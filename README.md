@@ -2,7 +2,11 @@
 
 [English](README.md) · [简体中文](docs/zh-CN/README.md) · [日本語](docs/ja/README.md) · [한국어](docs/ko/README.md) · [Español](docs/es/README.md)
 
+[![Content check](https://github.com/sandbaseai/deepseek-harness-handbook/actions/workflows/content-check.yml/badge.svg?branch=main)](https://github.com/sandbaseai/deepseek-harness-handbook/actions/workflows/content-check.yml) [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-0b7a53.svg)](LICENSE)
+
 > The agent-first, multilingual field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness).
+
+If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
 DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
 
@@ -15,9 +19,17 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Understand what DeepSeek Harness actually is | [DeepSeek Harness explained](docs/en/what-is-deepseek-harness.md) |
 | Run the Web UI safely | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
+| Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
+| Run one task in automation or CI | [Headless Agent guide](docs/en/getting-started/headless-agent.md) |
+| Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
+| Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
+| Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
+| Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
 | Understand the runtime | [The agent-runtime mental model](docs/en/architecture/agent-runtime.md) |
 | Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |
+| Understand approval, guards, and tool effects | [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md) |
 | Build an Agent rather than a loose collection of tools | [Agent design map](docs/en/agent-patterns/designing-an-agent.md) |
 | Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
 | Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
@@ -52,7 +64,11 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 ### Getting started
 
+- [What is DeepSeek Harness?](docs/en/what-is-deepseek-harness.md)
 - [Five-minute Web UI quickstart](docs/en/getting-started/quickstart.md)
+- [Python SDK quickstart](docs/en/getting-started/python-sdk.md)
+- [Headless Agent and CI](docs/en/getting-started/headless-agent.md)
+- [Configure model providers](docs/en/getting-started/model-providers.md)
 - Headless CLI
 - Run from source
 - Python SDK
@@ -62,6 +78,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 - [The agent-runtime mental model](docs/en/architecture/agent-runtime.md)
 - [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md)
+- [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md)
 - Profile, Bundle, and Patch
 - Capability Seams
 - Tool execution pipeline
@@ -71,6 +88,8 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 ### Agent patterns
 
 - [Designing an Agent](docs/en/agent-patterns/designing-an-agent.md)
+- [Skills: discovery, precedence, and invocation](docs/en/agent-patterns/skills.md)
+- [Subagents: providers, delegation, and continuation](docs/en/agent-patterns/subagents.md)
 - Context and prompt surfaces
 - Tools and side effects
 - Memory, compaction, and replay
@@ -86,9 +105,15 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - Read-only Agent
 - Headless CI Agent
 
+### Integrations
+
+- [Connect MCP servers](docs/en/integrations/mcp.md)
+
 ### Searchable operations
 
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
+- [MCP server not connecting](docs/en/troubleshooting/mcp-server-not-connecting.md)
+- [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 - Ecosystem projects and plugins
 - Comparisons with other agent runtimes

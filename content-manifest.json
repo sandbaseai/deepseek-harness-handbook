@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/what-is-deepseek-harness.md",
+      "revision": 1,
+      "translations": { "zh-CN": "docs/zh-CN/what-is-deepseek-harness.md" }
+    },
+    {
       "source": "docs/en/README.md",
       "revision": 1,
       "translations": {
@@ -25,6 +30,21 @@
       "translations": { "zh-CN": "docs/zh-CN/getting-started/quickstart.md" }
     },
     {
+      "source": "docs/en/getting-started/python-sdk.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/getting-started/model-providers.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/getting-started/headless-agent.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/architecture/agent-runtime.md",
       "revision": 1,
       "translations": { "zh-CN": "docs/zh-CN/architecture/agent-runtime.md" }
@@ -35,12 +55,42 @@
       "translations": {}
     },
     {
+      "source": "docs/en/architecture/tool-execution-pipeline.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/agent-patterns/designing-an-agent.md",
       "revision": 1,
       "translations": {}
     },
     {
+      "source": "docs/en/agent-patterns/skills.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/agent-patterns/subagents.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/integrations/mcp.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/README.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/mcp-server-not-connecting.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/sandbox-denied-vs-unavailable.md",
       "revision": 1,
       "translations": {}
     },

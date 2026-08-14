@@ -13,6 +13,15 @@ verified_at: 2026-08-14
 
 建议先阅读[五分钟快速开始](getting-started/quickstart.md)，完成一次安全、可观察的 Web UI 任务；随后通过 [Agent Runtime 架构地图](architecture/agent-runtime.md)理解模型、工具、权限、沙箱和会话为何必须分层设计。
 
+## 推荐阅读
+
+- [DeepSeek Harness 是什么？](what-is-deepseek-harness.md)
+- [五分钟快速开始](getting-started/quickstart.md)
+- [Agent Runtime 架构地图](architecture/agent-runtime.md)
+- [Python SDK（英文）](../en/getting-started/python-sdk.md)
+- [模型 Provider 配置（英文）](../en/getting-started/model-providers.md)
+- [Tool Execution Pipeline（英文）](../en/architecture/tool-execution-pipeline.md)
+
 ## 学习路线
 
 - **第一次运行：** Web UI、模型配置、工作区与安全验证。

@@ -25,6 +25,11 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Response disappears after reload | persistence/session log | session events and configured store |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
 
+## Focused guides
+
+- [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
+- [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
+
 ## Collect a minimal diagnostic bundle
 
 Share no secrets. Record:
