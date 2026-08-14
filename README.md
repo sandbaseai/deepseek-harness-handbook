@@ -38,6 +38,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand approval, guards, and tool effects | [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md) |
 | Build an Agent rather than a loose collection of tools | [Agent design map](docs/en/agent-patterns/designing-an-agent.md) |
 | Research a repository without publishing changes | [Repository Research Agent recipe](docs/en/recipes/repository-research-agent.md) |
+| Run or debug DeepSeek Harness on Windows | [Windows compatibility guide](docs/en/troubleshooting/windows-compatibility.md) |
 | Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
 | Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
 
@@ -132,6 +133,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
 - [MCP server not connecting](docs/en/troubleshooting/mcp-server-not-connecting.md)
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
+- [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 - Ecosystem projects and plugins
 - Comparisons with other agent runtimes

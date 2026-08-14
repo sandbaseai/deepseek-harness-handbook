@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -22,6 +22,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
 | Tool is denied | permission policy | operation, target, and active policy |
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
+| PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Response disappears after reload | persistence/session log | session events and configured store |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
 
@@ -29,6 +30,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
+- [Windows compatibility and troubleshooting](windows-compatibility.md)
 
 ## Collect a minimal diagnostic bundle
 
