@@ -10,6 +10,8 @@ Thank you for helping developers understand and use DeepSeek Harness.
 - Review a translation as a fluent speaker.
 - Summarize an upstream change with its commit or documentation link.
 
+Start with the [public roadmap](ROADMAP.md) or open a structured [documentation request](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=documentation-request.yml). Small, reviewable changes are encouraged.
+
 ## Source policy
 
 Use sources in this order:

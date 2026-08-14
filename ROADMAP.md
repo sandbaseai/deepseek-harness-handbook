@@ -1,36 +1,34 @@
-# Roadmap
+# Public roadmap
 
-## Phase 1 — Searchable foundation
+This roadmap keeps the handbook useful, source-backed, and easy to contribute to. It is not a commitment on behalf of DeepSeek AI.
 
-- [x] Establish the independent project identity and source policy.
-- [x] Add English, Simplified Chinese, Japanese, Korean, and Spanish entry points.
-- [x] Publish an agent-first architecture map and safe quickstart.
-- [x] Add automated content, source, translation, and secret checks.
-- [x] Publish searchable explainers for Python SDK, model providers, and the tool pipeline.
-- [ ] Publish the first ten troubleshooting pages.
+## Now
 
-## Phase 2 — Agent recipes
+- Expand the five-minute quickstart with verified Linux and macOS paths.
+- Add a Coding Agent recipe with explicit approval and sandbox boundaries.
+- Add a read-only Browser Research Agent recipe.
+- Document profile, bundle, and patch composition with a worked example.
+- Collect reproducible fixes for installation, MCP, and sandbox failures.
 
-- [x] Repository Research Agent.
-- [ ] Coding Agent.
-- [ ] Documentation Agent.
-- [ ] Browser Research Agent.
-- [ ] Read-only safety profile.
-- [ ] Headless CI recipe.
+## Next
 
-Each recipe must include configuration, exact commands, observable results, denial and timeout paths, cleanup, and upstream revision metadata.
+- Add evaluation and observability patterns for production Agents.
+- Add a version-pinned upgrade checklist for upstream breaking changes.
+- Expand reviewed Simplified Chinese coverage of high-demand pages.
+- Recruit fluent reviewers for Japanese, Korean, and Spanish navigation.
+- Add an ecosystem index with transparent inclusion criteria.
 
-## Phase 3 — Living upstream coverage
+## Later
 
-- [ ] Weekly DeepSeek Harness change digest.
-- [ ] Breaking-change tracker.
-- [ ] Package and capability index.
-- [ ] Version-aware configuration catalog.
-- [ ] Automated upstream link and path verification.
+- Publish comparison pages for adjacent Agent runtimes.
+- Add tested deployment recipes for common infrastructure targets.
+- Build a lightweight release digest from verified upstream changes.
 
-## Phase 4 — Ecosystem and comparisons
+## Pick up a task
 
-- [ ] Community plugin and tool catalog with license and security notes.
-- [ ] DeepSeek Harness versus other agent runtimes.
-- [ ] Native-speaker translation review program.
-- [ ] Static documentation site generated from the same Markdown source.
+1. Check the [open issues](https://github.com/sandbaseai/deepseek-harness-handbook/issues).
+2. If the task is not listed, open a [documentation request](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=documentation-request.yml).
+3. Comment with the scope you plan to cover and the upstream revision you will verify.
+4. Follow the page contract in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Small, evidence-backed contributions are welcome. A corrected command, verified failure branch, architecture diagram, or fluent translation review can be a complete contribution.

@@ -1,0 +1,45 @@
+name: Documentation request
+description: Request a guide, recipe, explanation, diagram, or troubleshooting path
+title: "docs: "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping make DeepSeek Harness easier to use. Please describe the Agent outcome you need, not only the page title.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Agent outcome
+      description: What should a reader be able to build, run, understand, or debug?
+      placeholder: A reader can run a read-only research Agent and verify that it cannot publish changes.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Include the interface, operating system, provider, and relevant configuration.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary sources or reproduction
+      description: Link official documentation or source, or provide steps that reproduce the behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: Observable success
+      description: What evidence would prove that the documentation works?
+    validations:
+      required: true
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to help draft or review this page.
