@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness on Windows
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -133,6 +133,20 @@ There is no published Windows runtime wheel in the upstream platform manifest. I
 
 For Windows today, prefer the Node-based CLI/Web or headless profile. If Python must orchestrate the Agent, run the supported runtime in Linux/WSL or another isolated supported host and define the transport and workspace boundary explicitly; do not claim native SDK support that the distributed wheel does not provide.
 
+## `missing required property "description"`
+
+An error such as `invalid arguments: missing required property "description"` happens during tool-argument validation, before PowerShell starts and before the Windows sandbox evaluates the command. In the current schemas, both `run_code` and `pwsh` require a short, non-empty `description` in addition to their executable input.
+
+If many unrelated tools begin failing this way, do not widen the sandbox permission. First inspect the resolved composition and compare it with a clean profile:
+
+```powershell
+dsh --profile web --dump-config
+$env:DSH_HOME = Join-Path $env:TEMP "dsh-clean-profile"
+npx @deepseek-ai/dsh web
+```
+
+Configure only the model in the clean profile, select a disposable workspace, and run a bounded read-only task. If the clean profile works, restore third-party plugins one at a time, prioritizing anything that intercepts tool schemas, `tools/*` events, or system-prompt assembly. Preserve the failed call's raw arguments: they show whether the model omitted `description` or a plugin changed the contract after prompt assembly.
+
 ## Symptom checklist
 
 | Symptom | Check first |
@@ -145,6 +159,7 @@ For Windows today, prefer the Node-based CLI/Web or headless profile. If Python 
 | CIM/WMI data is missing | restricted-token SID boundary |
 | Write succeeds outside the workspace | `Everyone` DACL, hard link, or non-NTFS/FAT boundary |
 | Python runtime is missing | Windows wheel is not published |
+| Every tool reports missing `description` | argument schema and active plugins; this occurs before sandbox execution |
 | Interrupted tool reports exit 1 | Windows termination has no POSIX signal marker |
 | A plugin argument path breaks at spaces | capture the exact CLI argv and report a minimal upstream reproduction |
 
