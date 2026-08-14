@@ -65,6 +65,16 @@
       "translations": {}
     },
     {
+      "source": "docs/en/agent-patterns/skills.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/agent-patterns/subagents.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/integrations/mcp.md",
       "revision": 1,
       "translations": {}

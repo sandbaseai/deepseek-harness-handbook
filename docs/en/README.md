@@ -19,6 +19,8 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Configure model providers](getting-started/model-providers.md)
 - [Connect MCP servers](integrations/mcp.md)
 - [Understand the tool execution pipeline](architecture/tool-execution-pipeline.md)
+- [Design reusable Skills](agent-patterns/skills.md)
+- [Choose a Subagent strategy](agent-patterns/subagents.md)
 
 ## Learning paths
 

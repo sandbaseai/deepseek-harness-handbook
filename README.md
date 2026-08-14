@@ -25,6 +25,8 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Run one task in automation or CI | [Headless Agent guide](docs/en/getting-started/headless-agent.md) |
 | Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
+| Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
+| Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
 | Understand the runtime | [The agent-runtime mental model](docs/en/architecture/agent-runtime.md) |
 | Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |
 | Understand approval, guards, and tool effects | [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md) |
@@ -86,6 +88,8 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 ### Agent patterns
 
 - [Designing an Agent](docs/en/agent-patterns/designing-an-agent.md)
+- [Skills: discovery, precedence, and invocation](docs/en/agent-patterns/skills.md)
+- [Subagents: providers, delegation, and continuation](docs/en/agent-patterns/subagents.md)
 - Context and prompt surfaces
 - Tools and side effects
 - Memory, compaction, and replay
