@@ -6,6 +6,7 @@
 - [x] Add English, Simplified Chinese, Japanese, Korean, and Spanish entry points.
 - [x] Publish an agent-first architecture map and safe quickstart.
 - [x] Add automated content, source, translation, and secret checks.
+- [x] Publish searchable explainers for Python SDK, model providers, and the tool pipeline.
 - [ ] Publish the first ten troubleshooting pages.
 
 ## Phase 2 — Agent recipes
