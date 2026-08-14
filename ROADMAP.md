@@ -11,7 +11,7 @@
 
 ## Phase 2 — Agent recipes
 
-- [ ] Repository Research Agent.
+- [x] Repository Research Agent.
 - [ ] Coding Agent.
 - [ ] Documentation Agent.
 - [ ] Browser Research Agent.

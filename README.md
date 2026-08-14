@@ -31,6 +31,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |
 | Understand approval, guards, and tool effects | [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md) |
 | Build an Agent rather than a loose collection of tools | [Agent design map](docs/en/agent-patterns/designing-an-agent.md) |
+| Research a repository without publishing changes | [Repository Research Agent recipe](docs/en/recipes/repository-research-agent.md) |
 | Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
 | Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
 
@@ -98,7 +99,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 ### Recipes
 
-- Repository Research Agent
+- [Repository Research Agent](docs/en/recipes/repository-research-agent.md)
 - Coding Agent
 - Documentation Agent
 - Browser Research Agent
