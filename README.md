@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Build a repository research Agent](docs/en/recipes/repository-research-agent.md)** · **[See the roadmap](ROADMAP.md)** · **[Contribute](CONTRIBUTING.md)**
+**[Open the cheat sheet](docs/en/reference/cheat-sheet.md)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Build a repository research Agent](docs/en/recipes/repository-research-agent.md)** · **[Contribute](CONTRIBUTING.md)**
 
 DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
 
@@ -23,6 +23,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Keep the essential commands and checks in one tab | [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md) |
 | Understand what DeepSeek Harness actually is | [DeepSeek Harness explained](docs/en/what-is-deepseek-harness.md) |
 | Run the Web UI safely | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
@@ -116,6 +117,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 ### Searchable operations
 
+- [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md)
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
 - [MCP server not connecting](docs/en/troubleshooting/mcp-server-not-connecting.md)
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
