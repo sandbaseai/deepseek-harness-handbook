@@ -15,6 +15,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/examples/official-examples-map.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/what-is-deepseek-harness.md",
       "revision": 1,
       "translations": { "zh-CN": "docs/zh-CN/what-is-deepseek-harness.md" }
