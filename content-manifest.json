@@ -75,6 +75,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/recipes/repository-research-agent.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/integrations/mcp.md",
       "revision": 1,
       "translations": {}

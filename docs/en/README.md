@@ -21,6 +21,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Understand the tool execution pipeline](architecture/tool-execution-pipeline.md)
 - [Design reusable Skills](agent-patterns/skills.md)
 - [Choose a Subagent strategy](agent-patterns/subagents.md)
+- [Build a Repository Research Agent](recipes/repository-research-agent.md)
 
 ## Learning paths
 
