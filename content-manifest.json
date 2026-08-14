@@ -40,6 +40,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/getting-started/headless-agent.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/architecture/agent-runtime.md",
       "revision": 1,
       "translations": { "zh-CN": "docs/zh-CN/architecture/agent-runtime.md" }
@@ -60,7 +65,22 @@
       "translations": {}
     },
     {
+      "source": "docs/en/integrations/mcp.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/README.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/mcp-server-not-connecting.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/sandbox-denied-vs-unavailable.md",
       "revision": 1,
       "translations": {}
     },

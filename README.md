@@ -22,7 +22,9 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand what DeepSeek Harness actually is | [DeepSeek Harness explained](docs/en/what-is-deepseek-harness.md) |
 | Run the Web UI safely | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
+| Run one task in automation or CI | [Headless Agent guide](docs/en/getting-started/headless-agent.md) |
 | Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
+| Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Understand the runtime | [The agent-runtime mental model](docs/en/architecture/agent-runtime.md) |
 | Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |
 | Understand approval, guards, and tool effects | [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md) |
@@ -63,6 +65,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - [What is DeepSeek Harness?](docs/en/what-is-deepseek-harness.md)
 - [Five-minute Web UI quickstart](docs/en/getting-started/quickstart.md)
 - [Python SDK quickstart](docs/en/getting-started/python-sdk.md)
+- [Headless Agent and CI](docs/en/getting-started/headless-agent.md)
 - [Configure model providers](docs/en/getting-started/model-providers.md)
 - Headless CLI
 - Run from source
@@ -98,9 +101,15 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - Read-only Agent
 - Headless CI Agent
 
+### Integrations
+
+- [Connect MCP servers](docs/en/integrations/mcp.md)
+
 ### Searchable operations
 
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
+- [MCP server not connecting](docs/en/troubleshooting/mcp-server-not-connecting.md)
+- [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 - Ecosystem projects and plugins
 - Comparisons with other agent runtimes

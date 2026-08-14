@@ -15,7 +15,9 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [What is DeepSeek Harness?](what-is-deepseek-harness.md)
 - [Run the Web UI](getting-started/quickstart.md)
 - [Use the Python SDK](getting-started/python-sdk.md)
+- [Run a Headless Agent](getting-started/headless-agent.md)
 - [Configure model providers](getting-started/model-providers.md)
+- [Connect MCP servers](integrations/mcp.md)
 - [Understand the tool execution pipeline](architecture/tool-execution-pipeline.md)
 
 ## Learning paths
