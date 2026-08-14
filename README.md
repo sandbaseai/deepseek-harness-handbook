@@ -1,0 +1,130 @@
+# DeepSeek Harness Handbook
+
+[English](README.md) · [简体中文](docs/zh-CN/README.md) · [日本語](docs/ja/README.md) · [한국어](docs/ko/README.md) · [Español](docs/es/README.md)
+
+> The agent-first, multilingual field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness).
+
+DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
+
+The project is maintained by [SandBase](https://sandbase.ai/). It is not an official DeepSeek AI project.
+
+> [!IMPORTANT]
+> DeepSeek Harness is in developer preview and may introduce compatibility-breaking changes. Pages in this handbook name their verification date and link to primary sources. Pin the revision you deploy.
+
+## Start with your goal
+
+| I want to… | Start here |
+|---|---|
+| Run the Web UI safely | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
+| Understand the runtime | [The agent-runtime mental model](docs/en/architecture/agent-runtime.md) |
+| Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |
+| Build an Agent rather than a loose collection of tools | [Agent design map](docs/en/agent-patterns/designing-an-agent.md) |
+| Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
+| Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
+
+## The agent-first mental model
+
+```mermaid
+flowchart LR
+  U[User goal] --> A[Agent contract]
+  A --> C[Profile + Bundles + Patches]
+  C --> G[Cordis plugin graph]
+  G --> L[Agent Loop]
+  L --> M[Model provider]
+  L --> T[Tools + policy + approval + sandbox]
+  L --> S[Durable Session events]
+  S --> L
+  S --> H[Web, headless, SDK, clients]
+```
+
+An agent is not just a prompt. A useful Agent has a task boundary, allowed effects, completion condition, model route, tool surface, permission policy, session strategy, failure behavior, and an operator-visible result. DeepSeek Harness supplies the runtime vocabulary for assembling those responsibilities without forcing every product into one fixed loop or interface.
+
+## What makes this handbook different
+
+- **Agent-first:** concepts are organized around building, running, and debugging Agents.
+- **Source-backed:** version-sensitive claims link to official documentation or source.
+- **Operational:** every tutorial includes success evidence, failure branches, and safety boundaries.
+- **Visual:** architecture pages prioritize diagrams over walls of text.
+- **Living:** updates, breaking changes, and troubleshooting pages follow upstream development.
+- **Multilingual by design:** translations declare their canonical source revision and review status.
+
+## Handbook map
+
+### Getting started
+
+- [Five-minute Web UI quickstart](docs/en/getting-started/quickstart.md)
+- Headless CLI
+- Run from source
+- Python SDK
+- Model providers
+
+### Architecture
+
+- [The agent-runtime mental model](docs/en/architecture/agent-runtime.md)
+- [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md)
+- Profile, Bundle, and Patch
+- Capability Seams
+- Tool execution pipeline
+- Permissions, approval, and sandboxing
+- Subagents
+
+### Agent patterns
+
+- [Designing an Agent](docs/en/agent-patterns/designing-an-agent.md)
+- Context and prompt surfaces
+- Tools and side effects
+- Memory, compaction, and replay
+- Multi-agent coordination
+- Evaluation and observability
+
+### Recipes
+
+- Repository Research Agent
+- Coding Agent
+- Documentation Agent
+- Browser Research Agent
+- Read-only Agent
+- Headless CI Agent
+
+### Searchable operations
+
+- [Troubleshooting index](docs/en/troubleshooting/README.md)
+- [Updates and breaking changes](docs/en/updates/README.md)
+- Ecosystem projects and plugins
+- Comparisons with other agent runtimes
+
+## Repository structure
+
+```text
+docs/<locale>/
+  getting-started/     installation and first runs
+  architecture/        runtime and lifecycle explanations
+  agent-patterns/      design decisions for real agents
+  recipes/             reproducible agent builds
+  troubleshooting/     symptom-driven diagnostic pages
+  ecosystem/           plugins, tools, skills, and comparisons
+  updates/             upstream change coverage
+scripts/               content and translation verification
+content-manifest.json  canonical revision and locale status
+```
+
+## Editorial and commercial boundary
+
+DeepSeek Harness remains the subject of every technical page. SandBase maintains the handbook and may provide a restrained link to related Agent, model, Skill, or MCP discovery resources. A mention is never presented as an official DeepSeek recommendation, a compatibility guarantee, or a security endorsement.
+
+## Contributing
+
+Corrections, reproducible examples, diagrams, troubleshooting cases, upstream change notes, and fluent translation reviews are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and run `npm run check` before submitting a pull request.
+
+## Primary sources
+
+- [DeepSeek Harness official repository](https://github.com/deepseek-ai/deepseek-harness)
+- [Official architecture documentation](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)
+- [Official Agent lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/agent-lifecycle.md)
+- [Official capability seams](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/capability-seams.md)
+- [Official tool execution pipeline](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/tool-execution-pipeline.md)
+- [Official user guides](https://github.com/deepseek-ai/deepseek-harness/tree/master/docs/user/guide)
+
+## License
+
+Apache-2.0. See [LICENSE](LICENSE).
