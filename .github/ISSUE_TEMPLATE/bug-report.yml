@@ -1,0 +1,34 @@
+name: Handbook bug report
+description: Report an incorrect command, claim, link, diagram, or translation
+title: "fix: "
+labels:
+  - bug
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: Link the handbook page containing the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is incorrect?
+      description: Quote the smallest relevant fragment and explain the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected correction
+      description: Describe the correct behavior, command, or wording.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Verification evidence
+      description: Link an official source or provide reproducible steps and the DeepSeek Harness revision.
+    validations:
+      required: true
