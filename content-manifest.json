@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/plugin-install-recovery.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/http2-invalid-session.md",
       "revision": 1,
       "translations": {}
@@ -126,7 +131,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 6,
+      "revision": 7,
       "translations": {}
     },
     {
