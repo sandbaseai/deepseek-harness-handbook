@@ -54,6 +54,25 @@ flowchart LR
 
 `maxTokens` is a ceiling, not a prediction of how long the answer will be. A very large ceiling still reserves budget in providers that validate input plus maximum completion before generation. In the example above, reducing the completion ceiling by only 152 tokens would satisfy the arithmetic, but leaving such a narrow margin is fragile. The next message, tool schema, or attachment can overflow again.
 
+## Why the Context Meter can still show room
+
+The current Web UI meter is a prompt-occupancy reference, not a sendability guarantee. Its numerator is the projected prompt pressure for the next request:
+
+```text
+uncached input + cache reads + cache writes + projected surface movement
+```
+
+It deliberately excludes response output and does not reserve the configured conversation `maxTokens`. The provider can therefore reject a request even when the ring remains below 100 percent:
+
+```text
+UI ring                 = projected prompt / context window
+provider admission      = prompt + requested completion <= context window
+```
+
+The System, Tools, and Messages rows in the meter are also a heuristic composition estimate. They are not expected to add up to the provider-anchored numerator. The fixed estimator can underprice CJK text and JSON schemas, while the headline stays anchored to the newest provider usage sample plus later surface changes.
+
+Reasoning tokens are not simply missing from cumulative usage: they are included in `outputTokens`. They do not belong to the prompt-only occupancy numerator. When deciding whether the next request fits, read the provider error and combine the displayed prompt estimate with the active completion reservation.
+
 ## Fast recovery for one conversation
 
 Try the least destructive options in this order.
@@ -212,5 +231,7 @@ This page was verified against DeepSeek Harness commit `47f943859bef60e416049234
 - [Basic compaction policies and defaults](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/compaction/compaction-basic/README.md#config-basiccompactionconfig)
 - [Canonical overflow recovery listener](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/compaction/compaction-basic/src/index.ts#L169-L222)
 - [Human `/compact` command contract](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/compaction/command-compact/README.md)
+- [Prompt-only context-pressure projection](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/llm/token-meter/src/usage-projection.ts#L64-L203)
+- [Context meter semantics and heuristic breakdown](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/llm/token-meter/src/projection.ts#L12-L68)
 - [Original context-window report](https://github.com/deepseek-ai/deepseek-harness/discussions/1930)
-
+- [Context-meter budget mismatch report](https://github.com/deepseek-ai/deepseek-harness/discussions/1937)
