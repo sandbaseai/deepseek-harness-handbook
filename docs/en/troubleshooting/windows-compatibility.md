@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness on Windows
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-15
 ---
@@ -170,6 +170,107 @@ npx @deepseek-ai/dsh web
 
 Configure only the model in the clean profile, select a disposable workspace, and run a bounded read-only task. If the clean profile works, restore third-party plugins one at a time, prioritizing anything that intercepts tool schemas, `tools/*` events, or system-prompt assembly. Preserve the failed call's raw arguments: they show whether the model omitted `description` or a plugin changed the contract after prompt assembly.
 
+## `Unexpected token '﻿'` while reading `package.json`
+
+An error that points at the first character of JSON can reveal an invisible UTF-8 byte order mark:
+
+```text
+<anonymous_script>:1
+﻿{
+^
+SyntaxError: Unexpected token '﻿', "﻿{"... is not valid JSON
+```
+
+This fails before the profile composition or any plugin starts. Harness reads the active profile manifest as UTF-8 and passes the complete string to `JSON.parse`. A leading Unicode `U+FEFF` is not removed first, so otherwise valid JSON is rejected at byte zero.
+
+The active manifest is normally:
+
+```text
+$DSH_HOME/profiles/<profile>/package.json
+```
+
+`DSH_HOME` defaults to `~/.dsh`. The stack trace often prints the exact manifest path; use that path instead of editing a similarly named repository `package.json`.
+
+### Confirm the failing file
+
+Inspect the first bytes without printing the whole manifest:
+
+```powershell
+$manifest = Join-Path $env:USERPROFILE '.dsh\profiles\web\package.json'
+$bytes = [System.IO.File]::ReadAllBytes($manifest)
+$bytes[0..([Math]::Min(7, $bytes.Length - 1))] | ForEach-Object { $_.ToString('X2') }
+```
+
+A UTF-8 BOM begins with `EF BB BF`. If `DSH_HOME` is set, resolve from that location instead:
+
+```powershell
+$root = if ($env:DSH_HOME) { $env:DSH_HOME } else { Join-Path $env:USERPROFILE '.dsh' }
+$manifest = Join-Path $root 'profiles\web\package.json'
+```
+
+Back up the file, then rewrite only the encoding while preserving its JSON content:
+
+```powershell
+Copy-Item $manifest "$manifest.bak" -Force
+$text = [System.IO.File]::ReadAllText($manifest)
+$text = $text.TrimStart([char]0xFEFF)
+[System.IO.File]::WriteAllText(
+  $manifest,
+  $text,
+  [System.Text.UTF8Encoding]::new($false)
+)
+```
+
+Validate the result before restarting Harness:
+
+```powershell
+Get-Content -Raw $manifest | ConvertFrom-Json | Out-Null
+dsh --profile web --dump-config
+```
+
+Do not delete the complete profile as the first response. The file can contain installed out-of-tree bundle dependencies and the ordered `dsh.profile.bundles` list. Removing a three-byte encoding marker should not become an unrelated configuration reset.
+
+If the BOM returns, identify the editor, PowerShell command, plugin installer, or sync process rewriting the manifest. PowerShell 5.1 commands such as `Out-File -Encoding utf8` commonly emit a BOM; prefer the explicit BOM-free writer above when scripting profile changes. The supported `dsh plugin` flow owns normal profile-manifest writes and emits two-space JSON with a trailing newline.
+
+## `node:zlib` does not export `createZstdDecompress`
+
+This startup error is a Node runtime mismatch:
+
+```text
+SyntaxError: The requested module 'node:zlib' does not provide an export
+named 'createZstdDecompress'
+```
+
+The session JSONL persistence package imports Node's zstd stream API during module initialization. DeepSeek Harness declares this supported Node range:
+
+```text
+^22.19.0 || >=24.0.0
+```
+
+Node `22.14.0`, visible in the original Windows report, is below that range. The plugin tree fails before any session storage operation runs, so deleting sessions, editing the profile, or disabling the sandbox cannot fix it.
+
+Check which executables PowerShell actually resolves:
+
+```powershell
+node --version
+where.exe node
+where.exe npm
+where.exe dsh
+npm prefix --global
+```
+
+Install a supported Node release, preferably the current Node 24.x line, then open a new PowerShell window and verify `node --version` before reinstalling or refreshing the CLI under that active runtime:
+
+```powershell
+npm install --global @deepseek-ai/dsh@latest
+node --version
+dsh web
+```
+
+If `node --version` still prints the old release, stop. Multiple Node installations or a stale `PATH` entry are still selecting it. Do not repeatedly reinstall Harness into the old global npm prefix. Resolve the active Node path first, then install the CLI once under that runtime.
+
+Preserve `$DSH_HOME` while upgrading Node. The runtime upgrade does not require deleting profiles, settings, credentials, attachments, or session logs.
+
 ## Symptom checklist
 
 | Symptom | Check first |
@@ -183,6 +284,8 @@ Configure only the model in the clean profile, select a disposable workspace, an
 | Write succeeds outside the workspace | `Everyone` DACL, hard link, or non-NTFS/FAT boundary |
 | Python runtime is missing | Windows wheel is not published |
 | Every tool reports missing `description` | argument schema and active plugins; this occurs before sandbox execution |
+| Startup fails with `Unexpected token '﻿'` at `{` | BOM in the exact active profile `package.json` |
+| `node:zlib` has no `createZstdDecompress` export | active Node is below `^22.19.0 || >=24.0.0` |
 | Interrupted tool reports exit 1 | Windows termination has no POSIX signal marker |
 | A plugin argument path breaks at spaces | capture the exact CLI argv and report a minimal upstream reproduction |
 
@@ -223,3 +326,9 @@ Never attach credentials, a full settings file, or an unredacted session log.
 - [PowerShell sandbox executor](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/pwsh-sandbox/README.md)
 - [Windows ACL sandbox](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/sandbox/sandbox-windows-acl/README.md)
 - [Python runtime wheel](https://github.com/deepseek-ai/deepseek-harness/blob/master/python/sdk-runtime/README.md)
+- [Profile manifest reader and writer](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/app-boot/src/profile.ts#L263-L284)
+- [Profile manifest location and ownership](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/app-boot/README.md#profiles-and-bundles)
+- [Windows BOM startup report](https://github.com/deepseek-ai/deepseek-harness/discussions/1903)
+- [Supported Node engine range](https://github.com/deepseek-ai/deepseek-harness/blob/master/package.json#L8-L10)
+- [JSONL persistence imports the zstd stream API](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/session/session-persistence-jsonl/src/zstd-private-decoder.ts#L1-L9)
+- [Windows zstd startup report](https://github.com/deepseek-ai/deepseek-harness/discussions/1936)
