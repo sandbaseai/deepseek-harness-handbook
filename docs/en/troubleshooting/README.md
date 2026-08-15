@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
 verified_at: 2026-08-15
 ---
@@ -19,6 +19,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
+| Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
 | Tool is denied | permission policy | operation, target, and active policy |
@@ -32,6 +33,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 ## Focused guides
 
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
+- [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)

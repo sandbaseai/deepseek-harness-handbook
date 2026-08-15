@@ -43,6 +43,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Build an Agent rather than a loose collection of tools | [Agent design map](docs/en/agent-patterns/designing-an-agent.md) |
 | Research a repository without publishing changes | [Repository Research Agent recipe](docs/en/recipes/repository-research-agent.md) |
 | Run or debug DeepSeek Harness on Windows | [Windows compatibility guide](docs/en/troubleshooting/windows-compatibility.md) |
+| Diagnose an `ERR_HTTP2_INVALID_SESSION` crash | [HTTP/2 provider-transport troubleshooting](docs/en/troubleshooting/http2-invalid-session.md) |
 | Fix an empty remote Web UI or `crypto.randomUUID` error | [Remote Web secure-context guide](docs/en/troubleshooting/remote-web-secure-context.md) |
 | Fix persistent Bash on NixOS or minimal Linux | [PTY shell-path guide](docs/en/troubleshooting/pty-shell-path.md) |
 | Protect or recover a session log | [Live session log durability](docs/en/troubleshooting/live-session-log-durability.md) |
@@ -126,6 +127,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md)
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
 - [MCP server not connecting](docs/en/troubleshooting/mcp-server-not-connecting.md)
+- [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](docs/en/troubleshooting/http2-invalid-session.md)
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](docs/en/troubleshooting/remote-web-secure-context.md)

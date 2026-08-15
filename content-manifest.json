@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/http2-invalid-session.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/remote-web-secure-context.md",
       "revision": 1,
       "translations": {}
@@ -121,7 +126,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 5,
+      "revision": 6,
       "translations": {}
     },
     {
