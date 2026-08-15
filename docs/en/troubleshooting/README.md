@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 7
+content_revision: 8
 status: canonical
 verified_at: 2026-08-15
 ---
@@ -19,6 +19,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
+| Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
 | Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
@@ -41,6 +42,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [Protect and recover live session logs](live-session-log-durability.md)
+- [Fix context window exceeded errors](context-window-exceeded.md)
 
 ## Collect a minimal diagnostic bundle
 

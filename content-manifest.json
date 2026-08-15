@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/context-window-exceeded.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/plugin-install-recovery.md",
       "revision": 1,
       "translations": {}
@@ -131,7 +136,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 7,
+      "revision": 8,
       "translations": {}
     },
     {
