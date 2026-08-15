@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -18,6 +18,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Web UI does not open | process/listen address | printed URL and terminal logs |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
+| Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
 | Tool is denied | permission policy | operation, target, and active policy |
@@ -29,6 +30,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 ## Focused guides
 
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
+- [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
 
