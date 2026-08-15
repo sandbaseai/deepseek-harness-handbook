@@ -10,7 +10,9 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Open the cheat sheet](docs/en/reference/cheat-sheet.md)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Build a repository research Agent](docs/en/recipes/repository-research-agent.md)** · **[Contribute](CONTRIBUTING.md)**
+**[Check the rc.6 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Contribute](CONTRIBUTING.md)**
+
+**Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml)
 
 DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
 
@@ -23,6 +25,9 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Check current rc.6 boundaries and safer next actions | [DeepSeek Harness rc.6 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
+| Capture the package and source revision that actually ran | [DeepSeek Harness Version Evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html) |
+| Find the first broken runtime boundary | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Keep the essential commands and checks in one tab | [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md) |
 | Choose the right official runnable example | [Official examples map](docs/en/examples/official-examples-map.md) |
 | Understand what DeepSeek Harness actually is | [DeepSeek Harness explained](docs/en/what-is-deepseek-harness.md) |
@@ -41,6 +46,9 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Research a repository without publishing changes | [Repository Research Agent recipe](docs/en/recipes/repository-research-agent.md) |
 | Run or debug DeepSeek Harness on Windows | [Windows compatibility guide](docs/en/troubleshooting/windows-compatibility.md) |
 | Recover a profile after a plugin change | [Plugin install and recovery guide](docs/en/troubleshooting/plugin-install-recovery.md) |
+| Diagnose an `ERR_HTTP2_INVALID_SESSION` crash | [HTTP/2 provider-transport troubleshooting](docs/en/troubleshooting/http2-invalid-session.md) |
+| Fix an empty remote Web UI or `crypto.randomUUID` error | [Remote Web secure-context guide](docs/en/troubleshooting/remote-web-secure-context.md) |
+| Fix persistent Bash on NixOS or minimal Linux | [PTY shell-path guide](docs/en/troubleshooting/pty-shell-path.md) |
 | Protect or recover a session log | [Live session log durability](docs/en/troubleshooting/live-session-log-durability.md) |
 | Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
 | Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
@@ -116,12 +124,18 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Searchable operations
 
+- [DeepSeek Harness rc.6 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)
+- [DeepSeek Harness Version Evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html)
+- [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)
 - [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md)
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
 - [MCP server not connecting](docs/en/troubleshooting/mcp-server-not-connecting.md)
+- [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](docs/en/troubleshooting/http2-invalid-session.md)
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)
+- [Remote Web UI, HTTPS, and `crypto.randomUUID`](docs/en/troubleshooting/remote-web-secure-context.md)
+- [PTY shell path on NixOS and minimal Linux](docs/en/troubleshooting/pty-shell-path.md)
 - [Protect and recover live session logs](docs/en/troubleshooting/live-session-log-durability.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 

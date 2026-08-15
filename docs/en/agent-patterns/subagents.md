@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Subagents Guide
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-15
 ---
 
 # DeepSeek Harness Subagents: delegation without one fixed backend
@@ -80,6 +80,47 @@ Evaluate providers on:
 
 Do not select a provider only by brand name. The capability descriptor and execution boundary determine whether it fits the Agent contract.
 
+## Scale workflows with two separate limits
+
+The worker-thread workflow engine has two different child limits:
+
+| Limit | Default | What it controls |
+|---|---:|---|
+| `maxConcurrentAgents` | `0` | live overlapping `agent()` calls; zero resolves to `min(16, max(1, CPU cores - 2))` |
+| `maxTotalAgents` | `1000` | all `agent()` calls started during one workflow run |
+
+The total limit is a runaway-loop backstop, not a memory budget. A workflow can remain below 1000 calls and still exhaust the Node.js heap because each child has an independent model context, runtime state, result, and lifecycle evidence. Increasing `--max-old-space-size` only moves the crash boundary; it does not make hundreds of children one bounded job.
+
+For a large translation or repository-processing task:
+
+1. partition the input into durable batches;
+2. start with a small concurrency ceiling such as 2–4;
+3. set a total-agent ceiling close to the expected batch size, not the deployment default;
+4. persist each completed batch outside the workflow before starting the next one;
+5. record peak heap, child count, batch duration, failed items, and retry count;
+6. cancel growth when memory rises monotonically after settled children.
+
+The relevant composition row is `workflow-worker-thread`. In a copied preset, keep it inside the same isolated delegation group as `tool-workflow` and lower both ceilings deliberately:
+
+```yaml
+- id: delegation
+  name: cordis:group
+  group: true
+  isolate:
+    workflows: true
+  config:
+    - id: workflow-worker-thread
+      name: '@deepseek-ai/dsh-workflow-worker-thread'
+      config:
+        provider: spawn
+        maxConcurrentAgents: 4
+        maxTotalAgents: 64
+    - id: tool-workflow
+      name: '@deepseek-ai/dsh-tool-workflow'
+```
+
+These values are starting bounds, not universal sizing advice. Increase one dimension at a time from measured evidence. A run that needs 480 translations is usually safer as several restartable batches than one process-lifetime fan-out.
+
 ## Failure checklist
 
 | Symptom | Investigate |
@@ -90,9 +131,12 @@ Do not select a provider only by brand name. The capability descriptor and execu
 | interrupt appears to lose work | claimed work is not requeued; unclaimed inbox remains |
 | cold resume lacks recent state | persistence flush failure or stale storage |
 | parent waits after its own task | owned descendant Activation has not disposed |
+| process approaches 4 GB and exits with JavaScript heap OOM | total child count may be below the default cap; lower concurrency and total calls, then split durable batches |
 
 ## Official sources
 
 - [Subagent subsystem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/subagent.md)
 - [Subagent packages](https://github.com/deepseek-ai/deepseek-harness/tree/master/packages/subagent)
 - [Extension cookbook](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/extension-cookbook.md)
+- [Workflow worker-thread limits](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/workflow/workflow-worker-thread/README.md#config)
+- [480-child JavaScript OOM report](https://github.com/deepseek-ai/deepseek-harness/discussions/1897)

@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 4
+content_revision: 7
 status: canonical
 verified_at: 2026-08-15
 ---
@@ -16,8 +16,10 @@ Diagnose the failing layer before reinstalling or changing configuration.
 |---|---|---|
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |
 | Web UI does not open | process/listen address | printed URL and terminal logs |
+| Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
+| Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
 | Tool is denied | permission policy | operation, target, and active policy |
@@ -27,13 +29,17 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Session crashes after its log is deleted or replaced | live/durable ownership | first persistence error and an offline artifact copy |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
 | Profile stops booting after a plugin change | package/bundle/composition lifecycle | manifest diff, lockfile diff, and `--dump-config` before/after |
+| Persistent Bash reports `PTY shell exited during startup` | terminal backend executable | `/bin/bash` existence and `command -v bash` from the Harness host |
 
 ## Focused guides
 
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
+- [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
+- [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
+- [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [Protect and recover live session logs](live-session-log-durability.md)
 
 ## Collect a minimal diagnostic bundle
