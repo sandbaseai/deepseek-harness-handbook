@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/remote-web-secure-context.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/pty-shell-path.md",
       "revision": 1,
       "translations": {}
@@ -116,7 +121,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 4,
+      "revision": 5,
       "translations": {}
     },
     {

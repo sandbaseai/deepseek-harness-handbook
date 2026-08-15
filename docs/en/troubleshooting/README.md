@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-15
 ---
@@ -16,6 +16,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 |---|---|---|
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |
 | Web UI does not open | process/listen address | printed URL and terminal logs |
+| Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
@@ -33,6 +34,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
+- [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [Protect and recover live session logs](live-session-log-durability.md)
 
