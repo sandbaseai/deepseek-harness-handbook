@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/windows-compatibility.md",
+      "revision": 2,
+      "translations": {}
+    },
+    {
       "source": "docs/en/reference/cheat-sheet.md",
       "revision": 1,
       "translations": {}
@@ -96,7 +101,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 1,
+      "revision": 2,
       "translations": {}
     },
     {
