@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness on Windows
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-15
 ---
