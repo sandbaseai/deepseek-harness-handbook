@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-15
 ---
 
 # DeepSeek Harness troubleshooting
@@ -25,12 +25,14 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Response disappears after reload | persistence/session log | session events and configured store |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
+| Profile stops booting after a plugin change | package/bundle/composition lifecycle | manifest diff, lockfile diff, and `--dump-config` before/after |
 
 ## Focused guides
 
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
+- [Plugin installation and known-good recovery](plugin-install-recovery.md)
 
 ## Collect a minimal diagnostic bundle
 
