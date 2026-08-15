@@ -24,6 +24,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | I want to… | Start here |
 |---|---|
 | Keep the essential commands and checks in one tab | [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md) |
+| Choose the right official runnable example | [Official examples map](docs/en/examples/official-examples-map.md) |
 | Understand what DeepSeek Harness actually is | [DeepSeek Harness explained](docs/en/what-is-deepseek-harness.md) |
 | Run the Web UI safely | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
@@ -110,6 +111,16 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - Browser Research Agent
 - Read-only Agent
 - Headless CI Agent
+
+### Official examples
+
+- [Choose the right upstream example](docs/en/examples/official-examples-map.md)
+- Headless CLI task runner
+- Python SDK and JSON-RPC runtime
+- ACP automation server
+- MCP memory overlays
+- Self-modifying Cordis composition
+- Session-local schedules
 
 ### Integrations
 
