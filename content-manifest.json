@@ -70,6 +70,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/architecture/sessions-vs-memory.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/architecture/tool-execution-pipeline.md",
       "revision": 1,
       "translations": {}
