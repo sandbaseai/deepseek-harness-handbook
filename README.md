@@ -68,7 +68,9 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - **Living:** updates, breaking changes, and troubleshooting pages follow upstream development.
 - **Multilingual by design:** translations declare their canonical source revision and review status.
 
-## Handbook map
+## Published guide map
+
+Every item below is available now. Planned coverage lives in the [public roadmap](ROADMAP.md).
 
 ### Getting started
 
@@ -77,41 +79,22 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - [Python SDK quickstart](docs/en/getting-started/python-sdk.md)
 - [Headless Agent and CI](docs/en/getting-started/headless-agent.md)
 - [Configure model providers](docs/en/getting-started/model-providers.md)
-- Headless CLI
-- Run from source
-- Python SDK
-- Model providers
 
 ### Architecture
 
 - [The agent-runtime mental model](docs/en/architecture/agent-runtime.md)
 - [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md)
 - [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md)
-- Profile, Bundle, and Patch
-- Capability Seams
-- Tool execution pipeline
-- Permissions, approval, and sandboxing
-- Subagents
 
 ### Agent patterns
 
 - [Designing an Agent](docs/en/agent-patterns/designing-an-agent.md)
 - [Skills: discovery, precedence, and invocation](docs/en/agent-patterns/skills.md)
 - [Subagents: providers, delegation, and continuation](docs/en/agent-patterns/subagents.md)
-- Context and prompt surfaces
-- Tools and side effects
-- Memory, compaction, and replay
-- Multi-agent coordination
-- Evaluation and observability
 
 ### Recipes
 
 - [Repository Research Agent](docs/en/recipes/repository-research-agent.md)
-- Coding Agent
-- Documentation Agent
-- Browser Research Agent
-- Read-only Agent
-- Headless CI Agent
 
 ### Official examples
 
@@ -135,8 +118,6 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
-- Ecosystem projects and plugins
-- Comparisons with other agent runtimes
 
 ## Repository structure
 
