@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -24,6 +24,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Response disappears after reload | persistence/session log | session events and configured store |
+| Session crashes after its log is deleted or replaced | live/durable ownership | first persistence error and an offline artifact copy |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
 
 ## Focused guides
@@ -31,6 +32,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
+- [Protect and recover live session logs](live-session-log-durability.md)
 
 ## Collect a minimal diagnostic bundle
 

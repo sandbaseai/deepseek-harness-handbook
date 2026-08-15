@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/live-session-log-durability.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/windows-compatibility.md",
       "revision": 2,
       "translations": {}
@@ -106,7 +111,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 2,
+      "revision": 3,
       "translations": {}
     },
     {
