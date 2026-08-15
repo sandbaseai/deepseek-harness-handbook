@@ -12,6 +12,8 @@ If this handbook saves you time, **star the repository** and watch releases. Tha
 
 **[Check the rc.6 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Contribute](CONTRIBUTING.md)**
 
+**Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml)
+
 DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
 
 The project is maintained by [SandBase](https://sandbase.ai/). It is not an official DeepSeek AI project.
