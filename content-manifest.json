@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/context-window-exceeded.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/live-session-log-durability.md",
       "revision": 1,
       "translations": {}
@@ -111,7 +116,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 3,
+      "revision": 4,
       "translations": {}
     },
     {

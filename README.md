@@ -30,6 +30,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
 | Run one task in automation or CI | [Headless Agent guide](docs/en/getting-started/headless-agent.md) |
 | Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
+| Fix a context-window or token-budget error | [Context window exceeded guide](docs/en/troubleshooting/context-window-exceeded.md) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
@@ -121,6 +122,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
 - [Protect and recover live session logs](docs/en/troubleshooting/live-session-log-durability.md)
+- [Fix context window exceeded errors](docs/en/troubleshooting/context-window-exceeded.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 
 ## Repository structure
