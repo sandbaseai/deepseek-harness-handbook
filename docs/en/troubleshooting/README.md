@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-15
 ---
 
 # DeepSeek Harness troubleshooting
@@ -25,12 +25,14 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Response disappears after reload | persistence/session log | session events and configured store |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
+| Persistent Bash reports `PTY shell exited during startup` | terminal backend executable | `/bin/bash` existence and `command -v bash` from the Harness host |
 
 ## Focused guides
 
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
+- [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 
 ## Collect a minimal diagnostic bundle
 
