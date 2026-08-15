@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Open the cheat sheet](docs/en/reference/cheat-sheet.md)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Contribute](CONTRIBUTING.md)**
+**[Check the rc.6 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Contribute](CONTRIBUTING.md)**
 
 DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
 
@@ -23,6 +23,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Check current rc.6 boundaries and safer next actions | [DeepSeek Harness rc.6 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
 | Find the first broken runtime boundary | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Keep the essential commands and checks in one tab | [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md) |
 | Choose the right official runnable example | [Official examples map](docs/en/examples/official-examples-map.md) |
@@ -113,6 +114,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Searchable operations
 
+- [DeepSeek Harness rc.6 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)
 - [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)
 - [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md)
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
