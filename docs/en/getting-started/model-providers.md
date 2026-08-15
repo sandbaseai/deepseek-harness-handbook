@@ -1,9 +1,9 @@
 ---
 title: Configure Model Providers in DeepSeek Harness
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-15
 ---
 
 # Configure DeepSeek and other model providers
@@ -37,6 +37,32 @@ Provider IDs become part of requests, saved sessions, defaults, and credential r
 
 ![Official DeepSeek Harness custom provider form](https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/master/docs/user/guide/providers-custom-form.png)
 
+### Local Ollama through the custom-provider form
+
+Ollama exposes an OpenAI-compatible API. Before opening DeepSeek Harness, prove that the endpoint and model are available from the machine or container running the Harness process:
+
+```bash
+curl http://127.0.0.1:11434/v1/models
+ollama list
+```
+
+Then choose **Add a custom provider** and enter:
+
+| Field | Value |
+|---|---|
+| Provider ID | `ollama` |
+| Display name | `Ollama` |
+| Base URL | `http://127.0.0.1:11434/v1` |
+| API protocol | `openai-completions` |
+| API key | leave blank |
+| Model ID | the exact installed name, including a tag such as `qwen2.5-coder:7b` |
+
+The current form does not reject a loopback HTTP URL. It enables creation only after the Provider ID is valid, the base URL is non-empty, and at least one valid model row exists. A blank key is accepted for a route that does not require authentication.
+
+`localhost` is resolved by the Harness host, not by the browser displaying the Web UI. If Harness runs in Docker, a VM, WSL, or on another machine, `127.0.0.1` points inside that environment. Use an address reachable from the Harness process and keep Ollama off untrusted networks.
+
+If **Fetch available models** fails, compare it with the direct `/v1/models` request above. You can enter the model manually when discovery is unavailable, but the first turn will still fail unless the host can reach the chat-completions endpoint and the model ID matches.
+
 ## Model discovery and image input
 
 **Fetch available models** queries the form's current endpoint and credential. OpenAI-compatible discovery expects `GET /models`; endpoints without it require manual model entries.
@@ -68,6 +94,8 @@ Selecting a model makes it the default for new sessions. A session that already 
 | `MISSING_CREDENTIAL` | store the key in Models or provide the referenced environment variable |
 | `UNKNOWN_MODEL` | select a configured model or add it to the custom route |
 | Model discovery returns 401 | verify the key; otherwise enter models manually |
+| Ollama form cannot be created | add at least one exact model ID; the base URL alone is not enough |
+| Ollama works with `curl` on the laptop but not in Harness | test from the Harness host/container; its loopback may be different |
 | Image refused before sending | declare `input: [text, image]` for that custom model |
 | Provider rejects an image | remove the incorrect modality claim and start a new session |
 | Composer blocks after provider deletion | choose another configured model |

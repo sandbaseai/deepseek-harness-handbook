@@ -3,7 +3,7 @@ title: DeepSeek Harness on Windows
 locale: en
 content_revision: 3
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-15
 ---
 
 # DeepSeek Harness on Windows: support boundaries and troubleshooting
@@ -23,6 +23,7 @@ This page separates supported runtime layers from common failure modes so you ca
 | Python SDK wheel | Not currently published for Windows | runtime wheels exist for Linux x64/arm64 and macOS arm64 |
 | Upstream minimal JSON-RPC example | Not a Windows Agent interface | persistent PTY and `danger-full-access` assumptions are POSIX-oriented |
 | Bash-specific overlays and prompts | Not native Windows tools | use PowerShell syntax, paths, and `$env:NAME` variables |
+| MSYS2 / MINGW shell | Separate compatibility target | its GNU-built Node/npm stack is not the native Windows Node toolchain |
 
 ## What changes on Windows
 
@@ -46,6 +47,28 @@ Resolve-Path .
 ```
 
 Do not send Bash syntax such as `export NAME=value`, `$PWD/foo`, or `cmd1 && cmd2` and assume it will be translated. The model-facing tool is named `pwsh`, and each call runs through `pwsh -Command` with no state carried into the next call. Use the tool's `workdir` instead of relying on `Set-Location` from a previous command.
+
+## Keep MSYS2 separate from native Windows
+
+Do not use a successful native PowerShell launch as proof that the same package works under MSYS2 or MINGW. MSYS2 can expose Windows executables such as `powershell.exe` through its configured `PATH` while still resolving `node`, `npm`, launch shims, and native addons from its separately patched GNU-toolchain packages. Those are intentionally different runtime stacks.
+
+Capture both shells when diagnosing a launcher failure:
+
+```text
+# In MSYS2
+which node
+which npm
+node -p "process.execPath"
+node -p "process.platform + ' ' + process.arch"
+which powershell
+
+# In native PowerShell
+Get-Command node, npm, pwsh, powershell.exe -ErrorAction SilentlyContinue
+node -p "process.execPath"
+node -p "process.platform + ' ' + process.arch"
+```
+
+Different Node and npm paths are expected; the comparison identifies which runtime owns the failure. A package with native addons or Windows-specific launcher assumptions must explicitly support the MSYS2 boundary. Reusing a visible `powershell.exe` does not make its Node ABI, path conversion, signal behavior, or shell-script launch semantics identical to native Windows.
 
 ## PowerShell discovery
 
