@@ -209,6 +209,45 @@ Do not delete the complete profile as the first response. The file can contain i
 
 If the BOM returns, identify the editor, PowerShell command, plugin installer, or sync process rewriting the manifest. PowerShell 5.1 commands such as `Out-File -Encoding utf8` commonly emit a BOM; prefer the explicit BOM-free writer above when scripting profile changes. The supported `dsh plugin` flow owns normal profile-manifest writes and emits two-space JSON with a trailing newline.
 
+## `node:zlib` does not export `createZstdDecompress`
+
+This startup error is a Node runtime mismatch:
+
+```text
+SyntaxError: The requested module 'node:zlib' does not provide an export
+named 'createZstdDecompress'
+```
+
+The session JSONL persistence package imports Node's zstd stream API during module initialization. DeepSeek Harness declares this supported Node range:
+
+```text
+^22.19.0 || >=24.0.0
+```
+
+Node `22.14.0`, visible in the original Windows report, is below that range. The plugin tree fails before any session storage operation runs, so deleting sessions, editing the profile, or disabling the sandbox cannot fix it.
+
+Check which executables PowerShell actually resolves:
+
+```powershell
+node --version
+where.exe node
+where.exe npm
+where.exe dsh
+npm prefix --global
+```
+
+Install a supported Node release, preferably the current Node 24.x line, then open a new PowerShell window and verify `node --version` before reinstalling or refreshing the CLI under that active runtime:
+
+```powershell
+npm install --global @deepseek-ai/dsh@latest
+node --version
+dsh web
+```
+
+If `node --version` still prints the old release, stop. Multiple Node installations or a stale `PATH` entry are still selecting it. Do not repeatedly reinstall Harness into the old global npm prefix. Resolve the active Node path first, then install the CLI once under that runtime.
+
+Preserve `$DSH_HOME` while upgrading Node. The runtime upgrade does not require deleting profiles, settings, credentials, attachments, or session logs.
+
 ## Symptom checklist
 
 | Symptom | Check first |
@@ -223,6 +262,7 @@ If the BOM returns, identify the editor, PowerShell command, plugin installer, o
 | Python runtime is missing | Windows wheel is not published |
 | Every tool reports missing `description` | argument schema and active plugins; this occurs before sandbox execution |
 | Startup fails with `Unexpected token '﻿'` at `{` | BOM in the exact active profile `package.json` |
+| `node:zlib` has no `createZstdDecompress` export | active Node is below `^22.19.0 || >=24.0.0` |
 | Interrupted tool reports exit 1 | Windows termination has no POSIX signal marker |
 | A plugin argument path breaks at spaces | capture the exact CLI argv and report a minimal upstream reproduction |
 
@@ -266,3 +306,6 @@ Never attach credentials, a full settings file, or an unredacted session log.
 - [Profile manifest reader and writer](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/app-boot/src/profile.ts#L263-L284)
 - [Profile manifest location and ownership](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/app-boot/README.md#profiles-and-bundles)
 - [Windows BOM startup report](https://github.com/deepseek-ai/deepseek-harness/discussions/1903)
+- [Supported Node engine range](https://github.com/deepseek-ai/deepseek-harness/blob/master/package.json#L8-L10)
+- [JSONL persistence imports the zstd stream API](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/session/session-persistence-jsonl/src/zstd-private-decoder.ts#L1-L9)
+- [Windows zstd startup report](https://github.com/deepseek-ai/deepseek-harness/discussions/1936)
