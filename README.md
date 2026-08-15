@@ -35,11 +35,13 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
 | Understand the runtime | [The agent-runtime mental model](docs/en/architecture/agent-runtime.md) |
 | Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |
+| Choose between Session persistence and long-term memory | [Sessions are not long-term memory](docs/en/architecture/sessions-vs-memory.md) |
 | Understand approval, guards, and tool effects | [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md) |
 | Build an Agent rather than a loose collection of tools | [Agent design map](docs/en/agent-patterns/designing-an-agent.md) |
 | Research a repository without publishing changes | [Repository Research Agent recipe](docs/en/recipes/repository-research-agent.md) |
 | Run or debug DeepSeek Harness on Windows | [Windows compatibility guide](docs/en/troubleshooting/windows-compatibility.md) |
 | Fix persistent Bash on NixOS or minimal Linux | [PTY shell-path guide](docs/en/troubleshooting/pty-shell-path.md) |
+| Protect or recover a session log | [Live session log durability](docs/en/troubleshooting/live-session-log-durability.md) |
 | Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
 | Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
 
@@ -85,6 +87,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 - [The agent-runtime mental model](docs/en/architecture/agent-runtime.md)
 - [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md)
+- [Sessions are not long-term memory](docs/en/architecture/sessions-vs-memory.md)
 - [Tool execution pipeline](docs/en/architecture/tool-execution-pipeline.md)
 
 ### Agent patterns
@@ -119,6 +122,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
 - [PTY shell path on NixOS and minimal Linux](docs/en/troubleshooting/pty-shell-path.md)
+- [Protect and recover live session logs](docs/en/troubleshooting/live-session-log-durability.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 
 ## Repository structure
