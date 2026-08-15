@@ -15,6 +15,16 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/pty-shell-path.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/live-session-log-durability.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/windows-compatibility.md",
       "revision": 2,
       "translations": {}
@@ -75,6 +85,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/architecture/sessions-vs-memory.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/architecture/tool-execution-pipeline.md",
       "revision": 1,
       "translations": {}
@@ -106,7 +121,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 2,
+      "revision": 5,
       "translations": {}
     },
     {

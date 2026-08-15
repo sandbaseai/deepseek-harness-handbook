@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 2
+content_revision: 5
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-15
 ---
 
 # DeepSeek Harness troubleshooting
@@ -25,7 +25,9 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Response disappears after reload | persistence/session log | session events and configured store |
+| Session crashes after its log is deleted or replaced | live/durable ownership | first persistence error and an offline artifact copy |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
+| Persistent Bash reports `PTY shell exited during startup` | terminal backend executable | `/bin/bash` existence and `command -v bash` from the Harness host |
 
 ## Focused guides
 
@@ -33,6 +35,8 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
+- [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
+- [Protect and recover live session logs](live-session-log-durability.md)
 
 ## Collect a minimal diagnostic bundle
 
