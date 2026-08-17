@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connect DeepSeek Harness to local Ollama | Custom provider guide</title>
+  <meta name="description" content="Configure Ollama as a DeepSeek Harness custom provider, prove host reachability, and diagnose disabled creation, model discovery, and container localhost failures.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/ollama-local-provider.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Connect DeepSeek Harness to local Ollama">
+  <meta property="og:description" content="Exact form values, host preflight, and the localhost boundary that screenshots miss.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/ollama-local-provider.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Connect DeepSeek Harness to local Ollama",
+    "datePublished": "2026-08-15",
+    "dateModified": "2026-08-15",
+    "author": {"@type": "Organization", "name": "SandBase"},
+    "isAccessibleForFree": true,
+    "inLanguage": "en"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#configure">Configure</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">Star on GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell">
+    <header class="article-hero reveal">
+      <p class="eyebrow">Provider guide · Local Ollama</p>
+      <h1>Localhost belongs to the Harness host.</h1>
+      <p class="article-deck">The custom-provider form accepts Ollama. Most failures come from one of two earlier boundaries: no model row was added, or the Harness process cannot reach the loopback address that worked in a different environment.</p>
+      <div class="article-meta"><span>Source checked at 47f94385</span><span>15 Aug 2026</span><span>5-minute setup</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The gate</strong><span>A valid Provider ID, non-empty base URL, and at least one valid model enable creation. The API key may stay blank for local Ollama.</span></div>
+
+      <h2>Prove the host before the form.</h2>
+      <p>Run both commands in the same machine, VM, container, or WSL environment that runs DeepSeek Harness:</p>
+      <pre><code>curl http://127.0.0.1:11434/v1/models
+ollama list</code></pre>
+      <p>The first command proves OpenAI-compatible discovery is reachable. The second gives the exact model ID, including its tag.</p>
+
+      <h2 id="configure">Enter the complete route.</h2>
+      <div class="route-diagram" role="img" aria-label="Ollama custom provider values">
+        <div class="route-row"><div class="route-node"><strong>Provider ID</strong><small>ollama</small></div><div class="route-arrow" aria-hidden="true">→</div><div class="route-node"><strong>Base URL</strong><small>http://127.0.0.1:11434/v1</small></div></div>
+        <div class="route-row"><div class="route-node"><strong>Protocol</strong><small>openai-completions</small></div><div class="route-arrow" aria-hidden="true">→</div><div class="route-node"><strong>Model</strong><small>exact output from ollama list</small></div></div>
+      </div>
+      <ol class="checklist">
+        <li><strong>Open Settings → Models → Add a custom provider.</strong></li>
+        <li><strong>Use Provider ID <code>ollama</code>.</strong> The ID must be lowercase and becomes permanent.</li>
+        <li><strong>Use base URL <code>http://127.0.0.1:11434/v1</code>.</strong></li>
+        <li><strong>Select <code>openai-completions</code>.</strong></li>
+        <li><strong>Leave API key blank.</strong> Local Ollama does not require one by default.</li>
+        <li><strong>Add a model row.</strong> Use the exact installed ID, such as <code>qwen2.5-coder:7b</code>.</li>
+      </ol>
+
+      <h2>Browser localhost is not the route.</h2>
+      <p>The browser only edits settings. Model discovery and inference run from the Harness host. If Harness runs in Docker, a VM, WSL, or another machine, <code>127.0.0.1</code> points inside that environment—not necessarily to the Ollama process on your laptop.</p>
+      <p>Use an address reachable from the Harness host. Keep Ollama bound away from untrusted networks; changing reachability should not silently widen exposure.</p>
+
+      <h2>Route the symptom.</h2>
+      <ul class="source-list">
+        <li><strong>Create remains disabled:</strong> add at least one model row and check the Provider ID format.</li>
+        <li><strong>Fetch available models fails:</strong> run the direct <code>/v1/models</code> request from the Harness host.</li>
+        <li><strong>Discovery works but the first turn fails:</strong> verify the exact model tag and inspect the provider response.</li>
+        <li><strong>Laptop curl works but container Harness fails:</strong> test from inside the container; loopback is different.</li>
+      </ul>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/client/ui-settings-models/src/client/CustomProviderCard.tsx">Custom-provider creation gates in the Web client</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/user/guide/providers.md">Official model-provider guide</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1866">Original Ollama configuration report</a></li>
+        <li><a href="https://docs.ollama.com/api/openai-compatibility">Ollama OpenAI compatibility documentation</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <p class="eyebrow">Diagnose the first broken boundary</p>
+        <h2>Keep the operator map close.</h2>
+        <p>The handbook separates browser, host reachability, provider protocol, model identity, Agent loop, and session failures.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star the handbook</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

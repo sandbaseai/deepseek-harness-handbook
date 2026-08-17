@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness subagent route inheritance | Incident note</title>
+  <meta name="description" content="Why a DeepSeek Harness subagent may inherit a stale provider route, use an unexpected API key, and how to mitigate the billing risk.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-route-inheritance.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="When a DeepSeek Harness subagent uses the wrong provider">
+  <meta property="og:description" content="A source-backed incident note on creation-time route snapshots, unexpected credentials, and safe mitigations.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-route-inheritance.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "When a DeepSeek Harness subagent uses the wrong provider",
+    "description": "A source-backed incident note on subagent route inheritance and unexpected API credential use.",
+    "datePublished": "2026-08-15",
+    "dateModified": "2026-08-15",
+    "author": {"@type": "Organization", "name": "SandBase"},
+    "isAccessibleForFree": true,
+    "inLanguage": "en"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./">Handbook</a><a href="#mitigation">Mitigation</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">Star on GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell">
+    <header class="article-hero reveal">
+      <p class="eyebrow">Incident note · Subagents</p>
+      <h1>When the child agent takes the wrong route.</h1>
+      <p class="article-deck">A parent session can be switched to one provider while its subagent still inherits the provider captured when the session was created. With two routes for the same model name, that can use the wrong API key—and the wrong budget.</p>
+      <div class="article-meta"><span>Verified on master 47f9438</span><span>15 Aug 2026</span><span>6-minute read</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The signal</strong><span>The parent visibly runs through provider B, but the child request header reports provider A. The model name may be identical on both routes.</span></div>
+
+      <h2>The route and the model are different decisions.</h2>
+      <p>A model label such as <code>deepseek-v4-flash</code> does not identify the endpoint or credential by itself. The provider route selects those operational details. If two configured providers expose the same model label, checking only the model name cannot prove which account is being charged.</p>
+
+      <div class="route-diagram" role="img" aria-label="Parent session switches from its creation-time official route to another live route, while a child agent reads the stale creation-time route">
+        <div class="route-row"><div class="route-node"><strong>Parent creation snapshot</strong><small>deepseek-official / deepseek-v4-flash</small></div><div class="route-arrow" aria-hidden="true">→</div><div class="route-node route-bad"><strong>Child inheritance</strong><small>stale official route and credential</small></div></div>
+        <div class="route-row"><div class="route-node"><strong>Parent live request</strong><small>OpenCode-Go / deepseek-v4-flash</small></div><div class="route-arrow" aria-hidden="true">→</div><div class="route-node"><strong>Expected child route</strong><small>current OpenCode-Go route</small></div></div>
+      </div>
+
+      <h2>What the current code does.</h2>
+      <p>The in-process driver resolves a child through <code>resolveChildAgentOptions(parent, request.agentOptions)</code>. The resolver copies <code>provider</code>, <code>model</code>, and <code>maxTokens</code> from <code>parent.options</code>, unless an explicit child option overrides a value.</p>
+      <p>That is consistent with the documented intent—children inherit the parent route—but <code>parent.options</code> is a creation-time configuration snapshot. A later Web UI model selection can change the route used by the live session without updating that snapshot. The child then inherits history rather than current state.</p>
+
+      <h3>Why this matters beyond correctness</h3>
+      <p>A silent route mismatch crosses an operational boundary. It may select a differently priced account, send data to another provider, apply a different context limit, or invalidate an evaluation that assumed parent and child used the same route.</p>
+
+      <h2 id="mitigation">Mitigate before you delegate.</h2>
+      <ol class="checklist">
+        <li><strong>Select the target provider and model before creating the parent session.</strong> If you changed the route inside an existing session, create a fresh session before the first subagent call.</li>
+        <li><strong>Verify provider, not only model.</strong> Inspect the parent and child <code>request/header.config.provider</code> values in a two-provider test.</li>
+        <li><strong>Put budgets on every credential.</strong> Treat an unused fallback key as reachable until route inheritance is verified.</li>
+        <li><strong>Temporarily disable unintended routes for sensitive runs.</strong> This turns a silent billing error into a visible configuration failure.</li>
+        <li><strong>Re-run the regression after upgrading.</strong> Use two providers exposing the same model name; otherwise the test can miss the exact failure mode.</li>
+      </ol>
+
+      <h2>The durable fix.</h2>
+      <p>The child should prefer the parent session’s latest effective request route, fall back to creation options only before the first parent request, and preserve explicit child overrides as the highest-precedence input. Token limits also need ownership-aware handling so an adapter default does not accidentally become an explicit cap on another route.</p>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/subagent/subagent/src/child-agent.ts#L59-L83">Child option resolver on the verified upstream revision</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/subagent/subagent-in-process-driver/src/index.ts#L115-L139">In-process driver call site</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1581">Independent reproduction and tested patch discussion</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1358#discussioncomment-18023903">Original unexpected-billing report and source-backed diagnosis</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <p class="eyebrow">Keep the field guide close</p>
+        <h2>Build agents with visible boundaries.</h2>
+        <p>The open handbook maps subagents, providers, tools, approval, sandboxing, MCP, sessions, and production verification back to primary DeepSeek Harness sources.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star the handbook</a>
+      </section>
+    </article>
+  </main>
+
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

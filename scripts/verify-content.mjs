@@ -4,6 +4,9 @@ import { dirname, extname, join, normalize, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const manifest = JSON.parse(readFileSync(join(root, 'content-manifest.json'), 'utf8'));
 const errors = [];
+const warnings = [];
+const externalLinks = new Set();
+const checkExternalLinks = process.argv.includes('--external-links');
 const allowedStatuses = new Set(['canonical', 'reviewed', 'draft']);
 
 function read(relativePath) {
@@ -74,12 +77,84 @@ for (const absolutePath of allMarkdown) {
   const text = readFileSync(absolutePath, 'utf8');
   const links = [...text.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)].map((match) => match[1]);
   for (const target of links) {
-    if (/^(https?:|mailto:|#)/.test(target)) continue;
+    if (/^https?:/.test(target)) {
+      externalLinks.add(target.split('#')[0]);
+      continue;
+    }
+    if (/^(mailto:|#)/.test(target)) continue;
     const cleanTarget = target.split('#')[0].split('?')[0];
     if (!cleanTarget) continue;
     const resolvedTarget = normalize(join(dirname(absolutePath), cleanTarget));
     if (!existsSync(resolvedTarget)) errors.push(`Broken local link in ${absolutePath.slice(root.length + 1)}: ${target}`);
   }
+}
+
+const siteDirectory = join(root, 'site');
+if (existsSync(siteDirectory)) {
+  const siteFiles = readdirSync(siteDirectory, { withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => join(siteDirectory, entry.name));
+
+  for (const absolutePath of siteFiles.filter((path) => extname(path) === '.html')) {
+    const text = readFileSync(absolutePath, 'utf8');
+    const targets = [...text.matchAll(/(?:href|src)=["']([^"']+)["']/g)].map((match) => match[1]);
+    for (const target of targets) {
+      if (/^https?:/.test(target)) {
+        externalLinks.add(target.split('#')[0]);
+        continue;
+      }
+      if (/^(#|data:|mailto:|javascript:)/.test(target)) continue;
+      const cleanTarget = target.split('#')[0].split('?')[0];
+      if (!cleanTarget || cleanTarget === './') continue;
+      const resolvedTarget = normalize(join(dirname(absolutePath), cleanTarget));
+      if (!existsSync(resolvedTarget)) errors.push(`Broken site link in ${absolutePath.slice(root.length + 1)}: ${target}`);
+    }
+  }
+}
+
+async function verifyExternalLink(url) {
+  let requestUrl = url;
+  const headers = { 'user-agent': 'deepseek-harness-handbook-link-check' };
+  try {
+    const parsed = new URL(url);
+    const parts = parsed.pathname.split('/').filter(Boolean);
+    if (parsed.hostname === 'github.com' && parts.length >= 2) {
+      const [owner, repository, kind, ref, ...rest] = parts;
+      const apiBase = `https://api.github.com/repos/${owner}/${repository}`;
+      if (!kind) requestUrl = apiBase;
+      else if ((kind === 'blob' || kind === 'tree') && ref && rest.length) {
+        requestUrl = `${apiBase}/contents/${rest.join('/')}?ref=${encodeURIComponent(ref)}`;
+      } else if (kind === 'commit' && ref) requestUrl = `${apiBase}/commits/${ref}`;
+      else if (kind === 'pull' && ref) requestUrl = `${apiBase}/pulls/${ref}`;
+      else if (kind === 'issues' && ref && /^\d+$/.test(ref)) requestUrl = `${apiBase}/issues/${ref}`;
+    }
+  } catch {
+    // The original URL will surface any parse or protocol problem.
+  }
+  if (requestUrl.startsWith('https://api.github.com/')) {
+    headers.accept = 'application/vnd.github+json';
+    if (process.env.GITHUB_TOKEN) headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+  try {
+    const response = await fetch(requestUrl, {
+      method: 'HEAD',
+      redirect: 'follow',
+      signal: AbortSignal.timeout(4_000),
+      headers,
+    });
+    if (response.status === 404 || response.status === 410) errors.push(`Dead external link (${response.status}): ${url}`);
+    else if (response.status === 403 || response.status === 429 || response.status >= 500) warnings.push(`External link not fully verified (${response.status}): ${url}`);
+  } catch (error) {
+    warnings.push(`External link check unavailable: ${url} (${error.message})`);
+  }
+}
+
+if (checkExternalLinks) {
+  const queue = [...externalLinks];
+  const workers = Array.from({ length: Math.min(16, queue.length) }, async () => {
+    while (queue.length) await verifyExternalLink(queue.shift());
+  });
+  await Promise.all(workers);
 }
 
 if (errors.length) {
@@ -88,4 +163,7 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Verified ${manifest.pages.length} canonical pages and ${docsFiles.length} localized documents.`);
+for (const warning of warnings.slice(0, 12)) console.warn(`Warning: ${warning}`);
+if (warnings.length > 12) console.warn(`Warning: ${warnings.length - 12} additional external links could not be fully verified.`);
+
+console.log(`Verified ${manifest.pages.length} canonical pages and ${docsFiles.length} localized documents${checkExternalLinks ? `; checked ${externalLinks.size} external links` : ''}.`);

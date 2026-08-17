@@ -1,0 +1,38 @@
+# DeepSeek Harness Handbook
+
+> An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
+
+Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+Canonical content: https://github.com/sandbaseai/deepseek-harness-handbook/tree/main/docs/en
+Language status: English canonical; Simplified Chinese partial and reviewed; Japanese, Korean, and Spanish navigation drafts.
+Atom updates feed: https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml
+Source repository: https://github.com/sandbaseai/deepseek-harness-handbook
+Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
+
+## Start here
+
+- [Protect live session logs](https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html): Stop the writer before backup or repair, then separate missing paths, sequence gaps, torn tails, and tool-call identity corruption.
+- [Fix a missing /bin/bash](https://sandbaseai.github.io/deepseek-harness-handbook/pty-shell-path.html): Configure the terminal-bash preset row with the exact executable path on NixOS, containers, and other non-FHS hosts.
+- [Connect local Ollama](https://sandbaseai.github.io/deepseek-harness-handbook/ollama-local-provider.html): Configure the custom-provider form, prove reachability from the Harness host, and diagnose container localhost failures.
+- [Bound subagent scale](https://sandbaseai.github.io/deepseek-harness-handbook/subagent-scale-oom.html): Separate concurrency from total-agent limits and turn large fan-out jobs into measured, restartable batches.
+- [Plugin installation and recovery](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html): Preserve a known-good profile, inspect bundle reconciliation, and route the first composition error.
+- [Version evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html): Separate moving npm dist-tags, immutable published artifacts, the installed executable, and the source revision before reporting a failure.
+- [DeepSeek Harness rc.6 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html): Current high-signal boundaries for installation, sessions, sandboxing, remote Web, Windows paths, and MCP configuration, with primary evidence and safer next actions.
+- [Interactive failure router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html): Pick the first broken boundary and get the first evidence, command, success signal, and focused guide.
+- [What is DeepSeek Harness?](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/what-is-deepseek-harness.md): Separate the model, provider API, runtime, profile, tools, policy, and session layers.
+- [Five-minute Web quickstart](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/quickstart.md): Run a bounded first task and inspect the resolved runtime graph.
+- [Headless Agent](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/headless-agent.md): Operate one non-interactive task with explicit artifacts and exit evidence.
+- [Python SDK](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/python-sdk.md): Embed the runtime over its JSON-RPC lifecycle.
+- [MCP integration](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/mcp.md): Diagnose process, transport, handshake, registration, and policy separately.
+- [Troubleshooting](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/README.md): Route symptoms to the provider, loop, tool, policy, sandbox, or session layer.
+- [Subagent route inheritance incident note](https://sandbaseai.github.io/deepseek-harness-handbook/subagent-route-inheritance.html): Diagnose and mitigate child agents using a stale provider route or unexpected credential.
+- [Remote Web secure-context incident note](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html): Diagnose empty workspaces and providers caused by crypto.randomUUID failures over plain HTTP.
+- [Operator cheat sheet](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/cheat-sheet.md): Commands, evidence checks, and production boundaries.
+
+## Download
+
+- [DeepSeek Harness Field Guide v0.1.0](https://github.com/sandbaseai/deepseek-harness-handbook/releases/download/v0.1.0/DeepSeek-Harness-Field-Guide-v0.1.0.pdf): Ten-page visual PDF for onboarding and offline reference.
+
+## Project boundary
+
+This is a community-maintained handbook from SandBase, not an official DeepSeek AI project. Version-sensitive claims link to primary sources and record verification dates.

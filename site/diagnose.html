@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness Failure Router | Diagnose the first broken boundary</title>
+  <meta name="description" content="Route a DeepSeek Harness failure to startup, Web security, workspace, provider, tool policy, sandbox, or session—with the first evidence and command to collect.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DeepSeek Harness Failure Router">
+  <meta property="og:description" content="Pick the first broken boundary. Get the evidence, command, and next guide.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#router">Skip to diagnosis</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home">
+      <span class="brand-mark" aria-hidden="true">DSH</span>
+      <span>Harness Handbook</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="./">Home</a>
+      <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/README.md">All guides</a>
+      <a href="https://github.com/sandbaseai/deepseek-harness-handbook">Star on GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main" class="diagnose-shell">
+    <section class="diagnose-hero reveal" aria-labelledby="diagnose-title">
+      <div>
+        <p class="eyebrow">Interactive failure router · verified 2026-08-15</p>
+        <h1 id="diagnose-title">Find the first broken boundary.</h1>
+      </div>
+      <p>Do not reinstall everything. Select the earliest observable failure and collect one discriminating piece of evidence.</p>
+    </section>
+
+    <section id="router" class="router-layout" aria-labelledby="router-title">
+      <div class="router-picker">
+        <div class="router-heading">
+          <p class="router-index">01 / Symptom</p>
+          <h2 id="router-title">What failed first?</h2>
+        </div>
+        <div class="symptom-list" role="list" aria-label="Failure symptoms">
+          <button class="symptom-button is-active" type="button" data-route="startup" aria-pressed="true"><span>01</span><strong>No Web URL appears</strong><small>Process exits or never becomes ready</small></button>
+          <button class="symptom-button" type="button" data-route="empty"><span>02</span><strong>Remote Web UI is empty</strong><small>Workspace and provider lists do not load</small></button>
+          <button class="symptom-button" type="button" data-route="workspace"><span>03</span><strong>Workspace cannot open</strong><small>Folder picker, invalid path, or wrong scope</small></button>
+          <button class="symptom-button" type="button" data-route="provider"><span>04</span><strong>The model turn fails</strong><small>Authentication, endpoint, TLS, or streaming</small></button>
+          <button class="symptom-button" type="button" data-route="tool"><span>05</span><strong>A tool does not execute</strong><small>Arguments, approval, policy, or provider</small></button>
+          <button class="symptom-button" type="button" data-route="sandbox"><span>06</span><strong>The shell is denied</strong><small>Policy denial versus unavailable isolation</small></button>
+          <button class="symptom-button" type="button" data-route="session"><span>07</span><strong>History or continuation is wrong</strong><small>Persistence, replay, queue, or route inheritance</small></button>
+        </div>
+      </div>
+
+      <article class="diagnosis-panel" aria-live="polite" aria-atomic="true">
+        <div class="diagnosis-kicker"><span id="route-layer">Process</span><span id="route-confidence">Start here</span></div>
+        <h2 id="route-title">Confirm the host stays alive</h2>
+        <p id="route-summary">The first boundary is process startup—not the browser, workspace, or model provider.</p>
+        <dl class="evidence-grid">
+          <div><dt>Collect first</dt><dd id="route-evidence">The launch command, Node and DSH versions, and the complete terminal tail.</dd></div>
+          <div><dt>Success signal</dt><dd id="route-success">The process remains alive and prints a reachable Web URL.</dd></div>
+        </dl>
+        <div class="route-command">
+          <div class="command-label">First command</div>
+          <code id="route-command">npx @deepseek-ai/dsh web</code>
+          <button class="copy-button" type="button" data-copy="route-command">Copy command</button>
+          <span class="copy-status" role="status" aria-live="polite"></span>
+        </div>
+        <div class="route-next">
+          <p class="router-index">02 / Next move</p>
+          <ol id="route-steps">
+            <li>Keep the launch terminal visible.</li>
+            <li>Do not diagnose the browser until the URL is printed.</li>
+            <li>Preserve the first error and its cause chain.</li>
+          </ol>
+        </div>
+        <div class="route-actions">
+          <a id="route-guide" class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/README.md">Open the full guide</a>
+          <a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star the handbook <span class="star-count" aria-live="polite"></span></a>
+        </div>
+      </article>
+    </section>
+
+    <section class="diagnose-boundary" aria-labelledby="boundary-title">
+      <p class="router-index">03 / Guardrail</p>
+      <h2 id="boundary-title">One variable per run.</h2>
+      <p>Use a disposable workspace. Never paste credentials, full settings, private paths, or an unredacted session log into an issue. A final assistant sentence is not evidence; prefer terminal output, durable events, artifacts, diffs, and exit status.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Independent community field guide by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p>
+    <div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook/issues">Report a gap</a></div>
+  </footer>
+  <script src="./script.js" defer></script>
+  <script src="./diagnose.js" defer></script>
+</body>
+</html>

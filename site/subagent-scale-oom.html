@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness subagent OOM | Bound concurrency and total agents</title>
+  <meta name="description" content="Diagnose JavaScript heap OOM after hundreds of DeepSeek Harness subagents. Separate concurrency from total-agent limits and use restartable batches.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-scale-oom.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="480 subagents can fail below the default guard">
+  <meta property="og:description" content="Two limits, one memory boundary, and a restartable operating pattern for DeepSeek Harness workflows.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-scale-oom.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#operate">Operating pattern</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell scale-article">
+    <header class="article-hero scale-hero">
+      <div>
+        <p class="eyebrow">Subagent capacity</p>
+        <h1>480 agents. Heap OOM.</h1>
+        <p class="article-deck">The default total limit prevents runaway calls. It does not promise the workflow will fit in memory.</p>
+      </div>
+      <div class="scale-figure" role="img" aria-label="Reported 480 subagents below the default total limit of 1000, ending near a 4 gigabyte V8 heap">
+        <div><strong>480</strong><span>children reported</span></div>
+        <div class="scale-marker"><span>below guard</span></div>
+        <div><strong>1000</strong><span>default total limit</span></div>
+        <p><strong>~4 GB</strong> V8 heap at fatal OOM</p>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>Evidence rule</strong><span>The report proves heap exhaustion at this scale. It does not distinguish a leak from legitimate retained workflow state without per-batch heap telemetry.</span></div>
+
+      <h2>Two limits answer different questions.</h2>
+      <div class="limit-pair">
+        <section><span>Live overlap</span><strong>0 → up to 16</strong><p><code>maxConcurrentAgents</code> defaults to auto: <code>min(16, max(1, cores - 2))</code>.</p></section>
+        <section><span>Run lifetime</span><strong>1000 total</strong><p><code>maxTotalAgents</code> stops excessive calls. It is not a heap budget.</p></section>
+      </div>
+
+      <h2 id="operate">Turn one long fan-out into restartable work.</h2>
+      <div class="batch-route" role="img" aria-label="Large workload split into measured batches with persisted results between batches">
+        <div><strong>Large input</strong><small>480 items</small></div><span>→</span><div><strong>Bounded batch</strong><small>2-4 concurrent</small></div><span>→</span><div><strong>Persist</strong><small>results + telemetry</small></div><span>↻</span>
+      </div>
+      <ol class="checklist">
+        <li><strong>Partition the input.</strong> Make every batch independently restartable.</li>
+        <li><strong>Start at 2-4 concurrent children.</strong> Raise one dimension only after measurement.</li>
+        <li><strong>Set a batch-sized total ceiling.</strong> Do not inherit 1000 when the batch expects 64 calls.</li>
+        <li><strong>Persist before the next batch.</strong> Keep completed output outside the workflow lifetime.</li>
+        <li><strong>Record memory and outcomes.</strong> Capture peak heap, child count, duration, failures, and retries.</li>
+      </ol>
+
+      <h2>Use a bounded delegation group.</h2>
+      <pre><code>- id: delegation
+  name: cordis:group
+  group: true
+  isolate:
+    workflows: true
+  config:
+    - id: workflow-worker-thread
+      name: '@deepseek-ai/dsh-workflow-worker-thread'
+      config:
+        provider: spawn
+        maxConcurrentAgents: 4
+        maxTotalAgents: 64
+    - id: tool-workflow
+      name: '@deepseek-ai/dsh-tool-workflow'</code></pre>
+      <p>The values are conservative starting points, not universal sizing advice. Increasing <code>--max-old-space-size</code> only moves the failure boundary if the workload still retains too much state.</p>
+
+      <h2>Stop on the memory trend.</h2>
+      <div class="decision-grid">
+        <section><strong>Heap falls after a batch</strong><p>Continue cautiously. Compare the next batch at the same bounds.</p></section>
+        <section><strong>Heap rises after settled children</strong><p>Stop growth. Preserve a heap profile and the settled-child count.</p></section>
+        <section><strong>OOM before total limit</strong><p>Reduce both ceilings and shorten the process lifetime.</p></section>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/workflow/workflow-worker-thread/README.md#config">Worker-thread workflow configuration and defaults</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1897">JavaScript OOM report after approximately 480 subagents</a></li>
+        <li><a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/subagents.md">Canonical handbook subagent guide</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the runtime boundary visible.</h2>
+        <p>Use the live status board for source-backed reports, first evidence, and safer next actions.</p>
+        <a class="button primary" href="./field-status.html">Open field status</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

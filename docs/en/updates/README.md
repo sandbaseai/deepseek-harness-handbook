@@ -1,14 +1,18 @@
 ---
 title: DeepSeek Harness Updates and Breaking Changes
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-17
 ---
 
 # DeepSeek Harness updates and breaking changes
 
 This is the living desk for upstream changes that affect people building or operating Agents. It summarizes primary sources; it is not an official changelog.
+
+## Handbook releases
+
+The repository [changelog](../../../CHANGELOG.md) records reader-visible handbook and publishing changes. GitHub Releases provide immutable milestones; the live operator site deploys from `site/` in the same `main` commit, so a successful Pages deployment can be traced back to reviewed source.
 
 ## Current watchlist
 
