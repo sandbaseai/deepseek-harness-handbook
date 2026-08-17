@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness crypto.randomUUID error | Remote Web UI</title>
+  <meta name="description" content="Why the DeepSeek Harness Web UI can open but show no workspaces or providers over LAN or Tailscale HTTP, and how to recover safely.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="When DeepSeek Harness loads—but its data does not">
+  <meta property="og:description" content="Diagnose crypto.randomUUID failures over plain HTTP without confusing browser compatibility with deployment security.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "When DeepSeek Harness loads—but its data does not",
+    "description": "A source-backed incident note on remote Web UI secure-context and crypto.randomUUID failures.",
+    "datePublished": "2026-08-15",
+    "dateModified": "2026-08-15",
+    "author": {"@type": "Organization", "name": "SandBase"},
+    "isAccessibleForFree": true,
+    "inLanguage": "en"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./">Handbook</a><a href="#recover">Recovery</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">Star on GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell">
+    <header class="article-hero reveal">
+      <p class="eyebrow">Incident note · Remote Web</p>
+      <h1>The shell loads. The data does not.</h1>
+      <p class="article-deck">A phone can open the DeepSeek Harness Web UI over LAN or Tailscale HTTP, yet show no workspaces, providers, or sessions. The first broken boundary may be the browser origin—not your model route.</p>
+      <div class="article-meta"><span>Verified on master 47f9438</span><span>15 Aug 2026</span><span>5-minute read</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The signal</strong><span>The static page renders from a non-loopback HTTP URL, while the console reports <code>crypto.randomUUID is not a function</code> and every RPC-backed view stays empty.</span></div>
+
+      <h2>The exception happens before the provider.</h2>
+      <p>The browser client creates an identifier before sending each RPC request. At the verified revision, that path directly calls <code>crypto.randomUUID()</code>. If the browser does not expose the method, request construction throws before workspace, session, or provider code can answer.</p>
+      <p>That explains the deceptive split: static HTML, CSS, and JavaScript arrive successfully, but the first data request never leaves the browser.</p>
+
+      <div class="route-diagram" role="img" aria-label="A remote plain HTTP browser loads the page shell, then fails when request creation needs crypto.randomUUID">
+        <div class="route-row"><div class="route-node"><strong>Remote plain HTTP</strong><small>page shell renders</small></div><div class="route-arrow" aria-hidden="true">→</div><div class="route-node route-bad"><strong>Request ID fails</strong><small>crypto.randomUUID unavailable</small></div></div>
+        <div class="route-row"><div class="route-node"><strong>Localhost or HTTPS</strong><small>secure browser context</small></div><div class="route-arrow" aria-hidden="true">→</div><div class="route-node"><strong>RPC proceeds</strong><small>workspace and provider data</small></div></div>
+      </div>
+
+      <h2>Probe the browser, not your API key.</h2>
+      <p>Run these two expressions in the failing browser console:</p>
+      <pre><code>window.isSecureContext
+typeof globalThis.crypto?.randomUUID</code></pre>
+      <p>The affected path normally reports <code>false</code> and <code>"undefined"</code>. Compare the same Harness process through its localhost URL on the host machine. If localhost works, rotating provider credentials or clearing sessions targets the wrong layer.</p>
+
+      <h2 id="recover">Recover without widening the wrong boundary.</h2>
+      <ol class="checklist">
+        <li><strong>Prefer loopback.</strong> Use the printed localhost URL when remote access is unnecessary.</li>
+        <li><strong>For remote use, create a trusted HTTPS boundary.</strong> Restrict who can reach it and preserve streaming and WebSocket behavior.</li>
+        <li><strong>Verify the complete surface.</strong> Check secure context, UUID availability, workspace/provider RPC, one disposable read-only turn, and rejection of unauthorized clients.</li>
+        <li><strong>Treat a UUID polyfill as diagnosis.</strong> It may restore compatibility, but it does not add TLS, authentication, or an origin policy.</li>
+      </ol>
+
+      <h2>Compatibility is not deployment security.</h2>
+      <p>The upstream server documentation says the Web carrier provides no TLS, authentication, or origin policy. The CLI separately rejects <code>--host 0.0.0.0</code> because direct exposure can make remote code execution reachable from the network. Fixing one missing browser API does not change either fact.</p>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/host/apiproxy/src/fetch/client.ts#L299-L301">Direct browser-side UUID call on the verified revision</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/subsystems/web-server.md#configuration">Upstream Web server exposure contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/bundle/web-app/src/startup.ts#L60-L72">CLI safety rejection for all-interfaces binding</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1642">Original reproduction and diagnostic workaround</a></li>
+        <li><a href="https://www.w3.org/TR/webcrypto-2/#Crypto-method-randomUUID">W3C Web Cryptography Level 2 specification</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <p class="eyebrow">Diagnose the right layer first</p>
+        <h2>Keep the operator map close.</h2>
+        <p>The open handbook separates browser, transport, provider, Agent loop, tool policy, sandbox, and session failures—with evidence for each boundary.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star the handbook</a>
+      </section>
+    </article>
+  </main>
+
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

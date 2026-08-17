@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Which DeepSeek Harness version are you running? | Version evidence</title>
+  <meta name="description" content="Distinguish the npm dist-tag, installed DeepSeek Harness package, source revision, and reproduced runtime before reporting or debugging a failure.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Which DeepSeek Harness version are you actually running?">
+  <meta property="og:description" content="Four version signals, one reproducible incident report.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#capture">Capture evidence</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">Star on GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell">
+    <header class="article-hero reveal">
+      <p class="eyebrow">Operator note · Version evidence</p>
+      <h1>“Latest” is not a reproducible version.</h1>
+      <p class="article-deck">A dist-tag can move, a repository can lag a published package, and a cached <code>npx</code> install can outlive both. Capture the artifact that executed—not the version you expected.</p>
+      <div class="article-meta"><span>Registry checked 15 Aug 2026</span><span>4-minute read</span><span>Primary sources only</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The mismatch</strong><span>The npm <code>latest</code> and <code>next</code> tags resolve to <code>0.1.0-rc.6</code>, while the public default branch ends at the rc.5 release merge and GitHub has no Release object.</span></div>
+
+      <h2>Separate four signals.</h2>
+      <ol class="checklist">
+        <li><strong>Dist-tag:</strong> what a fresh unpinned install would resolve now.</li>
+        <li><strong>Published artifact:</strong> the immutable package version and integrity metadata downloaded from npm.</li>
+        <li><strong>Installed artifact:</strong> the package actually selected by the current global install, project, cache, or launcher.</li>
+        <li><strong>Source revision:</strong> the commit used for code links and mechanism claims. It may not reconstruct an unpublished package exactly.</li>
+      </ol>
+
+      <h2 id="capture">Capture the executable evidence.</h2>
+      <p>Run this before changing the installation:</p>
+      <pre><code>npx @deepseek-ai/dsh --version
+npm view @deepseek-ai/dsh dist-tags --json
+npm view @deepseek-ai/dsh@0.1.0-rc.6 dist.integrity gitHead --json</code></pre>
+      <p>Also record the exact launch command, Node version, operating system build, profile, and resolved configuration. If the first command downloads a package, preserve that output: it is part of the reproduction.</p>
+
+      <h2>Pin experiments, not assumptions.</h2>
+      <pre><code>npx @deepseek-ai/dsh@0.1.0-rc.6 --version
+npx @deepseek-ai/dsh@0.1.0-rc.6 web</code></pre>
+      <p>An explicit version makes a clean-room retry comparable. It does not prove that an existing failing process used the same artifact, so capture first and reinstall second.</p>
+
+      <h2>Write incident claims with both coordinates.</h2>
+      <p>A useful report says: “Observed on npm package <code>0.1.0-rc.6</code>; source mechanism inspected at commit <code>47f94385</code>.” If those coordinates differ, label the source conclusion <strong>source-consistent</strong> rather than reproduced.</p>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://www.npmjs.com/package/@deepseek-ai/dsh?activeTab=versions">Published @deepseek-ai/dsh versions on npm</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a">Public rc.5 release merge revision</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases">GitHub Releases view</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <p class="eyebrow">Keep the evidence boundary visible</p>
+        <h2>Check the live field status.</h2>
+        <p>Known reports are labeled observed, source-consistent, or verified—never silently blended.</p>
+        <a class="button primary" href="./field-status.html">Open Field Status</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness session log recovery | Protect live sessions</title>
+  <meta name="description" content="Protect and recover DeepSeek Harness session logs after deletion, replacement, sequence gaps, torn tails, or tool-call identity corruption.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Stop the writer first.">
+  <meta property="og:description" content="Know which session state is authoritative before copying, replacing, deleting, or repairing its artifact.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#respond">Respond</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell durability-article">
+    <header class="article-hero durability-hero">
+      <div class="reveal">
+        <p class="eyebrow">Session log durability</p>
+        <h1>Stop the writer first.</h1>
+        <p class="article-deck">Stop the writer before you copy, replace, delete, or repair a DeepSeek Harness session artifact.</p>
+      </div>
+      <div class="authority-route reveal delay-1" role="img" aria-label="Session authority moves from live memory through write-behind persistence to a durable append-only log and then cold replay">
+        <div><small>While running</small><strong>Live Session</strong><span>memory is authoritative</span></div>
+        <div><small>During flush</small><strong>Write-behind</strong><span>cursor owns next seq</span></div>
+        <div><small>After stop</small><strong>Durable log</strong><span>append-only evidence</span></div>
+        <div><small>On resume</small><strong>Cold replay</strong><span>validate before publish</span></div>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The rule</strong><span>A session artifact is an append-only database file. External mutation can split live memory from durable replay.</span></div>
+
+      <h2 id="respond">Preserve the first failure.</h2>
+      <ol class="response-sequence">
+        <li><strong>Stop prompting</strong><span>Another turn can widen the memory and disk difference.</span></li>
+        <li><strong>Record evidence</strong><span>Capture version, session ID, surface, profile, and the first persistence error.</span></li>
+        <li><strong>Stop cleanly</strong><span>End the writer before touching the session directory.</span></li>
+        <li><strong>Copy offline</strong><span>Keep the original read-only. Diagnose only disposable copies.</span></li>
+      </ol>
+
+      <h2>Route by surviving evidence.</h2>
+      <div class="durability-routes">
+        <section><code>ENOENT</code><strong>The durable path disappeared.</strong><p>Do not create an empty file. Restore the full prefix or rematerialize the complete live log from seq 0.</p></section>
+        <section><code>seq gap</code><strong>The middle is not a torn tail.</strong><p>Preserve the first missing sequence. Appending a new tail cannot repair committed middle loss.</p></section>
+        <section><code>tool source</code><strong>One call has several identities.</strong><p>Update the assistant call, execution event, and result identity together on a copy.</p></section>
+        <section><code>works until reload</code><strong>Memory and replay disagree.</strong><p>Capture visible output, stop the writer, then test the cold artifact without new turns.</p></section>
+      </div>
+
+      <h2>Back up after quiescence.</h2>
+      <div class="backup-route" role="img" aria-label="Offline backup sequence from stopped writer through session root copy and digest verification to restart">
+        <div><strong>Stop writer</strong><span>no new events</span></div><i aria-hidden="true">→</i>
+        <div><strong>Copy session root</strong><span>whole directory</span></div><i aria-hidden="true">→</i>
+        <div><strong>Verify digests</strong><span>count and hash</span></div><i aria-hidden="true">→</i>
+        <div><strong>Restart</strong><span>matching build</span></div>
+      </div>
+      <pre><code>stat /path/to/session.jsonl
+sha256sum /path/to/session.jsonl
+zstd -dc /path/to/session.jsonl.zstd &gt; /recovery/session.decoded.jsonl</code></pre>
+
+      <h2>Cold recovery is intentionally narrow.</h2>
+      <div class="cold-boundary">
+        <section><span>Recoverable boundary</span><strong>Final torn fragment</strong><p>A never-fully-written physical tail may be discarded before replay.</p></section>
+        <section><span>Recoverable boundary</span><strong>Interrupted final turn</strong><p>Deterministic tool, step, and turn closers can balance a valid prefix.</p></section>
+        <section><span>Refused boundary</span><strong>Committed middle corruption</strong><p>Sequence gaps, malformed messages, and inconsistent tool identities must not be silently accepted.</p></section>
+      </div>
+
+      <h2>Inspect a copy, not the source.</h2>
+      <pre><code>jq -c . /recovery/session.jsonl &gt; /dev/null
+jq -r '[.seq // "header", .type] | @tsv' /recovery/session.jsonl</code></pre>
+      <p>Check contiguous sequence numbers, non-empty message IDs, valid sources, and one consistent identity across each assistant tool call, execution, and result.</p>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/session/session-persistence/README.md">Official persistence contract and limitations</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/session/session-persistence-jsonl/src/index.ts#L647-L682">JSONL durable append implementation</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/core/session/src/repair.ts#L1-L151">Interrupted-turn recovery semantics</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1891">Live deletion report</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1912">Live replacement report</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1915">Empty tool-call identity report</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the full recovery matrix.</h2>
+        <p>The canonical runbook includes backup boundaries, validation invariants, reporting evidence, and source links.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/live-session-log-durability.md">Read the full runbook</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

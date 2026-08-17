@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness rc.6 Field Status | Verified boundaries and workarounds</title>
+  <meta name="description" content="A source-linked field status for DeepSeek Harness 0.1.0-rc.6: installation, sessions, preset mounting, provider authentication, remote Web, Windows compatibility, MCP, and sandbox risk.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="DeepSeek Harness rc.6 Field Status">
+  <meta property="og:description" content="Known boundaries, first evidence, and safer next actions—linked to primary reports.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="DeepSeek Harness rc.6 Field Status — live, source-backed runtime boundaries">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home">
+      <span class="brand-mark" aria-hidden="true">DSH</span>
+      <span>Harness Handbook</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="./diagnose.html">Failure router</a>
+      <a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main" class="status-shell">
+    <section class="status-hero">
+      <div>
+        <p class="eyebrow">Field status · verified 2026-08-15</p>
+        <h1>Know the rc.6 boundaries before they become incidents.</h1>
+      </div>
+      <div class="status-summary">
+        <p>This is a community-maintained snapshot of high-signal reports, not an official release-health claim. Each item separates observed evidence from inference and links to the primary discussion.</p>
+        <dl>
+          <div><dt>Published</dt><dd>0.1.0-rc.6</dd></div>
+          <div><dt>Tracked</dt><dd>10 boundaries</dd></div>
+          <div><dt>Rule</dt><dd>Verify before workaround</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="status-board" aria-labelledby="board-title">
+      <div class="status-board-heading">
+        <p class="eyebrow">Operator view</p>
+        <h2 id="board-title">Start with the failure surface.</h2>
+      </div>
+
+      <article class="status-card severity-high">
+        <div class="status-card-top"><span>Linux · install</span><strong>High friction</strong></div>
+        <h3>Published CLI may lack the Linux x64 PTY prebuild.</h3>
+        <p><code>node-pty</code> falls back to <code>node-gyp rebuild</code>. A deprecation warning is not the failure; capture the first compiler error.</p>
+        <dl><div><dt>First evidence</dt><dd><code>prebuilds/linux-x64 does not exist</code></dd></div><div><dt>Next action</dt><dd>Install the native build toolchain or wait for a corrected package; do not treat local compilation as the release fix.</dd></div></dl>
+        <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1772">Primary report ↗</a>
+      </article>
+
+      <article class="status-card severity-high">
+        <div class="status-card-top"><span>Session · tool runtime</span><strong>Data continuity</strong></div>
+        <h3>A scheduler crash can leave a permanently invalid provider transcript.</h3>
+        <p>A recorded assistant tool call without its matching result can make every later turn fail with HTTP 400. A full restart was tested and did not repair a turn already closed with <code>turn/end(error)</code>.</p>
+        <dl><div><dt>First evidence</dt><dd><code>insufficient tool messages following tool_calls message</code></dd></div><div><dt>Next action</dt><dd>Preserve and back up the session. Avoid hot-loading plugins during an active turn; do not edit persisted event sequences manually.</dd></div></dl>
+        <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1695">Primary report and validation ↗</a>
+      </article>
+
+      <article class="status-card severity-critical">
+        <div class="status-card-top"><span>Linux · sandbox</span><strong>Security report</strong></div>
+        <h3>Do not run the bwrap profile as privileged root.</h3>
+        <p>A public report shows a root process retaining enough mount authority to remount a read-only bind as writable. The report is source-consistent but has not been independently reproduced by this handbook.</p>
+        <dl><div><dt>First evidence</dt><dd>Host writes persist after a sandboxed remount.</dd></div><div><dt>Next action</dt><dd>Treat root + bwrap as unsafe pending an upstream fix. Run unprivileged and prefer a capability-resistant isolation boundary such as Landlock or a disposable VM.</dd></div></dl>
+        <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1769">Security report ↗</a>
+      </article>
+
+      <article class="status-card severity-medium">
+        <div class="status-card-top"><span>Remote Web · browser</span><strong>Environment</strong></div>
+        <h3>Plain HTTP can remove required browser crypto APIs.</h3>
+        <p>A remote Web page may render while workspace and provider data stay empty because the origin is not a secure context.</p>
+        <dl><div><dt>First evidence</dt><dd><code>crypto.randomUUID is not a function</code></dd></div><div><dt>Next action</dt><dd>Use localhost or HTTPS. Do not work around the symptom by weakening browser security.</dd></div></dl>
+        <a href="./remote-web-secure-context.html">Open the incident note →</a>
+      </article>
+
+      <article class="status-card severity-medium">
+        <div class="status-card-top"><span>Windows · workspace</span><strong>Path boundary</strong></div>
+        <h3>Folder selection failures are not one bug.</h3>
+        <p>Native picker worker exits, legacy junction <code>EPERM</code>, and CJK UTF-16 truncation have distinct evidence and fixes. Switching blindly between pickers can hide the real boundary.</p>
+        <dl><div><dt>First evidence</dt><dd>Record the picker implementation, exact path class, and complete worker error.</dd></div><div><dt>Next action</dt><dd>Use a plain disposable path while preserving the failing path and logs for upstream diagnosis.</dd></div></dl>
+        <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1675">Junction report ↗</a>
+      </article>
+
+      <article class="status-card severity-info">
+        <div class="status-card-top"><span>MCP · configuration</span><strong>UX gap</strong></div>
+        <h3>The client exists; the general-purpose settings form does not.</h3>
+        <p>Configure one <code>@deepseek-ai/dsh-mcp-client</code> row per server through an overlay or profile patch. Discovered tools use <code>mcp__server__tool</code> names.</p>
+        <dl><div><dt>First evidence</dt><dd>Resolved config plus connection, discovery, and registration logs.</dd></div><div><dt>Next action</dt><dd>Trial with <code>--patch</code>, then merge into a profile patch. Resolve secrets from environment variables.</dd></div></dl>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/mcp.md">Open the MCP guide ↗</a>
+      </article>
+
+      <article class="status-card status-card-wide severity-high">
+        <div class="status-card-top"><span>GitHub Copilot · authentication</span><strong>Source-consistent</strong></div>
+        <h3>A valid long-lived token can still fail every streaming turn.</h3>
+        <p>Copilot expects its long-lived GitHub token to be exchanged for a short-lived endpoint token. The current adapter passes the resolved credential as a highest-priority API key instead, bypassing the provider-owned OAuth flow; the UI then reduces the resulting 403 to “API key is invalid.”</p>
+        <dl><div><dt>First evidence</dt><dd>A non-streaming auxiliary call succeeds while streaming turns fail with <code>403 Access to this endpoint is forbidden</code> on the same route, model, and credential.</dd></div><div><dt>Next action</dt><dd>Do not rotate or expose the credential based only on the generic UI message. Preserve the provider response and session evidence; wait for a published OAuth-exchange fix before treating this route as operational.</dd></div></dl>
+        <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1806">Root-cause report and proposed fix ↗</a>
+      </article>
+
+      <article class="status-card status-card-wide severity-high">
+        <div class="status-card-top"><span>Preset · Cordis host</span><strong>Source-confirmed</strong></div>
+        <h3>The shipped Cordis preset can collide with its own inspect providers.</h3>
+        <p><code>tool-cordis</code> registers process-level host inspect providers whenever the preset mounts, while the shared registry rejects a second provider with the same ID. A live preset that already owns those registrations can therefore prevent another Cordis preset from mounting.</p>
+        <dl><div><dt>First evidence</dt><dd><code>Host Cordis inspect provider &quot;Service&quot; is already registered</code> while <code>session.create</code> returns <code>agent-preset-invalid</code>.</dd></div><div><dt>Next action</dt><dd>Use the <code>standard</code> preset and restart the process after changing the default. Do not make registration silently idempotent without preserving disposer ownership; the durable fix belongs at host startup or behind isolated ownership.</dd></div></dl>
+        <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1827">Reproduction and source analysis ↗</a>
+      </article>
+
+      <article class="status-card status-card-wide severity-high">
+        <div class="status-card-top"><span>Windows 10 · sandbox</span><strong>Compatibility report</strong></div>
+        <h3>Restricted-token children may fail during DLL initialization.</h3>
+        <p>A Windows 10 build 19041 report shows ordinary child processes intermittently exiting with <code>0xC0000142</code> under <code>workspace-write</code>. The implementation documents this status for incompatible console creation flags, while its restricting-SID design was verified on Windows 11 build 26200.</p>
+        <dl><div><dt>First evidence</dt><dd><code>Start-Process</code> reports <code>-1073741502</code> (<code>STATUS_DLL_INIT_FAILED</code>), the same command succeeds outside confinement, and workspace ACLs do not accumulate.</dd></div><div><dt>Next action</dt><dd>Treat this as an OS/backend compatibility boundary, not a missing permission. Preserve the build, command, creation flags, and exit code; do not add broad SIDs or silently run unrestricted. Use a disposable VM for tasks that cannot run inside this backend.</dd></div></dl>
+        <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1847">Windows 10 reproduction ↗</a>
+      </article>
+
+      <article class="status-card status-card-wide severity-high">
+        <div class="status-card-top"><span>Workflow · subagents</span><strong>Capacity report</strong></div>
+        <h3>A workflow can exhaust the heap below the default total-agent guard.</h3>
+        <p>A translation run reported a fatal V8 OOM near 4 GB after approximately 480 subagents. The worker-thread engine permits up to 1000 calls by default, so that guard does not define a safe memory envelope.</p>
+        <dl><div><dt>First evidence</dt><dd>Capture peak heap, concurrent children, total children, settled children, and whether memory falls between batches.</dd></div><div><dt>Next action</dt><dd>Start with 2-4 concurrent children, use a batch-sized total ceiling, persist every batch, and stop when memory rises after settled children.</dd></div></dl>
+        <a href="./subagent-scale-oom.html">Open the bounded workflow guide →</a>
+      </article>
+    </section>
+
+    <section class="status-method">
+      <p class="eyebrow">Interpretation rule</p>
+      <h2>Observed is not the same as inferred.</h2>
+      <div>
+        <p><strong>Observed</strong> means a report includes an exact error, event sequence, or reproducible command. <strong>Source-consistent</strong> means the reported mechanism matches the inspected implementation. <strong>Verified</strong> means a workaround was actually tested against the described failure.</p>
+        <p>This page avoids “fixed” labels until a published build and the original failure path have both been retested.</p>
+      </div>
+    </section>
+
+    <section class="status-cta">
+      <div><p class="eyebrow">Need a route, not a list?</p><h2>Find the first broken boundary.</h2></div>
+      <div><a class="button primary" href="./diagnose.html">Open the failure router</a><a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star the handbook</a></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p>
+    <div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook/issues">Report evidence</a></div>
+  </footer>
+</body>
+</html>

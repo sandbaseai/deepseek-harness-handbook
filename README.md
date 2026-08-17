@@ -4,15 +4,15 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/sandbaseai/deepseek-harness-handbook?style=flat&logo=github&label=Stars&color=0b7a53)](https://github.com/sandbaseai/deepseek-harness-handbook/stargazers) [![Content check](https://github.com/sandbaseai/deepseek-harness-handbook/actions/workflows/content-check.yml/badge.svg?branch=main)](https://github.com/sandbaseai/deepseek-harness-handbook/actions/workflows/content-check.yml) [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-0b7a53.svg)](LICENSE)
 
-![DeepSeek Harness Handbook — Agent-first, multilingual, source-backed](assets/deepseek-harness-handbook-social-preview.png)
+![DeepSeek Harness Handbook — Agent-first, multilingual by design, source-backed](assets/deepseek-harness-handbook-social-preview.png)
 
-> The agent-first, multilingual field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness).
+> The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
 **[Check the rc.6 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Contribute](CONTRIBUTING.md)**
 
-**Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml)
+**Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
 DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
 
@@ -78,7 +78,19 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 - **Operational:** every tutorial includes success evidence, failure branches, and safety boundaries.
 - **Visual:** architecture pages prioritize diagrams over walls of text.
 - **Living:** updates, breaking changes, and troubleshooting pages follow upstream development.
-- **Multilingual by design:** translations declare their canonical source revision and review status.
+- **Multilingual by design:** English is canonical; translations declare their source revision and review status. Current depth is [reported explicitly](#language-coverage).
+
+## Language coverage
+
+| Locale | Current status | Published coverage |
+|---|---|---|
+| English | Canonical | 28 pages |
+| 简体中文 | Reviewed | Navigation plus three core guides |
+| 日本語 | Draft | Navigation only |
+| 한국어 | Draft | Navigation only |
+| Español | Draft | Navigation only |
+
+The locale links at the top do not imply feature parity. English remains the source of truth until a translation points to the current canonical revision and has been reviewed by a fluent contributor.
 
 ## Published guide map
 

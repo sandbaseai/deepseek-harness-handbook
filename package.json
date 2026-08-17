@@ -1,12 +1,12 @@
 {
   "name": "deepseek-harness-handbook",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "A multilingual, agent-first handbook for DeepSeek Harness.",
+  "description": "An English-canonical, multilingual-by-design handbook for DeepSeek Harness.",
   "type": "module",
   "scripts": {
     "check": "node scripts/verify-content.mjs",
-    "check:links": "node scripts/verify-content.mjs --links"
+    "check:links": "node scripts/verify-content.mjs --external-links"
   },
   "engines": {
     "node": ">=20"

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness Handbook | Agent-first field guide</title>
+  <meta name="description" content="Run, inspect, extend, and troubleshoot DeepSeek Harness with source-backed quickstarts, architecture maps, agent patterns, and a free field guide.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DeepSeek Harness Handbook">
+  <meta property="og:description" content="An agent-first field guide to the official DeepSeek Harness runtime.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/atom+xml" title="DeepSeek Harness Handbook updates" href="./feed.xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "DeepSeek Harness Handbook",
+    "description": "Source-backed quickstarts, architecture maps, agent patterns, and troubleshooting for DeepSeek Harness.",
+    "url": "https://sandbaseai.github.io/deepseek-harness-handbook/",
+    "mainEntityOfPage": "https://github.com/sandbaseai/deepseek-harness-handbook",
+    "author": {"@type": "Organization", "name": "SandBase"},
+    "isAccessibleForFree": true,
+    "inLanguage": "en"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home">
+      <span class="brand-mark" aria-hidden="true">DSH</span>
+      <span>Harness Handbook</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#quickstart">Quickstart</a>
+      <a href="#runtime">Runtime</a>
+      <a href="https://github.com/sandbaseai/deepseek-harness-handbook">Read on GitHub</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">Independent, source-backed, agent-first</p>
+        <h1 id="hero-title">Operate the harness, not just the model.</h1>
+        <p class="hero-text">Understand DeepSeek Harness from first run to production boundaries.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star the handbook <span class="star-count" aria-live="polite"></span></a>
+          <a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/README.md">Browse all 28 guides</a>
+        </div>
+      </div>
+      <figure class="hero-figure reveal delay-1">
+        <img src="./handbook-map.png" width="1200" height="400" alt="DeepSeek Harness Handbook map showing agent runtime, tools, policy, sessions, MCP, and production paths">
+      </figure>
+    </section>
+
+    <section id="quickstart" class="quickstart section-shell" aria-labelledby="quickstart-title">
+      <div class="section-heading">
+        <p class="eyebrow">Five-minute first run</p>
+        <h2 id="quickstart-title">Start with evidence.</h2>
+        <p>Launch the official Web profile from a disposable workspace, choose a model, and begin with a bounded read-only task.</p>
+      </div>
+      <div class="command-panel">
+        <div class="command-label">Terminal</div>
+        <code id="install-command">npx @deepseek-ai/dsh web</code>
+        <button class="copy-button" type="button" data-copy="install-command">Copy command</button>
+        <span class="copy-status" role="status" aria-live="polite"></span>
+      </div>
+      <ol class="run-list">
+        <li><strong>Choose the workspace.</strong><span>Select the exact disposable repository the agent may inspect.</span></li>
+        <li><strong>Configure the model.</strong><span>Use a limited credential with an environment spending cap.</span></li>
+        <li><strong>Ask for evidence.</strong><span>Require real file paths and stop before writes or external effects.</span></li>
+        <li><strong>Inspect the graph.</strong><span>Run <code>dsh --profile web --dump-config</code> before changing policy.</span></li>
+      </ol>
+    </section>
+
+    <section id="runtime" class="runtime section-shell" aria-labelledby="runtime-title">
+      <div class="runtime-heading">
+        <h2 id="runtime-title">A runtime is a composition.</h2>
+        <p>A profile resolves bundles and patches into one Cordis graph. The model is one adapter inside that graph, not the product boundary.</p>
+      </div>
+      <div class="runtime-flow" role="img" aria-label="Profile flows through bundles and patches into the agent loop, which connects to model, tools and policy, sessions, and user interfaces">
+        <div class="flow-source"><span>Profile</span><small>web, headless, custom</small></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-source"><span>Resolved graph</span><small>bundles plus patches</small></div>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-core"><span>Agent loop</span><small>prompt, step, effect, event</small></div>
+      </div>
+      <dl class="runtime-domains">
+        <div><dt>Model</dt><dd>Provider, endpoint, credential reference, and reasoning route.</dd></div>
+        <div><dt>Effects</dt><dd>Tools, approval policy, sandbox, and independent verification.</dd></div>
+        <div><dt>Session</dt><dd>Durable events that reconstruct model-visible history.</dd></div>
+        <div><dt>Surface</dt><dd>Web, headless, SDK, or a custom client over the same runtime.</dd></div>
+      </dl>
+    </section>
+
+    <section class="paths section-shell" aria-labelledby="paths-title">
+      <div class="paths-intro">
+        <h2 id="paths-title">Pick the path that matches the job.</h2>
+        <p>Each guide states the expected evidence, failure branch, and safety boundary.</p>
+      </div>
+      <div class="path-index">
+        <a href="./session-log-durability.html"><span>Persistence safety</span><strong>Protect live session logs</strong><small>Stop the writer, preserve evidence, and separate crash tails from committed corruption</small></a>
+        <a href="./pty-shell-path.html"><span>Host compatibility</span><strong>Fix a missing /bin/bash</strong><small>Patch the persistent PTY owner on NixOS and non-FHS hosts</small></a>
+        <a href="./plugin-recovery.html"><span>Recovery runbook</span><strong>Install one plugin safely</strong><small>Known-good state, composition diff, and first-error routing</small></a>
+        <a href="./subagent-scale-oom.html"><span>Capacity guide</span><strong>Bound subagent scale</strong><small>Two limits, one heap boundary, and restartable batches</small></a>
+        <a href="./ollama-local-provider.html"><span>Provider guide</span><strong>Connect local Ollama</strong><small>Exact form values, host preflight, and container localhost</small></a>
+        <a href="./version-evidence.html"><span>Operator note</span><strong>Capture the version that executed</strong><small>Separate npm tags, installed artifacts, and source revisions</small></a>
+        <a href="./field-status.html"><span>Current</span><strong>Check the rc.6 field status</strong><small>Known boundaries, evidence, and safer next actions</small></a>
+        <a href="./diagnose.html"><span>Interactive</span><strong>Route a failure in 30 seconds</strong><small>Pick the first broken boundary and collect the right evidence</small></a>
+        <a href="./remote-web-secure-context.html"><span>Incident note</span><strong>Fix an empty remote Web UI</strong><small>Diagnose secure-context and crypto.randomUUID failures</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/context-window-exceeded.md"><span>Context recovery</span><strong>Recover from a full context window</strong><small>Preserve evidence, compact safely, and choose a clean continuation boundary</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/http2-invalid-session.md"><span>Provider transport</span><strong>Diagnose an invalid HTTP/2 session</strong><small>Separate provider, proxy, transport, and retry boundaries</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-compatibility.md"><span>Windows</span><strong>Route native Windows startup failures</strong><small>MSYS2 boundaries, profile BOM recovery, and Node zstd startup checks</small></a>
+        <a href="./subagent-route-inheritance.html"><span>Incident note</span><strong>Prevent subagent route drift</strong><small>Why a child agent may use the wrong provider and credential</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/quickstart.md"><span>Web UI</span><strong>Explore interactively</strong><small>Workspace selection and a first safe task</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/headless-agent.md"><span>Headless</span><strong>Automate one bounded job</strong><small>Exit codes, artifacts, diffs, and CI evidence</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/python-sdk.md"><span>Python SDK</span><strong>Embed the runtime</strong><small>JSON-RPC lifecycle and platform boundaries</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/mcp.md"><span>MCP</span><strong>Connect external capabilities</strong><small>Process, transport, handshake, registration, policy</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/README.md"><span>Troubleshooting</span><strong>Diagnose by symptom</strong><small>Separate provider, loop, policy, sandbox, and tool failures</small></a>
+      </div>
+    </section>
+
+    <section class="principle section-shell" aria-labelledby="principle-title">
+      <blockquote>
+        <p id="principle-title">A prompt is an instruction. The boundary lives in policy, isolation, and evidence.</p>
+      </blockquote>
+      <div class="principle-notes">
+        <p>Pin the runtime. Review the resolved graph. Separate credentials by environment. Test denial, timeout, partial completion, and cleanup.</p>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/cheat-sheet.md">Open the operator cheat sheet</a>
+      </div>
+    </section>
+
+    <section class="final-cta section-shell" aria-labelledby="cta-title">
+      <h2 id="cta-title">Build on facts that can be replayed.</h2>
+      <p>The handbook is independent, open source, and verified against primary DeepSeek Harness sources.</p>
+      <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p>
+    <div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./feed.xml">Updates feed</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook/issues">Contribute</a></div>
+  </footer>
+  <script src="./script.js" defer></script>
+</body>
+</html>

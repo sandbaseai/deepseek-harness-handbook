@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepSeek Harness plugin recovery | Preserve a known-good profile</title>
+  <meta name="description" content="Install DeepSeek Harness plugins through a reversible loop. Diagnose bundle reconciliation, duplicate adapters, service injection, and failed restarts.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A reversible plugin change loop for DeepSeek Harness">
+  <meta property="og:description" content="Preserve, diff, compose, smoke test, then promote a new known-good profile.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#diagnose">Diagnose</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell recovery-article">
+    <header class="article-hero recovery-hero">
+      <div>
+        <p class="eyebrow">Plugin recovery</p>
+        <h1>Protect the profile.</h1>
+        <p class="article-deck">Preserve, compose, smoke test, then promote one plugin change.</p>
+      </div>
+      <div class="recovery-loop" role="img" aria-label="Reversible plugin change loop from known-good state through install and smoke test">
+        <div><strong>Known-good</strong><span>manifest + lock + patch</span></div>
+        <span>→</span>
+        <div><strong>One change</strong><span>package + bundle diff</span></div>
+        <span>→</span>
+        <div><strong>Smoke test</strong><span>promote or restore</span></div>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The boundary</strong><span>A successful pnpm install proves package resolution. It does not prove the composed Harness profile can boot.</span></div>
+
+      <h2>Capture four files first.</h2>
+      <div class="recovery-files">
+        <code>profiles/&lt;name&gt;/package.json</code>
+        <code>profiles/&lt;name&gt;/pnpm-lock.yaml</code>
+        <code>profiles/&lt;name&gt;/cordis.patch.yml</code>
+        <code>$DSH_HOME/cordis.patch.yml</code>
+      </div>
+      <pre><code>dsh --profile web --dump-config &gt; before.yml
+dsh plugin --profile web add &lt;package&gt;
+dsh --profile web --dump-config &gt; after.yml</code></pre>
+      <p>Compare both dumps, the manifest, and the lockfile before starting the long-lived Web process.</p>
+
+      <h2>Reconciliation follows installed state.</h2>
+      <div class="reconcile-map">
+        <section><strong>Dependency declares a bundle</strong><p>It joins <code>dsh.profile.bundles</code>.</p></section>
+        <section><strong>Dependency disappears</strong><p>Its managed bundle layer leaves the list.</p></section>
+        <section><strong>Dependency is plain</strong><p>It stays installed but adds no layer.</p></section>
+        <section><strong>Template bundle</strong><p>It is not dependency-managed and remains untouched.</p></section>
+      </div>
+      <p>A missing entry does not by itself prove that the array was overwritten. Check dependency presence, resolution, and the installed <code>dsh.bundle.patch</code> declaration.</p>
+
+      <h2 id="diagnose">Route the first boot error.</h2>
+      <div class="recovery-routes">
+        <section><code>DUPLICATE_ADAPTER</code><strong>Keep one route owner.</strong><p>A provider route has one runtime adapter. Use a distinct route or remove the original owner.</p></section>
+        <section><code>settings namespace not registered</code><strong>Declare the service.</strong><p>Use <code>inject: ['settings']</code> when settings are required during activation.</p></section>
+        <section><code>module / schema / patch error</code><strong>Inspect the first named row.</strong><p>Use <code>--dump-config</code> to identify the source layer before editing.</p></section>
+        <section><code>restart never returns</code><strong>Move ownership outside.</strong><p>A process cannot reliably run the continuation after terminating its own process tree.</p></section>
+      </div>
+
+      <h2>Catalog metadata is not route ownership.</h2>
+      <div class="ownership-contrast">
+        <section><span>Request dispatch</span><strong><code>registerAdapter()</code></strong><p>Owns the live provider route and rejects duplicates atomically.</p></section>
+        <section><span>Settings discovery</span><strong><code>registerConfigurableProviders()</code></strong><p>Publishes advisory catalog metadata. It does not override an adapter.</p></section>
+      </div>
+
+      <h2>Report evidence, not the dead screen.</h2>
+      <pre><code>Harness version or commit:
+OS and Node/pnpm versions:
+Exact plugin spec:
+Manifest and lockfile diff:
+Bundles before and after:
+First dump-config difference:
+First boot error:
+Clean-profile reproduction:</code></pre>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/apps/cli/src/plugin.ts">CLI plugin reconciliation implementation</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/apps/cli/reference/README.md">Profile and plugin contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/user/develop/framework/service.md">Cordis service dependency lifecycle</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1904">Original plugin lifecycle report</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the full runbook nearby.</h2>
+        <p>The canonical guide includes the source contract, recovery evidence, and adapter example.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/pull/20">Review the guide</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
