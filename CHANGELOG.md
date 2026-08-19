@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.0 - 2026-08-19
+
+### Changed
+
+- Expanded the headless quickstart into a current rc.7 CLI lifecycle guide that distinguishes the shipped profile launcher from a terminal chat UI.
+- Added exact stdout, stderr, exit-status, configuration-dump, unattended approval, CI evidence, app-argument, and community-TUI audit contracts.
+
 ## 0.3.9 - 2026-08-19
 
 ### Changed
