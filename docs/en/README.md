@@ -39,6 +39,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Diagnose a todo that remains in progress after the final answer](troubleshooting/todo-stuck-in-progress.md)
 - [Fix a Code Mode Skill that reaches UI but not model context](troubleshooting/code-mode-skill-context.md)
 - [Fix Minimal preset Bash on native Windows](troubleshooting/windows-minimal-preset-bash.md)
+- [Diagnose the first Windows workspace-write freeze](troubleshooting/windows-first-workspace-write-freeze.md)
 
 ## Learning paths
 

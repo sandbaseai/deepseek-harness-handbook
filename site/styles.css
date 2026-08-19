@@ -16,6 +16,39 @@
 }
 
 /* Todo snapshot and turn-lifecycle guide */
+/* Windows first workspace ACL grant guide */
+.aclfreeze-article { width: min(calc(100% - 40px), 1160px); }
+.aclfreeze-hero { display: grid; grid-template-columns: minmax(0,.9fr) minmax(430px,1.1fr); gap: clamp(2rem,5vw,5rem); align-items: center; min-height: auto; }
+.aclfreeze-hero h1 { max-width: 720px; font-size: clamp(3rem,4.8vw,4.55rem); }
+.aclfreeze-article .article-body { max-width: 920px; margin-inline: auto; }
+.aclfreeze-meter { min-width: 0; padding: 1.2rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.aclfreeze-meter>small { display: block; margin-bottom: 1rem; color: var(--accent); font: 700 .7rem ui-monospace,monospace; text-transform: uppercase; }
+.aclfreeze-meter section { display: grid; grid-template-columns: .7fr 1fr .8fr; gap: .7rem; align-items: center; padding: 1rem; border-left: 4px solid #b55d4c; background: var(--surface); }
+.aclfreeze-meter section+section { margin-top: .65rem; }
+.aclfreeze-meter .aclfreeze-fast { border-color: var(--accent); }
+.aclfreeze-meter span,.aclfreeze-meter i { color: var(--muted); font-size: .78rem; font-style: normal; }
+.aclfreeze-meter em { display: block; margin-top: 1rem; color: var(--muted); font-size: .8rem; font-style: normal; text-align: right; }
+.aclfreeze-trace { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: .6rem; align-items: center; margin: 1.25rem 0 2rem; }
+.aclfreeze-trace section { min-width: 0; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.aclfreeze-trace small,.aclfreeze-ops small,.aclfreeze-compare small { color: var(--accent); font: 700 .68rem ui-monospace,monospace; }
+.aclfreeze-trace span,.aclfreeze-router span,.aclfreeze-ops span { color: var(--muted); font-size: .8rem; }
+.aclfreeze-trace b { color: var(--accent); }
+.aclfreeze-trace .aclfreeze-hot { border-top: 3px solid #b55d4c; background: var(--surface-strong); }
+.aclfreeze-router { display: grid; grid-template-columns: repeat(2,1fr); gap: .7rem; margin: 1.25rem 0 2rem; }
+.aclfreeze-router section { min-width: 0; display: flex; flex-direction: column; gap: .5rem; padding: 1rem; border-bottom: 1px solid var(--line); background: var(--panel); }
+.aclfreeze-router code { color: var(--accent); }
+.aclfreeze-compare,.aclfreeze-ops { display: grid; grid-template-columns: repeat(3,1fr); gap: .7rem; margin: 1.25rem 0 2rem; }
+.aclfreeze-compare section,.aclfreeze-ops section { min-width: 0; min-height: 175px; display: flex; flex-direction: column; gap: .6rem; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.aclfreeze-compare code { margin-top: auto; color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+.aclfreeze-ops span { margin-top: auto; }
+.aclfreeze-warning { display: grid; grid-template-columns: .8fr 1.2fr; gap: 2rem; margin: 0 0 2rem; padding: 1.25rem; border-left: 4px solid #b55d4c; background: var(--surface-strong); }
+.aclfreeze-warning p { margin: 0; color: var(--muted); }
+.aclfreeze-tests { display: grid; grid-template-columns: repeat(5,1fr); gap: .6rem; margin: 1.25rem 0 2rem; padding: 0; list-style: none; counter-reset: aclfreeze-gate; }
+.aclfreeze-tests li { min-height: 115px; padding: .9rem; border-top: 2px solid var(--accent); background: var(--panel); counter-increment: aclfreeze-gate; }
+.aclfreeze-tests li::before { content: counter(aclfreeze-gate,decimal-leading-zero); display: block; margin-bottom: .8rem; color: var(--accent); font: 700 .68rem ui-monospace,monospace; }
+@media(max-width:980px){.aclfreeze-hero{grid-template-columns:1fr}.aclfreeze-tests{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.aclfreeze-article{width:min(calc(100% - 28px),1160px)}.aclfreeze-hero h1{font-size:clamp(2.5rem,12vw,3.3rem)}.aclfreeze-meter section,.aclfreeze-trace,.aclfreeze-router,.aclfreeze-compare,.aclfreeze-ops,.aclfreeze-warning,.aclfreeze-tests{grid-template-columns:1fr}.aclfreeze-trace b{justify-self:center;transform:rotate(90deg)}.aclfreeze-trace section{min-height:125px}.aclfreeze-meter em{text-align:left}}
+
 /* Windows Minimal preset Bash guide */
 .winmin-article { width: min(calc(100% - 40px), 1160px); }
 .winmin-hero { display: grid; grid-template-columns: minmax(0, .85fr) minmax(420px, 1.15fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; min-height: auto; }

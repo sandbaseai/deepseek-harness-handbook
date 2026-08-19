@@ -62,6 +62,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix a todo that stays in progress after the final answer | [Todo state and projection guide](https://sandbaseai.github.io/deepseek-harness-handbook/todo-stuck-in-progress.html) |
 | Fix a Code Mode Skill that appears in UI but not model context | [Code Mode Skill context guide](https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-skill-context.html) |
 | Fix `terminal inspection is unsupported on platform win32` in Minimal | [Windows Minimal preset Bash guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-minimal-bash.html) |
+| Diagnose a frozen first `workspace-write` call on Windows | [Windows first ACL grant guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-acl-first-run.html) |
 | Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
@@ -118,7 +119,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 58 pages |
+| English | Canonical | 59 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -199,6 +200,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
 - [Minimal preset Bash failure on native Windows](docs/en/troubleshooting/windows-minimal-preset-bash.md)
+- [First Windows workspace-write freeze](docs/en/troubleshooting/windows-first-workspace-write-freeze.md)
 - [Windows folder-picker worker crash](docs/en/troubleshooting/windows-folder-picker-worker-crash.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)
