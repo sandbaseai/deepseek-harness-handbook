@@ -3,6 +3,7 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+OpenAI-compatible developer-role 400: https://sandbaseai.github.io/deepseek-harness-handbook/openai-compatible-developer-role.html
 tapIndex dollar-sign corruption: https://sandbaseai.github.io/deepseek-harness-handbook/tapindex-dollar-corruption.html
 Session and deployment model routing: https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html
 Context overflow classification: https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html

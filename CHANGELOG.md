@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.2 - 2026-08-19
+
+### Added
+
+- A source-backed OpenAI-compatible provider guide for gateways that reject the `developer` role.
+- A role-decision map separating reasoning metadata, reasoning dialect, effort support, and message-role compatibility.
+- Homepage guide counts advanced to 51 canonical guides and 45 visual paths.
+
 ## 0.5.1 - 2026-08-19
 
 ### Changed

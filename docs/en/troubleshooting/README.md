@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 23
+content_revision: 24
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -12,6 +12,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 - [Understand session model and deployment default coupling](session-model-default-coupling.md)
 - [Fix dollar sign corruption in tapIndex plugins](tapindex-dollar-replacement.md)
+- [Fix developer role 400 errors in OpenAI-compatible providers](openai-compatible-developer-role.md)
 
 ## Symptom index
 
