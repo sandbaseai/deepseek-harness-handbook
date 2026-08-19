@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.34 - 2026-08-20
+
+### Added
+
+- A source-backed recovery guide for MCP tool descriptions that become unknown prompt variables inside the rc.8 Code Mode SDK section.
+- Native/code/both routing, TypeScript and Python repair scope, strict-template preservation, fifteen regression gates, and an incident bundle.
+
 ## 0.5.33 - 2026-08-20
 
 ### Added

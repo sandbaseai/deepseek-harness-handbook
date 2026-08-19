@@ -388,6 +388,11 @@
       "source": "docs/en/troubleshooting/node24-tsx-silent-build.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/code-mode-unknown-prompt-variable.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
