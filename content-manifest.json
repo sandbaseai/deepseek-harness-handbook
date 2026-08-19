@@ -348,6 +348,11 @@
       "source": "docs/en/troubleshooting/prompt-accepted-before-durable.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/security/prevent-unexpected-deepseek-api-charges.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
