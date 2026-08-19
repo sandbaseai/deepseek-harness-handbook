@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.2 - 2026-08-19
+
+### Added
+
+- A provider-egress runbook for `DeepSeek API request ... failed` that separates DNS, TCP, environment-proxy, enterprise-CA, and HTTP response boundaries.
+- Credential-free Node transport probes, version-gated proxy guidance, safe CA trust configuration, ingress-versus-egress routing, and restart acceptance checks.
+
 ## 0.4.1 - 2026-08-19
 
 ### Added
