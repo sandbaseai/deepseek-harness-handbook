@@ -197,8 +197,8 @@
     <title>Verify the official DeepSeek Harness project</title>
     <link href="https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html"/>
     <id>https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html</id>
-    <updated>2026-08-19T13:00:00Z</updated>
-    <summary>Match the DeepSeek AI repository, scoped npm package, rc.7 release commit, and executable before installing or reporting a bug.</summary>
+    <updated>2026-08-20T08:00:00Z</updated>
+    <summary>Distinguish the official DeepSeek AI Agent runtime from unrelated same-name API wrappers, then verify its repository, scoped npm package, release commit, and executable.</summary>
   </entry>
 
   <entry>
