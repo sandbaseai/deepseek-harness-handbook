@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 27,
+      "revision": 28,
       "translations": {}
     },
     {
@@ -281,6 +281,11 @@
     },
     {
       "source": "docs/en/troubleshooting/pnpm-adding-to-root-plugin.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/dangling-tool-calls-insufficient-results.md",
       "revision": 1,
       "translations": {}
     }

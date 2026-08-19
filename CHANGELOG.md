@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.7 - 2026-08-19
+
+### Added
+
+- A source-backed recovery guide for Sessions poisoned by assistant tool calls with missing tool results after a scheduler failure.
+- A lifecycle trace explaining why a closed error turn bypasses interrupted-tail repair, plus side-effect-safe recovery and regression gates.
+
 ## 0.5.6 - 2026-08-19
 
 ### Fixed
