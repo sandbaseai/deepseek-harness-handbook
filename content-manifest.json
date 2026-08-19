@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 23,
+      "revision": 24,
       "translations": {}
     },
     {
@@ -261,6 +261,11 @@
     },
     {
       "source": "docs/en/troubleshooting/tapindex-dollar-replacement.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/openai-compatible-developer-role.md",
       "revision": 1,
       "translations": {}
     }
