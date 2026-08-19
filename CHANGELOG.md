@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.12 - 2026-08-19
+
+### Added
+
+- A source-backed Code Mode diagnosis for nested Skill calls that succeed and render in Web UI but do not enter the next model context.
+- A three-observer payload map, rc.7 workaround, instruction-channel repair shape, evidence bundle, and ten regression gates.
+
 ## 0.5.11 - 2026-08-19
 
 ### Added

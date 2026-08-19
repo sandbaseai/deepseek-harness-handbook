@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 29,
+      "revision": 30,
       "translations": {}
     },
     {
@@ -291,6 +291,11 @@
     },
     {
       "source": "docs/en/troubleshooting/todo-stuck-in-progress.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/code-mode-skill-context.md",
       "revision": 1,
       "translations": {}
     }
