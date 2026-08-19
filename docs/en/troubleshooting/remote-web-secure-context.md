@@ -1,119 +1,153 @@
 ---
-title: Remote Web UI, HTTPS, and crypto.randomUUID
+title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-15
-upstream_revision: 47f943859bef60e4160492346772ded9b24f765a
+verified_at: 2026-08-19
+upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
 ---
 
-# Remote Web UI fails over plain HTTP
+# Remote Web access is a control-plane decision
 
-Use this guide when the DeepSeek Harness page shell opens from another device, but workspaces, providers, sessions, or messages do not load and the browser console reports:
+DeepSeek Harness rc.7 intentionally rejects:
 
 ```text
-crypto.randomUUID is not a function
+dsh web --host 0.0.0.0
+error: --host 0.0.0.0 is intentionally not supported yet for safety:
+it would expose remote code execution to the network; use 127.0.0.1 instead
 ```
 
-This symptom is not a provider failure. It occurs earlier, in the browser transport and client layers.
+This is not an unknown flag or a failed network bind. The shipped Web profile can create Agents with Bash and other Host effects, while its plain Node HTTP carrier supplies no TLS or authentication. A reachable page can therefore become a reachable command-execution control plane.
 
 > [!WARNING]
-> Do not expose the Web profile directly to an untrusted network. At the verified revision, the upstream Web server has no TLS, authentication, or origin policy, and the CLI deliberately rejects `--host 0.0.0.0` because network exposure can provide remote-code-execution capability. HTTPS fixes the browser secure-context problem; it does not add application authentication or make an unsafe bind safe.
+> `--trusted-host` is a DNS-rebinding and same-origin trust declaration. It is not user authentication. A firewall rule, private LAN, VPN route, UUID polyfill, or rewritten `Host` header also does not authenticate a caller.
 
-## Why the page can render while its data stays empty
+## What changed in rc.7
+
+Earlier builds used browser-side `crypto.randomUUID()` on a core request path. A non-loopback page over plain HTTP could render static assets while RPC creation failed because that API normally requires a secure context.
+
+The current Connection carrier constructs UUIDs with `crypto.getRandomValues()`, which browsers expose on insecure origins, and has a regression test proving RPC calls no longer require secure-context `randomUUID`. Do not carry the old HTML polyfill into rc.7 as a remote-access solution.
+
+The security boundary did **not** disappear:
+
+- the CLI still refuses `--host 0.0.0.0`;
+- the Web carrier still has no TLS or authentication;
+- every `/api` request and WebSocket upgrade passes a Host and origin trust fence;
+- configuration, credentials, directory selection, native open actions, and Agent-preset authoring remain loopback-only;
+- a remote page is classified as non-loopback by its browser hostname, so some settings use memory scope rather than Host persistence.
+
+## Four independent gates
 
 ```mermaid
 flowchart LR
-  B[Remote browser] -->|plain HTTP| P[Page shell loads]
-  P --> R[First API or message ID]
-  R --> U[crypto.randomUUID]
-  U -->|unavailable| X[Request creation throws]
-  X --> E[Empty workspaces and providers]
+  B[Remote browser] --> R[Reachability]
+  R --> T[Transport security]
+  T --> I[Caller identity]
+  I --> C[DSH capability scope]
+  C --> A[Agent and tool effects]
 
-  B2[Localhost or HTTPS browser] --> C[Secure context]
-  C --> U2[crypto.randomUUID available]
-  U2 --> A[API requests proceed]
+  R -. "SSH, VPN, proxy" .-> N[Network path]
+  T -. "HTTPS" .-> E[Encrypted origin]
+  I -. "auth layer" .-> P[Principal]
+  C -. "loopback-only methods" .-> L[Local control plane]
 ```
 
-The Web client creates identifiers before sending RPC requests and messages. The verified source contains direct browser-side calls in the API proxy client, connection client, conversation UI, and command client. When a browser does not expose `crypto.randomUUID`, request construction fails before the server can return workspace or provider data.
+Passing one gate proves nothing about the next:
 
-`http://127.0.0.1` and `http://localhost` receive special browser treatment. `http://192.168.x.x`, a Tailscale IP, or another non-loopback address is not equivalent merely because the network is private.
+| Gate | Evidence | Does not prove |
+|---|---|---|
+| Reachability | TCP connection and HTML response | encryption, identity, or authorization |
+| Browser transport | core RPC and WebSocket stream work | an unauthorized client is rejected |
+| API trust fence | Host and Origin are accepted | the human caller is authenticated |
+| Capability scope | one remote method succeeds | loopback-only settings or credentials are available |
 
-## Confirm the failing layer
+## Choose one topology
 
-Run these checks in the browser that fails:
+### A. SSH local forwarding: smallest remote boundary
 
-```js
-window.isSecureContext
-typeof globalThis.crypto?.randomUUID
+Keep DSH on the remote host's loopback interface:
+
+```sh
+npx @deepseek-ai/dsh web --host 127.0.0.1 --port 3080
 ```
 
-The affected path normally produces:
+On the operator machine, create a local-only forward:
 
-```text
-false
-"undefined"
+```sh
+ssh -N -L 127.0.0.1:3080:127.0.0.1:3080 user@remote-host
 ```
 
-Then compare the same Harness process from the host machine through its loopback URL. If localhost works while the remote plain-HTTP URL shows the signature above, do not rotate API keys or reinstall providers: those layers have not been reached.
+Open `http://127.0.0.1:3080` locally. Both the remote DSH listener and local tunnel endpoint remain loopback-bound. The browser also sees a real loopback hostname, so the shipped loopback-only capability decisions stay coherent.
 
-Also record:
+Use `ExitOnForwardFailure=yes` in automation and keep SSH authentication, host-key verification, account permissions, and lifecycle under normal operator control.
 
-```text
-Harness version or commit:
-Browser and version:
-Working URL origin:
-Failing URL origin:
-window.isSecureContext:
-typeof crypto.randomUUID:
-First console stack trace:
-```
+### B. Authenticated HTTPS gateway: deliberate product boundary
 
-## Choose a safe recovery path
+Use this only when multiple devices or browser-only clients require access. Keep the DSH backend on `127.0.0.1`; let a separately maintained gateway own:
 
-### 1. Keep the default loopback posture
+- TLS termination and renewal;
+- authenticated user identity;
+- session expiry, revocation, and rate limiting;
+- WebSocket and streaming proxy behavior;
+- request and security audit logs;
+- explicit rejection before any DSH route is reached.
 
-Use the Web UI on the same machine through the printed localhost URL. This is the smallest supported exposure boundary and the right default when remote access is not required.
+Do not treat a `Host` or `Origin` rewrite as the security layer. Rewriting them to loopback may bypass the DSH trust fence and can expose methods that upstream intentionally keeps local. If a gateway changes those headers, the gateway's own authentication and authorization become the real control plane and must be tested as such.
 
-### 2. Put a trusted HTTPS boundary in front
+Remote settings may still behave differently because the browser hostname is not loopback. Do not promise full local-UI parity unless the exact rc.7 capability matrix has been tested.
 
-If remote access is required, terminate HTTPS through infrastructure you control and restrict who can reach it. Preserve WebSocket and streaming behavior, and add access control appropriate to a service capable of executing Agent tools.
+### C. Direct non-loopback binding: wait for an upstream contract
 
-The acceptance test is not just “the page opens.” From the remote browser, verify all of the following:
+Do not patch the built CLI, generated frontend, trust list, or profile merely to make `0.0.0.0` accept connections. Those changes are overwritten by upgrades and can silently remove a deliberate safety refusal.
 
-- `window.isSecureContext === true`;
-- `typeof crypto.randomUUID === "function"`;
-- workspace and provider requests complete;
-- a disposable, read-only Agent turn streams successfully;
-- an unauthorized client cannot reach the service.
+If an experimental composition enables an all-interfaces server, isolate it inside an authoritative outer boundary and treat it as a custom deployment, not the supported Web profile.
 
-### 3. Wait for an upstream compatibility fix
+## Verify more than the home page
 
-A UUID fallback can make request construction work in browsers without `crypto.randomUUID`, but that only repairs compatibility. It does not address the Web server's missing TLS, authentication, or origin controls. Treat a local HTML polyfill as a diagnostic experiment, not as evidence that direct network exposure is production-safe.
+Use a disposable workspace and a test principal. Record every result.
 
-## Avoid misleading fixes
+### Before authentication
 
-| Attempt | Why it is insufficient |
+- `/` is rejected or redirected to the identity boundary;
+- `/api` requests do not reach DSH;
+- WebSocket upgrades are rejected;
+- static plugin bundles do not leak deployment metadata beyond policy.
+
+### After authentication
+
+- the exact browser origin is HTTPS when using a gateway;
+- workspace and model catalogs load;
+- one bounded, read-only turn streams to completion;
+- cancel and reconnect work;
+- the gateway preserves WebSocket and streaming lifecycles;
+- loopback-only settings, credentials, native actions, and preset authoring are unavailable unless an independently reviewed design intentionally mediates them.
+
+### Revocation and isolation
+
+- an expired or revoked session cannot reconnect;
+- a second test user cannot see the first user's Sessions, workspace paths, or events;
+- closing the gateway does not change the DSH listener from loopback;
+- logs identify the authenticated principal without recording secrets or full prompts by default.
+
+## Route common symptoms
+
+| Symptom | First boundary |
 |---|---|
-| Rotate the model API key | The exception occurs before the provider request is constructed. |
-| Clear sessions | Session persistence is downstream of the failed browser RPC. |
-| Bind to all interfaces and keep HTTP | It increases exposure and retains the insecure-context failure. |
-| Add only a UUID polyfill | It bypasses one browser capability check without supplying transport security or access control. |
-| Confirm only that HTML renders | Static shell delivery does not prove the API, SSE, or WebSocket paths work. |
-
-## Report upstream with useful evidence
-
-The upstream report should distinguish two independent contracts:
-
-1. **Browser compatibility:** client code either requires a secure context explicitly or supplies a tested UUID implementation.
-2. **Deployment security:** non-loopback access needs an intentional TLS, trust, and authentication story before it is presented as safe.
-
-Include the browser probes and the first failing stack trace. Do not include provider keys, private hostnames, Tailscale identities, or workspace contents.
+| CLI refuses `--host 0.0.0.0` | Intentional rc.7 startup policy |
+| Tunnel connects but local port refuses | Remote DSH listener, port, or SSH forward failure |
+| Page loads but `/api` returns 403 | Host/Origin trust fence or loopback-only method |
+| Core RPC works but settings do not persist | Remote browser classification and privileged capability scope |
+| Static page works but events do not stream | WebSocket or streaming gateway configuration |
+| Anyone on the network can open the page | Missing authentication; stop exposure immediately |
+| Old guide says to add `randomUUID` polyfill | Stale pre-rc.7 browser workaround |
 
 ## Primary sources
 
-- [Upstream report: remote plain-HTTP Web GUI fails at `crypto.randomUUID`](https://github.com/deepseek-ai/deepseek-harness/discussions/1642)
-- [API proxy browser client: direct `crypto.randomUUID()` call](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/host/apiproxy/src/fetch/client.ts#L299-L301)
-- [Web server exposure contract](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/subsystems/web-server.md#configuration)
-- [CLI rejection of all-interfaces binding](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/bundle/web-app/src/startup.ts#L60-L72)
-- [W3C Web Cryptography Level 2: `Crypto.randomUUID`](https://www.w3.org/TR/webcrypto-2/#Crypto-method-randomUUID)
+- [Official Web CLI behavior](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/reference/README.md#web-alias)
+- [CLI refusal for all-interfaces binding](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/web-app/src/startup.ts)
+- [Web carrier exposure contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/subsystems/web-server.md#configuration)
+- [Connection trust and privileged-method contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/README.md)
+- [Host and origin trust implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/api-request-trust.ts)
+- [Insecure-origin UUID implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/random-uuid.ts)
+- [Regression test without secure-context `randomUUID`](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/client-apply.client.spec.ts#L284-L315)
+- [Official remote-listening discussion #76](https://github.com/deepseek-ai/deepseek-harness/discussions/76)
