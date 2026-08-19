@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>Fix empty tool names in DeepSeek Harness streams</title>
-  <meta name="description" content="Diagnose OpenAI-compatible tool-call continuation deltas that erase a valid call ID and tool name, then make silent Agent failure observable.">
+  <title>Fix Bailian UNKNOWN_TOOL in DeepSeek Harness streams</title>
+  <meta name="description" content="Fix DeepSeek Harness UNKNOWN_TOOL when Bailian or another OpenAI-compatible stream overwrites a valid tool ID and name with empty continuation values.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="The tool name existed. A later delta erased it.">
-  <meta property="og:description" content="Trace first delta, continuation, block close, policy rejection, and the silent stop.">
+  <meta property="og:title" content="Bailian sent the tool name. Its next chunk erased it.">
+  <meta property="og:description" content="Trace empty DashScope continuation identity through rc.8 translation, block close, and UNKNOWN_TOOL.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html">
-  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./styles.css?v=0.5.40">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Fix UNKNOWN_TOOL from Empty Streamed Tool Identity","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-20","url":"https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html","inLanguage":"en","isAccessibleForFree":true}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -27,22 +28,22 @@
   <main id="main" class="article-shell identity-article">
     <header class="article-hero identity-hero">
       <div>
-        <p class="eyebrow">Stream protocol diagnosis</p>
-        <h1>The tool name existed. Then it vanished.</h1>
-        <p class="article-deck">Trace one identity from the first delta to the policy gate.</p>
-        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+        <p class="eyebrow">Bailian · stream protocol · rc.8</p>
+        <h1>The tool name existed. The next chunk erased it.</h1>
+        <p class="article-deck">Trace DashScope empty-string continuation identity from the wire to UNKNOWN_TOOL.</p>
+        <div class="article-meta"><span>Verified 2026-08-20</span><span>Upstream 141eb6f</span></div>
       </div>
       <div class="identity-trace" role="img" aria-label="A valid first tool-call delta is overwritten by an empty continuation before policy evaluation">
         <div class="trace-good"><small>First delta</small><strong>call_8f2</strong><code>read</code></div>
         <span aria-hidden="true">→</span>
-        <div class="trace-empty"><small>Continuation</small><strong>id: ""</strong><code>name: null</code></div>
+        <div class="trace-empty"><small>Continuation</small><strong>id: ""</strong><code>name: ""</code></div>
         <span aria-hidden="true">→</span>
         <div class="trace-stop"><small>Policy sees</small><strong>tool ""</strong><code>disabled</code></div>
       </div>
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The signature</strong><span>A real tool identity appears in the first delta, but the completed call and policy error contain empty strings.</span></div>
+      <div class="signal"><strong>The Bailian signature</strong><span>Chat and non-streaming tools work. A streamed first delta has identity, continuation deltas serialize empty strings, and the completed call reaches policy unnamed.</span></div>
 
       <h2>Do not debug the wrong boundary.</h2>
       <div class="identity-contrast">
@@ -53,7 +54,7 @@
       <h2>The overwrite happens before execution.</h2>
       <div class="identity-pipeline" aria-label="Five-stage tool identity pipeline">
         <div><b>First</b><code>id + name</code></div><i>→</i>
-        <div><b>Continue</b><code>"" + null</code></div><i>→</i>
+        <div><b>Continue</b><code>"" + ""</code></div><i>→</i>
         <div><b>Translate</b><code>overwrite</code></div><i>→</i>
         <div><b>Close</b><code>"" + ""</code></div><i>→</i>
         <div><b>Policy</b><code>refuse</code></div>
@@ -67,7 +68,7 @@
           <li><strong>Route A/B</strong><span>The same read-only prompt through empty-value and omission-style routes.</span></li>
         </ol>
         <pre><code>first  { id: "call_8f2", name: "read" }
-next   { id: "",          name: null   }
+next   { id: "",          name: ""     }
 final  { callId: "",      name: ""     }
 policy tool "" is disabled</code></pre>
       </div>
@@ -75,13 +76,13 @@ policy tool "" is disabled</code></pre>
       <h2>Keep the safety boundary intact.</h2>
       <div class="identity-safety">
         <section><strong>Stop retries</strong><p>Repeated empty calls spend budget without producing evidence.</p></section>
-        <section><strong>Switch route</strong><p>Use an already authorized backend that omits continuation identity.</p></section>
+        <section><strong>Switch route</strong><p>Use an authorized omission-style route, such as the reported official or Bailian Qwen controls.</p></section>
         <section><strong>Never allow empty</strong><p>Policy is right to reject an unidentified effect.</p></section>
       </div>
 
       <h2 id="acceptance">Ship the regression, not just the guard.</h2>
       <ul class="identity-gates">
-        <li><span>01</span>First non-empty identity survives empty continuation fields.</li>
+        <li><span>01</span>First non-empty identity survives empty-string and null continuation fields.</li>
         <li><span>02</span>All argument fragments still concatenate in order.</li>
         <li><span>03</span>Interleaved call indexes keep independent identities.</li>
         <li><span>04</span>A never-identified call fails loudly before policy.</li>
@@ -91,16 +92,16 @@ policy tool "" is disabled</code></pre>
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3281">Upstream report #3281</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/translate.ts">DeepSeek stream translator</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/tests/translate.spec.ts">Translator regression surface</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm/src/assembler.ts">BlockAssembler close contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3464">Bailian report #3464</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3281">Earlier null-continuation report #3281</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-deepseek/src/translate.ts">rc.8 DeepSeek stream translator</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm/src/assembler.ts">rc.8 BlockAssembler close contract</a></li>
       </ul>
 
       <section class="article-cta">
         <h2>Keep the complete incident runbook.</h2>
-        <p>The canonical guide includes safe capture, route isolation, source repair shape, seven acceptance gates, and a minimal report template.</p>
-        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+        <p>The canonical guide includes the Bailian control matrix, safe capture, route isolation, source repair shape, eight acceptance gates, and a minimal report template.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/streamed-tool-call-empty-identity.md">Read the complete guide</a>
       </section>
     </article>
   </main>

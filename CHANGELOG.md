@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.40 - 2026-08-20
+
+### Changed
+
+- Upgraded the streamed tool-identity runbook to rc.8 with the Bailian/DashScope `deepseek-v4-flash` empty-string continuation incident.
+- Added a control matrix, translator-to-BlockAssembler failure chain, safe route workaround, and regression fixtures for both empty-string and null continuation identities.
+- Refreshed the visual guide, README, troubleshooting router, homepage search, sitemap, and Atom feed around the exact `UNKNOWN_TOOL` signature.
+
 ## 0.5.39 - 2026-08-20
 
 ### Changed

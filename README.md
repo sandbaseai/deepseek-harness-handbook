@@ -93,7 +93,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Decide which plugin `missing peer` and ignored-build warnings require action | [Plugin peer-warning guide](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-warnings.html) |
 | Keep answers in Chinese or another language and diagnose an English Think row | [Response and reasoning language guide](https://sandbaseai.github.io/deepseek-harness-handbook/response-language.html) |
 | Recover a long prompt after Web clears it but the turn fails | [Accepted-before-durable prompt recovery](https://sandbaseai.github.io/deepseek-harness-handbook/prompt-send-recovery.html) |
-| Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
+| Fix Bailian/DashScope `UNKNOWN_TOOL` or `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
 | Decide whether worker-thread Code Mode fits the security boundary | [Code Mode trust-boundary guide](docs/en/security/code-mode-worker-trust-boundary.md) |
@@ -258,7 +258,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Classify and recover context overflow](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html)
 - [Stop a runaway Agent loop and contain spend](docs/en/troubleshooting/runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md)
-- [Diagnose empty tool names in streamed calls](docs/en/troubleshooting/streamed-tool-call-empty-identity.md)
+- [Fix UNKNOWN_TOOL from empty streamed tool identity, including Bailian](docs/en/troubleshooting/streamed-tool-call-empty-identity.md)
 - [Diagnose slow TTFT in mature Sessions](docs/en/troubleshooting/slow-ttft-mature-sessions.md)
 - [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](docs/en/troubleshooting/windows-replacefile-eacces.md)
 - [Treat worker-thread Code Mode as host-trusted](docs/en/security/code-mode-worker-trust-boundary.md)
