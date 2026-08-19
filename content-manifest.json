@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 34,
+      "revision": 35,
       "translations": {}
     },
     {
@@ -321,6 +321,11 @@
     },
     {
       "source": "docs/en/troubleshooting/output-token-limit-reached.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/git-plugin-missing-dist.md",
       "revision": 1,
       "translations": {}
     }
