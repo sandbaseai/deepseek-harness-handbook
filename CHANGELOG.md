@@ -2,6 +2,17 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.30 - 2026-08-20
+
+### Added
+
+- A source-backed guide to the rc.8 unified tool-schema DSL and enforced raw JSON Schema subset.
+- Representation-specific `additionalProperties` rules, type-array migration, exact-one `oneOf` behavior, unsupported-keyword routing, and twelve verification gates.
+
+### Changed
+
+- Linked the first-plugin tutorial directly to the detailed schema compatibility guide.
+
 ## 0.5.29 - 2026-08-20
 
 ### Added

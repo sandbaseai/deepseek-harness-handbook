@@ -1,7 +1,7 @@
 ---
 title: Build Your First DeepSeek Harness Plugin
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -120,6 +120,8 @@ Restart the command and ask:
 > Use the `greet` tool to greet Ada. Report the exact tool result.
 
 Verify the tool name, validated argument, call result, and rendered text in the trace. A natural-language greeting without a tool call is not proof that the plugin ran.
+
+For nested objects, explicit nulls, `oneOf`, and raw-schema compatibility, use the [tool schema subset guide](tool-schema-subset.md). The implicit parameter root and explicit value objects intentionally have different `additionalProperties` rules.
 
 ## 4. Add configuration without hardcoding deployment choices
 

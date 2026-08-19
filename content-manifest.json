@@ -56,7 +56,7 @@
     },
     {
       "source": "docs/en/plugin-development/first-plugin.md",
-      "revision": 1,
+      "revision": 2,
       "translations": {}
     },
     {
@@ -371,6 +371,11 @@
     },
     {
       "source": "docs/en/troubleshooting/plugin-add-nonzero-reconcile.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/plugin-development/tool-schema-subset.md",
       "revision": 1,
       "translations": {}
     }

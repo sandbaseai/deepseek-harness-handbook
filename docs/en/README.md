@@ -23,6 +23,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Audit community plugins before installation](security/community-plugin-audit.md)
 - [Install DeepSeek Harness safely](getting-started/install-deepseek-harness.md)
 - [Build your first DeepSeek Harness plugin](plugin-development/first-plugin.md)
+- [Author tool schemas for the enforced subset](plugin-development/tool-schema-subset.md)
 - [What is DeepSeek Harness?](what-is-deepseek-harness.md)
 - [Run the Web UI](getting-started/quickstart.md)
 - [Use the Python SDK](getting-started/python-sdk.md)
