@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="DeepSeek Harness Handbook — operate the agent runtime">
+  <meta property="og:title" content="DeepSeek Harness Handbook | Operate the agent runtime">
   <meta property="og:description" content="78 source-backed guides plus interactive tools for installing, operating, debugging, and extending DeepSeek Harness.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
@@ -18,22 +18,34 @@
   <meta property="og:image:height" content="400">
   <meta property="og:image:alt" content="DeepSeek Harness architecture map from model and tools through policy, sessions, MCP, and production operations">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="DeepSeek Harness Handbook — operate the agent runtime">
+  <meta name="twitter:title" content="DeepSeek Harness Handbook | Operate the agent runtime">
   <meta name="twitter:description" content="78 source-backed guides plus interactive tools for running and debugging DeepSeek Harness.">
   <meta name="twitter:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <link rel="alternate" type="application/atom+xml" title="DeepSeek Harness Handbook updates" href="./feed.xml">
-  <link rel="stylesheet" href="./styles.css?v=0.5.36">
+  <link rel="stylesheet" href="./styles.css?v=0.5.37">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": "DeepSeek Harness Handbook",
-    "description": "Source-backed quickstarts, architecture maps, agent patterns, and troubleshooting for DeepSeek Harness.",
-    "url": "https://sandbaseai.github.io/deepseek-harness-handbook/",
-    "mainEntityOfPage": "https://github.com/sandbaseai/deepseek-harness-handbook",
-    "author": {"@type": "Organization", "name": "SandBase"},
-    "isAccessibleForFree": true,
-    "inLanguage": "en"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "DeepSeek Harness Handbook",
+        "description": "Source-backed guides and interactive operator tools for DeepSeek Harness.",
+        "url": "https://sandbaseai.github.io/deepseek-harness-handbook/",
+        "publisher": {"@type": "Organization", "name": "SandBase"},
+        "inLanguage": "en"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "DeepSeek Harness Install Doctor",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "url": "https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html",
+        "description": "Generate environment-specific installation evidence commands and matched recovery guidance locally in the browser.",
+        "isAccessibleForFree": true,
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+      }
+    ]
   }
   </script>
 </head>
@@ -45,9 +57,9 @@
       <span>Harness Handbook</span>
     </a>
     <nav aria-label="Primary navigation">
-      <a href="#quickstart">Quickstart</a>
-      <a href="#runtime">Runtime</a>
-      <a href="https://github.com/sandbaseai/deepseek-harness-handbook">Read on GitHub</a>
+      <a href="./install-doctor.html">Install Doctor</a>
+      <a href="./diagnose.html">Failure Router</a>
+      <a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a>
     </nav>
   </header>
 
@@ -56,10 +68,10 @@
       <div class="hero-copy reveal">
         <p class="eyebrow">Independent, source-backed, agent-first</p>
         <h1 id="hero-title">Operate the harness, not just the model.</h1>
-        <p class="hero-text">Understand the official DeepSeek AI agent runtime—from first run to production boundaries—with commands, failure routes, and pinned primary sources.</p>
+        <p class="hero-text">Source-backed guides and local tools for installing, operating, and debugging the official DeepSeek AI agent runtime.</p>
         <div class="hero-actions">
-          <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star the handbook <span class="star-count" aria-live="polite"></span></a>
-          <a class="button secondary" href="#guide-index">Explore 78 canonical guides</a>
+          <a class="button primary" href="./install-doctor.html">Run Install Doctor</a>
+          <a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star on GitHub <span class="star-count" aria-live="polite"></span></a>
         </div>
       </div>
       <figure class="hero-figure reveal delay-1">
@@ -118,7 +130,7 @@
     <section id="guide-index" class="paths section-shell" aria-labelledby="paths-title">
       <div class="paths-intro">
         <h2 id="paths-title">Pick the path that matches the job.</h2>
-        <p>Each guide states the expected evidence, failure branch, and safety boundary.</p>
+        <p>Explore 78 canonical guides. Each one states the expected evidence, failure branch, and safety boundary.</p>
         <div class="guide-search">
           <label for="guide-query">Search the field guide</label>
           <input id="guide-query" type="search" inputmode="search" autocomplete="off" placeholder="Try Windows, MCP, context, plugin..." aria-describedby="guide-results">
@@ -224,6 +236,6 @@
     <p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p>
     <div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./feed.xml">Updates feed</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook/issues">Contribute</a></div>
   </footer>
-  <script src="./script.js?v=0.5.36" defer></script>
+  <script src="./script.js?v=0.5.37" defer></script>
 </body>
 </html>
