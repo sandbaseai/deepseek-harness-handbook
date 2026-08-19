@@ -53,6 +53,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand why one model switch affects future Agents | [Map session and deployment model state](https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html) |
 | Fix a plugin script corrupted around a dollar sign | [Repair tapIndex replacement-string insertion](https://sandbaseai.github.io/deepseek-harness-handbook/tapindex-dollar-corruption.html) |
 | Fix an OpenAI-compatible gateway that rejects `developer` | [Diagnose system-message role compatibility](https://sandbaseai.github.io/deepseek-harness-handbook/openai-compatible-developer-role.html) |
+| Fix Chinese or non-ASCII commands corrupted on macOS | [Trace the persistent Bash PTY write boundary](https://sandbaseai.github.io/deepseek-harness-handbook/macos-bash-nonascii.html) |
 | Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |
 | Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
