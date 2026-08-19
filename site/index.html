@@ -53,7 +53,7 @@
         <p class="hero-text">Understand DeepSeek Harness from first run to production boundaries.</p>
         <div class="hero-actions">
           <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star the handbook <span class="star-count" aria-live="polite"></span></a>
-          <a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/README.md">Browse all 46 guides</a>
+          <a class="button secondary" href="#guide-index">Explore 50 canonical guides</a>
         </div>
       </div>
       <figure class="hero-figure reveal delay-1">
@@ -101,12 +101,18 @@
       </dl>
     </section>
 
-    <section class="paths section-shell" aria-labelledby="paths-title">
+    <section id="guide-index" class="paths section-shell" aria-labelledby="paths-title">
       <div class="paths-intro">
         <h2 id="paths-title">Pick the path that matches the job.</h2>
         <p>Each guide states the expected evidence, failure branch, and safety boundary.</p>
+        <div class="guide-search">
+          <label for="guide-query">Search the field guide</label>
+          <input id="guide-query" type="search" inputmode="search" autocomplete="off" placeholder="Try Windows, MCP, context, plugin..." aria-describedby="guide-results">
+          <p id="guide-results" class="guide-results" role="status" aria-live="polite">44 indexed paths</p>
+          <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/README.md">Open the complete canonical index</a>
+        </div>
       </div>
-      <div class="path-index">
+      <div class="path-index" data-guide-index>
         <a href="./deepseek-harness-agents-md.html"><span>Instruction scope</span><strong>Place every AGENTS.md rule correctly</strong><small>Map global, repository, local, nested, direct-user, and Skill lifetimes before debugging precedence or refresh</small></a>
         <a href="./deepseek-harness-mcp.html"><span>MCP tools</span><strong>Compose one server into an Agent preset</strong><small>Start a fresh Session, prove scoped discovery, and route stdio, HTTP, registration, and reconnect failures</small></a>
         <a href="./deepseek-api-fetch-failed.html"><span>Provider egress</span><strong>Route API fetch failures</strong><small>Separate Node proxy discovery, enterprise CA trust, browser ingress, and provider HTTP status before changing the model</small></a>
@@ -151,6 +157,7 @@
         <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/python-sdk.md"><span>Python SDK</span><strong>Embed the runtime</strong><small>JSON-RPC lifecycle and platform boundaries</small></a>
         <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/mcp.md"><span>MCP</span><strong>Connect external capabilities</strong><small>Process, transport, handshake, registration, policy</small></a>
         <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/README.md"><span>Troubleshooting</span><strong>Diagnose by symptom</strong><small>Separate provider, loop, policy, sandbox, and tool failures</small></a>
+        <div class="guide-empty" data-guide-empty hidden><strong>No indexed path matches.</strong><span>Try a broader symptom, runtime boundary, operating system, or tool name.</span></div>
       </div>
     </section>
 
