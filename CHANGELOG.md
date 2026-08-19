@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.7 - 2026-08-19
+
+### Added
+
+- A single-writer Session-root runbook for concurrent Web, headless, ACP, SDK, service, and test processes.
+- A visual topology guide that separates concurrent roots from serialized shared-history handoffs and preserves evidence after suspected writer overlap.
+
 ## 0.3.6 - 2026-08-19
 
 ### Added
