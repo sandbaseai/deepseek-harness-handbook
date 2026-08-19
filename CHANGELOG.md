@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.7 - 2026-08-19
+
+### Added
+
+- A plugin-development guide for custom durable Session events, strict unknown-event refusal, and the currently incomplete downstream `ignorable` writer path.
+- Storage-by-semantics guidance, cold-resume compatibility gates, immutable recovery steps, and a reusable plugin release record.
+
 ## 0.2.6 - 2026-08-19
 
 ### Added

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>DeepSeek Harness Custom Session Event Compatibility</title>
+  <meta name="description" content="Choose safe storage for downstream plugin events, preserve strict Session reconstruction, and test cold resume across plugin and Harness versions.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html">
+  <meta property="og:type" content="article"><meta property="og:title" content="Typed here. Unknown on resume.">
+  <meta property="og:description" content="A durable-event compatibility guide for out-of-tree DeepSeek Harness plugins.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a><nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#storage">Storage</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell event-article">
+    <header class="article-hero event-hero">
+      <div><p class="eyebrow">Plugin durability</p><h1>Typed here. Unknown on resume.</h1><p class="article-deck">Put plugin records where their semantics can survive.</p><div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div></div>
+      <div class="event-resume" role="img" aria-label="A plugin writes a custom event successfully, but a cold reader refuses the unknown required event"><div><small>Write</small><strong>plugin/example</strong><span>accepted in memory</span></div><i>→</i><div class="event-refused"><small>Cold resume</small><strong>unknown required event</strong><span>refused by design</span></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>The invariant</strong><span>Compile-time declaration merging does not update the durable vocabulary of another Harness build.</span></div>
+      <h2>Three contracts must agree.</h2>
+      <div class="event-contracts"><section><span>Types</span><strong>Local event map</strong><p>Makes the writer compile.</p></section><section><span>Envelope</span><strong><code>ignorable?: true</code></strong><p>Travels with the stored record.</p></section><section><span>Reader</span><strong>Generated known types</strong><p>Controls cold reconstruction.</p></section></div>
+      <h2 id="storage">Choose storage by semantics.</h2>
+      <div class="event-storage"><section><small>Reconstruction required</small><strong>Official event or compatible runtime contract</strong><p>Never mark state-changing records ignorable.</p></section><section><small>Purely informational today</small><strong>Plugin-owned versioned store</strong><p>Key audit and telemetry records by Session ID without making resume depend on them.</p></section></div>
+      <h2>Test the boundary cold.</h2>
+      <ol class="event-tests"><li><strong>Write</strong><span>Exercise one disposable Session.</span></li><li><strong>Stop</strong><span>End the owning process cleanly.</span></li><li><strong>Resume</strong><span>Start a fresh process with the plugin.</span></li><li><strong>Remove</strong><span>Repeat without the plugin.</span></li><li><strong>Upgrade</strong><span>Repeat on the next supported Harness.</span></li></ol>
+      <h2>Recover without inventing semantics.</h2>
+      <div class="event-recovery"><div><strong>Preserve</strong><span>Stop writer and copy/export evidence</span></div><i>→</i><div><strong>Restore</strong><span>Use a trusted compatible reader</span></div><i>→</i><div><strong>Continue</strong><span>Start fresh from a reviewed summary if needed</span></div></div>
+      <div class="event-never"><section><strong>No generated-list patch</strong><p>It is local, regenerated, and does not travel with the Session.</p></section><section><strong>No loose-read default</strong><p>Skipping a required event can produce convincing corruption.</p></section><section><strong>No live-log surgery</strong><p>Sequence and source references may depend on the record.</p></section></div>
+      <h2>Primary evidence.</h2><ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3191">Upstream compatibility discussion #3191</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/known-event-types.ts">Generated reader vocabulary</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/types.ts">Durable envelope contract</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/src/coordinator.ts">Strict read validation</a></li></ul>
+      <section class="article-cta"><h2>Keep the plugin compatibility record.</h2><p>The canonical guide includes storage rules, version gates, cold-resume tests, recovery steps, and a release checklist.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body></html>
+
