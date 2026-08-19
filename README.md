@@ -60,6 +60,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |
 | Recover when every retry reports insufficient tool messages | [Missing tool-result recovery guide](https://sandbaseai.github.io/deepseek-harness-handbook/insufficient-tool-messages.html) |
 | Fix a todo that stays in progress after the final answer | [Todo state and projection guide](https://sandbaseai.github.io/deepseek-harness-handbook/todo-stuck-in-progress.html) |
+| Fix a Code Mode Skill that appears in UI but not model context | [Code Mode Skill context guide](https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-skill-context.html) |
 | Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
@@ -116,7 +117,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 56 pages |
+| English | Canonical | 57 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |

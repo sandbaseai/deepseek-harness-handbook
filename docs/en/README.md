@@ -37,6 +37,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Build a Repository Research Agent](recipes/repository-research-agent.md)
 - [Choose a safe remote Web access topology](troubleshooting/remote-web-secure-context.md)
 - [Diagnose a todo that remains in progress after the final answer](troubleshooting/todo-stuck-in-progress.md)
+- [Fix a Code Mode Skill that reaches UI but not model context](troubleshooting/code-mode-skill-context.md)
 
 ## Learning paths
 
