@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 21
+content_revision: 22
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -9,6 +9,8 @@ verified_at: 2026-08-19
 # DeepSeek Harness troubleshooting
 
 Diagnose the failing layer before reinstalling or changing configuration.
+
+- [Understand session model and deployment default coupling](session-model-default-coupling.md)
 
 ## Symptom index
 

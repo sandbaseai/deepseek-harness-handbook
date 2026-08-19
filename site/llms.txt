@@ -3,6 +3,7 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+Session and deployment model routing: https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html
 Context overflow classification: https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html
 Canonical content: https://github.com/sandbaseai/deepseek-harness-handbook/tree/main/docs/en
 Language status: English canonical; Simplified Chinese partial and reviewed; Japanese, Korean, and Spanish navigation drafts.
