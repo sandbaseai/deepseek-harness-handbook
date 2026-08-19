@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 21,
+      "revision": 22,
       "translations": {}
     },
     {
@@ -252,6 +252,11 @@
     {
       "source": "docs/en/updates/README.md",
       "revision": 2,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/session-model-default-coupling.md",
+      "revision": 1,
       "translations": {}
     }
   ]

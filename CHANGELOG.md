@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.9 - 2026-08-19
+
+### Added
+
+- A source-backed state map for the rc.7 coupling between Web session selection and the deployment-wide model default.
+- Safe operating steps and verification gates for session, future-Agent, headless, and subagent routing boundaries.
+
 ## 0.4.8 - 2026-08-19
 
 ### Corrected
