@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.0 - 2026-08-19
+
+### Added
+
+- The fiftieth canonical guide: a source-backed correction and safe fix for dollar-sign corruption in plugin `tapIndex` replacement strings.
+- A public `robots.txt` sitemap pointer and `TechArticle` structured data on the new search-focused guide.
+
 ## 0.4.9 - 2026-08-19
 
 ### Added

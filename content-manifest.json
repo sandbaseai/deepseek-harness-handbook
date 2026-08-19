@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 22,
+      "revision": 23,
       "translations": {}
     },
     {
@@ -256,6 +256,11 @@
     },
     {
       "source": "docs/en/troubleshooting/session-model-default-coupling.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/tapindex-dollar-replacement.md",
       "revision": 1,
       "translations": {}
     }
