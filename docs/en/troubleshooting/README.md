@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 9
+content_revision: 10
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -20,6 +20,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
+| Every follow-up in one Session returns `400 ... Unterminated string` | persisted tool-call arguments | exported Session log, malformed `tool/call` seq, and fresh-Session A/B result |
 | Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
@@ -45,6 +46,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Protect and recover live session logs](live-session-log-durability.md)
 - [Fix context window exceeded errors](context-window-exceeded.md)
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
+- [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
 
 ## Collect a minimal diagnostic bundle
 

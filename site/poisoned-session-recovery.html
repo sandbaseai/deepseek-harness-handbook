@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Recover a poisoned DeepSeek Harness Session | Invalid tool-call JSON</title>
+  <meta name="description" content="Diagnose a DeepSeek Harness Session that permanently returns 400 INVALID_REQUEST after truncated tool-call JSON. Export evidence and recover without editing a live log.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/poisoned-session-recovery.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="One malformed tool call can poison one Session">
+  <meta property="og:description" content="Recognize the recurring 400, preserve the log, isolate the Session, and recover safely.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/poisoned-session-recovery.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./runaway-agent-loop.html">Stop a loop</a><a href="#recover">Recover</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell poison-article">
+    <header class="article-hero poison-hero">
+      <div>
+        <p class="eyebrow">Session recovery</p>
+        <h1>One bad call. Every next turn fails.</h1>
+        <p class="article-deck">Export the evidence. Leave the poisoned history behind.</p>
+        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+      </div>
+      <div class="poison-loop" role="img" aria-label="Malformed tool arguments persist and repeat a provider 400 in every later turn">
+        <div><small>Stream</small><strong>truncated JSON</strong></div><span>→</span>
+        <div><small>Durable log</small><strong>raw arguments</strong></div><span>→</span>
+        <div class="poison-error"><small>Next request</small><strong>400 again</strong></div><i>↺</i>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The signature</strong><span>Every follow-up fails only in one Session; the same provider and workspace work in a new conversation.</span></div>
+
+      <h2>Confirm the durable loop.</h2>
+      <div class="signature-grid">
+        <section><code>01</code><strong>Tool call streams</strong><p>Its inner arguments JSON ends mid-string or before a closing delimiter.</p></section>
+        <section><code>02</code><strong>Provider returns 400</strong><p><code>Unterminated string</code> or another JSON parse diagnostic.</p></section>
+        <section><code>03</code><strong>Same Session repeats</strong><p>Every later message rebuilds and resends the stored call.</p></section>
+        <section><code>04</code><strong>Fresh Session works</strong><p>The account, route, and workspace are no longer the leading suspects.</p></section>
+      </div>
+
+      <h2 id="recover">Recover without rewriting history.</h2>
+      <ol class="poison-recovery">
+        <li><strong>Cancel</strong><span>Stop the active turn and prove provider usage stops.</span></li>
+        <li><strong>Export</strong><span>Choose <b>Session log</b>; keep the downloaded ZIP unchanged.</span></li>
+        <li><strong>Restart clean</strong><span>Create a new conversation and carry over only minimal task context.</span></li>
+        <li><strong>Prove isolation</strong><span>Run one bounded read-only prompt before restoring tools.</span></li>
+        <li><strong>Archive</strong><span>Keep the old Session for diagnosis, not normal use.</span></li>
+      </ol>
+
+      <h2>Separate the physical and logical files.</h2>
+      <div class="artifact-pair">
+        <section><span>Live persistence</span><strong><code>session.jsonl.zstd</code></strong><p>Checksummed Zstandard frames. One live writer. Do not edit or replace in place.</p></section>
+        <section><span>Downloaded evidence</span><strong><code>session.jsonl</code></strong><p>Logical decoded rows inside the export ZIP. Inspect a copy, read-only.</p></section>
+      </div>
+
+      <h2>The outer JSON can still be valid.</h2>
+      <pre><code>{"type":"tool/call","seq":42,
+ "data":{"name":"read",
+ "arguments":"{\"file_path\":\"C:\\\\work\\\\file.ts"}}</code></pre>
+      <p>Parse the event row first, then parse <code>event.data.arguments</code> separately. The malformed value is the JSON string inside the valid event envelope.</p>
+
+      <h2>Do not turn diagnosis into corruption.</h2>
+      <div class="never-grid">
+        <section><strong>No live-file edits</strong><p>Compression, checksums, identity, and sequence continuity are enforced.</p></section>
+        <section><strong>No blind <code>{}</code></strong><p>The original call may already have reached scheduling. Verify external effects.</p></section>
+        <section><strong>No endless Retry</strong><p>The same durable value remains in reconstructed history.</p></section>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3234">Upstream incident report #3234</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm/src/assembler.ts">Block assembly at the verified commit</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/agent-loop/src/tool-calls.ts">Argument parsing and durable tool-call append</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/README.md">JSONL/Zstandard persistence behavior</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the full incident runbook.</h2>
+        <p>The canonical guide includes the complete source chain, a read-only detector, unsafe-repair warnings, and a minimal report template.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

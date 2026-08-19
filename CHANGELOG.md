@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.2 - 2026-08-19
+
+### Added
+
+- A recovery runbook for Sessions that repeatedly fail with provider JSON errors after malformed streamed tool-call arguments enter durable history.
+- A safe evidence workflow using the Web Session export, fresh-Session isolation, and read-only inspection instead of live compressed-log edits.
+
 ## 0.2.1 - 2026-08-19
 
 ### Added

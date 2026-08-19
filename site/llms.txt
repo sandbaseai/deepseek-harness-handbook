@@ -11,6 +11,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 
 ## Start here
 
+- [Recover a poisoned Session](https://sandbaseai.github.io/deepseek-harness-handbook/poisoned-session-recovery.html): Diagnose recurring `400 INVALID_REQUEST` after truncated tool-call JSON, export the durable evidence, and recover without editing a live compressed log.
 - [Stop a runaway Agent loop](https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html): Cancel the active turn, prove provider calls stopped, distinguish Agent loops from retry storms, and add an independent spending boundary before retrying.
 - [Protect live session logs](https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html): Stop the writer before backup or repair, then separate missing paths, sequence gaps, torn tails, and tool-call identity corruption.
 - [Fix a missing /bin/bash](https://sandbaseai.github.io/deepseek-harness-handbook/pty-shell-path.html): Configure the terminal-bash preset row with the exact executable path on NixOS, containers, and other non-FHS hosts.

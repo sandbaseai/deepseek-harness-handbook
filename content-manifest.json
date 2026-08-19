@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/poisoned-session-invalid-tool-json.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/runaway-agent-loop.md",
       "revision": 1,
       "translations": {}
@@ -141,7 +146,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 9,
+      "revision": 10,
       "translations": {}
     },
     {
