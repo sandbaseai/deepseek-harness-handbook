@@ -393,6 +393,11 @@
       "source": "docs/en/troubleshooting/code-mode-unknown-prompt-variable.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/npm-etarget-rc8.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
