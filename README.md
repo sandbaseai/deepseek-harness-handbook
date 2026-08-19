@@ -66,6 +66,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Run DeepSeek Harness from source on a Synology NAS | [Synology NAS deployment guide](https://sandbaseai.github.io/deepseek-harness-handbook/synology-nas.html) |
 | Recover when the Agent waits but no question or approval card appears | [Missing interaction card guide](https://sandbaseai.github.io/deepseek-harness-handbook/missing-question-card.html) |
 | Diagnose `Output token limit reached` without confusing it with context overflow | [Output token ceiling guide](https://sandbaseai.github.io/deepseek-harness-handbook/output-token-limit.html) |
+| Recover when a Git plugin installs without its declared `dist/` or `lib/` export | [Missing plugin artifact guide](https://sandbaseai.github.io/deepseek-harness-handbook/git-plugin-missing-dist.html) |
 | Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
@@ -122,7 +123,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 62 pages |
+| English | Canonical | 63 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -207,6 +208,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Synology NAS source deployment](docs/en/getting-started/synology-nas-source-deployment.md)
 - [Missing question or approval card after reconnect](docs/en/troubleshooting/missing-question-approval-after-reconnect.md)
 - [`Output token limit reached`](docs/en/troubleshooting/output-token-limit-reached.md)
+- [Git plugin missing its built export](docs/en/troubleshooting/git-plugin-missing-dist.md)
 - [Windows folder-picker worker crash](docs/en/troubleshooting/windows-folder-picker-worker-crash.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)

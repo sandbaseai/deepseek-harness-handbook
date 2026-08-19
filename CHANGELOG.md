@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.18 - 2026-08-20
+
+### Added
+
+- A source-backed recovery guide for Git-hosted plugins that install without their declared `dist/` or `lib/` runtime exports.
+- A three-state build router, boot-safe removal path, publisher release gate, and twelve operator regression checks.
+
 ## 0.5.17 - 2026-08-20
 
 ### Added

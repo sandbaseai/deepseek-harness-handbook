@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 34
+content_revision: 35
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -56,6 +56,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Session resume refuses an unknown downstream plugin event type | durable event compatibility | plugin version, event type and seq, Harness revision, and whether the event is reconstruction-required |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
 | Profile stops booting after a plugin change | package/bundle/composition lifecycle | manifest diff, lockfile diff, and `--dump-config` before/after |
+| Git plugin install succeeds, then boot reports a missing `dist/` or `lib/` export | package build artifact / loader import | install flags, package scripts and exports, allowBuilds, artifact tree, and first import stack |
 | `dsh plugin ... add` reports `ERR_PNPM_ADDING_TO_ROOT` | profile package-manager workspace target | DSH and pnpm versions, selected profile, exact command, and profile workspace file |
 | Persistent Bash reports `PTY shell exited during startup` | terminal backend executable | `/bin/bash` existence and `command -v bash` from the Harness host |
 
@@ -76,6 +77,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Diagnose the first Windows workspace-write freeze](windows-first-workspace-write-freeze.md)
 - [Windows folder-picker worker crash](windows-folder-picker-worker-crash.md)
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
+- [Recover a Git plugin missing its built export](git-plugin-missing-dist.md)
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
