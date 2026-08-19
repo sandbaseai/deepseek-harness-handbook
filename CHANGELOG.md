@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.9 - 2026-08-19
+
+### Added
+
+- A macOS workspace-picker guide for firmlinked APFS paths where AppleScript leaks a terminal HFS colon before the POSIX slash.
+- Exact picker-output evidence, a narrow normalization boundary, reversible recovery choices, and adapter-plus-registry acceptance tests.
+
 ## 0.2.8 - 2026-08-19
 
 ### Added
