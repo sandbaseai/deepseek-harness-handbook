@@ -2,6 +2,17 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.38 - 2026-08-20
+
+### Added
+
+- A source-backed runbook for Session titles that remain on the deterministic fallback when reasoning consumes the auxiliary title request's output budget.
+- A compact architecture page that distinguishes fallback creation, LLM refinement, title-event evidence, and UI projection.
+
+### Changed
+
+- The English, troubleshooting, homepage, sitemap, and Atom indexes now surface the Session-title reasoning guide.
+
 ## 0.5.37 - 2026-08-20
 
 ### Changed

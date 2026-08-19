@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 39,
+      "revision": 40,
       "translations": {}
     },
     {
@@ -401,6 +401,11 @@
     },
     {
       "source": "docs/en/tools/install-doctor.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/session-title-reasoning-budget.md",
       "revision": 1,
       "translations": {}
     }
