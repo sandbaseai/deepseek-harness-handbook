@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.26 - 2026-08-20
+
+### Added
+
+- A source-backed recovery guide for first Session flushes that fail because the POSIX filesystem rejects hard links.
+- A capability probe, safe Session-root migration paths, fallback-semantics comparison, failure router, and twelve upstream acceptance gates.
+
 ## 0.5.25 - 2026-08-20
 
 ### Changed
