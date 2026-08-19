@@ -64,6 +64,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix `terminal inspection is unsupported on platform win32` in Minimal | [Windows Minimal preset Bash guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-minimal-bash.html) |
 | Diagnose a frozen first `workspace-write` call on Windows | [Windows first ACL grant guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-acl-first-run.html) |
 | Run DeepSeek Harness from source on a Synology NAS | [Synology NAS deployment guide](https://sandbaseai.github.io/deepseek-harness-handbook/synology-nas.html) |
+| Recover when the Agent waits but no question or approval card appears | [Missing interaction card guide](https://sandbaseai.github.io/deepseek-harness-handbook/missing-question-card.html) |
 | Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
@@ -120,7 +121,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 60 pages |
+| English | Canonical | 61 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -203,6 +204,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Minimal preset Bash failure on native Windows](docs/en/troubleshooting/windows-minimal-preset-bash.md)
 - [First Windows workspace-write freeze](docs/en/troubleshooting/windows-first-workspace-write-freeze.md)
 - [Synology NAS source deployment](docs/en/getting-started/synology-nas-source-deployment.md)
+- [Missing question or approval card after reconnect](docs/en/troubleshooting/missing-question-approval-after-reconnect.md)
 - [Windows folder-picker worker crash](docs/en/troubleshooting/windows-folder-picker-worker-crash.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)

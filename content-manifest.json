@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 32,
+      "revision": 33,
       "translations": {}
     },
     {
@@ -311,6 +311,11 @@
     },
     {
       "source": "docs/en/getting-started/synology-nas-source-deployment.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/missing-question-approval-after-reconnect.md",
       "revision": 1,
       "translations": {}
     }

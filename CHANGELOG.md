@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.16 - 2026-08-19
+
+### Added
+
+- A two-cause diagnosis for missing `ask_user_question` and approval cards after sleep, network loss, or reconnect.
+- A three-owner state map, consent-safe recovery, heartbeat and resync repair boundaries, and twelve regression gates.
+
 ## 0.5.15 - 2026-08-19
 
 ### Added
