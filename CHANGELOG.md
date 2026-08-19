@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.5 - 2026-08-19
+
+### Added
+
+- A source-backed recovery guide for `ERR_PNPM_ADDING_TO_ROOT` during profile plugin installation.
+- Four post-install proof boundaries, nearby-error routing, and a durable CLI repair shape across affected and current pnpm releases.
+
 ## 0.5.4 - 2026-08-19
 
 ### Added
