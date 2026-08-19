@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.6 - 2026-08-19
+
+### Fixed
+
+- Corrected stale English-canonical and homepage visual-index counts.
+- Extended the content checker to keep the manifest, README coverage table, homepage hero, visual path index, and no-JavaScript result label consistent.
+
 ## 0.5.5 - 2026-08-19
 
 ### Added

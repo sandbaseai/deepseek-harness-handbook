@@ -35,6 +35,27 @@ function read(relativePath) {
   return readFileSync(absolutePath, 'utf8');
 }
 
+function verifyPublishedCounts() {
+  const readme = read('README.md');
+  const homepage = read('site/index.html');
+  const canonicalCount = manifest.pages.length;
+  const indexMatch = homepage.match(/<div class="path-index" data-guide-index>([\s\S]*?)<\/div>/);
+  if (indexMatch === null) {
+    errors.push('Missing homepage visual guide index');
+    return;
+  }
+  const visualCount = (indexMatch[1].match(/<a\s/g) ?? []).length;
+  if (!readme.includes(`| English | Canonical | ${canonicalCount} pages |`)) {
+    errors.push(`README English coverage must match ${canonicalCount} canonical pages`);
+  }
+  if (!homepage.includes(`Explore ${canonicalCount} canonical guides`)) {
+    errors.push(`Homepage hero count must match ${canonicalCount} canonical guides`);
+  }
+  if (!homepage.includes(`>${visualCount} indexed paths</p>`)) {
+    errors.push(`Homepage initial search count must match ${visualCount} visual paths`);
+  }
+}
+
 function frontmatter(relativePath, text) {
   const match = text.match(/^---\n([\s\S]*?)\n---\n/);
   if (!match) {
@@ -57,6 +78,8 @@ function markdownFiles(directory) {
     return entry.isDirectory() ? markdownFiles(path) : extname(path) === '.md' ? [path] : [];
   });
 }
+
+verifyPublishedCounts();
 
 for (const page of manifest.pages) {
   const sourceText = read(page.source);
