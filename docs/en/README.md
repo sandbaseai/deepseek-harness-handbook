@@ -52,6 +52,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Fix Session persistence on filesystems without hard links](troubleshooting/session-hard-link-unsupported.md)
 - [Fix rc.8 source builds with standalone pnpm on Windows](troubleshooting/windows-standalone-pnpm-npm-execpath.md)
 - [Recover a conversation that updates before its start Match](troubleshooting/conversation-update-before-start.md)
+- [Recover a plugin materialized after pnpm exits nonzero](troubleshooting/plugin-add-nonzero-reconcile.md)
 
 ## Learning paths
 

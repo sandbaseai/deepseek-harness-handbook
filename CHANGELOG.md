@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.29 - 2026-08-20
+
+### Added
+
+- A source-backed runbook for plugin additions that materialize dependencies but exit nonzero before bundle reconciliation.
+- A five-state installation model, bounded retry and rollback paths, existence-only activation warning, and twelve upstream regression gates.
+
 ## 0.5.28 - 2026-08-20
 
 ### Added
