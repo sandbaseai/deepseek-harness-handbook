@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 27
+content_revision: 28
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -31,6 +31,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | `DeepSeek API request to ... failed` before an HTTP response | Host-to-provider network transport | deepest cause, Node version, endpoint, proxy requirement, and TLS inspection state |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
 | Every follow-up in one Session returns `400 ... Unterminated string` | persisted tool-call arguments | exported Session log, malformed `tool/call` seq, and fresh-Session A/B result |
+| Every retry returns `400 insufficient tool messages following tool_calls` | provider transcript / missing tool results | assistant call ids, durable call/result pairs, first scheduler error, and closed turn reason |
 | UI TTFT grows with mature Sessions or subagent fan-out | Host / provider / Session event pressure | `step/start`, gateway arrival/first-token, first `assistant/chunk`, event count, and active-step count |
 | Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
@@ -73,6 +74,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Fix context window exceeded errors](context-window-exceeded.md)
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
+- [Recover a Session poisoned by missing tool results](dangling-tool-calls-insufficient-results.md)
 - [Diagnose empty tool names in streamed calls](streamed-tool-call-empty-identity.md)
 - [Diagnose slow TTFT in mature Sessions](slow-ttft-mature-sessions.md)
 - [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](windows-replacefile-eacces.md)

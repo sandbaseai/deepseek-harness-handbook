@@ -58,6 +58,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Recover an empty sidebar or unreadable Session without destroying evidence | [Route frame, sequence, and tool-call identity failures](https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html) |
 | Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |
+| Recover when every retry reports insufficient tool messages | [Missing tool-result recovery guide](https://sandbaseai.github.io/deepseek-harness-handbook/insufficient-tool-messages.html) |
 | Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
@@ -114,7 +115,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 54 pages |
+| English | Canonical | 55 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
