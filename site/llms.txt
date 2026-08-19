@@ -11,6 +11,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 
 ## Start here
 
+- [Upgrade and roll back DeepSeek Harness](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html): Capture the known-good executable, profile, config, and Sessions; test an exact target in isolation; pass compatibility gates; and prove rollback.
 - [Community plugin audit](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html): Resolve repository and package identity, inspect published bytes without scripts, map Host effects, install one isolated candidate, and prove cleanup.
 - [Install DeepSeek Harness safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html): Verify the official package, choose exact npx, project-local, source, or global execution, and capture executable, profile state, and workspace evidence.
 - [DeepSeek Harness Skills guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html): Create a project Skill, understand progressive disclosure, test model and user invocation, and debug roots, precedence, policy, and hot refresh.
