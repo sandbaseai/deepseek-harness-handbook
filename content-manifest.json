@@ -353,6 +353,11 @@
       "source": "docs/en/security/prevent-unexpected-deepseek-api-charges.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/session-hard-link-unsupported.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

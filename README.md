@@ -95,6 +95,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix `crypto.randomUUID` over remote HTTP without exposing an unauthenticated Agent shell | [Remote Web control-plane guide](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) |
 | Fix persistent Bash on NixOS or minimal Linux | [PTY shell-path guide](docs/en/troubleshooting/pty-shell-path.md) |
 | Protect or recover a session log | [Live session log durability](docs/en/troubleshooting/live-session-log-durability.md) |
+| Fix first Session flush when the filesystem rejects hard links | [Session hard-link compatibility runbook](https://sandbaseai.github.io/deepseek-harness-handbook/session-hard-link-unsupported.html) |
 | Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
 | Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
 
@@ -128,7 +129,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 68 pages |
+| English | Canonical | 69 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
