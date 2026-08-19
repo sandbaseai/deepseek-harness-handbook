@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.5 - 2026-08-19
+
+### Corrected
+
+- Added the confirmed rc.7 UTF-16LE `U+XX00` low-byte truncation branch to the Windows native folder-picker runbook.
+- Separated worker crashes from successful IPC carrying a silently shortened path, explained the downstream `ENOENT`, and added an exact two-byte terminator model.
+- Tightened Unicode acceptance from generic CJK text to a regression path containing `开` (U+5F00), alongside the shipped browse-backend recovery.
+
 ## 0.4.4 - 2026-08-19
 
 ### Changed

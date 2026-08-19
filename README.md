@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Fix API fetch failures](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html)** · **[Fix the Windows folder picker](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)** · **[Choose a memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html)**
+**[Fix Windows picker crashes and truncation](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html)** · **[Fix API fetch failures](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)** · **[Choose a memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -26,7 +26,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | I want to… | Start here |
 |---|---|
 | Understand the shipped CLI, automate one task, or evaluate a community TUI | [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
-| Recover when the Windows folder-picker worker exits without a result | [Windows folder-picker crash guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html) |
+| Recover when the Windows folder picker crashes or truncates a Unicode path | [Windows folder-picker crash and truncation guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html) |
 | Connect to DeepSeek through an authorized proxy or enterprise CA | [Provider egress and TLS guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html) |
 | Add an MCP server or diagnose missing MCP tools | [MCP preset and connection guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
 | Move Codex or Claude Code memory without losing provenance or isolation | [Sessions, Skills, and long-term memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |

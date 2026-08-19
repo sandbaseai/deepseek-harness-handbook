@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>Fix DeepSeek Harness Windows folder picker worker crash</title>
-  <meta name="description" content="Route the DeepSeek Harness Win32 folder dialog worker crash across Node/Koffi decoding, native installation, and stale processes, then switch safely to the browse picker.">
+  <title>Fix DeepSeek Harness Windows folder picker crashes and path truncation</title>
+  <meta name="description" content="Route Win32 folder picker failures across Node/Koffi crashes, UTF-16LE U+XX00 truncation, native installation, and stale processes, then switch safely to browse mode.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="One worker error. Three failure branches.">
-  <meta property="og:description" content="Preserve evidence, classify the Win32 picker crash, and recover through the shipped browse backend.">
+  <meta property="og:title" content="One picker. Four failure branches.">
+  <meta property="og:description" content="Separate worker crashes from silent UTF-16LE path corruption before recovering through the shipped browse backend.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Recover from the DeepSeek Harness Windows folder-picker worker crash","dateModified":"2026-08-19","step":[{"@type":"HowToStep","name":"Capture evidence","text":"Record runtime, process, listener, and dialog timing before reinstalling."},{"@type":"HowToStep","name":"Classify the branch","text":"Separate post-selection decode crashes, native installation failures, and stale DSH processes."},{"@type":"HowToStep","name":"Switch the picker","text":"Replace the adaptive row with the shipped browse backend and verify workspace creation."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Recover from DeepSeek Harness Windows folder-picker crashes and path truncation","dateModified":"2026-08-19","step":[{"@type":"HowToStep","name":"Capture evidence","text":"Record runtime, process, dialog timing, and expected versus returned path."},{"@type":"HowToStep","name":"Classify the branch","text":"Separate Node/Koffi crashes, U+XX00 UTF-16 truncation, native installation, and stale DSH processes."},{"@type":"HowToStep","name":"Switch the picker","text":"Replace the adaptive row with the shipped browse backend and verify workspace creation."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -29,26 +29,27 @@
     <header class="article-hero picker-hero">
       <div class="reveal">
         <p class="eyebrow">Windows · folder picker</p>
-        <h1>One worker error. Three failure branches.</h1>
-        <p class="article-deck">Classify the crash before replacing native code or weakening the Host.</p>
+        <h1>One picker. Four failure branches.</h1>
+        <p class="article-deck">Separate a worker crash from a silently corrupted path before changing the Host.</p>
         <div class="hero-actions"><a class="button primary" href="#route">Route the failure</a><a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-folder-picker-worker-crash.md">Full runbook</a></div>
       </div>
-      <div class="picker-pipeline reveal delay-1" role="img" aria-label="Browser requests a folder, Host spawns a Win32 worker, the COM dialog returns a path, and the worker must send it back over IPC before exit">
+      <div class="picker-pipeline reveal delay-1" role="img" aria-label="Browser requests a folder, Host spawns a Win32 worker, the COM dialog returns a UTF-16 path, and decoding may crash or silently corrupt it before IPC">
         <div><small>Browser</small><strong>pick</strong><span>request</span></div><i>→</i>
         <div><small>Host</small><strong>spawn</strong><span>worker</span></div><i>→</i>
         <div><small>Win32</small><strong>dialog</strong><span>UTF-16 path</span></div><i>→</i>
-        <div class="picker-break"><small>IPC</small><strong>no result</strong><span>worker exited</span></div>
+        <div class="picker-break"><small>Decode</small><strong>crash or corrupt</strong><span>before Host validation</span></div>
       </div>
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The message is downstream</strong><span>It proves only that no terminal worker message arrived. It does not prove Koffi, COM, permissions, or installation was the cause.</span></div>
+      <div class="signal"><strong>Two outcome classes</strong><span>A worker exit returns no IPC result. Unicode truncation returns a damaged path that later fails correctly at <code>realpath</code>.</span></div>
 
       <h2 id="route">Route by the last boundary that worked.</h2>
       <div class="picker-branches">
-        <section><small>A · after selection</small><strong>Node / Koffi decode</strong><p>The dialog opens and accepts a folder, then the worker aborts while the path is materialized.</p><code>Node 22 ↔ Node 24+</code></section>
-        <section><small>B · before dialog</small><strong>Native install</strong><p>Koffi or another native artifact never built inside the exact dependency tree DSH resolves.</p><code>install + import evidence</code></section>
-        <section><small>C · unhealthy owner</small><strong>Stale DSH process</strong><p>An unexpected listener survives after its terminal or wrapper disappeared.</p><code>PID + parent + command line</code></section>
+        <section><small>A · no result</small><strong>Node / Koffi crash</strong><p>The dialog accepts a folder, then the worker aborts while materializing the path.</p><code>Node 22 ↔ Node 24+</code></section>
+        <section><small>B · wrong result</small><strong>UTF-16 truncation</strong><p>The worker returns a path cut immediately before a <code>U+XX00</code> character.</p><code>开 U+5F00 → 00 5F</code></section>
+        <section><small>C · before dialog</small><strong>Native install</strong><p>The native artifact never built inside the exact dependency tree DSH resolves.</p><code>install + import evidence</code></section>
+        <section><small>D · unhealthy owner</small><strong>Stale DSH process</strong><p>An unexpected listener survives after its terminal or wrapper disappeared.</p><code>PID + parent + command line</code></section>
       </div>
 
       <h2>rc.7 still carries the reported decode path.</h2>
@@ -58,6 +59,14 @@
         <div><small>expected</small><strong>IPC path</strong><span>never sent on crash</span></div>
       </div>
       <p>The discussion reports the picker path succeeding on Node 22.23.2 and aborting on Node 24.18.1 across multiple Koffi versions. Treat that as a focused component A/B, not a claim that every Node 24 DSH feature is broken.</p>
+
+      <h2>A zero byte is not a two-byte terminator.</h2>
+      <div class="picker-utf16">
+        <section><small>Character</small><strong>开 · U+5F00</strong><code>00 5F</code><span>valid code unit</span></section>
+        <b>≠</b>
+        <section><small>Terminator</small><strong>NUL · U+0000</strong><code>00 00</code><span>end of string</span></section>
+      </div>
+      <p>rc.7 checks only the first byte, so it can return a shortened path and produce a downstream `ENOENT`. A regression fixture must contain an actual <code>U+XX00</code> code point; “some CJK text” is not a sufficient test condition.</p>
 
       <h2 id="recover">Recover through the shipped browse picker.</h2>
       <div class="picker-swap">
@@ -82,6 +91,7 @@
         <li><strong>Open</strong><span>In-browser directory card renders.</span></li>
         <li><strong>Navigate</strong><span>Drive root and nested paths resolve.</span></li>
         <li><strong>Unicode</strong><span>ASCII and CJK paths round-trip exactly.</span></li>
+        <li><strong>U+XX00</strong><span>A path containing <code>开</code> round-trips exactly.</span></li>
         <li><strong>Create</strong><span>Disposable workspace is registered once.</span></li>
         <li><strong>Restart</strong><span>Workspace identity stays stable.</span></li>
       </ol>
@@ -89,6 +99,7 @@
       <h2>Primary evidence.</h2>
       <ul class="source-list">
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/30">Official failure discussion #30</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3291">Confirmed Unicode truncation report #3291</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/src/win32-dialog-bindings.ts">rc.7 Win32 decode path</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/README.md">Native picker contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-browse/README.md">Browse picker contract</a></li>
