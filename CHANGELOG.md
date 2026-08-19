@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.5 - 2026-08-19
+
+### Added
+
+- A reversible upgrade guide that separates CLI artifacts, source revisions, profile dependencies, configuration, and durable Session state.
+- A visual upgrade page with stopped-writer capture, isolated-home testing, ten compatibility gates, promotion evidence, and full-state rollback.
+
 ## 0.3.4 - 2026-08-19
 
 ### Added

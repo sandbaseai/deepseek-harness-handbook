@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/getting-started/upgrade-and-rollback.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/security/community-plugin-audit.md",
       "revision": 1,
       "translations": {}

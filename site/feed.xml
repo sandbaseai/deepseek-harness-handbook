@@ -5,9 +5,17 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-19T17:00:00Z</updated>
+  <updated>2026-08-19T18:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry>
+    <title>Upgrade DeepSeek Harness and preserve a proven rollback</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html</id>
+    <updated>2026-08-19T18:00:00Z</updated>
+    <summary>Capture the known-good runtime, test an exact target in an isolated home, pass compatibility gates, and restore every changed boundary.</summary>
+  </entry>
 
   <entry>
     <title>Audit a community DSH plugin before Host execution</title>

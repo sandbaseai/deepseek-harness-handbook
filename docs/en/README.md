@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Upgrade and roll back safely](getting-started/upgrade-and-rollback.md)
 - [Audit community plugins before installation](security/community-plugin-audit.md)
 - [Install DeepSeek Harness safely](getting-started/install-deepseek-harness.md)
 - [Build your first DeepSeek Harness plugin](plugin-development/first-plugin.md)
