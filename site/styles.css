@@ -16,6 +16,42 @@
 }
 
 /* Todo snapshot and turn-lifecycle guide */
+/* Windows Minimal preset Bash guide */
+.winmin-article { width: min(calc(100% - 40px), 1160px); }
+.winmin-hero { display: grid; grid-template-columns: minmax(0, .85fr) minmax(420px, 1.15fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; min-height: auto; }
+.winmin-hero h1 { max-width: 680px; font-size: clamp(3rem, 5vw, 4.65rem); }
+.winmin-article .article-body { max-width: 920px; margin-inline: auto; }
+.winmin-terminal { min-width: 0; padding: 1.35rem; border-radius: 1rem; background: #111714; color: #e8f1ec; box-shadow: 0 24px 70px rgb(0 0 0 / .16); }
+.winmin-terminal small,.winmin-terminal code,.winmin-terminal strong,.winmin-terminal span,.winmin-terminal i { display: block; }
+.winmin-terminal small { margin-bottom: 1.2rem; color: #8fc9aa; font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+.winmin-terminal code { padding: .8rem; border: 1px solid #314039; border-radius: .55rem; color: #dff8e9; overflow-wrap: anywhere; }
+.winmin-terminal strong { margin-top: 1.4rem; color: #ff9f8d; font-size: 1.4rem; }
+.winmin-terminal span { margin-top: .45rem; color: #c8d5cd; font: .9rem/1.6 ui-monospace, monospace; }
+.winmin-terminal b { color: #ff9f8d; }
+.winmin-terminal i { margin-top: 1.2rem; color: #8fc9aa; font-size: .78rem; font-style: normal; }
+.winmin-trace,.winmin-recover { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: .6rem; align-items: center; margin: 1.25rem 0 2rem; }
+.winmin-trace section,.winmin-recover section { min-width: 0; min-height: 155px; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.winmin-trace small,.winmin-recover small { color: var(--accent); font: 700 .68rem ui-monospace, monospace; }
+.winmin-trace span,.winmin-recover span { color: var(--muted); font-size: .8rem; }
+.winmin-trace b,.winmin-recover b { color: var(--accent); }
+.winmin-trace em { color: #b55d4c; font-style: normal; }
+.winmin-trace .winmin-stop { border-top: 3px solid #b55d4c; background: var(--surface-strong); }
+.winmin-recover { grid-template-columns: 1fr auto 1fr auto 1fr; }
+.winmin-router,.winmin-compare { display: grid; grid-template-columns: repeat(2,1fr); gap: .7rem; margin: 1.25rem 0 2rem; }
+.winmin-router section,.winmin-compare section { min-width: 0; display: flex; flex-direction: column; gap: .55rem; padding: 1rem; border-bottom: 1px solid var(--line); background: var(--panel); }
+.winmin-router code,.winmin-compare small { color: var(--accent); }
+.winmin-router span,.winmin-compare code { color: var(--muted); font-size: .8rem; overflow-wrap: anywhere; }
+.winmin-compare { grid-template-columns: repeat(3,1fr); }
+.winmin-compare section { min-height: 170px; }
+.winmin-compare .winmin-target { border-top: 3px solid var(--accent); background: var(--surface-strong); }
+.winmin-no { display: grid; grid-template-columns: .8fr 1.2fr; gap: 2rem; margin: 0 0 2rem; padding: 1.2rem; border-left: 4px solid #b55d4c; background: var(--surface-strong); }
+.winmin-no ul { display: grid; grid-template-columns: repeat(2,1fr); gap: .4rem 1rem; margin: 0; }
+.winmin-tests { display: grid; grid-template-columns: repeat(4,1fr); gap: .65rem; margin: 1.25rem 0 2rem; padding: 0; list-style: none; counter-reset: winmin-gate; }
+.winmin-tests li { min-height: 110px; padding: 1rem; border-top: 2px solid var(--accent); background: var(--panel); counter-increment: winmin-gate; }
+.winmin-tests li::before { content: "0" counter(winmin-gate); display: block; margin-bottom: .8rem; color: var(--accent); font: 700 .68rem ui-monospace, monospace; }
+@media(max-width:980px){.winmin-hero{grid-template-columns:1fr}.winmin-tests{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.winmin-article{width:min(calc(100% - 28px),1160px)}.winmin-hero h1{font-size:clamp(2.55rem,12vw,3.35rem)}.winmin-trace,.winmin-router,.winmin-recover,.winmin-compare,.winmin-no,.winmin-tests{grid-template-columns:1fr}.winmin-trace b,.winmin-recover b{justify-self:center;transform:rotate(90deg)}.winmin-trace section,.winmin-recover section{min-height:125px}.winmin-no ul{grid-template-columns:1fr}}
+
 /* Code Mode Skill context guide */
 .skillgap-article { width: min(calc(100% - 40px), 1160px); }
 .skillgap-hero { display: grid; grid-template-columns: minmax(0, .8fr) minmax(560px, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; min-height: auto; }

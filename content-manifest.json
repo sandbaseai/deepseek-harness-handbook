@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 30,
+      "revision": 31,
       "translations": {}
     },
     {
@@ -296,6 +296,11 @@
     },
     {
       "source": "docs/en/troubleshooting/code-mode-skill-context.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/windows-minimal-preset-bash.md",
       "revision": 1,
       "translations": {}
     }
