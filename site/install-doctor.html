@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>DeepSeek Harness Install Doctor</title>
+  <meta name="description" content="Generate a bounded DeepSeek Harness installation diagnostic plan for npm, registry mirrors, source checkouts, Windows, macOS, and Linux.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DeepSeek Harness Install Doctor">
+  <meta property="og:description" content="Choose your environment and first failure. Get exact evidence commands and the next source-backed guide.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css?v=0.5.36">
+</head>
+<body>
+  <a class="skip-link" href="#doctor">Skip to Install Doctor</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./">Home</a><a href="./diagnose.html">Failure Router</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">Star on GitHub</a></nav>
+  </header>
+
+  <main id="main" class="doctor-shell">
+    <header class="doctor-hero">
+      <p class="eyebrow">Install Doctor</p>
+      <h1>Find the first broken install boundary.</h1>
+      <p>Three choices produce one evidence plan. Nothing leaves your browser.</p>
+      <a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/tools/install-doctor.md">Method and limits</a>
+    </header>
+
+    <section id="doctor" class="doctor-workbench" aria-labelledby="doctor-title">
+      <form class="doctor-controls" id="doctor-form">
+        <h2 id="doctor-title">Describe the failing environment.</h2>
+
+        <fieldset>
+          <legend>Operating system</legend>
+          <div class="doctor-options">
+            <label><input type="radio" name="os" value="windows" checked><span>Windows</span></label>
+            <label><input type="radio" name="os" value="posix"><span>macOS or Linux</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Install path</legend>
+          <div class="doctor-options doctor-options-stack">
+            <label><input type="radio" name="path" value="npm" checked><span><strong>Official npm</strong><small>registry.npmjs.org</small></span></label>
+            <label><input type="radio" name="path" value="mirror"><span><strong>Mirror or proxy</strong><small>Enterprise or regional registry</small></span></label>
+            <label><input type="radio" name="path" value="source"><span><strong>Source checkout</strong><small>pnpm workspace build</small></span></label>
+          </div>
+        </fieldset>
+
+        <div class="doctor-field">
+          <label for="doctor-symptom">First observable failure</label>
+          <select id="doctor-symptom" name="symptom">
+            <option value="etarget">ETARGET or no matching version</option>
+            <option value="engine">Unsupported engine or version mismatch</option>
+            <option value="silent">Build exits 0 but creates no artifacts</option>
+            <option value="startup">Installed, but CLI fails before version output</option>
+            <option value="artifact">Missing native binding, lib, or generated export</option>
+            <option value="preflight">Not sure yet: run a neutral preflight</option>
+          </select>
+          <p class="doctor-helper">Choose the earliest failure, not the last aggregate error.</p>
+        </div>
+      </form>
+
+      <article class="doctor-output" aria-live="polite" aria-atomic="true">
+        <div class="doctor-output-head"><span id="doctor-layer">Registry metadata</span><span id="doctor-scope">Windows / official npm</span></div>
+        <h2 id="doctor-route-title">Prove which registry can see rc.8.</h2>
+        <p id="doctor-summary">Compare configured and official metadata before changing shared cache state.</p>
+
+        <div class="doctor-verdicts">
+          <div><span>Collect</span><strong id="doctor-collect">Registry URL, exact missing range, and both version lists.</strong></div>
+          <div><span>Success</span><strong id="doctor-success">A fresh isolated cache prints 0.1.0-rc.8.</strong></div>
+        </div>
+
+        <div class="doctor-command-block">
+          <div class="doctor-command-head"><span>Evidence commands</span><button type="button" id="doctor-copy">Copy commands</button></div>
+          <pre><code id="doctor-commands"></code></pre>
+          <p id="doctor-copy-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="doctor-caution"><strong>Before sharing</strong><span id="doctor-caution">Redact registry credentials, usernames, private paths, tokens, and internal hostnames.</span></div>
+
+        <div class="doctor-actions"><a class="button primary" id="doctor-guide" href="./npm-etarget-rc8.html">Open the matched guide</a><a class="doctor-github" href="https://github.com/sandbaseai/deepseek-harness-handbook">Keep this tool available on GitHub</a></div>
+        <noscript><p class="doctor-error">JavaScript is required to generate a route. Use the installation troubleshooting index on GitHub.</p></noscript>
+      </article>
+    </section>
+
+    <section class="doctor-boundary" aria-labelledby="doctor-boundary-title">
+      <h2 id="doctor-boundary-title">The doctor never asks for secrets.</h2>
+      <p>It generates commands locally and does not execute, upload, or store their output. Review every command before running it.</p>
+      <div><span>Version evidence</span><span>Registry identity</span><span>Artifact presence</span><span>Exit status</span></div>
+    </section>
+  </main>
+
+  <footer><p>Independent community tool by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook/issues">Report a missing route</a></div></footer>
+  <script src="./script.js?v=0.5.36" defer></script>
+  <script src="./install-doctor.js?v=0.5.36" defer></script>
+</body>
+</html>
