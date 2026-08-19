@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/windows-folder-picker-worker-crash.md",
       "revision": 1,
       "translations": {}
@@ -221,7 +226,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 19,
+      "revision": 20,
       "translations": {}
     },
     {

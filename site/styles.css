@@ -15,6 +15,64 @@
   --max: 1240px;
 }
 
+/* Provider egress, proxy, and enterprise CA */
+.article-shell.egress-article { width: min(calc(100% - 40px), 1160px); padding-top: clamp(3rem, 5vw, 4.5rem); }
+.egress-hero { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 4rem); align-items: center; min-height: auto; }
+.article-hero.egress-hero h1 { max-width: 720px; font-size: clamp(2.75rem, 3.6vw, 3.25rem); }
+.egress-article .article-body { max-width: 920px; margin-inline: auto; }
+.egress-map { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: .5rem; align-items: center; padding: 1.15rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.egress-map div { min-width: 0; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; padding: .9rem; border-top: 2px solid var(--line); background: var(--surface); }
+.egress-map .egress-host { border-color: var(--accent); background: var(--surface-strong); }
+.egress-map small, .egress-routes small, .egress-probe small, .egress-split small { color: var(--muted); font: 650 .68rem ui-monospace, monospace; text-transform: uppercase; }
+.egress-map strong { font-size: 1rem; }
+.egress-map span { color: var(--muted); font-size: .75rem; }
+.egress-map i, .egress-probe b { color: var(--accent); font-style: normal; }
+.egress-routes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 1.25rem 0 2rem; padding: 1px; background: var(--line); }
+.egress-routes section { min-width: 0; min-height: 245px; display: flex; flex-direction: column; padding: 1rem; background: var(--surface); }
+.egress-routes section:nth-child(3) { background: var(--surface-strong); }
+.egress-routes small, .egress-repairs span { color: var(--accent); }
+.egress-routes strong { margin-top: 1.7rem; font-size: 1.12rem; }
+.egress-routes code { margin-top: auto; overflow-wrap: anywhere; }
+.egress-routes p { color: var(--muted); font-size: .8rem; }
+.egress-probe { display: grid; grid-template-columns: 1fr auto 1fr; gap: .8rem; align-items: center; margin: 1.25rem 0 1rem; }
+.egress-probe div { min-width: 0; min-height: 175px; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.egress-probe div:last-child { border-top: 3px solid var(--accent); background: var(--surface-strong); }
+.egress-probe code, .egress-probe span { color: var(--muted); overflow-wrap: anywhere; }
+.egress-repairs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin: 1.25rem 0 2rem; }
+.egress-repairs section { min-width: 0; min-height: 255px; display: flex; flex-direction: column; padding: 1.1rem; border: 1px solid var(--line); border-radius: .9rem; background: var(--panel); }
+.egress-repairs span { font: 750 .72rem ui-monospace, monospace; }
+.egress-repairs strong { margin-top: 1.6rem; font-size: 1.18rem; }
+.egress-repairs code { margin-top: auto; overflow-wrap: anywhere; }
+.egress-repairs p { color: var(--muted); font-size: .82rem; }
+.egress-warning { display: grid; grid-template-columns: .85fr 1.15fr; gap: 2rem; margin: 0 0 2rem; padding: 1.3rem; border-left: 4px solid var(--accent); background: var(--surface-strong); }
+.egress-warning strong { font-size: 1.25rem; }
+.egress-warning p { margin: 0; color: var(--muted); }
+.egress-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin: 1.25rem 0 2rem; }
+.egress-split section { min-width: 0; min-height: 170px; display: flex; flex-direction: column; justify-content: space-between; padding: 1.1rem; border: 1px solid var(--line); border-radius: .9rem; background: var(--panel); }
+.egress-split > div { color: var(--accent); font-size: 1.5rem; font-weight: 800; }
+.egress-split span { color: var(--muted); }
+.egress-tests { display: grid; grid-template-columns: repeat(5, 1fr); gap: .65rem; margin: 1.25rem 0 2rem; padding: 0; list-style: none; counter-reset: egress-step; }
+.egress-tests li { min-width: 0; min-height: 155px; display: flex; flex-direction: column; padding: 1rem; border-top: 2px solid var(--accent); background: var(--panel); counter-increment: egress-step; }
+.egress-tests li::before { content: "0" counter(egress-step); color: var(--accent); font: 700 .7rem ui-monospace, monospace; }
+.egress-tests strong { margin-top: 1.15rem; }
+.egress-tests span { margin-top: auto; color: var(--muted); font-size: .8rem; }
+
+@media (max-width: 980px) {
+  .egress-hero { grid-template-columns: 1fr; }
+  .egress-map { max-width: 760px; }
+  .egress-routes { grid-template-columns: repeat(2, 1fr); }
+  .egress-tests { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .article-shell.egress-article { width: min(calc(100% - 28px), 1160px); }
+  .article-hero.egress-hero h1 { font-size: clamp(2.55rem, 11.5vw, 3.35rem); }
+  .egress-map, .egress-routes, .egress-probe, .egress-repairs, .egress-warning, .egress-split, .egress-tests { grid-template-columns: 1fr; }
+  .egress-map i, .egress-probe b, .egress-split > div { justify-self: center; transform: rotate(90deg); }
+  .egress-map div, .egress-probe div, .egress-split section, .egress-tests li { min-height: 130px; }
+  .egress-routes section, .egress-repairs section { min-height: 200px; }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #111714;

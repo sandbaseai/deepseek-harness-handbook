@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 19
+content_revision: 20
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -22,6 +22,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
+| `DeepSeek API request to ... failed` before an HTTP response | Host-to-provider network transport | deepest cause, Node version, endpoint, proxy requirement, and TLS inspection state |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
 | Every follow-up in one Session returns `400 ... Unterminated string` | persisted tool-call arguments | exported Session log, malformed `tool/call` seq, and fresh-Session A/B result |
 | UI TTFT grows with mature Sessions or subagent fan-out | Host / provider / Session event pressure | `step/start`, gateway arrival/first-token, first `assistant/chunk`, event count, and active-step count |
@@ -45,6 +46,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [DeepSeek API fetch failures behind a proxy or enterprise CA](deepseek-api-fetch-failed-proxy-ca.md)
 - [`--expose-internals` HMR startup diagnosis](hmr-expose-internals-source-checkout.md)
 - [Custom plugin events and Session resume compatibility](../plugin-development/custom-session-events.md)
 - [Code Mode worker-thread trust boundary](../security/code-mode-worker-trust-boundary.md)
