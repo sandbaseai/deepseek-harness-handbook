@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 40
+content_revision: 41
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -43,6 +43,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Agent repeats tools or spends after the task should be done | agent loop / retry / background owner | ordered Session events, request count, and provider usage curve |
 | Final answer is complete but the todo strip still shows `in_progress` | model todo snapshot / Session projection | last `todo/write`, last assistant message, `turn/end` reason, and next `turn/start` |
 | Tool is denied | permission policy | operation, target, and active policy |
+| Every tool fails as `UNKNOWN_TOOL` or `unknown tool ""` while chat works | provider stream identity / DeepSeek translator | first and continuation tool deltas, final `tool/call`, and same-prompt route A/B |
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | `run_code` is available while relying on `read-only` or `workspace-write` | Code Mode runtime trust boundary | effective tools mode, permission mode, code runtime, and outer isolation |
 | Code Mode Skill card is complete but the model says no content was returned | nested dispatch / outer result / instructions context | `tool/code-dispatch`, outer `run_code` result, additional contexts, and next request |
@@ -103,7 +104,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
 - [Recover a Session poisoned by missing tool results](dangling-tool-calls-insufficient-results.md)
 - [Diagnose a todo stuck in progress after the final answer](todo-stuck-in-progress.md)
-- [Diagnose empty tool names in streamed calls](streamed-tool-call-empty-identity.md)
+- [Fix `UNKNOWN_TOOL` from empty streamed tool identity, including Bailian](streamed-tool-call-empty-identity.md)
 - [Diagnose slow TTFT in mature Sessions](slow-ttft-mature-sessions.md)
 - [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](windows-replacefile-eacces.md)
 
