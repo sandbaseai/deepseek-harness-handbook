@@ -2,6 +2,17 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.27 - 2026-08-20
+
+### Added
+
+- A source-backed rc.8 guide for Windows builds that pass native standalone `pnpm.exe` to Node through `npm_execpath`.
+- Entry-point classification, Corepack recovery, four-runner impact mapping, neighboring-failure routing, and twelve upstream regression gates.
+
+### Changed
+
+- Updated official-project identity for the split release state: GitHub and npm `next` are rc.8 while npm `latest` remains rc.7.
+
 ## 0.5.26 - 2026-08-20
 
 ### Added
