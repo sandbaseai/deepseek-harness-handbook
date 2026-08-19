@@ -53,7 +53,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
 | Decide whether worker-thread Code Mode fits the security boundary | [Code Mode trust-boundary guide](docs/en/security/code-mode-worker-trust-boundary.md) |
-| Fix source startup reporting `--expose-internals` is required | [HMR loader-capability diagnosis](docs/en/troubleshooting/hmr-expose-internals-source-checkout.md) |
+| Fix Web, headless, or custom-profile startup reporting `--expose-internals` is required | [HMR loader-capability diagnosis](https://sandbaseai.github.io/deepseek-harness-handbook/hmr-expose-internals.html) |
 | Fix a pnpm global install that reports an installed plugin as missing | [Global native-binding resolution guide](docs/en/troubleshooting/pnpm-global-native-binding.md) |
 | Fix macOS workspace selection when the path ends in `:/` | [macOS native picker path guide](docs/en/troubleshooting/macos-workspace-picker-trailing-colon.md) |
 | Persist downstream plugin events without breaking Session resume | [Custom Session event compatibility](docs/en/plugin-development/custom-session-events.md) |

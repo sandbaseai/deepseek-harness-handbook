@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>Fix --expose-internals HMR Startup in DeepSeek Harness</title>
-  <meta name="description" content="Diagnose DeepSeek Harness source startup failures that say --expose-internals is required for HMR, without turning an internal Node flag into a permanent fix.">
+  <meta name="description" content="Diagnose DeepSeek Harness Web, headless, and custom-profile startup failures that say --expose-internals is required for HMR, without making the flag permanent.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/hmr-expose-internals.html">
@@ -32,8 +32,8 @@
         <p class="article-deck">Repair the launch environment before rewriting the launcher.</p>
         <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
       </div>
-      <div class="hmr-terminal" role="img" aria-label="pnpm dsh web reaches watch-only HMR, loader internal discovery fails, and the flag-focused error appears">
-        <small>pnpm dsh web</small>
+      <div class="hmr-terminal" role="img" aria-label="A Web, headless, or custom profile reaches watch-only HMR, loader internal discovery fails, and the flag-focused error appears">
+        <small>web · headless · custom</small>
         <strong>watch-only HMR</strong>
         <span>loader.internal → undefined</span>
         <code>--expose-internals is required</code>
@@ -41,7 +41,15 @@
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The correction</strong><span>The visible flag is one loader path. A missing or unusable native helper can produce the same final message.</span></div>
+      <div class="signal"><strong>Two corrections</strong><span>The visible flag is one loader path, not necessarily the root cause. The shared <code>runProfile()</code> fallback also means the blast radius is wider than Web.</span></div>
+
+      <h2>It is a profile-lifecycle failure, not a Web-only failure.</h2>
+      <div class="hmr-surfaces">
+        <section><small>Web</small><strong>shared HMR off</strong><span>fallback mounts</span></section>
+        <section><small>Headless</small><strong>shared HMR off</strong><span>fallback mounts before bounded exit</span></section>
+        <section><small>Custom</small><strong>no HMR service</strong><span>fallback mounts</span></section>
+        <section><small>Module reload</small><strong>HMR active</strong><span>can fail earlier</span></section>
+      </div>
 
       <h2 id="route">Start with the install topology.</h2>
       <div class="hmr-routes">
@@ -52,7 +60,7 @@
 
       <h2>Follow the capability chain.</h2>
       <div class="hmr-chain">
-        <div><strong>Profile boot</strong><small>mount watch-only HMR</small></div><i>→</i>
+        <div><strong>runProfile</strong><small>shared post-boot lifecycle</small></div><i>→</i>
         <div><strong>Loader</strong><small>discover internal ESM loader</small></div><i>→</i>
         <div><strong>Native helper</strong><small>resolve + load platform bridge</small></div><i>→</i>
         <div class="hmr-chain-fail"><strong>HMR</strong><small>throw when capability is absent</small></div>
@@ -75,12 +83,14 @@
         <section><strong>No launcher rewrite first</strong><p>Keep the repository contract intact while you locate the failed dependency path.</p></section>
         <section><strong>No destructive reinstall first</strong><p>Preserve the failing checkout and compare it with a clean sibling.</p></section>
       </div>
+      <p><strong>Do not classify headless as safe because its shared HMR row is disabled.</strong> That absence is the condition that triggers the same watch-only fallback while the root remains active.</p>
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/2699">Upstream report and investigation #2699</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/package.json">Pinned engines, pnpm, and source script</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/src/profile-boot.ts">Watch-only HMR mount</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/headless/cordis.patch.yml">Headless fallback contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/vendor/loader/src/internal.ts">Internal-loader discovery</a></li>
       </ul>
 
@@ -94,4 +104,3 @@
   <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
 </body>
 </html>
-

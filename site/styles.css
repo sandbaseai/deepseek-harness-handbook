@@ -678,6 +678,11 @@ footer div { display: flex; gap: 1.5rem; }
 .hmr-routes section:first-child { background: var(--surface-strong); }
 .hmr-routes span { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .05em; }
 .hmr-routes strong { display: block; margin-top: 2.2rem; font-size: 1.2rem; }
+.hmr-surfaces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 2rem 0; padding: 1px; background: var(--line); }
+.hmr-surfaces section { min-width: 0; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; background: var(--surface); }
+.hmr-surfaces section:nth-child(2) { background: var(--surface-strong); }
+.hmr-surfaces small { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+.hmr-surfaces span { color: var(--muted); font-size: .8rem; }
 .hmr-chain { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: .6rem; align-items: center; margin: 2rem 0; }
 .hmr-chain div { min-width: 0; min-height: 125px; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .hmr-chain i { color: var(--accent); font-style: normal; }
@@ -697,7 +702,7 @@ footer div { display: flex; gap: 1.5rem; }
 }
 
 @media (max-width: 767px) {
-  .hmr-routes, .hmr-chain, .hmr-steps, .hmr-never { grid-template-columns: 1fr; }
+  .hmr-routes, .hmr-surfaces, .hmr-chain, .hmr-steps, .hmr-never { grid-template-columns: 1fr; }
   .hmr-chain i { text-align: center; transform: rotate(90deg); }
 }
 

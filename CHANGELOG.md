@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.3 - 2026-08-19
+
+### Corrected
+
+- Expanded the HMR `--expose-internals` blast radius from a Web-only framing to every shared `runProfile()` path whose resolved composition lacks an HMR service, including headless and custom profiles.
+- Documented why disabling the shared HMR row triggers the watch-only fallback, why removing only the constructor check would move rather than repair the crash, and why silent degradation breaks the patch-watching contract.
+
 ## 0.4.2 - 2026-08-19
 
 ### Added
