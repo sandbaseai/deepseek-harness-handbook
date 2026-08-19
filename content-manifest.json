@@ -378,6 +378,11 @@
       "source": "docs/en/plugin-development/tool-schema-subset.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/integrations/acp-editor-boundary.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

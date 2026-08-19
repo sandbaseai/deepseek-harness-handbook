@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.31 - 2026-08-20
+
+### Added
+
+- A source-backed capability ledger for using the rc.8 automation-only ACP bridge with editor hosts such as Zed.
+- A bounded source-demo probe, committed-versus-token streaming trace, Session-resume boundary, trust model, and twelve editor-facing acceptance gates.
+
 ## 0.5.30 - 2026-08-20
 
 ### Added

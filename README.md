@@ -29,6 +29,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Recover when the Windows folder picker crashes or truncates a Unicode path | [Windows folder-picker crash and truncation guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html) |
 | Connect to DeepSeek through an authorized proxy or enterprise CA | [Provider egress and TLS guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html) |
 | Add an MCP server or diagnose missing MCP tools | [MCP preset and connection guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
+| Evaluate DeepSeek Harness as an ACP External Agent in an editor | [ACP editor-integration boundary](https://sandbaseai.github.io/deepseek-harness-handbook/acp-editor-boundary.html) |
 | Move Codex or Claude Code memory without losing provenance or isolation | [Sessions, Skills, and long-term memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |
 | Run Web, headless, ACP, or SDK processes concurrently without sharing a writable Session root | [Single-writer Session topology](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html) |
 | Fix `spawn bash ENOENT` after moving or renaming a workspace | [Moved-workspace recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html) |
@@ -133,7 +134,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 73 pages |
+| English | Canonical | 74 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -190,6 +191,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Integrations
 
 - [Connect MCP servers](docs/en/integrations/mcp.md)
+- [Evaluate the ACP editor-integration boundary](docs/en/integrations/acp-editor-boundary.md)
 
 ### Plugin development
 
