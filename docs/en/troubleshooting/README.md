@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 13
+content_revision: 14
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -15,6 +15,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |
+| Source `pnpm dsh web` says `--expose-internals is required for HMR service` | package-manager/native helper/HMR loader capability | Git SHA, pinned and actual pnpm versions, helper probe, direct-flag A/B |
 | Web UI does not open | process/listen address | printed URL and terminal logs |
 | Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
@@ -39,6 +40,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [`--expose-internals` HMR startup diagnosis](hmr-expose-internals-source-checkout.md)
 - [Code Mode worker-thread trust boundary](../security/code-mode-worker-trust-boundary.md)
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)

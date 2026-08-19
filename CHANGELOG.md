@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.6 - 2026-08-19
+
+### Added
+
+- A source-startup guide for `--expose-internals is required for HMR service` that separates the visible flag from package-manager and native-helper discovery failures.
+- Install-topology routing, pinned-pnpm validation, a clean-clone A/B, helper-resolution probe, and a direct-flag diagnostic that is explicitly not a durable workaround.
+
 ## 0.2.5 - 2026-08-19
 
 ### Added

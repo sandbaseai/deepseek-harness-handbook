@@ -11,6 +11,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 
 ## Start here
 
+- [Fix the HMR expose-internals startup error](https://sandbaseai.github.io/deepseek-harness-handbook/hmr-expose-internals.html): Route source, npx, and global-install topologies; verify the pinned pnpm; probe helper resolution; and use the direct Node flag only as a disposable diagnostic.
 - [Code Mode worker-thread trust boundary](https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-security-boundary.html): Separate worker reliability containment from enforceable OS isolation, inspect exposure without an escape proof, and choose native tools or a constrained outer boundary.
 - [Fix ReplaceFileW EACCES on Windows](https://sandbaseai.github.io/deepseek-harness-handbook/windows-replacefile-eacces.html): Distinguish an HMR watcher conflict from ACL denial, then stop, back up, edit, validate, restart, and roll back without exposing partial YAML.
 - [Diagnose slow TTFT](https://sandbaseai.github.io/deepseek-harness-handbook/slow-ttft.html): Split time-to-first-token into Host outbound, provider, and Host inbound intervals, then test mature Session event volume and concurrent model steps independently.

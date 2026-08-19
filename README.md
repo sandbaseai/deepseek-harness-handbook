@@ -41,6 +41,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
 | Decide whether worker-thread Code Mode fits the security boundary | [Code Mode trust-boundary guide](docs/en/security/code-mode-worker-trust-boundary.md) |
+| Fix source startup reporting `--expose-internals` is required | [HMR loader-capability diagnosis](docs/en/troubleshooting/hmr-expose-internals-source-checkout.md) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
@@ -89,7 +90,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 33 pages |
+| English | Canonical | 34 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -165,6 +166,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Diagnose slow TTFT in mature Sessions](docs/en/troubleshooting/slow-ttft-mature-sessions.md)
 - [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](docs/en/troubleshooting/windows-replacefile-eacces.md)
 - [Treat worker-thread Code Mode as host-trusted](docs/en/security/code-mode-worker-trust-boundary.md)
+- [Fix `--expose-internals` HMR startup from a source checkout](docs/en/troubleshooting/hmr-expose-internals-source-checkout.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 
 ## Repository structure
