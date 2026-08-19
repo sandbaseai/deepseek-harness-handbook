@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.36 - 2026-08-20
+
+### Added
+
+- DeepSeek Harness Install Doctor, a local browser tool that generates OS-, install-path-, and symptom-specific evidence commands.
+- Six failure routes across Windows, macOS/Linux, official npm, registry mirrors/proxies, and source checkouts, with matched success signals and guides.
+
 ## 0.5.35 - 2026-08-20
 
 ### Added

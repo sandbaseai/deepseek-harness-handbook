@@ -58,6 +58,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Recover a silent Node 24 and tsx root build](troubleshooting/node24-tsx-silent-build.md)
 - [Fix unknown prompt variables from MCP descriptions in Code Mode](troubleshooting/code-mode-unknown-prompt-variable.md)
 - [Fix npm ETARGET while installing rc.8](troubleshooting/npm-etarget-rc8.md)
+- [Generate an installation evidence plan with Install Doctor](tools/install-doctor.md)
 
 ## Learning paths
 

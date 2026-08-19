@@ -398,6 +398,11 @@
       "source": "docs/en/troubleshooting/npm-etarget-rc8.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/tools/install-doctor.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
