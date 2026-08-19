@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.9 - 2026-08-19
+
+### Corrected
+
+- Distinguished the three-second Connection readiness guard from a stream-abort timeout: rc.7 proceeds after the guard while keeping both event pumps alive.
+- Added a slow-link evidence timeline, safe remote diagnostics, and regression gates for readiness, unary RPC, stream lifecycle, and Session-history failures.
+
 ## 0.5.8 - 2026-08-19
 
 ### Corrected
