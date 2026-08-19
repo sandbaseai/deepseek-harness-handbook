@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.42 - 2026-08-20
+
+### Changed
+
+- Refreshed the repository social preview with the current 79-guide, rc.8, Install Doctor, and Failure Router value signals.
+- Connected the same 1280 by 640 asset to the README and homepage Open Graph and Twitter metadata.
+- Preserved the existing SandBase editorial identity and Agent runtime architecture diagram.
+
 ## 0.5.41 - 2026-08-20
 
 ### Changed
