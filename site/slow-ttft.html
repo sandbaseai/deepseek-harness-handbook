@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Diagnose slow DeepSeek Harness TTFT | Host, provider, Session</title>
+  <meta name="description" content="Split DeepSeek Harness time-to-first-token into Host outbound, provider, and Host inbound intervals. Test mature Sessions and subagent concurrency without guessing.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/slow-ttft.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The UI waited 50 seconds. The gateway needed two.">
+  <meta property="og:description" content="A source-backed measurement plan for mature Session and subagent TTFT degradation.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/slow-ttft.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#measure">Measure</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell ttft-article">
+    <header class="article-hero ttft-hero">
+      <div>
+        <p class="eyebrow">Performance triage</p>
+        <h1>Do not blame the model timer.</h1>
+        <p class="article-deck">Split the wait across the Host, provider, and return path.</p>
+        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+      </div>
+      <figure class="ttft-contrast" aria-label="One upstream deployment measured 49.7 second median UI TTFT and 2.1 second median gateway TTFT">
+        <div><small>UI median</small><strong>49.7s</strong><span>step start → first chunk</span></div>
+        <div><small>Gateway median</small><strong>2.1s</strong><span>matched requests</span></div>
+        <figcaption>One rc.7 report · not a universal baseline</figcaption>
+      </figure>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The test</strong><span>Same model, prompt class, and network path. Change Session size and concurrent steps independently.</span></div>
+
+      <h2 id="measure">Put four timestamps on the wait.</h2>
+      <div class="ttft-timeline">
+        <div><code>t0</code><strong>Step starts</strong><small>Harness log</small></div><span>Host out</span>
+        <div><code>t1</code><strong>Request arrives</strong><small>gateway log</small></div><span>Provider</span>
+        <div><code>t2</code><strong>First token</strong><small>gateway log</small></div><span>Host in</span>
+        <div><code>t3</code><strong>Chunk recorded</strong><small>Harness log</small></div>
+      </div>
+
+      <h2>Use an A/B ladder.</h2>
+      <ol class="ttft-ladder">
+        <li><strong>Fresh · 1 step</strong><span>baseline</span></li>
+        <li><strong>Mature · 1 step</strong><span>event volume</span></li>
+        <li><strong>Fresh · 3 / 5 / 8</strong><span>shared-process overlap</span></li>
+        <li><strong>Before / after restart</strong><span>process accumulation</span></li>
+        <li><strong>Fork / new Session</strong><span>prefix cost</span></li>
+      </ol>
+
+      <h2>Three Host pressure paths.</h2>
+      <div class="pressure-grid">
+        <section><code>append → snapshot</code><strong>Complete log copy</strong><p>The first <code>session.events</code> read after append rebuilds the immutable array.</p></section>
+        <section><code>event → token meter</code><strong>Hot observer</strong><p>Once initialized, the meter catches up after each published Session event.</p></section>
+        <section><code>fork → constructor</code><strong>Prefix validation</strong><p>Every seeded event is validated, detached or adopted, and frozen synchronously.</p></section>
+      </div>
+
+      <h2>Mitigate the measured dimension.</h2>
+      <div class="mitigation-map">
+        <section><span>Concurrency cliff</span><strong>Batch child work.</strong><p>For the Workflow worker engine, set an explicit small <code>maxConcurrentAgents</code>.</p></section>
+        <section><span>Large durable prefix</span><strong>Start clean.</strong><p>Carry a short handoff into a new conversation instead of forking the full history.</p></section>
+        <section><span>Temporary restart gain</span><strong>Keep it diagnostic.</strong><p>Capture evidence first; restart does not shrink resumed Session history.</p></section>
+        <section><span>Provider is actually slow</span><strong>Escalate with t1 → t2.</strong><p>Do not attribute gateway time to Host event processing.</p></section>
+      </div>
+
+      <h2>Similar controls are not substitutes.</h2>
+      <div class="control-strip">
+        <div><code>maxParallelToolCalls</code><span>tools inside one step</span></div>
+        <div><code>maxConcurrentAgents</code><span>one Workflow engine</span></div>
+        <div><code>maxTokens</code><span>one response output</span></div>
+        <div><code>compaction</code><span>model-visible context</span></div>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3235">Measured upstream report #3235</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/index.ts">Session snapshot and append behavior</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/token-meter/src/index.ts">Token-meter event catch-up</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/workflow/workflow-worker-thread/README.md">Workflow concurrency controls</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Bring a distribution, not one slow turn.</h2>
+        <p>The canonical guide includes the Session event counter, complete A/B ladder, source conditions, and performance incident bundle.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

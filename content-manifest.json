@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/slow-ttft-mature-sessions.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/poisoned-session-invalid-tool-json.md",
       "revision": 1,
       "translations": {}
@@ -146,7 +151,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 10,
+      "revision": 11,
       "translations": {}
     },
     {
