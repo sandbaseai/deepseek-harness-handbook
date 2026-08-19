@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 39
+content_revision: 40
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-20
 ---
 
 # DeepSeek Harness troubleshooting
@@ -29,6 +29,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
 | Chinese input receives an English answer or English Think row | user instruction / persona / provider / gateway | fresh-Session A/B, answer language, reasoning language, effective system-prompt row, and exact route |
+| Session title remains a clipped first-prompt fallback on a reasoning model | auxiliary title route / shared reasoning-text output cap | latest title source, `session/title-llm-request`, maxTokens, and terminal finish reason |
 | Web clears a prompt, the turn fails, and no user bubble appears | browser draft / Host admission / Agent inbox / Session durability | RPC outcome, composer restoration, ordered tail events, matching `user/message`, and `source.rpcId` |
 | `DeepSeek API request to ... failed` before an HTTP response | Host-to-provider network transport | deepest cause, Node version, endpoint, proxy requirement, and TLS inspection state |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
@@ -86,6 +87,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](plugin-peer-dependency-warnings.md)
 - [Control response and reasoning language](response-language-and-reasoning.md)
+- [Fix Session titles that stay on the fallback with reasoning models](session-title-reasoning-budget.md)
 - [Recover a prompt accepted before it became durable](prompt-accepted-before-durable.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [Session first-flush failure on filesystems without hard links](session-hard-link-unsupported.md)

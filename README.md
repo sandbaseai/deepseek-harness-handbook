@@ -8,7 +8,7 @@
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**78 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**79 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -71,6 +71,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Recover when a Node 24 + tsx build exits 0 but creates no artifacts | [Silent source-build recovery](https://sandbaseai.github.io/deepseek-harness-handbook/node24-tsx-silent-build.html) |
 | Fix `unknown prompt variable "{{hexagon}}"` after adding a draw.io or other MCP tool | [Code Mode tool-prose boundary](https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-unknown-prompt-variable.html) |
 | Fix npm `ETARGET` for `dsh-agent-loop@^0.1.0-rc.8` | [Registry and cache recovery](https://sandbaseai.github.io/deepseek-harness-handbook/npm-etarget-rc8.html) |
+| Session title stays on the first-prompt fallback with a reasoning model | [Auxiliary title budget diagnosis](https://sandbaseai.github.io/deepseek-harness-handbook/session-title-reasoning-budget.html) |
 | Generate exact installation evidence commands for my OS and install path | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
 | Recover an empty sidebar or unreadable Session without destroying evidence | [Route frame, sequence, and tool-call identity failures](https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html) |
 | Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
@@ -145,7 +146,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 78 pages |
+| English | Canonical | 79 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -206,6 +207,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Recover a silent Node 24 and tsx source build](docs/en/troubleshooting/node24-tsx-silent-build.md)
 - [Fix unknown prompt variables from MCP descriptions in Code Mode](docs/en/troubleshooting/code-mode-unknown-prompt-variable.md)
 - [Fix npm ETARGET while installing rc.8](docs/en/troubleshooting/npm-etarget-rc8.md)
+- [Fix Session titles that stay on the fallback with reasoning models](docs/en/troubleshooting/session-title-reasoning-budget.md)
 - [Generate an installation evidence plan with Install Doctor](docs/en/tools/install-doctor.md)
 
 ### Plugin development
