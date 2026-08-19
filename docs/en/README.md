@@ -55,6 +55,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Fix rc.8 source builds with standalone pnpm on Windows](troubleshooting/windows-standalone-pnpm-npm-execpath.md)
 - [Recover a conversation that updates before its start Match](troubleshooting/conversation-update-before-start.md)
 - [Recover a plugin materialized after pnpm exits nonzero](troubleshooting/plugin-add-nonzero-reconcile.md)
+- [Recover a silent Node 24 and tsx root build](troubleshooting/node24-tsx-silent-build.md)
 
 ## Learning paths
 
