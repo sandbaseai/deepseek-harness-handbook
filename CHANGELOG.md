@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.20 - 2026-08-20
+
+### Added
+
+- A source-backed router for pnpm peer-dependency and ignored-build warnings during plugin installation.
+- A three-layer Host/profile resolution model, singleton-safety guidance, version-mismatch handling, and twelve acceptance gates.
+
 ## 0.5.19 - 2026-08-20
 
 ### Added
