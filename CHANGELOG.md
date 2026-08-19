@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.14 - 2026-08-19
+
+### Added
+
+- A source-backed diagnosis for native-Windows Hosts that freeze during the first large-workspace `workspace-write` grant.
+- A synchronous control-plane trace, safe operator path, external-fix audit boundary, and ten repair invariants.
+
 ## 0.5.13 - 2026-08-19
 
 ### Added

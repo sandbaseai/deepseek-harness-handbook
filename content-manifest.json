@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 31,
+      "revision": 32,
       "translations": {}
     },
     {
@@ -301,6 +301,11 @@
     },
     {
       "source": "docs/en/troubleshooting/windows-minimal-preset-bash.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/windows-first-workspace-write-freeze.md",
       "revision": 1,
       "translations": {}
     }

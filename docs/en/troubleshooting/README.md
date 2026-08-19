@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 31
+content_revision: 32
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -45,6 +45,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Code Mode Skill card is complete but the model says no content was returned | nested dispatch / outer result / instructions context | `tool/code-dispatch`, outer `run_code` result, additional contexts, and next request |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Minimal preset `bash` reports terminal inspection unsupported on `win32` | preset / persistent PTY / process inspector | selected preset, native platform, tool name, and exact stderr |
+| First Windows `workspace-write` freezes Web and unrelated RPCs | synchronous ACL materialization | canonical root, tree size, first/second elapsed time, and control-plane responsiveness |
 | Windows folder picker opens but the worker exits without a result | native dialog / Node-Koffi decode / stale Host | dialog timing, Node version, exact DSH PID, and project-local native import |
 | Editing an existing Windows profile file reports `ReplaceFileW EACCES (Win32 5)` | atomic publication / HMR watcher | running Host owner, new-file A/B result, stopped-Host result, attributes, and ACL |
 | Response disappears after reload | persistence/session log | session events and configured store |
@@ -68,6 +69,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
 - [Fix Minimal preset Bash on native Windows](windows-minimal-preset-bash.md)
+- [Diagnose the first Windows workspace-write freeze](windows-first-workspace-write-freeze.md)
 - [Windows folder-picker worker crash](windows-folder-picker-worker-crash.md)
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
