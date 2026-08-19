@@ -11,6 +11,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 
 ## Start here
 
+- [DeepSeek Harness AGENTS.md scope map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html): Choose user-global, project, local-overlay, nested, direct-user, or Skill scope; understand refresh, budget behavior, and the rc.7 DSH_HOME collision.
 - [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html): Distinguish the shipped profile launcher from terminal chat, inspect compositions, run one headless task, interpret process evidence, and audit a community TUI.
 - [Windows folder-picker crash and truncation guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html): Separate Node/Koffi aborts, UTF-16LE U+XX00 path corruption, incomplete native installation, and stale ownership, then switch safely to the shipped browse backend.
 - [DeepSeek API fetch failure guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html): Separate browser ingress, Node proxy routing, enterprise CA trust, DNS/TCP transport, and provider HTTP responses without disabling TLS.

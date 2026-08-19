@@ -16,6 +16,286 @@
 }
 
 /* Streamed tool-call identity incident */
+.article-shell.agents-scope-article {
+  width: min(calc(100% - 40px), 1160px);
+  padding-top: clamp(3rem, 5vw, 4rem);
+}
+
+.agents-scope-hero {
+  display: grid;
+  grid-template-columns: .95fr 1.05fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  background:
+    linear-gradient(120deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 48%),
+    var(--surface);
+}
+
+.article-hero.agents-scope-hero h1 {
+  max-width: 11ch;
+  font-size: clamp(3rem, 5vw, 5rem);
+}
+
+.scope-stack {
+  display: grid;
+  gap: .7rem;
+  width: 100%;
+  max-width: 34rem;
+  justify-self: end;
+}
+
+.scope-stack div {
+  padding: .85rem 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.scope-stack div:nth-child(2) { margin-left: 8%; }
+.scope-stack div:nth-child(3) { margin-left: 16%; }
+.scope-stack div:nth-child(4) { margin-left: 24%; }
+
+.scope-stack small,
+.scope-stack strong {
+  display: block;
+}
+
+.scope-stack small {
+  margin-bottom: .25rem;
+  color: var(--muted);
+}
+
+.scope-stack strong {
+  overflow-wrap: anywhere;
+}
+
+.scope-map-grid {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 1rem;
+}
+
+.scope-map-grid section {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.scope-map-grid section:first-child,
+.scope-map-grid section:last-child {
+  grid-column: span 2;
+}
+
+.scope-map-grid span,
+.scope-map-grid strong,
+.scope-map-grid code {
+  display: block;
+}
+
+.scope-map-grid span {
+  margin-bottom: .75rem;
+  color: var(--muted);
+}
+
+.scope-map-grid strong {
+  font-size: 1.35rem;
+}
+
+.scope-map-grid code {
+  width: fit-content;
+  margin: .65rem 0;
+  color: var(--accent);
+}
+
+.scope-timeline {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto .8fr;
+  gap: .8rem;
+  align-items: center;
+}
+
+.scope-timeline > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  padding: 1rem;
+  border-radius: 14px;
+  background: var(--surface-strong);
+}
+
+.scope-timeline b {
+  flex-basis: 100%;
+}
+
+.scope-timeline span {
+  padding: .2rem .45rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+
+.scope-timeline i {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.scope-contrast {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 1rem;
+}
+
+.scope-contrast section {
+  padding: 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.scope-contrast strong,
+.scope-contrast span {
+  display: block;
+}
+
+.scope-contrast span {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.scope-contrast .scope-positive {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.scope-collision {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid color-mix(in srgb, #c87b35 55%, var(--line));
+  border-radius: 14px;
+  background: color-mix(in srgb, #c87b35 8%, var(--surface));
+}
+
+.scope-collision small,
+.scope-collision strong {
+  display: block;
+}
+
+.scope-collision small {
+  margin-bottom: .55rem;
+  color: var(--muted);
+}
+
+.scope-collision strong {
+  overflow-wrap: anywhere;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+}
+
+.scope-collision > span {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.scope-budget {
+  display: grid;
+  grid-template-columns: .75fr 1fr 1.35fr;
+  gap: .75rem;
+  align-items: stretch;
+}
+
+.scope-budget div {
+  padding: 1.1rem;
+  border-top: 3px solid var(--line);
+  background: var(--surface-strong);
+}
+
+.scope-budget span,
+.scope-budget strong {
+  display: block;
+}
+
+.scope-budget span {
+  margin-bottom: .6rem;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.scope-budget .budget-dropped {
+  opacity: .68;
+  border-top-color: #b75454;
+}
+
+.scope-budget .budget-kept {
+  border-top-color: var(--accent);
+}
+
+.scope-gates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .45rem 1.4rem;
+  padding: 0;
+  list-style: none;
+}
+
+.scope-gates li {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: .75rem;
+  padding: .75rem 0;
+}
+
+.scope-gates span {
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .agents-scope-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .scope-stack div:nth-child(n) { margin-left: 0; }
+
+  .scope-timeline,
+  .scope-collision {
+    grid-template-columns: 1fr;
+  }
+
+  .scope-timeline i {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+
+  .scope-collision > span {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .article-shell.agents-scope-article {
+    width: min(calc(100% - 28px), 1160px);
+  }
+
+  .scope-map-grid,
+  .scope-contrast,
+  .scope-budget,
+  .scope-gates {
+    grid-template-columns: 1fr;
+  }
+
+  .scope-map-grid section:first-child,
+  .scope-map-grid section:last-child {
+    grid-column: auto;
+  }
+}
+
 .identity-hero {
   align-items: center;
   background:

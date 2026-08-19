@@ -36,6 +36,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Find and audit a community plugin before Host execution | [Community plugin audit](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html) |
 | Choose an exact, reproducible installation topology | [Install DeepSeek Harness safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html) |
 | Create, invoke, and debug a reusable Skill | [DeepSeek Harness Skills lab](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html) |
+| Decide whether an instruction belongs in global, project, nested, local, or Skill scope | [AGENTS.md scope and precedence map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
 | Verify the official repository, package, release, and executable | [Official DeepSeek Harness identity guide](docs/en/reference/official-project-identity.md) |
 | Check current rc.7 boundaries and safer next actions | [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
@@ -107,7 +108,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 47 pages |
+| English | Canonical | 48 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -139,6 +140,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Agent patterns
 
 - [Designing an Agent](docs/en/agent-patterns/designing-an-agent.md)
+- [AGENTS.md scope and precedence](docs/en/agent-patterns/agents-md-scope.md)
 - [Skills: discovery, precedence, and invocation](docs/en/agent-patterns/skills.md)
 - [Subagents: providers, delegation, and continuation](docs/en/agent-patterns/subagents.md)
 

@@ -31,6 +31,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Connect MCP servers](integrations/mcp.md)
 - [Understand the tool execution pipeline](architecture/tool-execution-pipeline.md)
 - [Separate durable Sessions from long-term memory](architecture/sessions-vs-memory.md)
+- [Map AGENTS.md scope and precedence](agent-patterns/agents-md-scope.md)
 - [Design reusable Skills](agent-patterns/skills.md)
 - [Choose a Subagent strategy](agent-patterns/subagents.md)
 - [Build a Repository Research Agent](recipes/repository-research-agent.md)
