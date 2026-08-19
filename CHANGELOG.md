@@ -7,7 +7,7 @@ All notable handbook and publishing changes are recorded here. DeepSeek Harness 
 ### Added
 
 - The fiftieth canonical guide: a source-backed correction and safe fix for dollar-sign corruption in plugin `tapIndex` replacement strings.
-- A public `robots.txt` sitemap pointer and `TechArticle` structured data on the new search-focused guide.
+- `TechArticle` structured data on the new search-focused guide, while retaining the existing `robots.txt` sitemap discovery path.
 
 ## 0.4.9 - 2026-08-19
 
