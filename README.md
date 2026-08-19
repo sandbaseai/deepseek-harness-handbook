@@ -43,6 +43,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Create, invoke, and debug a reusable Skill | [DeepSeek Harness Skills lab](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html) |
 | Decide whether an instruction belongs in global, project, nested, local, or Skill scope | [AGENTS.md scope and precedence map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
+| Discover and manage community plugins from the DSH Web UI | [DSH Plugin Store](https://github.com/sandbaseai/dsh-plugin-store) |
 | Fix `additionalProperties`, type-array, or `oneOf` tool schema errors | [Tool schema subset guide](https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html) |
 | Distinguish the official Agent runtime from same-name API wrappers | [Official DeepSeek Harness identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html) |
 | Check current rc.7 boundaries and safer next actions | [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
