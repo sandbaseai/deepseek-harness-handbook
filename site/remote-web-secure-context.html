@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>Remote DeepSeek Harness Web access | SSH, HTTPS, trust</title>
-  <meta name="description" content="Access DeepSeek Harness Web remotely, diagnose slow event streams, and separate its three-second readiness guard from stream abortion.">
+  <title>Fix crypto.randomUUID in Remote DeepSeek Harness Web</title>
+  <meta name="description" content="Fix crypto.randomUUID is not a function in DeepSeek Harness rc.7, distinguish generic and typed RPC carriers, and choose SSH localhost or authenticated HTTPS.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Remote access is a control-plane decision">
-  <meta property="og:description" content="Keep DSH on loopback, test every boundary, and diagnose slow event streams from source-backed lifecycle evidence.">
+  <meta property="og:description" content="rc.7 fixed generic RPC UUIDs, but typed WebApiClient calls and draft attachments still require a secure origin.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Access DeepSeek Harness Web remotely","dateModified":"2026-08-19","step":[{"@type":"HowToStep","name":"Keep DSH on loopback","text":"Run the shipped Web profile on 127.0.0.1."},{"@type":"HowToStep","name":"Choose the remote boundary","text":"Use SSH local forwarding or a separately authenticated HTTPS gateway."},{"@type":"HowToStep","name":"Verify every path","text":"Test HTTP, API, WebSocket, capability scope, revocation, and isolation."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Fix crypto.randomUUID in remote DeepSeek Harness Web","dateModified":"2026-08-20","step":[{"@type":"HowToStep","name":"Identify the carrier","text":"Check secure context and whether a typed API request appears before the exception."},{"@type":"HowToStep","name":"Restore a secure origin","text":"Use SSH localhost forwarding or an authenticated HTTPS gateway."},{"@type":"HowToStep","name":"Verify every path","text":"Test typed RPC, attachments, WebSocket, capability scope, revocation, and isolation."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -44,14 +44,15 @@
     <article class="article-body">
       <div class="signal"><strong>The refusal is intentional</strong><span><code>--host 0.0.0.0</code> is blocked because the shipped Web carrier has no TLS or authentication and can reach Agent tool effects.</span></div>
 
-      <h2>rc.7 fixed compatibility, not exposure.</h2>
+      <h2>rc.7 fixed one carrier, not every carrier.</h2>
       <div class="remote-change">
-        <section><small>Before rc.7</small><strong><code>crypto.randomUUID()</code></strong><p>Core browser RPC could fail on a non-loopback plain-HTTP origin.</p></section>
-        <b aria-hidden="true">→</b>
-        <section><small>rc.7</small><strong><code>crypto.getRandomValues()</code></strong><p>Core Connection RPC no longer requires secure-context <code>randomUUID</code>.</p></section>
+        <section><small>Generic Connection RPC</small><strong><code>getRandomValues()</code></strong><p>The rc.7 fallback works on an insecure origin.</p></section>
         <b aria-hidden="true">≠</b>
-        <section class="remote-not-auth"><small>Still absent</small><strong>Authentication</strong><p>A UUID fallback never proves who is operating the shell.</p></section>
+        <section><small>Typed WebApiClient</small><strong><code>randomUUID()</code></strong><p>Host, Workspace, Session, Settings, and model calls can throw before fetch.</p></section>
+        <b aria-hidden="true">+</b>
+        <section class="remote-not-auth"><small>Draft attachment</small><strong><code>randomUUID()</code></strong><p>Image selection has a second secure-context dependency.</p></section>
       </div>
+      <aside class="remote-warning"><strong>Prove the throw happened before transport.</strong><p>If <code>crypto.randomUUID is not a function</code> appears and no matching <code>/api/host.listDirectory</code> or <code>/api/host.pickDirectory</code> request exists, typed RPC ID minting failed in the browser. A <code>403</code> response is a different trust-boundary failure.</p></aside>
 
       <h2 id="topology">Choose the operator boundary.</h2>
       <div class="remote-topologies">
@@ -106,6 +107,8 @@
       <div class="remote-router">
         <div><code>CLI refusal</code><span>startup policy</span><strong>Do not patch around it.</strong></div>
         <div><code>403</code><span>trust or capability scope</span><strong>Inspect Host, Origin, and method class.</strong></div>
+        <div><code>randomUUID + no request</code><span>typed RPC minting</span><strong>Use localhost or HTTPS.</strong></div>
+        <div><code>image-only randomUUID</code><span>draft attachment ID</span><strong>Restore a secure origin.</strong></div>
         <div><code>page only</code><span>transport split</span><strong>Test API and WebSocket separately.</strong></div>
         <div><code>~3 s timeout</code><span>unknown emitter</span><strong>Capture stack before changing the guard.</strong></div>
         <div><code>15 s helps</code><span>ordering evidence</span><strong>Inspect generations and stream lifecycle.</strong></div>
@@ -118,6 +121,9 @@
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/web-app/src/startup.ts">Intentional all-interfaces refusal</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/README.md">Trust fence and loopback-only capability contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/random-uuid.ts">rc.7 insecure-origin UUID implementation</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/apiproxy/src/fetch/client.ts#L298-L300">Typed RPC secure-context UUID call</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/ui-conversation/src/client/service.ts#L61-L68">Draft attachment UUID call</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3443">Plain-HTTP typed-RPC field report #3443</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts#L108-L151">Connection readiness guard implementation</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3413">Slow-link field report #3413</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/76">Official remote-listening discussion #76</a></li>

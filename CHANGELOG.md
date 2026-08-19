@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.25 - 2026-08-20
+
+### Changed
+
+- Corrected the rc.7 remote-Web guide: the generic Connection RPC uses an insecure-origin-safe UUID fallback, while typed `WebApiClient` calls and draft attachments still call `crypto.randomUUID()`.
+- Added carrier-specific diagnosis, no-network-request evidence, safe recovery, updated visuals, and the official plain-HTTP field report.
+
 ## 0.5.24 - 2026-08-20
 
 ### Added

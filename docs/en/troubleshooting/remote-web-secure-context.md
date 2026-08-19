@@ -1,9 +1,9 @@
 ---
 title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-20
 upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
 ---
 
@@ -22,11 +22,43 @@ This is not an unknown flag or a failed network bind. The shipped Web profile ca
 > [!WARNING]
 > `--trusted-host` is a DNS-rebinding and same-origin trust declaration. It is not user authentication. A firewall rule, private LAN, VPN route, UUID polyfill, or rewritten `Host` header also does not authenticate a caller.
 
-## What changed in rc.7
+## rc.7 fixed one UUID path, not every UUID path
 
 Earlier builds used browser-side `crypto.randomUUID()` on a core request path. A non-loopback page over plain HTTP could render static assets while RPC creation failed because that API normally requires a secure context.
 
-The current Connection carrier constructs UUIDs with `crypto.getRandomValues()`, which browsers expose on insecure origins, and has a regression test proving RPC calls no longer require secure-context `randomUUID`. Do not carry the old HTML polyfill into rc.7 as a remote-access solution.
+The rc.7 **generic Connection RPC** carrier constructs UUIDs with `crypto.getRandomValues()`, which browsers expose on insecure origins, and has a regression test proving that path no longer requires secure-context `randomUUID`.
+
+However, the Web UI also uses a typed `WebApiClient` inherited from `AbstractApiClient`. Its rc.7 `mintRpcId()` still calls `crypto.randomUUID()` before every typed unary request. That path includes `host.listDirectory`, `host.pickDirectory`, `workspace.create`, Session methods, Settings, credentials, model discovery, and other typed calls. Draft image attachment IDs also call `crypto.randomUUID()` directly.
+
+| Browser path | rc.7 UUID source | Plain HTTP on non-loopback IP |
+|---|---|---|
+| Generic Connection RPC | `randomUuid()` → `crypto.getRandomValues()` | UUID generation works |
+| Typed `WebApiClient` unary RPC | `AbstractApiClient.mintRpcId()` → `crypto.randomUUID()` | throws before `fetch()` |
+| Draft image attachment | `browserDraftAttachment()` → `crypto.randomUUID()` | throws before upload |
+
+So “the page connects” and even “generic RPC works” do not prove that workspace browsing, Settings, or draft attachments work. Do not carry an HTML UUID polyfill forward as the operational solution: use a loopback origin or trusted HTTPS. A code-level fallback fixes compatibility, but it still does not make direct remote exposure safe.
+
+### Diagnose the exact failing carrier
+
+On the failing page, capture:
+
+```js
+({
+  href: location.href,
+  secure: window.isSecureContext,
+  randomUUID: typeof crypto.randomUUID,
+  getRandomValues: typeof crypto.getRandomValues,
+})
+```
+
+Then open DevTools Network, clear it, and trigger **Add workspace** once.
+
+- `crypto.randomUUID is not a function` with **no** matching `/api/host.listDirectory` or `/api/host.pickDirectory` request means the browser threw while minting the typed RPC ID.
+- An HTTP request that reaches the server and returns `403` belongs to the Host/Origin trust or loopback-only capability boundary instead.
+- A request that stays pending or a socket that closes belongs to transport lifecycle, not UUID generation.
+- A failure only after selecting an image can belong to the separate draft-attachment ID path.
+
+The safe immediate recovery is to stop using the non-loopback HTTP origin. For one operator, use SSH local forwarding and open `http://127.0.0.1:3080`. For a browser-only deployment, use an authenticated HTTPS gateway and test capability scope independently.
 
 The security boundary did **not** disappear:
 
@@ -192,12 +224,15 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 | CLI refuses `--host 0.0.0.0` | Intentional rc.7 startup policy |
 | Tunnel connects but local port refuses | Remote DSH listener, port, or SSH forward failure |
 | Page loads but `/api` returns 403 | Host/Origin trust fence or loopback-only method |
+| `crypto.randomUUID is not a function` and no typed `/api` request appears | rc.7 typed `WebApiClient` throws while minting the RPC ID; use localhost or HTTPS |
+| Generic RPC works but Add workspace fails before network | Different UUID carriers; the generic fallback does not cover typed Host/Workspace calls |
+| Image selection alone throws `randomUUID` | Draft attachment ID path still requires a secure origin in rc.7 |
 | Core RPC works but settings do not persist | Remote browser classification and privileged capability scope |
 | Static page works but events do not stream | WebSocket or streaming gateway configuration |
 | `Signal timed out` near three seconds | Capture its stack first; the rc.7 readiness guard itself does not abort streams |
 | Raising `streamOpenTimeoutMs` changes the symptom | Timing evidence, not root-cause proof; compare connection generations and stream lifecycle |
 | Anyone on the network can open the page | Missing authentication; stop exposure immediately |
-| Old guide says to add `randomUUID` polyfill | Stale pre-rc.7 browser workaround |
+| Old guide says rc.7 removed every `randomUUID` call | Overbroad claim; inspect typed RPC and draft-attachment paths |
 
 ## Primary sources
 
@@ -208,6 +243,10 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 - [Host and origin trust implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/api-request-trust.ts)
 - [Insecure-origin UUID implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/random-uuid.ts)
 - [Regression test without secure-context `randomUUID`](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/client-apply.client.spec.ts#L284-L315)
+- [Typed RPC `mintRpcId()` still using `crypto.randomUUID()` at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/apiproxy/src/fetch/client.ts#L298-L300)
+- [rc.7 browser `WebApiClient` inherits the typed carrier without overriding UUID minting](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/web-api-client.ts)
+- [Draft attachment UUID call at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/ui-conversation/src/client/service.ts#L61-L68)
+- [Plain-HTTP typed-RPC field report #3443](https://github.com/deepseek-ai/deepseek-harness/discussions/3443)
 - [Connection readiness guard implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts#L108-L151)
 - [Readiness timeout regression test](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/connection.client.spec.ts#L215-L228)
 - [Slow-link field report #3413](https://github.com/deepseek-ai/deepseek-harness/discussions/3413)
