@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.33 - 2026-08-20
+
+### Added
+
+- A source-backed runbook for rc.8 root builds that exit zero without running under a Node 24 and `tsx` entrypoint path.
+- Positive artifact-record checks, missing-output routing, bounded recovery, direct-execution repair requirements, twelve regression gates, and an incident bundle.
+
 ## 0.5.32 - 2026-08-20
 
 ### Changed

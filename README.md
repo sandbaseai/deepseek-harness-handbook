@@ -8,7 +8,7 @@
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**74 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**75 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -65,6 +65,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix rc.8 source builds when standalone pnpm exposes `npm_execpath=pnpm.exe` | [Windows standalone-pnpm runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-standalone-pnpm.html) |
 | Recover an old Session that throws `received an update before its start Match` | [Conversation projection recovery](https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html) |
 | Recover when pnpm leaves a plugin package behind but DSH skips reconciliation | [Partial plugin install recovery](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-add-nonzero-reconcile.html) |
+| Recover when a Node 24 + tsx build exits 0 but creates no artifacts | [Silent source-build recovery](https://sandbaseai.github.io/deepseek-harness-handbook/node24-tsx-silent-build.html) |
 | Recover an empty sidebar or unreadable Session without destroying evidence | [Route frame, sequence, and tool-call identity failures](https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html) |
 | Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |
@@ -138,7 +139,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 74 pages |
+| English | Canonical | 75 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -196,6 +197,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 - [Connect MCP servers](docs/en/integrations/mcp.md)
 - [Evaluate the ACP editor-integration boundary](docs/en/integrations/acp-editor-boundary.md)
+- [Recover a silent Node 24 and tsx source build](docs/en/troubleshooting/node24-tsx-silent-build.md)
 
 ### Plugin development
 
