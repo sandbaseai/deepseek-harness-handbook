@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.23 - 2026-08-20
+
+### Changed
+
+- Expanded the official-project identity guide to distinguish the DeepSeek AI Agent runtime from unrelated same-name API wrappers.
+- Added behavior-based classification, common identity questions, search-oriented metadata, and a first-fold provenance route.
+
 ## 0.5.22 - 2026-08-20
 
 ### Added
