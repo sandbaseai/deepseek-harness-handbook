@@ -736,3 +736,43 @@ footer div { display: flex; gap: 1.5rem; }
   .identity-seal { min-width: 0; width: 100%; }
   .identity-grid, .identity-proof, .identity-routes { grid-template-columns: 1fr; }
 }
+
+.plugin-hero { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+.plugin-hero h1 { max-width: 10ch; font-size: clamp(3.2rem, 5.5vw, 5.2rem); }
+.plugin-stack { align-self: center; display: grid; gap: .5rem; min-width: 23rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.plugin-stack div { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem; border-radius: .7rem; background: var(--surface); }
+.plugin-stack small, .plugin-stack i { color: var(--muted); font-size: .78rem; }
+.plugin-stack i { text-align: center; font-style: normal; }
+.plugin-stack .plugin-stack-final { border-left: 3px solid var(--accent); background: var(--surface-strong); }
+.plugin-routes, .plugin-contract, .plugin-failures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 1.25rem 0 2rem; border: 1px solid var(--line); background: var(--line); }
+.plugin-routes section, .plugin-contract section, .plugin-failures section { min-width: 0; padding: 1.1rem; background: var(--surface); }
+.plugin-routes section:first-child { background: var(--surface-strong); }
+.plugin-routes span, .plugin-contract span { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .06em; }
+.plugin-routes strong, .plugin-contract strong, .plugin-failures strong { display: block; margin-top: 1.5rem; font-size: 1.12rem; }
+.plugin-routes p, .plugin-contract p, .plugin-failures p { color: var(--muted); }
+.plugin-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .65rem; align-items: stretch; margin: 1.25rem 0 2rem; }
+.plugin-flow section { min-width: 0; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.plugin-flow i { align-self: center; color: var(--accent); font-style: normal; }
+.plugin-flow small, .plugin-compare small { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .06em; }
+.plugin-flow strong { display: block; margin-top: .3rem; }
+.plugin-contract { grid-template-columns: repeat(4, 1fr); }
+.plugin-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: .8rem; align-items: center; margin: 1.25rem 0 2rem; }
+.plugin-compare section { min-height: 185px; padding: 1.2rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.plugin-compare section:last-child { background: var(--surface-strong); }
+.plugin-compare b { color: var(--accent); font-size: 1.6rem; }
+.plugin-compare strong { display: block; margin-top: 2rem; font-size: 1.3rem; }
+.plugin-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 1.25rem 0 2rem; padding: 1px; list-style: none; background: var(--line); }
+.plugin-steps li { min-width: 0; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1.1rem; background: var(--surface); }
+.plugin-steps strong { color: var(--accent); }
+.plugin-steps code { white-space: normal; overflow-wrap: anywhere; }
+.plugin-failures { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 900px) {
+  .plugin-hero { grid-template-columns: 1fr; }
+  .plugin-stack { min-width: 0; width: 100%; }
+}
+
+@media (max-width: 760px) {
+  .plugin-routes, .plugin-flow, .plugin-contract, .plugin-compare, .plugin-steps, .plugin-failures { grid-template-columns: 1fr; }
+  .plugin-flow i, .plugin-compare b { justify-self: center; transform: rotate(90deg); }
+}

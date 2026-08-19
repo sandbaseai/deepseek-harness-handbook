@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Verify the official project](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Check the rc.7 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Get started](docs/en/getting-started/quickstart.md)**
+**[Build your first plugin](https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html)** · **[Verify the official project](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Check the rc.7 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -25,6 +25,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
 | Verify the official repository, package, release, and executable | [Official DeepSeek Harness identity guide](docs/en/reference/official-project-identity.md) |
 | Check current rc.7 boundaries and safer next actions | [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
 | Capture the package and source revision that actually ran | [DeepSeek Harness Version Evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html) |
@@ -94,7 +95,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 35 pages |
+| English | Canonical | 39 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -147,6 +148,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Plugin development
 
+- [Build your first DeepSeek Harness plugin](docs/en/plugin-development/first-plugin.md)
 - [Custom durable Session event compatibility](docs/en/plugin-development/custom-session-events.md)
 
 ### Security

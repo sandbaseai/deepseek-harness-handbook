@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.1 - 2026-08-19
+
+### Added
+
+- A complete first-plugin lab that takes one capability from a local TypeScript module through a typed Agent tool to an installed DSH bundle.
+- A visual tutorial page, HowTo structured data, install-safe provenance checks, bundle/profile separation, acceptance evidence, and a first-failure router.
+
 ## 0.3.0 - 2026-08-19
 
 ### Added
