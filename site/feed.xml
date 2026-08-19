@@ -5,9 +5,17 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-19T14:00:00Z</updated>
+  <updated>2026-08-19T15:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry>
+    <title>Create and invoke DeepSeek Harness Skills</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html</id>
+    <updated>2026-08-19T15:00:00Z</updated>
+    <summary>Author one project Skill, route it by description, invoke it explicitly, prove compliance, and debug roots and precedence.</summary>
+  </entry>
 
   <entry>
     <title>Build your first DeepSeek Harness plugin</title>

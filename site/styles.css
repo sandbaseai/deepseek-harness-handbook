@@ -776,3 +776,44 @@ footer div { display: flex; gap: 1.5rem; }
   .plugin-routes, .plugin-flow, .plugin-contract, .plugin-compare, .plugin-steps, .plugin-failures { grid-template-columns: 1fr; }
   .plugin-flow i, .plugin-compare b { justify-self: center; transform: rotate(90deg); }
 }
+
+.skills-hero { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+.skills-hero h1 { max-width: 9ch; font-size: clamp(3.2rem, 5.5vw, 5.2rem); }
+.skills-cascade { align-self: center; display: grid; gap: .5rem; min-width: 24rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.skills-cascade div { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem; border-radius: .7rem; background: var(--surface); }
+.skills-cascade strong { max-width: 70%; overflow-wrap: anywhere; text-align: right; }
+.skills-cascade small, .skills-cascade i { color: var(--muted); font-size: .78rem; }
+.skills-cascade i { text-align: center; font-style: normal; }
+.skills-cascade .skills-cascade-final { border-left: 3px solid var(--accent); background: var(--surface-strong); }
+.skills-anatomy, .skills-failures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 1.25rem 0 2rem; border: 1px solid var(--line); background: var(--line); }
+.skills-anatomy section, .skills-failures section { min-width: 0; min-height: 180px; padding: 1.1rem; background: var(--surface); }
+.skills-anatomy span { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .06em; }
+.skills-anatomy strong, .skills-failures strong { display: block; margin-top: 2rem; font-size: 1.15rem; }
+.skills-anatomy p, .skills-failures p { color: var(--muted); }
+.skills-invoke { display: grid; grid-template-columns: 1fr auto 1fr; gap: .8rem; align-items: center; margin: 1.25rem 0 2rem; }
+.skills-invoke section { min-height: 245px; padding: 1.25rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.skills-invoke section:last-child { background: var(--surface-strong); }
+.skills-invoke small { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+.skills-invoke strong { display: block; margin-top: .4rem; font-size: 1.25rem; }
+.skills-invoke blockquote { margin: 1.4rem 0; padding-left: 1rem; border-left: 2px solid var(--accent); }
+.skills-invoke b { color: var(--accent); }
+.skills-proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 1.25rem 0 2rem; padding: 1px; list-style: none; background: var(--line); }
+.skills-proof li { min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1.1rem; background: var(--surface); }
+.skills-proof strong { color: var(--accent); font-size: 1.2rem; }
+.skills-ranks { display: grid; grid-template-columns: repeat(6, 1fr); gap: .6rem; margin: 1.25rem 0 1rem; }
+.skills-ranks section { min-width: 0; padding: .9rem; border-top: 2px solid var(--accent); background: var(--panel); }
+.skills-ranks span { display: block; color: var(--muted); font: 700 .72rem ui-monospace, monospace; }
+.skills-ranks strong { display: block; margin-top: .8rem; overflow-wrap: anywhere; font-size: .9rem; }
+.skills-failures { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 900px) {
+  .skills-hero { grid-template-columns: 1fr; }
+  .skills-cascade { min-width: 0; width: 100%; }
+  .skills-ranks { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 760px) {
+  .skills-anatomy, .skills-invoke, .skills-proof, .skills-failures { grid-template-columns: 1fr; }
+  .skills-invoke b { justify-self: center; transform: rotate(90deg); }
+  .skills-ranks { grid-template-columns: repeat(2, 1fr); }
+}
