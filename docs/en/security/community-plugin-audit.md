@@ -1,9 +1,10 @@
 ---
 title: DeepSeek Harness Community Plugin Audit
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-19
+upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
 ---
 
 # Find and install DeepSeek Harness plugins without turning discovery into trust
@@ -126,6 +127,79 @@ Read that patch and every inserted or overridden plugin row. Build an effect inv
 
 A plugin that registers a harmless-looking tool can still execute Host code during `apply()`. Review module-scope and lifecycle effects, not only the model-facing schema.
 
+### Incident: installation can replace the Agent's world
+
+An rc.7 report showed `@struktoai/mirage-dsh@0.0.1` changing the Web profile from Host-backed filesystem and shell providers to a Mirage workspace. Inspection of the exact public npm artifact, without running scripts, confirms that its declared bundle patch disables these existing rows:
+
+```yaml
+- id: fs-sandbox
+  disabled: true
+- id: bash-sandbox
+  disabled: true
+- id: pwsh-sandbox
+  disabled: true
+- id: tool-pwsh
+  disabled: true
+- id: tool-fs-search
+  disabled: true
+```
+
+It then inserts `mirage`, `mirage-fs`, and `mirage-shell`, initially with a RAM mount at `/tmp`. The effect is not merely “three more plugins.” It substitutes the services behind filesystem and shell behavior and removes Host-native search and PowerShell from the composed graph.
+
+This is an intentional design in the inspected artifact: comments in its published `cordis.patch.yml` explicitly describe the provider swap. The audit problem is that `dsh plugin add` automatically reconciles a dependency declaring `dsh.bundle.patch` into the profile's ordered bundle stack; a successful install does not present the resulting core-row diff as an approval boundary.
+
+The official composer supports this behavior by design:
+
+- profile bundles apply in manifest order over an empty root;
+- a later patch targets an existing row by `id`;
+- `disabled` can change independently of the row's plugin identity;
+- profile and home patches apply after bundle layers;
+- `--dump-config` prints both the effective tree and source-layer comments without booting plugins.
+
+Therefore, judge the **resolved Agent capability graph**, not whether a package calls itself an extension.
+
+## Detect capability drift before boot
+
+Capture both the shipped bundle baseline and the current effective profile before installation:
+
+```sh
+dsh --profile plugin-lab --dump-default-config > default-before.yml
+dsh --profile plugin-lab --dump-config > effective-before.yml
+```
+
+After adding one exact package, dump again **before booting the profile**:
+
+```sh
+dsh plugin --profile plugin-lab add <package>@<exact-version>
+dsh --profile plugin-lab --dump-config > effective-after.yml
+diff -u effective-before.yml effective-after.yml
+```
+
+Classify every changed row:
+
+| Change | Required decision |
+|---|---|
+| new row | Is the new service, tool, UI, process, or network effect expected? |
+| existing row disabled | Which Agent capability disappears, and on which platforms? |
+| provider identity replaced | Does the same tool now address a different filesystem, shell, or trust domain? |
+| existing `config` replaced | Which defaults or runtime expressions were lost? |
+| row enabled | Was dormant Host code or telemetry activated? |
+| source comment changes | Which package or user layer owns the final value? |
+
+Search by stable row IDs, not only npm package names. On rc.7, a core-capability review should at least track:
+
+```text
+fs-sandbox  tool-fs  tool-fs-search
+bash-sandbox  pwsh-sandbox  tool-bash  tool-pwsh
+sandbox  sandbox-policy  approval
+credentials  session-persistence-jsonl  attachment-local
+```
+
+Platform expressions matter. The base profile enables the Bash stack on non-Windows hosts and the PowerShell stack on Windows. A literal `disabled: true` applied later disables that row on every platform; do not infer the impact from a dump captured on only one operating system.
+
+> [!IMPORTANT]
+> Tool names can remain familiar while their backing service changes. Prove the workspace identity, path semantics, persistence, permission boundary, and subprocess environment observed by an actual disposable Agent turn.
+
 ## Gate 4: preserve a known-good profile
 
 Before installation, capture the profile state and resolved graph:
@@ -164,6 +238,14 @@ dsh plugin --profile plugin-lab add \
 
 Compare `before.yml`, `after.yml`, the manifest, lockfile, workspace build allowances, and physical installed package. Confirm that the only new bundle layer and dependency closure are the ones you expected.
 
+Do not boot when the diff contains an unexplained disable, provider replacement, credential source, network destination, or loss of a sandbox/approval row. Removal is safer than stacking an emergency override whose row configuration you have not reconstructed completely:
+
+```sh
+dsh plugin --profile plugin-lab remove <package>
+dsh --profile plugin-lab --dump-config > effective-removed.yml
+diff -u effective-before.yml effective-removed.yml
+```
+
 Install one plugin at a time. Otherwise the first failed boot cannot be attributed reliably.
 
 ## Gate 6: verify behavior and cleanup
@@ -181,6 +263,9 @@ Verify:
 7. disposal stops processes, listeners, timers, and connections;
 8. removal deletes both the dependency and bundle layer;
 9. the restored profile dump matches the known-good composition.
+10. filesystem and shell probes reach the intended workspace rather than a substitute mount.
+11. platform-native tool availability matches the pre-install baseline.
+12. approval and sandbox-denial behavior remains unchanged unless the reviewed purpose requires a documented change.
 
 Remove the candidate with:
 
@@ -219,6 +304,8 @@ Reviewer and date:
 - install scripts download or execute unpinned remote content;
 - a Git dependency requests a build allowance without a self-contained reviewed build;
 - the bundle overrides unrelated core rows without explaining why;
+- the install changes a core row but no pre-boot effective-config diff was reviewed;
+- familiar tool names now resolve to a different filesystem or shell trust domain without explicit operator approval;
 - credentials are requested through chat, committed config, or undocumented files;
 - network destinations are dynamic, hidden, or broader than the feature requires;
 - removal, disposal, or rollback behavior is absent;
@@ -230,3 +317,8 @@ Reviewer and date:
 - [Official CLI plugin-management contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/reference/README.md#plugin-management)
 - [Official package and install tutorial](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/basic/publish.md)
 - [Official plugins and lifecycle guide](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/framework/index.md)
+- [Official profile layer and row replacement contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/architecture.md)
+- [Official config-dump implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/src/dump-config.ts)
+- [Official base filesystem and shell rows](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/base/cordis.patch.yml)
+- [Published Mirage bundle patch at the inspected release](https://unpkg.com/@struktoai/mirage-dsh@0.0.1/cordis.patch.yml)
+- [Core-provider replacement report #3421](https://github.com/deepseek-ai/deepseek-harness/discussions/3421)

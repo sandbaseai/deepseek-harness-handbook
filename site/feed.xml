@@ -141,8 +141,8 @@
     <title>Audit a community DSH plugin before Host execution</title>
     <link href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html"/>
     <id>https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html</id>
-    <updated>2026-08-19T17:00:00Z</updated>
-    <summary>Separate discovery from trust, inspect exact published bytes, map Host effects, install one isolated candidate, and prove removal.</summary>
+    <updated>2026-08-19T23:45:00Z</updated>
+    <summary>Inspect exact published bytes, diff the effective Agent capability graph, detect core-provider replacement before boot, and prove removal.</summary>
   </entry>
 
   <entry>
