@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/reference/official-project-identity.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/macos-workspace-picker-trailing-colon.md",
       "revision": 1,
       "translations": {}
