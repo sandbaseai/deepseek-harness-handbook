@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.3 - 2026-08-19
+
+### Added
+
+- A macOS persistent-Bash guide for non-ASCII command corruption that later surfaces as a missing-marker timeout.
+- An evidence matrix, bounded recovery paths, a narrow serialization repair shape, and multilingual regression gates.
+
 ## 0.5.2 - 2026-08-19
 
 ### Added

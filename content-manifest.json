@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 24,
+      "revision": 25,
       "translations": {}
     },
     {
@@ -266,6 +266,11 @@
     },
     {
       "source": "docs/en/troubleshooting/openai-compatible-developer-role.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/macos-bash-nonascii-pty.md",
       "revision": 1,
       "translations": {}
     }
