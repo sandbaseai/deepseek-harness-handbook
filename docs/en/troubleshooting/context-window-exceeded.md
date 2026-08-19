@@ -1,9 +1,9 @@
 ---
 title: Fix DeepSeek Harness Context Window Exceeded Errors
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-19
 ---
 
 # Fix DeepSeek Harness context window exceeded errors
@@ -16,7 +16,16 @@ However, you requested 1048728 tokens
 (664728 in the messages, 384000 in the completion).
 ```
 
+DeepSeek production traffic can report the same capacity failure in a less obvious shape:
+
+```json
+{"message":"Input token exceed the limit (request id: ...)","type":"api_error","param":"","code":"quota_limit_reached"}
+```
+
 This is a request-budget error, not an authentication failure and not necessarily a model outage. The provider is being asked to reserve more tokens than the selected model can accept.
+
+> [!WARNING]
+> At rc.7 commit `99f6f02`, the second wording is not classified as `CONTEXT_WINDOW_EXCEEDED`. It falls through as `INVALID_REQUEST`, so automatic prune, compact, and retry recovery does not run. The provider field `quota_limit_reached` is ambiguous here; route on the full error body, not the code name alone.
 
 ## Read the error as an equation
 
@@ -34,6 +43,23 @@ The failure can therefore be fixed from either side:
 - reduce the output reservation, called `maxTokens` inside Harness;
 - reduce the input history through compaction or a new session;
 - correct inaccurate model-capacity metadata so automatic pressure handling starts early enough.
+
+## Classification decides whether recovery runs
+
+```mermaid
+flowchart LR
+  P[Provider HTTP 400] --> C{Normalized failure code}
+  C -->|CONTEXT_WINDOW_EXCEEDED| A[Automatic prune and compact]
+  A --> R[One bounded retry]
+  C -->|INVALID_REQUEST| F[Turn fails immediately]
+  F --> M[Manual recovery required]
+```
+
+The basic compaction service listens to `agent/request-error` and only enters overflow recovery when `failure.code` is exactly `CONTEXT_WINDOW_EXCEEDED`. A correct human-readable provider message is not enough if the adapter normalizes it to a different machine code.
+
+At rc.7, the shared classifier recognizes structured names such as `context_length_exceeded`, phrases such as `maximum context length`, and input that is `too large for model context`. It does not recognize DeepSeek's terse `Input token exceed the limit` wording. Both the direct DeepSeek adapter and the pi-ai route depend on this shared classifier for text-based overflow recognition.
+
+Do not globally reinterpret every `quota_limit_reached` as context overflow. Providers also use quota language for account balance and usage limits. The proposed narrow match requires `input token(s)` followed immediately by an `exceed... the limit` phrase.
 
 Do not confuse this with an output that stopped because it actually reached `maxTokens`. That case preserves the partial answer and the Web UI shows **Output token limit reached**. A context-window rejection happens before normal generation begins.
 
@@ -77,6 +103,10 @@ Reasoning tokens are not simply missing from cumulative usage: they are included
 
 Try the least destructive options in this order.
 
+### 0. Record the raw and normalized errors
+
+Before changing the Session, save the sanitized provider response body and the Harness failure code. If the body says `Input token exceed the limit` while Harness reports `INVALID_REQUEST`, you are on the rc.7 classifier gap. Repeatedly retrying the same turn cannot activate overflow recovery.
+
 ### 1. Lower the output limit
 
 In the Web UI, open the active conversation's model settings and lower the maximum output tokens. Use a value that leaves meaningful headroom rather than matching the error boundary exactly.
@@ -100,6 +130,8 @@ If the shipped profile includes the human compaction command, send:
 The command takes no arguments. It summarizes one useful balanced older span and reports the replaced history-item count and estimated tokens. It runs as a command, not as another ordinary model turn.
 
 Wait for a successful compaction result, then retry the original request once. Do not repeatedly submit the same failed prompt while the history is already over budget.
+
+If `/compact` reports `Compaction could not produce a useful summary`, the summarizer may itself be unable to read the already oversized history. Lower the active output reservation first. If that still does not create a summarizable envelope, move directly to a clean continuation rather than looping on `/compact`.
 
 ### 3. Start a clean continuation
 
@@ -188,8 +220,9 @@ Canonical provider overflow can trigger one maximal balanced head reduction and 
 - capacity metadata may be absent or inaccurate;
 - summarization can fail or fail to shrink enough;
 - `maxOverflowRetries: 0` disables overflow recovery.
+- a real overflow normalized as `INVALID_REQUEST` never reaches the recovery listener.
 
-If a tiny 152-token overflow reaches the provider despite automatic compaction, first check whether the profile actually mounts the basic compaction service and whether the selected route exposes the correct context window. Then inspect whether an explicit conversation `maxTokens` value is consuming the remaining headroom.
+If a tiny 152-token overflow reaches the provider despite automatic compaction, first compare the raw provider body with the normalized Harness failure code. Then check whether the profile mounts the basic compaction service, whether the selected route exposes the correct context window, and whether an explicit conversation `maxTokens` value consumes the remaining headroom.
 
 ## Verification checklist
 
@@ -201,6 +234,8 @@ After changing configuration or compacting, verify all of these:
 4. The context meter has meaningful headroom, not merely a few hundred tokens.
 5. One retry generates normally without `CONTEXT_WINDOW_EXCEEDED`.
 6. A longer follow-up still triggers proactive compaction before the provider boundary.
+7. A regression fixture using `Input token exceed the limit` normalizes to `CONTEXT_WINDOW_EXCEEDED`, not `QUOTA` or `INVALID_REQUEST`.
+8. A genuine monthly usage-limit message does not enter context-overflow recovery.
 
 ## Diagnostic bundle for an upstream report
 
@@ -210,6 +245,8 @@ Remove credentials, prompts, private paths, and proprietary tool output. Include
 Harness version or commit:
 Surface and profile:
 Provider and model route:
+Raw provider status, code, type, and sanitized message:
+Normalized Harness failure code:
 Provider-reported context window:
 Input/message tokens from the error:
 Requested completion tokens from the error:
@@ -223,15 +260,16 @@ Did a new empty session reproduce?:
 
 ## Source boundary
 
-This page was verified against DeepSeek Harness commit `47f943859bef60e4160492346772ded9b24f765a`.
+This page was verified against DeepSeek Harness commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`.
 
-- [Direct DeepSeek adapter configuration](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/llm/llm-deepseek/src/index.ts#L62-L102)
-- [The adapter resolves context capacity and default output tokens separately](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/llm/llm-deepseek/src/adapter.ts#L174-L197)
-- [`maxTokens` is serialized as the provider's `max_tokens`](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/llm/llm-deepseek/src/serialize.ts#L175-L187)
-- [Basic compaction policies and defaults](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/compaction/compaction-basic/README.md#config-basiccompactionconfig)
-- [Canonical overflow recovery listener](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/compaction/compaction-basic/src/index.ts#L169-L222)
-- [Human `/compact` command contract](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/compaction/command-compact/README.md)
-- [Prompt-only context-pressure projection](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/llm/token-meter/src/usage-projection.ts#L64-L203)
-- [Context meter semantics and heuristic breakdown](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/llm/token-meter/src/projection.ts#L12-L68)
+- [Shared context-overflow classifier](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm/src/error.ts)
+- [Direct DeepSeek HTTP error normalization](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/adapter.ts)
+- [pi-ai stop-reason mapping](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-pi-ai/src/stream.ts)
+- [Basic compaction policies and defaults](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/compaction/compaction-basic/README.md)
+- [Canonical overflow recovery listener](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/compaction/compaction-basic/src/index.ts)
+- [Human `/compact` command contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/compaction/command-compact/README.md)
+- [Prompt-only context-pressure projection](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/token-meter/src/usage-projection.ts)
+- [Context meter semantics and heuristic breakdown](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/token-meter/src/projection.ts)
+- [DeepSeek production wording report #3399](https://github.com/deepseek-ai/deepseek-harness/discussions/3399)
 - [Original context-window report](https://github.com/deepseek-ai/deepseek-harness/discussions/1930)
 - [Context-meter budget mismatch report](https://github.com/deepseek-ai/deepseek-harness/discussions/1937)

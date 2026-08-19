@@ -15,6 +15,44 @@
   --max: 1240px;
 }
 
+/* Context overflow classification */
+.overflow-article { width: min(calc(100% - 40px), 1160px); padding-top: clamp(2.5rem, 4vw, 3.5rem); }
+.overflow-hero { grid-template-columns: minmax(0, .9fr) minmax(520px, 1.1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; min-height: auto; padding-bottom: clamp(2rem, 3vw, 3rem); }
+.overflow-hero h1 { max-width: 680px; font-size: clamp(2.8rem, 4vw, 3.7rem); }
+.overflow-article .article-body { max-width: 940px; margin-inline: auto; }
+.overflow-trace { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .55rem; align-items: center; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.overflow-trace section { min-width: 0; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between; padding: .9rem; border-top: 2px solid var(--line); background: var(--surface); }
+.overflow-trace small, .overflow-paths small, .overflow-regression small { color: var(--muted); font: 700 .68rem ui-monospace, monospace; text-transform: uppercase; }
+.overflow-trace code, .overflow-paths code, .overflow-regression code { overflow-wrap: anywhere; }
+.overflow-trace i { color: var(--accent); font-style: normal; font-weight: 800; }
+.overflow-trace .overflow-stop { border-color: var(--accent); background: var(--surface-strong); }
+.overflow-paths { display: grid; grid-template-columns: 1fr 1.15fr; gap: .8rem; margin: 1.25rem 0 2rem; }
+.overflow-paths section { min-height: 210px; display: flex; flex-direction: column; padding: 1.15rem; border: 1px solid var(--line); border-radius: .9rem; background: var(--panel); }
+.overflow-paths strong { margin-top: 1.5rem; font-size: 1.2rem; }
+.overflow-paths p { margin-top: auto; color: var(--muted); }
+.overflow-paths .overflow-path-missed { border-top: 3px solid var(--accent); background: var(--surface-strong); }
+.overflow-evidence { display: grid; grid-template-columns: 1.2fr .8fr; gap: 1rem; margin: 1.25rem 0 2rem; }
+.overflow-evidence pre { margin: 0; }
+.overflow-evidence > div { padding: 1.2rem; border-left: 4px solid var(--accent); background: var(--surface-strong); }
+.overflow-evidence p { color: var(--muted); }
+.overflow-budget { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1.1fr; gap: .65rem; align-items: center; margin: 1.25rem 0 2rem; padding: 1rem; border: 1px solid var(--line); border-radius: .9rem; background: var(--panel); }
+.overflow-budget span, .overflow-budget strong { min-height: 85px; display: grid; place-items: center; padding: .8rem; text-align: center; background: var(--surface); }
+.overflow-budget strong { border-top: 2px solid var(--accent); background: var(--surface-strong); }
+.overflow-budget b { color: var(--accent); }
+.overflow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; margin: 1.25rem 0 2rem; padding: 0; list-style: none; }
+.overflow-steps li { min-height: 215px; display: flex; flex-direction: column; padding: 1rem; border-top: 2px solid var(--accent); background: var(--panel); }
+.overflow-steps span { color: var(--accent); font: 700 .7rem ui-monospace, monospace; }
+.overflow-steps strong { margin-top: 1.3rem; font-size: 1.12rem; }
+.overflow-steps p { margin-top: auto; color: var(--muted); font-size: .86rem; }
+.overflow-regression { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 1.25rem 0 2rem; padding: 1px; background: var(--line); }
+.overflow-regression section { min-height: 165px; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; background: var(--surface); }
+.overflow-regression section:first-child { border-top: 3px solid var(--accent); background: var(--surface-strong); }
+.overflow-gates { display: grid; grid-template-columns: repeat(3, 1fr); gap: .65rem; margin: 1.25rem 0 2rem; padding: 0; list-style: none; counter-reset: overflow-gate; }
+.overflow-gates li { min-height: 105px; padding: 1rem; border: 1px solid var(--line); background: var(--panel); counter-increment: overflow-gate; }
+.overflow-gates li::before { content: "0" counter(overflow-gate); display: block; margin-bottom: .7rem; color: var(--accent); font: 700 .68rem ui-monospace, monospace; }
+@media (max-width: 980px) { .overflow-hero { grid-template-columns: 1fr; } .overflow-trace { max-width: 780px; } .overflow-steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 760px) { .overflow-article { width: min(calc(100% - 28px), 1160px); } .overflow-hero h1 { font-size: clamp(2.55rem, 12vw, 3.4rem); } .overflow-trace, .overflow-paths, .overflow-evidence, .overflow-budget, .overflow-steps, .overflow-regression, .overflow-gates { grid-template-columns: 1fr; } .overflow-trace i, .overflow-budget b { justify-self: center; transform: rotate(90deg); } .overflow-trace section, .overflow-budget span, .overflow-budget strong { min-height: 100px; } .overflow-steps li { min-height: 165px; } }
+
 /* Streamed tool-call identity incident */
 .article-shell.agents-scope-article {
   width: min(calc(100% - 40px), 1160px);
