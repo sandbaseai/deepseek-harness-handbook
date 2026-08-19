@@ -12,13 +12,17 @@
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
-If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
+Choose one path and get to evidence quickly:
 
-**[Start in five minutes](docs/en/getting-started/quickstart.md)** · **[Prevent unexpected API charges](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html)** · **[Verify the official runtime](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)** · **[Diagnose a failure](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)**
+| Run | Debug | Build |
+|---|---|---|
+| [Five-minute quickstart](docs/en/getting-started/quickstart.md) | [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) | [First plugin lab](docs/en/plugin-development/first-plugin.md) |
+| [CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) | [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) | [MCP guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
+| [API cost boundary](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html) | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) | [Agent runtime map](docs/en/architecture/agent-runtime.md) |
 
-**Operator tools:** [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) · [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) · [Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)
+If one of these guides saves an incident or an afternoon, **[star the repository](https://github.com/sandbaseai/deepseek-harness-handbook)**. Stars help the next Agent builder find a source-backed answer instead of another unverified command list.
 
-**Live site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
+[Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
 DeepSeek Harness is more than a model wrapper. It is a composable agent runtime that connects model providers, tools, approval, sandboxing, durable sessions, subagents, and user interfaces through a plugin graph. This independent handbook explains those systems from the perspective of people building and operating agents.
 

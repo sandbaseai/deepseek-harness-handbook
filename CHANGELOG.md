@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.39 - 2026-08-20
+
+### Changed
+
+- Replaced the crowded English README action row with three task-oriented Run, Debug, and Build paths.
+- Expanded the high-traffic Simplified Chinese navigation page with transparent coverage evidence, task-based entry points, local-tool privacy notes, and a direct contribution signal.
+- Added direct Chinese navigation to Failure Router and the Session-title reasoning-budget runbook while preserving English as canonical.
+
 ## 0.5.38 - 2026-08-20
 
 ### Added
