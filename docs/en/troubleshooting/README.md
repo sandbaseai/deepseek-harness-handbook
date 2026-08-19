@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 32
+content_revision: 33
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -43,6 +43,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | `run_code` is available while relying on `read-only` or `workspace-write` | Code Mode runtime trust boundary | effective tools mode, permission mode, code runtime, and outer isolation |
 | Code Mode Skill card is complete but the model says no content was returned | nested dispatch / outer result / instructions context | `tool/code-dispatch`, outer `run_code` result, additional contexts, and next request |
+| Agent waits but question or approval card is missing | WebSocket generation / pending interaction replay | stable rpcId, socket lifecycle, mux replay, resync ordering, and Host pending registry |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Minimal preset `bash` reports terminal inspection unsupported on `win32` | preset / persistent PTY / process inspector | selected preset, native platform, tool name, and exact stderr |
 | First Windows `workspace-write` freezes Web and unrelated RPCs | synchronous ACL materialization | canonical root, tree size, first/second elapsed time, and control-plane responsiveness |
@@ -64,6 +65,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Custom plugin events and Session resume compatibility](../plugin-development/custom-session-events.md)
 - [Code Mode worker-thread trust boundary](../security/code-mode-worker-trust-boundary.md)
 - [Fix a nested Code Mode Skill that never enters model context](code-mode-skill-context.md)
+- [Recover a missing question or approval card after reconnect](missing-question-approval-after-reconnect.md)
 - [Add an MCP server and diagnose missing tools](mcp-server-not-connecting.md)
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
