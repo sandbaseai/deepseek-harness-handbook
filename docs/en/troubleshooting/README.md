@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 37
+content_revision: 38
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -28,6 +28,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
+| Chinese input receives an English answer or English Think row | user instruction / persona / provider / gateway | fresh-Session A/B, answer language, reasoning language, effective system-prompt row, and exact route |
 | `DeepSeek API request to ... failed` before an HTTP response | Host-to-provider network transport | deepest cause, Node version, endpoint, proxy requirement, and TLS inspection state |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
 | Every follow-up in one Session returns `400 ... Unterminated string` | persisted tool-call arguments | exported Session log, malformed `tool/call` seq, and fresh-Session A/B result |
@@ -83,6 +84,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Recover a Git plugin missing its built export](git-plugin-missing-dist.md)
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](plugin-peer-dependency-warnings.md)
+- [Control response and reasoning language](response-language-and-reasoning.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [`spawn bash ENOENT` after a workspace moves](workspace-moved-spawn-enoent.md)
