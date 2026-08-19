@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/getting-started/install-deepseek-harness.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/plugin-development/first-plugin.md",
       "revision": 1,
       "translations": {}

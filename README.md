@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Create a reusable Skill](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html)** · **[Build your first plugin](https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html)** · **[Verify the official project](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Route a failure](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)**
+**[Install safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html)** · **[Create a reusable Skill](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html)** · **[Build your first plugin](https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html)** · **[Route a failure](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -25,6 +25,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Choose an exact, reproducible installation topology | [Install DeepSeek Harness safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html) |
 | Create, invoke, and debug a reusable Skill | [DeepSeek Harness Skills lab](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
 | Verify the official repository, package, release, and executable | [Official DeepSeek Harness identity guide](docs/en/reference/official-project-identity.md) |
@@ -96,7 +97,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 39 pages |
+| English | Canonical | 40 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -111,6 +112,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Getting started
 
 - [What is DeepSeek Harness?](docs/en/what-is-deepseek-harness.md)
+- [Install DeepSeek Harness safely](docs/en/getting-started/install-deepseek-harness.md)
 - [Five-minute Web UI quickstart](docs/en/getting-started/quickstart.md)
 - [Python SDK quickstart](docs/en/getting-started/python-sdk.md)
 - [Headless Agent and CI](docs/en/getting-started/headless-agent.md)
