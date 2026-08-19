@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.28 - 2026-08-20
+
+### Added
+
+- A source-backed recovery guide for Sessions that fail to load with `received an update before its start Match`.
+- Surface-replacement ordering diagnostics, evidence-preserving recovery, a three-path upstream repair contract, and twelve regression gates.
+
 ## 0.5.27 - 2026-08-20
 
 ### Added
