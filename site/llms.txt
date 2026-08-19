@@ -11,6 +11,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 
 ## Start here
 
+- [DeepSeek Harness Skills guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html): Create a project Skill, understand progressive disclosure, test model and user invocation, and debug roots, precedence, policy, and hot refresh.
 - [Build your first DeepSeek Harness plugin](https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html): Load a local TypeScript module, register a typed Agent tool, package an installable bundle, inspect the profile composition, and remove it cleanly.
 - [Custom plugin Session event compatibility](https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html): Choose plugin storage by reconstruction semantics, preserve strict unknown-event refusal, and test cold resume with and without the plugin across Harness versions.
 - [Fix the HMR expose-internals startup error](https://sandbaseai.github.io/deepseek-harness-handbook/hmr-expose-internals.html): Route source, npx, and global-install topologies; verify the pinned pnpm; probe helper resolution; and use the direct Node flag only as a disposable diagnostic.

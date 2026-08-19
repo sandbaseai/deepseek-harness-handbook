@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.2 - 2026-08-19
+
+### Added
+
+- A practical Skills lab covering project-local authoring, routing descriptions, Agent-selected and user-explicit invocation, and observable compliance evidence.
+- A visual Skills page with progressive-disclosure anatomy, discovery ranks, monorepo root behavior, invocation policy, hot refresh, and missing-Skill diagnosis.
+
 ## 0.3.1 - 2026-08-19
 
 ### Added
