@@ -9,12 +9,21 @@ const externalLinks = new Set();
 const checkExternalLinks = process.argv.includes('--external-links');
 const allowedStatuses = new Set(['canonical', 'reviewed', 'draft']);
 const pagesOrigin = 'https://sandbaseai.github.io/deepseek-harness-handbook/';
+const repositoryBlobOrigin = 'https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/';
 const siteDirectory = join(root, 'site');
 
 function verifyCanonicalSiteTarget(sourcePath, target) {
   const localPath = target.slice(pagesOrigin.length).split('#')[0].split('?')[0] || 'index.html';
   const resolvedTarget = normalize(join(siteDirectory, localPath));
   if (!existsSync(resolvedTarget)) errors.push(`Broken canonical site link in ${sourcePath}: ${target}`);
+}
+
+function verifyCanonicalRepositoryTarget(sourcePath, target) {
+  const localPath = decodeURIComponent(target.slice(repositoryBlobOrigin.length).split('#')[0].split('?')[0]);
+  const resolvedTarget = normalize(join(root, localPath));
+  if (!resolvedTarget.startsWith(`${root}/`) || !existsSync(resolvedTarget)) {
+    errors.push(`Broken canonical repository link in ${sourcePath}: ${target}`);
+  }
 }
 
 function read(relativePath) {
@@ -90,6 +99,10 @@ for (const absolutePath of allMarkdown) {
         verifyCanonicalSiteTarget(absolutePath.slice(root.length + 1), target);
         continue;
       }
+      if (target.startsWith(repositoryBlobOrigin)) {
+        verifyCanonicalRepositoryTarget(absolutePath.slice(root.length + 1), target);
+        continue;
+      }
       externalLinks.add(target.split('#')[0]);
       continue;
     }
@@ -113,6 +126,10 @@ if (existsSync(siteDirectory)) {
       if (/^https?:/.test(target)) {
         if (target.startsWith(pagesOrigin)) {
           verifyCanonicalSiteTarget(absolutePath.slice(root.length + 1), target);
+          continue;
+        }
+        if (target.startsWith(repositoryBlobOrigin)) {
+          verifyCanonicalRepositoryTarget(absolutePath.slice(root.length + 1), target);
           continue;
         }
         externalLinks.add(target.split('#')[0]);
