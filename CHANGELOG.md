@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.3 - 2026-08-19
+
+### Added
+
+- An installation-topology guide for exact-version npm execution, project-local repeatability, official source checkouts, and global-command diagnosis.
+- A visual installation chooser that separates executable identity, profile state, and workspace reach before the first run.
+
 ## 0.3.2 - 2026-08-19
 
 ### Added

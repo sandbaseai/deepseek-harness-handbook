@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Install DeepSeek Harness safely](getting-started/install-deepseek-harness.md)
 - [Build your first DeepSeek Harness plugin](plugin-development/first-plugin.md)
 - [What is DeepSeek Harness?](what-is-deepseek-harness.md)
 - [Run the Web UI](getting-started/quickstart.md)
