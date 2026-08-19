@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/hmr-expose-internals-source-checkout.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/security/code-mode-worker-trust-boundary.md",
       "revision": 1,
       "translations": {}
@@ -161,7 +166,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 13,
+      "revision": 14,
       "translations": {}
     },
     {

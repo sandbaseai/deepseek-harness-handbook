@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Fix --expose-internals HMR Startup in DeepSeek Harness</title>
+  <meta name="description" content="Diagnose DeepSeek Harness source startup failures that say --expose-internals is required for HMR, without turning an internal Node flag into a permanent fix.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/hmr-expose-internals.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The flag is a clue, not the fix.">
+  <meta property="og:description" content="Route package-manager, helper-resolution, and HMR startup evidence before changing the source launcher.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/hmr-expose-internals.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#route">Route</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell hmr-article">
+    <header class="article-hero hmr-hero">
+      <div>
+        <p class="eyebrow">Source startup diagnosis</p>
+        <h1>The flag is a clue, not the fix.</h1>
+        <p class="article-deck">Repair the launch environment before rewriting the launcher.</p>
+        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+      </div>
+      <div class="hmr-terminal" role="img" aria-label="pnpm dsh web reaches watch-only HMR, loader internal discovery fails, and the flag-focused error appears">
+        <small>pnpm dsh web</small>
+        <strong>watch-only HMR</strong>
+        <span>loader.internal → undefined</span>
+        <code>--expose-internals is required</code>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The correction</strong><span>The visible flag is one loader path. A missing or unusable native helper can produce the same final message.</span></div>
+
+      <h2 id="route">Start with the install topology.</h2>
+      <div class="hmr-routes">
+        <section><span>Source</span><strong><code>pnpm dsh web</code></strong><p>Check Git SHA, Node, the repository pin, and the pnpm binary actually used.</p></section>
+        <section><span>Published</span><strong><code>npx @deepseek-ai/dsh web</code></strong><p>Check the resolved package version and install cache.</p></section>
+        <section><span>Global</span><strong><code>pnpm add -g</code></strong><p>Treat the virtual-store dependency layout as separate evidence.</p></section>
+      </div>
+
+      <h2>Follow the capability chain.</h2>
+      <div class="hmr-chain">
+        <div><strong>Profile boot</strong><small>mount watch-only HMR</small></div><i>→</i>
+        <div><strong>Loader</strong><small>discover internal ESM loader</small></div><i>→</i>
+        <div><strong>Native helper</strong><small>resolve + load platform bridge</small></div><i>→</i>
+        <div class="hmr-chain-fail"><strong>HMR</strong><small>throw when capability is absent</small></div>
+      </div>
+
+      <h2>Run a four-step source A/B.</h2>
+      <ol class="hmr-steps">
+        <li><strong>Versions</strong><span>Compare <code>packageManager</code>, <code>corepack pnpm</code>, and shell <code>pnpm</code>.</span></li>
+        <li><strong>Fresh clone</strong><span>Install with the pinned manager in a disposable sibling checkout.</span></li>
+        <li><strong>Helper probe</strong><span>Resolve from <code>vendor/loader</code>, not the repository root.</span></li>
+        <li><strong>Flag probe</strong><span>Use direct <code>node --expose-internals …</code> once; never make it permanent.</span></li>
+      </ol>
+
+      <h2>One diagnostic command, one boundary.</h2>
+      <pre><code>node --expose-internals --import tsx/esm apps/cli/src/bin.ts web</code></pre>
+      <p>If this changes the result, the loader-internal discovery chain is implicated. It does not prove the flag is a supported deployment fix.</p>
+
+      <div class="hmr-never">
+        <section><strong>No permanent <code>NODE_OPTIONS</code></strong><p>The supported Node line may reject the flag there, and the loader reads <code>process.execArgv</code>.</p></section>
+        <section><strong>No launcher rewrite first</strong><p>Keep the repository contract intact while you locate the failed dependency path.</p></section>
+        <section><strong>No destructive reinstall first</strong><p>Preserve the failing checkout and compare it with a clean sibling.</p></section>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/2699">Upstream report and investigation #2699</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/package.json">Pinned engines, pnpm, and source script</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/src/profile-boot.ts">Watch-only HMR mount</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/vendor/loader/src/internal.ts">Internal-loader discovery</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the complete startup worksheet.</h2>
+        <p>The canonical guide includes source, npx, global-install routing, exact probes, recovery choices, unsafe workarounds, and a minimal report.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
+
