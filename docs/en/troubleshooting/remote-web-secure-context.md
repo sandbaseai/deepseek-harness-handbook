@@ -1,7 +1,7 @@
 ---
 title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-19
 upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
@@ -129,6 +129,62 @@ Use a disposable workspace and a test principal. Record every result.
 - closing the gateway does not change the DSH listener from loopback;
 - logs identify the authenticated principal without recording secrets or full prompts by default.
 
+## Do not confuse the 3-second readiness guard with a stream abort
+
+An rc.6 field report attributes `Signal timed out` on a slow Tailscale or Cloudflare path to `streamOpenTimeoutMs: 3_000`. The symptom is real and the timing is useful evidence, but the pinned rc.7 implementation does **not** abort `/api/events.mux` or `/api/events.host` when that timer wins.
+
+The Connection controller starts both stream pumps, then waits for three readiness signals:
+
+1. `host.describe()` must return successfully;
+2. the mux stream should invoke `onOpen`;
+3. the Host stream should invoke `onOpen`.
+
+It races the two stream-open callbacks against a three-second sleep. If the sleep wins, the controller proceeds to `connected` after `host.describe()`; it leaves the generation and both pumps alive so late stream openings can still deliver events. The timer's `AbortController` only cancels the sleep when the streams open early. It is not the controller passed into either stream.
+
+```text
+start generation
+  ├─ open events.mux ───────────────┐
+  ├─ open events.host ──────────────┼─ keep pumping until stream loss/stop
+  └─ host.describe + [both open OR 3 s guard]
+                              └──────→ connected
+```
+
+This distinction changes the investigation. Raising the value to 15 seconds can change ordering and may hide a race elsewhere, but it does not prove that the three-second guard killed a healthy connection. Also, `Signal timed out` does not occur in the pinned Connection source, so capture the exact browser stack and the package/build identity that emits it before assigning ownership.
+
+### Measure the opening path
+
+Use browser Network timing and gateway logs to build one timeline for the same request ID or timestamp window:
+
+| Segment | Evidence to capture | A slow result points toward |
+|---|---|---|
+| DNS + TCP + TLS | browser timing, tunnel relay status | network path or certificate handshake |
+| Identity boundary | redirect chain, authentication duration | gateway or identity provider |
+| Upgrade / first headers | WebSocket status and time to first headers | buffering, upgrade forwarding, backend reachability |
+| `host.describe` | request start, response, status | unary RPC path, trust fence, or Host health |
+| `events.mux` + `events.host` | open callback, first frame, close code | streaming carrier or proxy lifecycle |
+| Session history | request/stream correlation and first render | downstream state load rather than stream opening |
+
+Do not use successful HTML delivery as evidence that the event streams are healthy. Do not use a longer timeout as the only acceptance test.
+
+### Safe operational response
+
+- Prefer SSH local forwarding for one operator; it removes the remote gateway from the browser-to-DSH stream path.
+- For an authenticated HTTPS gateway, verify WebSocket upgrades end to end, disable response buffering for streaming routes, and preserve close/error semantics.
+- Compare the same disposable Session on loopback and through the tunnel. If only the tunnel fails, keep the gateway and relay timings with the report.
+- Record the exact DSH version, built asset hash, browser, tunnel mode, direct-versus-relay state, console stack, stream status, and close code.
+- Avoid editing generated JavaScript or silently increasing a bundled constant. A reproducible configuration experiment belongs in a source build with the changed value recorded.
+
+### Regression matrix for a durable fix
+
+If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-second stream openings on both direct and relayed paths. Prove that:
+
+- a late `onOpen` does not create a second connection generation;
+- an early open cancels only the readiness sleep;
+- stop or stream failure cancels both pumps and leaves no orphan connection;
+- `host.describe` failure never becomes connected merely because the timer elapsed;
+- history loading, reconnect, cancellation, and first live event remain ordered;
+- diagnostics distinguish readiness-guard expiry, unary failure, stream close, and downstream history failure.
+
 ## Route common symptoms
 
 | Symptom | First boundary |
@@ -138,6 +194,8 @@ Use a disposable workspace and a test principal. Record every result.
 | Page loads but `/api` returns 403 | Host/Origin trust fence or loopback-only method |
 | Core RPC works but settings do not persist | Remote browser classification and privileged capability scope |
 | Static page works but events do not stream | WebSocket or streaming gateway configuration |
+| `Signal timed out` near three seconds | Capture its stack first; the rc.7 readiness guard itself does not abort streams |
+| Raising `streamOpenTimeoutMs` changes the symptom | Timing evidence, not root-cause proof; compare connection generations and stream lifecycle |
 | Anyone on the network can open the page | Missing authentication; stop exposure immediately |
 | Old guide says to add `randomUUID` polyfill | Stale pre-rc.7 browser workaround |
 
@@ -150,4 +208,7 @@ Use a disposable workspace and a test principal. Record every result.
 - [Host and origin trust implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/api-request-trust.ts)
 - [Insecure-origin UUID implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/random-uuid.ts)
 - [Regression test without secure-context `randomUUID`](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/client-apply.client.spec.ts#L284-L315)
+- [Connection readiness guard implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts#L108-L151)
+- [Readiness timeout regression test](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/connection.client.spec.ts#L215-L228)
+- [Slow-link field report #3413](https://github.com/deepseek-ai/deepseek-harness/discussions/3413)
 - [Official remote-listening discussion #76](https://github.com/deepseek-ai/deepseek-harness/discussions/76)

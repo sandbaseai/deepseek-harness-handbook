@@ -101,8 +101,8 @@
     <title>Choose a remote DeepSeek Harness Web access boundary</title>
     <link href="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html"/>
     <id>https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html</id>
-    <updated>2026-08-19T22:00:00Z</updated>
-    <summary>Keep DSH on loopback, choose SSH local forwarding or an authenticated HTTPS gateway, and test denial before Agent access.</summary>
+    <updated>2026-08-19T23:30:00Z</updated>
+    <summary>Keep DSH on loopback and distinguish the three-second readiness guard from stream abortion when diagnosing slow remote links.</summary>
   </entry>
 
   <entry>

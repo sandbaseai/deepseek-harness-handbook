@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>Remote DeepSeek Harness Web access | SSH, HTTPS, trust</title>
-  <meta name="description" content="Access DeepSeek Harness Web remotely without confusing reachability, HTTPS, authentication, API trust, or loopback-only capabilities.">
+  <meta name="description" content="Access DeepSeek Harness Web remotely, diagnose slow event streams, and separate its three-second readiness guard from stream abortion.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Remote access is a control-plane decision">
-  <meta property="og:description" content="Keep DSH on loopback. Choose SSH localhost or an authenticated HTTPS gateway. Test every boundary.">
+  <meta property="og:description" content="Keep DSH on loopback, test every boundary, and diagnose slow event streams from source-backed lifecycle evidence.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -71,6 +71,27 @@
       </div>
       <p>A proxy can rewrite headers, but that does not create authentication. If it defeats the loopback fence, the proxy becomes the real security boundary and must be reviewed and tested accordingly.</p>
 
+      <h2>A three-second guard is not a stream guillotine.</h2>
+      <p>A slow-link report connected <code>Signal timed out</code> to <code>streamOpenTimeoutMs: 3_000</code>. The timing is evidence, but the pinned rc.7 source shows a different lifecycle: the guard bounds readiness waiting and does not abort either event pump.</p>
+      <div class="remote-latency" role="img" aria-label="Connection starts the host description call and both event streams together. It becomes connected after both streams open or the three-second readiness guard elapses, while the event pumps remain alive.">
+        <section><small>t + 0</small><strong>Start generation</strong><span><code>describe</code> + two event pumps</span></section>
+        <b aria-hidden="true">→</b>
+        <section><small>readiness</small><strong>Both open or 3 s</strong><span>The timer only bounds waiting.</span></section>
+        <b aria-hidden="true">→</b>
+        <section class="remote-latency-live"><small>after guard</small><strong>Pumps stay alive</strong><span>Late opens can still carry events.</span></section>
+      </div>
+      <aside class="remote-warning"><strong>Capture the emitter.</strong><p><code>Signal timed out</code> is not present in the pinned Connection source. Record the browser stack, build identity, stream status, close code, and gateway timing before assigning the failure to this guard.</p></aside>
+
+      <h2>Measure one opening timeline.</h2>
+      <div class="remote-timing">
+        <div><code>01</code><strong>DNS · TCP · TLS</strong><span>Network or certificate handshake</span></div>
+        <div><code>02</code><strong>Identity</strong><span>Redirect and authentication duration</span></div>
+        <div><code>03</code><strong>Upgrade</strong><span>Status and first response headers</span></div>
+        <div><code>04</code><strong>Streams</strong><span>Open, first frame, close code</span></div>
+        <div><code>05</code><strong>History</strong><span>Correlation to first Session render</span></div>
+      </div>
+      <p>Compare the same disposable Session on loopback and through the relay. A longer timeout changing the symptom is a useful experiment, not root-cause proof.</p>
+
       <h2 id="verify">Prove denial before success.</h2>
       <ol class="remote-tests">
         <li><strong>Anonymous HTTP</strong><span>Reject or redirect before DSH.</span></li>
@@ -86,6 +107,8 @@
         <div><code>CLI refusal</code><span>startup policy</span><strong>Do not patch around it.</strong></div>
         <div><code>403</code><span>trust or capability scope</span><strong>Inspect Host, Origin, and method class.</strong></div>
         <div><code>page only</code><span>transport split</span><strong>Test API and WebSocket separately.</strong></div>
+        <div><code>~3 s timeout</code><span>unknown emitter</span><strong>Capture stack before changing the guard.</strong></div>
+        <div><code>15 s helps</code><span>ordering evidence</span><strong>Inspect generations and stream lifecycle.</strong></div>
         <div><code>anyone gets in</code><span>missing identity</span><strong>Stop exposure immediately.</strong></div>
       </div>
 
@@ -95,10 +118,12 @@
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/web-app/src/startup.ts">Intentional all-interfaces refusal</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/README.md">Trust fence and loopback-only capability contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/random-uuid.ts">rc.7 insecure-origin UUID implementation</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts#L108-L151">Connection readiness guard implementation</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3413">Slow-link field report #3413</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/76">Official remote-listening discussion #76</a></li>
       </ul>
 
-      <section class="article-cta"><h2>Keep the denial tests.</h2><p>The full runbook covers SSH lifecycle, authenticated gateway ownership, remote capability differences, revocation, isolation, and symptom routing.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/remote-web-secure-context.md">Read the full runbook</a></section>
+      <section class="article-cta"><h2>Keep the denial and latency tests.</h2><p>The full runbook covers SSH lifecycle, gateway ownership, remote capability differences, evidence capture, stream readiness, revocation, and regression gates.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/remote-web-secure-context.md">Read the full runbook</a></section>
     </article>
   </main>
   <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
