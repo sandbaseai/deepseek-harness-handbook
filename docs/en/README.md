@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Choose a memory architecture and migration path](architecture/sessions-vs-memory.md)
 - [Keep concurrent Session roots single-writer](operations/single-writer-session-roots.md)
 - [Recover `spawn bash ENOENT` after a workspace moves](troubleshooting/workspace-moved-spawn-enoent.md)
 - [Upgrade and roll back safely](getting-started/upgrade-and-rollback.md)

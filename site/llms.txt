@@ -11,6 +11,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 
 ## Start here
 
+- [DeepSeek Harness memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html): Separate Sessions, compaction, Skills, application records, and cross-session memory; migrate Codex or Claude Code state with provenance, isolation, and rollback evidence.
 - [Keep DeepSeek Harness Session roots single-writer](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html): Isolate concurrent Web, headless, ACP, SDK, service, and test processes or serialize shared-history ownership handoffs.
 - [Recover spawn ENOENT after a workspace moves](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html): Prove the shell executable exists, test the exact Session cwd, and choose a recovery that preserves workspace identity.
 - [Upgrade and roll back DeepSeek Harness](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html): Capture the known-good executable, profile, config, and Sessions; test an exact target in isolation; pass compatibility gates; and prove rollback.

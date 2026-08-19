@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>DeepSeek Harness memory: Sessions, Skills, migration</title>
+  <meta name="description" content="Separate DeepSeek Harness Sessions, Skills, compaction, application records, and cross-session memory. Migrate Codex or Claude Code memory with provenance and isolation tests.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Session remembers. Memory selects.">
+  <meta property="og:description" content="A source-backed map for choosing, migrating, and testing memory in DeepSeek Harness.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness memory: Sessions, Skills, migration","description":"Choose the correct DeepSeek Harness state mechanism and migrate cross-session memory with provenance, isolation, and rollback evidence.","dateModified":"2026-08-19","author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="#choose">Choose</a><a href="#migrate">Migrate</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell memory-article">
+    <header class="article-hero memory-hero">
+      <div class="reveal">
+        <p class="eyebrow">Memory architecture</p>
+        <h1>A Session remembers. Memory selects.</h1>
+        <p class="article-deck">Move the right state across Agent boundaries without turning old text into invisible policy.</p>
+        <div class="hero-actions"><a class="button primary" href="#choose">Choose the state</a><a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/sessions-vs-memory.md">Full guide</a></div>
+      </div>
+      <div class="memory-orbit reveal delay-1" role="img" aria-label="One live Session is surrounded by separate state systems for Skills, application records, and cross-session memory">
+        <div class="memory-core"><small>Current interaction</small><strong>Session</strong><span>ordered events</span></div>
+        <div class="memory-satellite memory-skill"><small>Always apply</small><strong>Skill</strong></div>
+        <div class="memory-satellite memory-recall"><small>Select and recall</small><strong>Memory</strong></div>
+        <div class="memory-satellite memory-record"><small>Never infer</small><strong>Record</strong></div>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The shipped boundary</strong><span>rc.7 includes durable Sessions and default-off MCP memory examples. It does not ship a generic <code>ctx.memory</code> service.</span></div>
+
+      <h2 id="choose">Give each kind of state one owner.</h2>
+      <div class="memory-owners">
+        <section><small>Reopen this interaction</small><strong>Session</strong><p>Replay ordered Agent events, tool calls, results, and model-visible history.</p><span>same conversation</span></section>
+        <section><small>Reduce context pressure</small><strong>Compaction</strong><p>Replace an older model-visible range while preserving the durable event history.</p><span>same Session</span></section>
+        <section><small>Apply on every run</small><strong>Skill</strong><p>Mount stable operating instructions deterministically. Do not hope retrieval finds policy.</p><span>instruction scope</span></section>
+        <section><small>Reuse selected facts</small><strong>Memory</strong><p>Retrieve scoped preferences or observations through a visible tool or assembly policy.</p><span>across Sessions</span></section>
+        <section><small>Preserve contractual truth</small><strong>App record</strong><p>Keep audit and business facts outside model memory and independent of recall.</p><span>system of record</span></section>
+      </div>
+
+      <h2 id="migrate">Migrate semantics, not folders.</h2>
+      <div class="memory-migration" role="img" aria-label="Codex and Claude Code source artifacts are classified, imported with provenance, and routed to separate DeepSeek Harness state owners">
+        <div class="memory-source"><small>Source</small><strong>Codex / Claude Code</strong><span>instructions</span><span>preferences</span><span>transcripts</span><span>tool config</span></div>
+        <b aria-hidden="true">→</b>
+        <div class="memory-gate"><small>Import gate</small><strong>Classify + hash</strong><code>source_path</code><code>source_digest</code><code>destination_scope</code><code>record_id</code></div>
+        <b aria-hidden="true">→</b>
+        <div class="memory-target"><small>Destination</small><strong>DSH owners</strong><span>Skill</span><span>Memory</span><span>Archive</span><span>Profile / MCP</span></div>
+      </div>
+      <aside class="memory-warning"><strong>Never bulk-inject the archive.</strong><p>Preserve source files, import into a disposable namespace, and retrieve only scoped records with visible provenance.</p></aside>
+
+      <h2>Make one record survive two independent Sessions.</h2>
+      <ol class="memory-test">
+        <li><strong>Save</strong><span>Session A writes a harmless nonce and returns a durable record ID.</span></li>
+        <li><strong>Recall</strong><span>Fresh Session B finds it through a visible search operation.</span></li>
+        <li><strong>Isolate</strong><span>Principal C cannot retrieve the record.</span></li>
+        <li><strong>Repeat</strong><span>The same import digest creates no duplicate.</span></li>
+        <li><strong>Distrust</strong><span>Instruction-like memory remains quoted data, never active policy.</span></li>
+      </ol>
+
+      <h2>Audit the plugin as Host code.</h2>
+      <div class="memory-audit">
+        <div><code>01</code><strong>Identity</strong><span>Repository, publisher, tarball, version</span></div>
+        <div><code>02</code><strong>Effects</strong><span>Scripts, network, files, injected services</span></div>
+        <div><code>03</code><strong>Surface</strong><span>Where recall enters the model request</span></div>
+        <div><code>04</code><strong>Removal</strong><span>Cold restart and Session load without it</span></div>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/README.md">Official Session contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/examples/mcp-memory/README.md">Official default-off MCP memory examples</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/tree/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/mcp/mcp-client">Official MCP client</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/14">Community migration question and alternatives</a></li>
+      </ul>
+
+      <section class="article-cta"><h2>Keep the acceptance test.</h2><p>The full guide includes ownership boundaries, idempotent migration fields, unknown outcomes, failure routing, and a community-plugin release gate.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/sessions-vs-memory.md">Read the full guide</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

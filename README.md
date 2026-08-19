@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Keep Session roots single-writer](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html)** · **[Fix moved-workspace ENOENT](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html)** · **[Upgrade and roll back](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html)** · **[Audit community plugins](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html)**
+**[Choose a memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html)** · **[Keep Session roots single-writer](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html)** · **[Fix moved-workspace ENOENT](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html)** · **[Upgrade and roll back](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -25,6 +25,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Move Codex or Claude Code memory without losing provenance or isolation | [Sessions, Skills, and long-term memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |
 | Run Web, headless, ACP, or SDK processes concurrently without sharing a writable Session root | [Single-writer Session topology](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html) |
 | Fix `spawn bash ENOENT` after moving or renaming a workspace | [Moved-workspace recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html) |
 | Upgrade an exact runtime and preserve a proven rollback | [Upgrade and rollback guide](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html) |
