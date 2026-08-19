@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Prevent concurrent DeepSeek Harness Session writers</title>
+  <meta name="description" content="Keep DeepSeek Harness Session roots single-writer, isolate concurrent Web and headless processes, and preserve evidence after suspected JSONL interleaving.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="One writable Session root. One live owner.">
+  <meta property="og:description" content="Separate concurrent Harness processes before stale cursors interleave one append-only Session log.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/session-writer-collision.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Keep DeepSeek Harness Session roots single-writer","step":[{"@type":"HowToStep","name":"Inventory writers","text":"Record every process, profile, home, persistence root, and resumable Session ID."},{"@type":"HowToStep","name":"Separate concurrent owners","text":"Assign each simultaneously live Harness process an isolated DSH_HOME or persistence root."},{"@type":"HowToStep","name":"Serialize shared-history handoffs","text":"Stop, flush, and verify the prior owner exited before the next process cold-loads."},{"@type":"HowToStep","name":"Preserve overlap evidence","text":"Stop all writers and inspect only offline copies after a suspected interleave."}]}</script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./session-log-durability.html">Sessions</a><a href="#topology">Topology</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell writer-article">
+    <header class="article-hero writer-hero">
+      <div class="reveal">
+        <p class="eyebrow">Session ownership</p>
+        <h1>One writable root. One live owner.</h1>
+        <p class="article-deck">Isolate concurrent Harness processes before stale cursors meet one append-only log.</p>
+        <div class="hero-actions"><a class="button primary" href="#topology">Choose a topology</a><a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/single-writer-session-roots.md">Full runbook</a></div>
+      </div>
+      <figure class="writer-visual reveal delay-1"><img src="./session-writer-collision.webp" width="1200" height="800" alt="Two agent runtime writers collide while appending one record stack, contrasted with isolated writers and separate stacks"></figure>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The precise risk</strong><span>Sharing a root is not instant corruption. Two independent live processes reaching the same Session artifact is the dangerous condition.</span></div>
+
+      <h2>Process-local safety stops at the process boundary.</h2>
+      <div class="writer-chain" role="img" aria-label="Process A and process B each hold a private cursor, then both append to one shared JSONL artifact, causing a later cold-load refusal">
+        <section><small>Process A</small><strong>cursor N</strong><span>private coordinator</span></section>
+        <section><small>Process B</small><strong>cursor N</strong><span>private coordinator</span></section>
+        <b aria-hidden="true">→</b>
+        <section class="writer-collision"><small>Shared artifact</small><strong>duplicate seq</strong><span>write may look successful</span></section>
+        <b aria-hidden="true">→</b>
+        <section><small>Next cold load</small><strong>refused</strong><span>committed-region gap</span></section>
+      </div>
+
+      <h2 id="topology">Choose concurrency or shared history.</h2>
+      <div class="writer-topologies">
+        <section><span>Concurrent surfaces</span><strong>Separate writable roots.</strong><p>Give Web, headless, ACP, SDK, and tests distinct homes or persistence roots.</p><code>DSH_HOME="$HOME/.dsh-web"</code></section>
+        <section><span>Shared history</span><strong>Serialize ownership.</strong><p>Stop, flush, verify exit, then let the next owner cold-load the Session.</p><code>owner A stops → owner B starts</code></section>
+      </div>
+
+      <pre><code>install -d -m 700 "$HOME/.dsh-web" "$HOME/.dsh-headless"
+
+DSH_HOME="$HOME/.dsh-web" npx @deepseek-ai/dsh web
+DSH_HOME="$HOME/.dsh-headless" npx @deepseek-ai/dsh --profile headless "inspect the repository"</code></pre>
+
+      <h2>Ports do not separate storage.</h2>
+      <div class="writer-facts">
+        <div><strong>Different port</strong><span>may still resolve the same <code>~/.dsh</code></span></div>
+        <div><strong>Different profile</strong><span>may still share one home and Session root</span></div>
+        <div><strong>Closed tab</strong><span>does not prove the Web Host exited</span></div>
+        <div><strong>SQLite rejection</strong><span>is not successful multi-writer coordination</span></div>
+      </div>
+
+      <aside class="writer-warning"><strong>Suspect overlap? Stop all writers.</strong><p>Do not open the Session in a third process. Copy the complete root after every owner exits, hash the originals, and inspect only disposable copies.</p></aside>
+
+      <h2>Handoff one owner cleanly.</h2>
+      <ol class="writer-handoff">
+        <li><strong>Stop admission</strong><span>No new turns or automation jobs.</span></li>
+        <li><strong>Drain work</strong><span>Wait for tools, background jobs, and child Agents.</span></li>
+        <li><strong>Terminate once</strong><span>Allow graceful disposal and Session flush.</span></li>
+        <li><strong>Verify exit</strong><span>Confirm no PID still owns the root.</span></li>
+        <li><strong>Cold-load</strong><span>Start the next owner only after quiescence.</span></li>
+      </ol>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/README.md">Official persistence contract and cross-process limitation</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/index.ts#L620-L633">Live Session sequence assignment</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/src/index.ts#L647-L682">JSONL durable append path</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-sqlite/src/schema.ts#L135-L152">SQLite Session sequence primary key</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3099">Real incident, reproduction, and rc.7 A/B</a></li>
+      </ul>
+
+      <section class="article-cta"><h2>Keep the operator checklist.</h2><p>The full runbook covers process inventory, service-manager overlap, offline evidence, and custom persistence roots.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/single-writer-session-roots.md">Read the full runbook</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

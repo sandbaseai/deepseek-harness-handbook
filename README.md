@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Fix moved-workspace ENOENT](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html)** · **[Upgrade and roll back](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html)** · **[Audit community plugins](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html)** · **[Install safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html)**
+**[Keep Session roots single-writer](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html)** · **[Fix moved-workspace ENOENT](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html)** · **[Upgrade and roll back](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html)** · **[Audit community plugins](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -25,6 +25,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Run Web, headless, ACP, or SDK processes concurrently without sharing a writable Session root | [Single-writer Session topology](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html) |
 | Fix `spawn bash ENOENT` after moving or renaming a workspace | [Moved-workspace recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html) |
 | Upgrade an exact runtime and preserve a proven rollback | [Upgrade and rollback guide](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html) |
 | Find and audit a community plugin before Host execution | [Community plugin audit](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html) |
@@ -100,7 +101,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 43 pages |
+| English | Canonical | 44 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -138,6 +139,10 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Recipes
 
 - [Repository Research Agent](docs/en/recipes/repository-research-agent.md)
+
+### Operations
+
+- [Keep concurrent Session roots single-writer](docs/en/operations/single-writer-session-roots.md)
 
 ### Official examples
 
