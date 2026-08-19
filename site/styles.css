@@ -1588,6 +1588,18 @@ footer div { display: flex; gap: 1.5rem; }
 .audit-loop strong { margin-top: 1.5rem; }
 .audit-loop code { margin-top: auto; white-space: normal; overflow-wrap: anywhere; }
 .audit-loop i { align-self: center; color: var(--accent); font-style: normal; }
+.audit-swap { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .7rem; align-items: center; margin: 1.25rem 0 1rem; }
+.audit-swap section { min-width: 0; min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.audit-swap small { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+.audit-swap strong { font-size: 1.15rem; }
+.audit-swap span { color: var(--muted); font-size: .82rem; }
+.audit-swap b { color: var(--accent); }
+.audit-swap .audit-swap-patch { border-top: 3px solid #b55d4c; background: var(--surface-strong); }
+.audit-drift { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin: 1.25rem 0 2rem; padding: 1px; background: var(--line); }
+.audit-drift section { min-width: 0; min-height: 170px; display: flex; flex-direction: column; padding: 1rem; background: var(--surface); }
+.audit-drift code { color: var(--accent); }
+.audit-drift strong { margin-top: 1.3rem; font-size: 1rem; }
+.audit-drift span { margin-top: auto; color: var(--muted); font-size: .78rem; }
 
 @media (max-width: 900px) {
   .audit-hero { grid-template-columns: 1fr; }
@@ -1595,8 +1607,8 @@ footer div { display: flex; gap: 1.5rem; }
 }
 
 @media (max-width: 760px) {
-  .audit-gates, .audit-equation, .audit-effects, .audit-loop, .audit-signals { grid-template-columns: 1fr; }
-  .audit-equation b, .audit-loop i { justify-self: center; transform: rotate(90deg); }
+  .audit-gates, .audit-equation, .audit-effects, .audit-swap, .audit-drift, .audit-loop, .audit-signals { grid-template-columns: 1fr; }
+  .audit-equation b, .audit-swap b, .audit-loop i { justify-self: center; transform: rotate(90deg); }
 }
 
 .upgrade-hero { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }

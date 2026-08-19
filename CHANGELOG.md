@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.10 - 2026-08-19
+
+### Corrected
+
+- Expanded the community-plugin audit around a verified rc.7 provider-swap incident: an installed bundle can disable existing filesystem, shell, PowerShell, and search rows while inserting replacements.
+- Added pre-boot effective-composition diffing, core-row drift classification, platform-aware checks, and Agent probes that verify the actual filesystem and shell trust domain.
+
 ## 0.5.9 - 2026-08-19
 
 ### Corrected
