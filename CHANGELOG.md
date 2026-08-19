@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.19 - 2026-08-20
+
+### Added
+
+- A source-backed diagnosis for compaction summaries truncated at the 8,192-token default across llama.cpp and LM Studio routes.
+- A context-shift versus durable-checkpoint model, three bounded recovery options, and twelve acceptance gates.
+
 ## 0.5.18 - 2026-08-20
 
 ### Added

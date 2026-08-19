@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 35
+content_revision: 36
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -45,6 +45,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Code Mode Skill card is complete but the model says no content was returned | nested dispatch / outer result / instructions context | `tool/code-dispatch`, outer `run_code` result, additional contexts, and next request |
 | Agent waits but question or approval card is missing | WebSocket generation / pending interaction replay | stable rpcId, socket lifecycle, mux replay, resync ordering, and Host pending registry |
 | Web reports `Output token limit reached` | request cap / provider capability / context headroom | request header, stop reason, prompt/output usage, model context, and server logs |
+| `/compact` says it could not produce a useful summary and `compaction/end` names an incomplete checkpoint | compaction summary output cap | compaction provider/model, maxTokens, finish reason, usage, Session events, and local-server context-shift policy |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Minimal preset `bash` reports terminal inspection unsupported on `win32` | preset / persistent PTY / process inspector | selected preset, native platform, tool name, and exact stderr |
 | First Windows `workspace-write` freezes Web and unrelated RPCs | synchronous ACL materialization | canonical root, tree size, first/second elapsed time, and control-plane responsiveness |
@@ -69,6 +70,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Fix a nested Code Mode Skill that never enters model context](code-mode-skill-context.md)
 - [Recover a missing question or approval card after reconnect](missing-question-approval-after-reconnect.md)
 - [Diagnose `Output token limit reached`](output-token-limit-reached.md)
+- [Fix a compaction summary truncated at the token cap](compaction-summary-truncated.md)
 - [Add an MCP server and diagnose missing tools](mcp-server-not-connecting.md)
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
