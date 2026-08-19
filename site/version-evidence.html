@@ -13,7 +13,7 @@
   <meta property="og:title" content="Which DeepSeek Harness version are you actually running?">
   <meta property="og:description" content="Four version signals, one reproducible incident report.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html">
-  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css">
 </head>
@@ -29,11 +29,11 @@
       <p class="eyebrow">Operator note · Version evidence</p>
       <h1>“Latest” is not a reproducible version.</h1>
       <p class="article-deck">A dist-tag can move, a repository can lag a published package, and a cached <code>npx</code> install can outlive both. Capture the artifact that executed—not the version you expected.</p>
-      <div class="article-meta"><span>Registry checked 15 Aug 2026</span><span>4-minute read</span><span>Primary sources only</span></div>
+      <div class="article-meta"><span>Registry checked 19 Aug 2026</span><span>4-minute read</span><span>Primary sources only</span></div>
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The mismatch</strong><span>The npm <code>latest</code> and <code>next</code> tags resolve to <code>0.1.0-rc.6</code>, while the public default branch ends at the rc.5 release merge and GitHub has no Release object.</span></div>
+      <div class="signal"><strong>The current alignment</strong><span>npm <code>latest</code> and <code>next</code>, the official GitHub release, and the public default branch all point to rc.7. Capture each coordinate anyway because tags and branches can move.</span></div>
 
       <h2>Separate four signals.</h2>
       <ol class="checklist">
@@ -47,22 +47,22 @@
       <p>Run this before changing the installation:</p>
       <pre><code>npx @deepseek-ai/dsh --version
 npm view @deepseek-ai/dsh dist-tags --json
-npm view @deepseek-ai/dsh@0.1.0-rc.6 dist.integrity gitHead --json</code></pre>
+npm view @deepseek-ai/dsh@0.1.0-rc.7 dist.integrity gitHead --json</code></pre>
       <p>Also record the exact launch command, Node version, operating system build, profile, and resolved configuration. If the first command downloads a package, preserve that output: it is part of the reproduction.</p>
 
       <h2>Pin experiments, not assumptions.</h2>
-      <pre><code>npx @deepseek-ai/dsh@0.1.0-rc.6 --version
-npx @deepseek-ai/dsh@0.1.0-rc.6 web</code></pre>
+      <pre><code>npx @deepseek-ai/dsh@0.1.0-rc.7 --version
+npx @deepseek-ai/dsh@0.1.0-rc.7 web</code></pre>
       <p>An explicit version makes a clean-room retry comparable. It does not prove that an existing failing process used the same artifact, so capture first and reinstall second.</p>
 
       <h2>Write incident claims with both coordinates.</h2>
-      <p>A useful report says: “Observed on npm package <code>0.1.0-rc.6</code>; source mechanism inspected at commit <code>47f94385</code>.” If those coordinates differ, label the source conclusion <strong>source-consistent</strong> rather than reproduced.</p>
+      <p>A useful report says: “Observed on npm package <code>0.1.0-rc.7</code>; source mechanism inspected at commit <code>99f6f02</code>.” If those coordinates differ, label the source conclusion <strong>source-consistent</strong> rather than reproduced.</p>
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
         <li><a href="https://www.npmjs.com/package/@deepseek-ai/dsh?activeTab=versions">Published @deepseek-ai/dsh versions on npm</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/commit/47f943859bef60e4160492346772ded9b24f765a">Public rc.5 release merge revision</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases">GitHub Releases view</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/commit/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca">Public rc.7 release merge revision</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7">Official rc.7 GitHub Release</a></li>
       </ul>
 
       <section class="article-cta">

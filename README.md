@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Check the rc.6 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Get started in five minutes](docs/en/getting-started/quickstart.md)** · **[Contribute](CONTRIBUTING.md)**
+**[Verify the official project](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Check the rc.7 field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)** · **[Route a failure in 30 seconds](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)** · **[Get started](docs/en/getting-started/quickstart.md)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -25,7 +25,8 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
-| Check current rc.6 boundaries and safer next actions | [DeepSeek Harness rc.6 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
+| Verify the official repository, package, release, and executable | [Official DeepSeek Harness identity guide](docs/en/reference/official-project-identity.md) |
+| Check current rc.7 boundaries and safer next actions | [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
 | Capture the package and source revision that actually ran | [DeepSeek Harness Version Evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html) |
 | Find the first broken runtime boundary | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Keep the essential commands and checks in one tab | [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md) |
@@ -154,7 +155,8 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Searchable operations
 
-- [DeepSeek Harness rc.6 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)
+- [Verify the official DeepSeek Harness project](docs/en/reference/official-project-identity.md)
+- [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)
 - [DeepSeek Harness Version Evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html)
 - [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)
 - [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md)

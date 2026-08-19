@@ -2,6 +2,16 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.0 - 2026-08-19
+
+### Added
+
+- An official-project identity guide that connects the DeepSeek AI repository, scoped npm package, rc.7 release tag, commit, executable, and independent handbook boundary.
+
+### Changed
+
+- Updated Field Status, Version Evidence, navigation, machine-readable indexes, and social preview metadata from rc.6 to the verified rc.7 release coordinates.
+
 ## 0.2.9 - 2026-08-19
 
 ### Added

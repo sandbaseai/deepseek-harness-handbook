@@ -9,6 +9,13 @@ const externalLinks = new Set();
 const checkExternalLinks = process.argv.includes('--external-links');
 const allowedStatuses = new Set(['canonical', 'reviewed', 'draft']);
 const pagesOrigin = 'https://sandbaseai.github.io/deepseek-harness-handbook/';
+const siteDirectory = join(root, 'site');
+
+function verifyCanonicalSiteTarget(sourcePath, target) {
+  const localPath = target.slice(pagesOrigin.length).split('#')[0].split('?')[0] || 'index.html';
+  const resolvedTarget = normalize(join(siteDirectory, localPath));
+  if (!existsSync(resolvedTarget)) errors.push(`Broken canonical site link in ${sourcePath}: ${target}`);
+}
 
 function read(relativePath) {
   const absolutePath = join(root, relativePath);
@@ -79,6 +86,10 @@ for (const absolutePath of allMarkdown) {
   const links = [...text.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)].map((match) => match[1]);
   for (const target of links) {
     if (/^https?:/.test(target)) {
+      if (target.startsWith(pagesOrigin)) {
+        verifyCanonicalSiteTarget(absolutePath.slice(root.length + 1), target);
+        continue;
+      }
       externalLinks.add(target.split('#')[0]);
       continue;
     }
@@ -90,7 +101,6 @@ for (const absolutePath of allMarkdown) {
   }
 }
 
-const siteDirectory = join(root, 'site');
 if (existsSync(siteDirectory)) {
   const siteFiles = readdirSync(siteDirectory, { withFileTypes: true })
     .filter((entry) => entry.isFile())
@@ -102,9 +112,7 @@ if (existsSync(siteDirectory)) {
     for (const target of targets) {
       if (/^https?:/.test(target)) {
         if (target.startsWith(pagesOrigin)) {
-          const localPath = target.slice(pagesOrigin.length).split('#')[0].split('?')[0] || 'index.html';
-          const resolvedTarget = normalize(join(siteDirectory, localPath));
-          if (!existsSync(resolvedTarget)) errors.push(`Broken canonical site link in ${absolutePath.slice(root.length + 1)}: ${target}`);
+          verifyCanonicalSiteTarget(absolutePath.slice(root.length + 1), target);
           continue;
         }
         externalLinks.add(target.split('#')[0]);
