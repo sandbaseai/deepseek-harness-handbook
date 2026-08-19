@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/workspace-moved-spawn-enoent.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/getting-started/upgrade-and-rollback.md",
       "revision": 1,
       "translations": {}
@@ -206,7 +211,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 17,
+      "revision": 18,
       "translations": {}
     },
     {

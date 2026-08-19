@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 17
+content_revision: 18
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -27,6 +27,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | UI TTFT grows with mature Sessions or subagent fan-out | Host / provider / Session event pressure | `step/start`, gateway arrival/first-token, first `assistant/chunk`, event count, and active-step count |
 | Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
+| Bash, grep, and glob all fail with `ENOENT` after a directory move | immutable Session cwd / subprocess workdir | recorded Session cwd, `test -d`, external `command -v bash`, and fresh-Session A/B |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
 | Agent repeats tools or spends after the task should be done | agent loop / retry / background owner | ordered Session events, request count, and provider usage curve |
 | Tool is denied | permission policy | operation, target, and active policy |
@@ -53,6 +54,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
+- [`spawn bash ENOENT` after a workspace moves](workspace-moved-spawn-enoent.md)
 - [Protect and recover live session logs](live-session-log-durability.md)
 - [Fix context window exceeded errors](context-window-exceeded.md)
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)

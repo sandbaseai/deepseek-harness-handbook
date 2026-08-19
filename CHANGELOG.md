@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.6 - 2026-08-19
+
+### Added
+
+- A source-backed runbook for misleading `spawn bash ENOENT` failures after a Session workspace is moved, renamed, deleted, or unmounted.
+- A visual failure route that separates executable discovery from child-process cwd validity and warns against treating an empty directory as recovery.
+
 ## 0.3.5 - 2026-08-19
 
 ### Added

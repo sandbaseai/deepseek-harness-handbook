@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Upgrade and roll back](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html)** · **[Audit community plugins](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html)** · **[Install safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html)** · **[Create a reusable Skill](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html)**
+**[Fix moved-workspace ENOENT](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html)** · **[Upgrade and roll back](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html)** · **[Audit community plugins](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html)** · **[Install safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -25,6 +25,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Fix `spawn bash ENOENT` after moving or renaming a workspace | [Moved-workspace recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html) |
 | Upgrade an exact runtime and preserve a proven rollback | [Upgrade and rollback guide](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html) |
 | Find and audit a community plugin before Host execution | [Community plugin audit](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html) |
 | Choose an exact, reproducible installation topology | [Install DeepSeek Harness safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html) |
@@ -99,7 +100,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 42 pages |
+| English | Canonical | 43 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -178,6 +179,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](docs/en/troubleshooting/remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](docs/en/troubleshooting/pty-shell-path.md)
 - [Protect and recover live session logs](docs/en/troubleshooting/live-session-log-durability.md)
+- [Recover `spawn bash ENOENT` after a workspace moves](docs/en/troubleshooting/workspace-moved-spawn-enoent.md)
 - [Fix context window exceeded errors](docs/en/troubleshooting/context-window-exceeded.md)
 - [Stop a runaway Agent loop and contain spend](docs/en/troubleshooting/runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md)
