@@ -2,6 +2,16 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.8 - 2026-08-19
+
+### Corrected
+
+- Expanded the context-window runbook with the DeepSeek `quota_limit_reached` response that rc.7 can normalize as `INVALID_REQUEST`, bypassing automatic compaction.
+
+### Changed
+
+- Added a visual context-overflow classification, recovery, and regression guide with source-pinned evidence.
+
 ## 0.4.7 - 2026-08-19
 
 ### Added

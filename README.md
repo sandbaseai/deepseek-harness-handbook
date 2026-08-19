@@ -49,7 +49,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
 | Run one task in automation or CI | [CLI and Headless Agent guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
 | Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
-| Fix a context-window or token-budget error | [Context window exceeded guide](docs/en/troubleshooting/context-window-exceeded.md) |
+| Fix a context-window or token-budget error | [Classify and recover context overflow](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html) |
 | Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |
 | Fix `tool "" is disabled` after a streamed call loses its ID and name | [Streamed tool-call identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html) |
@@ -195,7 +195,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [PTY shell path on NixOS and minimal Linux](docs/en/troubleshooting/pty-shell-path.md)
 - [Protect and recover live session logs](docs/en/troubleshooting/live-session-log-durability.md)
 - [Recover `spawn bash ENOENT` after a workspace moves](docs/en/troubleshooting/workspace-moved-spawn-enoent.md)
-- [Fix context window exceeded errors](docs/en/troubleshooting/context-window-exceeded.md)
+- [Classify and recover context overflow](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html)
 - [Stop a runaway Agent loop and contain spend](docs/en/troubleshooting/runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md)
 - [Diagnose empty tool names in streamed calls](docs/en/troubleshooting/streamed-tool-call-empty-identity.md)
