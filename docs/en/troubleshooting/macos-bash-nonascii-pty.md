@@ -77,10 +77,10 @@ The repair belongs at the command serialization boundary, before the one-shot PT
 
 ## Source boundary
 
-Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`. The pinned node-pty patch at this commit changes spawn-helper discovery, not input pacing or multibyte serialization.
+Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`. The workspace declares a pinned node-pty patch. The public rc.7 command serializer and one-write path still contain no non-ASCII transport escape or pacing branch.
 
 - [Upstream macOS reproduction #3391](https://github.com/deepseek-ai/deepseek-harness/discussions/3391)
 - [Persistent Bash wrapper and serializer](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/shell/tool-bash-persistent/src/index.ts)
 - [Terminal send path](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/terminal/terminal-bash/src/session.ts)
 - [Local node-pty write boundary](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/subprocess/subprocess-local/src/terminal.ts)
-- [Pinned node-pty patch](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/patches/node-pty%401.1.0.patch)
+- [Pinned node-pty patch declaration](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/pnpm-workspace.yaml)
