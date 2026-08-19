@@ -2,6 +2,17 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.43 - 2026-08-20
+
+### Added
+
+- A source-backed runbook for plugin boot failures caused by a missing `@deepseek-ai/dsh-client-schema-form` import.
+- Distribution-closure probes, plugin-versus-Host ownership routing, exact npm tag evidence, isolated compatibility testing, and ten acceptance gates.
+
+### Changed
+
+- The canonical, troubleshooting, homepage, sitemap, Atom, and machine-readable indexes now expose the new plugin-closure guide.
+
 ## 0.5.42 - 2026-08-20
 
 ### Changed
