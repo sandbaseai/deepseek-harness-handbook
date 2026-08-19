@@ -2,6 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://sandbaseai.github.io/deepseek-harness-handbook/sitemap.xml
-
-# Machine-readable project guide
-# https://sandbaseai.github.io/deepseek-harness-handbook/llms.txt
