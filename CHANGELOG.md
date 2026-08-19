@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.22 - 2026-08-20
+
+### Added
+
+- A source-backed recovery guide for prompts accepted into the Agent inbox but lost before a durable `user/message` event.
+- A six-boundary submission trace, side-effect-safe replay router, two repair architectures, and twelve durability gates.
+
 ## 0.5.21 - 2026-08-20
 
 ### Added
