@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.5 - 2026-08-19
+
+### Added
+
+- A defensive Code Mode trust-boundary guide that separates worker-thread reliability containment from enforceable OS isolation.
+- A deployment decision matrix, non-invasive exposure checks, native-mode rollback, outer-isolation requirements, and incident-response checklist.
+
 ## 0.2.4 - 2026-08-19
 
 ### Added

@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 12
+content_revision: 13
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -28,6 +28,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Agent repeats tools or spends after the task should be done | agent loop / retry / background owner | ordered Session events, request count, and provider usage curve |
 | Tool is denied | permission policy | operation, target, and active policy |
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
+| `run_code` is available while relying on `read-only` or `workspace-write` | Code Mode runtime trust boundary | effective tools mode, permission mode, code runtime, and outer isolation |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
 | Editing an existing Windows profile file reports `ReplaceFileW EACCES (Win32 5)` | atomic publication / HMR watcher | running Host owner, new-file A/B result, stopped-Host result, attributes, and ACL |
 | Response disappears after reload | persistence/session log | session events and configured store |
@@ -38,6 +39,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Code Mode worker-thread trust boundary](../security/code-mode-worker-trust-boundary.md)
 - [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)

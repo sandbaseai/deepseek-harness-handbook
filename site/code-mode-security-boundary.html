@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>DeepSeek Harness Code Mode Security Boundary</title>
+  <meta name="description" content="Understand what the DeepSeek Harness worker-thread Code Mode contains, what it does not sandbox, and how to choose native tools or an authoritative outer boundary.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-security-boundary.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A worker is not a sandbox.">
+  <meta property="og:description" content="A defensive deployment guide for DeepSeek Harness Code Mode at the worker-thread trust boundary.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-security-boundary.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#decision">Decision</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell security-article">
+    <header class="article-hero security-hero">
+      <div>
+        <p class="eyebrow">Code Mode trust boundary</p>
+        <h1>A worker is not a sandbox.</h1>
+        <p class="article-deck">Contain resource use. Isolate host authority.</p>
+        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+      </div>
+      <div class="boundary-stack" role="img" aria-label="Worker thread provides runtime containment but shares host-user operating system authority">
+        <div><small>Contained</small><strong>heap · time · output · environment</strong></div>
+        <span>≠</span>
+        <div class="boundary-risk"><small>Not isolated</small><strong>host-user OS authority</strong></div>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The rule</strong><span>If worker-thread Code Mode is enabled, treat the program body as host-trusted until an authoritative outer boundary proves otherwise.</span></div>
+
+      <h2>Read both switches together.</h2>
+      <div class="security-matrix">
+        <section><span>Tools mode</span><strong><code>native</code></strong><p>Ordinary tools route through their registered policy and sandbox seams.</p></section>
+        <section class="security-risk"><span>Tools mode</span><strong><code>code</code> / <code>both</code></strong><p><code>run_code</code> executes a TypeScript body in the loaded code runtime.</p></section>
+        <section><span>Permission mode</span><strong><code>read-only</code> / <code>workspace-write</code></strong><p>Constrains capability paths that call the sandbox policy.</p></section>
+        <section class="security-risk"><span>Missing proof</span><strong>worker OS confinement</strong><p>A fresh thread is still inside the Host process and user authority.</p></section>
+      </div>
+
+      <h2 id="decision">Make one explicit deployment choice.</h2>
+      <div class="security-decisions">
+        <section><small>Preferred default</small><strong>Return to native tools</strong><p>Unset <code>DSH_TOOLS_MODE</code>, restart the Host, and verify that <code>run_code</code> is absent.</p></section>
+        <section><small>When Code Mode is required</small><strong>Isolate the complete Host</strong><p>Use a disposable VM or constrained container with only the intended workspace, no host secrets or sockets, and independent egress policy.</p></section>
+      </div>
+
+      <h2>Inspect; do not run an escape proof.</h2>
+      <ol class="security-checks">
+        <li><strong>Environment</strong><span>Record <code>DSH_TOOLS_MODE</code> and <code>DSH_PERMISSION_MODE</code>.</span></li>
+        <li><strong>Composition</strong><span>Run <code>dsh --profile web --dump-config</code>.</span></li>
+        <li><strong>Runtime</strong><span>Identify whether the loaded backend is <code>worker-thread</code>.</span></li>
+        <li><strong>Catalog</strong><span>Confirm whether <code>run_code</code> is visible in a fresh Session.</span></li>
+      </ol>
+
+      <h2>Do not mistake reliability controls for authority.</h2>
+      <div class="security-not-equal">
+        <p><code>env: {}</code><span>removes inherited variables</span></p><b>≠</b><p>filesystem isolation</p>
+        <p>heap + time caps<span>bound resource use</span></p><b>≠</b><p>process policy</p>
+        <p>approval prompts<span>gate registered effects</span></p><b>≠</b><p>kernel enforcement</p>
+      </div>
+
+      <h2>If untrusted input already reached Code Mode.</h2>
+      <div class="incident-strip">
+        <span>Stop</span><i>→</i><span>Preserve Session</span><i>→</i><span>Review telemetry</span><i>→</i><span>Rotate reachable credentials</span><i>→</i><span>Rebuild if integrity is unknown</span>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3245">Public upstream security report #3245</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/code-runtime/code-runtime-worker-thread/README.md">Worker-thread trust statement</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/code-runtime/code-runtime-worker-thread/src/index.ts">Worker construction</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/tools/README.md">Code Mode tool contract</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the deployment checklist.</h2>
+        <p>The canonical guide includes shell and PowerShell checks, outer-boundary requirements, incident response, and a reusable decision record.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
+

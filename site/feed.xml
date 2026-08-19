@@ -5,9 +5,17 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-19T07:00:00Z</updated>
+  <updated>2026-08-19T08:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry>
+    <title>Treat worker-thread Code Mode as host-trusted</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-security-boundary.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-security-boundary.html</id>
+    <updated>2026-08-19T08:00:00Z</updated>
+    <summary>Separate worker reliability containment from OS isolation, inspect exposure without an escape proof, and choose native tools or an authoritative outer boundary.</summary>
+  </entry>
 
   <entry>
     <title>Fix ReplaceFileW EACCES on Windows HMR-watched config</title>
