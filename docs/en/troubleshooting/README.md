@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 18
+content_revision: 19
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -34,6 +34,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | `run_code` is available while relying on `read-only` or `workspace-write` | Code Mode runtime trust boundary | effective tools mode, permission mode, code runtime, and outer isolation |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
+| Windows folder picker opens but the worker exits without a result | native dialog / Node-Koffi decode / stale Host | dialog timing, Node version, exact DSH PID, and project-local native import |
 | Editing an existing Windows profile file reports `ReplaceFileW EACCES (Win32 5)` | atomic publication / HMR watcher | running Host owner, new-file A/B result, stopped-Host result, attributes, and ACL |
 | Response disappears after reload | persistence/session log | session events and configured store |
 | Session crashes after its log is deleted or replaced | live/durable ownership | first persistence error and an offline artifact copy |
@@ -51,6 +52,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
+- [Windows folder-picker worker crash](windows-folder-picker-worker-crash.md)
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)

@@ -5,9 +5,17 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-19T23:00:00Z</updated>
+  <updated>2026-08-20T00:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry>
+    <title>Windows folder-picker worker crash</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <summary>Route the same downstream worker error across Node/Koffi decoding, incomplete native installation, and stale DSH ownership, then recover through the shipped browse picker.</summary>
+  </entry>
 
   <entry>
     <title>Use the DeepSeek Harness CLI by lifecycle</title>

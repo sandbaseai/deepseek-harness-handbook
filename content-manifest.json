@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/windows-folder-picker-worker-crash.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/operations/single-writer-session-roots.md",
       "revision": 1,
       "translations": {}
@@ -216,7 +221,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 18,
+      "revision": 19,
       "translations": {}
     },
     {

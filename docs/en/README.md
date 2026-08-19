@@ -16,6 +16,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Choose a memory architecture and migration path](architecture/sessions-vs-memory.md)
 - [Keep concurrent Session roots single-writer](operations/single-writer-session-roots.md)
 - [Recover `spawn bash ENOENT` after a workspace moves](troubleshooting/workspace-moved-spawn-enoent.md)
+- [Recover from a Windows folder-picker worker crash](troubleshooting/windows-folder-picker-worker-crash.md)
 - [Upgrade and roll back safely](getting-started/upgrade-and-rollback.md)
 - [Audit community plugins before installation](security/community-plugin-audit.md)
 - [Install DeepSeek Harness safely](getting-started/install-deepseek-harness.md)
