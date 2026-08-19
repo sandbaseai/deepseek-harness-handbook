@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.44 - 2026-08-20
+
+### Fixed
+
+- Aligned the homepage evidence strip and social-card descriptions with the current 80 canonical guides.
+- Corrected Open Graph image dimensions from 1200 by 400 to the asset's actual 1280 by 640 pixels and added explicit image type and X-card alternative text.
+- Refreshed homepage asset version keys so deployed metadata and interaction code update together.
+
 ## 0.5.43 - 2026-08-20
 
 ### Added
