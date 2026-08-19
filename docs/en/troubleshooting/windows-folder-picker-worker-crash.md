@@ -1,13 +1,13 @@
 ---
-title: Windows Folder Picker Worker Crash in DeepSeek Harness
+title: Windows Folder Picker Crash and Unicode Truncation in DeepSeek Harness
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-19
 upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
 ---
 
-# Route the Windows folder-picker worker crash
+# Route Windows folder-picker crashes and Unicode truncation
 
 Use this guide when DeepSeek Harness on Windows reports:
 
@@ -16,11 +16,19 @@ directory picker failed: directory picker failed:
 win32 folder dialog worker exited before reporting a result
 ```
 
-The message states only that the spawned picker worker terminated before it sent a terminal IPC message. It does not identify why. At least three distinct failures can produce the same outer error:
+or when the native dialog returns a visibly shortened path and workspace creation later reports:
+
+```text
+workspace-invalid-path: cannot create a workspace at "D:\...\CAN盒子二次":
+ENOENT: no such file or directory, realpath 'D:\...\CAN盒子二次'
+```
+
+The worker-exit message states only that the spawned picker terminated before it sent a terminal IPC message. The `ENOENT` case is different: the worker may have returned successfully, but `readUtf16()` corrupted the path before the Host validated it. At least four failures now need separate branches:
 
 1. a Node-runtime-specific Koffi crash while decoding the selected UTF-16 path;
-2. an incomplete or incompatible native-module installation;
-3. an unhealthy leftover DSH process whose child-process environment is no longer trustworthy.
+2. silent UTF-16LE truncation when a selected path contains a `U+XX00` code point;
+3. an incomplete or incompatible native-module installation;
+4. an unhealthy leftover DSH process whose child-process environment is no longer trustworthy.
 
 Do not patch generated JavaScript, pin a random Koffi version, disable the sandbox, or grant full access before classifying the failure.
 
@@ -46,6 +54,8 @@ Native dialog appeared: yes / no
 Crash occurred before selection or after selection:
 ASCII path result:
 CJK path result:
+Path containing a U+XX00 character (for example 开 U+5F00):
+Expected path versus path quoted by ENOENT:
 Clean restart result:
 ```
 
@@ -69,7 +79,49 @@ Run a clean A/B with the exact same DSH release, home copy, path, and launch com
 
 **Evidence for this branch:** dialog appears; choosing a directory triggers the worker exit; Node 22 succeeds while Node 24+ fails under otherwise identical conditions.
 
-### B. Dialog never appears and native modules failed during install
+### B. Dialog returns, but the path is cut at a Han character
+
+This is silent corruption, not a worker crash and not a workspace-validator bug. In rc.7, `readUtf16()` scans only the low byte of each UTF-16LE code unit:
+
+```ts
+while (end + 1 < bytes.length && bytes[end] !== 0) end += 2
+```
+
+A true UTF-16LE terminator is `00 00`. Characters whose code point ends in `00` are encoded with a zero low byte followed by a nonzero high byte. For example:
+
+```text
+开 U+5F00 → 00 5F
+一 U+4E00 → 00 4E
+刀 U+5200 → 00 52
+退 U+9000 → 00 90
+```
+
+The rc.7 loop mistakes the first byte for the terminator. A selected path such as:
+
+```text
+D:\PythonProjects\Python\CAN盒子二次开发\can_auto_test
+```
+
+can therefore reach workspace validation as:
+
+```text
+D:\PythonProjects\Python\CAN盒子二次
+```
+
+`fs.realpath()` correctly rejects that nonexistent truncated path. Compare the expected selection with the exact path quoted by `ENOENT`; the first missing character is decisive evidence.
+
+The source-level repair is a two-byte terminator test:
+
+```ts
+while (end + 1 < bytes.length
+  && (bytes[end] !== 0 || bytes[end + 1] !== 0)) end += 2
+```
+
+Do not patch an installed `lib` file as an operator workaround. The durable upstream fix also needs a regression fixture containing a `U+XX00` character; generic “CJK” or ASCII fixtures do not guarantee this byte pattern.
+
+**Evidence for this branch:** the dialog completes; the error quotes a path truncated immediately before `开`, `一`, `刀`, `退`, or another `U+XX00` code point; the full selected directory exists.
+
+### C. Dialog never appears and native modules failed during install
 
 Inspect the original npm output for Koffi or native build/install-script failure. An isolated `npx` dependency tree does not necessarily use a globally installed `koffi` or `node-pty`; installing another global copy can leave the failing tree unchanged.
 
@@ -88,7 +140,7 @@ The `--ignore-scripts` step is inspection staging, not a runnable final install.
 
 **Evidence for this branch:** dialog never appears; install or rebuild output names Koffi/native compilation; the same tree cannot import the binding.
 
-### C. A listener survives after the terminal or wrapper exits
+### D. A listener survives after the terminal or wrapper exits
 
 If port 3080 remains owned by an unexpected `node.exe`, stop admission and terminate the verified leftover DSH process. Do not kill every Node process on the machine.
 
@@ -154,7 +206,8 @@ Restart and verify the resolved composition before trying the native dialog agai
 |---|---|---|
 | Dialog opens | record | in-browser card opens |
 | ASCII path returns exactly | record | required |
-| CJK path returns exactly | record | required |
+| ordinary CJK path returns exactly | record | required |
+| path containing `开` (U+5F00) returns exactly | record | required |
 | Cancel leaves no workspace | required | required |
 | Abort closes the interaction | required | required |
 | New Session uses selected cwd | required | required |
@@ -165,6 +218,8 @@ Keep browse mode if it meets the product need. If reporting the native failure, 
 ## Primary sources
 
 - [Official failure discussion #30](https://github.com/deepseek-ai/deepseek-harness/discussions/30)
+- [Confirmed rc.7 UTF-16LE truncation report #3291](https://github.com/deepseek-ai/deepseek-harness/discussions/3291)
+- [Original directory-name truncation report #3188](https://github.com/deepseek-ai/deepseek-harness/discussions/3188)
 - [rc.7 Win32 UTF-16 decode path](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/src/win32-dialog-bindings.ts)
 - [Native picker contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/README.md)
 - [Adaptive picker selection contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-auto/README.md)
