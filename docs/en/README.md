@@ -56,6 +56,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Recover a conversation that updates before its start Match](troubleshooting/conversation-update-before-start.md)
 - [Recover a plugin materialized after pnpm exits nonzero](troubleshooting/plugin-add-nonzero-reconcile.md)
 - [Recover a silent Node 24 and tsx root build](troubleshooting/node24-tsx-silent-build.md)
+- [Fix unknown prompt variables from MCP descriptions in Code Mode](troubleshooting/code-mode-unknown-prompt-variable.md)
 
 ## Learning paths
 
