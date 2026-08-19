@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.9 - 2026-08-19
+
+### Changed
+
+- Replaced the pre-rc.7 `crypto.randomUUID` incident note with a current remote Web access topology and acceptance guide.
+- Documented the rc.7 insecure-origin UUID fix, intentional `0.0.0.0` refusal, Host and Origin trust fence, loopback-only methods, SSH forwarding path, and authenticated HTTPS gateway boundary.
+
 ## 0.3.8 - 2026-08-19
 
 ### Added
