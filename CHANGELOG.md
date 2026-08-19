@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.3 - 2026-08-19
+
+### Added
+
+- A TTFT measurement guide that separates Host outbound, provider, and Host inbound latency before attributing a slow first token.
+- A source-backed A/B ladder for mature Sessions, concurrent subagents, Session snapshot rebuilds, token-meter observation, and fork seed validation.
+
 ## 0.2.2 - 2026-08-19
 
 ### Added

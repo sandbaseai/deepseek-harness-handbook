@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 10
+content_revision: 11
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -21,6 +21,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Provider authentication fails | model route/credential | provider name and sanitized error |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
 | Every follow-up in one Session returns `400 ... Unterminated string` | persisted tool-call arguments | exported Session log, malformed `tool/call` seq, and fresh-Session A/B result |
+| UI TTFT grows with mature Sessions or subagent fan-out | Host / provider / Session event pressure | `step/start`, gateway arrival/first-token, first `assistant/chunk`, event count, and active-step count |
 | Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
@@ -47,6 +48,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Fix context window exceeded errors](context-window-exceeded.md)
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
+- [Diagnose slow TTFT in mature Sessions](slow-ttft-mature-sessions.md)
 
 ## Collect a minimal diagnostic bundle
 
