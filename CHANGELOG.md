@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.1 - 2026-08-19
+
+### Added
+
+- A source-backed emergency runbook for cancelling runaway Agent turns, distinguishing repeated tool calls from provider retries and background work, and containing spend with an independent provider-side boundary.
+- A visual control matrix that separates concurrency, response output, compaction, tool timeouts, retries, and account quotas.
+
 ## 0.2.0 - 2026-08-17
 
 ### Added

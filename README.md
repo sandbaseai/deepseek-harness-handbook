@@ -36,6 +36,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Run one task in automation or CI | [Headless Agent guide](docs/en/getting-started/headless-agent.md) |
 | Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
 | Fix a context-window or token-budget error | [Context window exceeded guide](docs/en/troubleshooting/context-window-exceeded.md) |
+| Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
@@ -84,7 +85,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 28 pages |
+| English | Canonical | 29 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -151,6 +152,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [PTY shell path on NixOS and minimal Linux](docs/en/troubleshooting/pty-shell-path.md)
 - [Protect and recover live session logs](docs/en/troubleshooting/live-session-log-durability.md)
 - [Fix context window exceeded errors](docs/en/troubleshooting/context-window-exceeded.md)
+- [Stop a runaway Agent loop and contain spend](docs/en/troubleshooting/runaway-agent-loop.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 
 ## Repository structure

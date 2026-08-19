@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 8
+content_revision: 9
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-19
 ---
 
 # DeepSeek Harness troubleshooting
@@ -23,6 +23,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Host exits with `ERR_HTTP2_INVALID_SESSION` | provider transport / proxy / HTTP/2 session | complete stack, Node A/B result, and sanitized provider hostname |
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
+| Agent repeats tools or spends after the task should be done | agent loop / retry / background owner | ordered Session events, request count, and provider usage curve |
 | Tool is denied | permission policy | operation, target, and active policy |
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
@@ -43,6 +44,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [Protect and recover live session logs](live-session-log-durability.md)
 - [Fix context window exceeded errors](context-window-exceeded.md)
+- [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 
 ## Collect a minimal diagnostic bundle
 
