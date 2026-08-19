@@ -61,6 +61,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Session resume refuses an unknown downstream plugin event type | durable event compatibility | plugin version, event type and seq, Harness revision, and whether the event is reconstruction-required |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
 | Profile stops booting after a plugin change | package/bundle/composition lifecycle | manifest diff, lockfile diff, and `--dump-config` before/after |
+| Plugin boot reports `Cannot find package '@deepseek-ai/dsh-client-schema-form'` | plugin import / DSH distribution closure | DSH channel and version, importing file, plugin manifest, and physical package roots |
 | Git plugin install succeeds, then boot reports a missing `dist/` or `lib/` export | package build artifact / loader import | install flags, package scripts and exports, allowBuilds, artifact tree, and first import stack |
 | `dsh plugin ... add` reports `ERR_PNPM_ADDING_TO_ROOT` | profile package-manager workspace target | DSH and pnpm versions, selected profile, exact command, and profile workspace file |
 | plugin add prints many `missing peer` warnings or an ignored-build notice | Host/profile dependency boundary / plugin build policy | requested ranges, resolved paths and versions, profile workspace, exact build identity, and real capability result |
@@ -87,6 +88,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Recover a Git plugin missing its built export](git-plugin-missing-dist.md)
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](plugin-peer-dependency-warnings.md)
+- [Fix missing `dsh-client-schema-form` after npm installation](missing-client-schema-form.md)
 - [Control response and reasoning language](response-language-and-reasoning.md)
 - [Fix Session titles that stay on the fallback with reasoning models](session-title-reasoning-budget.md)
 - [Recover a prompt accepted before it became durable](prompt-accepted-before-durable.md)

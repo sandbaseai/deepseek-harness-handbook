@@ -49,6 +49,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Recover a Git plugin missing its built export](troubleshooting/git-plugin-missing-dist.md)
 - [Fix a compaction summary truncated at the token cap](troubleshooting/compaction-summary-truncated.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](troubleshooting/plugin-peer-dependency-warnings.md)
+- [Fix missing `dsh-client-schema-form` after npm installation](troubleshooting/missing-client-schema-form.md)
 - [Control response and reasoning language](troubleshooting/response-language-and-reasoning.md)
 - [Recover a prompt accepted before it became durable](troubleshooting/prompt-accepted-before-durable.md)
 - [Fix Session persistence on filesystems without hard links](troubleshooting/session-hard-link-unsupported.md)

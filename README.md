@@ -6,11 +6,11 @@
 
 Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources), the community-maintained DSH ecosystem directory.
 
-![DeepSeek Harness Handbook — 79 source-backed guides, rc.8, Install Doctor, and Failure Router](assets/deepseek-harness-handbook-social-preview-v2.png)
+![DeepSeek Harness Handbook — source-backed guides, rc.8, Install Doctor, and Failure Router](assets/deepseek-harness-handbook-social-preview-v2.png)
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**79 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**80 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -52,6 +52,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Decide whether an instruction belongs in global, project, nested, local, or Skill scope | [AGENTS.md scope and precedence map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
 | Discover and manage community plugins from the DSH Web UI | [DSH Plugin Store](https://sandbaseai.github.io/dsh-plugin-store/) ([GitHub](https://github.com/sandbaseai/dsh-plugin-store)) |
+| Fix a plugin boot crash for missing `@deepseek-ai/dsh-client-schema-form` | [Plugin distribution-closure runbook](https://sandbaseai.github.io/deepseek-harness-handbook/missing-client-schema-form.html) |
 | Fix `additionalProperties`, type-array, or `oneOf` tool schema errors | [Tool schema subset guide](https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html) |
 | Distinguish the official Agent runtime from same-name API wrappers | [Official DeepSeek Harness identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html) |
 | Check current rc.7 boundaries and safer next actions | [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
@@ -152,7 +153,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 79 pages |
+| English | Canonical | 80 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -213,6 +214,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Recover a silent Node 24 and tsx source build](docs/en/troubleshooting/node24-tsx-silent-build.md)
 - [Fix unknown prompt variables from MCP descriptions in Code Mode](docs/en/troubleshooting/code-mode-unknown-prompt-variable.md)
 - [Fix npm ETARGET while installing rc.8](docs/en/troubleshooting/npm-etarget-rc8.md)
+- [Fix missing `dsh-client-schema-form` after npm installation](docs/en/troubleshooting/missing-client-schema-form.md)
 - [Fix Session titles that stay on the fallback with reasoning models](docs/en/troubleshooting/session-title-reasoning-budget.md)
 - [Generate an installation evidence plan with Install Doctor](docs/en/tools/install-doctor.md)
 

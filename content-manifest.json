@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/missing-client-schema-form.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/agent-patterns/agents-md-scope.md",
       "revision": 1,
       "translations": {}

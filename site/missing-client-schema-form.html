@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Fix missing dsh-client-schema-form in DeepSeek Harness</title>
+  <meta name="description" content="Diagnose DeepSeek Harness plugin boot failures when an npm installation does not provide @deepseek-ai/dsh-client-schema-form.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/missing-client-schema-form.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Installed is not resolvable.">
+  <meta property="og:description" content="Separate the plugin import, DSH distribution closure, package tags, and duplicate-runtime risk before adding a missing package.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/missing-client-schema-form.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css?v=0.5.43">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Fix Missing dsh-client-schema-form After npm Installation","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-20","url":"https://sandbaseai.github.io/deepseek-harness-handbook/missing-client-schema-form.html","inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="Handbook home"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#trace">Trace</a><a href="#recover">Recover</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div><p class="eyebrow">Plugin closure · npm · rc.8</p><h1>Installed is not resolvable.</h1><p class="article-deck">A plugin can materialize successfully and still import a DeepSeek client package that the selected DSH distribution does not provide.</p><div class="article-meta"><span>Verified 2026-08-20</span><span>Source 141eb6f</span></div></div>
+      <div class="identity-seal" role="img" aria-label="A community plugin imports dsh-client-schema-form, the npm DSH rc.8 closure does not provide it, and profile boot stops at module resolution"><div><small>plugin</small><strong>schema-form import</strong></div><i>resolve</i><div><small>DSH closure</small><strong>package absent</strong></div><i>boot</i><div><small>profile</small><strong>loader stops</strong></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>Verified boundary</strong><span>The rc.8 CLI manifest does not declare <code>dsh-client-schema-form</code>. npm publishes separate rc.1 and rc.7 package lines, but no rc.8 build.</span></div>
+      <h2 id="trace">Trace four coordinates before adding anything.</h2>
+      <div class="identity-proof"><section><strong>Executable</strong><p>Record path, version, and npm or Homebrew channel.</p></section><section><strong>Importer</strong><p>Find the plugin file and its dependency contract.</p></section><section><strong>Closure</strong><p>Inspect the selected DSH manifest and physical package root.</p></section><section><strong>Registry</strong><p>Record exact versions and mutable dist-tags.</p></section></div>
+      <h2>One stack, four owners.</h2>
+      <div class="identity-routes"><section><span>Undeclared import</span><strong>plugin publisher</strong><p>Publish an explicit, compatible contract.</p></section><section><span>Host peer absent</span><strong>release boundary</strong><p>Align the plugin and DSH distribution.</p></section><section><span>Declared, bytes absent</span><strong>installation</strong><p>Reinstall the exact supported artifact.</p></section></div>
+      <div class="identity-warning"><strong>Do not run an unversioned <code>pnpm add ...@next</code> in the working profile.</strong><p>The tag is mutable, the available package line trails rc.8, and a second internal runtime copy can turn one missing import into split Harness state.</p></div>
+      <h2 id="recover">Recover in a disposable profile.</h2>
+      <pre><code>dsh plugin --profile schema-form-probe add &lt;plugin&gt;@&lt;reviewed-version&gt;
+dsh --profile schema-form-probe</code></pre>
+      <p>Prefer a compatible plugin release or supported DSH distribution. If you deliberately test the standalone package, pin the exact version in the probe only, verify one coherent runtime closure, and require boot, settings, reload, and restart.</p>
+      <h2>Primary evidence.</h2>
+      <ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3471">Official report #3471</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/apps/cli/package.json">rc.8 CLI manifest</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.8">Official rc.8 release</a></li><li><a href="https://www.npmjs.com/package/@deepseek-ai/dsh-client-schema-form">Published schema-form package</a></li></ul>
+      <section class="article-cta"><h2>Keep the complete closure runbook.</h2><p>The canonical guide includes exact probes, ownership routing, channel comparison, bounded recovery, unsafe shortcuts, ten acceptance gates, and an incident bundle.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/missing-client-schema-form.md">Read the complete guide</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
