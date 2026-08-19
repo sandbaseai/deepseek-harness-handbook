@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/macos-workspace-picker-trailing-colon.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/pnpm-global-native-binding.md",
       "revision": 1,
       "translations": {}
@@ -176,7 +181,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 16,
+      "revision": 17,
       "translations": {}
     },
     {

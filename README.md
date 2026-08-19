@@ -43,6 +43,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Decide whether worker-thread Code Mode fits the security boundary | [Code Mode trust-boundary guide](docs/en/security/code-mode-worker-trust-boundary.md) |
 | Fix source startup reporting `--expose-internals` is required | [HMR loader-capability diagnosis](docs/en/troubleshooting/hmr-expose-internals-source-checkout.md) |
 | Fix a pnpm global install that reports an installed plugin as missing | [Global native-binding resolution guide](docs/en/troubleshooting/pnpm-global-native-binding.md) |
+| Fix macOS workspace selection when the path ends in `:/` | [macOS native picker path guide](docs/en/troubleshooting/macos-workspace-picker-trailing-colon.md) |
 | Persist downstream plugin events without breaking Session resume | [Custom Session event compatibility](docs/en/plugin-development/custom-session-events.md) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
@@ -174,6 +175,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Treat worker-thread Code Mode as host-trusted](docs/en/security/code-mode-worker-trust-boundary.md)
 - [Fix `--expose-internals` HMR startup from a source checkout](docs/en/troubleshooting/hmr-expose-internals-source-checkout.md)
 - [Fix pnpm global native-binding plugin resolution](docs/en/troubleshooting/pnpm-global-native-binding.md)
+- [Fix macOS workspace picker trailing-colon paths](docs/en/troubleshooting/macos-workspace-picker-trailing-colon.md)
 - [Persist custom plugin events without breaking Session resume](docs/en/plugin-development/custom-session-events.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 
