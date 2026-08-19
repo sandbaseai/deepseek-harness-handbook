@@ -43,3 +43,4 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 ## Project boundary
 
 This is a community-maintained handbook from SandBase, not an official DeepSeek AI project. Version-sensitive claims link to primary sources and record verification dates.
+- [Fix pnpm global native-binding resolution](https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-global-native-binding.html): Preserve the isolated store, trace the helper from its physical owner, and compare an exact project-local install before changing dependency visibility.

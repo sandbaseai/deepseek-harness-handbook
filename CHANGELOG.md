@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.8 - 2026-08-19
+
+### Added
+
+- A source-backed diagnosis for pnpm global installs where native platform-package resolution fails before an installed bare plugin is misleadingly reported as missing.
+- Physical-layout evidence, an exact-version project-local A/B, reversible recovery paths, and a cold-restart acceptance test for future fixes.
+
 ## 0.2.7 - 2026-08-19
 
 ### Added

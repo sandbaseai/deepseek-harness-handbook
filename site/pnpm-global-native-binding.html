@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Fix pnpm Global Native Binding Resolution | DeepSeek Harness</title>
+  <meta name="description" content="Diagnose DeepSeek Harness global pnpm installs where an isolated native helper failure becomes a misleading plugin-not-found error.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-global-native-binding.html">
+  <meta property="og:type" content="article"><meta property="og:title" content="Installed does not mean resolvable.">
+  <meta property="og:description" content="Trace the native bridge before blaming the plugin package.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-global-native-binding.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview.png">
+  <meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a><nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#route">Route</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell binding-article">
+    <header class="article-hero binding-hero">
+      <div><p class="eyebrow">Global install diagnosis</p><h1>Installed does not mean resolvable.</h1><p class="article-deck">Trace the native bridge before blaming the plugin.</p><div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div></div>
+      <div class="binding-stack" role="img" aria-label="The CLI entry can see the native platform package while the shared loader package cannot resolve it from its physical root"><div><small>entry package</small><strong>platform bridge ✓</strong></div><i>physical root changes</i><div class="binding-fail"><small>shared loader</small><strong>platform bridge ?</strong></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>The hidden first failure</strong><span>The native helper fails inside an isolated global store; ordinary import fallback later reports the installed plugin as missing.</span></div>
+      <h2 id="route">Route by install topology.</h2>
+      <div class="binding-routes"><section><span>Global pnpm</span><strong>virtual-store boundary</strong><p>Capture the binary, global root, dependency tree, and physical package locations.</p></section><section><span>Project local</span><strong>exact-version A/B</strong><p>Use a disposable directory to test the same artifact without the global layout.</p></section><section><span>Source checkout</span><strong>different diagnosis</strong><p>The HMR flag message has overlapping internals but a separate installation contract.</p></section></div>
+      <h2>Follow the failure, not the last message.</h2>
+      <div class="binding-chain"><div><strong><code>dsh web</code></strong><small>mount bare plugin</small></div><i>→</i><div><strong>native helper</strong><small>reach Node ESM loader</small></div><i>→</i><div class="binding-chain-fail"><strong>resolution gap</strong><small>first error swallowed</small></div><i>→</i><div><strong>fallback import</strong><small>misleading not found</small></div></div>
+      <h2>Collect before reinstalling.</h2>
+      <pre><code>command -v dsh
+dsh --version
+node --version
+pnpm --version
+pnpm root -g
+pnpm list -g --depth 3 @deepseek-ai/dsh node-addon-require-builtin</code></pre>
+      <h2>A repair must preserve the boundary.</h2>
+      <div class="binding-tests"><section><b>1</b><strong>Fresh prefix</strong><p>No inherited hoist or cache assumption.</p></section><section><b>2</b><strong>Cold restart</strong><p>No warm loader cache masking the defect.</p></section><section><b>3</b><strong>Bare plugin mount</strong><p>Prove the actual failing capability.</p></section><section><b>4</b><strong>Opt-out semantics</strong><p>Explicit disable remains explicit.</p></section></div>
+      <div class="binding-never"><section><strong>No permanent internal flag</strong><p>It bypasses the path; it does not repair dependency ownership.</p></section><section><strong>No broad global hoist</strong><p>It hides the regression by changing unrelated visibility.</p></section><section><strong>No copied native binary</strong><p>Platform, ABI, architecture, and package version all matter.</p></section></div>
+      <h2>Primary evidence.</h2>
+      <ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3250">Upstream report and proposed fix #3250</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/package.json">CLI dependency declaration</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/vendor/loader/src/internal.ts">Internal-loader discovery</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/boot/app-boot/README.md">Bare-specifier resolution contract</a></li></ul>
+      <section class="article-cta"><h2>Keep the physical layout as evidence.</h2><p>The canonical guide includes exact probes, a project-local A/B, safe recovery choices, acceptance tests, and a minimal upstream report.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

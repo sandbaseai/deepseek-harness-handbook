@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/pnpm-global-native-binding.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/plugin-development/custom-session-events.md",
       "revision": 1,
       "translations": {}
@@ -171,7 +176,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 15,
+      "revision": 16,
       "translations": {}
     },
     {
