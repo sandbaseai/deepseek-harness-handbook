@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 35,
+      "revision": 36,
       "translations": {}
     },
     {
@@ -326,6 +326,11 @@
     },
     {
       "source": "docs/en/troubleshooting/git-plugin-missing-dist.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/compaction-summary-truncated.md",
       "revision": 1,
       "translations": {}
     }
