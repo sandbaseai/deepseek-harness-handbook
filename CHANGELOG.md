@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.21 - 2026-08-20
+
+### Added
+
+- A source-backed guide separating answer language, exposed reasoning language, deployment persona, provider behavior, gateway injection, and Web locale.
+- A fresh-Session A/B workflow, safe existing-row persona override, route-specific reasoning controls, and twelve language regression gates.
+
 ## 0.5.20 - 2026-08-20
 
 ### Added

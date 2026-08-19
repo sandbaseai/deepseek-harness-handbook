@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 37,
+      "revision": 38,
       "translations": {}
     },
     {
@@ -336,6 +336,11 @@
     },
     {
       "source": "docs/en/troubleshooting/plugin-peer-dependency-warnings.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/response-language-and-reasoning.md",
       "revision": 1,
       "translations": {}
     }

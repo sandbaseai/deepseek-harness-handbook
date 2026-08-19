@@ -46,6 +46,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Recover a Git plugin missing its built export](troubleshooting/git-plugin-missing-dist.md)
 - [Fix a compaction summary truncated at the token cap](troubleshooting/compaction-summary-truncated.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](troubleshooting/plugin-peer-dependency-warnings.md)
+- [Control response and reasoning language](troubleshooting/response-language-and-reasoning.md)
 
 ## Learning paths
 
