@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.2.4 - 2026-08-19
+
+### Added
+
+- A Windows recovery runbook for `ReplaceFileW EACCES (Win32 5)` when an existing profile file is held by HMR.
+- A reversible stop, evidence, backup, edit, dump-config, restart, and rollback workflow that preserves atomic publication semantics.
+
 ## 0.2.3 - 2026-08-19
 
 ### Added
