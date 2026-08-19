@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 11
+content_revision: 12
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -29,6 +29,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Tool is denied | permission policy | operation, target, and active policy |
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | PowerShell or Windows sandbox behaves differently | platform execution boundary | active `pwsh` rows, permission mode, and complete stderr |
+| Editing an existing Windows profile file reports `ReplaceFileW EACCES (Win32 5)` | atomic publication / HMR watcher | running Host owner, new-file A/B result, stopped-Host result, attributes, and ACL |
 | Response disappears after reload | persistence/session log | session events and configured store |
 | Session crashes after its log is deleted or replaced | live/durable ownership | first persistence error and an offline artifact copy |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
@@ -49,6 +50,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
 - [Diagnose slow TTFT in mature Sessions](slow-ttft-mature-sessions.md)
+- [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](windows-replacefile-eacces.md)
 
 ## Collect a minimal diagnostic bundle
 

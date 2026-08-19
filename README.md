@@ -39,6 +39,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |
 | Explain slow first-token latency before blaming the provider | [Mature Session TTFT guide](docs/en/troubleshooting/slow-ttft-mature-sessions.md) |
+| Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
@@ -87,7 +88,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 31 pages |
+| English | Canonical | 32 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -157,6 +158,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Stop a runaway Agent loop and contain spend](docs/en/troubleshooting/runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md)
 - [Diagnose slow TTFT in mature Sessions](docs/en/troubleshooting/slow-ttft-mature-sessions.md)
+- [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](docs/en/troubleshooting/windows-replacefile-eacces.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 
 ## Repository structure
