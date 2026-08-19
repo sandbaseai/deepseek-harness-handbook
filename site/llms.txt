@@ -3,6 +3,7 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+Tool schema subset: https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html
 Partial plugin-add recovery: https://sandbaseai.github.io/deepseek-harness-handbook/plugin-add-nonzero-reconcile.html
 Conversation update-before-start recovery: https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html
 macOS persistent Bash non-ASCII corruption: https://sandbaseai.github.io/deepseek-harness-handbook/macos-bash-nonascii.html
