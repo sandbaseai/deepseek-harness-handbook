@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Install safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html)** · **[Create a reusable Skill](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html)** · **[Build your first plugin](https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html)** · **[Route a failure](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)**
+**[Audit community plugins](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html)** · **[Install safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html)** · **[Create a reusable Skill](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html)** · **[Build your first plugin](https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -25,6 +25,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Find and audit a community plugin before Host execution | [Community plugin audit](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html) |
 | Choose an exact, reproducible installation topology | [Install DeepSeek Harness safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html) |
 | Create, invoke, and debug a reusable Skill | [DeepSeek Harness Skills lab](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
@@ -97,7 +98,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 40 pages |
+| English | Canonical | 41 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -156,6 +157,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Security
 
+- [Audit community plugins before installation](docs/en/security/community-plugin-audit.md)
 - [Code Mode worker-thread trust boundary](docs/en/security/code-mode-worker-trust-boundary.md)
 
 ### Searchable operations

@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/security/community-plugin-audit.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/getting-started/install-deepseek-harness.md",
       "revision": 1,
       "translations": {}

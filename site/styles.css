@@ -851,3 +851,44 @@ footer div { display: flex; gap: 1.5rem; }
   .install-coordinates i { justify-self: center; transform: rotate(90deg); }
   .install-terminal { min-height: 290px; }
 }
+
+.audit-hero { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+.audit-hero h1 { max-width: 10ch; font-size: clamp(3.2rem, 5.4vw, 5.1rem); }
+.audit-funnel { align-self: center; display: grid; gap: .5rem; min-width: 23rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.audit-funnel div { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem; border-radius: .7rem; background: var(--surface); }
+.audit-funnel strong { max-width: 70%; overflow-wrap: anywhere; text-align: right; }
+.audit-funnel small, .audit-funnel i { color: var(--muted); font-size: .78rem; }
+.audit-funnel i { text-align: center; font-style: normal; }
+.audit-funnel .audit-funnel-final { border-left: 3px solid var(--accent); background: var(--surface-strong); }
+.audit-gates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 1.25rem 0 2rem; padding: 1px; list-style: none; background: var(--line); }
+.audit-gates li { min-width: 0; min-height: 190px; display: flex; flex-direction: column; margin: 0; padding: 1.1rem; background: var(--surface); }
+.audit-gates li:first-child { background: var(--surface-strong); }
+.audit-gates strong { color: var(--accent); font: 700 .85rem ui-monospace, monospace; }
+.audit-gates span { margin-top: 1rem; font-size: 1.2rem; font-weight: 750; }
+.audit-gates p { margin-top: auto; color: var(--muted); }
+.audit-equation { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .75rem; align-items: center; margin: 1.25rem 0 2rem; }
+.audit-equation section { min-width: 0; min-height: 150px; padding: 1.1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.audit-equation small { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+.audit-equation strong { display: block; margin-top: 2rem; }
+.audit-equation b { color: var(--accent); font-size: 1.4rem; }
+.audit-effects, .audit-signals { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 1.25rem 0 2rem; border: 1px solid var(--line); background: var(--line); }
+.audit-effects section, .audit-signals section { min-width: 0; min-height: 180px; padding: 1.1rem; background: var(--surface); }
+.audit-effects span { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+.audit-effects strong, .audit-signals strong { display: block; margin-top: 1.8rem; font-size: 1.15rem; }
+.audit-effects p, .audit-signals p { color: var(--muted); }
+.audit-loop { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .7rem; align-items: stretch; margin: 1.25rem 0 2rem; }
+.audit-loop section { min-width: 0; min-height: 185px; display: flex; flex-direction: column; padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.audit-loop small { color: var(--accent); font: 700 .7rem ui-monospace, monospace; text-transform: uppercase; }
+.audit-loop strong { margin-top: 1.5rem; }
+.audit-loop code { margin-top: auto; white-space: normal; overflow-wrap: anywhere; }
+.audit-loop i { align-self: center; color: var(--accent); font-style: normal; }
+
+@media (max-width: 900px) {
+  .audit-hero { grid-template-columns: 1fr; }
+  .audit-funnel { min-width: 0; width: 100%; }
+}
+
+@media (max-width: 760px) {
+  .audit-gates, .audit-equation, .audit-effects, .audit-loop, .audit-signals { grid-template-columns: 1fr; }
+  .audit-equation b, .audit-loop i { justify-self: center; transform: rotate(90deg); }
+}

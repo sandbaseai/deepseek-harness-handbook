@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.4 - 2026-08-19
+
+### Added
+
+- A six-gate community-plugin audit from discovery through package identity, published-artifact inspection, Host-effect mapping, isolated installation, and reversible removal.
+- A visual supply-chain page that separates ecosystem discovery signals from executable trust evidence.
+
 ## 0.3.3 - 2026-08-19
 
 ### Added
