@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.24 - 2026-08-20
+
+### Added
+
+- A source-backed runbook separating DeepSeek model visibility, route registration, route selection, credential resolution, and network dispatch.
+- An emergency stop, home-level hard-disable patch, effective-graph checks, egress verification, and twelve zero-surprise billing gates.
+
 ## 0.5.23 - 2026-08-20
 
 ### Changed

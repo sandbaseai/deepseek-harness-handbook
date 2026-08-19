@@ -109,7 +109,14 @@
     <title>Windows folder-picker worker crash</title>
     <link href="https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html"/>
     <id>https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html</id>
-    <updated>2026-08-20T00:00:00Z</updated>
+  <updated>2026-08-20T02:00:00Z</updated>
+  <entry>
+    <title>Prevent unexpected DeepSeek API charges</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html</id>
+    <updated>2026-08-20T02:00:00Z</updated>
+    <summary>Separate model visibility, route registration, selection, credentials, and observed egress before claiming DeepSeek API spend is disabled.</summary>
+  </entry>
     <summary>Route the same downstream worker error across Node/Koffi decoding, incomplete native installation, and stale DSH ownership, then recover through the shipped browse picker.</summary>
   </entry>
 

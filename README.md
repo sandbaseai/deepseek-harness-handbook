@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Verify the official runtime—not an API wrapper](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Fix Windows picker crashes](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)** · **[Choose a memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html)**
+**[Prevent unexpected DeepSeek API charges](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html)** · **[Verify the official runtime](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Fix Windows picker crashes](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -49,6 +49,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
 | Run one task in automation or CI | [CLI and Headless Agent guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
 | Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
+| Prove DeepSeek chat and Web search cannot create unexpected charges | [DeepSeek API cost-boundary runbook](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html) |
 | Fix a context-window or token-budget error | [Classify and recover context overflow](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html) |
 | Understand why one model switch affects future Agents | [Map session and deployment model state](https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html) |
 | Fix a plugin script corrupted around a dollar sign | [Repair tapIndex replacement-string insertion](https://sandbaseai.github.io/deepseek-harness-handbook/tapindex-dollar-corruption.html) |
@@ -127,7 +128,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 67 pages |
+| English | Canonical | 68 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -194,6 +195,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 - [Audit community plugins before installation](docs/en/security/community-plugin-audit.md)
 - [Code Mode worker-thread trust boundary](docs/en/security/code-mode-worker-trust-boundary.md)
+- [Prevent unexpected DeepSeek API charges](docs/en/security/prevent-unexpected-deepseek-api-charges.md)
 
 ### Searchable operations
 
