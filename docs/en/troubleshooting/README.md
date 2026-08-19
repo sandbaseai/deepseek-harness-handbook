@@ -91,6 +91,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Session first-flush failure on filesystems without hard links](session-hard-link-unsupported.md)
 - [Windows standalone-pnpm `npm_execpath` build failure](windows-standalone-pnpm-npm-execpath.md)
 - [Conversation update before its start Match](conversation-update-before-start.md)
+- [Plugin add exits nonzero after materialization](plugin-add-nonzero-reconcile.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [`spawn bash ENOENT` after a workspace moves](workspace-moved-spawn-enoent.md)
 - [Protect and recover live session logs](live-session-log-durability.md)
