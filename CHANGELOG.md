@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.1 - 2026-08-19
+
+### Changed
+
+- Replaced the stale 46-guide homepage label with the current 50-guide canonical count.
+- Added an accessible, keyboard-friendly filter with live result counts and a real empty state for the 44 visual guide paths.
+
 ## 0.5.0 - 2026-08-19
 
 ### Added
