@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.15 - 2026-08-19
+
+### Added
+
+- A source-backed Synology NAS deployment guide for Linux x64, pnpm workspaces, native addons, cwd-stable wrappers, and service operation.
+- A secure remote-access topology that keeps the Agent Host loopback-only behind authenticated transport.
+
 ## 0.5.14 - 2026-08-19
 
 ### Added

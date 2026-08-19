@@ -40,6 +40,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Fix a Code Mode Skill that reaches UI but not model context](troubleshooting/code-mode-skill-context.md)
 - [Fix Minimal preset Bash on native Windows](troubleshooting/windows-minimal-preset-bash.md)
 - [Diagnose the first Windows workspace-write freeze](troubleshooting/windows-first-workspace-write-freeze.md)
+- [Run from source on a Synology NAS](getting-started/synology-nas-source-deployment.md)
 
 ## Learning paths
 
