@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.17 - 2026-08-20
+
+### Added
+
+- A source-backed diagnosis for `Output token limit reached` across DeepSeek, pi-ai, Ollama, and llama.cpp routes.
+- A three-ceiling model, terminal-signal trace, bounded recovery, configuration precedence, and twelve regression gates.
+
 ## 0.5.16 - 2026-08-19
 
 ### Added
