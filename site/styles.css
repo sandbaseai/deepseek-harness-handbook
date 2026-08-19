@@ -1352,6 +1352,9 @@ footer div { display: flex; gap: 1.5rem; }
 .event-resume div { min-width: 0; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; padding: 1.2rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
 .event-resume i { color: var(--accent); font-style: normal; font-size: 1.5rem; }
 .event-resume small, .event-contracts span, .event-storage small { color: var(--accent); font: 700 .68rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .05em; }
+.event-case { display: grid; gap: .75rem; margin: 1.25rem 0 2rem; padding: 1.3rem; border-left: 4px solid var(--accent); background: var(--surface-strong); }
+.event-case span { color: var(--accent); font: 800 .72rem ui-monospace, monospace; text-transform: uppercase; }
+.event-case p { margin: 0; color: var(--muted); }
 .event-resume strong { overflow-wrap: anywhere; font-size: 1.2rem; }
 .event-resume span { color: var(--muted); font-size: .8rem; }
 .event-resume .event-refused { border: 2px solid #b55d4c; background: var(--surface-strong); }
