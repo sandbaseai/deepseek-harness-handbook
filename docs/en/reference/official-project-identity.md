@@ -1,7 +1,7 @@
 ---
 title: Verify the Official DeepSeek Harness Project
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -24,9 +24,10 @@ The official README describes `dsh` as an agent harness with an “everything is
 | Product page | `https://deepseek.com/harness` |
 | CLI package | `@deepseek-ai/dsh` |
 | CLI command | `dsh` |
-| Current npm `latest` and `next` | `0.1.0-rc.7` |
-| Current GitHub release | `dsh-v0.1.0-rc.7` |
-| Release commit | `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca` |
+| Current npm `latest` | `0.1.0-rc.7` |
+| Current npm `next` | `0.1.0-rc.8` |
+| Current GitHub release | `dsh-v0.1.0-rc.8` |
+| rc.8 release commit | `141eb6fef83422698aef7a981029e843e8161534` |
 | Runtime license | MIT |
 
 ## Runtime or API wrapper? Use the behavior test
@@ -63,7 +64,7 @@ Expected identity signals:
 }
 ```
 
-The dist-tags are mutable. Treat the exact version as evidence captured at a time, not as a permanent promise.
+The dist-tags are mutable. At the verification date, bare `npx @deepseek-ai/dsh` resolves through `latest` to rc.7, while `npx @deepseek-ai/dsh@next` resolves to rc.8. Treat the exact version as evidence captured at a time, not as a permanent promise.
 
 ## Verify a source checkout
 
@@ -79,14 +80,14 @@ node -p "require('./apps/cli/package.json').name"
 
 A fork can contain valid work while its `origin` is not the official repository. Record both the remote and commit. Do not describe a fork commit as released upstream until the official tag contains it.
 
-For the rc.7 release:
+For the rc.8 release:
 
 ```sh
 git fetch --tags https://github.com/deepseek-ai/deepseek-harness.git
-git rev-list -n 1 dsh-v0.1.0-rc.7
+git rev-list -n 1 dsh-v0.1.0-rc.8
 ```
 
-The tag should resolve to `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca` at the verification date.
+The tag should resolve to `141eb6fef83422698aef7a981029e843e8161534` at the verification date.
 
 ## Verify the artifact you actually run
 
@@ -99,11 +100,11 @@ npm list -g --depth=0 @deepseek-ai/dsh
 pnpm list -g --depth=0 @deepseek-ai/dsh
 ```
 
-For a clean-room test, pin the full version:
+For a clean-room test, pin the full version rather than relying on a moving dist-tag:
 
 ```sh
-npx @deepseek-ai/dsh@0.1.0-rc.7 --version
-npx @deepseek-ai/dsh@0.1.0-rc.7 web
+npx @deepseek-ai/dsh@0.1.0-rc.8 --version
+npx @deepseek-ai/dsh@0.1.0-rc.8 web
 ```
 
 Capture output before reinstalling. An `npx` cache, project-local dependency, global installation, packaged application, and source checkout can all select different artifacts.
@@ -168,8 +169,8 @@ Observed date and time zone:
 ## Primary sources
 
 - [Official DeepSeek Harness repository](https://github.com/deepseek-ai/deepseek-harness)
-- [Official rc.7 GitHub release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7)
-- [Official CLI package manifest at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/package.json)
-- [Official repository README at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/README.md)
+- [Official rc.8 GitHub release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.8)
+- [Official CLI package manifest at rc.8](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/apps/cli/package.json)
+- [Official repository README at rc.8](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/README.md)
 - [Published `@deepseek-ai/dsh` package](https://www.npmjs.com/package/@deepseek-ai/dsh)
 - [DeepSeek Harness product page](https://deepseek.com/harness)

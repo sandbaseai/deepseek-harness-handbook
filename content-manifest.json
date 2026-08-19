@@ -61,7 +61,7 @@
     },
     {
       "source": "docs/en/reference/official-project-identity.md",
-      "revision": 2,
+      "revision": 3,
       "translations": {}
     },
     {
@@ -356,6 +356,11 @@
     },
     {
       "source": "docs/en/troubleshooting/session-hard-link-unsupported.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/windows-standalone-pnpm-npm-execpath.md",
       "revision": 1,
       "translations": {}
     }

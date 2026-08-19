@@ -58,6 +58,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 - [Subagent route inheritance incident note](https://sandbaseai.github.io/deepseek-harness-handbook/subagent-route-inheritance.html): Diagnose and mitigate child agents using a stale provider route or unexpected credential.
 - [Remote Web control-plane guide](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html): Keep DSH on loopback, choose SSH localhost or an authenticated HTTPS gateway, separate the three-second readiness guard from stream abortion, and diagnose slow links with an evidence timeline.
 - [Session hard-link compatibility](https://sandbaseai.github.io/deepseek-harness-handbook/session-hard-link-unsupported.html): Recover first-flush link failures by moving the Session root while preserving atomic, no-overwrite publication.
+- [Windows standalone pnpm](https://sandbaseai.github.io/deepseek-harness-handbook/windows-standalone-pnpm.html): Fix rc.8 source runners that pass native pnpm.exe to Node through npm_execpath.
 - [Operator cheat sheet](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/cheat-sheet.md): Commands, evidence checks, and production boundaries.
 
 ## Download

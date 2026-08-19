@@ -89,6 +89,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Recover a prompt accepted before it became durable](prompt-accepted-before-durable.md)
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [Session first-flush failure on filesystems without hard links](session-hard-link-unsupported.md)
+- [Windows standalone-pnpm `npm_execpath` build failure](windows-standalone-pnpm-npm-execpath.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [`spawn bash ENOENT` after a workspace moves](workspace-moved-spawn-enoent.md)
 - [Protect and recover live session logs](live-session-log-durability.md)

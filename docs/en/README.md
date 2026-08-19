@@ -50,6 +50,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Control response and reasoning language](troubleshooting/response-language-and-reasoning.md)
 - [Recover a prompt accepted before it became durable](troubleshooting/prompt-accepted-before-durable.md)
 - [Fix Session persistence on filesystems without hard links](troubleshooting/session-hard-link-unsupported.md)
+- [Fix rc.8 source builds with standalone pnpm on Windows](troubleshooting/windows-standalone-pnpm-npm-execpath.md)
 
 ## Learning paths
 
