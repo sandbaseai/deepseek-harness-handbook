@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.32 - 2026-08-20
+
+### Changed
+
+- Reworked the repository and Pages above-the-fold messaging around the complete Agent boundary, pinned source evidence, and direct task entry points.
+- Added a responsive evidence strip for canonical coverage, rc.8 coverage, primary-source linking, and independent-project status.
+- Expanded Open Graph and X card metadata and versioned the homepage CSS and JavaScript URLs to avoid stale Pages assets after releases.
+
 ## 0.5.31 - 2026-08-20
 
 ### Added

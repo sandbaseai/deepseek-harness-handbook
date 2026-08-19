@@ -8,9 +8,13 @@
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
+**74 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+
+Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
+
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Prevent unexpected DeepSeek API charges](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html)** · **[Verify the official runtime](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Fix Windows picker crashes](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)**
+**[Start in five minutes](docs/en/getting-started/quickstart.md)** · **[Prevent unexpected API charges](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html)** · **[Verify the official runtime](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)** · **[Diagnose a failure](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 

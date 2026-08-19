@@ -1006,6 +1006,11 @@ h2 { font-size: clamp(2.8rem, 5.2vw, 5.4rem); font-weight: 730; }
 .star-count:not(:empty)::after { content: ")"; }
 .hero-figure { margin: 0; transform: rotate(2deg); }
 .hero-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); background: #f7f3e8; }
+.evidence-strip { width: min(calc(100% - 40px), var(--max)); margin: -1px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.evidence-strip div { min-height: 112px; padding: 1.35rem 1.25rem 1.25rem 0; display: flex; flex-direction: column; justify-content: space-between; gap: .65rem; }
+.evidence-strip div + div { padding-left: 1.25rem; border-left: 1px solid var(--line); }
+.evidence-strip strong { font-size: 1.05rem; letter-spacing: -.025em; }
+.evidence-strip span { max-width: 24ch; color: var(--muted); font-size: .78rem; line-height: 1.4; }
 
 .section-shell { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; padding: clamp(5.5rem, 10vw, 9rem) 0; }
 .section-heading { max-width: 760px; }
@@ -1369,6 +1374,9 @@ footer div { display: flex; gap: 1.5rem; }
 
 @media (max-width: 900px) {
   .hero, .quickstart, .runtime-heading, .paths, .principle { grid-template-columns: 1fr; }
+  .evidence-strip { grid-template-columns: repeat(2, 1fr); }
+  .evidence-strip div:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+  .evidence-strip div:nth-child(4) { border-top: 1px solid var(--line); }
   .hero { min-height: auto; padding: 4rem 0 6rem; }
   .hero-figure { transform: none; max-width: 700px; }
   .quickstart { gap: 2rem; }
@@ -1383,6 +1391,12 @@ footer div { display: flex; gap: 1.5rem; }
   .diagnose-boundary { gap: 1.5rem; }
   .status-hero, .status-method, .status-cta { gap: 2.5rem; }
   .status-cta > div:last-child { justify-content: flex-start; }
+}
+
+@media (max-width: 560px) {
+  .evidence-strip { grid-template-columns: 1fr; }
+  .evidence-strip div { min-height: 92px; padding: 1.1rem 0; }
+  .evidence-strip div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
 }
 
 @media (max-width: 680px) {
