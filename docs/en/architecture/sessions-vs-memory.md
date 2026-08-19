@@ -1,16 +1,16 @@
 ---
 title: DeepSeek Harness Sessions vs Long-Term Memory
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-19
 ---
 
 # Sessions are not long-term memory
 
 DeepSeek Harness has durable sessions, but a durable session is not automatically a cross-session memory system. The distinction matters: session replay reconstructs one interaction; long-term memory deliberately moves selected facts across interaction boundaries.
 
-On the verified upstream revision, the shipped composition has an event-sourced Session service and opt-in examples for third-party memory servers through MCP. It does **not** ship a generic `ctx.memory` service. Treat proposals for such a service as design work, not as an available runtime API.
+On the verified upstream rc.7 revision, the shipped composition has an event-sourced Session service and opt-in examples for third-party memory servers through MCP. It does **not** ship a generic `ctx.memory` service. Treat proposals for such a service as design work, not as an available runtime API.
 
 ```mermaid
 flowchart LR
@@ -38,6 +38,30 @@ flowchart LR
 | Long-term memory | Selected facts, observations, or profiles | Potentially many sessions | Only when a tool or prompt-assembly policy retrieves it |
 
 A fifth mechanism—**Skills or workspace instructions**—stores stable operating guidance. Do not put policy into semantic memory and hope retrieval happens. If an Agent must always follow a rule, mount that rule deterministically.
+
+## Decide what you are migrating
+
+"Move my Codex or Claude Code memory" can refer to four different artifacts. Inventory them before choosing a plugin or writing an importer.
+
+| Source artifact | What it usually means | DSH destination |
+|---|---|---|
+| Project instructions | Rules that should apply on every run | Project Skill or workspace instruction |
+| User preferences | Selected facts reused across new Sessions | Scoped long-term memory |
+| Conversation transcript | Evidence from one prior interaction | Imported archive or read-only search index, not a live Session append |
+| Tool configuration | Commands, MCP servers, permissions, or model routes | Reviewed DSH profile, plugin, or MCP configuration |
+
+Do not bulk-inject every source file into the system prompt. That hides provenance, spends context on irrelevant records, and turns stale notes into high-priority instructions. Preserve the original files, import into a disposable namespace, and make retrieval explicit enough to inspect.
+
+### Migration acceptance record
+
+Record these fields for each imported item:
+
+```text
+source_agent, source_path, source_digest, source_updated_at
+imported_at, importer_version, destination_scope, destination_record_id
+```
+
+The source digest makes a rerun idempotent and lets an operator distinguish unchanged, updated, and deleted source files. A dry run should report those three sets without mutating either side.
 
 ## What the Session service guarantees
 
@@ -130,6 +154,8 @@ Use a disposable provider namespace and a non-sensitive nonce such as `validatio
 6. Create session C under another test principal. Confirm the nonce is absent.
 7. Repeat the original save with the same idempotency key. Confirm there is still one logical record.
 8. Inject instruction-like text into a test memory. Confirm it is quoted as data and cannot override the active Agent policy.
+9. Re-run the same import. Confirm unchanged source digests do not create duplicate records.
+10. Change one source fact and import again. Confirm the old record remains auditable or is explicitly superseded rather than silently overwritten.
 
 ### Success evidence
 
@@ -149,6 +175,23 @@ Use a disposable provider namespace and a non-sensitive nonce such as `validatio
 | Two records appear after retry | Missing or provider-ignored idempotency |
 | Timeout followed by a late record | Unknown-outcome handling and reconciliation |
 | Retrieved text changes Agent policy | Trust labeling and prompt hierarchy |
+| A second import duplicates everything | Source digests, idempotency, and update semantics |
+| An old fact silently wins | Conflict policy, timestamps, and supersession records |
+
+## Evaluate a community memory plugin before installing it
+
+A GitHub repository, npm package, and enthusiastic discussion comment are discovery signals, not compatibility or security evidence. Memory plugins execute inside or beside the Host and can observe sensitive prompts, files, and durable state.
+
+Use this release gate:
+
+1. Match the repository, npm publisher, package tarball, license, and exact version.
+2. Inspect install scripts, runtime dependencies, network destinations, filesystem roots, and declared DSH injections.
+3. Confirm where recall enters the model surface and whether the insertion is visible in Session evidence.
+4. Test tenant and workspace isolation with two disposable principals.
+5. Test uninstall and cold restart without the plugin. Existing Sessions must still load, or the plugin must document the durable dependency.
+6. Back up the complete profile and memory store before testing migration against real data.
+
+The [community plugin audit](../security/community-plugin-audit.md) provides the full artifact-inspection and recovery workflow.
 
 ## Current upstream status
 
@@ -160,8 +203,9 @@ Pin the upstream revision you deploy and re-check this boundary after upgrades.
 
 ## Official sources
 
-- [Session package](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/core/session/README.md)
-- [Session implementation](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/core/session/src/index.ts)
-- [Third-party memory MCP examples](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/examples/mcp-memory/README.md)
-- [MCP client](https://github.com/deepseek-ai/deepseek-harness/tree/47f943859bef60e4160492346772ded9b24f765a/packages/mcp/mcp-client)
+- [Session package](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/README.md)
+- [Session implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/index.ts)
+- [Third-party memory MCP examples](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/examples/mcp-memory/README.md)
+- [MCP client](https://github.com/deepseek-ai/deepseek-harness/tree/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/mcp/mcp-client)
+- [Community memory migration discussion](https://github.com/deepseek-ai/deepseek-harness/discussions/14)
 - [Community `ctx.memory` proposal](https://github.com/deepseek-ai/deepseek-harness/discussions/1638)

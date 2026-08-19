@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.3.8 - 2026-08-19
+
+### Added
+
+- A source-backed decision guide that separates DSH Sessions, compaction, Skills, application records, and cross-session memory.
+- A migration acceptance record, community-plugin release gate, and visual architecture page for moving Codex or Claude Code memory without losing provenance.
+
 ## 0.3.7 - 2026-08-19
 
 ### Added
