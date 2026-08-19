@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.1 - 2026-08-19
+
+### Added
+
+- A Windows folder-picker worker-crash runbook that separates Node/Koffi path decoding, incomplete native installation, and stale-process failure branches.
+- A reversible switch to the shipped in-browser directory picker, clean Node-version A/B procedure, unsafe-workaround warnings, and cross-backend acceptance matrix.
+
 ## 0.4.0 - 2026-08-19
 
 ### Changed

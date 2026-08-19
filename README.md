@@ -10,7 +10,7 @@
 
 If this handbook saves you time, **star the repository** and watch releases. That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)** · **[Choose a memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html)** · **[Keep Session roots single-writer](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html)** · **[Upgrade and roll back](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html)**
+**[Fix the Windows folder picker](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html)** · **[Use the DSH CLI](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html)** · **[Choose a memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html)** · **[Keep Session roots single-writer](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html)**
 
 **Live operator site:** [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 
@@ -26,6 +26,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | I want to… | Start here |
 |---|---|
 | Understand the shipped CLI, automate one task, or evaluate a community TUI | [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
+| Recover when the Windows folder-picker worker exits without a result | [Windows folder-picker crash guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html) |
 | Move Codex or Claude Code memory without losing provenance or isolation | [Sessions, Skills, and long-term memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |
 | Run Web, headless, ACP, or SDK processes concurrently without sharing a writable Session root | [Single-writer Session topology](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html) |
 | Fix `spawn bash ENOENT` after moving or renaming a workspace | [Moved-workspace recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html) |
@@ -182,6 +183,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](docs/en/troubleshooting/http2-invalid-session.md)
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)
+- [Windows folder-picker worker crash](docs/en/troubleshooting/windows-folder-picker-worker-crash.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)
 - [Remote Web access, SSH, HTTPS, and trust](docs/en/troubleshooting/remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](docs/en/troubleshooting/pty-shell-path.md)
