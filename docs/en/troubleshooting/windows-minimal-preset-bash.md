@@ -1,0 +1,120 @@
+---
+title: DeepSeek Harness Windows Minimal Preset Bash Failure
+locale: en
+content_revision: 1
+status: canonical
+verified_at: 2026-08-19
+upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
+---
+
+# Windows Minimal preset Bash fails before the command runs
+
+On DeepSeek Harness rc.7 for native Windows, the shipped **Minimal** Agent preset can expose a `bash` tool that fails every time with:
+
+```text
+BashError: subprocess-local: terminal inspection is unsupported on platform win32
+```
+
+This is not evidence that Bash is missing from `PATH`, the command is malformed, or the sandbox denied it. The preset selects a persistent PTY stack whose local process inspector has no Windows implementation.
+
+> [!WARNING]
+> Do not install Git Bash, weaken permissions, or rewrite the command as the first response. The failure occurs while the terminal backend is being constructed, before the requested command executes.
+
+## Identify this exact case
+
+All four conditions should be true:
+
+1. the Host is native `win32`, not WSL;
+2. the selected Agent preset is `minimal`;
+3. the model-facing tool is `bash`, not `pwsh`;
+4. stderr contains the exact terminal-inspection error above.
+
+If the tool is `pwsh`, route the failure through the broader [Windows compatibility guide](windows-compatibility.md). If `bash` reports `ENOENT`, inspect executable discovery instead. If WSL hosts the Harness process, the platform is Linux and this guide does not apply.
+
+## The failure crosses four layers
+
+```mermaid
+flowchart LR
+  M[Minimal preset] --> P[Persistent bash tool]
+  P --> T[Terminal Bash + PTY registry]
+  T --> S[Local spawnTerminal]
+  S --> I{Process inspector}
+  I -->|linux| L[Linux inspector]
+  I -->|darwin| D[macOS inspector]
+  I -->|win32| X[Unsupported-platform error]
+```
+
+The Minimal composition mounts these rows without a platform guard:
+
+```yaml
+- id: pty
+  name: '@deepseek-ai/dsh-terminal'
+- id: terminal-bash
+  name: '@deepseek-ai/dsh-terminal-bash'
+- id: persistent-bash
+  name: '@deepseek-ai/dsh-tool-bash-persistent'
+```
+
+That stack eventually calls `createProcessInspector()`. At the pinned revision, the factory returns implementations only for `linux` and `darwin`, then throws for every other platform.
+
+Standard, Code, and Cordis presets use a different shell contract. Their tool rows explicitly disable `tool-bash` on `win32` and enable `tool-pwsh` there. This is why changing preset can make the same installation work.
+
+## Fast recovery on rc.7
+
+Use **Standard** or **Code** for a native Windows Session, create a fresh Session, and verify that the tool roster contains `pwsh` rather than `bash`.
+
+```powershell
+dsh --profile web --dump-config
+```
+
+Then run a bounded probe through the Agent:
+
+```powershell
+Get-Location
+Get-ChildItem -Force | Select-Object -First 5
+```
+
+A new Session matters because the selected preset and tool contract are Session facts. Switching a UI control is not sufficient evidence that an already-created Session was recomposed.
+
+If the Minimal prompt is essential, copy the shipped preset through the supported preset-authoring flow and replace its persistent PTY group with the same platform-gated `tool-bash` / `tool-pwsh` rows used by the other presets. Never edit the shipped preset in place: an upgrade can overwrite it, and a malformed composition can prevent the Agent from loading.
+
+## What not to do
+
+| Attempt | Why it misses this failure |
+|---|---|
+| install another `bash.exe` | the backend fails at terminal inspection, not executable lookup |
+| retry with `danger-full-access` | permission policy does not add a Windows process inspector |
+| translate the command to PowerShell | the mounted tool remains persistent Bash |
+| edit the shipped Minimal YAML | upgrades overwrite it and the deployment owns that composition |
+| treat `str_replace_editor` fallback errors as the cause | they happen after Bash has already failed |
+
+## Durable upstream repair
+
+The shipped preset should never advertise a tool whose required backend rejects the Host platform. A repair can take one of two shapes:
+
+1. make Minimal platform-aware and compose PowerShell on `win32`; or
+2. implement and test the complete persistent-terminal inspection contract on Windows.
+
+The first option aligns with the current Standard, Code, and Cordis behavior. Merely suppressing the inspector error would be unsafe if foreground process groups, termination, or session cleanup remain unimplemented.
+
+## Regression gates
+
+A complete preset-level fix should prove:
+
+1. Minimal on `win32` exposes `pwsh`, not persistent `bash`;
+2. Minimal on Linux/macOS retains its intended persistent Bash behavior;
+3. Standard, Code, and Cordis rosters do not regress;
+4. the Minimal tool description matches the actual shell semantics;
+5. a fresh Windows Session completes a read-only shell probe;
+6. cancellation and process cleanup leave no child behind;
+7. preset switching creates the expected Session-scoped roster;
+8. resolved-config output makes the platform choice inspectable.
+
+## Source evidence
+
+- [Upstream report #3428](https://github.com/deepseek-ai/deepseek-harness/discussions/3428)
+- [Minimal preset composition](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/config/agent-presets/minimal/agent.cordis.yml)
+- [`createProcessInspector()` platform factory](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/subprocess/subprocess-local/src/process-inspector.ts)
+- [Platform-gated preset tests](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/tests/windows-shell.spec.ts)
+- [Standard preset shell rows](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/config/agent-presets/standard/agent.cordis.yml)
+

@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.13 - 2026-08-19
+
+### Added
+
+- A source-backed diagnosis for Minimal preset Bash calls that fail before command execution on native Windows.
+- A preset-to-platform trace, rc.7 recovery path, safe repair boundary, and eight regression gates.
+
 ## 0.5.12 - 2026-08-19
 
 ### Added

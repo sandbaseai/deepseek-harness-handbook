@@ -38,6 +38,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Choose a safe remote Web access topology](troubleshooting/remote-web-secure-context.md)
 - [Diagnose a todo that remains in progress after the final answer](troubleshooting/todo-stuck-in-progress.md)
 - [Fix a Code Mode Skill that reaches UI but not model context](troubleshooting/code-mode-skill-context.md)
+- [Fix Minimal preset Bash on native Windows](troubleshooting/windows-minimal-preset-bash.md)
 
 ## Learning paths
 
