@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 25
+content_revision: 26
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -44,6 +44,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Windows folder picker opens but the worker exits without a result | native dialog / Node-Koffi decode / stale Host | dialog timing, Node version, exact DSH PID, and project-local native import |
 | Editing an existing Windows profile file reports `ReplaceFileW EACCES (Win32 5)` | atomic publication / HMR watcher | running Host owner, new-file A/B result, stopped-Host result, attributes, and ACL |
 | Response disappears after reload | persistence/session log | session events and configured store |
+| Session list is empty, or history reports a frame, sequence, or duplicate-start error | physical log / event ordering / client projection | exact signature, stopped-writer process list, immutable artifact copy, and repeated call IDs |
 | Session crashes after its log is deleted or replaced | live/durable ownership | first persistence error and an offline artifact copy |
 | Session resume refuses an unknown downstream plugin event type | durable event compatibility | plugin version, event type and seq, Harness revision, and whether the event is reconstruction-required |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
@@ -66,6 +67,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
 - [`spawn bash ENOENT` after a workspace moves](workspace-moved-spawn-enoent.md)
 - [Protect and recover live session logs](live-session-log-durability.md)
+- [Route and recover session-history corruption](session-history-corruption-triage.md)
 - [Fix context window exceeded errors](context-window-exceeded.md)
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)

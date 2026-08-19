@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.4 - 2026-08-19
+
+### Added
+
+- A session-history recovery router that separates Zstandard frame damage, committed sequence gaps, and repeated provider tool-call ID collisions.
+- A preserve-first workflow, four bounded recovery outcomes, and cross-layer regression gates grounded in three upstream reproductions.
+
 ## 0.5.3 - 2026-08-19
 
 ### Added

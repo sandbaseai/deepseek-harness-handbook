@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 25,
+      "revision": 26,
       "translations": {}
     },
     {
@@ -271,6 +271,11 @@
     },
     {
       "source": "docs/en/troubleshooting/macos-bash-nonascii-pty.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/session-history-corruption-triage.md",
       "revision": 1,
       "translations": {}
     }
