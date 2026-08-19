@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 38,
+      "revision": 39,
       "translations": {}
     },
     {
@@ -341,6 +341,11 @@
     },
     {
       "source": "docs/en/troubleshooting/response-language-and-reasoning.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/prompt-accepted-before-durable.md",
       "revision": 1,
       "translations": {}
     }

@@ -47,6 +47,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Fix a compaction summary truncated at the token cap](troubleshooting/compaction-summary-truncated.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](troubleshooting/plugin-peer-dependency-warnings.md)
 - [Control response and reasoning language](troubleshooting/response-language-and-reasoning.md)
+- [Recover a prompt accepted before it became durable](troubleshooting/prompt-accepted-before-durable.md)
 
 ## Learning paths
 
