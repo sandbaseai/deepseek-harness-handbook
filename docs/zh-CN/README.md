@@ -15,6 +15,8 @@ verified_at: 2026-08-20
 
 如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook](https://github.com/sandbaseai/deepseek-harness-handbook) 点一个 Star。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
+这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
+
 ## 按你的任务开始
 
 | 我现在要做什么 | 最短入口 | 你会得到什么 |

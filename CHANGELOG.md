@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.41 - 2026-08-20
+
+### Changed
+
+- Added the merged Awesome DeepSeek Harness listing as verifiable community adoption evidence.
+- Connected English and Simplified Chinese entry points to the public source-backed runbook request Discussion.
+- Added the same evidence-first topic route to the contribution guide.
+
 ## 0.5.40 - 2026-08-20
 
 ### Changed
