@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.45 - 2026-08-20
+
+### Added
+
+- A primary-source-backed comparison of DeepSeek Harness, Claude Code, and Codex focused on runtime ownership, extensions, policy, state, and migration contracts.
+- A visual decision map, controlled evaluation gates, homepage discovery card, sitemap entry, Atom update, and machine-readable index entry.
+
 ## 0.5.44 - 2026-08-20
 
 ### Fixed

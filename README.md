@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**80 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**81 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -61,6 +61,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Keep the essential commands and checks in one tab | [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md) |
 | Choose the right official runnable example | [Official examples map](docs/en/examples/official-examples-map.md) |
 | Understand what DeepSeek Harness actually is | [DeepSeek Harness explained](docs/en/what-is-deepseek-harness.md) |
+| Choose between DeepSeek Harness, Claude Code, and Codex | [Source-backed control-plane comparison](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-vs-claude-code-vs-codex.html) |
 | Run the Web UI safely | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
 | Run one task in automation or CI | [CLI and Headless Agent guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
@@ -153,7 +154,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 80 pages |
+| English | Canonical | 81 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -168,6 +169,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Getting started
 
 - [What is DeepSeek Harness?](docs/en/what-is-deepseek-harness.md)
+- [DeepSeek Harness vs Claude Code vs Codex](docs/en/reference/deepseek-harness-vs-coding-agents.md)
 - [Install DeepSeek Harness safely](docs/en/getting-started/install-deepseek-harness.md)
 - [Upgrade and roll back safely](docs/en/getting-started/upgrade-and-rollback.md)
 - [Five-minute Web UI quickstart](docs/en/getting-started/quickstart.md)

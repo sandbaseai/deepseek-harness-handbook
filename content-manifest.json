@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/reference/deepseek-harness-vs-coding-agents.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/missing-client-schema-form.md",
       "revision": 1,
       "translations": {}
