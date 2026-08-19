@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 36,
+      "revision": 37,
       "translations": {}
     },
     {
@@ -331,6 +331,11 @@
     },
     {
       "source": "docs/en/troubleshooting/compaction-summary-truncated.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/plugin-peer-dependency-warnings.md",
       "revision": 1,
       "translations": {}
     }
