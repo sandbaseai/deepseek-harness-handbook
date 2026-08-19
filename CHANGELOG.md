@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.35 - 2026-08-20
+
+### Added
+
+- A source-backed npm `ETARGET` runbook for rc.8 installs resolving stale package metadata through caches, mirrors, and proxies.
+- Official-versus-configured registry routing, isolated-cache probes, dist-tag clarification, release-publisher gates, and an incident bundle.
+
 ## 0.5.34 - 2026-08-20
 
 ### Added
