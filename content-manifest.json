@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 26,
+      "revision": 27,
       "translations": {}
     },
     {
@@ -276,6 +276,11 @@
     },
     {
       "source": "docs/en/troubleshooting/session-history-corruption-triage.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/pnpm-adding-to-root-plugin.md",
       "revision": 1,
       "translations": {}
     }
