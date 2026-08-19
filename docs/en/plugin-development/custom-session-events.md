@@ -1,14 +1,14 @@
 ---
 title: Persist Custom Plugin Events Without Breaking Session Resume
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-19
 ---
 
 # Persist custom plugin events without breaking Session resume
 
-At upstream commit `99f6f02`, an out-of-tree plugin can extend the TypeScript `SessionEventMap` and append its own event type, but that does not make the type known to a future Harness reader. The next cold load can refuse the complete Session:
+At upstream commit `99f6f02`, an out-of-tree plugin can extend the TypeScript `SessionEventMap` and append its own event type, but that does not make the type known to the persistence reader. The next cold load can refuse the complete Session—even with the same Harness version and the plugin still installed:
 
 ```text
 session "…" contains event type "plugin/example" (seq N) unknown to this
@@ -16,6 +16,23 @@ harness and not marked ignorable; refusing to interpret the log
 ```
 
 Until the public writer API can persist the `ignorable` envelope for downstream event types, keep plugin-only audit and telemetry records outside the core durable Session log.
+
+## What the rc.7 incident proves
+
+Upstream report #3416 records two otherwise healthy rc.7 Sessions containing eight `dsh-talk/speech` events. The plugin described those events as informational, but called `session.append('dsh-talk/speech', data)` because the public append signature has no `ignorable` option. Each stored envelope therefore omitted the only marker that permits an unknown reader to skip it.
+
+Cold load failed on the same rc.7 build that wrote the events. Reinstalling or keeping the plugin enabled did not expand `KNOWN_SESSION_EVENT_TYPES`: declaration merging affects the writer's local TypeScript compilation, not the generated runtime set used by persistence validation.
+
+This sharpens the diagnosis:
+
+| Observation | What it proves |
+|---|---|
+| event sequence and framing are valid | this is not generic log corruption |
+| same Harness version still refuses | version rollback alone is insufficient |
+| plugin remains installed | plugin presence does not register durable reader vocabulary |
+| adding `ignorable: true` to a copied artifact passes validation | the missing envelope capability is the blocking boundary |
+
+The last row is forensic confirmation, not a general editing recipe. A format-aware repair must preserve frames, sequence, checksums, source references, and the original artifact; only the plugin author can assert that dropping the event is semantically safe.
 
 > [!CAUTION]
 > Do not patch a live Session log, cast around the append API, or hand-edit the generated known-type catalog. The strict read refusal protects reconstruction integrity: an unknown required event may change the meaning of every event after it.
@@ -28,7 +45,7 @@ Until the public writer API can persist the `ignorable` envelope for downstream 
 | Durable envelope | `ignorable?: true` exists on stored events | only the writer can truthfully declare that loss is safe |
 | Reader vocabulary | generated `KNOWN_SESSION_EVENT_TYPES` contains in-repository events | downstream types are unknown by construction |
 
-The reader already skips an unknown event when its stored envelope carries `ignorable: true`. At the verified revision, `Session.append()` exposes surface options only for the built-in surface event types and exposes no options tuple for other event types. The read-side escape hatch exists; the public downstream write path does not yet expose it.
+The reader already skips an unknown event when its stored envelope carries `ignorable: true`. At the verified revision, `Session.append()` exposes a `SurfaceIntent` options tuple only for built-in surface event types and exposes no options tuple for other event types. The read-side escape hatch exists; the public downstream write path does not yet expose it.
 
 ```mermaid
 flowchart LR
@@ -99,6 +116,8 @@ Stop the process that owns the Session. Export through the UI if it remains avai
 
 If the plugin version or Harness build that wrote the event is trusted and available, restore that complete compatible composition in an isolated environment and export a human-readable transcript. Do not install an unreviewed fork on a credential-bearing workstation merely to load the Session.
 
+For an rc.7 downstream type, “compatible” cannot mean merely reinstalling the plugin: prove that the reader actually recognizes the stored type or that the artifact carries an ignorable marker written under a supported contract.
+
 ### 3. Continue in a new Session when compatibility cannot be proven
 
 Create a new Session and bring forward a reviewed summary plus explicit source artifacts. Keep the rejected log immutable for diagnosis. A summary continuation is data loss compared with a valid resume, but it is safer than silently deleting an event whose semantics are unknown.
@@ -141,9 +160,9 @@ Rollback path:
 
 ## Primary sources
 
+- [Real rc.7 `dsh-talk/speech` incident #3416](https://github.com/deepseek-ai/deepseek-harness/discussions/3416)
 - [Upstream plugin compatibility discussion #3191](https://github.com/deepseek-ai/deepseek-harness/discussions/3191)
 - [Generated reader vocabulary at `99f6f02`](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/known-event-types.ts)
 - [Durable `ignorable` envelope contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/types.ts)
 - [`Session.append()` option surface](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/index.ts)
 - [Strict persistence read validation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/src/coordinator.ts)
-

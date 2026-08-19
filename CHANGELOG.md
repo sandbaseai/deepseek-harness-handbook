@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.8 - 2026-08-19
+
+### Corrected
+
+- Expanded custom Session event compatibility with a real rc.7 incident showing that the same Harness version and an installed plugin still cannot register downstream reader vocabulary.
+- Added a four-signal evidence matrix and clarified the difference between forensic confirmation and safe format-aware repair.
+
 ## 0.5.7 - 2026-08-19
 
 ### Added

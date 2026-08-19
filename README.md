@@ -66,7 +66,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix Web, headless, or custom-profile startup reporting `--expose-internals` is required | [HMR loader-capability diagnosis](https://sandbaseai.github.io/deepseek-harness-handbook/hmr-expose-internals.html) |
 | Fix a pnpm global install that reports an installed plugin as missing | [Global native-binding resolution guide](docs/en/troubleshooting/pnpm-global-native-binding.md) |
 | Fix macOS workspace selection when the path ends in `:/` | [macOS native picker path guide](docs/en/troubleshooting/macos-workspace-picker-trailing-colon.md) |
-| Persist downstream plugin events without breaking Session resume | [Custom Session event compatibility](docs/en/plugin-development/custom-session-events.md) |
+| Persist downstream plugin events without breaking Session resume | [Custom Session event compatibility](https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
