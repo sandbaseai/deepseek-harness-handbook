@@ -1,20 +1,22 @@
 ---
 title: Fix --expose-internals is required for HMR service
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-19
 ---
 
 # Fix `--expose-internals is required for HMR service`
 
-When `pnpm dsh web` exits from a DeepSeek Harness source checkout with:
+When a DeepSeek Harness source-checkout profile exits with:
 
 ```text
 --expose-internals is required for HMR service
 ```
 
 do not immediately add a permanent Node flag. First prove which launch path you are using, whether the repository-pinned pnpm version installed the native helper correctly, and whether only the fallback Node-internals path changes the result.
+
+The observed report uses `pnpm dsh web`, but the startup path is not Web-only. `runProfile()` is shared by Web, headless, and custom profiles. After boot, it installs patch-file watching unconditionally while the root is active. If the composed tree has no HMR service, it mounts watch-only HMR with `root: []`; both the Web and headless bundles disable the shared module-reload row and therefore enter that fallback. A custom profile that omits or disables HMR enters it too.
 
 At upstream commit `99f6f02`, the repository pins `pnpm@11.7.0`, supports Node `^22.19.0 || >=24.0.0`, and launches the source CLI without `--expose-internals`. A normal source setup is therefore expected to start without manually editing the root `dsh` script.
 
@@ -32,9 +34,20 @@ At upstream commit `99f6f02`, the repository pins `pnpm@11.7.0`, supports Node `
 
 Do not apply a source-tree command to a global install. Dependency visibility differs across these layouts.
 
+## Establish the blast radius
+
+| Profile result | HMR path | Exposure when `loader.internal` is absent |
+|---|---|---|
+| Web bundle disables shared HMR | post-boot watch-only fallback | constructor fails before the Web run can continue |
+| headless bundle disables shared HMR | the same fallback, before bounded shutdown removes watchers | one-shot startup can fail too |
+| custom profile has no HMR service | the same fallback | fails while the root is still active |
+| profile mounts module-reload HMR | composition-time HMR service | can fail earlier at the same constructor check |
+
+`disabled: true` is not a safety boundary here: it removes the shared service, which is exactly the condition that triggers the fallback. Diagnose the resolved composition and the shared `runProfile()` lifecycle, not only the surface name.
+
 ## Why the error appears
 
-The Web bundle disables shared module reload, but profile boot later mounts a watch-only HMR instance with `root: []` so changes to `cordis.patch.yml` stay live. HMR still requires `ctx.loader.internal` at construction.
+When the resolved composition lacks HMR, profile boot later mounts a watch-only HMR instance with `root: []` so user patch changes stay live. HMR still requires `ctx.loader.internal` at construction. Its initializer also reads `this.internal.loadCache` even with no module roots, so removing only the constructor error would merely move the crash; a real upstream repair must preserve module-reload requirements while separating the watch-only path.
 
 The loader tries two ways to obtain Node’s internal ESM loader:
 
@@ -45,7 +58,7 @@ Both failures are swallowed and `fromInternal()` returns `undefined`. HMR then e
 
 ```mermaid
 flowchart LR
-  S[pnpm dsh web] --> P[profile boot]
+  S[Web, headless, or custom profile] --> P[shared runProfile boot]
   P --> H[watch-only HMR]
   H --> L[loader.internal]
   L --> A{available?}
@@ -141,6 +154,7 @@ Prefer a published release or packaged distribution over an arbitrary source che
 - **Do not permanently edit the root `dsh` script first.** That hides the helper/install failure and creates an unsupported local launch contract.
 - **Do not delete the failing checkout before collecting evidence.** A fresh sibling clone gives a cleaner A/B.
 - **Do not weaken HMR into a silent no-op.** Profile patch watching is a documented behavior; absence should be explicit.
+- **Do not assume headless is unaffected.** Its disabled shared HMR row also causes the shared launcher to mount the watch-only fallback while the root remains active.
 - **Do not blame a Unicode path without an A/B.** The failure can occur from package-manager or native-helper resolution independently of path text.
 
 ## Minimal report
@@ -167,6 +181,6 @@ Complete first stack:
 - [Pinned engines, package manager, and source `dsh` script at `99f6f02`](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/package.json)
 - [Official development prerequisites](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/development.md)
 - [Watch-only HMR mount in profile boot](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/src/profile-boot.ts)
+- [Headless bundle disables shared HMR and relies on the launcher fallback](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/headless/cordis.patch.yml)
 - [Optional internal-loader discovery](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/vendor/loader/src/internal.ts)
 - [HMR’s loader-internal requirement](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/vendor/hmr/src/index.ts)
-
