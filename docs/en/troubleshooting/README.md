@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 28
+content_revision: 29
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -38,6 +38,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Bash, grep, and glob all fail with `ENOENT` after a directory move | immutable Session cwd / subprocess workdir | recorded Session cwd, `test -d`, external `command -v bash`, and fresh-Session A/B |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
 | Agent repeats tools or spends after the task should be done | agent loop / retry / background owner | ordered Session events, request count, and provider usage curve |
+| Final answer is complete but the todo strip still shows `in_progress` | model todo snapshot / Session projection | last `todo/write`, last assistant message, `turn/end` reason, and next `turn/start` |
 | Tool is denied | permission policy | operation, target, and active policy |
 | Command runs in wrong environment | capability provider | resolved config and sandbox/backend |
 | `run_code` is available while relying on `read-only` or `workspace-write` | Code Mode runtime trust boundary | effective tools mode, permission mode, code runtime, and outer isolation |
@@ -75,6 +76,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
 - [Recover a Session poisoned by missing tool results](dangling-tool-calls-insufficient-results.md)
+- [Diagnose a todo stuck in progress after the final answer](todo-stuck-in-progress.md)
 - [Diagnose empty tool names in streamed calls](streamed-tool-call-empty-identity.md)
 - [Diagnose slow TTFT in mature Sessions](slow-ttft-mature-sessions.md)
 - [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](windows-replacefile-eacces.md)

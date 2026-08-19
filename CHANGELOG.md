@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.11 - 2026-08-19
+
+### Added
+
+- A source-backed diagnosis for todo lists that remain `in_progress` after an Agent's final answer.
+- A four-owner state model, event-order router, safe recovery, bounded `agent/turn-stopping` reconciliation design, and ten regression gates.
+
 ## 0.5.10 - 2026-08-19
 
 ### Corrected

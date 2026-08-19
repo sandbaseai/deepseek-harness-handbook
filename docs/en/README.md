@@ -36,6 +36,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Choose a Subagent strategy](agent-patterns/subagents.md)
 - [Build a Repository Research Agent](recipes/repository-research-agent.md)
 - [Choose a safe remote Web access topology](troubleshooting/remote-web-secure-context.md)
+- [Diagnose a todo that remains in progress after the final answer](troubleshooting/todo-stuck-in-progress.md)
 
 ## Learning paths
 

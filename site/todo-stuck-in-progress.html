@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>DeepSeek Harness Todo Stuck In Progress | Source-backed fix</title>
+  <meta name="description" content="Diagnose a DeepSeek Harness task list that remains in progress after the final answer. Trace todo_write, durable snapshots, turn endings, projections, and safe reconciliation.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/todo-stuck-in-progress.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A finished answer does not finish a todo.">
+  <meta property="og:description" content="Separate model prose, durable todo snapshots, runtime completion, and the Web projection.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/todo-stuck-in-progress.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"A finished answer does not finish a DeepSeek Harness todo","dateModified":"2026-08-19","author":{"@type":"Organization","name":"SandBase"},"inLanguage":"en","isAccessibleForFree":true,"url":"https://sandbaseai.github.io/deepseek-harness-handbook/todo-stuck-in-progress.html"}</script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a><nav aria-label="Primary navigation"><a href="#trace">Trace</a><a href="#fix">Fix</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell todo-article">
+    <header class="article-hero todo-hero">
+      <div><p class="eyebrow">Agent state · todo_write · rc.7</p><h1>A finished answer does not finish a todo.</h1><p class="article-deck">The UI renders the last durable snapshot—not the confidence of the final sentence.</p><div class="hero-actions"><a class="button primary" href="#trace">Trace the events</a><a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/todo-stuck-in-progress.md">Full runbook</a></div></div>
+      <div class="todo-terminal" role="img" aria-label="The todo list has two completed tasks and one in-progress task even though the assistant has sent a final answer"><small>latest durable plan</small><div><i>✓</i><span>Inspect evidence</span></div><div><i>✓</i><span>Implement change</span></div><div class="todo-active"><i>↻</i><span>Verify result</span></div><strong>Assistant: Done.</strong><em>State mismatch, not UI inference.</em></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>The decisive event</strong><span>If no later <code>todo/write</code> exists, <code>turn/end</code> intentionally preserves the last list—including <code>in_progress</code>.</span></div>
+      <h2>Four facts. Four owners.</h2>
+      <div class="todo-owners"><section><code>assistant/message</code><strong>What was said</strong><span>Prose is not task state.</span></section><section><code>todo/write</code><strong>What was recorded</strong><span>Whole-list replacement.</span></section><section><code>turn/end</code><strong>Why the loop stopped</strong><span>Protocol outcome, not proof.</span></section><section><code>todos projection</code><strong>What the dock renders</strong><span>Latest snapshot, last wins.</span></section></div>
+      <h2 id="trace">Trace the actual lifetime.</h2>
+      <div class="todo-trace"><section><small>01 · model call</small><strong><code>todo_write</code></strong><span>Last item remains active.</span></section><b>→</b><section><small>02 · durable log</small><strong><code>todo/write</code></strong><span>Full snapshot appended.</span></section><b>→</b><section class="todo-trace-risk"><small>03 · final answer</small><strong>No second write</strong><span>Prose says the work is done.</span></section><b>→</b><section><small>04 · turn boundary</small><strong>State retained</strong><span>Next <code>turn/start</code> clears it.</span></section></div>
+      <h2>Route the mismatch.</h2>
+      <div class="todo-routes"><div><code>snapshot active</code><span>model omitted reconciliation</span><strong>Improve discipline or add one bounded stop reminder.</strong></div><div><code>snapshot complete</code><span>dock still active</span><strong>Inspect projection <code>asOfSeq</code> and event delivery.</strong></div><div><code>call failed</code><span>no snapshot event</span><strong>Fix the tool error; arguments are not committed state.</strong></div><div><code>old row active</code><span>dock is complete</span><strong>The row describes a historical call, not current state.</strong></div></div>
+      <h2 id="fix">Reconcile truth, not color.</h2>
+      <div class="todo-fix"><section><small>Operator</small><strong>Ask for verification</strong><p>Start a new turn, verify real outputs, then write a fresh complete list.</p></section><section><small>Prompt</small><strong>Require a final comparison</strong><p>No <code>in_progress</code> only after every item has evidence.</p></section><section><small>Composition</small><strong>One stop reminder</strong><p>Use <code>agent/turn-stopping</code> plus logged steering, bounded to one continuation.</p></section></div>
+      <aside class="todo-warning"><strong>Never auto-complete every turn.</strong><p>Turns can end completed, aborted, blocked, errored, max-token, or interrupted. Even normal protocol completion does not prove the external work succeeded.</p></aside>
+      <h2>Regression gates.</h2>
+      <ol class="todo-tests"><li><strong>Completed final write</strong><span>Survives turn end.</span></li><li><strong>Missing final write</strong><span>Remains visible.</span></li><li><strong>Next turn</strong><span>Clears prior projection.</span></li><li><strong>Failed call</strong><span>Writes no snapshot.</span></li><li><strong>Stop guard</strong><span>At most one retry.</span></li><li><strong>Replay</strong><span>Same list and sequence.</span></li></ol>
+      <h2>Primary evidence.</h2>
+      <ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/todo/tool-todo/src/index.ts">Todo tool and projection implementation</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/todo/tool-todo/tests/projection.spec.ts#L94-L106">Projection lifetime regression test</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/agent-loop/src/agent.ts#L260-L325">Agent stop lifecycle</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3424">Upstream report #3424</a></li></ul>
+      <section class="article-cta"><h2>Keep the complete event router.</h2><p>The canonical guide covers both Web surfaces, safe recovery, a bounded stop-guard design, all turn-ending reasons, and ten regression gates.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/todo-stuck-in-progress.md">Read the full runbook</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
