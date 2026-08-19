@@ -236,7 +236,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 33,
+      "revision": 34,
       "translations": {}
     },
     {
@@ -316,6 +316,11 @@
     },
     {
       "source": "docs/en/troubleshooting/missing-question-approval-after-reconnect.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/output-token-limit-reached.md",
       "revision": 1,
       "translations": {}
     }

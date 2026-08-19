@@ -42,6 +42,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Diagnose the first Windows workspace-write freeze](troubleshooting/windows-first-workspace-write-freeze.md)
 - [Run from source on a Synology NAS](getting-started/synology-nas-source-deployment.md)
 - [Recover a missing question or approval card after reconnect](troubleshooting/missing-question-approval-after-reconnect.md)
+- [Diagnose `Output token limit reached`](troubleshooting/output-token-limit-reached.md)
 
 ## Learning paths
 
