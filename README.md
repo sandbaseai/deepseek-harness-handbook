@@ -42,6 +42,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix `ReplaceFileW EACCES` while editing a Windows profile | [Windows HMR-watched config recovery](docs/en/troubleshooting/windows-replacefile-eacces.md) |
 | Decide whether worker-thread Code Mode fits the security boundary | [Code Mode trust-boundary guide](docs/en/security/code-mode-worker-trust-boundary.md) |
 | Fix source startup reporting `--expose-internals` is required | [HMR loader-capability diagnosis](docs/en/troubleshooting/hmr-expose-internals-source-checkout.md) |
+| Fix a pnpm global install that reports an installed plugin as missing | [Global native-binding resolution guide](docs/en/troubleshooting/pnpm-global-native-binding.md) |
 | Persist downstream plugin events without breaking Session resume | [Custom Session event compatibility](docs/en/plugin-development/custom-session-events.md) |
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
@@ -172,6 +173,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](docs/en/troubleshooting/windows-replacefile-eacces.md)
 - [Treat worker-thread Code Mode as host-trusted](docs/en/security/code-mode-worker-trust-boundary.md)
 - [Fix `--expose-internals` HMR startup from a source checkout](docs/en/troubleshooting/hmr-expose-internals-source-checkout.md)
+- [Fix pnpm global native-binding plugin resolution](docs/en/troubleshooting/pnpm-global-native-binding.md)
 - [Persist custom plugin events without breaking Session resume](docs/en/plugin-development/custom-session-events.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
 

@@ -5,9 +5,17 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-19T10:00:00Z</updated>
+  <updated>2026-08-19T11:30:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry>
+    <title>Fix pnpm global native-binding plugin resolution</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-global-native-binding.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-global-native-binding.html</id>
+    <updated>2026-08-19T11:30:00Z</updated>
+    <summary>Trace the isolated native bridge before blaming an installed plugin, then recover with an exact-version project-local A/B.</summary>
+  </entry>
 
   <entry>
     <title>Persist custom plugin events without breaking Session resume</title>

@@ -676,3 +676,26 @@ footer div { display: flex; gap: 1.5rem; }
   .event-resume, .event-contracts, .event-storage, .event-tests, .event-recovery, .event-never { grid-template-columns: 1fr; }
   .event-resume i, .event-recovery i { text-align: center; transform: rotate(90deg); }
 }
+.binding-hero { align-items: stretch; }
+.binding-stack { align-self: center; display: grid; gap: .65rem; min-width: 20rem; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--panel); }
+.binding-stack div { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem; border-radius: .7rem; background: var(--surface); }
+.binding-stack small, .binding-stack i { color: var(--muted); font-size: .78rem; }
+.binding-stack i { text-align: center; font-style: normal; }
+.binding-stack .binding-fail { border-left: 3px solid #d06b4c; }
+.binding-routes, .binding-never, .binding-tests { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.25rem 0 2rem; }
+.binding-routes section, .binding-never section, .binding-tests section { padding: 1rem; border: 1px solid var(--line); border-radius: .85rem; background: var(--panel); }
+.binding-routes span { display: block; color: var(--accent); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
+.binding-routes strong, .binding-never strong, .binding-tests strong { display: block; margin: .3rem 0; }
+.binding-chain { display: flex; align-items: stretch; gap: .55rem; margin: 1.25rem 0 2rem; }
+.binding-chain div { flex: 1; padding: .9rem; border: 1px solid var(--line); border-radius: .75rem; background: var(--panel); }
+.binding-chain i { align-self: center; color: var(--muted); font-style: normal; }
+.binding-chain small { display: block; margin-top: .25rem; color: var(--muted); }
+.binding-chain .binding-chain-fail { border-color: #d06b4c; }
+.binding-tests { grid-template-columns: repeat(4, 1fr); }
+.binding-tests b { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; margin-bottom: .5rem; border-radius: 50%; background: var(--ink); color: var(--surface); }
+@media (max-width: 760px) {
+  .binding-stack { min-width: 0; width: 100%; }
+  .binding-routes, .binding-never, .binding-tests { grid-template-columns: 1fr; }
+  .binding-chain { display: grid; }
+  .binding-chain i { transform: rotate(90deg); justify-self: center; }
+}

@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 15
+content_revision: 16
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -16,6 +16,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 |---|---|---|
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |
 | Source `pnpm dsh web` says `--expose-internals is required for HMR service` | package-manager/native helper/HMR loader capability | Git SHA, pinned and actual pnpm versions, helper probe, direct-flag A/B |
+| Global pnpm `dsh web` says an installed bare plugin cannot be found | isolated native platform-package resolution | exact CLI version, global root, dependency tree, physical package paths, project-local A/B |
 | Web UI does not open | process/listen address | printed URL and terminal logs |
 | Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
