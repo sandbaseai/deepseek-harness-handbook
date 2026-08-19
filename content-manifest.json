@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/runaway-agent-loop.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/context-window-exceeded.md",
       "revision": 1,
       "translations": {}
@@ -136,7 +141,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 8,
+      "revision": 9,
       "translations": {}
     },
     {

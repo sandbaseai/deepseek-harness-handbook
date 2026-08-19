@@ -5,9 +5,17 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-17T03:00:00Z</updated>
+  <updated>2026-08-19T04:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry>
+    <title>Stop a runaway Agent loop before it spends again</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html</id>
+    <updated>2026-08-19T04:00:00Z</updated>
+    <summary>Cancel the active turn, prove calls stopped, route the repeating layer, and add an independent provider-side cost boundary.</summary>
+  </entry>
 
   <entry>
     <title>Handbook v0.2.0: one source for content and Pages</title>
