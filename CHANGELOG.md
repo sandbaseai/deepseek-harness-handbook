@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.6 - 2026-08-19
+
+### Added
+
+- A source-backed incident runbook for OpenAI-compatible streams whose empty continuation fields erase a valid tool-call ID and name.
+- A first-delta-to-policy visual trace, wire and Session evidence capture, safe route A/B isolation, and a seven-gate regression checklist.
+- Explicit separation from tool registration failures, malformed arguments, and poisoned Session history.
+
 ## 0.4.5 - 2026-08-19
 
 ### Corrected
