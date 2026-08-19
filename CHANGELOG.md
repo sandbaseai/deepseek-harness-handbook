@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.7 - 2026-08-19
+
+### Added
+
+- A source-backed `AGENTS.md` scope and precedence map covering user-global, project, local-overlay, nested, direct-user, and Skill instruction lifetimes.
+- Baseline ordering, structured-fs nested discovery, touch-driven refresh, specificity-first budget behavior, and nine acceptance checks.
+- An explicit rc.7 `$DSH_HOME/AGENTS.md` collision note with safe operating alternatives while upstream scope separation remains a proposal.
+
 ## 0.4.6 - 2026-08-19
 
 ### Added

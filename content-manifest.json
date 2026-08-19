@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/agent-patterns/agents-md-scope.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/streamed-tool-call-empty-identity.md",
       "revision": 1,
       "translations": {}
