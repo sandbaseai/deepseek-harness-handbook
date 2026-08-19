@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Add MCP Servers to DeepSeek Harness</title>
+  <meta name="description" content="Add MCP servers through Agent presets, prove tool discovery in a fresh Session, and route stdio, HTTP, registration, and reconnect failures.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MCP belongs to the Agent preset.">
+  <meta property="og:description" content="No add button is not no capability. Compose one server, start a fresh Session, and verify the scoped tool generation.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Add an MCP server to DeepSeek Harness","dateModified":"2026-08-19","step":[{"@type":"HowToStep","name":"Copy a preset","text":"Create an editable user preset rather than modifying the shipped set."},{"@type":"HowToStep","name":"Add one server row","text":"Configure one dsh-mcp-client instance with a unique serverName."},{"@type":"HowToStep","name":"Create a fresh Session","text":"Select the edited preset so the next generation mounts."},{"@type":"HowToStep","name":"Verify tools","text":"Find the deterministic mcp__server__tool names and run a read-only test."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="#compose">Compose</a><a href="#diagnose">Diagnose</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell mcp-article">
+    <header class="article-hero mcp-hero">
+      <div>
+        <p class="eyebrow">MCP · Agent composition</p>
+        <h1>MCP belongs to the Agent preset.</h1>
+        <p class="article-deck">No add button is not no capability. Compose the bridge, then prove the Session joined its generation.</p>
+        <div class="hero-actions"><a class="button primary" href="#compose">Add one server</a><a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/mcp-server-not-connecting.md">Full runbook</a></div>
+      </div>
+      <div class="mcp-scope" role="img" aria-label="A user Agent preset owns an MCP client, which discovers server tools into a preset-scoped registry used only by Sessions joined to that preset">
+        <div><small>User preset</small><strong>agent.cordis.yml</strong><span>composition</span></div><i>→</i>
+        <div><small>Bridge</small><strong>MCP client</strong><span>connect + listTools</span></div><i>→</i>
+        <div><small>Scope</small><strong>tool generation</strong><span>fresh Sessions only</span></div>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The missing surface</strong><span>rc.7 has no dedicated MCP add form. The official bridge is configured as a plugin row inside a user Agent preset.</span></div>
+
+      <h2 id="compose">Four boundaries to a visible tool.</h2>
+      <div class="mcp-boundaries">
+        <section><small>01</small><strong>Preset</strong><span>editable user copy</span></section>
+        <section><small>02</small><strong>Transport</strong><span>stdio or HTTP</span></section>
+        <section><small>03</small><strong>Discovery</strong><span><code>listTools()</code></span></section>
+        <section><small>04</small><strong>Registry</strong><span><code>mcp__server__tool</code></span></section>
+      </div>
+
+      <h2>One server. One row. One namespace.</h2>
+      <pre><code>- id: mcp-internal-search
+  name: '@deepseek-ai/dsh-mcp-client'
+  config:
+    serverName: internal-search
+    transport: streamable-http
+    url: https://mcp.example.internal/mcp
+    headers:
+      Authorization: !!js '`Bearer ${process.env.MCP_TOKEN}`'
+    failOnStartupError: true</code></pre>
+      <div class="mcp-naming"><span>raw tool</span><code>search</code><b>→</b><span>model sees</span><code>mcp__internal-search__search</code></div>
+
+      <h2>The generation boundary explains “still missing.”</h2>
+      <div class="mcp-generation">
+        <section><small>Before edit</small><strong>running Session</strong><span>keeps generation A</span></section>
+        <div aria-hidden="true">≠</div>
+        <section><small>After edit</small><strong>new blank Session</strong><span>joins generation B</span></section>
+      </div>
+      <p>Saving the file does not rewrite the tool surface of a Session that already produced history. Select the edited preset in a new blank Session before diagnosing the connection.</p>
+
+      <h2 id="diagnose">Route the first failed boundary.</h2>
+      <div class="mcp-routes">
+        <section><small>stdio</small><strong>Child never starts</strong><p>Resolve command, args, cwd, scrubbed environment, and stderr.</p></section>
+        <section><small>HTTP</small><strong>Host cannot connect</strong><p>Verify URL, TLS, proxy, auth, and server availability from the Host.</p></section>
+        <section><small>Discovery</small><strong>No generation</strong><p>Inspect <code>listTools()</code>, duplicate raw names, and schema errors.</p></section>
+        <section><small>Registry</small><strong>Namespace conflict</strong><p>Keep <code>serverName</code> unique and remove foreign qualified-name squatters.</p></section>
+      </div>
+
+      <h2>Outage state is not startup state.</h2>
+      <div class="mcp-outage">
+        <div><small>Last good</small><strong>tools stay listed</strong><span>calls fail during outage</span></div><i>→</i>
+        <div><small>Recovered</small><strong>generation replaced</strong><span>names stay stable</span></div><i>→</i>
+        <div><small>Budget exhausted</small><strong>tools removed</strong><span>reload or restart required</span></div>
+      </div>
+
+      <aside class="mcp-warning"><strong>Tools only.</strong><p>The current bridge does not expose MCP Resources or Prompts as Harness tools. Their presence in another client does not prove tool discovery failed here.</p></aside>
+
+      <h2>Acceptance, not optimism.</h2>
+      <ol class="mcp-tests"><li><strong>Mount</strong><span>preset parses</span></li><li><strong>Join</strong><span>fresh Session</span></li><li><strong>Discover</strong><span>qualified names</span></li><li><strong>Call</strong><span>read-only result</span></li><li><strong>Isolate</strong><span>sibling has none</span></li><li><strong>Recover</strong><span>stable reconnect</span></li></ol>
+
+      <div class="article-cta"><div><p class="eyebrow">Operator worksheet</p><h2>Capture the generation and the connection.</h2></div><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/mcp-server-not-connecting.md">Open full runbook</a></div>
+    </article>
+  </main>
+
+  <footer class="site-footer"><div><strong>DeepSeek Harness Handbook</strong><p>Independent community documentation. Not an official DeepSeek AI project.</p></div><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./feed.xml">Updates feed</a></div></footer>
+</body>
+</html>

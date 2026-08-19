@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 20
+content_revision: 21
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -15,6 +15,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |
+| no MCP add button, or configured MCP tools do not appear | Agent preset / generation / MCP bridge | selected preset, fresh-Session A/B, transport, and first connection or registration error |
 | Source `pnpm dsh web` says `--expose-internals is required for HMR service` | package-manager/native helper/HMR loader capability | Git SHA, pinned and actual pnpm versions, helper probe, direct-flag A/B |
 | Global pnpm `dsh web` says an installed bare plugin cannot be found | isolated native platform-package resolution | exact CLI version, global root, dependency tree, physical package paths, project-local A/B |
 | macOS workspace selection reports a path ending in `:/` and `ENOENT` | native picker AppleScript path conversion | exact picker output, normalized-path `test -d`, volume topology, picker backend |
@@ -50,7 +51,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [`--expose-internals` HMR startup diagnosis](hmr-expose-internals-source-checkout.md)
 - [Custom plugin events and Session resume compatibility](../plugin-development/custom-session-events.md)
 - [Code Mode worker-thread trust boundary](../security/code-mode-worker-trust-boundary.md)
-- [MCP server not connecting or tools missing](mcp-server-not-connecting.md)
+- [Add an MCP server and diagnose missing tools](mcp-server-not-connecting.md)
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
