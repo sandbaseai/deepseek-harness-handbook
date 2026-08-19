@@ -28,6 +28,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand the shipped CLI, automate one task, or evaluate a community TUI | [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
 | Recover when the Windows folder-picker worker exits without a result | [Windows folder-picker crash guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html) |
 | Connect to DeepSeek through an authorized proxy or enterprise CA | [Provider egress and TLS guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html) |
+| Add an MCP server or diagnose missing MCP tools | [MCP preset and connection guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
 | Move Codex or Claude Code memory without losing provenance or isolation | [Sessions, Skills, and long-term memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |
 | Run Web, headless, ACP, or SDK processes concurrently without sharing a writable Session root | [Single-writer Session topology](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html) |
 | Fix `spawn bash ENOENT` after moving or renaming a workspace | [Moved-workspace recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html) |
@@ -180,7 +181,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)
 - [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md)
 - [Troubleshooting index](docs/en/troubleshooting/README.md)
-- [MCP server not connecting](docs/en/troubleshooting/mcp-server-not-connecting.md)
+- [Add an MCP server and diagnose missing tools](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html)
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](docs/en/troubleshooting/http2-invalid-session.md)
 - [Sandbox denial versus sandbox unavailable](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md)
 - [Windows compatibility and troubleshooting](docs/en/troubleshooting/windows-compatibility.md)

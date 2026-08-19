@@ -5,9 +5,17 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-20T02:00:00Z</updated>
+  <updated>2026-08-20T03:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry>
+    <title>Add an MCP server and diagnose missing tools</title>
+    <link href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html"/>
+    <id>https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html</id>
+    <updated>2026-08-20T03:00:00Z</updated>
+    <summary>Compose one MCP server into a user Agent preset, start a fresh Session generation, and route transport, discovery, registration, reconnect, and isolation failures.</summary>
+  </entry>
 
   <entry>
     <title>Correct the HMR expose-internals blast radius</title>

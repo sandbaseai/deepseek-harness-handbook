@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.4.4 - 2026-08-19
+
+### Changed
+
+- Expanded MCP troubleshooting into an Agent-preset ownership, generation, transport, discovery, registration, outage, and isolation runbook.
+- Added source-backed stdio and Streamable HTTP examples, fresh-Session semantics, deterministic tool identity, reconnect lifecycle, security constraints, and a seven-gate acceptance test.
+- Added a responsive MCP composition and missing-tools decision tree.
+
 ## 0.4.3 - 2026-08-19
 
 ### Corrected
