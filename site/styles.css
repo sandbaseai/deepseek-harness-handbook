@@ -988,7 +988,7 @@ nav a:hover { color: var(--ink); }
   min-height: calc(100dvh - 72px);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.08fr .92fr;
+  grid-template-columns: 1.32fr .68fr;
   align-items: center;
   gap: clamp(2.5rem, 7vw, 7rem);
   padding: 5rem 0;
@@ -996,6 +996,7 @@ nav a:hover { color: var(--ink); }
 .eyebrow { margin: 0 0 1rem; color: var(--accent); font: 700 .76rem ui-monospace, monospace; letter-spacing: .09em; text-transform: uppercase; }
 h1, h2 { margin: 0; letter-spacing: -.055em; line-height: .98; text-wrap: balance; }
 h1 { max-width: 760px; font-size: clamp(3.7rem, 7.5vw, 7.3rem); font-weight: 760; }
+.hero h1 { max-width: none; font-size: clamp(3.55rem, 4.2vw, 3.8rem); }
 h2 { font-size: clamp(2.8rem, 5.2vw, 5.4rem); font-weight: 730; }
 .hero-text { max-width: 24ch; margin: 1.6rem 0 0; color: var(--muted); font-size: clamp(1.05rem, 1.5vw, 1.35rem); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.1rem; }

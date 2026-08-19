@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.37 - 2026-08-20
+
+### Changed
+
+- Promoted Install Doctor to the homepage primary action and added direct Install Doctor and Failure Router navigation.
+- Replaced homepage article markup with WebSite and SoftwareApplication structured data for clearer search discovery.
+- Added an Install Doctor entry to the high-traffic Simplified Chinese navigation page while keeping the tool English-canonical.
+
 ## 0.5.36 - 2026-08-20
 
 ### Added

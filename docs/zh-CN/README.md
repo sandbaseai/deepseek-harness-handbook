@@ -13,6 +13,8 @@ verified_at: 2026-08-14
 
 建议先阅读[五分钟快速开始](getting-started/quickstart.md)，完成一次安全、可观察的 Web UI 任务；随后通过 [Agent Runtime 架构地图](architecture/agent-runtime.md)理解模型、工具、权限、沙箱和会话为何必须分层设计。
 
+安装或启动遇到问题时，可以直接使用英文版 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html)：选择操作系统、安装方式和最早出现的错误，生成对应的取证命令、成功标准与详细指南。所有逻辑都在浏览器本地运行，不上传日志或配置。
+
 ## 推荐阅读
 
 - [DeepSeek Harness 是什么？](what-is-deepseek-harness.md)
@@ -21,6 +23,7 @@ verified_at: 2026-08-14
 - [Python SDK（英文）](../en/getting-started/python-sdk.md)
 - [模型 Provider 配置（英文）](../en/getting-started/model-providers.md)
 - [Tool Execution Pipeline（英文）](../en/architecture/tool-execution-pipeline.md)
+- [Install Doctor（英文交互工具）](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html)
 
 ## 学习路线
 
