@@ -15,6 +15,233 @@
   --max: 1240px;
 }
 
+/* Streamed tool-call identity incident */
+.identity-hero {
+  align-items: center;
+  background:
+    radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 36%),
+    var(--surface);
+}
+
+.identity-trace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: .75rem;
+  min-width: 0;
+}
+
+.identity-trace > div {
+  min-width: 0;
+  padding: 1.05rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent));
+}
+
+.identity-trace small,
+.identity-trace strong,
+.identity-trace code {
+  display: block;
+}
+
+.identity-trace small {
+  margin-bottom: .65rem;
+  color: var(--muted);
+}
+
+.identity-trace strong {
+  overflow-wrap: anywhere;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+}
+
+.identity-trace code {
+  margin-top: .35rem;
+  color: var(--accent);
+}
+
+.identity-trace > span,
+.identity-pipeline > i {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.identity-trace .trace-empty {
+  border-color: color-mix(in srgb, #c87b35 55%, var(--line));
+  background: color-mix(in srgb, #c87b35 9%, var(--surface));
+}
+
+.identity-trace .trace-stop {
+  border-color: color-mix(in srgb, #b75454 52%, var(--line));
+  background: color-mix(in srgb, #b75454 9%, var(--surface));
+}
+
+.identity-contrast {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 1rem;
+}
+
+.identity-contrast section {
+  padding: 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.identity-contrast span,
+.identity-contrast strong {
+  display: block;
+}
+
+.identity-contrast span {
+  margin-bottom: 1rem;
+  color: var(--muted);
+}
+
+.identity-contrast strong {
+  margin-bottom: .65rem;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+}
+
+.identity-contrast .identity-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.identity-pipeline {
+  display: grid;
+  grid-template-columns: repeat(9, auto);
+  align-items: center;
+  gap: .7rem;
+  padding: 1.2rem;
+  overflow-x: auto;
+  border-radius: 14px;
+  background: var(--surface-strong);
+}
+
+.identity-pipeline div {
+  min-width: 7.2rem;
+}
+
+.identity-pipeline b,
+.identity-pipeline code {
+  display: block;
+}
+
+.identity-pipeline code {
+  margin-top: .4rem;
+  color: var(--muted);
+}
+
+.capture-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.capture-layout ol {
+  display: grid;
+  gap: .8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: capture;
+}
+
+.capture-layout li {
+  counter-increment: capture;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: .1rem .75rem;
+  padding: 1rem;
+  border-left: 2px solid var(--accent);
+  background: var(--surface-strong);
+}
+
+.capture-layout li::before {
+  content: counter(capture, decimal-leading-zero);
+  grid-row: 1 / 3;
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.capture-layout li span {
+  color: var(--muted);
+}
+
+.capture-layout pre {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.identity-safety {
+  display: grid;
+  grid-template-columns: 1.2fr .9fr .9fr;
+  gap: 1rem;
+}
+
+.identity-safety section {
+  padding: 1.3rem;
+  border-top: 3px solid var(--accent);
+  background: var(--surface-strong);
+}
+
+.identity-gates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .65rem 1.4rem;
+  padding: 0;
+  list-style: none;
+}
+
+.identity-gates li {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: .75rem;
+  align-items: start;
+  padding: .8rem 0;
+}
+
+.identity-gates span {
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .identity-trace {
+    grid-template-columns: 1fr;
+  }
+
+  .identity-trace > span {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+
+  .identity-pipeline {
+    grid-template-columns: 1fr;
+  }
+
+  .identity-pipeline > i {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+
+  .capture-layout,
+  .identity-safety {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .identity-contrast,
+  .identity-gates {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* MCP preset composition and connection routing */
 .article-shell.mcp-article { width: min(calc(100% - 40px), 1160px); }
 .mcp-hero { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; min-height: auto; }

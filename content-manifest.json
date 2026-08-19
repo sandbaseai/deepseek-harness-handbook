@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/streamed-tool-call-empty-identity.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md",
       "revision": 1,
       "translations": {}

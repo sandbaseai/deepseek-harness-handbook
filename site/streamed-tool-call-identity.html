@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Fix empty tool names in DeepSeek Harness streams</title>
+  <meta name="description" content="Diagnose OpenAI-compatible tool-call continuation deltas that erase a valid call ID and tool name, then make silent Agent failure observable.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The tool name existed. A later delta erased it.">
+  <meta property="og:description" content="Trace first delta, continuation, block close, policy rejection, and the silent stop.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="#capture">Capture</a><a href="#acceptance">Acceptance</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div>
+        <p class="eyebrow">Stream protocol diagnosis</p>
+        <h1>The tool name existed. Then it vanished.</h1>
+        <p class="article-deck">Trace one identity from the first delta to the policy gate.</p>
+        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+      </div>
+      <div class="identity-trace" role="img" aria-label="A valid first tool-call delta is overwritten by an empty continuation before policy evaluation">
+        <div class="trace-good"><small>First delta</small><strong>call_8f2</strong><code>read</code></div>
+        <span aria-hidden="true">→</span>
+        <div class="trace-empty"><small>Continuation</small><strong>id: ""</strong><code>name: null</code></div>
+        <span aria-hidden="true">→</span>
+        <div class="trace-stop"><small>Policy sees</small><strong>tool ""</strong><code>disabled</code></div>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The signature</strong><span>A real tool identity appears in the first delta, but the completed call and policy error contain empty strings.</span></div>
+
+      <h2>Do not debug the wrong boundary.</h2>
+      <div class="identity-contrast">
+        <section><span>Registration problem</span><strong><code>name: "read"</code></strong><p>The identity survived. Inspect catalog, preset, and tool policy.</p></section>
+        <section class="identity-active"><span>Stream assembly problem</span><strong><code>name: ""</code></strong><p>The identity was lost before policy. Inspect ordered wire deltas.</p></section>
+      </div>
+
+      <h2>The overwrite happens before execution.</h2>
+      <div class="identity-pipeline" aria-label="Five-stage tool identity pipeline">
+        <div><b>First</b><code>id + name</code></div><i>→</i>
+        <div><b>Continue</b><code>"" + null</code></div><i>→</i>
+        <div><b>Translate</b><code>overwrite</code></div><i>→</i>
+        <div><b>Close</b><code>"" + ""</code></div><i>→</i>
+        <div><b>Policy</b><code>refuse</code></div>
+      </div>
+
+      <h2 id="capture">Capture the smallest decisive bundle.</h2>
+      <div class="capture-layout">
+        <ol>
+          <li><strong>Wire</strong><span>Ordered deltas for one call index, including omitted versus explicit empty fields.</span></li>
+          <li><strong>Session</strong><span>Raw chunks and the completed <code>tool/call</code> identity.</span></li>
+          <li><strong>Route A/B</strong><span>The same read-only prompt through empty-value and omission-style routes.</span></li>
+        </ol>
+        <pre><code>first  { id: "call_8f2", name: "read" }
+next   { id: "",          name: null   }
+final  { callId: "",      name: ""     }
+policy tool "" is disabled</code></pre>
+      </div>
+
+      <h2>Keep the safety boundary intact.</h2>
+      <div class="identity-safety">
+        <section><strong>Stop retries</strong><p>Repeated empty calls spend budget without producing evidence.</p></section>
+        <section><strong>Switch route</strong><p>Use an already authorized backend that omits continuation identity.</p></section>
+        <section><strong>Never allow empty</strong><p>Policy is right to reject an unidentified effect.</p></section>
+      </div>
+
+      <h2 id="acceptance">Ship the regression, not just the guard.</h2>
+      <ul class="identity-gates">
+        <li><span>01</span>First non-empty identity survives empty continuation fields.</li>
+        <li><span>02</span>All argument fragments still concatenate in order.</li>
+        <li><span>03</span>Interleaved call indexes keep independent identities.</li>
+        <li><span>04</span>A never-identified call fails loudly before policy.</li>
+        <li><span>05</span>Session and execution record the same call ID and name.</li>
+        <li><span>06</span>Web and headless expose the same protocol failure.</li>
+      </ul>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3281">Upstream report #3281</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/translate.ts">DeepSeek stream translator</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/tests/translate.spec.ts">Translator regression surface</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm/src/assembler.ts">BlockAssembler close contract</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the complete incident runbook.</h2>
+        <p>The canonical guide includes safe capture, route isolation, source repair shape, seven acceptance gates, and a minimal report template.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

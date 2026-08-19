@@ -64,6 +64,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Fix context window exceeded errors](context-window-exceeded.md)
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
+- [Diagnose empty tool names in streamed calls](streamed-tool-call-empty-identity.md)
 - [Diagnose slow TTFT in mature Sessions](slow-ttft-mature-sessions.md)
 - [Fix `ReplaceFileW EACCES` on Windows HMR-watched config](windows-replacefile-eacces.md)
 
