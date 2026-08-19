@@ -308,6 +308,11 @@
       "source": "docs/en/troubleshooting/windows-first-workspace-write-freeze.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/getting-started/synology-nas-source-deployment.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
