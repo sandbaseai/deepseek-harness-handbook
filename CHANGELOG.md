@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.80 - 2026-08-20
+
+### Added
+
+- A source-backed Windows and offline-network runbook for `AbortSignal.any is not a function`, separating the shell-visible Node version from the executable and global owned by the running DSH process.
+- PowerShell probes for PATH, shims, process images, `NODE_OPTIONS`, and runtime feature descriptors, plus controlled offline artifact recovery and ten acceptance gates.
+- A visual runtime-identity map and homepage, sitemap, Atom, LLM, canonical, and troubleshooting discovery entries for the 109th English guide.
+
 ## 0.5.79 - 2026-08-20
 
 ### Changed
