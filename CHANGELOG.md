@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.86 - 2026-08-20
+
+### Changed
+
+- Expanded the standalone-pnpm runbook from Windows-only signatures to Linux ELF binaries, POSIX launchers, macOS native executables, and Windows EXE/CMD entrypoints.
+- Added the pnpm 11 reproduction from upstream #3532, cross-platform probes, a safer runner classification, and explicit reasons not to adopt `shell: true` universally.
+- Reworked the visual map and discovery copy around entrypoint bytes and direct-versus-Node execution while retaining the existing canonical URL.
+
 ## 0.5.85 - 2026-08-20
 
 ### Added

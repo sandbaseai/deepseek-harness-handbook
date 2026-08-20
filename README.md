@@ -96,7 +96,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix an OpenAI-compatible gateway that rejects `developer` | [Diagnose system-message role compatibility](https://sandbaseai.github.io/deepseek-harness-handbook/openai-compatible-developer-role.html) |
 | Fix CJK commands that stall persistent Bash for 300 seconds | [Separate the locale/readline trap from PTY corruption](https://sandbaseai.github.io/deepseek-harness-handbook/macos-bash-nonascii.html) |
 | Fix plugin installation blocked by `ERR_PNPM_ADDING_TO_ROOT` | [Make the profile workspace target explicit](https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-adding-to-root.html) |
-| Fix rc.8 source builds when standalone pnpm exposes `npm_execpath=pnpm.exe` | [Windows standalone-pnpm runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-standalone-pnpm.html) |
+| Fix rc.8 source builds when Node parses an ELF, shell, or Windows pnpm entrypoint | [Cross-platform pnpm entrypoint runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-standalone-pnpm.html) |
 | Stop black console windows flashing during Windows tool calls | [Two-path Windows process-creation runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-console-window-flash.html) |
 | Find the corrupt `package.json` behind a pathless boot SyntaxError | [Package-closure recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/corrupt-package-json-profile-boot.html) |
 | Fix an OpenAI-compatible `server_error` that never retries | [pi-ai classification and retry evidence](https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-server-error-retry.html) |
