@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/web-ime-composition.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/security/credential-storage-threat-model.md",
       "revision": 1,
       "translations": {}
@@ -301,7 +306,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 46,
+      "revision": 47,
       "translations": {}
     },
     {

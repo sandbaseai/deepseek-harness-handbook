@@ -29,6 +29,7 @@ Language status: English canonical; Simplified Chinese partial and reviewed; Jap
 Atom updates feed: https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml
 Source repository: https://github.com/sandbaseai/deepseek-harness-handbook
 Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
+Web IME composition recovery: https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html
 
 ## Start here
 
