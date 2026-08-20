@@ -29,6 +29,7 @@ Language status: English canonical; Simplified Chinese partial and reviewed; Jap
 Atom updates feed: https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml
 Source repository: https://github.com/sandbaseai/deepseek-harness-handbook
 Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
+Responses API overload and retry runbook: https://sandbaseai.github.io/deepseek-harness-handbook/responses-overload-retry.html
 Codex hooks bridge: https://sandbaseai.github.io/deepseek-harness-handbook/codex-hooks-bridge.html
 Claude Code hooks bridge: https://sandbaseai.github.io/deepseek-harness-handbook/claude-code-hooks-bridge.html
 Duplicate core runtime recovery: https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-core-runtime.html

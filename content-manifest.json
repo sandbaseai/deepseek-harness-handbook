@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/openai-responses-overload-retry.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/plugin-development/install-codex-hooks-bridge.md",
       "revision": 1,
       "translations": {}
