@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 47
+content_revision: 48
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Recover after a preset edit collides with its previous generation](preset-generation-not-reclaimed.md)
 - [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)
 - [Recover a Session log with duplicated committed sequence numbers](duplicate-committed-session-seq.md)
 - [Recover a composer stuck read-only after sending an image](image-send-composer-readonly.md)
@@ -25,6 +26,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| saving `agent.cordis.yml` makes later Session creation fail with an inspect provider already registered until restart | standing preset generation / process-global registration ownership | preset stamp, joined Sessions, Host PID, first `session.create` error, duplicate provider ID, and cross-preset inventory |
 | Web composer inserts raw pinyin, kana, or jamo without an IME candidate window | browser/OS composition negotiation / DOM focus / build identity | exact CLI and browser build, clean-profile A/B, focused element, composition event trace, and TUI comparison |
 | history reports a committed seq gap where an earlier range repeats | durable cursor / writer ownership / retry identity | stopped-writer inventory, immutable artifact hash, first expected/got pair, complete logical event comparison, and process interruption timeline |
 | textarea keeps its caret but becomes permanently read-only after an image send | client input flight / image serialization / Host admission | input data-phase, image metadata, RPC identity, Host response, and whether the durable prompt already exists |
@@ -86,6 +88,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Recover after a preset edit collides with its previous generation](preset-generation-not-reclaimed.md)
 - [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)
 - [Fix Web Search authentication on a custom gateway](web-search-custom-gateway-auth.md)
 - [Diagnose npx hanging before DeepSeek Harness starts](npx-install-prompt-hangs.md)
