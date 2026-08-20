@@ -433,6 +433,11 @@
       "source": "docs/en/troubleshooting/windows-console-window-flash.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/corrupt-package-json-profile-boot.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
