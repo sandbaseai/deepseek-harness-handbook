@@ -33,6 +33,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Web clears a prompt, the turn fails, and no user bubble appears | browser draft / Host admission / Agent inbox / Session durability | RPC outcome, composer restoration, ordered tail events, matching `user/message`, and `source.rpcId` |
 | `DeepSeek API request to ... failed` before an HTTP response | Host-to-provider network transport | deepest cause, Node version, endpoint, proxy requirement, and TLS inspection state |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
+| One word, phrase, or n-gram repeats until the output cap | model stream degeneration / repetition guard | raw text deltas, repeated unit and offset, finish reason, route, and retry policy |
 | Every follow-up in one Session returns `400 ... Unterminated string` | persisted tool-call arguments | exported Session log, malformed `tool/call` seq, and fresh-Session A/B result |
 | Every retry returns `400 insufficient tool messages following tool_calls` | provider transcript / missing tool results | assistant call ids, durable call/result pairs, first scheduler error, and closed turn reason |
 | UI TTFT grows with mature Sessions or subagent fan-out | Host / provider / Session event pressure | `step/start`, gateway arrival/first-token, first `assistant/chunk`, event count, and active-step count |
@@ -72,6 +73,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Detect and recover from degenerate repeated model output](degenerate-model-output.md)
 - [Replace synchronous subprocess calls inside plugin tools](../plugin-development/async-subprocess-tools.md)
 - [Stop a foreground tool that will not cancel](stuck-tool-cancellation.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](deepseek-api-fetch-failed-proxy-ca.md)

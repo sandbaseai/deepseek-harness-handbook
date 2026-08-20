@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**89 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**90 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -90,6 +90,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Generate exact installation evidence commands for my OS and install path | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
 | Recover an empty sidebar or unreadable Session without destroying evidence | [Route frame, sequence, and tool-call identity failures](https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html) |
 | Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
+| Detect repeated model text inside one streaming attempt | [Degenerate-output guard guide](https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html) |
 | Stop a foreground tool after `session.cancel` is accepted but work remains live | [Stuck-tool cancellation runbook](https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html) |
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |
 | Recover when every retry reports insufficient tool messages | [Missing tool-result recovery guide](https://sandbaseai.github.io/deepseek-harness-handbook/insufficient-tool-messages.html) |
@@ -162,7 +163,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 89 pages |
+| English | Canonical | 90 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -274,6 +275,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Recover `spawn bash ENOENT` after a workspace moves](docs/en/troubleshooting/workspace-moved-spawn-enoent.md)
 - [Classify and recover context overflow](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html)
 - [Stop a runaway Agent loop and contain spend](docs/en/troubleshooting/runaway-agent-loop.md)
+- [Detect and recover from degenerate repeated model output](docs/en/troubleshooting/degenerate-model-output.md)
 - [Stop a tool that will not cancel](docs/en/troubleshooting/stuck-tool-cancellation.md)
 - [Recover a Session poisoned by invalid tool-call JSON](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md)
 - [Fix UNKNOWN_TOOL from empty streamed tool identity, including Bailian](docs/en/troubleshooting/streamed-tool-call-empty-identity.md)
