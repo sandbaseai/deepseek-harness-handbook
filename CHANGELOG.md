@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.48 - 2026-08-20
+
+### Changed
+
+- Replaced the count-bound social preview with a durable “Operator Guides” value signal so shared cards stay accurate as coverage grows.
+- Preserved the existing SandBase architecture map, rc.8 evidence signal, Install Doctor, and Failure Router calls to action in a verified 1280 by 640 asset.
+
 ## 0.5.47 - 2026-08-20
 
 ### Added
