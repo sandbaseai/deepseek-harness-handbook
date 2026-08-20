@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Detect and recover from degenerate repeated model output](troubleshooting/degenerate-model-output.md)
 - [Unbrick a profile after an invalid overlay](troubleshooting/invalid-overlay-boot-failure.md)
 - [Read the Session log storage format without losing packed output](reference/session-log-storage-format.md)
 - [Compare DeepSeek Harness, Claude Code, and Codex](reference/deepseek-harness-vs-coding-agents.md)
