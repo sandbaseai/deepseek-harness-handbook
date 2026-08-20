@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.46 - 2026-08-20
+
+### Added
+
+- A pinned rc.8 map of the JSONL Session artifact, concatenated Zstandard frames, packed storage rows, and decoded logical events.
+- Safe inspection steps and reader acceptance gates for `text-chunks`, `reasoning-chunks`, and `tool-call-chunks` without silent output loss.
+- A visual format map plus homepage, sitemap, Atom, and machine-readable discovery entries for the 82nd canonical English guide.
+
 ## 0.5.45 - 2026-08-20
 
 ### Added

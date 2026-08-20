@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>DeepSeek Harness Session Log Format | Packed Rows</title>
+  <meta name="description" content="Read DeepSeek Harness JSONL and Zstandard Session logs without silently dropping text-chunks, reasoning-chunks, or tool-call-chunks rows.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-session-log-format.html">
+  <meta property="og:type" content="article"><meta property="og:title" content="A Session event is not always one line.">
+  <meta property="og:description" content="Decode DeepSeek Harness framing, storage rows, and logical events without losing packed assistant output.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-session-log-format.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="./styles.css?v=0.5.46">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness Session Log Storage Format","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-20","url":"https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-session-log-format.html","inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="Handbook home"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#layers">Layers</a><a href="#gates">Reader gates</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div><p class="eyebrow">Session persistence · rc.8</p><h1>A Session event is not always one line.</h1><p class="article-deck">Default DSH logs compress frames and pack streamed deltas. Decode both layers or silently lose assistant output.</p><div class="article-meta"><span>Verified 2026-08-20</span><span>DSH source 141eb6f</span></div></div>
+      <div class="identity-seal" role="img" aria-label="Session artifact transforms from Zstandard frames to storage rows and then decoded Session events"><div><small>artifact</small><strong>.jsonl.zstd</strong></div><i>→</i><div><small>storage</small><strong>packed rows</strong></div><i>→</i><div><small>logical</small><strong>Session events</strong></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>The silent-loss trap</strong><span>Rows named text-chunks, reasoning-chunks, and tool-call-chunks carry seq0—not seq—and are not SessionEvent types.</span></div>
+      <h2 id="layers">Decode four layers in order.</h2>
+      <div class="identity-proof"><section><strong>1 · Artifact</strong><p>Select <code>.jsonl.zstd</code> or plaintext <code>.jsonl</code> from the configured persistence root.</p></section><section><strong>2 · Frames</strong><p>Decode the header frame and every checksummed append frame. The file is a frame concatenation.</p></section><section><strong>3 · Rows</strong><p>Classify ordinary events and all three packed storage-row types.</p></section><section><strong>4 · Events</strong><p>Expand each packed row, then require one contiguous logical <code>seq</code> stream.</p></section></div>
+      <h2>One row can represent many events.</h2>
+      <div class="identity-routes"><section><span>text-chunks</span><strong>text deltas</strong><p><code>texts[]</code> preserves every streamed fragment.</p></section><section><span>reasoning-chunks</span><strong>reasoning deltas</strong><p>The same envelope carries thinking-model output.</p></section><section><span>tool-call-chunks</span><strong>argument deltas</strong><p><code>args[]</code> shares one call id and optional name.</p></section></div>
+      <pre><code>{ type: "text-chunks", seq0: 10, time0: 1787150994000,
+  data: { turn: 1, step: 1, index: 0,
+          dt: [21, 1, 0, 20],
+          texts: ["He", "llo", ", ", "wor", "ld"] } }</code></pre>
+      <p>This physical row reconstructs five <code>assistant/chunk</code> events with sequence numbers 10 through 14. Filtering rows without <code>seq</code> drops all five.</p>
+      <div class="identity-warning"><strong>Use the shipped codec.</strong><p>Run every post-header value through <code>decodeStorageRecord</code>. Do not independently guess a durable prerelease format from the generated event catalog.</p></div>
+      <h2 id="gates">Minimum reader gates.</h2>
+      <ul><li>Read plaintext and concatenated Zstandard artifacts.</li><li>Validate the header and reject unsupported format versions first.</li><li>Expand all three packed-row types without joining fragments early.</li><li>Preserve packed, unpacked, and mixed-layout equivalence.</li><li>Fail loudly on malformed packed rows and committed sequence gaps.</li><li>Inspect a quiesced copy; never repair the only live artifact.</li></ul>
+      <section class="article-cta"><h2>Keep the complete format map.</h2><p>The canonical guide includes exact reconstruction rules, unsafe parser examples, a read-only inspection procedure, eleven acceptance gates, and pinned rc.8 sources.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/session-log-storage-format.md">Read the complete guide</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
