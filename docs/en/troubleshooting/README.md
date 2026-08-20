@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 46
+content_revision: 47
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)
 - [Recover a Session log with duplicated committed sequence numbers](duplicate-committed-session-seq.md)
 - [Recover a composer stuck read-only after sending an image](image-send-composer-readonly.md)
 - [Configure Bailian Token Plan without losing catalog compatibility](bailian-token-plan-catalog-route.md)
@@ -24,6 +25,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| Web composer inserts raw pinyin, kana, or jamo without an IME candidate window | browser/OS composition negotiation / DOM focus / build identity | exact CLI and browser build, clean-profile A/B, focused element, composition event trace, and TUI comparison |
 | history reports a committed seq gap where an earlier range repeats | durable cursor / writer ownership / retry identity | stopped-writer inventory, immutable artifact hash, first expected/got pair, complete logical event comparison, and process interruption timeline |
 | textarea keeps its caret but becomes permanently read-only after an image send | client input flight / image serialization / Host admission | input data-phase, image metadata, RPC identity, Host response, and whether the durable prompt already exists |
 | Bailian Token Plan has no reasoning selector, rejects `developer`, or appears to lose models | catalog provider identity / model metadata / versioned compat schema | DSH version, provider key, resolved route, first provider response, and whether `models` replaces the catalog |
@@ -84,6 +86,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)
 - [Fix Web Search authentication on a custom gateway](web-search-custom-gateway-auth.md)
 - [Diagnose npx hanging before DeepSeek Harness starts](npx-install-prompt-hangs.md)
 - [Detect and recover from degenerate repeated model output](degenerate-model-output.md)
