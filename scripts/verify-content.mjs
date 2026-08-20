@@ -51,6 +51,19 @@ function verifyPublishedCounts() {
   if (!homepage.includes(`Explore ${canonicalCount} canonical guides`)) {
     errors.push(`Homepage hero count must match ${canonicalCount} canonical guides`);
   }
+  if (!homepage.includes(`content="${canonicalCount} source-backed guides plus interactive tools`)) {
+    errors.push(`Homepage social descriptions must match ${canonicalCount} canonical guides`);
+  } else {
+    const socialDescriptionCount = homepage.match(
+      new RegExp(`content="${canonicalCount} source-backed guides plus interactive tools`, 'g'),
+    )?.length ?? 0;
+    if (socialDescriptionCount !== 2) {
+      errors.push(`Homepage Open Graph and Twitter descriptions must both match ${canonicalCount} canonical guides`);
+    }
+  }
+  if (!homepage.includes(`<strong>${canonicalCount}</strong><span>canonical English guides</span>`)) {
+    errors.push(`Homepage evidence count must match ${canonicalCount} canonical guides`);
+  }
   if (!homepage.includes(`>${visualCount} indexed paths</p>`)) {
     errors.push(`Homepage initial search count must match ${visualCount} visual paths`);
   }
