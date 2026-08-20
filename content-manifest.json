@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/security/credential-storage-threat-model.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/duplicate-committed-session-seq.md",
       "revision": 1,
       "translations": {}

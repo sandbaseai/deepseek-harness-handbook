@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**97 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**98 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -37,6 +37,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Protect API keys from backups, same-UID tools, or an untrusted Agent | [Credential storage threat model](https://sandbaseai.github.io/deepseek-harness-handbook/api-key-storage.html) |
 | Recover a Session whose committed event sequence repeats | [Duplicate committed seq runbook](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html) |
 | Recover a Web composer stuck read-only after sending an image | [Image-send admission runbook](https://sandbaseai.github.io/deepseek-harness-handbook/image-send-readonly.html) |
 | Set and verify reasoning effort for a headless one-shot run | [Headless reasoning-effort guide](https://sandbaseai.github.io/deepseek-harness-handbook/headless-reasoning-effort.html) |
@@ -170,7 +171,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 97 pages |
+| English | Canonical | 98 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -248,6 +249,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Security
 
+- [Threat-model API key storage and choose a stronger credential boundary](docs/en/security/credential-storage-threat-model.md)
 - [Audit community plugins before installation](docs/en/security/community-plugin-audit.md)
 - [Code Mode worker-thread trust boundary](docs/en/security/code-mode-worker-trust-boundary.md)
 - [Prevent unexpected DeepSeek API charges](docs/en/security/prevent-unexpected-deepseek-api-charges.md)
