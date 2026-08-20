@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**91 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**92 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -40,6 +40,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand the shipped CLI, automate one task, or evaluate a community TUI | [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
 | Recover when the Windows folder picker crashes or truncates a Unicode path | [Windows folder-picker crash and truncation guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html) |
 | Connect to DeepSeek through an authorized proxy or enterprise CA | [Provider egress and TLS guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html) |
+| Fix Web Search authentication when chat uses a custom gateway | [Custom-gateway Web Search runbook](https://sandbaseai.github.io/deepseek-harness-handbook/web-search-custom-gateway.html) |
 | Add an MCP server or diagnose missing MCP tools | [MCP preset and connection guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
 | Evaluate DeepSeek Harness as an ACP External Agent in an editor | [ACP editor-integration boundary](https://sandbaseai.github.io/deepseek-harness-handbook/acp-editor-boundary.html) |
 | Render an ACP permission request in a custom Web client | [ACP permission UI contract](https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-request-ui.html) |
@@ -164,7 +165,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 91 pages |
+| English | Canonical | 92 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -270,6 +271,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Prompt accepted before it became durable](docs/en/troubleshooting/prompt-accepted-before-durable.md)
 - [Windows folder-picker worker crash](docs/en/troubleshooting/windows-folder-picker-worker-crash.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)
+- [Fix Web Search authentication on a custom gateway](docs/en/troubleshooting/web-search-custom-gateway-auth.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)
 - [Remote Web access, SSH, HTTPS, and trust](docs/en/troubleshooting/remote-web-secure-context.md)
 - [PTY shell path on NixOS and minimal Linux](docs/en/troubleshooting/pty-shell-path.md)
