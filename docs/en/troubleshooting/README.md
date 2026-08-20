@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 53
+content_revision: 54
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -31,6 +31,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| Code Mode fails before a model request with unknown or malformed `{{...}}` in `tools:sdk` | third-party schema text / generated SDK / strict prompt interpolation | exact group and section, tool presentation mode and language, smallest schema carrier, native-mode control, generated SDK fragment, and assembly raw-flag propagation |
 | manual `/compact` records `compaction/start`, then ends with `DeepSeek request aborted by caller` | caller cancellation / command, gateway, Agent, or Host lifecycle | command and compaction IDs, first-abort source and reason, Remote token generation, maintenance cancel cause, client mount timeline, and surface hash before/after |
 | plugin update reports `ERR_PNPM_UNEXPECTED_STORE` and names two absolute store paths | pnpm linked-store identity / environment-sensitive store selection | exact profile, linked and selected paths from the first error, effective store config, DSH and pnpm versions, filesystem device identity, and manifest/lockfile diff |
 | chat works but every native and MCP tool fails reading scheduler `prepare` from undefined | duplicate physical core package / module-local symbol identity | DSH and profile resolution realpaths, dependency trees, install command, lockfile, and native/MCP control calls |
