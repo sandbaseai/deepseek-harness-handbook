@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**82 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**83 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -63,6 +63,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand what DeepSeek Harness actually is | [DeepSeek Harness explained](docs/en/what-is-deepseek-harness.md) |
 | Choose between DeepSeek Harness, Claude Code, and Codex | [Source-backed control-plane comparison](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-vs-claude-code-vs-codex.html) |
 | Read a Session log without dropping packed assistant output | [Session log storage-format map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-session-log-format.html) |
+| Recover when an invalid overlay prevents the profile from booting | [Invalid-overlay recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html) |
 | Run the Web UI safely | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
 | Run one task in automation or CI | [CLI and Headless Agent guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
@@ -155,7 +156,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 82 pages |
+| English | Canonical | 83 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Unbrick DeepSeek Harness After an Invalid Overlay</title>
+  <meta name="description" content="Recover DeepSeek Harness when an invalid cordis.patch.yml insert causes ERR_MODULE_NOT_FOUND and prevents Web or another profile from booting.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html">
+  <meta property="og:type" content="article"><meta property="og:title" content="When the control plane will not boot, recovery lives outside it.">
+  <meta property="og:description" content="Preserve the user layers, prove the bundle-only baseline, remove the invalid row, and restore one candidate at a time.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html"><meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="./styles.css?v=0.5.47">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Unbrick DeepSeek Harness After an Invalid Overlay","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-20","url":"https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html","inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="Handbook home"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#recover">Recover</a><a href="#transaction">Prevent</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div><p class="eyebrow">Profile recovery · rc.8</p><h1>When the control plane will not boot, recovery lives outside it.</h1><p class="article-deck">One unresolved insert can stop the entire profile. Preserve the layers, prove the shipped baseline, and restore one candidate at a time.</p><div class="article-meta"><span>Verified 2026-08-20</span><span>DSH source 141eb6f</span></div></div>
+      <div class="identity-seal" role="img" aria-label="An invalid user overlay causes module resolution to fail and the Harness profile to exit"><div><small>user layer</small><strong>insert package</strong></div><i>→</i><div><small>Loader</small><strong>module unresolved</strong></div><i>→</i><div><small>profile</small><strong>fail loud</strong></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>The cold-start distinction</strong><span>Live HMR can retain the last good tree after a rejected candidate. A restart has no previous tree and exits.</span></div>
+      <h2 id="recover">Recover through three proofs.</h2>
+      <div class="identity-proof"><section><strong>1 · Preserve</strong><p>Stop DSH and copy the profile manifest, both user layers, lockfile, and first error.</p></section><section><strong>2 · Baseline</strong><p>Use <code>--dump-default-config</code> to omit user layers and prove shipped bundles still compose.</p></section><section><strong>3 · Reduce</strong><p>Set the implicated active user layer to a valid empty array: <code>[]</code>.</p></section><section><strong>4 · Boot</strong><p>Require both a full config dump and real import/activation readiness.</p></section></div>
+      <pre><code>dsh --profile web --dump-default-config &gt; web.default.yml
+dsh --profile web --dump-config &gt; web.recovered.yml
+dsh --profile web</code></pre>
+      <div class="identity-warning"><strong>A successful dump is not a successful boot.</strong><p>Offline composition parses patches but does not prove that an inserted package resolves, imports, or activates.</p></div>
+      <h2>Choose the correct repair.</h2>
+      <div class="identity-routes"><section><span>Accidental row</span><strong>Remove the insert</strong><p>Restore reviewed groups one at a time.</p></section><section><span>Intended bundle</span><strong>Use dsh plugin add</strong><p>Require zero exit, lock integrity, declaration, and boot.</p></section><section><span>Raw module</span><strong>Resolve from profile root</strong><p>Then test its export and lifecycle in isolation.</p></section></div>
+      <h2 id="transaction">A writer needs a transaction.</h2>
+      <pre><code>resolve → parse → compose → snapshot
+  → isolated boot + health probe
+  → promote or restore</code></pre>
+      <p>Do not turn every missing plugin into a warning. A missing policy, sandbox, or persistence provider is not a safe degraded runtime.</p>
+      <section class="article-cta"><h2>Keep the complete recovery runbook.</h2><p>The canonical guide maps both user layers, the rc.8 default-config escape hatch, package resolution probes, unsafe shortcuts, transactional writer requirements, and ten acceptance gates.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/invalid-overlay-boot-failure.md">Read the complete runbook</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

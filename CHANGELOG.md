@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.47 - 2026-08-20
+
+### Added
+
+- A pinned rc.8 runbook for recovering when an invalid `cordis.patch.yml` insert prevents a profile and its Web control plane from booting.
+- The `--dump-default-config` recovery boundary, both user-layer owners, module-resolution probes, transactional writer requirements, and ten acceptance gates.
+- A visual recovery map plus homepage, sitemap, Atom, and machine-readable discovery entries for the 83rd canonical English guide.
+
 ## 0.5.46 - 2026-08-20
 
 ### Added
