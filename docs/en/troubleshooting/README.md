@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 44
+content_revision: 45
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Recover a composer stuck read-only after sending an image](image-send-composer-readonly.md)
 - [Configure Bailian Token Plan without losing catalog compatibility](bailian-token-plan-catalog-route.md)
 - [Recover an expired MCP session without a runaway tool loop](expired-mcp-session-loop.md)
 
@@ -22,6 +23,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| textarea keeps its caret but becomes permanently read-only after an image send | client input flight / image serialization / Host admission | input data-phase, image metadata, RPC identity, Host response, and whether the durable prompt already exists |
 | Bailian Token Plan has no reasoning selector, rejects `developer`, or appears to lose models | catalog provider identity / model metadata / versioned compat schema | DSH version, provider key, resolved route, first provider response, and whether `models` replaces the catalog |
 | MCP tools remain visible but every call returns `Unknown or expired MCP session` | application-level MCP session / stale tool generation | transport state, error code, connection generation, repeated-call count, and whether `initialize` plus `tools/list` reruns |
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |

@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/image-send-composer-readonly.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/guides/headless-reasoning-effort.md",
       "revision": 1,
       "translations": {}
@@ -286,7 +291,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 44,
+      "revision": 45,
       "translations": {}
     },
     {

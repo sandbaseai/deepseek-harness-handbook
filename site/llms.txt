@@ -3,6 +3,7 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+Image-send composer recovery: https://sandbaseai.github.io/deepseek-harness-handbook/image-send-readonly.html
 Headless reasoning effort: https://sandbaseai.github.io/deepseek-harness-handbook/headless-reasoning-effort.html
 Bailian Token Plan catalog route: https://sandbaseai.github.io/deepseek-harness-handbook/bailian-token-plan.html
 Expired MCP session recovery: https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html
