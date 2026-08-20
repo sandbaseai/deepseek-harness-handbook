@@ -1,12 +1,13 @@
 {
   "name": "deepseek-harness-handbook",
-  "version": "0.5.77",
+  "version": "0.5.78",
   "private": true,
   "description": "An English-canonical, multilingual-by-design handbook for DeepSeek Harness.",
   "type": "module",
   "scripts": {
     "check": "node scripts/verify-content.mjs",
-    "check:links": "node scripts/verify-content.mjs --external-links"
+    "check:links": "node scripts/verify-content.mjs --external-links",
+    "sync:article-schema": "node scripts/sync-article-schema.mjs"
   },
   "engines": {
     "node": ">=20"

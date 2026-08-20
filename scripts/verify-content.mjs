@@ -69,6 +69,16 @@ function verifyPublishedCounts() {
   }
 }
 
+function verifyArticleStructuredData() {
+  for (const file of readdirSync(siteDirectory).filter((name) => name.endsWith('.html'))) {
+    const html = readFileSync(join(siteDirectory, file), 'utf8');
+    if (!html.includes('property="og:type" content="article"')) continue;
+    if (!html.includes('type="application/ld+json"')) {
+      errors.push(`Article page must include JSON-LD structured data: site/${file}`);
+    }
+  }
+}
+
 function frontmatter(relativePath, text) {
   const match = text.match(/^---\n([\s\S]*?)\n---\n/);
   if (!match) {
@@ -93,6 +103,7 @@ function markdownFiles(directory) {
 }
 
 verifyPublishedCounts();
+verifyArticleStructuredData();
 
 for (const page of manifest.pages) {
   const sourceText = read(page.source);
