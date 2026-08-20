@@ -6,6 +6,7 @@ Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
 ACP editor integration boundary: https://sandbaseai.github.io/deepseek-harness-handbook/acp-editor-boundary.html
 ACP permission request UI: https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-request-ui.html
 Async subprocess tools: https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html
+Stuck tool cancellation: https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html
 Tool schema subset: https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html
 Partial plugin-add recovery: https://sandbaseai.github.io/deepseek-harness-handbook/plugin-add-nonzero-reconcile.html
 Conversation update-before-start recovery: https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html
