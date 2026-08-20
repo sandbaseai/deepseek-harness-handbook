@@ -185,7 +185,7 @@ Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e
 
 - [Upstream store-drift reproduction and proposed repair #3545](https://github.com/deepseek-ai/deepseek-harness/discussions/3545)
 - [rc.8 plugin command forwarding](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/apps/cli/src/plugin.ts)
-- [rc.8 DSH home resolution](https://github.com/deepseek-ai/deepseek-harness/tree/141eb6fef83422698aef7a981029e843e8161534/packages/boot/home-paths)
+- [rc.8 DSH home resolution](https://github.com/deepseek-ai/deepseek-harness/tree/141eb6fef83422698aef7a981029e843e8161534/packages/util/home-paths)
 - [pnpm configuration: store-dir](https://pnpm.io/settings#store-dir)
 - [pnpm error documentation](https://pnpm.io/errors#err_pnpm_unexpected_store)
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
