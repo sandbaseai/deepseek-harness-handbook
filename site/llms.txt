@@ -3,6 +3,7 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+Shared workspace-write dependency caches: https://sandbaseai.github.io/deepseek-harness-handbook/workspace-write-shared-cache.html
 API key storage threat model: https://sandbaseai.github.io/deepseek-harness-handbook/api-key-storage.html
 Duplicated committed Session seq recovery: https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html
 Image-send composer recovery: https://sandbaseai.github.io/deepseek-harness-handbook/image-send-readonly.html

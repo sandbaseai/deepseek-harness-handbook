@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/security/workspace-write-shared-cache.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/abortsignal-any-runtime-mismatch.md",
       "revision": 1,
       "translations": {}

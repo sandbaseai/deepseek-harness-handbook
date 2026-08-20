@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.83 - 2026-08-20
+
+### Added
+
+- A source-backed capability design for sharing npm, pnpm, pip, Cargo, Go, and other dependency caches without granting arbitrary Host write roots.
+- Trust-scope, namespace, path-admission, TOCTOU, concurrency, quota, and corruption-recovery requirements, with independent enforcement gates for bwrap, Landlock, Seatbelt, Windows ACL, and in-process filesystem tools.
+- A visual architecture page and discovery entries for the 110th canonical English guide, grounded in upstream request #3527 and rc.8 policy code.
+
 ## 0.5.82 - 2026-08-20
 
 ### Changed
