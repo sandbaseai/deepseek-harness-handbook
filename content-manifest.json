@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/preset-generation-not-reclaimed.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/web-ime-composition.md",
       "revision": 1,
       "translations": {}
@@ -306,7 +311,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 47,
+      "revision": 48,
       "translations": {}
     },
     {
