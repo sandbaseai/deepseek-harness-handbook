@@ -448,6 +448,11 @@
       "source": "docs/en/integrations/acp-permission-request-ui.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/plugin-development/async-subprocess-tools.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
