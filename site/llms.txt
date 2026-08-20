@@ -29,6 +29,7 @@ Language status: English canonical; Simplified Chinese partial and reviewed; Jap
 Atom updates feed: https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml
 Source repository: https://github.com/sandbaseai/deepseek-harness-handbook
 Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
+Programmatic headless contract: https://sandbaseai.github.io/deepseek-harness-handbook/headless-programmatic-contract.html
 Air-gapped rc.8 source build: https://sandbaseai.github.io/deepseek-harness-handbook/air-gapped-source-build.html
 Token accounting map: https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html
 Preset generation recovery: https://sandbaseai.github.io/deepseek-harness-handbook/preset-generation-recovery.html

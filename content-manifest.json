@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/guides/headless-programmatic-contract.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/getting-started/air-gapped-source-build.md",
       "revision": 1,
       "translations": {}
