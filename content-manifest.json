@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/operations/token-meter-accounting.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/preset-generation-not-reclaimed.md",
       "revision": 1,
       "translations": {}
