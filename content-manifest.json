@@ -443,6 +443,11 @@
       "source": "docs/en/troubleshooting/pi-ai-server-error-not-retried.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/integrations/acp-permission-request-ui.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
