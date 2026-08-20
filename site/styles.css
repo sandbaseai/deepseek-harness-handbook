@@ -1795,6 +1795,10 @@ footer div { display: flex; gap: 1.5rem; }
 .identity-routes { display: grid; grid-template-columns: 1.1fr 1fr .9fr; gap: 1rem; margin: 1.25rem 0 2rem; }
 .identity-routes span { color: var(--accent); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
 .identity-routes strong { display: block; margin-top: .25rem; }
+html:has(link[rel="canonical"][href$="code-mode-unknown-prompt-variable.html"]) .identity-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(400px,.82fr); gap:clamp(2rem,5vw,5rem); min-height:auto; padding-top:clamp(2.5rem,4vw,3.5rem); padding-bottom:clamp(2rem,3vw,3rem); }
+html:has(link[rel="canonical"][href$="code-mode-unknown-prompt-variable.html"]) .identity-hero h1 { max-width:700px; font-size:clamp(2.9rem,4.5vw,4.2rem); }
+html:has(link[rel="canonical"][href$="code-mode-unknown-prompt-variable.html"]) .article-body { max-width:940px; margin-inline:auto; }
+@media(max-width:900px){html:has(link[rel="canonical"][href$="code-mode-unknown-prompt-variable.html"]) .identity-hero{grid-template-columns:1fr}}
 @media (max-width: 760px) {
   .identity-seal { min-width: 0; width: 100%; }
   .identity-grid, .identity-proof, .identity-routes { grid-template-columns: 1fr; }

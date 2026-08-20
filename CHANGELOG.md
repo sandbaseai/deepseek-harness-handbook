@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.89 - 2026-08-20
+
+### Changed
+
+- Expanded the Code Mode prompt-variable guide from the `{{hexagon}}` unknown-name case to the malformed `{{dotted.state.path}}` grammar failure reported in upstream #3541.
+- Evaluated contributor commit `c2af02e`, promoted an explicit raw-section contract over description-only sanitization, and added propagation gates for assembly replacement and complete sections.
+- Reworked the visual guide and discovery copy around literal ownership across descriptions, property names, enums, const values, and generated SDK text.
+
 ## 0.5.88 - 2026-08-20
 
 ### Added

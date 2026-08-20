@@ -3,6 +3,7 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+Code Mode literal-section boundary: https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-unknown-prompt-variable.html
 Manual compaction caller-abort diagnosis: https://sandbaseai.github.io/deepseek-harness-handbook/manual-compaction-aborted.html
 pnpm store-identity recovery: https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-unexpected-store.html
 OpenCode Go model routing: https://sandbaseai.github.io/deepseek-harness-handbook/opencode-go-model-routing.html

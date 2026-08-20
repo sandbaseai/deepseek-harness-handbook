@@ -1,20 +1,25 @@
 ---
-title: Fix Unknown Prompt Variables from MCP Tool Descriptions in Code Mode
+title: Fix Unknown or Malformed Prompt Variables from Tool Descriptions in Code Mode
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-20
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
-# Fix `unknown prompt variable "{{hexagon}}"` in Code Mode
+# Fix double-brace tool descriptions breaking Code Mode
 
-DeepSeek Harness rc.8 can reject prompt assembly when a third-party tool description contains a complete double-brace group such as `{{hexagon}}`. The real-world trigger is the Mermaid reference embedded by `@drawio/mcp`, but the failure class is not specific to draw.io:
+DeepSeek Harness rc.8 can reject prompt assembly when a third-party tool description contains a complete double-brace group. Two independent reports now cover both parser branches:
 
 ```text
 unknown prompt variable "{{hexagon}}" in section "tools:sdk";
 registered variables: provider, model, cwd, ...
+
+malformed prompt variable reference "{{dotted.state.path}}" in section "tools:sdk"
+(variable names match /^[a-z][a-z0-9_]*$/)
 ```
+
+The first group is a syntactically valid variable name that is not registered. The second documents a tool's own dotted-path template syntax, so it fails the variable-name grammar before lookup. Both share the same ownership error: generated third-party text was treated as a Harness-authored prompt template.
 
 In `code` or `both` tool-presentation mode, DSH generates a model-facing SDK from every visible tool schema. Raw tool and property descriptions enter the `tools:sdk` prompt section. The system-prompt renderer then interprets every complete `{{name}}` group in that generated text as a strict Harness prompt variable.
 
@@ -25,7 +30,7 @@ Third-party prose has crossed into deployment-authored template syntax.
 This guide applies when all four conditions hold:
 
 1. the failure names section `tools:sdk`;
-2. the unknown group appears in a tool or schema description;
+2. the unknown or malformed group appears in a tool or schema description, property name, enum, or const string;
 3. effective tool presentation is `code` or `both`; and
 4. the same tool set assembles in `native` mode or assembles after the offending tool is removed.
 
@@ -43,7 +48,7 @@ If the configuration contains secrets, redact values while preserving key names,
 
 ```mermaid
 flowchart LR
-  A[MCP tool schema] --> B[description contains {{hexagon}}]
+  A[Visible tool schema] --> B[literal double-brace group]
   B --> C[Code Mode SDK renderer]
   C --> D[tools:sdk prompt section]
   D --> E[strict prompt interpolation]
@@ -53,8 +58,8 @@ flowchart LR
 At rc.8:
 
 - `dsh-tools` registers `tools:sdk` only for effective `code` and `both` modes;
-- the TypeScript renderer sends tool and property descriptions through `docLines()`;
-- the Python renderer also turns those descriptions into generated SDK documentation;
+- the TypeScript renderer sends tool and property descriptions through `docLines()` and can render schema values;
+- the Python renderer also turns descriptions, property names, and schema values into generated SDK documentation;
 - `renderPrompt()` subsequently calls the same strict interpolator for every section; and
 - the interpolator scans for `{{`, validates a complete simple name, and throws when that name has no registered variable.
 
@@ -85,16 +90,16 @@ Prove:
 
 If Code Mode is required, remove the draw.io MCP bridge from a disposable copy of the preset and start a fresh Session. This restores assembly but removes those tools; it is a diagnostic isolation step, not a feature-complete fix.
 
-### Sanitize the description locally
+### Sanitize generated text locally
 
-For a controlled source checkout, sanitize complete double-brace openers at the boundary where third-party schema prose becomes generated SDK text. Apply the same rule to:
+For a controlled source checkout, sanitizing double-brace openers can restore one known description. Apply the same rule consistently to:
 
 - top-level tool descriptions;
 - nested parameter-property descriptions;
 - TypeScript SDK output; and
 - Python SDK output.
 
-One conservative display transformation is `{{` → `{ {`. It preserves the readable intent while preventing strict variable recognition. Record the patch and expect upgrades to replace it.
+One conservative display transformation is `{{` → `{ {`. It prevents strict variable recognition, but it changes the model-visible documentation and can miss special property names, enum values, const values, or future renderer fields. Treat it as an operator patch, not the complete contract.
 
 Do not mutate only the published `@drawio/mcp` text and declare the Harness fixed. Another MCP server, plugin, or ordinary tool can carry the same group tomorrow.
 
@@ -116,17 +121,23 @@ A durable repair should preserve both properties:
 1. Harness-authored templates still fail on unknown or malformed variables.
 2. Third-party schema prose reaches the model as literal documentation, never as template syntax.
 
-The narrowest rc.8-compatible repair is to escape SDK-bound description text before the generated section enters interpolation. A more explicit future design could distinguish literal sections from templated sections, but that changes the system-prompt API and needs a broader compatibility review.
+The stronger repair is an explicit literal-section contract. A proposed fork commit adds an opt-in `PromptSection.raw` flag, preserves it on `AssembledSection`, makes `renderPrompt()` skip interpolation for raw sections, and registers `tools:sdk` as raw. Deployment persona and other authored sections remain strict.
+
+This design covers every byte of generated SDK text, not only descriptions. It also keeps output byte-identical for tool sets without double-brace text. The commit lives in a contributor fork, not the official DeepSeek AI repository, so treat it as a reviewed proposal until an upstream commit lands.
+
+A raw-section implementation must preserve the flag through complete-section selection, waterfall assembly replacement, serialization boundaries, and any plugin that reconstructs `PromptAssembly`. Dropping `raw` at one boundary reintroduces the failure only for those compositions.
 
 ## Regression gates
 
 ### Presentation matrix
 
 - [ ] A tool description containing `{{hexagon}}` assembles in `native` mode.
+- [ ] A tool description containing `{{dotted.state.path}}` assembles and remains literal.
 - [ ] It assembles in TypeScript `code` mode and remains readable in the generated SDK.
 - [ ] It assembles in Python `code` mode and remains readable.
 - [ ] It assembles in `both` mode without removing native schemas.
 - [ ] A nested property description with `{{example}}` follows the same rules.
+- [ ] A special property name, enum string, and const string containing a complete group remain literal.
 
 ### Template strictness
 
@@ -135,6 +146,8 @@ The narrowest rc.8-compatible repair is to escape SDK-bound description text bef
 - [ ] A registered variable still substitutes exactly once.
 - [ ] Substituted values are not scanned a second time.
 - [ ] Literal prose without a closing group remains literal according to the existing contract.
+- [ ] A raw section next to a normal section does not disable interpolation in the normal section.
+- [ ] The raw flag survives assembly replacement and complete-section selection.
 
 ### Generated-SDK safety
 
@@ -148,7 +161,8 @@ The narrowest rc.8-compatible repair is to escape SDK-bound description text bef
 
 | Error evidence | First boundary |
 |---|---|
-| `unknown prompt variable … in section "tools:sdk"` | third-party schema prose crossed into strict interpolation |
+| `unknown prompt variable … in section "tools:sdk"` | valid simple group from third-party schema text crossed into strict interpolation |
+| `malformed prompt variable reference … in section "tools:sdk"` | third-party literal group violates the Harness variable-name grammar |
 | Same error in `deployment:persona` | deployment template references an unregistered name |
 | `malformed prompt variable reference` | group shape or variable-name grammar |
 | `prompt variable … has no value` | registered provider returned `undefined` |
@@ -165,12 +179,14 @@ Include:
 - the full error including section and registered-variable list;
 - the smallest redacted tool schema that reproduces it;
 - whether `native`, `code`, and `both` reproduce independently;
-- whether the double-brace group occurs in the tool or a nested property description; and
+- whether the double-brace group occurs in a description, property name, enum, or const value; and
 - the generated SDK fragment after any proposed escaping.
 
 ## Primary sources
 
 - [Official discussion #3454](https://github.com/deepseek-ai/deepseek-harness/discussions/3454)
+- [Dotted-path reproduction and raw-section proposal #3541](https://github.com/deepseek-ai/deepseek-harness/discussions/3541)
+- [Contributor fork commit `c2af02e` implementing `PromptSection.raw`](https://github.com/Max-LiQingYang/deepseek-harness/commit/c2af02e6fc50eb32b2f20d71b5ff9551aba44db2)
 - [rc.8 strict prompt interpolation](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/system-prompt/src/index.ts)
 - [rc.8 TypeScript SDK renderer](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/src/ts-types.ts)
 - [rc.8 Python SDK renderer](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/src/py-types.ts)

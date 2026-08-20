@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-23T05:00:00Z</updated>
+  <updated>2026-08-23T06:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Make generated Code Mode SDK text explicitly literal</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-unknown-prompt-variable.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/code-mode-raw-section-r2</id><updated>2026-08-23T06:00:00Z</updated><summary>Cover both unknown simple groups and malformed dotted paths, then keep tools:sdk literal through an opt-in raw-section contract while authored templates remain strict.</summary></entry>
 
   <entry><title>Diagnose manual compaction aborted by its caller</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/manual-compaction-aborted.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/manual-compaction-aborted.html</id><updated>2026-08-23T05:00:00Z</updated><summary>Stop retries, preserve one failed transaction, identify the first aborted lifecycle signal, and keep authentic cancellation in the repair.</summary></entry>
 
