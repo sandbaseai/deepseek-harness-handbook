@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Compare DeepSeek Harness, Claude Code, and Codex](reference/deepseek-harness-vs-coding-agents.md)
 - [Choose the right CLI lifecycle](getting-started/headless-agent.md)
 - [Choose a memory architecture and migration path](architecture/sessions-vs-memory.md)
 - [Keep concurrent Session roots single-writer](operations/single-writer-session-roots.md)
