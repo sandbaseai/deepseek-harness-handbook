@@ -6,7 +6,7 @@
 
 Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources), the community-maintained DSH ecosystem directory.
 
-![DeepSeek Harness Handbook — source-backed guides, rc.8, Install Doctor, and Failure Router](assets/deepseek-harness-handbook-social-preview-v2.png)
+![DeepSeek Harness Handbook — operator guides, rc.8, Install Doctor, and Failure Router](assets/deepseek-harness-handbook-social-preview-v3.png)
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
