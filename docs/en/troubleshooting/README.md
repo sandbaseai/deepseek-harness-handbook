@@ -29,6 +29,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
+| Chat works through a custom gateway but `web_search` returns 401, reserved-tool, or no-result-block errors | independent Web Search endpoint / credential / Anthropic dialect | search request event endpoint, credential reference name, gateway protocol, and structured response blocks |
 | Chinese input receives an English answer or English Think row | user instruction / persona / provider / gateway | fresh-Session A/B, answer language, reasoning language, effective system-prompt row, and exact route |
 | Session title remains a clipped first-prompt fallback on a reasoning model | auxiliary title route / shared reasoning-text output cap | latest title source, `session/title-llm-request`, maxTokens, and terminal finish reason |
 | Web clears a prompt, the turn fails, and no user bubble appears | browser draft / Host admission / Agent inbox / Session durability | RPC outcome, composer restoration, ordered tail events, matching `user/message`, and `source.rpcId` |
@@ -74,6 +75,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Fix Web Search authentication on a custom gateway](web-search-custom-gateway-auth.md)
 - [Diagnose npx hanging before DeepSeek Harness starts](npx-install-prompt-hangs.md)
 - [Detect and recover from degenerate repeated model output](degenerate-model-output.md)
 - [Replace synchronous subprocess calls inside plugin tools](../plugin-development/async-subprocess-tools.md)

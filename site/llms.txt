@@ -9,6 +9,7 @@ Async subprocess tools: https://sandbaseai.github.io/deepseek-harness-handbook/a
 Stuck tool cancellation: https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html
 Degenerate model output: https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html
 npx install prompt hangs: https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html
+Web Search custom gateway: https://sandbaseai.github.io/deepseek-harness-handbook/web-search-custom-gateway.html
 Tool schema subset: https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html
 Partial plugin-add recovery: https://sandbaseai.github.io/deepseek-harness-handbook/plugin-add-nonzero-reconcile.html
 Conversation update-before-start recovery: https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html
