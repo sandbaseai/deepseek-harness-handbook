@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**84 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**85 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -77,6 +77,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix plugin installation blocked by `ERR_PNPM_ADDING_TO_ROOT` | [Make the profile workspace target explicit](https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-adding-to-root.html) |
 | Fix rc.8 source builds when standalone pnpm exposes `npm_execpath=pnpm.exe` | [Windows standalone-pnpm runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-standalone-pnpm.html) |
 | Stop black console windows flashing during Windows tool calls | [Two-path Windows process-creation runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-console-window-flash.html) |
+| Find the corrupt `package.json` behind a pathless boot SyntaxError | [Package-closure recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/corrupt-package-json-profile-boot.html) |
 | Recover an old Session that throws `received an update before its start Match` | [Conversation projection recovery](https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html) |
 | Recover when pnpm leaves a plugin package behind but DSH skips reconciliation | [Partial plugin install recovery](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-add-nonzero-reconcile.html) |
 | Recover when a Node 24 + tsx build exits 0 but creates no artifacts | [Silent source-build recovery](https://sandbaseai.github.io/deepseek-harness-handbook/node24-tsx-silent-build.html) |
@@ -157,7 +158,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 84 pages |
+| English | Canonical | 85 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
