@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/web-client-plugin-boot-failure.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/security/workspace-write-shared-cache.md",
       "revision": 1,
       "translations": {}
@@ -361,7 +366,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 49,
+      "revision": 50,
       "translations": {}
     },
     {

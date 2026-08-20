@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 49
+content_revision: 50
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Recover Web from a Client plugin boot failure](web-client-plugin-boot-failure.md)
 - [Recover when a second core package copy breaks every tool call](duplicate-core-runtime-closure.md)
 - [Recover after a preset edit collides with its previous generation](preset-generation-not-reclaimed.md)
 - [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)
