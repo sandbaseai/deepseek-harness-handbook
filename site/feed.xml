@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-22T07:00:00Z</updated>
+  <updated>2026-08-22T08:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Configure Bailian Token Plan without losing catalog compatibility</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/bailian-token-plan.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/bailian-token-plan.html</id><updated>2026-08-22T08:00:00Z</updated><summary>Use the installed catalog route, distinguish role compatibility from authentication, and handle rc.7/rc.8 compat and model replacement semantics safely.</summary></entry>
 
   <entry><title>Recover an expired MCP session without a repeated tool-call loop</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html</id><updated>2026-08-22T07:00:00Z</updated><summary>Separate an application-level expired session from a closed transport, invalidate one connection generation, rediscover tools, and circuit-break repeated failures.</summary></entry>
 
