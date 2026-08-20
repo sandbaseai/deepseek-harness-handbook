@@ -35,6 +35,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Prevent unexpected DeepSeek API charges](security/prevent-unexpected-deepseek-api-charges.md)
 - [Connect MCP servers](integrations/mcp.md)
 - [Evaluate the ACP editor-integration boundary](integrations/acp-editor-boundary.md)
+- [Render ACP permission requests safely](integrations/acp-permission-request-ui.md)
 - [Understand the tool execution pipeline](architecture/tool-execution-pipeline.md)
 - [Separate durable Sessions from long-term memory](architecture/sessions-vs-memory.md)
 - [Map AGENTS.md scope and precedence](agent-patterns/agents-md-scope.md)
