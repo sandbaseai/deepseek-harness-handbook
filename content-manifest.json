@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/manual-compaction-caller-abort.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/pnpm-unexpected-store-plugin-update.md",
       "revision": 1,
       "translations": {}
@@ -376,7 +381,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 52,
+      "revision": 53,
       "translations": {}
     },
     {

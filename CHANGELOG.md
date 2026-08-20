@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.88 - 2026-08-20
+
+### Added
+
+- A source-backed incident runbook for manual `/compact` failing with `DeepSeek request aborted by caller`.
+- First-abort signal instrumentation, a controlled Web-versus-non-Web lifecycle matrix, safe Session continuity, and twelve runtime repair gates.
+- A visual cancellation-chain guide and discovery entries for the 114th canonical English guide, grounded in upstream report #3542 and pinned rc.8 source.
+
 ## 0.5.87 - 2026-08-20
 
 ### Added
