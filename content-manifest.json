@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/plugin-development/install-claude-code-hooks-bridge.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/duplicate-core-runtime-closure.md",
       "revision": 1,
       "translations": {}

@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**104 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**105 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -37,6 +37,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Install the Claude Code hooks bridge without duplicating the runtime | [Hooks bridge installation guide](https://sandbaseai.github.io/deepseek-harness-handbook/claude-code-hooks-bridge.html) |
 | Recover when a second core package copy breaks every tool call | [Duplicate core runtime recovery](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-core-runtime.html) |
 | Design session, model, JSON, and exit semantics for headless embedding | [Programmatic headless contract](https://sandbaseai.github.io/deepseek-harness-handbook/headless-programmatic-contract.html) |
 | Build rc.8 in an air-gapped environment without losing provenance | [Air-gapped source-build guide](https://sandbaseai.github.io/deepseek-harness-handbook/air-gapped-source-build.html) |
@@ -177,7 +178,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 104 pages |
+| English | Canonical | 105 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
