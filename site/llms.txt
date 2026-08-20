@@ -69,6 +69,7 @@ Official upstream runtime: https://github.com/deepseek-ai/deepseek-harness
 - [Windows standalone pnpm](https://sandbaseai.github.io/deepseek-harness-handbook/windows-standalone-pnpm.html): Fix rc.8 source runners that pass native pnpm.exe to Node through npm_execpath.
 - [Windows console-window flash](https://sandbaseai.github.io/deepseek-harness-handbook/windows-console-window-flash.html): Route local subprocess and restricted-token ACL sandbox process creation separately without disabling the sandbox.
 - [Corrupt package manifest at boot](https://sandbaseai.github.io/deepseek-harness-handbook/corrupt-package-json-profile-boot.html): Find every malformed package.json behind a pathless JSON SyntaxError and repair the owning installation closure.
+- [pi-ai server_error retry](https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-server-error-retry.html): Route flattened overload text through classification, provider policy, and durable llm/retry event evidence.
 - [Operator cheat sheet](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/cheat-sheet.md): Commands, evidence checks, and production boundaries.
 
 ## Download
