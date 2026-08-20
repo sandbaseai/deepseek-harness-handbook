@@ -57,6 +57,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Recover a prompt accepted before it became durable](troubleshooting/prompt-accepted-before-durable.md)
 - [Fix Session persistence on filesystems without hard links](troubleshooting/session-hard-link-unsupported.md)
 - [Fix rc.8 source builds with standalone pnpm on Windows](troubleshooting/windows-standalone-pnpm-npm-execpath.md)
+- [Stop console windows flashing during Windows tool calls](troubleshooting/windows-console-window-flash.md)
 - [Recover a conversation that updates before its start Match](troubleshooting/conversation-update-before-start.md)
 - [Recover a plugin materialized after pnpm exits nonzero](troubleshooting/plugin-add-nonzero-reconcile.md)
 - [Recover a silent Node 24 and tsx root build](troubleshooting/node24-tsx-silent-build.md)

@@ -428,6 +428,11 @@
       "source": "docs/en/troubleshooting/session-title-reasoning-budget.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/windows-console-window-flash.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

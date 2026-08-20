@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-21T20:00:00Z</updated>
+  <updated>2026-08-21T21:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Stop Windows console windows flashing during tool calls</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/windows-console-window-flash.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/windows-console-window-flash.html</id><updated>2026-08-21T21:00:00Z</updated><summary>Separate local child_process.spawn from restricted-token CreateProcessAsUserW, then hide each path without disabling sandbox policy.</summary></entry>
 
   <entry><title>Unbrick DeepSeek Harness after an invalid overlay</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html</id><updated>2026-08-21T20:00:00Z</updated><summary>Preserve both user layers, prove the bundle-only baseline, remove the unresolved insert, and restore one candidate at a time.</summary></entry>
 

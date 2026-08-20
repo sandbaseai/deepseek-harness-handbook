@@ -97,6 +97,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
 - [Session first-flush failure on filesystems without hard links](session-hard-link-unsupported.md)
 - [Windows standalone-pnpm `npm_execpath` build failure](windows-standalone-pnpm-npm-execpath.md)
+- [Stop console windows flashing during Windows tool calls](windows-console-window-flash.md)
 - [Conversation update before its start Match](conversation-update-before-start.md)
 - [Plugin add exits nonzero after materialization](plugin-add-nonzero-reconcile.md)
 - [PTY shell path on NixOS and minimal Linux](pty-shell-path.md)
