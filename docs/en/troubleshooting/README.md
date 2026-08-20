@@ -49,6 +49,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Session title remains a clipped first-prompt fallback on a reasoning model | auxiliary title route / shared reasoning-text output cap | latest title source, `session/title-llm-request`, maxTokens, and terminal finish reason |
 | Web clears a prompt, the turn fails, and no user bubble appears | browser draft / Host admission / Agent inbox / Session durability | RPC outcome, composer restoration, ordered tail events, matching `user/message`, and `source.rpcId` |
 | `DeepSeek API request to ... failed` before an HTTP response | Host-to-provider network transport | deepest cause, Node version, endpoint, proxy requirement, and TLS inspection state |
+| `AbortSignal.any is not a function (internal)` when sending a prompt | Node executable / runtime global / launcher identity | `process.execPath`, runtime feature probe, DSH process image, shim path, and `NODE_OPTIONS` |
 | Provider says requested messages plus completion exceed context | request token budget | message tokens, requested completion, and model window from the error |
 | One word, phrase, or n-gram repeats until the output cap | model stream degeneration / repetition guard | raw text deltas, repeated unit and offset, finish reason, route, and retry policy |
 | Every follow-up in one Session returns `400 ... Unterminated string` | persisted tool-call arguments | exported Session log, malformed `tool/call` seq, and fresh-Session A/B result |
@@ -118,6 +119,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Find a corrupt package manifest behind a pathless boot SyntaxError](corrupt-package-json-profile-boot.md)
 - [Fix pi-ai `server_error` overloads that are not retried](pi-ai-server-error-not-retried.md)
 - [Recover a Git plugin missing its built export](git-plugin-missing-dist.md)
+- [Fix `AbortSignal.any is not a function`](abortsignal-any-runtime-mismatch.md)
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](plugin-peer-dependency-warnings.md)
 - [Fix missing `dsh-client-schema-form` after npm installation](missing-client-schema-form.md)
