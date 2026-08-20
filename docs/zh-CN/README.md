@@ -11,9 +11,9 @@ verified_at: 2026-08-20
 
 这是一份从 Agent 视角理解、运行、排查和扩展 DeepSeek Harness 的独立社区手册，由 [SandBase](https://sandbase.ai/) 维护，并非 DeepSeek AI 官方项目。
 
-目前包含 **79 篇英文 canonical 指南**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供经过审核的核心内容与任务导航。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
+目前包含 **108 篇英文 canonical 指南**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供经过审核的核心内容与任务导航。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
-如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook](https://github.com/sandbaseai/deepseek-harness-handbook) 点一个 Star。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
+先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
 这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
 
