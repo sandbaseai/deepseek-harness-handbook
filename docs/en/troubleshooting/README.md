@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 48
+content_revision: 49
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Recover when a second core package copy breaks every tool call](duplicate-core-runtime-closure.md)
 - [Recover after a preset edit collides with its previous generation](preset-generation-not-reclaimed.md)
 - [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)
 - [Recover a Session log with duplicated committed sequence numbers](duplicate-committed-session-seq.md)
@@ -26,6 +27,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| chat works but every native and MCP tool fails reading scheduler `prepare` from undefined | duplicate physical core package / module-local symbol identity | DSH and profile resolution realpaths, dependency trees, install command, lockfile, and native/MCP control calls |
 | saving `agent.cordis.yml` makes later Session creation fail with an inspect provider already registered until restart | standing preset generation / process-global registration ownership | preset stamp, joined Sessions, Host PID, first `session.create` error, duplicate provider ID, and cross-preset inventory |
 | Web composer inserts raw pinyin, kana, or jamo without an IME candidate window | browser/OS composition negotiation / DOM focus / build identity | exact CLI and browser build, clean-profile A/B, focused element, composition event trace, and TUI comparison |
 | history reports a committed seq gap where an earlier range repeats | durable cursor / writer ownership / retry identity | stopped-writer inventory, immutable artifact hash, first expected/got pair, complete logical event comparison, and process interruption timeline |
@@ -88,6 +90,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Recover when a second core package copy breaks every tool call](duplicate-core-runtime-closure.md)
 - [Recover after a preset edit collides with its previous generation](preset-generation-not-reclaimed.md)
 - [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)
 - [Fix Web Search authentication on a custom gateway](web-search-custom-gateway-auth.md)
