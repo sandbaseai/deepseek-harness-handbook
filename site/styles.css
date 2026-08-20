@@ -1495,6 +1495,34 @@ footer div { display: flex; gap: 1.5rem; }
   footer { flex-direction: column; }
 }
 
+/* pnpm store-identity field guide */
+.store-article{width:min(calc(100% - 40px),1160px);padding-top:clamp(2.5rem,4vw,3.5rem)}
+.store-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(390px,.82fr);gap:clamp(2rem,5vw,5rem);align-items:center;padding-bottom:clamp(2rem,3vw,3rem)}
+.store-hero h1{max-width:730px;font-size:clamp(3rem,5vw,4.7rem)}
+.store-article .article-body{max-width:940px;margin-inline:auto}
+.store-map{display:grid;grid-template-columns:1fr auto 1fr;gap:.65rem;align-items:center;padding:1.25rem;border:1px solid var(--line);border-radius:1rem;background:var(--code);color:var(--code-ink)}
+.store-map>small,.store-identities small,.store-recovery small{grid-column:1 / -1;color:var(--muted);font:700 .68rem ui-monospace,monospace;text-transform:uppercase;letter-spacing:.06em}
+.store-map section{min-width:0;display:flex;min-height:130px;flex-direction:column;padding:1rem;border:1px solid #314039;background:rgba(255,255,255,.04)}
+.store-map section strong{margin-top:1rem;overflow-wrap:anywhere}.store-map section b{margin-top:auto;color:var(--accent)}
+.store-map>i{color:var(--accent);font-size:1.6rem;font-style:normal}.store-map>p{grid-column:1 / -1;margin:0;padding-top:.75rem;border-top:1px solid #314039;color:#e58a78;text-align:right}
+.store-map .store-current{border-color:#b55d4c}
+.store-identities{display:grid;grid-template-columns:1.05fr .95fr 1.2fr;gap:.75rem;margin:1.25rem 0 2rem}
+.store-identities section{min-height:175px;display:flex;flex-direction:column;padding:1rem;border-top:3px solid var(--accent);background:var(--panel)}
+.store-identities strong{margin-top:1.2rem;font-size:1.2rem}.store-identities p{margin-top:auto;color:var(--muted)}
+.store-recovery{display:grid;grid-template-columns:1fr auto 1.2fr auto 1fr;gap:.7rem;align-items:center;margin:1.25rem 0 2rem}
+.store-recovery section{min-width:0;min-height:160px;display:flex;flex-direction:column;padding:1rem;border:1px solid var(--line);background:var(--panel)}
+.store-recovery strong{margin-top:1.1rem}.store-recovery span{margin-top:auto;color:var(--muted)}.store-recovery>b{color:var(--accent)}
+.store-config{display:grid;grid-template-columns:.75fr 1.25fr;gap:1.2rem;align-items:center;margin:1.25rem 0 2rem;padding:1.25rem;border-left:4px solid var(--accent);background:var(--surface-strong)}
+.store-config div{display:flex;flex-direction:column;gap:.5rem}.store-config span{color:var(--muted)}.store-config pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.store-gates{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin:1.25rem 0 2rem;padding:0;list-style:none;counter-reset:store-gate}
+.store-gates li{min-height:105px;padding:1rem;border:1px solid var(--line);background:var(--panel);counter-increment:store-gate}
+.store-gates li::before{content:"0" counter(store-gate);display:block;margin-bottom:.7rem;color:var(--accent);font:700 .68rem ui-monospace,monospace}
+.store-routes{display:grid;grid-template-columns:1fr 1.15fr .9fr 1fr;gap:.7rem;margin:1.25rem 0 2rem}
+.store-routes section{min-height:170px;display:flex;flex-direction:column;padding:1rem;border-top:3px solid var(--accent);background:var(--panel)}
+.store-routes code{overflow-wrap:anywhere}.store-routes strong{margin-top:1.1rem}.store-routes a{margin-top:auto}
+@media(max-width:980px){.store-hero{grid-template-columns:1fr}.store-routes{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.store-article{width:min(calc(100% - 28px),1160px)}.store-hero h1{font-size:clamp(2.5rem,12vw,3.35rem)}.store-map,.store-identities,.store-recovery,.store-config,.store-gates,.store-routes{grid-template-columns:1fr}.store-map>small,.store-map>p{grid-column:auto}.store-map>i,.store-recovery>b{justify-self:center;transform:rotate(90deg)}}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

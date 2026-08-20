@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 51
+content_revision: 52
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Fix pnpm store drift during plugin update](pnpm-unexpected-store-plugin-update.md)
 - [Route OpenCode Go models by protocol and entitlement](opencode-go-model-routing.md)
 - [Recover Web from a Client plugin boot failure](web-client-plugin-boot-failure.md)
 - [Recover when a second core package copy breaks every tool call](duplicate-core-runtime-closure.md)
@@ -29,6 +30,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| plugin update reports `ERR_PNPM_UNEXPECTED_STORE` and names two absolute store paths | pnpm linked-store identity / environment-sensitive store selection | exact profile, linked and selected paths from the first error, effective store config, DSH and pnpm versions, filesystem device identity, and manifest/lockfile diff |
 | chat works but every native and MCP tool fails reading scheduler `prepare` from undefined | duplicate physical core package / module-local symbol identity | DSH and profile resolution realpaths, dependency trees, install command, lockfile, and native/MCP control calls |
 | saving `agent.cordis.yml` makes later Session creation fail with an inspect provider already registered until restart | standing preset generation / process-global registration ownership | preset stamp, joined Sessions, Host PID, first `session.create` error, duplicate provider ID, and cross-preset inventory |
 | Web composer inserts raw pinyin, kana, or jamo without an IME candidate window | browser/OS composition negotiation / DOM focus / build identity | exact CLI and browser build, clean-profile A/B, focused element, composition event trace, and TUI comparison |
