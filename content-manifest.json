@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/invalid-overlay-boot-failure.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/reference/session-log-storage-format.md",
       "revision": 1,
       "translations": {}
@@ -251,7 +256,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 41,
+      "revision": 42,
       "translations": {}
     },
     {

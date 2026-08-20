@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 41
+content_revision: 42
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -61,6 +61,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Session resume refuses an unknown downstream plugin event type | durable event compatibility | plugin version, event type and seq, Harness revision, and whether the event is reconstruction-required |
 | UI and transcript disagree | durable vs live event consumer | last `session/event` sequence |
 | Profile stops booting after a plugin change | package/bundle/composition lifecycle | manifest diff, lockfile diff, and `--dump-config` before/after |
+| Profile stops booting after a raw `cordis.patch.yml` insert | user layer / module resolution / Loader activation | both user layers, `--dump-default-config`, first import error, and profile-root resolution |
 | Plugin boot reports `Cannot find package '@deepseek-ai/dsh-client-schema-form'` | plugin import / DSH distribution closure | DSH channel and version, importing file, plugin manifest, and physical package roots |
 | Git plugin install succeeds, then boot reports a missing `dist/` or `lib/` export | package build artifact / loader import | install flags, package scripts and exports, allowBuilds, artifact tree, and first import stack |
 | `dsh plugin ... add` reports `ERR_PNPM_ADDING_TO_ROOT` | profile package-manager workspace target | DSH and pnpm versions, selected profile, exact command, and profile workspace file |
@@ -85,6 +86,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Diagnose the first Windows workspace-write freeze](windows-first-workspace-write-freeze.md)
 - [Windows folder-picker worker crash](windows-folder-picker-worker-crash.md)
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
+- [Unbrick a profile after an invalid user overlay](invalid-overlay-boot-failure.md)
 - [Recover a Git plugin missing its built export](git-plugin-missing-dist.md)
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](plugin-peer-dependency-warnings.md)

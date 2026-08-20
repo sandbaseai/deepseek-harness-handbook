@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-21T19:00:00Z</updated>
+  <updated>2026-08-21T20:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Unbrick DeepSeek Harness after an invalid overlay</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/invalid-overlay-boot-failure.html</id><updated>2026-08-21T20:00:00Z</updated><summary>Preserve both user layers, prove the bundle-only baseline, remove the unresolved insert, and restore one candidate at a time.</summary></entry>
 
   <entry><title>Read the DeepSeek Harness Session log storage format</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-session-log-format.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-session-log-format.html</id><updated>2026-08-21T19:00:00Z</updated><summary>Decode concatenated Zstandard frames and packed text, reasoning, and tool-call rows without silently losing assistant output.</summary></entry>
 
