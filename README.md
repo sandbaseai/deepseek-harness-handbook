@@ -93,7 +93,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Understand why one model switch affects future Agents | [Map session and deployment model state](https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html) |
 | Fix a plugin script corrupted around a dollar sign | [Repair tapIndex replacement-string insertion](https://sandbaseai.github.io/deepseek-harness-handbook/tapindex-dollar-corruption.html) |
 | Fix an OpenAI-compatible gateway that rejects `developer` | [Diagnose system-message role compatibility](https://sandbaseai.github.io/deepseek-harness-handbook/openai-compatible-developer-role.html) |
-| Fix Chinese or non-ASCII commands corrupted on macOS | [Trace the persistent Bash PTY write boundary](https://sandbaseai.github.io/deepseek-harness-handbook/macos-bash-nonascii.html) |
+| Fix CJK commands that stall persistent Bash for 300 seconds | [Separate the locale/readline trap from PTY corruption](https://sandbaseai.github.io/deepseek-harness-handbook/macos-bash-nonascii.html) |
 | Fix plugin installation blocked by `ERR_PNPM_ADDING_TO_ROOT` | [Make the profile workspace target explicit](https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-adding-to-root.html) |
 | Fix rc.8 source builds when standalone pnpm exposes `npm_execpath=pnpm.exe` | [Windows standalone-pnpm runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-standalone-pnpm.html) |
 | Stop black console windows flashing during Windows tool calls | [Two-path Windows process-creation runbook](https://sandbaseai.github.io/deepseek-harness-handbook/windows-console-window-flash.html) |

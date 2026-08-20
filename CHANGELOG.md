@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.79 - 2026-08-20
+
+### Changed
+
+- Corrected the macOS persistent-Bash runbook to distinguish a C-locale readline Meta-binding trap from the earlier PTY transport-corruption hypothesis.
+- Added an rc.8 source-backed diagnostic matrix, exact `--noediting` preset workaround, durable runtime repair boundary, and eight regression gates.
+- Reworked the visual article and discovery surfaces around the 300-second CJK stall signature and upstream reproduction #3522.
+
 ## 0.5.48 - 2026-08-20
 
 ### Changed
