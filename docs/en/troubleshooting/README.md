@@ -40,6 +40,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Agent sees the wrong files | workspace/scope | launch directory and selected workspace |
 | Bash, grep, and glob all fail with `ENOENT` after a directory move | immutable Session cwd / subprocess workdir | recorded Session cwd, `test -d`, external `command -v bash`, and fresh-Session A/B |
 | Tool waits indefinitely | approval/inbox | pending approval and last session event |
+| A plugin tool using `spawnSync` freezes Web, cancellation, and Session flushes | synchronous subprocess / Host event loop | tool name, sync API, child command, stack sample, cancellation and health-probe result |
 | Agent repeats tools or spends after the task should be done | agent loop / retry / background owner | ordered Session events, request count, and provider usage curve |
 | Final answer is complete but the todo strip still shows `in_progress` | model todo snapshot / Session projection | last `todo/write`, last assistant message, `turn/end` reason, and next `turn/start` |
 | Tool is denied | permission policy | operation, target, and active policy |
@@ -70,6 +71,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Replace synchronous subprocess calls inside plugin tools](../plugin-development/async-subprocess-tools.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](deepseek-api-fetch-failed-proxy-ca.md)
 - [`--expose-internals` HMR startup diagnosis](hmr-expose-internals-source-checkout.md)
 - [Custom plugin events and Session resume compatibility](../plugin-development/custom-session-events.md)
