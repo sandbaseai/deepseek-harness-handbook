@@ -169,6 +169,5 @@ Improved diagnostics identify the damaged artifact; they must not auto-repair or
 
 - [Official corrupt-manifest report #3324](https://github.com/deepseek-ai/deepseek-harness/discussions/3324)
 - [rc.8 profile fallback walker](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/boot/app-boot/src/profile.ts)
-- [Official profile documentation](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/docs/profile.md)
 - [Node.js package metadata contract](https://nodejs.org/api/packages.html)
 - [npm cache integrity behavior](https://docs.npmjs.com/cli/commands/npm-cache)
