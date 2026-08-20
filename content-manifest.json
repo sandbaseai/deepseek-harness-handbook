@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/reference/session-log-storage-format.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/reference/deepseek-harness-vs-coding-agents.md",
       "revision": 1,
       "translations": {}
