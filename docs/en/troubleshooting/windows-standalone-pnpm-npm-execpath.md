@@ -7,7 +7,7 @@ verified_at: 2026-08-20
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
-# Fix `ERR_UNKNOWN_FILE_EXTENSION .exe` with standalone pnpm on Windows
+# Fix `Invalid or unexpected token` and `.exe` loader errors with standalone pnpm on Windows
 
 DeepSeek Harness rc.8 repository scripts assume `npm_execpath` names a JavaScript package-manager entrypoint. When pnpm 11 is installed as the standalone `@pnpm/exe` build, that variable can name a native `pnpm.exe` instead. The scripts then run the equivalent of:
 
@@ -15,13 +15,19 @@ DeepSeek Harness rc.8 repository scripts assume `npm_execpath` names a JavaScrip
 node C:\...\@pnpm\exe\pnpm.exe run build:lib
 ```
 
-Node tries to load the executable as an ES module and fails:
+Node tries to parse or load the native PE executable as JavaScript. The exact failure depends on the Node loader path and pnpm distribution. Both of these signatures have been reported:
+
+```text
+SyntaxError: Invalid or unexpected token
+```
+
+The first output line may contain binary-looking text beginning with the Windows PE marker `MZ`. Another environment can instead report:
 
 ```text
 TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".exe"
 ```
 
-This is a repository build-runner incompatibility. It is not a failure in the package being built, a pnpm store corruption, or the same problem as `ERR_PNPM_ADDING_TO_ROOT` during plugin installation.
+These are two presentations of one repository build-runner incompatibility: Node received a native executable where it expected JavaScript. It is not a failure in the package being built, a pnpm store corruption, or the same problem as `ERR_PNPM_ADDING_TO_ROOT` during plugin installation.
 
 ## Confirm all three identities
 
@@ -160,7 +166,8 @@ A shared helper should own this decision so build, gates, Web snapshots, and cov
 
 | Symptom | First boundary |
 |---|---|
-| Node reports unknown `.exe` extension | runner wrapped native pnpm with Node |
+| binary-looking `MZ` output followed by `Invalid or unexpected token` | runner made Node parse native pnpm as JavaScript |
+| Node reports unknown `.exe` extension | runner made Node load native pnpm as a module |
 | `npm_execpath is unavailable` | script invocation environment |
 | `ERR_PNPM_ADDING_TO_ROOT` | plugin target is a workspace root |
 | ignored build scripts or missing native artifact | pnpm build policy and package artifact |
@@ -170,10 +177,10 @@ A shared helper should own this decision so build, gates, Web snapshots, and cov
 ## Primary sources
 
 - [Official discussion #3440](https://github.com/deepseek-ai/deepseek-harness/discussions/3440)
+- [mise-installed pnpm reproduction #3475](https://github.com/deepseek-ai/deepseek-harness/discussions/3475)
 - [Official rc.8 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.8)
 - [rc.8 `scripts/build.ts`](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/scripts/build.ts)
 - [rc.8 `scripts/run-gates.ts`](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/scripts/run-gates.ts)
 - [rc.8 `scripts/run-web-snapshots.ts`](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/scripts/run-web-snapshots.ts)
 - [rc.8 `scripts/coverage-partitions.ts`](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/scripts/coverage-partitions.ts)
 - [rc.8 root package contract](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/package.json)
-
