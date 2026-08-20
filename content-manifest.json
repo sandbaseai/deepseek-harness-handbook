@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/duplicate-committed-session-seq.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/image-send-composer-readonly.md",
       "revision": 1,
       "translations": {}
@@ -291,7 +296,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 45,
+      "revision": 46,
       "translations": {}
     },
     {
