@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**112 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**113 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -37,6 +37,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Fix `ERR_PNPM_UNEXPECTED_STORE` during a plugin update | [pnpm store-identity recovery](https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-unexpected-store.html) |
 | Fix `AbortSignal.any is not a function` even though Node looks current | [Runtime identity and offline recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/abortsignal-any.html) |
 | Recover Web stuck on Loading plugins in a pnpm source checkout | [pnpm symlink boot guide](https://sandbaseai.github.io/deepseek-harness-handbook/web-loading-plugins-pnpm.html) |
 | Separate Responses API full-history traffic, retry attempts, and SSE leaks | [Responses overload runbook](https://sandbaseai.github.io/deepseek-harness-handbook/responses-overload-retry.html) |
@@ -182,7 +183,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 112 pages |
+| English | Canonical | 113 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -196,6 +197,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Getting started
 
+- [Fix pnpm store drift during plugin update](docs/en/troubleshooting/pnpm-unexpected-store-plugin-update.md)
 - [Diagnose npx hanging before DeepSeek Harness starts](docs/en/troubleshooting/npx-install-prompt-hangs.md)
 - [What is DeepSeek Harness?](docs/en/what-is-deepseek-harness.md)
 - [DeepSeek Harness vs Claude Code vs Codex](docs/en/reference/deepseek-harness-vs-coding-agents.md)

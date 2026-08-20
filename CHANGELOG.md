@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.87 - 2026-08-20
+
+### Added
+
+- A source-backed recovery runbook for `ERR_PNPM_UNEXPECTED_STORE` during DeepSeek Harness plugin updates.
+- Linked-store, selected-store, and stable-store evidence capture; frozen relinking; repeat-stability gates; and a deterministic runtime repair boundary.
+- A visual store-identity map and discovery entries for the 113th canonical English guide, grounded in upstream report #3545 and the rc.8 plugin forwarder.
+
 ## 0.5.86 - 2026-08-20
 
 ### Changed

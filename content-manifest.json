@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/pnpm-unexpected-store-plugin-update.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/opencode-go-model-routing.md",
       "revision": 1,
       "translations": {}
@@ -371,7 +376,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 51,
+      "revision": 52,
       "translations": {}
     },
     {
