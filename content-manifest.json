@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/bailian-token-plan-catalog-route.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/expired-mcp-session-loop.md",
       "revision": 1,
       "translations": {}
@@ -276,7 +281,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 43,
+      "revision": 44,
       "translations": {}
     },
     {
