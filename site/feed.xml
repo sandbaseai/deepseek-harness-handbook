@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-22T04:00:00Z</updated>
+  <updated>2026-08-22T05:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Update Windows picker Unicode-truncation evidence for rc.8</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html#revision-3</id><updated>2026-08-22T05:00:00Z</updated><summary>Add an independent U+9500 reproduction and verify that rc.8 retains the one-byte UTF-16 terminator test.</summary></entry>
 
   <entry><title>Diagnose npx hanging while installing DeepSeek Harness</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html</id><updated>2026-08-22T04:00:00Z</updated><summary>Separate npm exec confirmation, registry, cache, lifecycle scripts, CLI entry, and Web boot before destructive recovery.</summary></entry>
 

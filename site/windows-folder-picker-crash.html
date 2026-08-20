@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Recover from DeepSeek Harness Windows folder-picker crashes and path truncation","dateModified":"2026-08-19","step":[{"@type":"HowToStep","name":"Capture evidence","text":"Record runtime, process, dialog timing, and expected versus returned path."},{"@type":"HowToStep","name":"Classify the branch","text":"Separate Node/Koffi crashes, U+XX00 UTF-16 truncation, native installation, and stale DSH processes."},{"@type":"HowToStep","name":"Switch the picker","text":"Replace the adaptive row with the shipped browse backend and verify workspace creation."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Recover from DeepSeek Harness Windows folder-picker crashes and path truncation","dateModified":"2026-08-20","step":[{"@type":"HowToStep","name":"Capture evidence","text":"Record runtime, process, dialog timing, and expected versus returned path."},{"@type":"HowToStep","name":"Classify the branch","text":"Separate Node/Koffi crashes, U+XX00 UTF-16 truncation, native installation, and stale DSH processes."},{"@type":"HowToStep","name":"Switch the picker","text":"Replace the adaptive row with the shipped browse backend and verify workspace creation."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -52,7 +52,7 @@
         <section><small>D · unhealthy owner</small><strong>Stale DSH process</strong><p>An unexpected listener survives after its terminal or wrapper disappeared.</p><code>PID + parent + command line</code></section>
       </div>
 
-      <h2>rc.7 still carries the reported decode path.</h2>
+      <h2>rc.8 still carries the reported decode path.</h2>
       <div class="picker-code">
         <div><small>COM result</small><strong><code>void **name</code></strong><span>native address</span></div><i>→</i>
         <div class="picker-code-risk"><small>readUtf16</small><strong><code>koffi.view(address, 32768)</code></strong><span>reported Node 24 abort</span></div><i>→</i>
@@ -66,7 +66,7 @@
         <b>≠</b>
         <section><small>Terminator</small><strong>NUL · U+0000</strong><code>00 00</code><span>end of string</span></section>
       </div>
-      <p>rc.7 checks only the first byte, so it can return a shortened path and produce a downstream `ENOENT`. A regression fixture must contain an actual <code>U+XX00</code> code point; “some CJK text” is not a sufficient test condition.</p>
+      <p>rc.8 checks only the first byte, so it can return a shortened path and produce a downstream <code>ENOENT</code>. Reports now confirm both <code>开 U+5F00 → 00 5F</code> and <code>销 U+9500 → 00 95</code>. Regression fixtures must contain actual <code>U+XX00</code> code points; “some CJK text” is not sufficient.</p>
 
       <h2 id="recover">Recover through the shipped browse picker.</h2>
       <div class="picker-swap">
@@ -100,7 +100,8 @@
       <ul class="source-list">
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/30">Official failure discussion #30</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3291">Confirmed Unicode truncation report #3291</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/src/win32-dialog-bindings.ts">rc.7 Win32 decode path</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3484">Independent workspace-invalid-path confirmation #3484</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/host/directory-picker-native/src/win32-dialog-bindings.ts">rc.8 Win32 decode path</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/README.md">Native picker contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-browse/README.md">Browse picker contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/web-app/cordis.patch.yml">Official Web picker row</a></li>
