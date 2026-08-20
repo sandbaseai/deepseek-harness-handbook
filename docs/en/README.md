@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Stop expired MCP sessions from driving repeated tool-call loops](troubleshooting/expired-mcp-session-loop.md)
 - [Fix Web Search authentication on a custom gateway](troubleshooting/web-search-custom-gateway-auth.md)
 - [Diagnose npx hanging before DeepSeek Harness starts](troubleshooting/npx-install-prompt-hangs.md)
 - [Detect and recover from degenerate repeated model output](troubleshooting/degenerate-model-output.md)

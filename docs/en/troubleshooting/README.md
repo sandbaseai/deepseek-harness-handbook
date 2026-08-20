@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 42
+content_revision: 43
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -9,6 +9,8 @@ verified_at: 2026-08-20
 # DeepSeek Harness troubleshooting
 
 Diagnose the failing layer before reinstalling or changing configuration.
+
+- [Recover an expired MCP session without a runaway tool loop](expired-mcp-session-loop.md)
 
 - [Understand session model and deployment default coupling](session-model-default-coupling.md)
 - [Fix dollar sign corruption in tapIndex plugins](tapindex-dollar-replacement.md)
@@ -19,6 +21,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| MCP tools remain visible but every call returns `Unknown or expired MCP session` | application-level MCP session / stale tool generation | transport state, error code, connection generation, repeated-call count, and whether `initialize` plus `tools/list` reruns |
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |
 | `npx @deepseek-ai/dsh web` shows an install prompt and appears frozen | npm exec confirmation / registry / fetch / lifecycle script | Node/npm versions, exact package, last line, registry, timing log, and `dsh --version` result |
 | no MCP add button, or configured MCP tools do not appear | Agent preset / generation / MCP bridge | selected preset, fresh-Session A/B, transport, and first connection or registration error |
