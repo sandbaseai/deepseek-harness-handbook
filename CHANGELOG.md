@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.84 - 2026-08-20
+
+### Added
+
+- A source-backed runbook for Web Client plugin failures that leave the rc.8 shell on `Failed to load plugins` while the Host remains healthy.
+- A six-stage evidence matrix across manifest, arrival, registration, materialization, apply, and dependency settlement, plus transactional profile recovery and safe-mode design gates.
+- A visual browser pipeline and discovery entries for the 111th canonical English guide, grounded in upstream report #3536 and the rc.8 boot kernel.
+
 ## 0.5.83 - 2026-08-20
 
 ### Added
