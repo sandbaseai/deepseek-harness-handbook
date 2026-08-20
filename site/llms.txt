@@ -19,7 +19,7 @@ Web Search custom gateway: https://sandbaseai.github.io/deepseek-harness-handboo
 Tool schema subset: https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html
 Partial plugin-add recovery: https://sandbaseai.github.io/deepseek-harness-handbook/plugin-add-nonzero-reconcile.html
 Conversation update-before-start recovery: https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html
-macOS persistent Bash non-ASCII corruption: https://sandbaseai.github.io/deepseek-harness-handbook/macos-bash-nonascii.html
+Persistent Bash CJK locale/readline stalls: https://sandbaseai.github.io/deepseek-harness-handbook/macos-bash-nonascii.html
 OpenAI-compatible developer-role 400: https://sandbaseai.github.io/deepseek-harness-handbook/openai-compatible-developer-role.html
 tapIndex dollar-sign corruption: https://sandbaseai.github.io/deepseek-harness-handbook/tapindex-dollar-corruption.html
 Session and deployment model routing: https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html
