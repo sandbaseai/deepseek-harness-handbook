@@ -20,6 +20,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
 | `dsh` command does not start | Node/npm/package resolution | Node version and full terminal error |
+| `npx @deepseek-ai/dsh web` shows an install prompt and appears frozen | npm exec confirmation / registry / fetch / lifecycle script | Node/npm versions, exact package, last line, registry, timing log, and `dsh --version` result |
 | no MCP add button, or configured MCP tools do not appear | Agent preset / generation / MCP bridge | selected preset, fresh-Session A/B, transport, and first connection or registration error |
 | Source `pnpm dsh web` says `--expose-internals is required for HMR service` | package-manager/native helper/HMR loader capability | Git SHA, pinned and actual pnpm versions, helper probe, direct-flag A/B |
 | Global pnpm `dsh web` says an installed bare plugin cannot be found | isolated native platform-package resolution | exact CLI version, global root, dependency tree, physical package paths, project-local A/B |
@@ -73,6 +74,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Diagnose npx hanging before DeepSeek Harness starts](npx-install-prompt-hangs.md)
 - [Detect and recover from degenerate repeated model output](degenerate-model-output.md)
 - [Replace synchronous subprocess calls inside plugin tools](../plugin-development/async-subprocess-tools.md)
 - [Stop a foreground tool that will not cancel](stuck-tool-cancellation.md)

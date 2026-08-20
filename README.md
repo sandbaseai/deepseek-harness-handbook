@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**90 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**91 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -49,6 +49,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Upgrade an exact runtime and preserve a proven rollback | [Upgrade and rollback guide](https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html) |
 | Detect when a community plugin replaces core Agent providers | [Composition-diff plugin audit](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html) |
 | Choose an exact, reproducible installation topology | [Install DeepSeek Harness safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html) |
+| Diagnose `npx` waiting at the DeepSeek Harness install prompt | [npx install-boundary runbook](https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html) |
 | Create, invoke, and debug a reusable Skill | [DeepSeek Harness Skills lab](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html) |
 | Decide whether an instruction belongs in global, project, nested, local, or Skill scope | [AGENTS.md scope and precedence map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
@@ -163,7 +164,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 90 pages |
+| English | Canonical | 91 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -177,6 +178,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Getting started
 
+- [Diagnose npx hanging before DeepSeek Harness starts](docs/en/troubleshooting/npx-install-prompt-hangs.md)
 - [What is DeepSeek Harness?](docs/en/what-is-deepseek-harness.md)
 - [DeepSeek Harness vs Claude Code vs Codex](docs/en/reference/deepseek-harness-vs-coding-agents.md)
 - [Install DeepSeek Harness safely](docs/en/getting-started/install-deepseek-harness.md)
