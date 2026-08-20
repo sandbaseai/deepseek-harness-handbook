@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.81 - 2026-08-20
+
+### Changed
+
+- Upgraded the Remote Web canonical guide with an rc.8 trace of `host.pickDirectory` HTTP 403 caused by a browser extension removing the serving port from the loopback `Origin` header.
+- Added DevTools evidence capture, clean-profile and scoped-extension A/B tests, managed-extension handling, and the precise limit of the `localhost` workaround.
+- Reworked the visual guide and discovery surfaces to separate pre-fetch UUID failures from Host/Origin authority rejection without weakening the Agent control-plane fence.
+
 ## 0.5.80 - 2026-08-20
 
 ### Added

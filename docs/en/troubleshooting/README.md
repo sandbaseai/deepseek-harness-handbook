@@ -41,7 +41,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Global pnpm `dsh web` says an installed bare plugin cannot be found | isolated native platform-package resolution | exact CLI version, global root, dependency tree, physical package paths, project-local A/B |
 | macOS workspace selection reports a path ending in `:/` and `ENOENT` | native picker AppleScript path conversion | exact picker output, normalized-path `test -d`, volume topology, picker backend |
 | Web UI does not open | process/listen address | printed URL and terminal logs |
-| Remote Web shell opens but data is empty | browser secure context / transport | URL origin, `window.isSecureContext`, and console error |
+| Remote Web shell opens but data is empty or workspace picking returns 403 | browser secure context / trust fence / extension rewrite | URL, Host, Origin, `Sec-Fetch-Site`, extension state, and console error |
 | Composer remains disabled | workspace selection | selected workspace in UI |
 | Provider authentication fails | model route/credential | provider name and sanitized error |
 | Chat works through a custom gateway but `web_search` returns 401, reserved-tool, or no-result-block errors | independent Web Search endpoint / credential / Anthropic dialect | search request event endpoint, credential reference name, gateway protocol, and structured response blocks |
@@ -126,7 +126,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Control response and reasoning language](response-language-and-reasoning.md)
 - [Fix Session titles that stay on the fallback with reasoning models](session-title-reasoning-budget.md)
 - [Recover a prompt accepted before it became durable](prompt-accepted-before-durable.md)
-- [Remote Web UI, HTTPS, and `crypto.randomUUID`](remote-web-secure-context.md)
+- [Remote Web UI, HTTPS, `crypto.randomUUID`, and extension-induced Origin 403](remote-web-secure-context.md)
 - [Session first-flush failure on filesystems without hard links](session-hard-link-unsupported.md)
 - [Windows standalone-pnpm `npm_execpath` build failure](windows-standalone-pnpm-npm-execpath.md)
 - [Stop console windows flashing during Windows tool calls](windows-console-window-flash.md)

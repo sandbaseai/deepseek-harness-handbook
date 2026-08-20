@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>Fix crypto.randomUUID in Remote DeepSeek Harness Web</title>
-  <meta name="description" content="Fix crypto.randomUUID is not a function in DeepSeek Harness rc.7, distinguish generic and typed RPC carriers, and choose SSH localhost or authenticated HTTPS.">
+  <title>Fix Remote Web UUID and Origin 403 Errors in DeepSeek Harness</title>
+  <meta name="description" content="Separate crypto.randomUUID failures from Host and Origin 403 responses, including browser-extension rewrites of loopback requests in DeepSeek Harness.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Remote access is a control-plane decision">
-  <meta property="og:description" content="rc.7 fixed generic RPC UUIDs, but typed WebApiClient calls and draft attachments still require a secure origin.">
+  <meta property="og:description" content="Route typed RPC UUID failures and extension-rewritten loopback Origin headers without weakening the Agent control-plane fence.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -53,6 +53,17 @@
         <section class="remote-not-auth"><small>Draft attachment</small><strong><code>randomUUID()</code></strong><p>Image selection has a second secure-context dependency.</p></section>
       </div>
       <aside class="remote-warning"><strong>Prove the throw happened before transport.</strong><p>If <code>crypto.randomUUID is not a function</code> appears and no matching <code>/api/host.listDirectory</code> or <code>/api/host.pickDirectory</code> request exists, typed RPC ID minting failed in the browser. A <code>403</code> response is a different trust-boundary failure.</p></aside>
+
+      <h2>A loopback URL can still carry the wrong Origin.</h2>
+      <div class="remote-change">
+        <section><small>Request authority</small><strong><code>127.0.0.1:3080</code></strong><p>The URL and Host retain the serving port.</p></section>
+        <b aria-hidden="true">≠</b>
+        <section><small>Extension rewrite</small><strong><code>Origin: 127.0.0.1</code></strong><p>A DNR rule removes the port before transport.</p></section>
+        <b aria-hidden="true">→</b>
+        <section class="remote-not-auth"><small>Trust fence</small><strong><code>HTTP 403</code></strong><p>The RPC and native picker never run.</p></section>
+      </div>
+      <p>Capture the actual <code>Host</code>, <code>Origin</code>, <code>Sec-Fetch-Site</code>, initiator, and extension state in DevTools Network. Repeat in a clean profile or with the identified extension disabled for this site.</p>
+      <aside class="remote-warning"><strong><code>localhost</code> is an A/B, not a bypass.</strong><p>It worked in report #3521 because the observed extension rule matched <code>127.0.0.1</code> only. Verify the rule scope. Do not edit generated extension files, weaken the DSH fence, or expect <code>--trusted-host</code> to authorize <code>host.pickDirectory</code>.</p></aside>
 
       <h2 id="topology">Choose the operator boundary.</h2>
       <div class="remote-topologies">
@@ -106,7 +117,7 @@
       <h2>Route the symptom.</h2>
       <div class="remote-router">
         <div><code>CLI refusal</code><span>startup policy</span><strong>Do not patch around it.</strong></div>
-        <div><code>403</code><span>trust or capability scope</span><strong>Inspect Host, Origin, and method class.</strong></div>
+        <div><code>403</code><span>trust or capability scope</span><strong>Compare URL, Host, Origin, fetch metadata, and extension state.</strong></div>
         <div><code>randomUUID + no request</code><span>typed RPC minting</span><strong>Use localhost or HTTPS.</strong></div>
         <div><code>image-only randomUUID</code><span>draft attachment ID</span><strong>Restore a secure origin.</strong></div>
         <div><code>page only</code><span>transport split</span><strong>Test API and WebSocket separately.</strong></div>
@@ -124,6 +135,7 @@
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/apiproxy/src/fetch/client.ts#L298-L300">Typed RPC secure-context UUID call</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/ui-conversation/src/client/service.ts#L61-L68">Draft attachment UUID call</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3443">Plain-HTTP typed-RPC field report #3443</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3521">Extension-rewritten Origin field report #3521</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts#L108-L151">Connection readiness guard implementation</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3413">Slow-link field report #3413</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/76">Official remote-listening discussion #76</a></li>
