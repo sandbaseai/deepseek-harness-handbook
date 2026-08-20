@@ -1,10 +1,10 @@
 ---
 title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-20
-upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
+upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
 # Remote Web access is a control-plane decision
@@ -57,6 +57,33 @@ Then open DevTools Network, clear it, and trigger **Add workspace** once.
 - An HTTP request that reaches the server and returns `403` belongs to the Host/Origin trust or loopback-only capability boundary instead.
 - A request that stays pending or a socket that closes belongs to transport lifecycle, not UUID generation.
 - A failure only after selecting an image can belong to the separate draft-attachment ID path.
+
+### Diagnose a loopback 403 caused by an extension
+
+A loopback URL does not guarantee that the browser sends a matching loopback `Origin`. Upstream report #3521 traced this exact request:
+
+```text
+URL:    http://127.0.0.1:3080/api/host.pickDirectory
+Host:   127.0.0.1:3080
+Origin: http://127.0.0.1
+Result: HTTP 403
+```
+
+The page was opened on port 3080, but a Chrome extension's Declarative Net Request rule removed the port from `Origin`. The rc.8 trust fence parses both authorities and requires `new URL(origin).host === hostUrl.host`. `127.0.0.1` and `127.0.0.1:3080` are different authorities, so the request is rejected before RPC dispatch and before the native directory picker runs.
+
+Capture the real request in DevTools Network rather than inferring it from the address bar:
+
+1. open a new disposable tab on the printed DSH URL;
+2. clear Network, trigger **Add workspace** once, and select `/api/host.pickDirectory`;
+3. record the request URL, `Host`, `Origin`, `Sec-Fetch-Site`, status, initiator, browser version, and enabled extensions;
+4. compare the URL authority, `Host` authority, and `Origin` authority byte for byte after URL normalization;
+5. repeat in a clean browser profile or with the identified extension disabled for this site.
+
+If organizational policy manages the extension, preserve its id and matching rule evidence and ask the responsible administrator for a scoped exclusion. Do not edit an installed extension's generated rule files directly; updates can overwrite the change and a managed policy may restore it.
+
+Opening `http://localhost:3080` was a valid bounded workaround in #3521 only because the observed rule matched `127.0.0.1` and did not match `localhost`. Verify that rule scope before using the hostname A/B. Both names are loopback to DSH, but a different extension, proxy, PAC rule, or security product can rewrite both.
+
+Do not weaken `isTrustedApiRequest()` and do not add `--trusted-host` to hide this mismatch. The ordinary API fence still rejects a cross-origin marker, and `host.pickDirectory` belongs to the privileged loopback-pinned method set that is evaluated with an empty trusted-host list. Restoring the exact same-origin request is the repair.
 
 The safe immediate recovery is to stop using the non-loopback HTTP origin. For one operator, use SSH local forwarding and open `http://127.0.0.1:3080`. For a browser-only deployment, use an authenticated HTTPS gateway and test capability scope independently.
 
@@ -223,7 +250,8 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 |---|---|
 | CLI refuses `--host 0.0.0.0` | Intentional rc.7 startup policy |
 | Tunnel connects but local port refuses | Remote DSH listener, port, or SSH forward failure |
-| Page loads but `/api` returns 403 | Host/Origin trust fence or loopback-only method |
+| Page loads but `/api` returns 403 | Compare request URL, Host, Origin, Sec-Fetch-Site, method authority, and extension/proxy rewrites |
+| `host.pickDirectory` returns 403 only with one extension enabled | Extension DNR changed Origin or fetch metadata; restore exact same-origin headers instead of weakening the Host |
 | `crypto.randomUUID is not a function` and no typed `/api` request appears | rc.7 typed `WebApiClient` throws while minting the RPC ID; use localhost or HTTPS |
 | Generic RPC works but Add workspace fails before network | Different UUID carriers; the generic fallback does not cover typed Host/Workspace calls |
 | Image selection alone throws `randomUUID` | Draft attachment ID path still requires a secure origin in rc.7 |
@@ -240,13 +268,14 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 - [CLI refusal for all-interfaces binding](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/web-app/src/startup.ts)
 - [Web carrier exposure contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/subsystems/web-server.md#configuration)
 - [Connection trust and privileged-method contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/README.md)
-- [Host and origin trust implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/api-request-trust.ts)
+- [rc.8 Host and origin trust implementation](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/connection/src/api-request-trust.ts)
 - [Insecure-origin UUID implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/random-uuid.ts)
 - [Regression test without secure-context `randomUUID`](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/client-apply.client.spec.ts#L284-L315)
 - [Typed RPC `mintRpcId()` still using `crypto.randomUUID()` at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/apiproxy/src/fetch/client.ts#L298-L300)
 - [rc.7 browser `WebApiClient` inherits the typed carrier without overriding UUID minting](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/web-api-client.ts)
 - [Draft attachment UUID call at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/ui-conversation/src/client/service.ts#L61-L68)
 - [Plain-HTTP typed-RPC field report #3443](https://github.com/deepseek-ai/deepseek-harness/discussions/3443)
+- [Extension-rewritten Origin field report #3521](https://github.com/deepseek-ai/deepseek-harness/discussions/3521)
 - [Connection readiness guard implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts#L108-L151)
 - [Readiness timeout regression test](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/connection.client.spec.ts#L215-L228)
 - [Slow-link field report #3413](https://github.com/deepseek-ai/deepseek-harness/discussions/3413)
