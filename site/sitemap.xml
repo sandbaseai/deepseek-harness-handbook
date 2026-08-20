@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-core-runtime.html</loc><lastmod>2026-08-20</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://sandbaseai.github.io/deepseek-harness-handbook/headless-programmatic-contract.html</loc><lastmod>2026-08-20</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://sandbaseai.github.io/deepseek-harness-handbook/air-gapped-source-build.html</loc><lastmod>2026-08-20</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html</loc><lastmod>2026-08-20</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
