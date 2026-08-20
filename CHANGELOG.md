@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.85 - 2026-08-20
+
+### Added
+
+- A source-backed OpenCode Go runbook that separates model discovery, product endpoint, per-model protocol, entitlement, and regional availability.
+- Three protocol-homogeneous route examples for Chat Completions, Responses, and Anthropic Messages, plus provider-response classification and data-residency gates.
+- A visual routing map and discovery entries for the 112th canonical English guide, grounded in upstream report #3538, rc.8 discovery code, and OpenCode's official Go endpoint table.
+
 ## 0.5.84 - 2026-08-20
 
 ### Added

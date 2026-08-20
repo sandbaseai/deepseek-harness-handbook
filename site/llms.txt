@@ -3,6 +3,7 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
+OpenCode Go model routing: https://sandbaseai.github.io/deepseek-harness-handbook/opencode-go-model-routing.html
 Web Client plugin boot failure: https://sandbaseai.github.io/deepseek-harness-handbook/web-client-plugin-boot-failure.html
 Shared workspace-write dependency caches: https://sandbaseai.github.io/deepseek-harness-handbook/workspace-write-shared-cache.html
 API key storage threat model: https://sandbaseai.github.io/deepseek-harness-handbook/api-key-storage.html

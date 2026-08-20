@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/opencode-go-model-routing.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/web-client-plugin-boot-failure.md",
       "revision": 1,
       "translations": {}
@@ -366,7 +371,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 50,
+      "revision": 51,
       "translations": {}
     },
     {
