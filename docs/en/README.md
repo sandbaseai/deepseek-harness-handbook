@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Route OpenCode Go models by protocol and entitlement](troubleshooting/opencode-go-model-routing.md)
 - [Recover Web from a Client plugin boot failure](troubleshooting/web-client-plugin-boot-failure.md)
 - [Design shared dependency caches as explicit workspace-write capabilities](security/workspace-write-shared-cache.md)
 - [Configure Bailian Token Plan without losing catalog compatibility](troubleshooting/bailian-token-plan-catalog-route.md)
