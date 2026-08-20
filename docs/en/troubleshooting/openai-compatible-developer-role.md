@@ -1,7 +1,7 @@
 ---
 title: Fix Developer Role 400 Errors in DeepSeek Harness OpenAI-Compatible Providers
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-19
 ---
@@ -30,7 +30,7 @@ A hand-declared model with `reasoningEfforts` has reasoning metadata. pi-ai then
 
 The Ark endpoints reported in upstream Discussion #3379 demonstrate this boundary: the same request succeeds with `system` and fails with `developer`.
 
-## Why rc.7 configuration cannot express the exact fix
+## Respect the rc.7 versus rc.8 boundary
 
 The rc.7 `llm-pi-ai` compatibility schema exposes only:
 
@@ -41,6 +41,29 @@ compat:
 ```
 
 It does not expose `supportsDeveloperRole`. Changing `thinkingFormat` controls the reasoning payload dialect, not the system-message role. Changing `supportsReasoningEffort` controls a reasoning field, not role support.
+
+rc.8 adds `supportsDeveloperRole` to the configurable compatibility profile for `openai-completions` and the three OpenAI Responses protocols. It can be set at route level or per model; a model value wins per field over the route value, then the installed catalog, then pi-ai detection.
+
+For a gateway whose entire route accepts only `system`, keep reasoning efforts and declare the wire fact explicitly:
+
+```yaml
+llm-pi-ai:
+  providers:
+    volcengine:
+      apiKeyEnv: VOLCENGINE_API_KEY
+      api: openai-completions
+      baseURL: https://ark.cn-beijing.volces.com/api/plan/v3
+      compat:
+        supportsDeveloperRole: false
+      models:
+        - id: deepseek-v4-flash
+          reasoningEfforts:
+            off: null
+            high: high
+            max: max
+```
+
+Do not leave `supportsDeveloperRole:` valueless. rc.8 rejects null rather than silently falling through to URL detection.
 
 ## Capture before changing the route
 
@@ -56,21 +79,36 @@ Do not log the API key or full user prompt.
 
 ## Recovery choices
 
-### 1. Use a verified compatible route
+### 1. On rc.8, declare the route or model compatibility
+
+Set `compat.supportsDeveloperRole: false`, restart or reload through the normal settings lifecycle, create a fresh Session, and capture the first outbound role. This preserves the reasoning selector while keeping the system prompt on `system`.
+
+Use a model-level override when only one model behind a mixed route needs it:
+
+```yaml
+models:
+  - id: deepseek-v4-flash
+    reasoningEfforts:
+      high: high
+    compat:
+      supportsDeveloperRole: false
+```
+
+### 2. Use a verified compatible route
 
 For production, route through a provider profile whose system role and reasoning dialect are already verified. This is the safest immediate option when request integrity matters.
 
-### 2. Declare a non-reasoning compatibility route
+### 3. On rc.7, declare a non-reasoning compatibility route
 
 If the gateway can serve the model without selectable reasoning metadata, a separate route with `reasoningEfforts: false` avoids marking it as a reasoning model. Verify the actual outbound role and model behavior. Do not claim that this disables provider-side reasoning unless the provider documents that behavior.
 
-### 3. Apply a temporary local dependency patch
+### 4. Apply a temporary local dependency patch
 
 For an isolated test installation, forcing `supportsDeveloperRole: false` for the affected endpoint can prove the diagnosis. Treat this as disposable evidence: reinstalling or upgrading replaces `node_modules`, and a process restart is required.
 
-### 4. Fix the configuration boundary upstream
+### 5. Backport the rc.8 configuration boundary deliberately
 
-The durable design is to expose `supportsDeveloperRole` in the Harness compatibility profile, or add a correct built-in provider detector. A user-defined OpenAI-compatible route should be able to declare the roles its gateway accepts without editing dependencies.
+If rc.7 must remain deployed, prefer a reviewed backport of the rc.8 configuration contract over an untracked `node_modules` edit. Preserve exact source, build, package, and rollback identity. A built-in detector can still improve defaults, but a private gateway's URL cannot reliably describe its role contract.
 
 ## Verification matrix
 
@@ -87,6 +125,7 @@ Test both `openai-completions` and `openai-responses` if the deployment exposes 
 ## Acceptance gates
 
 - Wire capture proves the system-message role.
+- The effective DSH version is rc.8 before relying on the native compat key.
 - The corrected route succeeds without changing credentials or user content.
 - Reasoning controls still match the documented provider behavior.
 - Unrelated providers preserve their previous role selection.
@@ -95,9 +134,10 @@ Test both `openai-completions` and `openai-responses` if the deployment exposes 
 
 ## Source boundary
 
-Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca` and its pinned `@earendil-works/pi-ai` dependency range.
+Verified against DeepSeek Harness `0.1.0-rc.8` commit `141eb6fef83422698aef7a981029e843e8161534`. rc.7 lacks the configurable field; rc.8 exposes it at route and model scope.
 
 - [Upstream Ark reproduction #3379](https://github.com/deepseek-ai/deepseek-harness/discussions/3379)
-- [`llm-pi-ai` compatibility schema](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-pi-ai/src/config.ts)
-- [Reasoning and compatibility resolution](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-pi-ai/src/catalog.ts)
-- [Official generic provider guide](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-pi-ai/README.md)
+- [Reasoning-depth plus system-role report #3531](https://github.com/deepseek-ai/deepseek-harness/discussions/3531)
+- [rc.8 `llm-pi-ai` compatibility schema](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-pi-ai/src/config.ts)
+- [rc.8 reasoning and compatibility resolution](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-pi-ai/src/catalog.ts)
+- [rc.8 generic provider guide and compat example](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-pi-ai/README.md)

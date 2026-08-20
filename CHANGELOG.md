@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.82 - 2026-08-20
+
+### Changed
+
+- Corrected the developer-role compatibility guide with the rc.7/rc.8 boundary: rc.8 natively exposes `supportsDeveloperRole` at route and model scope.
+- Added exact YAML that preserves reasoning-effort selectors while keeping the system prompt on `system`, plus null-value, precedence, backport, and wire-verification guidance.
+- Reworked the visual guide around the native rc.8 recovery and upstream reasoning-depth report #3531.
+
 ## 0.5.81 - 2026-08-20
 
 ### Changed
