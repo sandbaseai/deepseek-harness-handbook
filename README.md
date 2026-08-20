@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
 
-**101 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
+**102 canonical guides · rc.8 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -37,6 +37,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Build rc.8 in an air-gapped environment without losing provenance | [Air-gapped source-build guide](https://sandbaseai.github.io/deepseek-harness-handbook/air-gapped-source-build.html) |
 | Interpret token estimates, provider usage, UI occupancy, and compaction pressure | [Token accounting map](https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html) |
 | Recover Session creation after editing a live Agent preset | [Preset generation recovery](https://sandbaseai.github.io/deepseek-harness-handbook/preset-generation-recovery.html) |
 | Recover raw pinyin, kana, or jamo in the Web composer | [Web IME composition runbook](https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html) |
@@ -174,7 +175,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 101 pages |
+| English | Canonical | 102 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
