@@ -438,6 +438,11 @@
       "source": "docs/en/troubleshooting/corrupt-package-json-profile-boot.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/pi-ai-server-error-not-retried.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

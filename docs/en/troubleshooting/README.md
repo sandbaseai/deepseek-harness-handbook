@@ -88,6 +88,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
 - [Unbrick a profile after an invalid user overlay](invalid-overlay-boot-failure.md)
 - [Find a corrupt package manifest behind a pathless boot SyntaxError](corrupt-package-json-profile-boot.md)
+- [Fix pi-ai `server_error` overloads that are not retried](pi-ai-server-error-not-retried.md)
 - [Recover a Git plugin missing its built export](git-plugin-missing-dist.md)
 - [Fix `ERR_PNPM_ADDING_TO_ROOT` during plugin add](pnpm-adding-to-root-plugin.md)
 - [Diagnose plugin peer-dependency and ignored-build warnings](plugin-peer-dependency-warnings.md)
