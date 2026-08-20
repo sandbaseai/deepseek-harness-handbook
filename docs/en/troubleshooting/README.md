@@ -130,7 +130,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Recover a prompt accepted before it became durable](prompt-accepted-before-durable.md)
 - [Remote Web UI, HTTPS, `crypto.randomUUID`, and extension-induced Origin 403](remote-web-secure-context.md)
 - [Session first-flush failure on filesystems without hard links](session-hard-link-unsupported.md)
-- [Windows standalone-pnpm `npm_execpath` build failure](windows-standalone-pnpm-npm-execpath.md)
+- [Cross-platform pnpm `npm_execpath` build failure](windows-standalone-pnpm-npm-execpath.md)
 - [Stop console windows flashing during Windows tool calls](windows-console-window-flash.md)
 - [Conversation update before its start Match](conversation-update-before-start.md)
 - [Plugin add exits nonzero after materialization](plugin-add-nonzero-reconcile.md)
