@@ -1,10 +1,10 @@
 ---
 title: Windows Folder Picker Crash and Unicode Truncation in DeepSeek Harness
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-19
-upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
+verified_at: 2026-08-20
+upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
 # Route Windows folder-picker crashes and Unicode truncation
@@ -96,7 +96,7 @@ A true UTF-16LE terminator is `00 00`. Characters whose code point ends in `00` 
 退 U+9000 → 00 90
 ```
 
-The rc.7 loop mistakes the first byte for the terminator. A selected path such as:
+The same one-byte test remains in the verified rc.8 source. The loop mistakes the first byte for the terminator. A selected path such as:
 
 ```text
 D:\PythonProjects\Python\CAN盒子二次开发\can_auto_test
@@ -110,6 +110,8 @@ D:\PythonProjects\Python\CAN盒子二次
 
 `fs.realpath()` correctly rejects that nonexistent truncated path. Compare the expected selection with the exact path quoted by `ENOENT`; the first missing character is decisive evidence.
 
+A second independent report shows the same signature with `销 U+9500`, encoded as `00 95` in UTF-16LE. The picker returns only the prefix before `销`, then `workspace.create` reports `workspace-invalid-path` because that shortened directory does not exist. This is additional confirmation of the same native decoder defect—not a distinct workspace-creation failure.
+
 The source-level repair is a two-byte terminator test:
 
 ```ts
@@ -117,7 +119,7 @@ while (end + 1 < bytes.length
   && (bytes[end] !== 0 || bytes[end + 1] !== 0)) end += 2
 ```
 
-Do not patch an installed `lib` file as an operator workaround. The durable upstream fix also needs a regression fixture containing a `U+XX00` character; generic “CJK” or ASCII fixtures do not guarantee this byte pattern.
+Do not patch an installed `lib` file as an operator workaround. The durable upstream fix also needs regression fixtures containing multiple `U+XX00` characters, including `开 U+5F00` and `销 U+9500`; generic “CJK” or ASCII fixtures do not guarantee this byte pattern.
 
 **Evidence for this branch:** the dialog completes; the error quotes a path truncated immediately before `开`, `一`, `刀`, `退`, or another `U+XX00` code point; the full selected directory exists.
 
@@ -208,6 +210,7 @@ Restart and verify the resolved composition before trying the native dialog agai
 | ASCII path returns exactly | record | required |
 | ordinary CJK path returns exactly | record | required |
 | path containing `开` (U+5F00) returns exactly | record | required |
+| path containing `销` (U+9500) returns exactly | record | required |
 | Cancel leaves no workspace | required | required |
 | Abort closes the interaction | required | required |
 | New Session uses selected cwd | required | required |
@@ -219,8 +222,9 @@ Keep browse mode if it meets the product need. If reporting the native failure, 
 
 - [Official failure discussion #30](https://github.com/deepseek-ai/deepseek-harness/discussions/30)
 - [Confirmed rc.7 UTF-16LE truncation report #3291](https://github.com/deepseek-ai/deepseek-harness/discussions/3291)
+- [Independent workspace-invalid-path confirmation #3484](https://github.com/deepseek-ai/deepseek-harness/discussions/3484)
 - [Original directory-name truncation report #3188](https://github.com/deepseek-ai/deepseek-harness/discussions/3188)
-- [rc.7 Win32 UTF-16 decode path](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/src/win32-dialog-bindings.ts)
+- [rc.8 Win32 UTF-16 decode path](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/host/directory-picker-native/src/win32-dialog-bindings.ts)
 - [Native picker contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/README.md)
 - [Adaptive picker selection contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-auto/README.md)
 - [Browse picker contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-browse/README.md)
