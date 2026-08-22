@@ -44,6 +44,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Use the Python SDK](getting-started/python-sdk.md)
 - [Run a Headless Agent](getting-started/headless-agent.md)
 - [Configure model providers](getting-started/model-providers.md)
+- [Configure and diagnose DeepSeek image input](getting-started/deepseek-image-input.md)
 - [Prevent unexpected DeepSeek API charges](security/prevent-unexpected-deepseek-api-charges.md)
 - [Connect MCP servers](integrations/mcp.md)
 - [Evaluate the ACP editor-integration boundary](integrations/acp-editor-boundary.md)
