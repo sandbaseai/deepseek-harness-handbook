@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/getting-started/deepseek-image-input.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/manual-compaction-caller-abort.md",
       "revision": 1,
       "translations": {}

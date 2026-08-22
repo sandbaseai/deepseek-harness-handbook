@@ -117,6 +117,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Add an MCP server and diagnose missing tools](mcp-server-not-connecting.md)
 - [`ERR_HTTP2_INVALID_SESSION` provider-transport crashes](http2-invalid-session.md)
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
+- [Configure and diagnose DeepSeek image input](../getting-started/deepseek-image-input.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
 - [Fix Minimal preset Bash on native Windows](windows-minimal-preset-bash.md)
 - [Diagnose the first Windows workspace-write freeze](windows-first-workspace-write-freeze.md)
