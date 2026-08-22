@@ -91,7 +91,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Use it from Python | [Python SDK quickstart](docs/en/getting-started/python-sdk.md) |
 | Run one task in automation or CI | [CLI and Headless Agent guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
 | Configure DeepSeek or another provider | [Model provider guide](docs/en/getting-started/model-providers.md) |
-| Configure and diagnose DeepSeek image input on rc.2 | [DeepSeek image-input guide](docs/en/getting-started/deepseek-image-input.md) |
+| Track the rc.2 Files-backed image-input release | [Release and migration note](docs/en/updates/README.md) |
 | Prove DeepSeek chat and Web search cannot create unexpected charges | [DeepSeek API cost-boundary runbook](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html) |
 | Fix a context-window or token-budget error | [Classify and recover context overflow](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html) |
 | Understand why one model switch affects future Agents | [Map session and deployment model state](https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html) |
