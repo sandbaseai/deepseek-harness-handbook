@@ -1,9 +1,10 @@
 ---
 title: Upgrade and Roll Back DeepSeek Harness
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-22
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
 ---
 
 # Upgrade DeepSeek Harness without losing the last known-good runtime
@@ -19,7 +20,7 @@ Upgrade one boundary at a time and preserve evidence that can actually restore t
 
 | Boundary | Examples | Rollback object |
 |---|---|---|
-| published CLI artifact | `@deepseek-ai/dsh@0.1.0-rc.7` | exact previous package version and integrity |
+| published CLI artifact | `@deepseek-ai/dsh@0.1.1-rc.2` | exact previous package version and integrity |
 | official source checkout | Git commit or release tag | previous commit plus clean build inputs |
 | profile plugin | npm version or Git commit | previous manifest, lockfile, and bundle list |
 | profile configuration | `cordis.patch.yml` | exact previous file and resolved graph |
@@ -224,8 +225,8 @@ Reviewer and date:
 
 ## Official sources
 
-- [Official release and run instructions](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/README.md)
-- [CLI profile, plugin, shutdown, and source-execution contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/reference/README.md)
-- [Official CLI package manifest](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/package.json)
-- [Official rc.7 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7)
-- [Session persistence contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/README.md)
+- [Official release and run instructions](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/README.md)
+- [CLI profile, plugin, shutdown, and source-execution contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/reference/README.md)
+- [Official CLI package manifest](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/package.json)
+- [Official rc.2 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.1-rc.2)
+- [Session persistence contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/packages/session/session-persistence/README.md)
