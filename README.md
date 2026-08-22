@@ -8,7 +8,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 ![DeepSeek Harness Handbook — operator guides, rc.8, Install Doctor, and Failure Router](assets/deepseek-harness-handbook-social-preview-v3.png)
 
-> The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations.
+> The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
 **115 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
