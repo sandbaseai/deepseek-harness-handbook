@@ -1,9 +1,10 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-22
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
 ---
 
 # Install DeepSeek Harness: choose the right execution topology
@@ -23,8 +24,9 @@ The official coordinates are:
 Repository  deepseek-ai/deepseek-harness
 npm package @deepseek-ai/dsh
 Executable  dsh
-Release     dsh-v0.1.0-rc.7
-Commit      99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
+Release     dsh-v0.1.1-rc.2
+Commit      b150a551b8d465e31e418e1b2eaf5e79bbb7d28
+Integrity   sha512-UP1UIh6q3Gme/yXRn/QL2P8IsVlv8Shpg22TRJIZPsCRWLm4CBiA1MUvXmJAfsOEETBMLAl+xWPtFw6ICsN3wg==
 ```
 
 Read registry metadata before running package code:
@@ -40,8 +42,8 @@ Confirm the scoped name, DeepSeek AI repository, expected version, and `dsh` bin
 
 | Objective | Topology | Command | Tradeoff |
 |---|---|---|---|
-| First bounded evaluation | ephemeral npm execution | `npx @deepseek-ai/dsh@0.1.0-rc.7 web` | smallest setup; package cache is not a deployment manifest |
-| Repeatable local evaluation | project-local exact dependency | `npm install --save-exact @deepseek-ai/dsh@0.1.0-rc.7` | version recorded in a disposable project and lockfile |
+| First bounded evaluation | ephemeral npm execution | `npx @deepseek-ai/dsh@0.1.1-rc.2 web` | smallest setup; package cache is not a deployment manifest |
+| Repeatable local evaluation | project-local exact dependency | `npm install --save-exact @deepseek-ai/dsh@0.1.1-rc.2` | version recorded in a disposable project and lockfile |
 | Upstream development | official source checkout | `pnpm install && pnpm run build && pnpm dsh web` | tests source and built artifacts, not the published npm package |
 | Persistent shell-wide command | global install | package-manager global bin | convenient but easiest to confuse with another executable or stale store |
 
@@ -52,7 +54,7 @@ The official README documents npm execution and source execution. Project-local 
 From a disposable repository:
 
 ```sh
-npx @deepseek-ai/dsh@0.1.0-rc.7 web
+npx @deepseek-ai/dsh@0.1.1-rc.2 web
 ```
 
 Open `http://127.0.0.1:3080`, configure a limited model credential, select the exact disposable workspace, and begin with a read-only task.
@@ -60,8 +62,8 @@ Open `http://127.0.0.1:3080`, configure a limited model credential, select the e
 In another terminal, preserve evidence:
 
 ```sh
-npx @deepseek-ai/dsh@0.1.0-rc.7 --version
-npx @deepseek-ai/dsh@0.1.0-rc.7 --profile web --dump-config > resolved-web.yml
+npx @deepseek-ai/dsh@0.1.1-rc.2 --version
+npx @deepseek-ai/dsh@0.1.1-rc.2 --profile web --dump-config > resolved-web.yml
 ```
 
 The explicit version prevents a moving npm tag from changing the artifact between reproductions. It does not make the profile immutable: user and profile patches can still change the resolved composition.
@@ -74,7 +76,7 @@ Use a small launcher project when a team needs a lockfile and a repeatable npm a
 mkdir dsh-lab
 cd dsh-lab
 npm init -y
-npm install --save-exact @deepseek-ai/dsh@0.1.0-rc.7
+npm install --save-exact @deepseek-ai/dsh@0.1.1-rc.2
 npx dsh --version
 npx dsh web
 ```
@@ -91,7 +93,7 @@ Use this path to contribute upstream, inspect internal packages, or compare a so
 git clone https://github.com/deepseek-ai/deepseek-harness.git
 cd deepseek-harness
 git remote get-url origin
-git checkout 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
+git checkout b150a551b8d465e31e418e1b2eaf5e79bbb7d28
 corepack enable
 pnpm install
 pnpm run build
@@ -191,8 +193,8 @@ Exact-version project-local comparison result:
 
 ## Official sources
 
-- [Official DeepSeek Harness README](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/README.md)
-- [Official CLI README](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/README.md)
-- [CLI profile, plugin, and source-execution contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/reference/README.md)
-- [Official CLI package manifest](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/package.json)
-- [Official rc.7 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.0-rc.7)
+- [Official DeepSeek Harness README at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/README.md)
+- [Official CLI README at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/README.md)
+- [CLI profile, plugin, and source-execution contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/reference/README.md)
+- [Official CLI package manifest](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/package.json)
+- [Official rc.2 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.1-rc.2)
