@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Windows Minimal Preset Bash Failure and rc.8 Fix
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-22
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
@@ -98,36 +98,31 @@ A new Session matters because the selected preset and tool contract are Session 
 
 If the Minimal prompt is essential, copy the shipped preset through the supported preset-authoring flow and replace its persistent PTY group with the same platform-gated `tool-bash` / `tool-pwsh` rows used by the other presets. Never edit the shipped preset in place: an upgrade can overwrite it, and a malformed composition can prevent the Agent from loading.
 
-## Tested community alternative
+## dsh-win32 compatibility companion
 
-If the Minimal prompt and a persistent shell are both required, [dsh-win32 0.15.1](https://github.com/sjh9714/dsh-win32/releases/tag/v0.15.1) provides separate Windows presets and leaves the shipped Minimal preset unchanged.
-
-For the Web profile, run this from native PowerShell.
+On rc.8 or later, no community shell replacement is required. [dsh-win32 0.16.0](https://github.com/sjh9714/dsh-win32/releases/tag/v0.16.0) instead checks the official persistent PowerShell and Workspace Write packages, diagnoses common Windows installation failures, and can create the desktop shortcut.
 
 ```powershell
-npx dsh-win32@0.15.1 setup --sandboxed
+npx dsh-win32@0.16.0 doctor
+npx dsh-win32@0.16.0 setup
 ```
 
-For the default DSH Desktop profile, target `desktop` and skip the Web shortcut.
+The default setup does not install a custom bundle or preset. `setup --sandboxed` remains accepted for command compatibility, but current DSH already owns the sandbox configuration.
+
+If upgrading from rc.7 or earlier is impossible and the older Minimal prompt plus persistent shell is still required, the previous Git Bash and busybox-w32 presets remain available only through an explicit legacy setup.
 
 ```powershell
-npx dsh-win32@0.15.1 setup --sandboxed --profile desktop --no-shortcut
+npx dsh-win32@0.16.0 setup --legacy --sandboxed
 ```
 
-Restart the selected Host, create a fresh Session, and choose **Minimal (Windows, sandboxed)**. `npx dsh-win32 doctor` should report `sandbox_shell` as `pass`. A successful Agent probe can run `pwd` and `ls` while the permission badge remains on `Workspace Write`.
+This legacy path is a community workaround, not an upstream repair. The sandboxed preset uses busybox-w32 ash rather than Bash or PowerShell. Bash arrays and `[[ ]]` are unavailable. Prefer upgrading DSH over installing the legacy preset.
 
-This is a community workaround, not an upstream repair. The sandboxed preset uses busybox-w32 ash rather than Bash or PowerShell. Bash arrays and `[[ ]]` are unavailable. Editor writes remain behind the Session write policy, while reads and network access are not confined by that write fence.
-
-If the busybox download is blocked, download `busybox64.exe` from the linked upstream project in the package documentation and pass its path with `--busybox`. If profile wiring fails, setup prints the exact `dsh plugin --profile <name> add` command to run after pnpm is available.
-
-To roll back the Web profile installation, remove the bundle and the two community presets.
+To roll back a legacy Web profile installation, remove the bundle and the two community presets.
 
 ```powershell
 npx @deepseek-ai/dsh plugin --profile web remove dsh-win32
 Remove-Item -Recurse -Force "$HOME\.dsh\.agent-presets\minimal-windows","$HOME\.dsh\.agent-presets\minimal-windows-sandboxed" -ErrorAction SilentlyContinue
 ```
-
-Use `--profile desktop` in the first command when the bundle was installed for DSH Desktop.
 
 ## What not to do
 
@@ -161,5 +156,5 @@ The upstream implementation addresses both required layers: the Windows process 
 - [rc.8 Minimal platform-specific shell composition](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/config/agent-presets/minimal/agent.cordis.yml)
 - [rc.8 Windows shell tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/tests/windows-shell.spec.ts)
 - [rc.8 Standard preset shell rows](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/config/agent-presets/standard/agent.cordis.yml)
-- [dsh-win32 Windows details and measured limitations](https://github.com/sjh9714/dsh-win32/blob/v0.15.1/docs/windows-details.md)
+- [dsh-win32 Windows details and measured limitations](https://github.com/sjh9714/dsh-win32/blob/v0.16.0/docs/windows-details.md)
 - [dsh-win32 cross-platform and restricted-token CI](https://github.com/sjh9714/dsh-win32/actions/workflows/ci.yml)
