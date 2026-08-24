@@ -322,7 +322,7 @@
     {
       "source": "docs/en/getting-started/quickstart.md",
       "revision": 1,
-      "translations": { "zh-CN": "docs/zh-CN/getting-started/quickstart.md" }
+      "translations": { "zh-CN": "docs/zh-CN/getting-started/quickstart.md", "ja": "docs/ja/getting-started/quickstart.md" }
     },
     {
       "source": "docs/en/getting-started/python-sdk.md",
