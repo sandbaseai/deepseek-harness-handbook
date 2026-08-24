@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness on Windows
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-24
 ---
 
 # DeepSeek Harness on Windows: support boundaries and troubleshooting
@@ -24,6 +24,116 @@ This page separates supported runtime layers from common failure modes so you ca
 | Upstream minimal JSON-RPC example | Not a Windows Agent interface | persistent PTY and `danger-full-access` assumptions are POSIX-oriented |
 | Bash-specific overlays and prompts | Not native Windows tools | use PowerShell syntax, paths, and `$env:NAME` variables |
 | MSYS2 / MINGW shell | Separate compatibility target | its GNU-built Node/npm stack is not the native Windows Node toolchain |
+
+## Field validation: npm rc.6 launcher on Windows
+
+The following matrix records one real-host observation from 2026-08-24. It is
+not a compatibility promise for later packages or every Windows policy. The
+test used a disposable Git repository and a new `DSH_HOME`; it did not read an
+existing profile, credential, Session, or provider response.
+
+### Exact test identity
+
+| Component | Observed identity |
+|---|---|
+| Windows | 25H2, build `26200.8875`, AMD64 |
+| Node / npm | `v24.12.0` / `11.6.2` |
+| PowerShell | PowerShell `7.6.4`; Windows PowerShell `5.1.26100.8875` also installed |
+| Python | `3.11.7` |
+| launcher package | `@deepseek-ai/dsh@0.1.0-rc.6` |
+| launcher tarball | npm shasum `de9fbf39056c7f4e658a3e284cb1d66ebc86d040` |
+| resolved shell packages | `dsh-tool-pwsh`, `dsh-pwsh-local`, and `dsh-pwsh-sandbox` at `0.1.0-rc.8` |
+
+The last row is important. The rc.6 launcher declares internal dependencies as
+caret ranges such as `^0.1.0-rc.6`; resolving that package on 2026-08-24
+selected rc.8 shell packages. This run therefore validates the **rc.6 launcher
+with its then-current resolved dependency graph**, not an all-rc.6 closure.
+The npm package did not expose a `gitHead`, and the upstream repository had no
+`v0.1.0-rc.6` tag or GitHub Release, so no source commit is claimed for the
+launcher tarball.
+
+The test host's npm wrapper did not materialize `node_modules`, so the published
+tarball was unpacked and its production dependencies were installed with an
+npm-equivalent hoisted layout:
+
+```powershell
+$testRoot = Join-Path $env:TEMP 'dsh-rc6-windows-validation'
+New-Item -ItemType Directory -Path $testRoot | Out-Null
+$env:DSH_HOME = Join-Path $testRoot 'home'
+
+npm pack @deepseek-ai/dsh@0.1.0-rc.6 --json
+tar -xf .\deepseek-ai-dsh-0.1.0-rc.6.tgz -C $testRoot
+Set-Location (Join-Path $testRoot 'package')
+corepack pnpm@11.7.0 install --prod --node-linker=hoisted
+
+node .\lib\bin.js --version
+node .\lib\bin.js --profile web --dump-config
+node .\lib\bin.js web --no-open --port 0
+```
+
+That reconstruction is test-rig documentation, not a replacement for the normal
+`npx @deepseek-ai/dsh@0.1.0-rc.6 web` installation path.
+
+### Results
+
+| Boundary | Result | Evidence |
+|---|---|---|
+| CLI identity and grammar | Passed | `--version` printed `0.1.0-rc.6`; launcher, Web, and headless help exited 0. |
+| Web boot | Passed | `web --no-open --port 0` printed a loopback URL; Chromium loaded a page titled `DeepSeek Harness`. |
+| Workspace-selection UI | Partial | The page exposed `Select workspace` / `Add workspace`. Outside the automation sandbox, clicking Select workspace launched the native picker without a Web error; an OS dialog was not selected by headless automation. |
+| Platform composition | Passed | The resolved Web config disabled `bash-sandbox`, enabled `pwsh-sandbox`, and defaulted the sandbox policy to `workspace-write`. Root Web tool rows remained disabled until an Agent preset was selected, so the config dump alone was not treated as tool-execution proof. |
+| Foreground `pwsh` | Passed | A real `ctx.tools.execute()` call returned `FOREGROUND_OK`, PowerShell `7.6.4`, `FullLanguage`, the disposable Session cwd, and `DSH_SHELL=1`. |
+| Background `pwsh` | Passed | The tool returned `started background job pwsh-1`; `job_output` later contained `BACKGROUND_OK` and `[status: completed, exit code: 0]`. |
+| `workspace-write` | Passed, partial enforcement | On a previously unused one-file workspace, first/second confined calls took 846/867 ms; no meaningful warmup difference was visible at that size. Both allowed workspace writes, denied an outside write, allowed an outside read, retained `FullLanguage`, and reported `enforcement: partial`. |
+| `read-only` | Passed, partial enforcement | It reported `ConstrainedLanguage`, denied a workspace write, still allowed an outside read, and reported `enforcement: partial`. The language-mode probe also emitted the expected `Only core types are supported` errors when the executor preamble attempted non-core type construction. |
+| Missing `description` | Passed | Calling `pwsh` without `description` returned `invalid arguments: missing required property "description"`; the command marker did not run. |
+| Headless model turn | Not run | No limited provider key was available. Headless help and composition were verified, but no model response or Agent-generated tool transcript is claimed. |
+| Python runtime wheel | Not available as a supported Windows carrier | The current upstream `platforms.json` lists Linux x64/arm64 and macOS arm64 only. A configured mirror offered an old `0.0.0.dev0-py3-none-any` placeholder; resolving that file is not evidence of a native Windows runtime executable. |
+
+The foreground probe used the same public plugin assembly as the upstream real
+integration suite: `dsh-tools`, `dsh-jobs-local`, `dsh-tool-jobs`,
+`dsh-subprocess-local`, `dsh-shell-env`, `dsh-pwsh-local`, and
+`dsh-tool-pwsh`. The ACL probe mirrored the upstream real-backend suite with
+`dsh-sandbox-local`, `dsh-sandbox-policy`, `dsh-subprocess-local`, and
+`dsh-pwsh-sandbox`. The relevant PowerShell commands were:
+
+```powershell
+# Foreground identity
+[pscustomobject]@{
+  Marker = 'FOREGROUND_OK'
+  Version = $PSVersionTable.PSVersion.ToString()
+  LanguageMode = $ExecutionContext.SessionState.LanguageMode.ToString()
+  Cwd = (Get-Location).Path
+  Shell = $env:DSH_SHELL
+} | ConvertTo-Json -Compress
+
+# Background completion
+Start-Sleep -Milliseconds 300
+Write-Output 'BACKGROUND_OK'
+
+# Permission probes used Set-Content inside and outside the disposable
+# workspace, then Get-Content on an outside marker file.
+```
+
+### Interpretation and cleanup
+
+This observation supports the page's main boundaries: the native Web path and
+fresh-process PowerShell executor worked; Windows ACL modes restricted writes
+but not reads and described themselves as partial; read-only changed PowerShell
+language behavior; background execution settled through the generic job
+runtime. It does **not** prove provider authentication, a full headless Agent
+turn, every native picker completion path, or a pure rc.6 dependency closure.
+
+Stop the Web process before deleting the disposable root. Then remove only the
+path you created for the test:
+
+```powershell
+Stop-Process -Id <dsh-test-pid>
+Remove-Item -LiteralPath $testRoot -Recurse -Force
+Remove-Item Env:DSH_HOME -ErrorAction SilentlyContinue
+```
+
+Do not substitute your normal `$DSH_HOME` in that cleanup command.
 
 ## What changes on Windows
 
@@ -320,12 +430,16 @@ Never attach credentials, a full settings file, or an unredacted session log.
 
 ## Official sources
 
+- [`@deepseek-ai/dsh@0.1.0-rc.6` package](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.6)
 - [CLI composition](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/composition.md)
 - [PowerShell tool](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/tool-pwsh/README.md)
 - [PowerShell executor](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/pwsh-local/README.md)
 - [PowerShell sandbox executor](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/pwsh-sandbox/README.md)
+- [Real PowerShell tool integration suite](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/tool-pwsh/tests/integration.spec.ts)
+- [Real Windows ACL PowerShell suite](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/pwsh-sandbox/tests/acl.e2e.ts)
 - [Windows ACL sandbox](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/sandbox/sandbox-windows-acl/README.md)
 - [Python runtime wheel](https://github.com/deepseek-ai/deepseek-harness/blob/master/python/sdk-runtime/README.md)
+- [Python runtime platform manifest](https://github.com/deepseek-ai/deepseek-harness/blob/master/python/sdk-runtime/platforms.json)
 - [Profile manifest reader and writer](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/app-boot/src/profile.ts#L263-L284)
 - [Profile manifest location and ownership](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/app-boot/README.md#profiles-and-bundles)
 - [Windows BOM startup report](https://github.com/deepseek-ai/deepseek-harness/discussions/1903)
