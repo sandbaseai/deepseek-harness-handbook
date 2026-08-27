@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.133 - 2026-08-27
+
+### Changed
+
+- Updated the reviewed Simplified Chinese navigation to the current 138 canonical guides and 146 localized documents.
+- Added reviewed Chinese task descriptions for five recent English-canonical, rc.2 source-verified guides without claiming translation parity.
+- Added the pinned interpretation baseline and a direct, privacy-bounded evidence-report path for the repository's most visited language entry.
+
 ## 0.5.132 - 2026-08-27
 
 ### Changed
