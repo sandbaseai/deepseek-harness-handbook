@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.122 - 2026-08-27
+
+### Added
+
+- Added a source-backed diagnosis for Settings navigation rows clipped when many Client plugins register sections.
+- Defined the narrow flexbox repair that keeps the title fixed while making the section list a bounded scroll owner.
+- Added installed-build containment, reachability-first keyboard and responsive tests, a visual scroll-owner map, and twenty regression gates.
+
 ## 0.5.121 - 2026-08-27
 
 ### Added
