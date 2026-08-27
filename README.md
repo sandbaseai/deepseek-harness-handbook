@@ -26,11 +26,11 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
-| [Order Agent context without corrupting cache or replay](docs/en/architecture/agent-lifecycle.md#prefix-caching-is-a-message-order-contract) | Separate provenance, instruction recency, durable order, and provider prefix stability before moving injected context. |
+| [Capture a Windows Web Host that listens but stops answering](https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html) | Join the listener PID, HTTP probe timeline, and three private full dumps before blaming Node, zstd, a proxy, or a native module. |
+| [Separate an insecure-origin UUID failure from a socket incident](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) | Prove when typed `host.describe` fails before fetch, aborts the shared generation, and repeats `connection lost`. |
 | [Recover question actions clipped by a long header](https://sandbaseai.github.io/deepseek-harness-handbook/missing-question-card.html) | Distinguish a missing Host request from a present card whose fixed header consumes the bounded scroll area. |
 | [Route double-encoded structured tool arguments](docs/en/plugin-development/tool-schema-subset.md#route-double-encoded-structured-arguments-before-coercing-them) | Keep validation pure while any compatibility normalization stays schema-driven, observable, and identical across approval and execution. |
 | [Evaluate eight Agent Harness boundaries](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html) | Review model routing, lifecycle, state, tools, authority, isolation, evidence, and release gates locally in the browser. |
-| [Understand why AGENTS.md was ignored](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) | Distinguish discovery and model visibility from instruction following and deterministic enforcement. |
 
 Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 
@@ -216,7 +216,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 | Locale | Current status | Published coverage |
 |---|---|---|
 | English | Canonical | 142 pages |
-| 简体中文 | Reviewed | Navigation plus three core guides |
+| 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
 | Español | Draft | Navigation only |

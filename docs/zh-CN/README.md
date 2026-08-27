@@ -3,15 +3,15 @@ title: DeepSeek Harness 开发者手册
 locale: zh-CN
 source: docs/en/README.md
 source_revision: 1
-status: reviewed
-verified_at: 2026-08-20
+status: draft
+verified_at: 2026-08-27
 ---
 
 # 简体中文手册
 
 这是一份从 Agent 视角理解、运行、排查和扩展 DeepSeek Harness 的独立社区手册，由 [SandBase](https://sandbase.ai/) 维护，并非 DeepSeek AI 官方项目。
 
-目前包含 **138 篇英文 canonical 指南和 146 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供经过审核的核心内容与任务导航。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
+目前包含 **142 篇英文 canonical 指南和 150 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，本次最新专题摘要为机器辅助草稿，等待流利读者复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
@@ -33,15 +33,15 @@ verified_at: 2026-08-20
 
 ## 最近完成源码验证的专题
 
-以下页面的 canonical 内容仍为英文。这里提供经过审核的中文任务说明和验证边界，不把自动翻译冒充为完整中文版本。
+以下页面的 canonical 内容仍为英文。这里提供机器辅助的中文任务说明和验证边界，等待流利读者复核，不把自动翻译冒充为完整中文版本。
 
 | 真实问题 | 英文专题 | 这篇文章证明什么 |
 |---|---|---|
-| 配置或插件把 Profile 弄坏了，能否自动修复或复位？ | [Profile Repair and Reset](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) | 先区分用户 Patch、Bundle、依赖事务和插件激活故障；只修复一个有归属的层，不删除凭据、Session 或其它 Profile。 |
-| Web 和飞书同时展示审批时，谁能决定最终结果？ | [Web / Feishu Approval Routing](https://sandbaseai.github.io/deepseek-harness-handbook/sdk-human-interaction-wire.html) | 多个界面只能作为 observer；一个经过身份绑定的 decision owner 原子地结算点击与超时。 |
-| 已经配置 HTTPS 和密码，为什么远程 Settings 仍不可用？ | [Authenticated Remote Settings](https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html) | HTTPS、网关身份、浏览器用户和 Host Capability 是四个不同证明，不能用 `trusted-host` 代替授权。 |
-| AGENTS.md 明明加载了，为什么 Agent 还是没有遵守？ | [AGENTS.md Scope and Enforcement](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) | 文件发现、进入模型上下文、模型遵循和确定性强制执行是四个不同边界。 |
-| PDF 或视频能否直接交给支持原生输入的 Provider？ | [Provider-native Files](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | 保留一个本地不可变附件，将 Provider 文件绑定到确切路由，并诚实记录抽取、采样或直传证据。 |
+| Windows 上发送一条消息后端口仍监听，但所有 HTTP 请求都超时，应该先查什么？ | [Windows Web Host Hang](https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html) | 先把监听端口绑定到准确 PID，记录 HTTP 时间线并私下保存三份完整转储；低 CPU、单独 `fetch` 成功或某个包存在都不能直接证明根因。 |
+| 远程 Web 不断打印 `connection lost`，一定是 WebSocket 坏了吗？ | [Remote Web Reconnect Loop](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) | 必须同时证明非安全上下文、缺少 `randomUUID`、没有 `host.describe` 请求且 HTTPS/loopback 成功，才能定位为 fetch 之前的 typed RPC 失败。 |
+| 问题卡已经出现，但题目太长把操作按钮挤没了，怎样区分于请求丢失？ | [Long Question Card](https://sandbaseai.github.io/deepseek-harness-handbook/missing-question-card.html) | 先证明卡片存在，再检查固定标题是否消耗受限高度以及真正的滚动容器归属。 |
+| object 或 `oneOf` 工具参数为什么到了插件里变成字符串？ | [Structured Tool Arguments](../en/plugin-development/tool-schema-subset.md#route-double-encoded-structured-arguments-before-coercing-them) | 分开外层解析、纯验证、Schema 建模、有限兼容归一化与后续 RPC 形状丢失，不能把所有字符串都盲目 `JSON.parse`。 |
+| 团队如何系统评估一个 Agent Harness，而不是只看模型回答？ | [Agent Harness Scorecard](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html) | 用八个边界分别检查路由、生命周期、持久状态、工具、权限、隔离、证据与发布门禁，评分数据只保留在浏览器本地。 |
 
 这些结论以 DeepSeek Harness rc.2 的官方源码提交 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) 为解释基线。文章会明确区分已经发布的行为、社区提案和建议的验收契约。
 

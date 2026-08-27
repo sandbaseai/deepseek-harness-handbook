@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.151 - 2026-08-27
+
+### Changed
+
+- Refreshed the GitHub Overview's source-verified table with the newest Windows Host hang and remote Web reconnect evidence paths.
+- Updated the high-traffic Simplified Chinese entry from stale 138/146 coverage to the verified 142/150 counts.
+- Replaced its older topic sampler with concise Chinese routing for the five newest practical guides while keeping English canonical.
+
 ## 0.5.150 - 2026-08-27
 
 ### Added
