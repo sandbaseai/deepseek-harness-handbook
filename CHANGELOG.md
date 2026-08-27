@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.115 - 2026-08-27
+
+### Added
+
+- Added a source-backed guide for durable Web UI customization through independently installed Client plugins instead of patches to npx-managed files.
+- Documented SlotMap discovery, `single`-seat replacement risk, manifest discovery, dual-face artifacts, the lazy browser loader factory, and module purity.
+- Added an install-to-removal proof chain, failure router, pinned upgrade contract, visual architecture page, and sixteen acceptance gates.
+
 ## 0.5.114 - 2026-08-27
 
 ### Added

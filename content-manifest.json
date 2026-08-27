@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/plugin-development/persistent-web-ui-client-plugin.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/plugin-development/out-of-tree-typert-generation.md",
       "revision": 1,
       "translations": {}
