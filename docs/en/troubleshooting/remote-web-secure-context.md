@@ -1,10 +1,10 @@
 ---
 title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
-verified_at: 2026-08-20
-upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Remote Web access is a control-plane decision
@@ -94,6 +94,41 @@ The security boundary did **not** disappear:
 - every `/api` request and WebSocket upgrade passes a Host and origin trust fence;
 - configuration, credentials, directory selection, native open actions, and Agent-preset authoring remain loopback-only;
 - a remote page is classified as non-loopback by its browser hostname, so some settings use memory scope rather than Host persistence.
+
+## `settings are unavailable in this browser` is an intentional scope result
+
+Official rc.2 report #4695 reproduces a non-loopback browser reaching the Web UI through nginx and HTTPS, while Settings and Models fail with:
+
+```text
+settings are unavailable in this browser
+```
+
+This is not evidence that HTTPS, the reverse proxy, or the provider catalog request failed. In rc.2, the client settings mirror receives a persistence mode derived from browser scope. A non-loopback browser initializes the mirror and every backed Settings scope as `unavailable`; because Settings RPCs are loopback-only, the mirror does not cross the wire.
+
+Diagnose it before changing the proxy:
+
+1. record the address-bar hostname exactly as the browser sees it;
+2. confirm whether that hostname is loopback, independent of where nginx sends traffic;
+3. open Network, trigger Models once, and verify whether a Settings RPC is absent;
+4. distinguish this client-side unavailable state from an RPC that reached DSH and returned 403;
+5. compare through SSH local forwarding at `http://127.0.0.1:<port>` using the same Host and profile.
+
+| Evidence | Boundary |
+|---|---|
+| no Settings RPC and mirror reports unavailable | browser was classified non-loopback; current client intentionally keeps the section inert |
+| Settings RPC returns 403 | Host/Origin or privileged-method trust fence |
+| Settings RPC succeeds but write fails | settings provider, schema, revision, or credential-store boundary |
+| loopback works, remote HTTPS does not | expected capability-scope difference, not proof of a broken provider adapter |
+
+`--trusted-host`, TLS, a self-signed certificate, nginx reachability, and successful ordinary API calls do not change this classification. `--trusted-host` is not a capability-escalation flag and not authentication. Rewriting `Host` or `Origin` to loopback can bypass a deliberate fence and makes the proxy the real security boundary without giving DSH an authenticated principal.
+
+### Supported operational choices
+
+- **One trusted operator:** keep DSH loopback-bound, use SSH local forwarding, and configure Settings from a browser whose visible origin is loopback.
+- **Remote observers:** expose only the methods intentionally safe for the authenticated remote product; manage model routes and credentials out of band on the Host.
+- **Multi-user remote administration:** build a separate authenticated configuration service with authorization, write-only secret handling, CSRF/origin protection, audit, revocation, and explicit namespace policy. Do not patch the browser's persistence classification alone.
+
+Avoid third-party memory-scope patches unless their threat model, provenance, upgrade behavior, secret handling, and authorization have been independently reviewed. Making the page render a form is not equivalent to safely exposing `settings.set` or `credentials.set` over a network.
 
 ## Four independent gates
 
@@ -255,6 +290,7 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 | `crypto.randomUUID is not a function` and no typed `/api` request appears | rc.7 typed `WebApiClient` throws while minting the RPC ID; use localhost or HTTPS |
 | Generic RPC works but Add workspace fails before network | Different UUID carriers; the generic fallback does not cover typed Host/Workspace calls |
 | Image selection alone throws `randomUUID` | Draft attachment ID path still requires a secure origin in rc.7 |
+| Models reports `settings are unavailable in this browser` with no Settings RPC | Intentional rc.2 non-loopback settings scope; use SSH loopback or an independently authenticated configuration plane |
 | Core RPC works but settings do not persist | Remote browser classification and privileged capability scope |
 | Static page works but events do not stream | WebSocket or streaming gateway configuration |
 | `Signal timed out` near three seconds | Capture its stack first; the rc.7 readiness guard itself does not abort streams |
@@ -280,3 +316,7 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 - [Readiness timeout regression test](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/tests/connection.client.spec.ts#L215-L228)
 - [Slow-link field report #3413](https://github.com/deepseek-ai/deepseek-harness/discussions/3413)
 - [Official remote-listening discussion #76](https://github.com/deepseek-ai/deepseek-harness/discussions/76)
+- [Official rc.2 non-loopback Settings report #4695](https://github.com/deepseek-ai/deepseek-harness/discussions/4695)
+- [rc.2 client Settings mirror non-loopback contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/src/client/settings-mirror.ts)
+- [rc.2 Settings scope unavailable state](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/src/client/settings-scope.ts)
+- [rc.2 UI Settings documented remote boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/README.md)

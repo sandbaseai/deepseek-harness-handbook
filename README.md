@@ -152,7 +152,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Recover partial multi-agent work after `unknown job` | [Subagent ID routing and recovery](docs/en/troubleshooting/subagent-unknown-job-id.md) |
 | Recover a profile after a plugin change | [Plugin install and recovery guide](docs/en/troubleshooting/plugin-install-recovery.md) |
 | Diagnose an `ERR_HTTP2_INVALID_SESSION` crash | [HTTP/2 provider-transport troubleshooting](docs/en/troubleshooting/http2-invalid-session.md) |
-| Fix `crypto.randomUUID` or `host.pickDirectory` HTTP 403 without weakening the Agent shell | [Remote Web control-plane guide](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) |
+| Fix remote Settings unavailable, `crypto.randomUUID`, or Host/Origin 403 safely | [Remote Web control-plane guide](https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html) |
 | Fix persistent Bash on NixOS or minimal Linux | [PTY shell-path guide](docs/en/troubleshooting/pty-shell-path.md) |
 | Protect or recover a session log | [Live session log durability](docs/en/troubleshooting/live-session-log-durability.md) |
 | Fix first Session flush when the filesystem rejects hard links | [Session hard-link compatibility runbook](https://sandbaseai.github.io/deepseek-harness-handbook/session-hard-link-unsupported.html) |
