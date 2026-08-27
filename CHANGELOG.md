@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.113 - 2026-08-27
+
+### Changed
+
+- Reverified insufficient-tool-message recovery against rc.2 and community serializer patch discussion #4668, raising the guide to revision 2.
+- Added missing-result, orphan-result, empty/duplicate-ID, and malformed-argument failure routing without treating an unproven plugin claim as root cause.
+- Added honest wire-containment rules, a three-layer repair boundary, a linear transcript validator, and sixteen cross-adapter regression gates.
+
 ## 0.5.112 - 2026-08-27
 
 ### Added

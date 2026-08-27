@@ -1,9 +1,10 @@
 ---
 title: Recover a DeepSeek Harness Session With Insufficient Tool Messages
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-27
+upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Recover a Session with insufficient tool messages
@@ -38,7 +39,25 @@ next request → provider 400
 
 This is different from malformed tool-call JSON. The call blocks can be syntactically valid while their required result messages are absent.
 
-## Trace the rc.7 failure chain
+The reverse shape is also invalid for strict OpenAI-compatible transcripts:
+
+```text
+tool: call_Z result       # no prior assistant call_Z
+```
+
+Route all structural cases before repairing:
+
+| Shape | Proven fact | Safe interpretation |
+|---|---|---|
+| Assistant call, no durable `tool/call` | model requested it; runtime did not record dispatch | `TOOL_NOT_STARTED` |
+| Durable `tool/call`, no result | dispatch crossed the durable boundary | `TOOL_OUTCOME_UNKNOWN` |
+| Tool result, no matching assistant call | result is orphaned from provider-visible request | preserve as quarantined evidence; do not invent an assistant action |
+| Empty or duplicate call ID | correlation identity is unusable/ambiguous | typed invariant failure; never match by order alone |
+| Malformed tool arguments | request payload is invalid | distinct from call/result cardinality; preserve raw evidence |
+
+An invalid presentation payload is not necessarily a provider-wire defect. For example, a UI `presentCall(JSON.parse(arguments))` failure can break a card while the durable call remains correlated. Catch presentation parsing locally; do not use transcript synthesis to repair a renderer.
+
+## Trace the rc.7 and rc.2 failure chain
 
 In the rc.7 parallel tool scheduler, `startCall()` appends `tool/call` before it asks the runtime scheduler to prepare the execution. If prepare, dispatch, finalization, or ordered commit fails, the catch path waits for in-flight work and rethrows the scheduler error.
 
@@ -47,6 +66,10 @@ The cancellation path is different: it appends an error result for every skipped
 That final `turn/end` matters. The persistence repair function synthesizes missing tool results only for an **open interrupted tail turn**. A turn already closed with an error is structurally balanced at the turn boundary, so cold resume does not enter interrupted-turn repair even though the provider transcript is unbalanced.
 
 Finally, the DeepSeek adapter serializes assistant tool calls and later tool-result blocks in order. It does not add missing results. The provider therefore rejects every later request carrying the same history.
+
+The same source-level invariant remains relevant in rc.2. Recent reports show scheduler `prepare` failures that append `tool/call`, then `step/end` and `turn/end(error)` without `tool/result`. A later serializer cannot infer from message shape alone whether a side effect started, completed, or remained unknown.
+
+Discussion #4668 proposes a wire serializer that fills pending calls and handles orphan results. Its title attributes the problem to plugins, but the post provides no plugin, injected message, resulting Session events, or minimal reproduction. Treat “plugin caused it” as an unverified hypothesis until the producer boundary is identified. The proposed code is useful design input, not authoritative evidence of the ingress defect.
 
 ## Recover without falsifying side effects
 
@@ -57,6 +80,8 @@ Finally, the DeepSeek adapter serializes assistant tool calls and later tool-res
    - no durable `tool/call`: the operation was not recorded as started;
    - durable `tool/call`, no result: the external outcome is unknown.
 5. Start a fresh Session and carry forward only a reviewed summary plus verified external state.
+
+Also capture the exact provider-visible message sequence on a redacted copy. Count every assistant call ID and tool-result ID, including empty and duplicate values. Join each wire item back to its immutable Session message and source. Do not publish tool arguments, results, prompts, or credentials merely to show the structure.
 
 For a missing result after a side-effecting call, inspect the filesystem, service, repository, or remote system before retrying. Never assume “no result” means “no effect.”
 
@@ -82,6 +107,61 @@ The primary invariant belongs at the Agent Loop boundary: every assistant tool c
 
 A load-time transcript audit can repair previously poisoned Sessions, but it must distinguish closed error turns from open crash tails and append only version-valid events. A wire-only sanitizer may keep a provider request alive, but it hides a durable invariant violation and lacks enough evidence to claim whether a tool ran; treat it as containment, not the source of truth.
 
+## Review a wire-only sanitizer
+
+A serializer containment layer must be honest and deterministic.
+
+### Missing result after an assistant call
+
+Adding a synthetic provider `tool` message can make the request structurally acceptable, but its text must preserve uncertainty. A generic `(interrupted tool call)` does not say whether the call never started or may have produced an external effect. If the serializer cannot consult durable execution evidence, it must choose the more conservative unknown-outcome wording and emit telemetry that the durable history remains invalid.
+
+Do not mutate the Session log from the adapter. The synthesized wire message is a request-scoped compatibility net, not a recovered event.
+
+### Orphan tool result
+
+Never fabricate an assistant call such as:
+
+```json
+{
+  "id": "call_Z",
+  "type": "function",
+  "function": { "name": "tool", "arguments": "{}" }
+}
+```
+
+That tells the model it previously chose a fake tool and arguments. Tool name is load-bearing routing evidence, not a placeholder field. If an orphan result must remain model-visible, convert it to clearly delimited, source-attributed evidence in a user/context message, or exclude it from the provider request while retaining it in diagnostics. Do not present it as an authentic tool protocol exchange.
+
+### Ordering and algorithm state
+
+Test the actual mutation order. If `flushPending()` first appends synthetic tool messages, “last message is assistant” may become unreachable in a following orphan branch. A branch that looks correct in isolation can never execute after the helper changes the array tail.
+
+Use an ordered map rather than a set when original call order matters. Reject duplicate IDs before inserting them. Empty IDs cannot participate in correlation and must not silently fall into the orphan path.
+
+### Boundary placement
+
+Use three layers, each with a different job:
+
+1. **Producer admission:** reject plugin or core messages that violate role, source, block, ID, and correlation invariants before they become durable.
+2. **Agent-loop closure:** settle every requested call exactly once with truthful execution semantics before `turn/end`.
+3. **Adapter containment:** prevent an old poisoned Session from producing a provider-invalid request, while emitting an observable repair classification.
+
+Adapter containment is valuable defense in depth. It must not become the only fix, because other adapters, exports, compaction, replay, and future providers still consume the invalid durable history.
+
+## Define a transcript validator
+
+Run one linear validator over the provider-neutral message sequence before provider conversion:
+
+- open assistant call IDs in original order;
+- reject empty and duplicate IDs;
+- accept exactly one matching result per open ID;
+- reject or quarantine results for unknown IDs;
+- close all pending calls before the next incompatible role boundary;
+- retain message ID, source, turn/step/call provenance, and repair classification;
+- never match a result to a call solely by array position;
+- never reorder authentic calls/results to make a malformed transcript appear valid.
+
+The validator should return a typed diagnostic rather than throw a raw `UNKNOWN` error. A repair mode must be explicit and versioned; validation-only mode is the safe default for new writes.
+
 ## Regression gates
 
 - Parallel prepare failure closes every requested call id exactly once.
@@ -92,14 +172,24 @@ A load-time transcript audit can repair previously poisoned Sessions, but it mus
 - Cold resume produces a provider-valid transcript for both open and closed-error tails.
 - DeepSeek and OpenAI-compatible serialization preserves call/result order.
 - Repeated retry of a poisoned fixture is unnecessary because the first repaired request succeeds or fails for a new reason.
+- An orphan result never fabricates an assistant tool name, arguments, or intent.
+- Empty and duplicate call IDs fail before correlation.
+- Multiple parallel calls retain declaration order and exactly one result each.
+- A malformed argument string can fail presentation without changing transcript cardinality.
+- Serializer containment reports whether it used unknown-outcome or quarantined-orphan handling.
+- The same poisoned fixtures are tested across DeepSeek and pi-ai/OpenAI-compatible adapters.
+- Plugin admission rejects an invalid message before durable append and names the owning producer.
 
 ## Source boundary
 
-Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca` and upstream reproduction #3415.
+Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`, `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`, upstream reproduction #3415, and community patch discussion #4668. The plugin-causality claim in #4668 remains unverified without a minimal producer-to-wire reproduction.
 
 - [Upstream insufficient-tool-messages reproduction #3415](https://github.com/deepseek-ai/deepseek-harness/discussions/3415)
+- [Community wire-sanitizer patch discussion #4668](https://github.com/deepseek-ai/deepseek-harness/discussions/4668)
 - [Parallel tool scheduler failure path](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/agent-loop/src/tool-calls.ts)
 - [Interrupted-turn repair semantics](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/repair.ts)
 - [DeepSeek message serializer](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/serialize.ts)
 - [Official session persistence recovery contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/README.md)
+- [rc.2 DeepSeek message serializer](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/serialize.ts)
+- [rc.2 immutable message and source types](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/message.ts)
 - [Session history recovery router](session-history-corruption-triage.md)
