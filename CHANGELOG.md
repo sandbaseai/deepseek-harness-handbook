@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.165 - 2026-08-27
+
+### Changed
+
+- Refreshed the high-traffic Overview with the five newest source-verified Session, search, attachment, Client-slot, and frontier-selection routes.
+- Repaired two early official-discussion references that still targeted the deleted `agent/context-overflow` branch, replacing them with the permanent `main` URL.
+
 ## 0.5.164 - 2026-08-27
 
 ### Changed

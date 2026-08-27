@@ -26,11 +26,11 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
-| [Fix a custom OpenAI-compatible route that silently sends `/messages`](https://sandbaseai.github.io/deepseek-harness-handbook/custom-provider-catalog-collision.html) | Provider id, endpoint, and protocol are independent; an omitted `api` can delegate the stream to an installed catalog provider. |
-| [Explain a 70M → 100M cumulative token jump](https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html) | Chart provider usage per call, then separate current occupancy, 50 KB spill, pressure-gated pruning, compaction summary cost, cache buckets, and retries. |
-| [Recover invisible composer text with a translation extension](https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html) | Prove controlled textarea value, DOM identity, injected wrappers, aligned backdrop, and computed style before calling it data loss. |
-| [Capture a Windows Web Host that listens but stops answering](https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html) | Join the listener PID, HTTP probe timeline, and three private full dumps before blaming Node, zstd, a proxy, or a native module. |
-| [Separate an insecure-origin UUID failure from a socket incident](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) | Prove when typed `host.describe` fails before fetch, aborts the shared generation, and repeats `connection lost`. |
+| [Recover a same-seq event carrying foreign Session content](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html) | Treat different values as an isolation conflict, preserve restricted evidence, and separate original corruption from a generic Zstandard recompression failure. |
+| [Enable cross-Session transcript search without calling it memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) | rc.2 ships Session query, SQLite FTS, Host search, and model tools; base indexing and Agent access remain deliberate opt-ins. |
+| [Design PDF and non-image composer attachments](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | Browser intake, durable Session replay, and Agent-readable evidence are three contracts; a Host disk path must not become the message identity. |
+| [Choose `single`, `chain`, `keyed`, or `list` for a Client slot](docs/en/plugin-development/persistent-web-ui-client-plugin.md) | Slot cardinality encodes ownership: replacement, election, dispatch, or coexistence; independent Turn badges require an ordered list. |
+| [Place beam/search frontier selection at the correct runtime boundary](docs/en/architecture/agent-lifecycle.md) | Multi-candidate expansion, scoring, budgets, effect isolation, and deterministic replay belong outside the linear driver and intra-step tool scheduler. |
 
 Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 
