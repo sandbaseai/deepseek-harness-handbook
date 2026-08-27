@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.135 - 2026-08-27
+
+### Changed
+
+- Expanded the Windows guide to decode decimal native exit `3221226505` as unsigned `0xC0000409` without treating the NTSTATUS label as a proven cause.
+- Added process-lineage, WER correlation, private dump, last-durable-sequence, one-variable A/B, redaction, and twelve acceptance gates for native crash triage.
+- Added a focused visual router that separates Node Host, PowerShell child, desktop wrapper, controlled exit, and Microsoft Fail Fast evidence boundaries.
+
 ## 0.5.134 - 2026-08-27
 
 ### Changed

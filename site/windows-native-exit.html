@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>DeepSeek Harness Windows Exit 3221226505 | Native Crash Triage</title>
+  <meta name="description" content="Decode Windows exit 3221226505 as 0xC0000409 without guessing the cause. Identify the terminated process, correlate WER, capture one private dump, and run bounded A/B tests.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/windows-native-exit.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="One exit code is a routing clue—not a root cause">
+  <meta property="og:description" content="Resolve the process, Fail Fast subcode, faulting module, and last durable boundary before reinstalling anything.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/windows-native-exit.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness Windows Exit 3221226505 | Native Crash Triage","description":"Decode Windows exit 3221226505 as 0xC0000409 without guessing the cause. Identify the terminated process, correlate WER, capture one private dump, and run bounded A/B tests.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/windows-native-exit.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/windows-native-exit.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="#route">Route</a><a href="#evidence">Evidence</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell recovery-article">
+    <header class="article-hero recovery-hero">
+      <div>
+        <p class="eyebrow">Windows · native exit · evidence first</p>
+        <h1>One code.<br>Several process boundaries.</h1>
+        <p class="article-deck">Decode <code>3221226505</code> without turning an unsigned status into a guessed root cause.</p>
+        <div class="article-meta"><span>rc.2 interpretation</span><span>Microsoft-native evidence</span></div>
+      </div>
+      <div class="recovery-loop" role="img" aria-label="Convert decimal exit to hexadecimal status, identify the terminated process, then correlate one Windows Error Reporting record">
+        <div><strong>3221226505</strong><span>package-manager display</span></div>
+        <span>→</span>
+        <div><strong>0xC0000409</strong><span>Fail Fast routing clue</span></div>
+        <span>→</span>
+        <div><strong>Dump + WER</strong><span>process · module · subcode</span></div>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>Do not over-read the label</strong><span>Microsoft names the NTSTATUS <code>STATUS_STACK_BUFFER_OVERRUN</code>, but applications also use this exception code for non-buffer Fail Fast conditions. The first exception parameter carries the subcode.</span></div>
+
+      <h2 id="route">First identify what terminated.</h2>
+      <div class="recovery-routes">
+        <section><code>node.exe</code><strong>DSH Host or Node child</strong><p>Use PID lineage, native module, stack, and last durable Session sequence.</p></section>
+        <section><code>pwsh.exe</code><strong>Tool child</strong><p>One command should fail without converting the child crash into Host exit.</p></section>
+        <section><code>wrapper.exe</code><strong>Desktop owner</strong><p>Record wrapper and child Host exits separately; the window title is not process identity.</p></section>
+        <section><code>no WER event</code><strong>Controlled exit</strong><p>Route CLI, lifecycle, or usage failure before native-crash analysis.</p></section>
+      </div>
+
+      <h2>Capture one bounded foreground run.</h2>
+      <pre><code>Get-Command dsh,node,npm,pnpm,pwsh -All |
+  Select Name,CommandType,Source,Version
+
+$started = Get-Date
+dsh web --no-open 1&gt; stdout.log 2&gt; stderr.log
+'0x{0:X8}' -f [uint32]$LASTEXITCODE</code></pre>
+      <p>Preserve command resolution, exact versions, timestamps, PID/parent PID, standard streams, and the first error. Redact credentials, signed URLs, prompts, and private paths before sharing.</p>
+
+      <h2 id="evidence">Correlate three evidence planes.</h2>
+      <div class="ownership-contrast">
+        <section><span>Process tree</span><strong>Who owned the exit?</strong><p>Executable path, PID, parent PID, creation time, non-secret argument shape.</p></section>
+        <section><span>Windows Error Reporting</span><strong>What failed natively?</strong><p>Faulting application/module, exception, report id, subcode, and stack.</p></section>
+      </div>
+      <div class="ownership-contrast">
+        <section><span>Harness durability</span><strong>What committed first?</strong><p>Last Session sequence and whether tool admission, execution, or result persistence crossed its boundary.</p></section>
+        <section><span>One-variable A/B</span><strong>What changes the outcome?</strong><p>Node, DSH artifact, profile, plugin, or action—change one, keep the rest fixed.</p></section>
+      </div>
+
+      <h2>A dump is evidence and sensitive data.</h2>
+      <pre><code>procdump.exe -accepteula -ma -e &lt;confirmed-pid&gt; &lt;private-dump-dir&gt;</code></pre>
+      <div class="identity-warning"><strong>Attach only to the confirmed process.</strong><p>Use an approved Microsoft Sysinternals binary. Keep dumps encrypted and access-controlled; they can contain API keys, prompts, files, environment values, registry data, and network material. Never upload them publicly.</p></div>
+
+      <h2>Twelve gates before claiming a cause.</h2>
+      <div class="recovery-routes">
+        <section><code>status</code><strong>Decimal + hex.</strong><p>Preserve unsigned eight-digit representation.</p></section>
+        <section><code>identity</code><strong>Exact executables.</strong><p>Prove dsh, Node, package manager, shell, and wrapper resolution.</p></section>
+        <section><code>lineage</code><strong>PID + parent PID.</strong><p>Name the process that actually terminated.</p></section>
+        <section><code>WER</code><strong>One correlated event.</strong><p>Match timestamp, application, module, exception, and report id.</p></section>
+        <section><code>dump</code><strong>Subcode + stack.</strong><p>Do not infer either from the numeric status.</p></section>
+        <section><code>A/B</code><strong>One changed variable.</strong><p>Do not reinstall or reset several ownership layers together.</p></section>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55">Microsoft NTSTATUS values</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/cpp/intrinsics/fastfail?view=msvc-170">Microsoft Fail Fast contract</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps">Microsoft WER user-mode dump collection</a></li>
+        <li><a href="https://learn.microsoft.com/en-us/sysinternals/downloads/procdump">Microsoft Sysinternals ProcDump</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4720">Original DSH exit report #4720</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Route the crash before repairing it.</h2>
+        <p>The canonical Windows guide includes the complete process, WER, dump, privacy, A/B, persistence, and reporting contract.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-compatibility.md">Read the full Windows runbook</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
