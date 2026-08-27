@@ -54,6 +54,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Map AGENTS.md scope and precedence](agent-patterns/agents-md-scope.md)
 - [Design reusable Skills](agent-patterns/skills.md)
 - [Choose a Subagent strategy](agent-patterns/subagents.md)
+- [Stop Goal rounds while owned subagents are still running](agent-patterns/goal-round-subagent-wait.md)
 - [Relay human clarification for a continuable subagent](agent-patterns/subagent-human-question-relay.md)
 - [Build a Repository Research Agent](recipes/repository-research-agent.md)
 - [Choose a safe remote Web access topology](troubleshooting/remote-web-secure-context.md)

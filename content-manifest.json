@@ -633,6 +633,11 @@
       "source": "docs/en/integrations/openrouter-provider-pinning.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/agent-patterns/goal-round-subagent-wait.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

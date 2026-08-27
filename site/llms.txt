@@ -134,3 +134,4 @@ Embedded code escaping: https://sandbaseai.github.io/deepseek-harness-handbook/e
 Tool-produced image result cards: https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html
 General file attachments for Agents: https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html
 OpenRouter provider pinning: https://sandbaseai.github.io/deepseek-harness-handbook/openrouter-provider-pinning.html
+Goal rounds waiting for subagents: https://sandbaseai.github.io/deepseek-harness-handbook/goal-round-subagent-wait.html
