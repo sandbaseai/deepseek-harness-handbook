@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.128 - 2026-08-27
+
+### Changed
+
+- Expanded the remote Settings guide for deployments that already provide HTTPS and password authentication without treating either as a DSH capability grant.
+- Defined separate gateway-carrier and browser-principal negotiations, narrow Settings/credential/model capabilities, Host-side enforcement, CSRF, revision, audit, revocation, and secret-handling requirements.
+- Added an additive migration path, a revised visual trust map, and fourteen acceptance gates for authenticated non-loopback administration.
+
 ## 0.5.127 - 2026-08-27
 
 ### Changed

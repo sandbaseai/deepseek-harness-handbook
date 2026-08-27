@@ -1,7 +1,7 @@
 ---
 title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 6
+content_revision: 7
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -129,6 +129,99 @@ Diagnose it before changing the proxy:
 - **Multi-user remote administration:** build a separate authenticated configuration service with authorization, write-only secret handling, CSRF/origin protection, audit, revocation, and explicit namespace policy. Do not patch the browser's persistence classification alone.
 
 Avoid third-party memory-scope patches unless their threat model, provenance, upgrade behavior, secret handling, and authorization have been independently reviewed. Making the page render a form is not equivalent to safely exposing `settings.set` or `credentials.set` over a network.
+
+## HTTPS plus a password is deployment evidence, not a DSH capability grant
+
+Discussion #4732 asks whether a deployment that already has HTTPS and password authentication should be allowed to bind `0.0.0.0` and show Settings. The desired outcome is reasonable, but the current pieces do not compose into that proof automatically:
+
+- HTTPS proves an encrypted browser-to-gateway origin and server identity;
+- a password session may prove a user to the gateway;
+- `--trusted-host` proves only that DSH accepts one request authority;
+- none of those facts currently gives rc.2 an authenticated principal or a Settings capability;
+- the browser's non-loopback Settings mirror never sends the RPC, so the Host cannot inspect an external login after the fact.
+
+Do not accept a client-supplied header such as `X-Authenticated-User: true`. If arbitrary network clients can reach DSH, they can forge the same header unless the Host authenticates the gateway on a separate trusted channel and removes all alternate paths.
+
+### A safe upstream contract needs two independent negotiations
+
+```mermaid
+flowchart LR
+  B[HTTPS browser] --> G[Identity gateway]
+  G -->|authenticated session + CSRF| P[Principal]
+  G -->|mTLS / private socket| H[DSH remote-admin carrier]
+  P --> Z{Capability grant}
+  H --> Z
+  Z -->|settings.read| R[Redacted settings]
+  Z -->|settings.write| W[Revision-checked mutation]
+  Z -->|credentials.write| C[Write-only credential path]
+  Z -. denied .-> N[Native picker / open path]
+```
+
+1. **Carrier negotiation:** DSH explicitly enables a remote-admin carrier and authenticates the gateway through mTLS, a private Unix/named pipe, or another non-forwardable deployment credential. The ordinary dev Web carrier remains loopback-only by default.
+2. **Principal negotiation:** every browser session maps to a stable principal with tenant, audience, issued/expiry times, session id, authentication strength, and revocation state. DSH authorizes a narrow capability set for that principal.
+
+The gateway credential proves which gateway is speaking; it must not collapse every browser user into one administrator. The user session proves who is asking; it must not authorize a method by itself.
+
+### Scope Settings separately from Host-native effects
+
+Do not expose the existing privileged-method set as one Boolean. At minimum distinguish:
+
+| Capability | Remote contract |
+|---|---|
+| `settings.read` | redacted layered values and schemas; namespace allowlist |
+| `settings.write` | revision-checked mutation; field/namespace policy; audit |
+| `credentials.describe` | value-free configured/source/writable state only |
+| `credentials.write` | write-only values; step-up authentication; never echoed |
+| `models.discover` | destination allowlist, SSRF controls, draft secret never stored |
+| `workspace.select` | server-owned ids, tenant containment, no arbitrary Host path |
+| native picker/open | keep local-only unless a separate attended-host protocol exists |
+| Agent execution | separate Session/workspace/tool authorization; Settings access does not imply it |
+
+The browser should receive a server-signed or carrier-bound capability description after authentication. It may render only granted sections, but the Host must enforce the same grant on every RPC; hiding a row is not authorization.
+
+### Preserve browser security properties
+
+An authenticated remote configuration plane also needs:
+
+- exact allowed HTTPS origins and WebSocket origin checks;
+- SameSite, Secure, HttpOnly session cookies or an equivalent bounded token channel;
+- CSRF protection on every state-changing request, including WebSocket commands;
+- session expiry, logout, revocation, rotation, replay protection, and rate limits;
+- step-up authentication for credential changes and destructive configuration;
+- audit records containing principal, tenant, namespace, operation, revision, result, and correlation id—never secret values;
+- optimistic revision checks so two administrators cannot silently overwrite one another;
+- secret-bearing envelopes excluded or redacted from diagnostics, tracing, plugins, and exports;
+- a default-deny namespace policy for third-party plugins rather than automatic remote exposure.
+
+### Migration without silently widening rc.2
+
+An additive design can preserve current behavior:
+
+1. loopback browsers keep the existing local Settings carrier;
+2. non-loopback browsers remain `unavailable` when no authenticated remote-admin capability is negotiated;
+3. a new versioned handshake returns granted remote namespaces and operations;
+4. old clients ignore the new carrier and remain unavailable;
+5. `--host 0.0.0.0` remains rejected unless an explicit authenticated deployment profile owns the listener;
+6. disabling or losing the gateway identity immediately removes remote grants without affecting loopback administration.
+
+Do not make “HTTPS was observed” or “an auth header exists” the opt-in. Bind enablement to explicit Host configuration plus successful carrier authentication.
+
+### Acceptance gates for authenticated remote Settings
+
+- [ ] Direct access to the DSH backend is impossible from the client network.
+- [ ] DSH authenticates the gateway independently of browser-controlled headers.
+- [ ] Two browser users remain distinct principals through every Settings RPC.
+- [ ] An authenticated user with no grant receives a typed denial from the Host.
+- [ ] Namespace and operation grants are default-deny and enforced server-side.
+- [ ] Settings reads remain redacted and credential values never travel back to the browser.
+- [ ] Credential writes require step-up authentication and appear only as value-free audit facts.
+- [ ] CSRF, cross-origin WebSocket, token replay, expired session, and revoked session tests fail closed.
+- [ ] Concurrent writes return revision conflicts instead of last-writer-wins loss.
+- [ ] Third-party namespaces do not become remotely configurable merely by registering a section.
+- [ ] Native picker/open and arbitrary Host paths remain outside the Settings grant.
+- [ ] Settings authority does not imply workspace, Session, Agent, or tool-execution authority.
+- [ ] Removing the remote-admin profile restores the current non-loopback `unavailable` behavior.
+- [ ] Loopback administration remains compatible with existing clients.
 
 ## Four independent gates
 
@@ -291,6 +384,7 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 | Generic RPC works but Add workspace fails before network | Different UUID carriers; the generic fallback does not cover typed Host/Workspace calls |
 | Image selection alone throws `randomUUID` | Draft attachment ID path still requires a secure origin in rc.7 |
 | Models reports `settings are unavailable in this browser` with no Settings RPC | Intentional rc.2 non-loopback settings scope; use SSH loopback or an independently authenticated configuration plane |
+| HTTPS login succeeds but Settings remains unavailable | Expected in rc.2; external authentication is not negotiated into a DSH principal or capability |
 | Core RPC works but settings do not persist | Remote browser classification and privileged capability scope |
 | Static page works but events do not stream | WebSocket or streaming gateway configuration |
 | `Signal timed out` near three seconds | Capture its stack first; the rc.7 readiness guard itself does not abort streams |
@@ -317,6 +411,7 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 - [Slow-link field report #3413](https://github.com/deepseek-ai/deepseek-harness/discussions/3413)
 - [Official remote-listening discussion #76](https://github.com/deepseek-ai/deepseek-harness/discussions/76)
 - [Official rc.2 non-loopback Settings report #4695](https://github.com/deepseek-ai/deepseek-harness/discussions/4695)
+- [Authenticated non-loopback Settings request #4732](https://github.com/deepseek-ai/deepseek-harness/discussions/4732)
 - [rc.2 client Settings mirror non-loopback contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/src/client/settings-mirror.ts)
 - [rc.2 Settings scope unavailable state](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/src/client/settings-scope.ts)
 - [rc.2 UI Settings documented remote boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/README.md)
