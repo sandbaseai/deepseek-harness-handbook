@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**125 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**126 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -75,6 +75,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Decide whether an instruction belongs in global, project, nested, local, or Skill scope | [AGENTS.md scope and precedence map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
 | Keep a plugin subprocess from freezing the Agent Host | [Async subprocess tool guide](https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html) |
+| Archive or delete old Sessions without corrupting durable history | [Session archive, trash, and delete guide](https://sandbaseai.github.io/deepseek-harness-handbook/session-archive-trash-delete.html) |
 | Discover and manage community plugins from the DSH Web UI | [DSH Plugin Store](https://sandbaseai.github.io/dsh-plugin-store/) ([GitHub](https://github.com/sandbaseai/dsh-plugin-store)) |
 | Fix a plugin boot crash for missing `@deepseek-ai/dsh-client-schema-form` | [Plugin distribution-closure runbook](https://sandbaseai.github.io/deepseek-harness-handbook/missing-client-schema-form.html) |
 | Fix `additionalProperties`, type-array, or `oneOf` tool schema errors | [Tool schema subset guide](https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html) |
@@ -189,7 +190,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 125 pages |
+| English | Canonical | 126 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -270,6 +271,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Pin OpenRouter providers without arbitrary request-body passthrough](docs/en/integrations/openrouter-provider-pinning.md)
 - [Build your first DeepSeek Harness plugin](docs/en/plugin-development/first-plugin.md)
 - [Run subprocesses safely inside tools](docs/en/plugin-development/async-subprocess-tools.md)
+- [Archive, trash, and delete Sessions safely](docs/en/operations/session-archive-trash-delete.md)
 - [Author tool schemas for the enforced subset](docs/en/plugin-development/tool-schema-subset.md)
 - [Custom durable Session event compatibility](docs/en/plugin-development/custom-session-events.md)
 

@@ -638,6 +638,11 @@
       "source": "docs/en/agent-patterns/goal-round-subagent-wait.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/operations/session-archive-trash-delete.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
