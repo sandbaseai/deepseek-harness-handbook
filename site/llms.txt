@@ -57,6 +57,7 @@ Web IME composition recovery: https://sandbaseai.github.io/deepseek-harness-hand
 
 ## Start here
 
+- [Agent lifecycle and prefix-cache ordering](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-lifecycle.md): Trace turns and steps, then separate provenance, recency, durable order, and cache stability before moving injected context.
 - [Agent Harness Evaluation Scorecard](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html): Rate eight runtime boundaries with evidence, identify the next gate, and share a local browser-only review.
 
 - [Diagnose ask_user_question aborts](https://sandbaseai.github.io/deepseek-harness-handbook/ask-user-question-aborted.html): Prove rc.2 has no implicit answer timer, correlate the execution signal and provider lifecycle, and keep reminders distinct from typed deadlines.
