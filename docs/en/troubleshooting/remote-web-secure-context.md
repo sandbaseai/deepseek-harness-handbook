@@ -1,7 +1,7 @@
 ---
 title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 7
+content_revision: 8
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -37,6 +37,39 @@ However, the Web UI also uses a typed `WebApiClient` inherited from `AbstractApi
 | Draft image attachment | `browserDraftAttachment()` → `crypto.randomUUID()` | throws before upload |
 
 So “the page connects” and even “generic RPC works” do not prove that workspace browsing, Settings, or draft attachments work. Do not carry an HTML UUID polyfill forward as the operational solution: use a loopback origin or trusted HTTPS. A code-level fallback fixes compatibility, but it still does not make direct remote exposure safe.
+
+### Why this can look like a broken event stream
+
+Report #4756 pins a misleading full-page symptom to the typed RPC path. During each connection generation, the controller starts both event streams and then awaits `host.describe({})` as part of its readiness handshake. `host.describe` uses the typed `WebApiClient`, so `mintRpcId()` can throw before any request leaves a non-secure browser origin.
+
+The readiness `catch` aborts that generation. Both event streams were opened with the same abort signal, so they close while the client is still connecting. The supervisor then emits:
+
+```text
+[web-runtime] connection lost, retry #N
+```
+
+and repeats the same generation after backoff. Sessions, workspaces, and the model picker never hydrate even though sign-in, static assets, or another carrier may appear healthy.
+
+```mermaid
+flowchart LR
+  P[Plain HTTP non-loopback page] --> C[Start connection generation]
+  C --> S[Open mux and host event streams]
+  C --> D[Typed host.describe]
+  D --> U[crypto.randomUUID is unavailable]
+  U --> X[Throw before fetch]
+  X --> A[Abort shared generation]
+  A --> R[Streams close and retry backoff]
+  R --> C
+```
+
+Do not classify this loop from the warning alone. Prove all four facts:
+
+1. `window.isSecureContext` is `false`;
+2. `typeof crypto.randomUUID` is `"undefined"` while `getRandomValues` remains available;
+3. no matching `host.describe` typed request appears in Network;
+4. the same build reaches connected state through HTTPS or a real loopback browser origin.
+
+If a `host.describe` request exists, or the console has no UUID exception, route the incident to transport, origin trust, server lifecycle, or event-stream diagnosis instead. The reconnect warning is a convergence symptom, not a unique root-cause signature.
 
 ### Diagnose the exact failing carrier
 
@@ -381,6 +414,7 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 | Page loads but `/api` returns 403 | Compare request URL, Host, Origin, Sec-Fetch-Site, method authority, and extension/proxy rewrites |
 | `host.pickDirectory` returns 403 only with one extension enabled | Extension DNR changed Origin or fetch metadata; restore exact same-origin headers instead of weakening the Host |
 | `crypto.randomUUID is not a function` and no typed `/api` request appears | rc.7 typed `WebApiClient` throws while minting the RPC ID; use localhost or HTTPS |
+| repeated `[web-runtime] connection lost` plus no `host.describe` request | typed readiness RPC can be throwing before fetch; prove the secure-context four-tuple before changing WebSocket settings |
 | Generic RPC works but Add workspace fails before network | Different UUID carriers; the generic fallback does not cover typed Host/Workspace calls |
 | Image selection alone throws `randomUUID` | Draft attachment ID path still requires a secure origin in rc.7 |
 | Models reports `settings are unavailable in this browser` with no Settings RPC | Intentional rc.2 non-loopback settings scope; use SSH loopback or an independently authenticated configuration plane |
@@ -404,6 +438,8 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 - [Typed RPC `mintRpcId()` still using `crypto.randomUUID()` at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/apiproxy/src/fetch/client.ts#L298-L300)
 - [rc.7 browser `WebApiClient` inherits the typed carrier without overriding UUID minting](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/web-api-client.ts)
 - [Draft attachment UUID call at rc.7](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/ui-conversation/src/client/service.ts#L61-L68)
+- [rc.2 readiness handshake and shared-generation abort](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/connection/src/client/connection.ts)
+- [Insecure-origin reconnect-loop field report #4756](https://github.com/deepseek-ai/deepseek-harness/discussions/4756)
 - [Plain-HTTP typed-RPC field report #3443](https://github.com/deepseek-ai/deepseek-harness/discussions/3443)
 - [Extension-rewritten Origin field report #3521](https://github.com/deepseek-ai/deepseek-harness/discussions/3521)
 - [Connection readiness guard implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts#L108-L151)
