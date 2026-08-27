@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Extend the Web UI with a persistent Client plugin](plugin-development/persistent-web-ui-client-plugin.md)
 - [Generate strict Typert artifacts for an out-of-tree plugin](plugin-development/out-of-tree-typert-generation.md)
 - [Design server-to-client questions and approvals for SDK embeddings](integrations/sdk-human-interaction-wire.md)
 - [Fix valid WebP images rejected by a pi-ai provider route](troubleshooting/pi-ai-image-media-type.md)
