@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.137 - 2026-08-27
+
+### Added
+
+- Added a source-bounded runbook for WebView `MutationObserver` CPU loops that separates Host, official Web, desktop wrapper, and client-injection ownership.
+- Added immutable-profile isolation, observer-registration tracing, sanitized Session reduction, feedback-edge controls, privacy guidance, and sixteen performance gates.
+- Added a focused visual incident router for renderer identity, loaded-script provenance, callback ownership, and non-destructive Session containment.
+
 ## 0.5.136 - 2026-08-27
 
 ### Changed

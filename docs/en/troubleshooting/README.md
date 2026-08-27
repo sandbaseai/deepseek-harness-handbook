@@ -147,6 +147,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Protect and recover live session logs](live-session-log-durability.md)
 - [Route and recover session-history corruption](session-history-corruption-triage.md)
 - [Fix context window exceeded errors](context-window-exceeded.md)
+- [Diagnose a WebView MutationObserver CPU loop](webview-mutation-observer-loop.md)
 - [Stop a runaway Agent loop and contain spend](runaway-agent-loop.md)
 - [Recover a Session poisoned by invalid tool-call JSON](poisoned-session-invalid-tool-json.md)
 - [Recover a Session poisoned by missing tool results](dangling-tool-calls-insufficient-results.md)

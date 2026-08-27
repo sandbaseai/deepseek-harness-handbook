@@ -335,6 +335,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/webview-mutation-observer-loop.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/plugin-install-recovery.md",
       "revision": 2,
       "translations": {}
