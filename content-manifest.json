@@ -291,7 +291,7 @@
     },
     {
       "source": "docs/en/troubleshooting/windows-compatibility.md",
-      "revision": 5,
+      "revision": 6,
       "translations": {}
     },
     {
@@ -322,7 +322,7 @@
     {
       "source": "docs/en/getting-started/quickstart.md",
       "revision": 1,
-      "translations": { "zh-CN": "docs/zh-CN/getting-started/quickstart.md" }
+      "translations": { "zh-CN": "docs/zh-CN/getting-started/quickstart.md", "ja": "docs/ja/getting-started/quickstart.md" }
     },
     {
       "source": "docs/en/getting-started/python-sdk.md",
@@ -451,7 +451,7 @@
     },
     {
       "source": "docs/en/troubleshooting/windows-minimal-preset-bash.md",
-      "revision": 1,
+      "revision": 4,
       "translations": {}
     },
     {

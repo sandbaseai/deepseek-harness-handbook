@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { dirname, extname, join, normalize, resolve } from 'node:path';
+import { dirname, extname, isAbsolute, join, normalize, relative, resolve, sep } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 const manifest = JSON.parse(readFileSync(join(root, 'content-manifest.json'), 'utf8'));
@@ -12,16 +12,23 @@ const pagesOrigin = 'https://sandbaseai.github.io/deepseek-harness-handbook/';
 const repositoryBlobOrigin = 'https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/';
 const siteDirectory = join(root, 'site');
 
+function isWithin(parent, target) {
+  const path = relative(parent, target);
+  return path === '' || (!isAbsolute(path) && path !== '..' && !path.startsWith(`..${sep}`));
+}
+
 function verifyCanonicalSiteTarget(sourcePath, target) {
   const localPath = target.slice(pagesOrigin.length).split('#')[0].split('?')[0] || 'index.html';
   const resolvedTarget = normalize(join(siteDirectory, localPath));
-  if (!existsSync(resolvedTarget)) errors.push(`Broken canonical site link in ${sourcePath}: ${target}`);
+  if (!isWithin(siteDirectory, resolvedTarget) || !existsSync(resolvedTarget)) {
+    errors.push(`Broken canonical site link in ${sourcePath}: ${target}`);
+  }
 }
 
 function verifyCanonicalRepositoryTarget(sourcePath, target) {
   const localPath = decodeURIComponent(target.slice(repositoryBlobOrigin.length).split('#')[0].split('?')[0]);
   const resolvedTarget = normalize(join(root, localPath));
-  if (!resolvedTarget.startsWith(`${root}/`) || !existsSync(resolvedTarget)) {
+  if (!isWithin(root, resolvedTarget) || !existsSync(resolvedTarget)) {
     errors.push(`Broken canonical repository link in ${sourcePath}: ${target}`);
   }
 }
@@ -80,13 +87,13 @@ function verifyArticleStructuredData() {
 }
 
 function frontmatter(relativePath, text) {
-  const match = text.match(/^---\n([\s\S]*?)\n---\n/);
+  const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
   if (!match) {
     errors.push(`Missing frontmatter: ${relativePath}`);
     return {};
   }
   return Object.fromEntries(
-    match[1].split('\n').map((line) => {
+    match[1].split(/\r?\n/).map((line) => {
       const separator = line.indexOf(':');
       return separator === -1
         ? [line.trim(), '']
@@ -125,7 +132,7 @@ for (const page of manifest.pages) {
 
 const docsFiles = markdownFiles(join(root, 'docs'));
 for (const absolutePath of docsFiles) {
-  const relativePath = absolutePath.slice(root.length + 1);
+  const relativePath = relative(root, absolutePath).split(sep).join('/');
   const text = readFileSync(absolutePath, 'utf8');
   const meta = frontmatter(relativePath, text);
   if (!meta.title || !meta.locale || !meta.status || !meta.verified_at) {
