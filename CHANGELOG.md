@@ -2,6 +2,15 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.110 - 2026-08-27
+
+### Changed
+
+- Reverified scheduler `prepare` failures against rc.2 reports #4601 and #4667 and raised the duplicate-core guide to revision 2.
+- Separated fresh-process static duplication, resumed-Session relaunch, and proven mid-process runtime-generation transitions.
+- Corrected closure attribution: unrelated version-drifted core packages are risk evidence, not direct proof of a second scheduler symbol.
+- Added PID/boot-generation evidence, plugin lifecycle tracing, restart-only containment, orphaned-tool-call protection, and sixteen regression gates.
+
 ## 0.5.109 - 2026-08-27
 
 ### Added
