@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-27T12:00:00Z</updated>
+  <updated>2026-08-27T13:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Render tool-produced images in Web result cards</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html</id><updated>2026-08-27T13:00:00Z</updated><summary>Separate model-facing image content from a keyed Web tool view and retrieve pixels through the Session-authorized attachment path.</summary></entry>
 
   <entry><title>Preserve embedded code through literal file tools</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/embedded-code-escaping.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/embedded-code-escaping.html</id><updated>2026-08-27T12:00:00Z</updated><summary>Locate the first divergent representation boundary, reduce nested string layers, and validate each source artifact before bundling.</summary></entry>
 

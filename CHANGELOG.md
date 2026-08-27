@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.101 - 2026-08-27
+
+### Added
+
+- A corrected integration guide for rendering tool-produced images to both the model and the DeepSeek Harness Web user.
+- Separate contracts for canonical output, model rendering, durable tool results, keyed Web views, and Session-authorized attachment retrieval.
+- Client lifecycle, security, failure routing, replay, accessibility, and fourteen acceptance gates plus a visual data-flow brief.
+
 ## 0.5.100 - 2026-08-27
 
 ### Added

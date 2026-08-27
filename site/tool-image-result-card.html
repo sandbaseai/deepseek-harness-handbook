@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Render tool-produced images in DeepSeek Harness Web</title>
+  <meta name="description" content="Send a tool image to the model and render it for the user through an exact Web tool-view registration and Session-authorized attachment read.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="One image. Two presentation contracts.">
+  <meta property="og:description" content="Model-facing output.render does not register a Web tool result card. Wire both paths without public image URLs.">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Render Tool-Produced Images in DeepSeek Harness Web","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html","inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="Handbook home"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#split">Split</a><a href="#wire">Wire</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div><p class="eyebrow">Plugin UI · image attachment · rc.2</p><h1>One image. Two presentation contracts.</h1><p class="article-deck">The model consumes rendered tool content. The human needs a keyed Web row that reads the same durable attachment.</p><div class="article-meta"><span>Verified 2026-08-27</span><span>Source b150a55</span></div></div>
+      <div class="identity-seal" role="img" aria-label="A tool-produced image flows to the model through output render and to the user through a keyed tool view and authorized attachment read"><div><small>Tool</small><strong>durable image ref</strong></div><i>output.render</i><div><small>Model</small><strong>image content</strong></div><i>tool view + Session</i><div><small>User</small><strong>result card pixels</strong></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>The corrected diagnosis</strong><span>A generic or context row does not prove the Host lost the image. It proves the client presentation path was not registered for that tool.</span></div>
+      <h2 id="split">Keep the consumers separate.</h2>
+      <div class="identity-proof"><section><strong>Canonical value</strong><p>Stable JSON for Code Mode and programmatic callers.</p></section><section><strong>Model render</strong><p>Text and image blocks for the next model request.</p></section><section><strong>Tool node</strong><p>Durable call/result identity and replay lifecycle.</p></section><section><strong>Web view</strong><p>Business-owned row registered under the exact wire name.</p></section></div>
+      <h2 id="wire">Wire the user path explicitly.</h2>
+      <div class="identity-routes"><section><span>Register</span><strong>tool.call.toolview</strong><p>Scope one component to each controlled image tool name.</p></section><section><span>Resolve</span><strong>completed result</strong><p>Read only durable image references owned by that call.</p></section><section><span>Fetch</span><strong>session.attachment</strong><p>Use Session authorization, then create and revoke a safe Blob URL.</p></section></div>
+      <div class="identity-warning"><strong>Do not inject context to make pixels appear.</strong><p>Context injection changes model transcript semantics and renders through a compact context row. Keep the artifact attached to the tool call that produced it.</p></div>
+      <h2>Fail safely and visibly.</h2>
+      <p>Missing, corrupt, oversized, unsupported, or unauthorized attachments must leave readable fallback text without crashing Chat. Abort loads on Session change, revoke object URLs, and keep provider credentials and local paths out of the DOM.</p>
+      <h2>Primary evidence.</h2>
+      <ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4706">Corrected report #4706</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/2995">Assistant-image proposal #2995</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-tool/README.md">Client tool-view contract</a></li><li><a href="https://github.com/weijiafu14/pi2dsh/tree/main/examples/codex-image-gen">Working community reference</a></li></ul>
+      <section class="article-cta"><h2>Keep model and UI truth aligned.</h2><p>The complete guide covers Host output, client slot registration, authorized attachment retrieval, package lifecycle, failure routing, security boundaries, and fourteen acceptance tests.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/plugin-development/tool-image-result-card.md">Read the complete guide</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

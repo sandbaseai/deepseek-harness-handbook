@@ -131,3 +131,4 @@ This is a community-maintained handbook from SandBase, not an official DeepSeek 
 AbortSignal.any runtime identity: https://sandbaseai.github.io/deepseek-harness-handbook/abortsignal-any.html
 Multi-tenant ACP remote hosting: https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html
 Embedded code escaping: https://sandbaseai.github.io/deepseek-harness-handbook/embedded-code-escaping.html
+Tool-produced image result cards: https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html
