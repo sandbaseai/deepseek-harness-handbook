@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-28T06:00:00Z</updated>
+  <updated>2026-08-28T07:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Let the tool own its code-card language</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html</id><updated>2026-08-28T07:00:00Z</updated><summary>Move grammar intent from the reserved wire name into a provider-neutral execute call view while preserving legacy peers and separating display from runtime authority.</summary></entry>
 
   <entry><title>Control one parent's pending subagent follow-ups</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-inbox-control.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/subagents-r3</id><updated>2026-08-28T06:00:00Z</updated><summary>List and cancel an authorized pending follow-up subsequence while preserving settlement notices, other inbox owners, stable message identity, and the claim race.</summary></entry>
 
