@@ -623,6 +623,11 @@
       "source": "docs/en/troubleshooting/stuck-tool-cancellation.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/integrations/general-file-attachments.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

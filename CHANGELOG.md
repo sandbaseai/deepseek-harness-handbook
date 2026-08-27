@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.104 - 2026-08-27
+
+### Added
+
+- A source-pinned architecture guide for general-file attachments, based on official request #4700.
+- Separate contracts for browser intake, immutable storage, Session authorization, bounded extraction, model context, file-card replay, and retention.
+- A safe rc.2 workspace workaround, failure router, parser-security rules, fifteen acceptance gates, and a visual end-to-end brief.
+
 ## 0.5.103 - 2026-08-27
 
 ### Changed

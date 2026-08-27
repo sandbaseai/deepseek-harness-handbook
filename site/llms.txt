@@ -132,3 +132,4 @@ AbortSignal.any runtime identity: https://sandbaseai.github.io/deepseek-harness-
 Multi-tenant ACP remote hosting: https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html
 Embedded code escaping: https://sandbaseai.github.io/deepseek-harness-handbook/embedded-code-escaping.html
 Tool-produced image result cards: https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html
+General file attachments for Agents: https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html
