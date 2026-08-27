@@ -37,11 +37,11 @@ verified_at: 2026-08-27
 
 | 真实问题 | 英文专题 | 这篇文章证明什么 |
 |---|---|---|
-| 自定义 OpenAI 兼容 Provider 为什么发出了 `/messages` 请求？ | [Provider Catalog 冲突（中文草稿）](troubleshooting/custom-provider-catalog-collision.md) | Provider ID、端点和协议相互独立；如果 ID 命中内置 Catalog 且省略 `api`，请求流仍可能由 Catalog Provider 所有。 |
-| 累计 Token 从 70M 增长到 100M，是否等于单次 Prompt 有 30M？ | [Token Accounting（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html) | 必须按调用拆分 provider usage、当前 occupancy、spill、压力触发的 pruning、compaction 摘要成本与重试，累计值在压缩后不会下降。 |
-| 开启翻译扩展后输入文字不可见，是草稿丢失了吗？ | [Web IME / Translation Extension（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html) | 分别证明 textarea 值、DOM 身份、注入 wrapper、backdrop 与 computed style，不能从“不可见”直接推出数据丢失。 |
-| Windows 上发送一条消息后端口仍监听，但所有 HTTP 请求都超时，应该先查什么？ | [Windows Web Host Hang](https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html) | 先把监听端口绑定到准确 PID，记录 HTTP 时间线并私下保存三份完整转储；低 CPU、单独 `fetch` 成功或某个包存在都不能直接证明根因。 |
-| 远程 Web 不断打印 `connection lost`，一定是 WebSocket 坏了吗？ | [Remote Web Reconnect Loop](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) | 必须同时证明非安全上下文、缺少 `randomUUID`、没有 `host.describe` 请求且 HTTPS/loopback 成功，才能定位为 fetch 之前的 typed RPC 失败。 |
+| Session 中出现相同 `seq`、不同事件，甚至含另一 Session 内容，能否删掉较长的一行？ | [Session Sequence Conflict（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html) | 不同值属于隔离冲突，不是可自动删除的幂等重复；还要把原始污染与普通 `zstd` 重压造成的二次 frame 错误分开。 |
+| 跨 Session 搜索原始对话是不是完全没有实现？ | [Sessions, Search, and Memory（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) | rc.2 已包含 Session Query、SQLite FTS、Host Search 和 Agent 工具包，但基础组合默认关闭全文索引，也不默认挂载模型工具。 |
+| Composer 能否直接支持 PDF、DOCX 等非图片文件？ | [General File Attachments（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | 浏览器接收、Session 持久重放与 Agent 可读证据是三个独立承诺；Host 磁盘路径不能成为消息身份。 |
+| 插件应该选择 `single`、`chain`、`keyed` 还是 `list` Slot？ | [Persistent Client Plugin（英文）](../en/plugin-development/persistent-web-ui-client-plugin.md) | Slot cardinality 分别表达替换、选举、按 key 分派与并存；多个 Turn badge 需要有序 `list`，不能共用只选一个赢家的 `chain`。 |
+| Beam Search、分支剪枝与 Frontier Selection 应该接入工具 Scheduler 吗？ | [Agent Lifecycle（英文）](../en/architecture/agent-lifecycle.md) | 多候选扩展、评分、预算、效果隔离与确定性 replay 属于线性 driver 外部的编排层，不属于单个 step 内的工具并发调度。 |
 
 这些结论以 DeepSeek Harness rc.2 的官方源码提交 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) 为解释基线。文章会明确区分已经发布的行为、社区提案和建议的验收契约。
 

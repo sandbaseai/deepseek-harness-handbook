@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.166 - 2026-08-27
+
+### Changed
+
+- Refreshed the second-highest-traffic Simplified Chinese Overview with concise draft summaries and direct canonical links for the five newest source-verified topics.
+- Answered the unanswered close-to-tray question with a source-bounded distinction between official CLI/Web and an unidentified community desktop wrapper.
+
 ## 0.5.165 - 2026-08-27
 
 ### Changed
