@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.97 - 2026-08-27
+
+### Changed
+
+- Expanded the remote Web guide with the intentional rc.2 non-loopback Settings scope from official report #4695.
+- Added no-RPC versus 403 versus provider-write diagnosis and three explicit configuration-owner topologies.
+- Added a visual warning that reachability, HTTPS, and trusted Host declarations do not make a remote browser a loopback configuration principal.
+
 ## 0.5.96 - 2026-08-27
 
 ### Added
