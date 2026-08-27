@@ -340,6 +340,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/rtl-mixed-text-rendering.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/plugin-install-recovery.md",
       "revision": 2,
       "translations": {}

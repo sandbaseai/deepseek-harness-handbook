@@ -46,6 +46,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Keep concurrent Session roots single-writer](operations/single-writer-session-roots.md)
 - [Archive, trash, and delete Sessions safely](operations/session-archive-trash-delete.md)
 - [Diagnose a WebView MutationObserver CPU loop](troubleshooting/webview-mutation-observer-loop.md)
+- [Design RTL and mixed-script rendering](troubleshooting/rtl-mixed-text-rendering.md)
 - [Recover `spawn bash ENOENT` after a workspace moves](troubleshooting/workspace-moved-spawn-enoent.md)
 - [Recover from a Windows folder-picker worker crash](troubleshooting/windows-folder-picker-worker-crash.md)
 - [Diagnose DeepSeek API fetch failures behind a proxy or enterprise CA](troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)
