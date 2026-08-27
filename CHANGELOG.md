@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.103 - 2026-08-27
+
+### Changed
+
+- Reverified the streamed tool-call identity guide against rc.2 and the persistent resume-corruption report #4704.
+- Extended the failure chain from empty continuation identity through policy refusal, durable replay, provider HTTP 400, and restore-time validation failure.
+- Added writer/reader asymmetry analysis, correlated identity evidence, bounded operator recovery, and append/restore/listing regression gates.
+
 ## 0.5.102 - 2026-08-27
 
 ### Changed
