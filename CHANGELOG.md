@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.142 - 2026-08-27
+
+### Changed
+
+- Expanded sandbox diagnosis to separate backend denial, unavailable confinement, ordinary operation failure, and invalid same-or-narrower escalation.
+- Documented the strict `read-only < workspace-write < danger-full-access` order, execution-time validation, ordinary Full Access call shape, and nine-case regression matrix.
+- Corrected the tempting but unsafe conclusion that an executor should silently accept or strip a same-mode `sandbox_permissions` request.
+
 ## 0.5.141 - 2026-08-27
 
 ### Added
