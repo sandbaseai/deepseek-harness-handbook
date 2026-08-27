@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/subagent-unknown-job-id.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/getting-started/deepseek-image-input.md",
       "revision": 1,
       "translations": {}

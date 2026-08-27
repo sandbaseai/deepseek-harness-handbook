@@ -977,6 +977,20 @@ code { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; }
   gap: 2rem;
   border-bottom: 1px solid var(--line);
 }
+.site-nav {
+  width: min(calc(100% - 40px), var(--max));
+  min-height: 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.site-nav > div { display: flex; align-items: center; gap: 1.5rem; white-space: nowrap; font-size: .9rem; }
+.site-nav > div a { color: var(--muted); text-decoration: none; }
+.site-nav > div a:hover { color: var(--ink); }
+.site-nav .brand > span:first-child { display: grid; place-items: center; width: 42px; height: 32px; border-radius: 9px; background: var(--ink); color: var(--bg); font: 700 .7rem ui-monospace, monospace; letter-spacing: .08em; }
 .brand { display: inline-flex; align-items: center; gap: .75rem; font-weight: 720; text-decoration: none; letter-spacing: -.02em; }
 .brand-mark { display: grid; place-items: center; width: 42px; height: 32px; border-radius: 9px; background: var(--ink); color: var(--bg); font: 700 .7rem ui-monospace, monospace; letter-spacing: .08em; }
 nav { display: flex; align-items: center; gap: 1.5rem; white-space: nowrap; font-size: .9rem; }
@@ -1459,6 +1473,10 @@ footer div { display: flex; gap: 1.5rem; }
 @media (max-width: 680px) {
   body { font-size: 16px; }
   .site-header { width: min(calc(100% - 28px), var(--max)); min-height: 64px; }
+  .site-nav { width: min(calc(100% - 28px), var(--max)); min-height: 64px; }
+  .site-nav .brand > strong { display: none; }
+  .site-nav > div { gap: .85rem; font-size: .78rem; }
+  .site-nav > div a:first-child { display: none; }
   .brand > span:last-child { display: none; }
   nav { gap: .85rem; font-size: .78rem; }
   nav a:first-child { display: none; }

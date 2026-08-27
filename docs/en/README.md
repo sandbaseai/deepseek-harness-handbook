@@ -70,6 +70,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Control response and reasoning language](troubleshooting/response-language-and-reasoning.md)
 - [Recover a prompt accepted before it became durable](troubleshooting/prompt-accepted-before-durable.md)
 - [Fix Session persistence on filesystems without hard links](troubleshooting/session-hard-link-unsupported.md)
+- [Recover partial multi-agent work after subagent `unknown job`](troubleshooting/subagent-unknown-job-id.md)
 - [Fix rc.8 source builds when Node tries to parse pnpm](troubleshooting/windows-standalone-pnpm-npm-execpath.md)
 - [Stop console windows flashing during Windows tool calls](troubleshooting/windows-console-window-flash.md)
 - [Find a corrupt package manifest blocking profile boot](troubleshooting/corrupt-package-json-profile-boot.md)

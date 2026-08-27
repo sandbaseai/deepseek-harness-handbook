@@ -119,6 +119,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Sandbox denial versus `SANDBOX_UNAVAILABLE`](sandbox-denied-vs-unavailable.md)
 - [Configure and diagnose DeepSeek image input](../getting-started/deepseek-image-input.md)
 - [Windows compatibility and troubleshooting](windows-compatibility.md)
+- [Subagent `unknown job` identity routing and partial-work recovery](subagent-unknown-job-id.md)
 - [Fix Minimal preset Bash on native Windows](windows-minimal-preset-bash.md)
 - [Diagnose the first Windows workspace-write freeze](windows-first-workspace-write-freeze.md)
 - [Windows folder-picker worker crash](windows-folder-picker-worker-crash.md)

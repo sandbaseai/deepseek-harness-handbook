@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**116 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**117 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -147,6 +147,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Build an Agent rather than a loose collection of tools | [Agent design map](docs/en/agent-patterns/designing-an-agent.md) |
 | Research a repository without publishing changes | [Repository Research Agent recipe](docs/en/recipes/repository-research-agent.md) |
 | Run or debug DeepSeek Harness on Windows | [Windows compatibility and ACL boundary guide](docs/en/troubleshooting/windows-compatibility.md) |
+| Recover partial multi-agent work after `unknown job` | [Subagent ID routing and recovery](docs/en/troubleshooting/subagent-unknown-job-id.md) |
 | Recover a profile after a plugin change | [Plugin install and recovery guide](docs/en/troubleshooting/plugin-install-recovery.md) |
 | Diagnose an `ERR_HTTP2_INVALID_SESSION` crash | [HTTP/2 provider-transport troubleshooting](docs/en/troubleshooting/http2-invalid-session.md) |
 | Fix `crypto.randomUUID` or `host.pickDirectory` HTTP 403 without weakening the Agent shell | [Remote Web control-plane guide](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) |
@@ -186,7 +187,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 116 pages |
+| English | Canonical | 117 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -301,6 +302,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Recover a composer stuck read-only after an image send](docs/en/troubleshooting/image-send-composer-readonly.md)
 - [Set and verify reasoning effort for headless runs](docs/en/guides/headless-reasoning-effort.md)
 - [Fix spawn subagents that drop reasoning effort](docs/en/troubleshooting/spawn-subagent-reasoning-effort.md)
+- [Fix `unknown job` after a background subagent run](docs/en/troubleshooting/subagent-unknown-job-id.md)
 - [Recover an expired MCP session without a repeated tool-call loop](docs/en/troubleshooting/expired-mcp-session-loop.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)
 - [Remote Web access, SSH, HTTPS, and trust](docs/en/troubleshooting/remote-web-secure-context.md)
