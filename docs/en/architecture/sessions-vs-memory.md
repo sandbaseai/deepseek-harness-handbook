@@ -1,16 +1,17 @@
 ---
 title: DeepSeek Harness Sessions vs Long-Term Memory
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Sessions are not long-term memory
 
 DeepSeek Harness has durable sessions, but a durable session is not automatically a cross-session memory system. The distinction matters: session replay reconstructs one interaction; long-term memory deliberately moves selected facts across interaction boundaries.
 
-On the verified upstream rc.7 revision, the shipped composition has an event-sourced Session service and opt-in examples for third-party memory servers through MCP. It does **not** ship a generic `ctx.memory` service. Treat proposals for such a service as design work, not as an available runtime API.
+On the verified upstream `0.1.1-rc.2` revision, the shipped composition has an event-sourced Session service, an opt-in transcript-query family, and examples for third-party memory servers through MCP. It does **not** ship a generic `ctx.memory` service. Treat proposals for such a service as design work, not as an available runtime API.
 
 ```mermaid
 flowchart LR
@@ -38,6 +39,46 @@ flowchart LR
 | Long-term memory | Selected facts, observations, or profiles | Potentially many sessions | Only when a tool or prompt-assembly policy retrieves it |
 
 A fifth mechanism—**Skills or workspace instructions**—stores stable operating guidance. Do not put policy into semantic memory and hope retrieval happens. If an Agent must always follow a rule, mount that rule deterministically.
+
+## Transcript search already exists, but it is opt-in
+
+[Request #4752](https://github.com/deepseek-ai/deepseek-harness/discussions/4752) describes cross-conversation raw-text search as absent. The rc.2 source has a more precise boundary:
+
+| Layer | Shipped capability | Default base behavior |
+|---|---|---|
+| Service | `ctx.sessionQuery` exact reads, filters, lineage, event relationships, and search interface | mounted through the SQLite implementation |
+| Index | SQLite FTS over logical current-surface user, assistant, and steering records | `openAt: never`; full-text calls return `SESSION_QUERY_SEARCH_DISABLED` and SQLite is not opened |
+| Host/Web API | bounded `session.search` projection over Sessions already visible through `session.list` | available only when content search is enabled; sidebar search otherwise matches metadata |
+| Model tools | `session_search`, `session_event_search`, trace, and exact event-read tools | `tool-session-query` is shipped but not mounted by default |
+
+This is neither automatic long-term memory nor a missing extension point. It is an existing retrieval subsystem whose expensive and sensitive surfaces require deployment opt-in. A profile can override the SQLite row to `openAt: first-search` or `startup`, normally with a durable index path, and can deliberately mount the model-tool package. Do not infer those choices from the package being present in the repository.
+
+### Keep human search and Agent search distinct
+
+The Host `session.search` route and model tools share a corpus but expose different authority and result contracts:
+
+- the Host route derives visibility from `session.list`, revalidates every hit, returns at most 20 visible Session/snippet pairs, and bounds each snippet to 240 Unicode code points;
+- model `session_search` is workspace-authorized, omits the caller Session, hides unauthorized lineage boundaries, and does not expose provider cursors, workspace paths, or a model-controlled result limit;
+- current-Session `session_event_search` stops before the step that invoked it so the active tool call cannot retrieve itself;
+- exact event reads should follow a relevant search hit rather than returning whole transcripts in the initial result.
+
+Search results are untrusted historical evidence. They can contain stale instructions, secrets, tool output, or text written under a different policy. Keep source Session and event identity visible, retrieve the minimum exact range needed, and never promote matched transcript text into system instructions.
+
+### Enable it as a privacy-sensitive derived index
+
+The SQLite database is a rebuildable index, not the durable Session source of truth. An operational enablement record should name:
+
+```text
+source Session roots and visibility scope
+openAt mode and durable index path
+who can call Web search and model tools
+indexed event kinds and current-surface semantics
+snippet, result, work, and cancellation bounds
+archive, deletion, retention, backup, and rebuild behavior
+audit policy for human and Agent queries
+```
+
+Test deletion and authorization against the index, not only the Session files. A stale hit after access revocation or Session deletion is a privacy failure even if opening the original Session is denied.
 
 ## Decide what you are migrating
 
@@ -196,6 +237,7 @@ The [community plugin audit](../security/community-plugin-audit.md) provides the
 ## Current upstream status
 
 - Durable Session events, resume, fork, and compaction are shipped runtime mechanisms.
+- The session-query family, SQLite FTS provider, Host search projection, and model tools are shipped; base content search is disabled with `openAt: never`, and the model tools are not mounted by default.
 - Third-party memory is available through default-off MCP example overlays.
 - A first-party `ctx.memory` capability seam has been proposed in the community, but it is not part of the verified shipped API.
 
@@ -205,6 +247,10 @@ Pin the upstream revision you deploy and re-check this boundary after upgrades.
 
 - [Session package](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/README.md)
 - [Session implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/index.ts)
+- [rc.2 session-query family](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session-query/README.md)
+- [rc.2 SQLite search provider](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session-query/session-query-sqlite/README.md)
+- [rc.2 workspace-authorized model tools](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session-query/tool-session-query/README.md)
+- [Cross-conversation transcript-search request #4752](https://github.com/deepseek-ai/deepseek-harness/discussions/4752)
 - [Third-party memory MCP examples](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/examples/mcp-memory/README.md)
 - [MCP client](https://github.com/deepseek-ai/deepseek-harness/tree/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/mcp/mcp-client)
 - [Community memory migration discussion](https://github.com/deepseek-ai/deepseek-harness/discussions/14)
