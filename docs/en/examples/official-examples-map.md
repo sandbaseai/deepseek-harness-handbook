@@ -1,14 +1,14 @@
 ---
 title: DeepSeek Harness Official Examples Map
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-28
 ---
 
 # DeepSeek Harness official examples: choose the right starting point
 
-The upstream repository ships several runnable compositions. They demonstrate different interfaces and effect boundaries; they are not interchangeable starter templates. Use this map to choose the smallest example that proves the layer you are evaluating.
+The rc.2 upstream repository shipped several runnable compositions. They demonstrate different interfaces and effect boundaries; they are not interchangeable starter templates. The current `0.1.2-alpha.1` source tree no longer contains the top-level `examples` directory, so every example link below is pinned to rc.2. Use them as historical, inspectable baselines rather than assuming the paths exist in a fresh checkout.
 
 > [!WARNING]
 > These examples exercise real tools, credentials, processes, persistence, and sometimes broad filesystem access. Read the linked composition and run in a disposable workspace before adapting one to production.
@@ -17,12 +17,12 @@ The upstream repository ships several runnable compositions. They demonstrate di
 
 | You need to… | Start with | Interface | Main boundary to inspect |
 |---|---|---|---|
-| Run one unattended repository task | [`headless-agent`](https://github.com/deepseek-ai/deepseek-harness/tree/master/examples/headless-agent) | CLI | working directory, approval, sandbox, exit evidence |
-| Embed an Agent in Python | [`jsonrpc-agent`](https://github.com/deepseek-ai/deepseek-harness/tree/master/examples/jsonrpc-agent) | Python SDK + JSON-RPC | runtime process, session identity, filesystem reach |
-| Serve an Agent to programmatic clients | [`acp-agent`](https://github.com/deepseek-ai/deepseek-harness/tree/master/examples/acp-agent) | ACP over JSON-RPC stdio | protocol-pure stdout, client-owned permissions, cancellation |
-| Connect third-party memory through MCP | [`mcp-memory`](https://github.com/deepseek-ai/deepseek-harness/tree/master/examples/mcp-memory) | Web profile overlay | server lifecycle, credentials, storage scope, tool discovery |
-| Let an Agent inspect its plugin graph | [`web-cordis`](https://github.com/deepseek-ai/deepseek-harness/tree/master/examples/web-cordis) | Web or ACP | in-memory plugin effects shared by the Host process |
-| Add session-local reminders | [`web-schedule`](https://github.com/deepseek-ai/deepseek-harness/tree/master/examples/web-schedule) | Web profile overlay | Session ownership, delivery timing, persistence semantics |
+| Run one unattended repository task | [`headless-agent`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/headless-agent) | CLI | working directory, approval, sandbox, exit evidence |
+| Embed an Agent in Python | [`jsonrpc-agent`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/jsonrpc-agent) | Python SDK + JSON-RPC | runtime process, session identity, filesystem reach |
+| Serve an Agent to programmatic clients | [`acp-agent`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/acp-agent) | ACP over JSON-RPC stdio | protocol-pure stdout, client-owned permissions, cancellation |
+| Connect third-party memory through MCP | [`mcp-memory`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/mcp-memory) | Web profile overlay | server lifecycle, credentials, storage scope, tool discovery |
+| Let an Agent inspect its plugin graph | [`web-cordis`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/web-cordis) | Web or ACP | in-memory plugin effects shared by the Host process |
+| Add session-local reminders | [`web-schedule`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/web-schedule) | Web profile overlay | Session ownership, delivery timing, persistence semantics |
 
 ## Interface map
 
@@ -126,10 +126,10 @@ Before copying an example:
 
 ## Official sources
 
-- [Official examples index](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/README.md)
-- [Headless Agent example](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/headless-agent/README.md)
-- [JSON-RPC Agent example](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/jsonrpc-agent/README.md)
-- [ACP Agent example](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/acp-agent/README.md)
-- [MCP memory examples](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/mcp-memory/README.md)
-- [Web Cordis example](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/web-cordis/README.md)
-- [Web Schedule example](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/web-schedule/README.md)
+- [rc.2 examples index](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/README.md)
+- [rc.2 Headless Agent example](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/headless-agent/README.md)
+- [rc.2 JSON-RPC Agent example](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/jsonrpc-agent/README.md)
+- [rc.2 ACP Agent example](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/acp-agent/README.md)
+- [rc.2 MCP memory examples](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/mcp-memory/README.md)
+- [rc.2 Web Cordis example](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/web-cordis/README.md)
+- [rc.2 Web Schedule example](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/web-schedule/README.md)

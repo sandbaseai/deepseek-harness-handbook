@@ -1,14 +1,17 @@
 ---
 title: DeepSeek Harness Python SDK Quickstart
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-28
 ---
 
 # DeepSeek Harness Python SDK quickstart
 
-The official Python SDK is the programmatic alternative to the Web UI. It starts a bundled Harness runtime, runs a checked-in Agent composition, and returns a structured result to Python.
+The rc.2 Python SDK is a programmatic alternative to the Web UI. It starts a bundled Harness runtime, runs a checked-in Agent composition, and returns a structured result to Python.
+
+> [!IMPORTANT]
+> This page is pinned to the rc.2 source snapshot. The current `0.1.2-alpha.1` source tree no longer includes `examples/jsonrpc-agent`; do not expect the commands below to work unchanged after cloning current `master`.
 
 ## Prerequisites
 
@@ -106,4 +109,4 @@ The persistent PTY requires a POSIX terminal substrate; this example does not su
 
 - [Python SDK guide](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/python-sdk.md)
 - [Python SDK reference](https://github.com/deepseek-ai/deepseek-harness/tree/master/python/sdk)
-- [JSON-RPC Agent example](https://github.com/deepseek-ai/deepseek-harness/tree/master/examples/jsonrpc-agent)
+- [rc.2 JSON-RPC Agent example](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/jsonrpc-agent)
