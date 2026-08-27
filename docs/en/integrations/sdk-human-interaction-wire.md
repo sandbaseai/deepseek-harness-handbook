@@ -1,7 +1,7 @@
 ---
 title: Design server-to-client human interaction for the DeepSeek Harness SDK
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -212,6 +212,97 @@ The Web API proxy has a different connection model: stable domain IDs and pendin
 
 If future SDK reconnect keeps the runtime alive, replay must reuse the same domain request ID, mint a new connection-scoped JSON-RPC ID, invalidate the old generation, and accept only the first valid terminal answer.
 
+## Route one approval across Web and messaging channels
+
+Discussion #4733 proposes a Feishu card answerer for Sessions whose Agent Preset name ends in `-feishu`, while leaving the shipped Web answerer unchanged. The channel-neutral `approval/request` waterfall is the correct seam, but channel selection, decision ownership, and settlement must be explicit.
+
+### One request has one decision owner
+
+Do not let Web and Feishu race to answer the same approval. A Session can have multiple presentation observers, but one immutable interaction binding should own the decision:
+
+```ts
+interface ApprovalChannelBinding {
+  kind: 'web' | 'feishu' | 'sdk'
+  channelInstanceId: string
+  principalPolicyId: string
+}
+```
+
+A Preset suffix can be a temporary routing hint, but it is not a durable authorization contract. Preset naming conventions drift, copies can change names, and a third-party composition can reuse a suffix. Prefer a Session-owned binding created by trusted configuration and verified against the exact live root Agent. The Feishu listener handles only matching bindings and calls `next()` for every other Agent.
+
+Do not use sibling listener order as policy priority. The rc.2 approval seam explicitly recommends one terminal answerer per deployment scope because waterfall registration order is not an authorization mechanism.
+
+### Bind the card action to the exact authority
+
+The card callback must authenticate and correlate:
+
+- Feishu application and tenant;
+- user/open id under an allowlist or role policy;
+- chat, thread, and channel instance;
+- DSH runtime generation and Session id;
+- approval id and optional tool call id;
+- one-shot outcome vocabulary;
+- issued time, expiry, nonce, and schema version.
+
+Do not make a guessable `auth_id` or filesystem path a bearer capability. The callback payload should carry a signed, short-lived opaque token or look up a high-entropy id in server-owned state. Validate the actual clicking principal; possession of a forwarded card must not be enough.
+
+The approval card should disclose only the minimum rc.2 request fields: tool name, reason, and optional call id. rc.2 does **not** put tool arguments in `ApprovalRequest`, so a card must not imply that the approver reviewed exact command bytes unless another independently secured evidence path supplied them.
+
+### Make timeout and click one linearizable race
+
+Writing `timeout` before patching the card is the correct ordering principle, but a check-then-write JSON file is not yet an exactly-once settlement primitive. The click callback and timer need one atomic compare-and-set:
+
+```text
+pending@revision 4
+  ├─ CAS(click, allowed-once, expected 4) → winner
+  └─ CAS(timer, cancelled, expected 4)    → stale loser
+```
+
+Only the winner returns an outcome to the in-process `approval/request` promise. The `ApprovalService` remains the owner that appends the paired `approval/decided` event. The losing path observes the terminal record and performs no second decision. A late click receives a stale/expired acknowledgement and never returns `allowed-once`.
+
+If a file-backed prototype is retained, require a private directory, no symlink following, restrictive permissions, atomic no-overwrite creation or revisioned rename, fsync where crash durability matters, bounded filenames, and cleanup. A resident service with an authenticated callback and transactional store is a safer production owner than one subprocess polling one status file per approval.
+
+### Treat the card as a projection
+
+The terminal decision record is authoritative; the visible card is a best-effort projection. After settlement, patch the original message to show actor-safe outcome or expiry. A patch timeout cannot reopen the decision and must not change the tool result.
+
+Persist the schema family and message id used for the original send. Patch the same schema deliberately. Do not try Card 1.0, then guess Card 2.0 after an error: a fallback can target a message whose actual schema or ownership is unknown. Migrate old cards with an explicit recorded version and a tested renderer per version.
+
+Button layout, disabled state, and countdown improve UX but do not enforce authority. Card forwarding, duplicate callbacks, platform retries, webhook reordering, and an unpatched zombie card must all fail closed at the settlement store.
+
+### Package the integration at a supported seam
+
+Keeping `dsh-im` unmodified is a useful upgrade property only if the callback contract it consumes is documented and versioned. Otherwise the design has an undeclared dependency that an upgrade can still break.
+
+For a community implementation:
+
+1. package a normal out-of-tree DSH plugin that registers one scoped `approval/request` answerer;
+2. keep the Feishu client, callback verification, state owner, and card renderers inside that plugin or a versioned companion service;
+3. declare compatible DSH and `dsh-im` versions and pin the callback schema;
+4. avoid patching npx-managed DSH files or installing a private extension under the official package tree;
+5. publish threat model, license, removal path, and end-to-end fixtures before proposing upstream inclusion.
+
+Official inclusion is worth considering after the channel contract is provider-neutral. Core should own approval identity, ownership, settlement, and adapter interfaces; a Feishu package should own Feishu authentication and card UX.
+
+### Multi-channel conformance additions
+
+- [ ] Every Session has at most one approval decision owner.
+- [ ] Channel routing uses an explicit trusted binding, not only a Preset-name suffix.
+- [ ] Non-owning answerers always delegate with `next()` and cannot observe secret state.
+- [ ] Feishu tenant, app, actor, chat, channel, Session, approval, call, expiry, and nonce are validated.
+- [ ] A forwarded card cannot authorize an unapproved principal.
+- [ ] Card text does not claim tool arguments were reviewed when rc.2 did not supply them.
+- [ ] Click and timeout compete through one atomic compare-and-set.
+- [ ] Duplicate, retried, reordered, and late callbacks cannot create a second outcome.
+- [ ] Only the winning answerer result reaches `ApprovalService`; audit events remain service-owned.
+- [ ] Message patch failure cannot reopen, alter, or delay the terminal tool decision.
+- [ ] Original card schema and message identity are recorded; updates never guess a fallback schema.
+- [ ] State storage rejects symlinks, cross-runtime ids, partial writes, and unauthorized readers.
+- [ ] Restart recovery settles or cancels every pending approval without auto-allowing.
+- [ ] Web-only, Feishu-only, and simultaneous-observer fixtures prove one decision owner.
+- [ ] The `dsh-im` callback contract is versioned and tested across supported upgrades.
+- [ ] Installation and removal use supported out-of-tree plugin boundaries.
+
 ## Harden the current loopback workaround
 
 Until the wire grows server requests, an embedder can register an in-process provider that forwards to a private control channel. Treat that channel as an approval plane:
@@ -254,6 +345,7 @@ This workaround restores functionality but creates a second protocol and credent
 ## Primary sources
 
 - [Official SDK interaction proposal #4708](https://github.com/deepseek-ai/deepseek-harness/discussions/4708)
+- [Feishu approval-card channel proposal #4733](https://github.com/deepseek-ai/deepseek-harness/discussions/4733)
 - [rc.2 SDK protocol contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sdk/protocol/README.md)
 - [rc.2 SDK server contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sdk/server/README.md)
 - [rc.2 TypeScript SDK client](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sdk/client/src/client.ts)
@@ -261,4 +353,3 @@ This workaround restores functionality but creates a second protocol and credent
 - [rc.2 approval seam](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/interaction/user-approval/README.md)
 - [rc.2 Web proxy question tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/host/apiproxy/tests/api-proxy-question.spec.ts)
 - [rc.2 Web proxy approval tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/host/apiproxy/tests/api-proxy-approval.spec.ts)
-

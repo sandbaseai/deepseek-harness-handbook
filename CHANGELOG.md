@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.129 - 2026-08-27
+
+### Changed
+
+- Expanded the human-interaction wire guide with a security review of multi-channel Web and Feishu approval routing.
+- Defined one immutable decision owner, authenticated card authority, atomic click-versus-timeout settlement, service-owned audit, schema-stable projection, restart recovery, and supported out-of-tree packaging.
+- Added sixteen multi-channel conformance gates and revised the visual map around the distinction between presentation observers and one decision owner.
+
 ## 0.5.128 - 2026-08-27
 
 ### Changed

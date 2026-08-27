@@ -24,7 +24,7 @@ Subprocess crash isolation and Host survival: https://sandbaseai.github.io/deeps
 Session archive, trash, restore, and purge: https://sandbaseai.github.io/deepseek-harness-handbook/session-archive-trash-delete.html
 read_image missing fs injection: https://sandbaseai.github.io/deepseek-harness-handbook/read-image-fs-inject.html
 pi-ai image MIME compatibility: https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-image-media-type.html
-SDK server-to-client questions and approvals: https://sandbaseai.github.io/deepseek-harness-handbook/sdk-human-interaction-wire.html
+SDK and multi-channel human interaction: https://sandbaseai.github.io/deepseek-harness-handbook/sdk-human-interaction-wire.html — negotiate questions and approvals, then route Web/Feishu presentation through one authenticated decision owner and atomic settlement.
 Stuck tool cancellation: https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html
 Degenerate model output: https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html
 npx install prompt hangs: https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html
