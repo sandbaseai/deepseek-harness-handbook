@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.160 - 2026-08-27
+
+### Changed
+
+- Converted the non-image composer request into separate intake, durable-card, and Agent-usability contracts.
+- Added an additive document-card state model and rejected model-visible Host paths in favor of authorized attachment resolution or explicit workspace materialization.
+
 ## 0.5.159 - 2026-08-27
 
 ### Changed

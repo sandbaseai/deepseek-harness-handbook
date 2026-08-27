@@ -1,7 +1,7 @@
 ---
 title: Design General Files and Provider-Native PDF/Video Passthrough
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -38,6 +38,35 @@ The Host contract is equally specific:
 | Model route | image request policy and provider image encoding | a PDF or spreadsheet requires parsing or a provider-native file contract |
 
 The local store verifies declared raster media type against decoded bytes, normalizes dimensions, enforces pixel and byte bounds, and produces a content-addressed image reference. Relabeling a PDF as an image should fail, and weakening that check would remove an integrity boundary.
+
+## Turn the composer request into three product contracts
+
+[Request #4766](https://github.com/deepseek-ai/deepseek-harness/discussions/4766) proposes the most useful initial user experience: pick or drop a PDF, keep a document card in the draft and history, and let an Agent read it with an appropriate tool. That experience still needs three separately testable contracts.
+
+| User action | Product promise | Required proof |
+|---|---|---|
+| choose, paste, or drop | the surface admits a declared file type and shows per-file validation | keyboard and pointer parity, truthful MIME/size error, no silent drop |
+| send and reconnect | the Host commits an immutable object and the Session replays a durable card | object digest, atomic message commit, authorized retrieval after reconnect |
+| ask the Agent to read it | one explicit consumer produces bounded evidence | selected tool or provider route, provenance, coordinates, limits, warning state |
+
+Do not make the picker imply the third promise. A PDF card may be durably present while extraction is pending, unavailable, refused by policy, or unsupported on the selected route. Give the card an explicit state such as `stored`, `processing`, `ready`, `limited`, or `failed`, and let the Agent report that state instead of guessing from the filename.
+
+The smallest safe UI extension is additive: keep the current image draft and renderer unchanged; introduce a neutral file draft and document card; send it through a new Host admission schema; and publish the message only after every selected object has committed. Picker `accept` filters are convenience hints, not security controls. The Host still owns byte validation, quotas, quarantine, and authorization.
+
+### Do not put a Host disk path in the message
+
+A durable attachment reference should resolve through a Session-authorized Host operation. It should not expose the backing-store path to the model or convert a browser filename into a filesystem capability. This matters even on a local installation: storage layout can change, exported Sessions need stable identities, and a model-visible absolute path grants more ambient information than the attachment contract requires.
+
+If a deployment deliberately offers “copy into workspace,” model that as a separate, approved materialization operation:
+
+```text
+attachment id + target workspace + relative destination + overwrite policy
+  -> authorize
+  -> write atomically inside the workspace
+  -> return a relative tool-visible path and the source digest
+```
+
+The resulting workspace file is a derivative. It does not replace the attachment identity, and its later modification must not rewrite history about the bytes the user originally attached.
 
 ## Model the complete path
 
@@ -307,6 +336,7 @@ Reconnect, cancellation, deletion, and export behavior:
 
 - [General-file attachment request #4700](https://github.com/deepseek-ai/deepseek-harness/discussions/4700)
 - [PDF/video passthrough request #4725](https://github.com/deepseek-ai/deepseek-harness/discussions/4725)
+- [Composer non-image attachment request #4766](https://github.com/deepseek-ai/deepseek-harness/discussions/4766)
 - [rc.2 Web composer intake](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/src/client/skeleton/InputBar.tsx)
 - [rc.2 conversation draft and send service](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/src/client/service.ts)
 - [rc.2 attachment vocabulary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/attachment/attachment/src/types.ts)
