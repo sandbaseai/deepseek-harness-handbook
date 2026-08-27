@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.98 - 2026-08-27
+
+### Changed
+
+- Reverified the ACP editor boundary against rc.2 and official telemetry request #4691.
+- Separated optional editor presentation from machine-readable tool lifecycle and usage facts required by automation controllers.
+- Added a minimal telemetry mapping, redaction requirements, provider-accounting checks, and updated visual guidance.
+
 ## 0.5.97 - 2026-08-27
 
 ### Changed
