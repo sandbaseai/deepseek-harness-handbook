@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.145 - 2026-08-27
+
+### Changed
+
+- Added a source-verified lifecycle section explaining why provider prefix caching is a durable message-order contract.
+- Separated message provenance, instruction recency, durable replay order, and cache stability instead of treating plugin context as one reorderable class.
+- Added an eight-case regression matrix for any stable-baseline ordering optimization.
+
 ## 0.5.144 - 2026-08-27
 
 ### Added
