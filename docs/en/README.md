@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Fix `read_image` failing with `cannot get property "fs" without inject`](troubleshooting/read-image-fs-inject.md)
 - [Diagnose manual compaction aborted by its caller signal](troubleshooting/manual-compaction-caller-abort.md)
 - [Fix pnpm store drift during plugin update](troubleshooting/pnpm-unexpected-store-plugin-update.md)
 - [Route OpenCode Go models by protocol and entitlement](troubleshooting/opencode-go-model-routing.md)

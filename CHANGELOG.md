@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.109 - 2026-08-27
+
+### Added
+
+- A source-pinned diagnosis for native `read_image` calls failing with `cannot get property "fs" without inject`, based on official report #4612.
+- A seven-way failure router separating service scope, attachment availability, model capability, format, size, and missing-file boundaries.
+- The one-line source repair, a composition-level execution regression, attachment lifecycle proof, safe packaged-install containment, and sixteen acceptance gates.
+
 ## 0.5.108 - 2026-08-27
 
 ### Added
