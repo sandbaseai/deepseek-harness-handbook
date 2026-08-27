@@ -1,9 +1,10 @@
 ---
 title: DeepSeek Harness on Windows
 locale: en
-content_revision: 6
+content_revision: 7
 status: canonical
-verified_at: 2026-08-25
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # DeepSeek Harness on Windows: support boundaries and troubleshooting
@@ -218,6 +219,35 @@ However, its reported enforcement is deliberately `partial`:
 
 `read-only` therefore means “no explicit workspace or private-temp write capability,” not complete system isolation. If a task must not read caller-accessible files or reach the network, use an additional isolation boundary such as a disposable VM or container whose filesystem and network policy you control.
 
+### Diagnose an apparent delete outside the workspace
+
+Official report #4688 describes a `.NET` recycle-bin delete that appeared to remove a file under `%USERPROFILE%\.dsh` while `workspace-write` was active. A follow-up Windows CI reproduction tested raw `.NET` delete, `Remove-Item`, and `Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile`; all three were denied and all target files survived. Treat the report as an environment-sensitive boundary investigation, not as proof that every rc.2 Windows sandbox permits arbitrary deletion.
+
+The result `file not found` for a missing path outside the workspace is also not proof of a delete bypass. This backend intentionally permits caller-readable paths; it intersects write-class access only. Prove a write-boundary failure by checking the target file after the confined child exits.
+
+Before reproducing any deletion, inspect the target and its ancestors without changing them:
+
+```powershell
+$Target = "$env:USERPROFILE\.dsh\some_file.txt"
+Get-Item -LiteralPath $Target | Select-Object FullName, LinkType
+icacls $Target
+icacls (Split-Path -Parent $Target)
+fsutil fsinfo volumeinfo (Split-Path -Qualifier $Target)
+```
+
+Look for these documented partial-enforcement paths:
+
+| Evidence | Interpretation | Safe response |
+|---|---|---|
+| an `Everyone` write or modify ACE | the ambient ACE can satisfy both restricted-token access checks | remove the broad grant only after an administrator reviews inheritance and application requirements |
+| a capability SID such as `S-1-15-3-...` on an unexpected ancestor | the path may retain a standing grant from an earlier, broader workspace selection | preserve `icacls` output and report the workspace history; do not guess-delete ACL entries |
+| multiple hard links | ACLs belong to the file object, so a granted in-workspace alias affects an external alias | move untrusted work to an isolation boundary without shared hard-linked objects |
+| FAT-class or another filesystem without NTFS security descriptors | the ACL mechanism cannot express the intended boundary | use NTFS for this backend or a VM/container boundary |
+
+Do not test against `$HOME`, `%USERPROFILE%`, `.dsh`, credentials, or any real user file. If a maintainer requests a destructive probe, create a disposable external directory containing only a sentinel file, record its ACL and volume type, assert file existence from the parent process after every vector, and remove the directory only after the investigation.
+
+If your threat model requires a complete write boundary, reject `enforcement: partial`. Run the Agent in a disposable VM, container, or remote sandbox with an independently scoped filesystem and network policy; a prompt instruction and the local ACL rung are not equivalent to that boundary.
+
 ## Why the first confined command can be slow
 
 The first `workspace-write` run on a directory materializes an inheritable workspace ACL through its tree. On a large workspace this can take tens of seconds or longer. Later sessions derive the same workspace SID and skip the write when the exact ACL entry already exists.
@@ -395,7 +425,7 @@ Preserve `$DSH_HOME` while upgrading Node. The runtime upgrade does not require 
 | `Add-Type` or .NET calls fail | `LanguageMode` under `read-only` |
 | Nested CLI fails with `EPERM` | captured named-pipe stdio under confinement |
 | CIM/WMI data is missing | restricted-token SID boundary |
-| Write succeeds outside the workspace | `Everyone` DACL, hard link, or non-NTFS/FAT boundary |
+| Write or delete succeeds outside the workspace | verify target survival from the parent, then inspect `Everyone` DACLs, standing capability ACEs, hard links, and the volume type |
 | Python runtime is missing | Windows wheel is not published |
 | Every tool reports missing `description` | argument schema and active plugins; this occurs before sandbox execution |
 | Startup fails with `Unexpected token '﻿'` at `{` | BOM in the exact active profile `package.json` |
@@ -442,6 +472,8 @@ Never attach credentials, a full settings file, or an unredacted session log.
 - [Real PowerShell tool integration suite](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/tool-pwsh/tests/integration.spec.ts)
 - [Real Windows ACL PowerShell suite](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/pwsh-sandbox/tests/acl.e2e.ts)
 - [Windows ACL sandbox](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/sandbox/sandbox-windows-acl/README.md)
+- [Windows delete-boundary report and negative CI reproduction #4688](https://github.com/deepseek-ai/deepseek-harness/discussions/4688)
+- [rc.2 restricted-token construction](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sandbox/sandbox-windows-acl/src/token.ts)
 - [Python runtime wheel](https://github.com/deepseek-ai/deepseek-harness/blob/master/python/sdk-runtime/README.md)
 - [Python runtime platform manifest](https://github.com/deepseek-ai/deepseek-harness/blob/master/python/sdk-runtime/platforms.json)
 - [Profile manifest reader and writer](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/boot/app-boot/src/profile.ts#L263-L284)
