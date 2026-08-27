@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.127 - 2026-08-27
+
+### Changed
+
+- Merged community PR #198 and refreshed the Windows compatibility companion to the published, MIT-licensed `dsh-win32` 0.17.1 release.
+- Documented the model-free `verify` command and separated metadata/local diagnosis, component-chain acceptance, and a complete stock Minimal Host or model-Session claim.
+- Updated the visual recovery guide with the supported rc.8+ PowerShell path, optional companion checks, exact verification boundary, and current rc.2 source provenance.
+
 ## 0.5.126 - 2026-08-27
 
 ### Changed

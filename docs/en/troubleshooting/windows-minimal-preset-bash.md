@@ -4,7 +4,7 @@ locale: en
 content_revision: 5
 status: canonical
 verified_at: 2026-08-27
-upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Windows Minimal preset Bash failure and rc.8 fix
