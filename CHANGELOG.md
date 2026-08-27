@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.148 - 2026-08-27
+
+### Changed
+
+- Corrected the README first-screen Run, Evaluate, and Debug or build paths.
+- Replaced stale featured links with the newest source-verified runtime, interaction, Schema, and evaluation resources.
+- Refined repository discovery metadata around coding-agent engineering without changing the independent project boundary.
+
 ## 0.5.147 - 2026-08-27
 
 ### Changed
