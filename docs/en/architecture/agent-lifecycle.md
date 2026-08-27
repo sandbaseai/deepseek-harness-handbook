@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Agent Turn and Step Lifecycle
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 verified_upstream: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -46,6 +46,77 @@ sequenceDiagram
 - Steering or queued next-step input can extend a turn.
 - A rejected first `agent/pre-step` decision can still produce a durable zero-step turn.
 - Cancellation and provider errors must close or recover at the correct boundary.
+
+## A search frontier belongs outside the default linear driver
+
+[Request #4761](https://github.com/deepseek-ai/deepseek-harness/discussions/4761) asks for a generic frontier-selection extension point for beam search, branch pruning, cost-aware planning, and deterministic replay. The rc.2 source has no public frontier seam. More importantly, the existing tool scheduler is the wrong owner: it orders exclusive and parallel-safe tool calls **inside one model step**. It does not own alternative Session histories, candidate scores, search budgets, or branch selection.
+
+The concrete `ReactLoopAgent`, inbox, and run controls are package-private. Public orchestration creates or resumes Agents through `ctx.agents`; a prepared Session can be claimed by only one concrete driver. Subagents, jobs, and workflows are composed outside the default loop. A frontier controller should preserve those boundaries instead of importing driver internals.
+
+```mermaid
+flowchart LR
+  C[Search controller] --> F[Durable frontier]
+  F --> A[Candidate A\nSession lineage]
+  F --> B[Candidate B\nSession lineage]
+  F --> D[Candidate C\nSession lineage]
+  A --> S{Policy + scorer}
+  B --> S
+  D --> S
+  S -->|expand| F
+  S -->|select| W[Winning evidence]
+  S -->|prune| P[Durable disposition]
+```
+
+### Define the seam around evidence, not mutable Agents
+
+A reusable selector needs an immutable input and an explicit decision output. This illustrative vocabulary is not an rc.2 API:
+
+```ts
+interface FrontierCandidate {
+  candidateId: string
+  sessionId: string
+  parentCandidateId?: string
+  depth: number
+  stateDigest: string
+  terminal: boolean
+  observedUsage?: { inputTokens?: number; outputTokens?: number }
+}
+
+type FrontierDecision =
+  | { kind: 'expand'; candidateIds: string[] }
+  | { kind: 'select'; candidateId: string }
+  | { kind: 'prune'; candidateIds: string[]; reason: string }
+  | { kind: 'stop'; reason: 'budget' | 'cancelled' | 'exhausted' }
+```
+
+Do not pass live Agent objects to third-party scoring code. A selector should receive frozen candidate records plus a harness-owned budget and policy revision. Candidate IDs, Session lineage, state digests, score components, tie-break order, and final disposition must be durable enough to explain the outcome later.
+
+### Separate four extension points
+
+| Extension | Owns | Must not own implicitly |
+|---|---|---|
+| expander | which admitted candidate states may be generated next | policy bypass or unbounded Agent creation |
+| scorer | comparable observations and declared uncertainty | hidden side effects or current mutable Session reads |
+| selector | deterministic ranking, tie-break, and next action | execution of the selected branch |
+| budget policy | depth, width, tokens, cost, wall time, and cancellation | fabricated provider cost from token estimates |
+
+Cost-aware planning must distinguish observed provider usage from estimates and unknown values. A missing price or delayed usage record cannot become zero cost. Branches that execute tools need the same approval, sandbox, and effect policy as a normal Agent; speculative side effects are not made safe by later pruning.
+
+### Make replay mean replay
+
+Deterministic replay should consume recorded candidate inputs and decisions without calling the model, tools, clock, or scorer again. Re-running the search with the same seed is a reproduction experiment, not replay. Record at least:
+
+```text
+controller and policy revision
+candidate id, Session lineage, and state digest
+expansion order and admitted children
+score components, missing values, and scorer revision
+budget before and after each decision
+stable tie-break key
+selected, pruned, failed, and cancelled dispositions
+```
+
+Acceptance requires identical decision order from the recorded ledger, bounded teardown of every losing Agent handle, no orphaned background job, and one explicit answer for what happens to tool effects produced by a branch that is later pruned. If candidates cannot be isolated from irreversible effects, restrict search to read-only or simulated capabilities.
 
 ## Durable facts versus live control
 
@@ -129,3 +200,5 @@ When a turn looks stuck, identify the last durable event:
 - [Agent instructions insertion at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/src/index.ts)
 - [Skill catalog insertion at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/skill/tool-skill/src/index.ts)
 - [Prefix-cache report and measurements](https://github.com/deepseek-ai/deepseek-harness/discussions/4749)
+- [Frontier-selection extension request #4761](https://github.com/deepseek-ai/deepseek-harness/discussions/4761)
+- [rc.2 AgentLoop public/private boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/README.md)

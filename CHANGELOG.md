@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.163 - 2026-08-27
+
+### Changed
+
+- Located frontier selection outside the default linear Agent driver and intra-step tool scheduler.
+- Added candidate, expander, scorer, selector, budget, effect-isolation, teardown, and deterministic-replay contracts for beam and search orchestration.
+
 ## 0.5.162 - 2026-08-27
 
 ### Changed
