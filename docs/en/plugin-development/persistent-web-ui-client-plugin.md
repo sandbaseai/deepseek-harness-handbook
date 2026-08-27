@@ -1,7 +1,7 @@
 ---
 title: Extend the DeepSeek Harness Web UI With a Persistent Client Plugin
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -45,6 +45,33 @@ For every candidate slot, record:
 - source declaration and lifecycle owner.
 
 Do not infer a slot key from visible text or a CSS selector. The generated catalog is built from actual `SlotMap` declarations and shipped registrations.
+
+## Choose cardinality by ownership, not appearance
+
+[Request #4764](https://github.com/deepseek-ai/deepseek-harness/discussions/4764) identifies a real composition mismatch. In rc.2, the completed Turn Node exposes `conversation.chat.turnTail` as a `chain`. Chain entries are selectors: each derives a match from the engine-owned Turn, the first accepted entry owns the extension region, and later entries do not render. That is correct for mutually exclusive whole-tail presentations. It cannot safely compose independent cost, model, latency, cache, or policy badges.
+
+Use the slot kind to express who may coexist:
+
+| Kind | Ownership question | Good example | Bad fit |
+|---|---|---|---|
+| `single` | who replaces this complete affordance? | one full model selector | an optional badge |
+| `chain` | which one renderer owns this case? | mutually exclusive completed-turn tail | several independent metrics |
+| `keyed` | which renderer owns this domain key? | tool or command type dispatch | multiple contributors for one key |
+| `list` | which independent cells coexist in order? | actions, badges, status rows | mutually exclusive whole-region selection |
+
+A per-Turn badge seat should therefore be an additive Session-scoped `list` with stable `id`, deterministic `order`, and the immutable Turn identity and closing sequence in its owner props. Each registration must be allowed to render `null` for a Turn it does not annotate. One contributor must never hide another merely because it has data first.
+
+### Keep badges as projections, not new truth
+
+Cost and model badges often arrive from durable usage, route, or policy events. The badge renderer should project those frozen records; it should not fetch a current model setting and relabel historical Turns. Define absence explicitly:
+
+- no matching record means no badge, not zero cost;
+- partial usage stays partial and visibly qualified;
+- a streaming Turn does not receive a finalized badge early;
+- replay after upgrade derives the same value from the same durable events;
+- redaction and visibility policy apply before owner props reach third-party cells.
+
+Placing the list between the existing tail chain and `IconActions` is a presentation choice, not the whole contract. Test wrapping, density, keyboard order, screen-reader naming, narrow widths, long localized values, and at least three simultaneous registrations. Registration and disposal must update every active Session scope without remounting the Turn body or changing its durable node identity.
 
 ## Understand the model-selector example
 
@@ -232,6 +259,9 @@ A plugin survives replacement of the installed DSH package; it does not make pri
 - The feature targets a documented SlotMap key or explicitly declares its DOM dependency as fragile.
 - Slot kind, scope, owner props, and shipped occupants are recorded.
 - A `single` slot replacement covers the complete displaced affordance.
+- A `chain` is used only when one accepted renderer owns the whole region.
+- Independent per-record metadata uses a stable ordered `list`; one empty entry cannot suppress another.
+- Historical badges derive from durable addressed evidence rather than current global state.
 - Package, composition entry, loader handoff, and boot row use one identity.
 - `./package.json` is exported and resolvable from the profile anchor.
 - `dsh.client.platform` is exactly `web`.
@@ -248,12 +278,14 @@ A plugin survives replacement of the installed DSH package; it does not make pri
 
 ## Source boundary
 
-Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` and official discussion #4683. The manifest and loader-factory examples describe the rc.2 contract; public out-of-tree authoring helpers may change.
+Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` and official discussions #4683 and #4764. The manifest and loader-factory examples describe the rc.2 contract; public out-of-tree authoring helpers may change.
 
 - [How to modify the DSH Web UI discussion #4683](https://github.com/deepseek-ai/deepseek-harness/discussions/4683)
+- [Per-Turn badge list-slot request #4764](https://github.com/deepseek-ai/deepseek-harness/discussions/4764)
+- [rc.2 completed-Turn slot declarations](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/src/client/contract/slots.ts)
+- [rc.2 completed-Turn render-site registration](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/src/client/chat/register-node-renderers.ts)
 - [rc.2 Client package discovery and boot graph](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/modules/src/index.ts)
 - [rc.2 shared Client bundle contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/tsdown.client.ts)
 - [Model-selector SlotMap declaration](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/src/client/contract/slots.ts)
 - [Shipped model-selector registration](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-model-selection/src/client/index.ts)
 - [Generated Client slot catalog](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/extensions/cordis-client-runner/src/client/slot-catalog.ts)
-

@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.162 - 2026-08-27
+
+### Changed
+
+- Added a SlotMap cardinality decision table for `single`, `chain`, `keyed`, and `list` ownership.
+- Mapped the per-Turn badge proposal to an additive ordered-list contract with durable evidence, absence, replay, accessibility, coexistence, and disposal gates.
+
 ## 0.5.161 - 2026-08-27
 
 ### Changed
