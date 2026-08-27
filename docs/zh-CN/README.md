@@ -11,7 +11,7 @@ verified_at: 2026-08-20
 
 这是一份从 Agent 视角理解、运行、排查和扩展 DeepSeek Harness 的独立社区手册，由 [SandBase](https://sandbase.ai/) 维护，并非 DeepSeek AI 官方项目。
 
-目前包含 **116 篇英文 canonical 指南**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供经过审核的核心内容与任务导航。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
+目前包含 **138 篇英文 canonical 指南和 146 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供经过审核的核心内容与任务导航。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
@@ -30,6 +30,22 @@ verified_at: 2026-08-20
 | 担心意外产生 API 费用 | [API Cost Boundary（英文）](../en/security/prevent-unexpected-deepseek-api-charges.md) | 从模型可见性到真实网络出口的逐层证明 |
 
 不知道问题属于哪一层时，先使用 Failure Router；如果命令还没有成功启动，先使用 Install Doctor。这两个工具都在浏览器本地运行，不上传日志、配置或工作区内容。
+
+## 最近完成源码验证的专题
+
+以下页面的 canonical 内容仍为英文。这里提供经过审核的中文任务说明和验证边界，不把自动翻译冒充为完整中文版本。
+
+| 真实问题 | 英文专题 | 这篇文章证明什么 |
+|---|---|---|
+| 配置或插件把 Profile 弄坏了，能否自动修复或复位？ | [Profile Repair and Reset](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) | 先区分用户 Patch、Bundle、依赖事务和插件激活故障；只修复一个有归属的层，不删除凭据、Session 或其它 Profile。 |
+| Web 和飞书同时展示审批时，谁能决定最终结果？ | [Web / Feishu Approval Routing](https://sandbaseai.github.io/deepseek-harness-handbook/sdk-human-interaction-wire.html) | 多个界面只能作为 observer；一个经过身份绑定的 decision owner 原子地结算点击与超时。 |
+| 已经配置 HTTPS 和密码，为什么远程 Settings 仍不可用？ | [Authenticated Remote Settings](https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html) | HTTPS、网关身份、浏览器用户和 Host Capability 是四个不同证明，不能用 `trusted-host` 代替授权。 |
+| AGENTS.md 明明加载了，为什么 Agent 还是没有遵守？ | [AGENTS.md Scope and Enforcement](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) | 文件发现、进入模型上下文、模型遵循和确定性强制执行是四个不同边界。 |
+| PDF 或视频能否直接交给支持原生输入的 Provider？ | [Provider-native Files](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | 保留一个本地不可变附件，将 Provider 文件绑定到确切路由，并诚实记录抽取、采样或直传证据。 |
+
+这些结论以 DeepSeek Harness rc.2 的官方源码提交 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) 为解释基线。文章会明确区分已经发布的行为、社区提案和建议的验收契约。
+
+如果你的实际版本与文章不同，请提交[手册错误报告](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=bug-report.yml)，写明 DSH 版本、操作系统、入口和第一个错误。日志应移除 API Key、Token、签名 URL、私人路径、无关 Prompt 与凭据值。
 
 ## 为什么这不是另一份命令清单
 
