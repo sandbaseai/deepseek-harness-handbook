@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.130 - 2026-08-27
+
+### Changed
+
+- Reverified the plugin recovery guide against rc.2 and answered the automatic repair/reset request without treating the Harness home as disposable cache.
+- Added default-versus-effective composition diagnosis, clean-profile controls, transactional repair requirements, hot-generation versus disk-candidate semantics, and exact rollback boundaries.
+- Added sixteen repair acceptance gates and redesigned the visual runbook around one scoped profile repair with credentials, Sessions, presets, and unrelated profiles excluded by default.
+
 ## 0.5.129 - 2026-08-27
 
 ### Changed

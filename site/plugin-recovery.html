@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>DeepSeek Harness plugin recovery | Preserve a known-good profile</title>
-  <meta name="description" content="Install DeepSeek Harness plugins through a reversible loop. Diagnose bundle reconciliation, duplicate adapters, service injection, and failed restarts.">
+  <title>DeepSeek Harness repair and reset | Recover one profile safely</title>
+  <meta name="description" content="Diagnose a broken DeepSeek Harness profile without deleting user state. Preview one scoped repair, verify cold boot, and restore the exact snapshot on failure.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="A reversible plugin change loop for DeepSeek Harness">
-  <meta property="og:description" content="Preserve, diff, compose, smoke test, then promote a new known-good profile.">
+  <meta property="og:title" content="Repair one DeepSeek Harness profile—never reset the whole home">
+  <meta property="og:description" content="Capture, diagnose, preview, apply, verify, and restore through one bounded recovery transaction.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness plugin recovery | Preserve a known-good profile","description":"Install DeepSeek Harness plugins through a reversible loop. Diagnose bundle reconciliation, duplicate adapters, service injection, and failed restarts.","dateModified":"2026-08-20","url":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness repair and reset | Recover one profile safely","description":"Diagnose a broken DeepSeek Harness profile without deleting user state. Preview one scoped repair, verify cold boot, and restore the exact snapshot on failure.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
@@ -27,21 +27,47 @@
   <main id="main" class="article-shell recovery-article">
     <header class="article-hero recovery-hero">
       <div>
-        <p class="eyebrow">Plugin recovery</p>
-        <h1>Protect the profile.</h1>
-        <p class="article-deck">Preserve, compose, smoke test, then promote one plugin change.</p>
+        <p class="eyebrow">Repair contract · rc.2 verified</p>
+        <h1>Repair one layer.<br>Never erase the home.</h1>
+        <p class="article-deck">A safe reset names its profile, previews every mutation, verifies a cold boot, and can restore the exact snapshot.</p>
       </div>
       <div class="recovery-loop" role="img" aria-label="Reversible plugin change loop from known-good state through install and smoke test">
-        <div><strong>Known-good</strong><span>manifest + lock + patch</span></div>
+        <div><strong>Capture</strong><span>identity + files + hashes</span></div>
         <span>→</span>
-        <div><strong>One change</strong><span>package + bundle diff</span></div>
+        <div><strong>One plan</strong><span>typed preconditions + inverse</span></div>
         <span>→</span>
-        <div><strong>Smoke test</strong><span>promote or restore</span></div>
+        <div><strong>Cold verify</strong><span>promote or restore</span></div>
       </div>
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The boundary</strong><span>A successful pnpm install proves package resolution. It does not prove the composed Harness profile can boot.</span></div>
+      <div class="signal"><strong>No universal reset</strong><span><code>$DSH_HOME</code> mixes profiles, credentials, presets, Sessions, and machine-wide policy. rc.2 ships config dumps—not a general <code>doctor</code>, <code>repair</code>, or factory-reset command.</span></div>
+
+      <h2>Classify before changing anything.</h2>
+      <div class="recovery-routes">
+        <section><code>default ✓ · effective ✕</code><strong>User layer boundary.</strong><p>Profile patch, home patch, or named overlay. Diagnose each layer in precedence order.</p></section>
+        <section><code>default ✕</code><strong>Bundle boundary.</strong><p>Manifest, ordered Bundle patch, or module resolution failed before activation.</p></section>
+        <section><code>dumps ✓ · boot ✕</code><strong>Activation boundary.</strong><p>Preserve the first plugin, service, app-argument, or runtime-effect failure.</p></section>
+        <section><code>pnpm ✕</code><strong>Dependency transaction.</strong><p>Manifest and lock state may differ. Inspect both before retrying.</p></section>
+      </div>
+
+      <pre><code>mkdir -p ./dsh-recovery-evidence
+dsh --version &gt; ./dsh-recovery-evidence/version.txt
+dsh --profile web --dump-default-config &gt; ./dsh-recovery-evidence/default.yml
+dsh --profile web --dump-config &gt; ./dsh-recovery-evidence/effective.yml</code></pre>
+
+      <h2>The recovery transaction.</h2>
+      <div class="reconcile-map">
+        <section><strong>01 · Capture</strong><p>Absolute identity, versions, hashes, file type, permissions, and explicit exclusions.</p></section>
+        <section><strong>02 · Diagnose</strong><p>Read-only evidence identifies the first failed ownership boundary.</p></section>
+        <section><strong>03 · Preview</strong><p>Every path, package operation, precondition, and inverse is visible.</p></section>
+        <section><strong>04 · Verify</strong><p>Offline composition, cold boot, provider request, and authorized tool call—or exact restore.</p></section>
+      </div>
+
+      <div class="ownership-contrast">
+        <section><span>Leave untouched by default</span><strong>Credentials · Sessions · presets</strong><p>They are independent user and security state, not disposable profile cache.</p></section>
+        <section><span>Allowed repair scope</span><strong>One selected profile</strong><p>Touch a home-level patch only when the plan names it and captures its exact revision.</p></section>
+      </div>
 
       <h2>Capture four files first.</h2>
       <div class="recovery-files">
@@ -54,6 +80,13 @@
 dsh plugin --profile web add &lt;package&gt;
 dsh --profile web --dump-config &gt; after.yml</code></pre>
       <p>Compare both dumps, the manifest, and the lockfile before starting the long-lived Web process.</p>
+
+      <h2>Live does not mean saved.</h2>
+      <div class="ownership-contrast">
+        <section><span>Live generation</span><strong>Last activated tree</strong><p>rc.2 transactional HMR keeps this generation running when a candidate edit fails.</p></section>
+        <section><span>Disk candidate</span><strong>Next cold boot</strong><p>An invalid file can remain on disk even while the old generation serves traffic.</p></section>
+      </div>
+      <p>Verify the disk candidate offline before restart. Never label a surviving process as a successful configuration save.</p>
 
       <h2>Reconciliation follows installed state.</h2>
       <div class="reconcile-map">
@@ -78,6 +111,16 @@ dsh --profile web --dump-config &gt; after.yml</code></pre>
         <section><span>Settings discovery</span><strong><code>registerConfigurableProviders()</code></strong><p>Publishes advisory catalog metadata. It does not override an adapter.</p></section>
       </div>
 
+      <h2>Six gates before promotion.</h2>
+      <div class="recovery-routes">
+        <section><code>scope</code><strong>One profile.</strong><p>No wildcard or whole-home deletion; unrelated state remains excluded.</p></section>
+        <section><code>CAS</code><strong>Revision unchanged.</strong><p>Every mutation checks the captured hash or manifest revision first.</p></section>
+        <section><code>compose</code><strong>Both dumps pass.</strong><p>Default and effective configuration resolve after the repair.</p></section>
+        <section><code>cold</code><strong>Every row activates.</strong><p>A live HMR survivor is not sufficient verification.</p></section>
+        <section><code>turn</code><strong>One real request.</strong><p>Provider and authorized tool paths both cross their runtime boundary.</p></section>
+        <section><code>inverse</code><strong>Restore is proven.</strong><p>The exact snapshot cold-boots if repair verification fails.</p></section>
+      </div>
+
       <h2>Report evidence, not the dead screen.</h2>
       <pre><code>Harness version or commit:
 OS and Node/pnpm versions:
@@ -90,16 +133,16 @@ Clean-profile reproduction:</code></pre>
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/apps/cli/src/plugin.ts">CLI plugin reconciliation implementation</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/apps/cli/reference/README.md">Profile and plugin contract</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/user/develop/framework/service.md">Cordis service dependency lifecycle</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/1904">Original plugin lifecycle report</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/reference/README.md">rc.2 CLI profile and plugin contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/README.md">rc.2 profile and transactional HMR contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/util/atomic-write/README.md">rc.2 atomic write and lock contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4735">Automatic repair and reset request #4735</a></li>
       </ul>
 
       <section class="article-cta">
-        <h2>Keep the full runbook nearby.</h2>
-        <p>The canonical guide includes the source contract, recovery evidence, and adapter example.</p>
-        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/pull/20">Review the guide</a>
+        <h2>Use the complete repair contract.</h2>
+        <p>The canonical guide includes 16 recovery gates, layer precedence, clean-profile controls, rollback semantics, and plugin conflict diagnosis.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-install-recovery.md">Read the runbook</a>
       </section>
     </article>
   </main>

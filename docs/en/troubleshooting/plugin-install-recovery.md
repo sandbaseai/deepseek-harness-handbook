@@ -1,9 +1,10 @@
 ---
 title: DeepSeek Harness Plugin Install and Recovery
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Install DeepSeek Harness plugins without losing a known-good profile
@@ -65,6 +66,137 @@ This means a missing entry is not enough evidence that `plugin add` replaced the
 
 Do not keep adding recovery plugins to a profile that cannot compose. Return to the captured state first, reproduce with one added package, and preserve the first error.
 
+## There is no safe universal `reset` in rc.2
+
+Discussion #4735 asks for automatic repair after a configuration edit or plugin conflict prevents startup. DeepSeek Harness rc.2 does not ship a general `doctor`, `repair`, or factory-reset command. That absence matters: `$DSH_HOME` is not one disposable cache. It can contain independent user-owned and security-sensitive state:
+
+- profile manifests, lockfiles, plugin installations, and profile patch layers;
+- the home-level patch applied above every profile;
+- managed credentials and environment fallbacks;
+- user-authored agent presets;
+- persisted Sessions and local indexes.
+
+Deleting or replacing the whole directory can destroy the evidence needed to identify the first bad layer, erase unrelated profiles and Sessions, or silently change credential and permission behavior. “Restore defaults” must therefore name a **profile and state class**, show the proposed diff, preserve a snapshot, and leave credentials and Sessions out of scope by default.
+
+The rc.2 launcher already exposes two useful diagnostic properties, but neither is an automatic repair:
+
+1. `--dump-default-config` composes only the selected profile's Bundle layers without its user patch files.
+2. `--dump-config` adds the profile patch, the home patch, and explicit `--patch` overlays without activating plugins.
+
+Both commands still need the profile manifest and every listed Bundle to resolve and parse. A corrupt manifest, missing Bundle, or broken dependency closure can therefore fail before either dump is available.
+
+## Recover by narrowing one layer at a time
+
+Use a new directory for evidence. Do not redirect diagnostic output into `$DSH_HOME`.
+
+```sh
+mkdir -p ./dsh-recovery-evidence
+dsh --version > ./dsh-recovery-evidence/version.txt
+dsh --profile web --dump-default-config > ./dsh-recovery-evidence/default.yml
+dsh --profile web --dump-config > ./dsh-recovery-evidence/effective.yml
+```
+
+Interpret the first boundary:
+
+| Result | Proven boundary | Next bounded action |
+|---|---|---|
+| both dumps succeed, live boot fails | plugin activation, required service, app argument, or runtime effect | preserve the first boot stack; test an exact overlay or clean profile |
+| default succeeds, effective fails | profile patch, home patch, or named overlay | parse copies offline; never edit both user layers at once |
+| default fails while manifest parses | listed Bundle, Bundle patch, or module resolution | inspect the ordered Bundle list and resolve each package from the profile |
+| manifest does not parse | profile metadata | restore the exact known-good manifest snapshot; do not invent JSON fields |
+| pnpm operation failed | dependency transaction may be partial | inspect manifest, lockfile, workspace file, and store state before retrying |
+
+An empty or comments-only `cordis.patch.yml` is not the disabled form; it parses to no document and fails. The explicit no-op layer is:
+
+```yaml
+[]
+```
+
+Do not replace a suspect patch in place merely to test this. Copy the original first, record its hash and timestamp, then use a disposable `--patch` or a cloned profile. The home-level patch outranks the profile patch, so a clean profile alone does not exclude a machine-wide override.
+
+## A clean profile is a control, not a repair
+
+Create a distinct diagnostic profile rather than deleting the broken one:
+
+```sh
+dsh plugin --profile recovery-probe add @deepseek-ai/dsh-base
+dsh --profile recovery-probe --dump-config > ./dsh-recovery-evidence/probe.yml
+```
+
+This proves whether the selected installation, pnpm executable, base Bundle, shared module fallback, and home-level patch can compose. It does **not** prove the original profile is safe to reset, and it may still inherit the same home patch and environment layers. Use a separate temporary `DSH_HOME` only when you explicitly want to test the installation without any user state; never point that probe at the production home or later promote the probe wholesale.
+
+Compare four independent deltas:
+
+1. `package.json`: requested dependency and ordered `dsh.profile.bundles` membership;
+2. `pnpm-lock.yaml`: exact resolved graph and peer decisions;
+3. profile `cordis.patch.yml`: profile-only overrides;
+4. home `cordis.patch.yml`: machine-wide overrides applied last.
+
+If removing one third-party Bundle restores the probe, that is isolation evidence—not proof the package is intrinsically defective. Capture the exact version, peer graph, activation stack, and conflicting row or route before reporting it.
+
+## Design automatic repair as a transaction
+
+A safe future `dsh doctor` should be read-only unless the operator selects one explicit repair plan. Separate diagnosis from mutation:
+
+```mermaid
+stateDiagram-v2
+  [*] --> Capture
+  Capture --> Diagnose
+  Diagnose --> Plan
+  Plan --> Preview
+  Preview --> Apply: explicit approval
+  Preview --> [*]: cancel
+  Apply --> Verify
+  Verify --> Promote: all gates pass
+  Verify --> Restore: any gate fails
+  Restore --> VerifyRestored
+  VerifyRestored --> [*]
+  Promote --> [*]
+```
+
+The snapshot must be immutable and scoped to the selected profile plus any home-level file the plan proposes to touch. Record paths, file types, modes or ACL facts, hashes, selected installation identity, DSH/Node/pnpm versions, and a manifest of intentionally excluded state. Never copy secret values into a diagnostic report.
+
+Each repair operation needs a typed precondition and inverse. Examples:
+
+| Candidate repair | Required precondition | Inverse |
+|---|---|---|
+| replace invalid patch with `[]` | exact file hash still matches captured failure | restore captured file atomically |
+| remove one dependency-managed Bundle | package is both a dependency and managed Bundle; manifest revision unchanged | restore manifest and lockfile, then exact frozen install |
+| regenerate profile dependency closure | exact manifest and lockfile parse; package manager and registry identity recorded | restore full captured closure or abort before mutation |
+| remove orphan lock file | no live writer owns it; platform-specific owner evidence collected | none—therefore never infer from age alone |
+
+Do not make “delete the last installed plugin” an automatic rule. A pnpm command may have changed several transitive packages, the latest plugin may be unrelated, and a home patch can be the true failing layer.
+
+## Keep hot reload and cold boot separate
+
+rc.2 watches the profile and home patch files. A rejected read, YAML parse, schema, or Loader candidate leaves the last good in-memory tree running and emits `hmr/config-update-failed`. That protects a live process from one invalid edit; it does not make the file on disk valid for the next cold boot.
+
+The recovery UI should therefore show two facts independently:
+
+- **live generation:** the last configuration generation that activated successfully;
+- **disk candidate:** the current file revision and its parse/activation result.
+
+“Service is still running” must not be displayed as “configuration saved successfully.” Before restart, verify the disk candidate through offline composition. Conversely, a failed live candidate must not be persisted as the new known-good generation.
+
+## Acceptance gates for repair or reset
+
+- [ ] The selected DSH installation, profile, and Harness home resolve to absolute paths before mutation.
+- [ ] Diagnosis is read-only and produces a redacted evidence bundle.
+- [ ] The first failing boundary is classified before a repair is proposed.
+- [ ] The plan names every file and package operation; no wildcard or whole-home deletion is used.
+- [ ] Credentials, Sessions, user presets, and unrelated profiles are excluded by default.
+- [ ] The snapshot records hashes, file type, permissions, version, registry, and package-manager identity.
+- [ ] Every mutation checks that the captured precondition still holds.
+- [ ] Multi-file changes are serialized and recoverable after interruption.
+- [ ] Profile and home patch layers are diagnosed independently and in precedence order.
+- [ ] A successful clean-profile control is not mislabeled as repair of the original profile.
+- [ ] Offline default and effective config dumps succeed after the change.
+- [ ] Cold boot activates every enabled row; a live HMR survivor is insufficient evidence.
+- [ ] One provider request and one authorized tool call pass in the repaired profile.
+- [ ] The exact restored snapshot cold-boots if post-repair verification fails.
+- [ ] Logs and exported evidence never contain credential values or full sensitive environment data.
+- [ ] The operator receives the snapshot location, repair manifest, verification result, and rollback result.
+
 ## Adapter routes have one runtime owner
 
 `ctx.llm.registerAdapter()` fails atomically when any requested provider route already has an adapter. The official DeepSeek adapter owns `deepseek-official`; a third-party adapter must use a distinct route unless the original owner is removed from the composition.
@@ -114,8 +246,10 @@ Do not include credentials or the full user home. A small reproduction profile i
 
 ## Official sources
 
-- [CLI plugin reconciliation implementation](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/apps/cli/src/plugin.ts)
-- [CLI profile and plugin contract](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/apps/cli/reference/README.md)
-- [Services and dependency lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/user/develop/framework/service.md)
-- [LLM adapter ownership contract](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/docs/subsystems/llm-streaming.md#adapter-contract)
+- [rc.2 CLI profile and plugin contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/reference/README.md)
+- [rc.2 plugin reconciliation implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/src/plugin.ts)
+- [rc.2 profile composition and live-layer ownership](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/src/profile-boot.ts)
+- [rc.2 app-boot profile and transactional HMR contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/README.md)
+- [rc.2 atomic file replacement and lock contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/util/atomic-write/README.md)
 - [Community plugin lifecycle report](https://github.com/deepseek-ai/deepseek-harness/discussions/1904)
+- [Automatic repair and reset request #4735](https://github.com/deepseek-ai/deepseek-harness/discussions/4735)
