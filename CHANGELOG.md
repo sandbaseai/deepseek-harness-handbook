@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.132 - 2026-08-27
+
+### Changed
+
+- Added a contribution ladder so corrections, source verification, bounded runtime observations, full runbooks, and fluent translation reviews each have an explicit minimum evidence unit.
+- Documented pinned-source identity, verification-boundary language, disposable runtime practice, redaction requirements, and the complete local validation set.
+- Expanded pull request and issue templates with artifact/platform boundaries, privacy checks, source-only contribution options, and cleanup evidence.
+
 ## 0.5.131 - 2026-08-27
 
 ### Changed

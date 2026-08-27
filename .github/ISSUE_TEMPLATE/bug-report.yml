@@ -32,3 +32,18 @@ body:
       description: Link an official source or provide reproducible steps and the DeepSeek Harness revision.
     validations:
       required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Verification boundary
+      description: State what you observed directly and what remains unverified. Include the DSH package or source commit, OS, Node version, interface, and first error when relevant.
+      placeholder: Reproduced on @deepseek-ai/dsh 0.x, Windows 11, Node 24, Web profile. I did not test headless or another provider.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed API keys, tokens, signed URLs, private paths, unrelated prompts, and credential values from this report.
+          required: true

@@ -43,3 +43,12 @@ body:
       label: Contribution
       options:
         - label: I am willing to help draft or review this page.
+        - label: I can provide source-only verification without running a model.
+        - label: I can provide a sanitized runtime observation from a disposable environment.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: Any attached evidence excludes API keys, tokens, signed URLs, private paths, unrelated prompts, and credential values.
+          required: true
