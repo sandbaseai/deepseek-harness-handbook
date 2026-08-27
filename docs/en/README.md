@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Diagnose Agents calling unknown `edit` or `str_replace_editor` tools](troubleshooting/unknown-edit-tool.md)
 - [Restore Settings sections clipped below a long plugin navigation](troubleshooting/settings-plugin-nav-overflow.md)
 - [Design Session Collections and explicit no-Workspace execution profiles](operations/session-groups-workspace-less.md)
 - [Let an execution tool declare its code-card language](plugin-development/tool-code-card-language.md)

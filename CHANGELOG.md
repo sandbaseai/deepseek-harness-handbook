@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.123 - 2026-08-27
+
+### Added
+
+- Added a source-backed diagnosis for Agents alternating between unknown `edit` and `str_replace_editor` calls.
+- Mapped Standard, Minimal, Code, Both, and custom Preset tool surfaces without confusing lookup failure with path, freshness, sandbox, or permission errors.
+- Added assembly evidence, recovery routes, a disposable read-edit-read proof, retry containment, a visual dispatch boundary, and twenty regression gates.
+
 ## 0.5.122 - 2026-08-27
 
 ### Added
