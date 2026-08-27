@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**142 canonical guides · 150 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
+**143 canonical guides · 150 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -75,6 +75,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Set and verify reasoning effort for a headless one-shot run | [Headless reasoning-effort guide](https://sandbaseai.github.io/deepseek-harness-handbook/headless-reasoning-effort.html) |
 | Fix spawn delegations that lose reasoning effort | [Spawn subagent route-fidelity runbook](https://sandbaseai.github.io/deepseek-harness-handbook/spawn-subagent-reasoning-effort.html) |
 | Configure Bailian Token Plan without losing reasoning or model metadata | [Bailian catalog-route runbook](https://sandbaseai.github.io/deepseek-harness-handbook/bailian-token-plan.html) |
+| Fix a custom OpenAI-compatible provider that silently sends `/messages` | [Custom provider catalog-collision runbook](https://sandbaseai.github.io/deepseek-harness-handbook/custom-provider-catalog-collision.html) |
 | Recover tools that repeatedly return `Unknown or expired MCP session` | [Expired MCP session loop runbook](https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html) |
 | Understand the shipped CLI, automate one task, or evaluate a community TUI | [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
 | Recover when the Windows folder picker crashes or truncates a Unicode path | [Windows folder-picker crash and truncation guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html) |
@@ -215,7 +216,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 142 pages |
+| English | Canonical | 143 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |

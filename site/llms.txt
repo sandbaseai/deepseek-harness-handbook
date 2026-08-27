@@ -15,6 +15,7 @@ Image-send composer recovery: https://sandbaseai.github.io/deepseek-harness-hand
 Headless reasoning effort: https://sandbaseai.github.io/deepseek-harness-handbook/headless-reasoning-effort.html
 Spawn subagent reasoning-effort recovery: https://sandbaseai.github.io/deepseek-harness-handbook/spawn-subagent-reasoning-effort.html
 Bailian Token Plan catalog route: https://sandbaseai.github.io/deepseek-harness-handbook/bailian-token-plan.html
+Custom provider catalog collision: https://sandbaseai.github.io/deepseek-harness-handbook/custom-provider-catalog-collision.html
 Expired MCP session recovery: https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html
 ACP editor integration boundary: https://sandbaseai.github.io/deepseek-harness-handbook/acp-editor-boundary.html
 ACP permission request UI: https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-request-ui.html
