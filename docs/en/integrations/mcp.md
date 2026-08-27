@@ -98,5 +98,5 @@ The official bridge currently exposes MCP **tools**. MCP resources and prompts d
 
 - [MCP package index](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/mcp/README.md)
 - [MCP client plugin](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/mcp/mcp-client/README.md)
-- [Third-party memory MCP examples](https://github.com/deepseek-ai/deepseek-harness/blob/master/examples/mcp-memory/README.md)
+- [rc.2 third-party memory MCP examples](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/examples/mcp-memory/README.md)
 - [Tool execution pipeline](../architecture/tool-execution-pipeline.md)

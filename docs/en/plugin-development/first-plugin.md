@@ -1,9 +1,9 @@
 ---
 title: Build Your First DeepSeek Harness Plugin
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-28
 ---
 
 # Build your first DeepSeek Harness plugin
@@ -71,6 +71,32 @@ Create `scratch-plugin/cordis.yml`, replacing the example with the absolute path
 ```
 
 The path must be absolute because a patch contributes configuration but does not change the profile directory used for module resolution.
+
+### Give editor diagnostics an explicit project
+
+The overlay above is the complete **runtime** configuration. It does not make `scratch-plugin` part of the repository's TypeScript Project Reference graph. If an editor or a direct `tsc` invocation reports `Cannot find module '@deepseek-ai/cordis'`, add `scratch-plugin/tsconfig.json`:
+
+```json
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": false,
+    "noEmit": true
+  },
+  "include": ["src"]
+}
+```
+
+Then verify the scratch project directly:
+
+```sh
+pnpm exec tsc -p scratch-plugin/tsconfig.json
+```
+
+Extending `tsconfig.base.json` inherits the official source `paths`, including `@deepseek-ai/cordis`. The local file owns only the scratch project's inclusion and no-emit policy. Do not add `scratch-plugin` to the root Host aggregate, and do not add `include` or `files` to `tsconfig.base.json`; either change widens or narrows an official build graph merely to satisfy local editor discovery.
 
 Boot the Web composition with the overlay:
 
@@ -243,6 +269,7 @@ pnpm 10 blocks Git dependency build scripts until the consumer explicitly allows
 
 - [ ] The official repository and inspected commit are recorded.
 - [ ] The local module loads through one explicit overlay.
+- [ ] The scratch project type-checks through its own config when editor or CLI diagnostics are required.
 - [ ] Every hard service dependency appears in `inject`.
 - [ ] Tool arguments and canonical output are validated.
 - [ ] External resources have a lifecycle disposer.
@@ -258,6 +285,7 @@ pnpm 10 blocks Git dependency build scripts until the consumer explicitly allows
 | First failure | Inspect first |
 |---|---|
 | module not found | absolute local path or packaged `main` entry |
+| editor cannot resolve `@deepseek-ai/cordis` | scratch `tsconfig.json` extending the repository base config |
 | plugin installs but no layer appears | `dsh.bundle.patch` in the installed manifest |
 | service is not declared | missing `inject` or unsafe direct `ctx.service` access |
 | configuration rejected | exported Schemastery `Config` schema and supplied row |
@@ -267,9 +295,10 @@ pnpm 10 blocks Git dependency build scripts until the consumer explicitly allows
 
 ## Official sources
 
-- [Your first plugin](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/basic/index.md)
-- [Build a tool](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/basic/tool.md)
-- [Plugin configuration](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/basic/config.md)
-- [Package and install a plugin](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/basic/publish.md)
-- [CLI profile and plugin contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/reference/README.md)
-- [Services and dependency lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/framework/service.md)
+- [Your first plugin](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/basic/index.md)
+- [Build a tool](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/basic/tool.md)
+- [Plugin configuration](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/basic/config.md)
+- [Package and install a plugin](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/basic/publish.md)
+- [CLI profile and plugin contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/cli/reference/README.md)
+- [TypeScript project layout and base-path contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/development.md#typescript-project-layout)
+- [Services and dependency lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/framework/service.md)

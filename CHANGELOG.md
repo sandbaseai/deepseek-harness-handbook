@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.167 - 2026-08-28
+
+### Changed
+
+- Separated first-plugin runtime loading from editor and direct-TypeScript project discovery at the current `0.1.2-alpha.1` source revision.
+- Added a scoped scratch `tsconfig.json`, a direct verification command, and guardrails against mutating the official root aggregate or shared base config.
+- Pinned removed top-level examples to the rc.2 snapshot and marked the examples map and Python SDK quickstart as historical rather than current-master paths.
+
 ## 0.5.166 - 2026-08-27
 
 ### Changed
