@@ -115,6 +115,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/spawn-subagent-reasoning-effort.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/bailian-token-plan-catalog-route.md",
       "revision": 1,
       "translations": {}
@@ -386,7 +391,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 54,
+      "revision": 55,
       "translations": {}
     },
     {

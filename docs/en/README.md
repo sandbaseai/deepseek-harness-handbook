@@ -80,6 +80,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Fix double-brace tool text breaking Code Mode prompt assembly](troubleshooting/code-mode-unknown-prompt-variable.md)
 - [Fix npm ETARGET while installing rc.8](troubleshooting/npm-etarget-rc8.md)
 - [Fix Session titles that stay on the fallback with reasoning models](troubleshooting/session-title-reasoning-budget.md)
+- [Fix spawn subagents that drop reasoning effort](troubleshooting/spawn-subagent-reasoning-effort.md)
 - [Generate an installation evidence plan with Install Doctor](tools/install-doctor.md)
 
 ## Learning paths

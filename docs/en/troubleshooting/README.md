@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 54
+content_revision: 55
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -133,6 +133,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Fix missing `dsh-client-schema-form` after npm installation](missing-client-schema-form.md)
 - [Control response and reasoning language](response-language-and-reasoning.md)
 - [Fix Session titles that stay on the fallback with reasoning models](session-title-reasoning-budget.md)
+- [Fix spawn subagents that drop reasoning effort](spawn-subagent-reasoning-effort.md)
 - [Recover a prompt accepted before it became durable](prompt-accepted-before-durable.md)
 - [Remote Web UI, HTTPS, `crypto.randomUUID`, and extension-induced Origin 403](remote-web-secure-context.md)
 - [Session first-flush failure on filesystems without hard links](session-hard-link-unsupported.md)
