@@ -146,6 +146,6 @@ AbortSignal.any runtime identity: https://sandbaseai.github.io/deepseek-harness-
 Multi-tenant ACP remote hosting: https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html
 Embedded code escaping: https://sandbaseai.github.io/deepseek-harness-handbook/embedded-code-escaping.html
 Tool-produced image result cards: https://sandbaseai.github.io/deepseek-harness-handbook/tool-image-result-card.html
-General file attachments for Agents: https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html
+Provider-native PDF/video and general file attachments: https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html — negotiate the exact route, keep provider uploads as revocable derivatives, and preserve extraction or sampling truth.
 OpenRouter provider pinning: https://sandbaseai.github.io/deepseek-harness-handbook/openrouter-provider-pinning.html
 Goal rounds waiting for subagents: https://sandbaseai.github.io/deepseek-harness-handbook/goal-round-subagent-wait.html

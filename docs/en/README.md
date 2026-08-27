@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Design general files and provider-native PDF/video passthrough](integrations/general-file-attachments.md)
 - [Trace `ask_user_question` aborts without inventing an answer timeout](troubleshooting/ask-user-question-aborted.md)
 - [Diagnose Agents calling unknown `edit` or `str_replace_editor` tools](troubleshooting/unknown-edit-tool.md)
 - [Restore Settings sections clipped below a long plugin navigation](troubleshooting/settings-plugin-nav-overflow.md)

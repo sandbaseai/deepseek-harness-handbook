@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.125 - 2026-08-27
+
+### Changed
+
+- Upgraded the general-file architecture guide with exact-route capability negotiation for provider-native PDF and video input.
+- Kept provider uploads as revocable derivatives of one local immutable attachment, with scoped binding identity, processing, reuse, expiry, and deletion states.
+- Added PDF and video truth boundaries, egress controls, safe fallback planning, a revised visual route map, and twenty-seven acceptance gates.
+
 ## 0.5.124 - 2026-08-27
 
 ### Added
