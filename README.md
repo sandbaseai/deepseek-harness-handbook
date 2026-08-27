@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**118 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**119 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -141,6 +141,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Design multi-tenant MCP across ACP | [Session-scoped MCP architecture](docs/en/integrations/acp-session-scoped-mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
+| Let a subagent request human clarification safely | [Parent-owned question relay](docs/en/agent-patterns/subagent-human-question-relay.md) |
 | Understand the runtime | [The agent-runtime mental model](docs/en/architecture/agent-runtime.md) |
 | Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |
 | Choose between Session persistence and long-term memory | [Sessions are not long-term memory](docs/en/architecture/sessions-vs-memory.md) |
@@ -188,7 +189,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 118 pages |
+| English | Canonical | 119 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
