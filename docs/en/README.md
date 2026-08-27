@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Diagnose why AGENTS.md loaded but did not constrain an action](agent-patterns/agents-md-scope.md)
 - [Design general files and provider-native PDF/video passthrough](integrations/general-file-attachments.md)
 - [Trace `ask_user_question` aborts without inventing an answer timeout](troubleshooting/ask-user-question-aborted.md)
 - [Diagnose Agents calling unknown `edit` or `str_replace_editor` tools](troubleshooting/unknown-edit-tool.md)
@@ -67,7 +68,6 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Render ACP permission requests safely](integrations/acp-permission-request-ui.md)
 - [Understand the tool execution pipeline](architecture/tool-execution-pipeline.md)
 - [Separate durable Sessions from long-term memory](architecture/sessions-vs-memory.md)
-- [Map AGENTS.md scope and precedence](agent-patterns/agents-md-scope.md)
 - [Design reusable Skills](agent-patterns/skills.md)
 - [Choose a Subagent strategy](agent-patterns/subagents.md)
 - [Stop Goal rounds while owned subagents are still running](agent-patterns/goal-round-subagent-wait.md)

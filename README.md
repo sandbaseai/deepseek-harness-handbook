@@ -79,7 +79,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Choose an exact, reproducible installation topology | [Install DeepSeek Harness safely](https://sandbaseai.github.io/deepseek-harness-handbook/install-deepseek-harness.html) |
 | Diagnose `npx` waiting at the DeepSeek Harness install prompt | [npx install-boundary runbook](https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html) |
 | Create, invoke, and debug a reusable Skill | [DeepSeek Harness Skills lab](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html) |
-| Decide whether an instruction belongs in global, project, nested, local, or Skill scope | [AGENTS.md scope and precedence map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
+| Diagnose why AGENTS.md loaded but did not constrain an action | [AGENTS.md scope, visibility, and enforcement map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
 | Let a third-party execution tool render the correct code language | [Tool-owned code-card language design](https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html) |
 | Keep a plugin subprocess from freezing the Agent Host | [Async subprocess tool guide](https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html) |
