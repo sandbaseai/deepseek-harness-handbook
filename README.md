@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**121 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**122 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -189,7 +189,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 121 pages |
+| English | Canonical | 122 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -264,6 +264,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 ### Plugin development
 
+- [Render a tool-produced image in its Web result card](docs/en/plugin-development/tool-image-result-card.md)
 - [Build your first DeepSeek Harness plugin](docs/en/plugin-development/first-plugin.md)
 - [Run subprocesses safely inside tools](docs/en/plugin-development/async-subprocess-tools.md)
 - [Author tool schemas for the enforced subset](docs/en/plugin-development/tool-schema-subset.md)
