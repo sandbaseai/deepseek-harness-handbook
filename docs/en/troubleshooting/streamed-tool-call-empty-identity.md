@@ -1,25 +1,39 @@
 ---
 title: Fix UNKNOWN_TOOL from Empty Streamed Tool Identity
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-20
-upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Fix `UNKNOWN_TOOL` from empty streamed tool identity
 
-If every DeepSeek Harness tool call fails as `UNKNOWN_TOOL`, `unknown tool ""`, or `tool "" is disabled` while ordinary chat still works, inspect the provider stream before changing tool policy. An OpenAI-compatible endpoint may emit a valid tool name and ID in the first delta, then overwrite them with explicit empty values in continuation deltas.
+If DeepSeek Harness reports `UNKNOWN_TOOL`, `unknown tool ""`, or `tool "" is disabled` while ordinary chat still works, inspect the provider stream before changing tool policy. An OpenAI-compatible endpoint may emit a valid tool name and ID in the first delta, then overwrite them with explicit empty values in continuation deltas.
 
-This guide now covers two verified incidents:
+Do not treat this as only a live tool failure. In rc.2, the empty identity can cross three boundaries: the completed assistant block, the `tool/call`, and the synthesized `tool/result`. A later resume can reject that persisted result with `SessionPersistenceCorruptionError`, while provider replay can reject the empty function name with HTTP 400. The first bad turn is therefore the containment point.
+
+This guide covers three reported shapes:
 
 - an rc.7 gateway stream whose continuation deltas used an empty ID and `null` name; and
-- Alibaba Cloud Bailian (DashScope) `deepseek-v4-flash` on rc.8, whose continuation deltas use empty strings for both ID and name.
+- Alibaba Cloud Bailian (DashScope) `deepseek-v4-flash` on rc.8, whose continuation deltas use empty strings for both ID and name; and
+- an rc.2 OpenAI-compatible route where an empty final identity entered the durable Session, poisoned provider replay, and made the next resume fail validation.
 
 The second case is especially easy to misdiagnose because the same DSH tools work through the official DeepSeek API, Bailian Qwen models work, and Bailian's non-streaming response contains the correct function identity.
 
 > [!WARNING]
-> The current source path is verified at upstream commit `141eb6f` (rc.8). The two-line hardening is not part of rc.8. Do not patch generated `lib/` files or a global `node_modules` installation in place; an upgrade will overwrite the edit and leave no reviewable source change.
+> The current source path is verified at upstream commit `b150a55` (`0.1.1-rc.2`). The translator still accepts explicit empty continuation identity. The live append path and restored-event path also do not enforce the same message-shape boundary. Do not patch generated `lib/`, a global `node_modules` installation, or a live Session artifact in place.
+
+## Route the symptom before touching anything
+
+| First visible failure | Inspect first | Meaning |
+|---|---|---|
+| `tool "" is disabled` or `unknown tool ""` | ordered provider deltas and final `tool/call` | identity was absent or lost before policy |
+| repeated provider `400` about empty function name | persisted assistant history | one bad call is being replayed into later requests |
+| `SessionPersistenceCorruptionError: ... message must have tool source` | `tool/result.message.source.callId` in a copied log | a stored empty call ID is rejected on restore |
+| all Session lists disappear | isolate unreadable Session directories one at a time | enumeration may be failing on one artifact, not every workspace |
+
+Stop the process that owns the Session and preserve the complete Session directory before deeper inspection. A running writer can append more failures or replace an attempted repair with its in-memory state.
 
 ## Current rc.8 Bailian signature
 
@@ -60,7 +74,7 @@ flowchart LR
   P --> S[Retries, then clean stop]
 ```
 
-At rc.8 commit `141eb6f`, the DeepSeek translator updates an open tool block whenever the wire field is not `undefined`:
+At rc.2 commit `b150a55`, the DeepSeek translator updates an open tool block whenever the wire field is not `undefined`:
 
 ```ts
 if (call.id !== undefined) block.callId = call.id
@@ -70,6 +84,26 @@ if (call.function?.name !== undefined) block.name = call.function.name
 That handles the official omission shape, but an explicit empty value also passes the guard. A continuation carrying `id: ""` replaces the captured call ID. Bailian also supplies `function.name: ""`, which replaces the captured name. A gateway that supplies `null` can reach the same failure through a lenient wire boundary. `closeBlock()` then emits the overwritten identity in the completed tool block.
 
 `BlockAssembler` ignores a falsy empty name on intermediate `tool-call-delta` chunks, but `block-end` is authoritative and follows a first-close-wins contract. The translator's completed empty block therefore wins over the earlier valid delta. The policy layer receives no usable tool name and correctly refuses to execute an unidentified effect.
+
+## Why one empty call can brick resume
+
+The rc.2 restore boundary calls `adoptSessionEvent()`, which applies `assertMessageEventShape()`. A stored `tool/result` is accepted only when its source has `kind: "tool"`, a non-empty `callId`, and a matching inner `toolCallId`.
+
+The live `Session.append()` path snapshots JSON and validates surface placement, but it does not call that same message-shape assertion. The persistence coordinator checks supported event vocabulary and sequence continuity before writing; it does not add the missing identity validation. This creates a narrow writer/reader asymmetry:
+
+```text
+provider delta       id="" name=""
+completed block      id="" name=""
+tool/call            callId="" name=""
+tool/result          source.callId="" toolCallId=""
+live Session         continues
+provider replay      HTTP 400 on empty function name
+next restore         rejects stored tool source
+```
+
+Crash-tail repair does not solve this case. `interruptedTurnClosers()` closes unmatched calls at an open tail; it does not rewrite an already committed invalid trio in the middle of a log.
+
+This distinction matters for a source fix. Retaining non-empty stream identity prevents the known overwrite shape. Enforcing the same message invariant before append prevents any producer from persisting a result that the loader will later reject. Both boundaries need regression coverage.
 
 ## Capture three pieces of evidence
 
@@ -97,6 +131,17 @@ tool/call        callId=""        name=""
 
 The event names and envelope fields can vary by export projection. Preserve the raw rows rather than rewriting them into this display form. If the final `tool/call` still has the real name, this guide does not explain the later failure.
 
+For a resume failure, correlate the complete identity set rather than searching for only one empty string:
+
+```text
+assistant/message.content[].id
+tool/call.data.callId
+tool/result.data.message.source.callId
+tool/result.data.message.content[0].toolCallId
+```
+
+Also retain `seq`, turn, step, `sourceEventSeqs`, and the surrounding boundary events. These prove whether the bad record is a committed mid-log event or an incomplete crash tail.
+
 ### Route A/B
 
 Use the same bounded, read-only prompt with the same profile and tool catalog through two authorized routes:
@@ -108,13 +153,15 @@ If only the first route produces an empty assembled name, the evidence points to
 
 ## Safe operator actions
 
-1. Stop repeated retries. They add noise and can consume budget without producing a tool result.
-2. Save the Session export and sanitized wire sequence before switching routes.
+1. Stop repeated retries and stop every process that can write the affected Session. Retries add noise, consume budget, and can persist another invalid call.
+2. Copy the complete Session directory, record a hash, and save the sanitized wire sequence before switching routes.
 3. Route the workload through a backend/model combination that omits identity fields on continuation deltas, if one is already authorized. In #3464, the reported controls were the official DeepSeek endpoint and Bailian Qwen.
 4. Start a fresh Session for the verification prompt. Do not infer recovery from a Session that already contains failed attempts.
 5. Pin the working route and Harness version until a source fix and regression test ship.
 
 Do not enable a tool whose name is empty. Policy is correctly refusing an unidentified effect. Do not weaken approval, sandbox, or tool allowlists to make the error disappear.
+
+If the old Session no longer opens, preserve it as evidence and continue in a fresh Session from the last independently verified workspace state. Do not delete only the failing `tool/result`, globally replace empty strings, or recompress the live file. One logical call spans several correlated records, and the JSONL Zstandard backend has a format-specific first header frame. Until an official version-aware doctor exists, manual repair is an expert-only operation on an isolated copy, not a normal recovery instruction.
 
 ## Source repair and regression shape
 
@@ -143,6 +190,11 @@ Also test a stream that never supplies identity. Hardening should surface that a
 - [ ] Two interleaved tool-call indexes retain independent IDs and names.
 - [ ] A call that never supplies a usable name fails loudly before policy evaluation.
 - [ ] The Session event records the same non-empty identity that reaches execution.
+- [ ] A result with an empty source `callId` is rejected before it enters the live log or persistence queue.
+- [ ] Append-time and restore-time message-shape fixtures enforce the same invariant set.
+- [ ] A committed invalid mid-log fixture is distinguished from an open crash tail.
+- [ ] One unreadable Session cannot hide unrelated Session listings.
+- [ ] Provider replay never serializes an empty function name from durable history.
 - [ ] Headless and Web surfaces expose the same protocol failure.
 - [ ] No credential or private prompt is present in the incident bundle.
 
@@ -159,13 +211,18 @@ Policy or terminal message:
 Finish reason:
 Same prompt succeeds through omission-style route: yes/no
 Fresh Session tested: yes/no
+Resume error and rejected seq, if any:
+Complete correlated identity set captured: yes/no
+Original Session directory copied and hashed: yes/no
 ```
 
 ## Primary sources
 
 - [Bailian `deepseek-v4-flash` report #3464](https://github.com/deepseek-ai/deepseek-harness/discussions/3464)
 - [Earlier null-continuation report #3281](https://github.com/deepseek-ai/deepseek-harness/discussions/3281)
-- [rc.8 DeepSeek stream translator](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-deepseek/src/translate.ts)
-- [rc.8 translator tests](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-deepseek/tests/translate.spec.ts)
-- [rc.8 `BlockAssembler` close contract](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm/src/assembler.ts)
-- [rc.8 stream chunk protocol](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm/src/types.ts)
+- [Persistent empty-identity and resume-corruption report #4704](https://github.com/deepseek-ai/deepseek-harness/discussions/4704)
+- [rc.2 DeepSeek stream translator](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/translate.ts)
+- [rc.2 translator tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/tests/translate.spec.ts)
+- [rc.2 Session append and restored-event validation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/index.ts)
+- [rc.2 crash-tail repair](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/repair.ts)
+- [rc.2 persistence coordinator append boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence/src/coordinator.ts)
