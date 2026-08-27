@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.102 - 2026-08-27
+
+### Changed
+
+- Reverified the Token Meter guide against rc.2 and two independent wide-compaction underflow reports.
+- Added the shared signed-fold root cause, containment, copied-state recovery, and the need to repair both message and pressure projections.
+- Added checkpoint migration and sequence-zero refold requirements, expanded regression gates, and a revised visual recovery brief.
+
 ## 0.5.101 - 2026-08-27
 
 ### Added
