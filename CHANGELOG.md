@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.154 - 2026-08-27
+
+### Added
+
+- Added a custom-provider catalog-collision runbook for routes that silently use `/messages` when `api` is omitted.
+- Documented provider id, endpoint, protocol, catalog stream ownership, fresh-Session proof, backward-compatible hardening, and safe rollback.
+
 ## 0.5.153 - 2026-08-27
 
 ### Changed

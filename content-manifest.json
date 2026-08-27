@@ -195,6 +195,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/custom-provider-catalog-collision.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/expired-mcp-session-loop.md",
       "revision": 1,
       "translations": {}
