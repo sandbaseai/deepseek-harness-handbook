@@ -1,9 +1,10 @@
 ---
 title: Fix DeepSeek Harness Context Window Exceeded Errors
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-27
+upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Fix DeepSeek Harness context window exceeded errors
@@ -25,7 +26,7 @@ DeepSeek production traffic can report the same capacity failure in a less obvio
 This is a request-budget error, not an authentication failure and not necessarily a model outage. The provider is being asked to reserve more tokens than the selected model can accept.
 
 > [!WARNING]
-> At rc.7 commit `99f6f02`, the second wording is not classified as `CONTEXT_WINDOW_EXCEEDED`. It falls through as `INVALID_REQUEST`, so automatic prune, compact, and retry recovery does not run. The provider field `quota_limit_reached` is ambiguous here; route on the full error body, not the code name alone.
+> At rc.2 commit `b150a55`, several real overflow wordings still miss the canonical classifier. DeepSeek's `Input token exceed the limit` falls through as `INVALID_REQUEST`; llama.cpp's `Context size has been exceeded` can fall through as `SERVER` when delivered inside a 500 response. In both cases automatic prune, compact, and retry recovery does not run. Route on the raw status, code, type, message, and resolved model capacity together—not one provider label.
 
 ## Read the error as an equation
 
@@ -57,11 +58,37 @@ flowchart LR
 
 The basic compaction service listens to `agent/request-error` and only enters overflow recovery when `failure.code` is exactly `CONTEXT_WINDOW_EXCEEDED`. A correct human-readable provider message is not enough if the adapter normalizes it to a different machine code.
 
-At rc.7, the shared classifier recognizes structured names such as `context_length_exceeded`, phrases such as `maximum context length`, and input that is `too large for model context`. It does not recognize DeepSeek's terse `Input token exceed the limit` wording. Both the direct DeepSeek adapter and the pi-ai route depend on this shared classifier for text-based overflow recognition.
+At rc.2, the shared classifier recognizes structured names such as `context_length_exceeded`, phrases such as `maximum context length`, and input that is `too large for model context`. It does not recognize either DeepSeek's terse `Input token exceed the limit` wording or llama.cpp's `Context size has been exceeded` wording. The latter says `size`, not the classifier's required `length` or `window`; the pi-ai fallback can then classify the surrounding 500 as `SERVER`. Both the direct DeepSeek adapter and the pi-ai route depend on the shared classifier for text-based overflow recognition.
 
 Do not globally reinterpret every `quota_limit_reached` as context overflow. Providers also use quota language for account balance and usage limits. The proposed narrow match requires `input token(s)` followed immediately by an `exceed... the limit` phrase.
 
 Do not confuse this with an output that stopped because it actually reached `maxTokens`. That case preserves the partial answer and the Web UI shows **Output token limit reached**. A context-window rejection happens before normal generation begins.
+
+## Recovery must fit and converge
+
+Correct classification only opens the recovery path. It does not prove that the separate compaction request can fit the same provider window or produce a smaller checkpoint.
+
+For a provider-rejected request, preserve and price two envelopes independently:
+
+```text
+conversation envelope = system + tools + visible messages + requested output
+recovery envelope     = system + tools + selected replay + compaction instruction + summary output
+```
+
+In rc.2, context-overflow recovery selects a maximal balanced head with `retainTokens = 0`, but the summarizer still replays the selected prefix behind the conversation's system prompt and tool set and adds its own instruction. A provider can therefore reject the recovery request even though its purpose is to shrink the next conversation request. Measure the actual serialized envelopes; do not infer that a request named “compaction” is smaller.
+
+A different non-convergence occurs when selection contains only a small existing checkpoint. The required structured framing can make the proposed replacement equal to or larger than the selected source. The transaction correctly rejects `summary is not smaller than the shadowed content`, leaves the surface unchanged, and closes with an error. However, a later pressure check can select the same range and pay for the same rejected summary again.
+
+Record a failure fingerprint:
+
+```text
+trigger + provider/model + surface replaceGeneration + selected start:end
++ selected token count + summary finish reason + normalized error
+```
+
+If the fingerprint and surface generation are unchanged, stop automatic repetition. A safe implementation can expand the selected balanced range, reduce retention, choose a capable summarization route, or terminate with a durable diagnostic. It must not weaken the invariant that the replacement is complete and smaller than the content it shadows.
+
+`compactionRetries` is not a retry budget for a failed first summary. In rc.2 it applies after a successful replacement when total pressure is still above the threshold. `maxOverflowRetries` similarly permits a conversation retry only after durable surface progress. Neither setting justifies replaying a byte-identical failed summary indefinitely.
 
 ## The request budget
 
@@ -105,7 +132,9 @@ Try the least destructive options in this order.
 
 ### 0. Record the raw and normalized errors
 
-Before changing the Session, save the sanitized provider response body and the Harness failure code. If the body says `Input token exceed the limit` while Harness reports `INVALID_REQUEST`, you are on the rc.7 classifier gap. Repeatedly retrying the same turn cannot activate overflow recovery.
+Before changing the Session, save the sanitized provider response body and the Harness failure code. If the body says `Input token exceed the limit` while Harness reports `INVALID_REQUEST`, you are on the rc.2 classifier gap. Repeatedly retrying the same turn cannot activate overflow recovery.
+
+For llama.cpp-compatible routes, also preserve `Context size has been exceeded` together with the HTTP status. If Harness reports `SERVER`, stop generic 5xx retries after confirming that the same request and error fingerprint repeat.
 
 ### 1. Lower the output limit
 
@@ -236,6 +265,10 @@ After changing configuration or compacting, verify all of these:
 6. A longer follow-up still triggers proactive compaction before the provider boundary.
 7. A regression fixture using `Input token exceed the limit` normalizes to `CONTEXT_WINDOW_EXCEEDED`, not `QUOTA` or `INVALID_REQUEST`.
 8. A genuine monthly usage-limit message does not enter context-overflow recovery.
+9. `Context size has been exceeded` reaches the canonical overflow path instead of generic `SERVER` retry.
+10. The priced recovery envelope fits the configured summarization route before a provider call is repeated.
+11. A truncated or non-shrinking summary leaves the original surface unchanged and closes its transaction durably.
+12. The same failed range and surface generation are not summarized again without an adaptive change.
 
 ## Diagnostic bundle for an upstream report
 
@@ -254,22 +287,33 @@ Conversation-level maxTokens:
 Adapter default maxTokens:
 Exact model contextWindow and maxTokens:
 Compaction thresholdRatio and maxOverflowRetries:
+Conversation request serialized size or token estimate:
+Recovery request serialized size or token estimate:
+Selected compaction range and shadowedTokenCount:
+Surface replaceGeneration before/after:
+Summary finish reason and output usage:
+Repeated failure fingerprint count:
 Was /compact available and what did it report?:
 Did a new empty session reproduce?:
 ```
 
 ## Source boundary
 
-This page was verified against DeepSeek Harness commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`.
+This revision was verified against DeepSeek Harness commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` (`0.1.1-rc.2`). The #4420 request sizes and failure rates are reporter measurements, not independent Handbook reproductions.
 
-- [Shared context-overflow classifier](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm/src/error.ts)
-- [Direct DeepSeek HTTP error normalization](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/adapter.ts)
-- [pi-ai stop-reason mapping](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-pi-ai/src/stream.ts)
-- [Basic compaction policies and defaults](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/compaction/compaction-basic/README.md)
-- [Canonical overflow recovery listener](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/compaction/compaction-basic/src/index.ts)
-- [Human `/compact` command contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/compaction/command-compact/README.md)
-- [Prompt-only context-pressure projection](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/token-meter/src/usage-projection.ts)
-- [Context meter semantics and heuristic breakdown](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/token-meter/src/projection.ts)
+- [Shared context-overflow classifier](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/error.ts)
+- [Direct DeepSeek HTTP error normalization](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/adapter.ts)
+- [pi-ai stop-reason mapping](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-pi-ai/src/stream.ts)
+- [Basic compaction policies and defaults](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/README.md)
+- [Canonical overflow recovery listener](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/index.ts)
+- [Human `/compact` command contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/command-compact/README.md)
+- [Prompt-only context-pressure projection](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/token-meter/src/usage-projection.ts)
+- [Context meter semantics and heuristic breakdown](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/token-meter/src/projection.ts)
 - [DeepSeek production wording report #3399](https://github.com/deepseek-ai/deepseek-harness/discussions/3399)
 - [Original context-window report](https://github.com/deepseek-ai/deepseek-harness/discussions/1930)
 - [Context-meter budget mismatch report](https://github.com/deepseek-ai/deepseek-harness/discussions/1937)
+- [Local llama.cpp overflow and non-converging recovery report #4420](https://github.com/deepseek-ai/deepseek-harness/discussions/4420)
+- [rc.2 shared overflow classifier](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/error.ts)
+- [rc.2 pi-ai failure mapping](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-pi-ai/src/stream.ts)
+- [rc.2 overflow recovery and retry proof](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/index.ts)
+- [rc.2 compaction region transaction](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/region.ts)

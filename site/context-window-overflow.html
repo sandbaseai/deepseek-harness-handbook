@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>Fix DeepSeek Harness context overflow recovery</title>
-  <meta name="description" content="Diagnose a DeepSeek context overflow that is normalized as INVALID_REQUEST, bypasses automatic compaction, and requires bounded manual recovery.">
+  <title>DeepSeek Harness context overflow and compaction loops</title>
+  <meta name="description" content="Classify DeepSeek Harness context overflow correctly, price the separate recovery envelope, and stop identical non-converging compaction attempts.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html">
-  <meta property="og:type" content="article"><meta property="og:title" content="The context overflow happened. Recovery never heard it.">
-  <meta property="og:description" content="Follow the raw provider body through normalization and the exact automatic recovery gate.">
+  <meta property="og:type" content="article"><meta property="og:title" content="Recovery is a second request. It must fit and converge.">
+  <meta property="og:description" content="Classify the provider error, price both envelopes, and stop a stable failed-range fingerprint.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="./styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Fix DeepSeek Harness context overflow recovery","description":"Diagnose a DeepSeek context overflow that is normalized as INVALID_REQUEST, bypasses automatic compaction, and requires bounded manual recovery.","dateModified":"2026-08-19","url":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness context overflow and compaction loops","description":"Classify DeepSeek Harness context overflow correctly, price the separate recovery envelope, and stop identical non-converging compaction attempts.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
@@ -24,16 +24,16 @@
 
   <main id="main" class="article-shell overflow-article">
     <header class="article-hero overflow-hero">
-      <div><p class="eyebrow">Context overflow diagnosis</p><h1>The overflow happened. Recovery never heard it.</h1><p class="article-deck">Trace the raw DeepSeek error before you retry or compact.</p><div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div></div>
+      <div><p class="eyebrow">Context overflow · compaction · rc.2</p><h1>Recovery is a second request.<br>It must fit and converge.</h1><p class="article-deck">Classify the provider error, price both envelopes, and stop identical failed ranges.</p><div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream b150a55</span></div></div>
       <div class="overflow-trace" role="img" aria-label="DeepSeek returns quota limit reached, Harness normalizes it as invalid request, and automatic recovery is not called">
-        <section><small>Provider</small><strong>HTTP 400</strong><code>quota_limit_reached</code></section><i>→</i>
-        <section><small>Harness</small><strong>INVALID_REQUEST</strong><code>raw text missed</code></section><i>→</i>
-        <section class="overflow-stop"><small>Recovery</small><strong>not called</strong><code>turn fails</code></section>
+        <section><small>Classify</small><strong>canonical code</strong><code>not generic 5xx</code></section><i>→</i>
+        <section><small>Price</small><strong>recovery envelope</strong><code>system + tools + replay</code></section><i>→</i>
+        <section class="overflow-stop"><small>Prove</small><strong>durable shrink</strong><code>or stop</code></section>
       </div>
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The signature</strong><span>The body says <code>Input token exceed the limit</code>, but the normalized error code is <code>INVALID_REQUEST</code>.</span></div>
+      <div class="signal"><strong>Two gates, not one</strong><span>A correct <code>CONTEXT_WINDOW_EXCEEDED</code> classification only opens recovery. The summary request must still fit its route and replace the selected range with a complete smaller checkpoint.</span></div>
 
       <h2>Classification decides whether recovery runs.</h2>
       <div class="overflow-paths">
@@ -51,6 +51,17 @@
       <h2>Budget the next request before sending it.</h2>
       <div class="overflow-budget"><span>history tokens</span><b>+</b><span>tool and system tokens</span><b>+</b><span>requested output</span><b>&lt;</b><strong>model context window</strong></div>
 
+      <h2>Price the recovery request separately.</h2>
+      <div class="overflow-paths">
+        <section><small>Conversation</small><code>system + tools + visible history</code><strong>+ requested output</strong><p>This is the envelope the provider rejected.</p></section>
+        <section class="overflow-path-missed"><small>Compaction</small><code>system + tools + selected replay</code><strong>+ instruction + summary output</strong><p>A recovery label does not make this envelope smaller.</p></section>
+      </div>
+
+      <h2>Stop a stable failure fingerprint.</h2>
+      <div class="overflow-evidence"><pre><code>trigger + route + replaceGeneration
++ selected start:end + token count
++ finish reason + normalized error</code></pre><div><strong>No adaptive change, no repeat.</strong><p>Expand the balanced range, reduce retention, change the approved summary route, or terminate durably. Never weaken the complete-and-smaller checkpoint invariant.</p></div></div>
+
       <h2 id="recover">Recover in a bounded order.</h2>
       <ol class="overflow-steps">
         <li><span>01</span><strong>Capture</strong><p>Save the raw body, normalized code, model, adapter, and request ID.</p></li>
@@ -63,16 +74,17 @@
       <div class="overflow-regression"><section><small>Must classify</small><code>Input token exceed the limit</code><strong>CONTEXT_WINDOW_EXCEEDED</strong></section><section><small>Must not classify</small><code>Monthly usage quota exceeded</code><strong>usage or account limit</strong></section></div>
 
       <h2>Acceptance gates.</h2>
-      <ul class="overflow-gates"><li>Raw provider body is retained.</li><li>Normalized code is observable.</li><li>Real overflow reaches the listener.</li><li>Usage quota stays a separate class.</li><li>Compaction retries are bounded.</li><li>A clean continuation preserves evidence.</li></ul>
+      <ul class="overflow-gates"><li>Raw provider body is retained.</li><li>Normalized code is observable.</li><li>Real overflow reaches the listener.</li><li>Usage quota stays a separate class.</li><li>Both serialized envelopes are priced.</li><li>Failed range fingerprints are stable.</li><li>No surface change means no identical retry.</li><li>A clean continuation preserves evidence.</li></ul>
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3399">Upstream report #3399</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm/src/error.ts">Shared error classifier</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/adapter.ts">DeepSeek adapter mapping</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/compaction/compaction-basic/src/index.ts">Compaction recovery listener</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4420">llama.cpp recovery and media report #4420</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/error.ts">rc.2 shared error classifier</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/index.ts">rc.2 recovery and retry proof</a></li>
+        <li><a href="./pi-ai-image-media-type.html">Related WebP media-capability route</a></li>
       </ul>
-      <section class="article-cta"><h2>Keep the complete runbook.</h2><p>The canonical guide includes capture fields, decision branches, source boundaries, and a minimal incident report.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a></section>
+      <section class="article-cta"><h2>Keep the complete runbook.</h2><p>The canonical guide includes capture fields, request arithmetic, failure fingerprints, decision branches, and twelve convergence checks.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/context-window-exceeded.md">Read the full overflow runbook</a></section>
     </article>
   </main>
   <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>

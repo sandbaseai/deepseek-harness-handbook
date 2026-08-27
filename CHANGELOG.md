@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.136 - 2026-08-27
+
+### Changed
+
+- Updated context-overflow diagnosis for rc.2 to distinguish missed llama.cpp and DeepSeek provider wording from canonical `CONTEXT_WINDOW_EXCEEDED` routing.
+- Added separate conversation-versus-recovery envelope pricing, non-shrinking checkpoint handling, stable failure fingerprints, and adaptive convergence gates.
+- Revised the visual overflow router to stop identical recovery loops and route related WebP failures to the dedicated media-capability guide.
+
 ## 0.5.135 - 2026-08-27
 
 ### Changed
