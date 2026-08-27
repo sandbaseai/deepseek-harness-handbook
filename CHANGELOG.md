@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.93 - 2026-08-27
+
+### Added
+
+- A source-backed guide for `unknown job` after partial multi-agent work, based on official report #4696.
+- A three-route identity map for foreground run IDs, one-shot background Job IDs, and continuable child conversation IDs.
+- Artifact reconciliation, missing-unit recovery, final-assembly gates, orchestration instructions, and ten regression cases.
+
 ## 0.5.92 - 2026-08-27
 
 ### Changed
