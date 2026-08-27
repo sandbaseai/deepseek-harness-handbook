@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Sandbox Denied, Unavailable, or Invalid Escalation
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 verified_upstream: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -83,6 +83,48 @@ It is not:
 
 Do not automatically strip fields inside the executor and continue. Rejecting malformed authority requests keeps the audit trail truthful and prevents a client or model bug from becoming silent privilege behavior.
 
+## Evaluate the proposed no-op behavior without weakening real escalation
+
+Report #4763 observes a systematic producer failure: under a Full Access Session, a model reflexively fills the registry-global `sandbox_permissions` and `justification` fields on nearly every Bash, PowerShell, write, and edit call. Because `danger-full-access` has no wider mode, those calls can never represent a useful escalation and fail before their ordinary effect.
+
+The proposal is to treat two shapes as no-ops:
+
+1. any requested target when the effective mode is already `danger-full-access`; and
+2. a requested mode equal to the effective confined mode.
+
+This can improve liveness without granting additional authority, but it changes malformed authority input from fail-closed error to ordinary execution. Treat it as a versioned compatibility policy, not as a self-evidently neutral parser cleanup.
+
+The current call order matters. `validateEscalationArgs()` runs before `approveEscalation()` at tool call sites. A blank `justification` can therefore fail before a no-op decision implemented only inside `approveEscalation()` is reached. A complete patch must define which layer recognizes a no-op pair and whether it consumes both fields before pairing and sentence validation.
+
+### Required decision table
+
+| Effective mode | Requested mode | Justification | Proposed result |
+|---|---|---|---|
+| `danger-full-access` | `workspace-write` | absent, blank, or nonblank | ignore pair; execute once at standing Full Access |
+| `danger-full-access` | `danger-full-access` | absent, blank, or nonblank | ignore pair; execute once at standing Full Access |
+| `workspace-write` | `workspace-write` | paired according to chosen policy | ignore pair; execute once at standing Workspace Write |
+| `workspace-write` | `danger-full-access` | nonblank | preserve strict widening, approval, and one-call grant |
+| `read-only` | `workspace-write` or `danger-full-access` | nonblank | preserve strict widening, approval, and one-call grant |
+| any confined mode | unknown, narrower, or malformed request | any | fail closed with no effect |
+| invalid effective mode | any | any | fail closed; never reinterpret as Full Access |
+
+Ignoring `workspace-write` while already in Full Access must not downgrade the call or report that a sandbox ran. It means “use the standing mode,” not “honor the requested target.” Likewise, a same-mode no-op must not emit approval events, create a one-call grant, or change durable Session policy.
+
+### Evidence and regression gates
+
+- preserve the raw received call arguments in bounded audit evidence before normalization;
+- emit an observable compatibility marker or counter for ignored no-op escalation fields;
+- exercise Bash, PowerShell, write, and edit through the shared decision path;
+- prove each ordinary effect executes exactly once and returns its normal result;
+- prove no approval prompt/event is created for a no-op;
+- prove every genuinely wider request still validates a non-empty sentence before approval;
+- prove denied, cancelled, unavailable, and agent-less approval outcomes remain fail closed;
+- prove an unknown effective mode never falls through to unconstrained execution;
+- keep registry-global schema behavior compatible with a narrower per-Session override; and
+- test models/clients that omit the optional fields as the unchanged control.
+
+An alternative upstream design is to make tool presentation Session-aware and hide impossible targets before model generation. That reduces malformed calls but changes tool-schema identity across Sessions and can affect provider prefix caching. It is a separate tradeoff from execution-time no-op compatibility.
+
 ## Diagnose denial versus unavailable backend
 
 1. Record the resolved mode and canonical workspace root for the call.
@@ -132,3 +174,4 @@ The mode order, schema behavior, strict-widening validation, and fail-closed sem
 - [Filesystem tool escalation contract at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/README.md)
 - [Bash tool escalation contract at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/shell/tool-bash/README.md)
 - [Community report #4742](https://github.com/deepseek-ai/deepseek-harness/discussions/4742)
+- [Full Access reflexive-field report and no-op proposal #4763](https://github.com/deepseek-ai/deepseek-harness/discussions/4763)
