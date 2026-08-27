@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.140 - 2026-08-27
+
+### Changed
+
+- Rebuilt the central Agent runtime guide as a seven-layer boundary map separating models, providers, framework primitives, Agent harnesses, evaluation harnesses, capabilities, and execution controls.
+- Added an ownership-explicit turn sequence, extension decision matrix, and five-question architecture review so runtime, policy, provider, Session, and surface failures are not collapsed into “the Agent.”
+- Synchronized the reviewed Chinese edition and pinned every upstream architecture reference to the verified rc.2 commit.
+
 ## 0.5.139 - 2026-08-27
 
 ### Changed
