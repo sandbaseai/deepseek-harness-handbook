@@ -49,6 +49,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Design RTL and mixed-script rendering](troubleshooting/rtl-mixed-text-rendering.md)
 - [Recover `spawn bash ENOENT` after a workspace moves](troubleshooting/workspace-moved-spawn-enoent.md)
 - [Recover from a Windows folder-picker worker crash](troubleshooting/windows-folder-picker-worker-crash.md)
+- [Diagnose a Windows Web Host that listens but stops responding](troubleshooting/windows-web-event-loop-hang.md)
 - [Diagnose DeepSeek API fetch failures behind a proxy or enterprise CA](troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)
 - [Add an MCP server and diagnose missing tools](troubleshooting/mcp-server-not-connecting.md)
 - [Upgrade and roll back safely](getting-started/upgrade-and-rollback.md)

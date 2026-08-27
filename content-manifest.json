@@ -255,6 +255,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/windows-web-event-loop-hang.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/operations/single-writer-session-roots.md",
       "revision": 1,
       "translations": {}
