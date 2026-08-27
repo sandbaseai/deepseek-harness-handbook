@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.107 - 2026-08-27
+
+### Changed
+
+- Reverified subprocess-tool guidance against rc.2 and the Windows community-desktop crash report #4713.
+- Separated third-party child, official Host, desktop main process, and renderer identities before assigning a core Harness regression.
+- Added abrupt-exit, EPIPE, stream ownership, global exception, safe reproduction, Host-survival, Session-replay, and nineteen acceptance gates.
+
 ## 0.5.106 - 2026-08-27
 
 ### Added
