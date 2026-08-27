@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.161 - 2026-08-27
+
+### Changed
+
+- Corrected the cross-conversation-search boundary: rc.2 ships session-query, SQLite FTS, Host search, and model-tool packages, while base full-text indexing and Agent tools remain opt-in.
+- Added human-versus-Agent authorization, bounded result, self-search, derived-index privacy, deletion, audit, and enablement contracts.
+
 ## 0.5.160 - 2026-08-27
 
 ### Changed

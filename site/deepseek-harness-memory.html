@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>DeepSeek Harness memory: Sessions, Skills, migration</title>
-  <meta name="description" content="Separate DeepSeek Harness Sessions, Skills, compaction, application records, and cross-session memory. Migrate Codex or Claude Code memory with provenance and isolation tests.">
+  <meta name="description" content="Separate DeepSeek Harness Sessions, opt-in transcript search, Skills, compaction, and long-term memory with source-verified privacy and isolation boundaries.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html">
@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness memory: Sessions, Skills, migration","description":"Choose the correct DeepSeek Harness state mechanism and migrate cross-session memory with provenance, isolation, and rollback evidence.","dateModified":"2026-08-19","author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness memory: Sessions, search, Skills, migration","description":"Choose the correct DeepSeek Harness state mechanism and enable opt-in transcript search with provenance, isolation, and rollback evidence.","dateModified":"2026-08-27","author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -42,7 +42,7 @@
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The shipped boundary</strong><span>rc.7 includes durable Sessions and default-off MCP memory examples. It does not ship a generic <code>ctx.memory</code> service.</span></div>
+      <div class="signal"><strong>Search is shipped, not enabled</strong><span>rc.2 includes Session query, SQLite FTS, Host search, and model-tool packages. Base uses <code>openAt: never</code>, and does not mount the Agent tools.</span></div>
 
       <h2 id="choose">Give each kind of state one owner.</h2>
       <div class="memory-owners">
@@ -82,6 +82,8 @@
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4752">Transcript-search request #4752</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session-query/README.md">rc.2 Session-query family</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/README.md">Official Session contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/examples/mcp-memory/README.md">Official default-off MCP memory examples</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/tree/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/mcp/mcp-client">Official MCP client</a></li>
