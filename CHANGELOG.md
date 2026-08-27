@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.158 - 2026-08-27
+
+### Changed
+
+- Added the Full Access reflexive escalation-field failure and bounded no-op compatibility proposal to the sandbox runbook.
+- Defined call-order, audit, no-downgrade, approval, unknown-mode, cross-tool, and schema/cache regression gates before malformed authority input can become ordinary execution.
+
 ## 0.5.157 - 2026-08-27
 
 ### Added
