@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness on Windows
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
-verified_at: 2026-08-24
+verified_at: 2026-08-25
 ---
 
 # DeepSeek Harness on Windows: support boundaries and troubleshooting
@@ -192,13 +192,17 @@ Get-Command powershell.exe -ErrorAction SilentlyContinue
 pwsh -NoLogo -NoProfile -NonInteractive -Command '$PSVersionTable.PSVersion'
 ```
 
-Then inspect the resolved profile:
+Then inspect the resolved composition. The Web host plane and a Web session do not show the same shell-tool rows.
 
 ```powershell
 dsh --profile web --dump-config
 ```
 
-Confirm that the Windows `pwsh-sandbox` and `tool-pwsh` rows are active and the POSIX Bash rows are disabled. A model response mentioning Bash is not proof that the correct executor mounted; the resolved configuration is.
+On the Web host plane, confirm that `pwsh-sandbox` is active on Windows and that the POSIX `bash-sandbox` row is disabled. The shared `tool-pwsh` and `tool-bash` rows are disabled there by design; each Web session remounts the shell tool through its selected Agent preset. The shipped standard preset enables `tool-pwsh` on Windows and disables `tool-bash`.
+
+For a one-shot Agent, inspect the headless dump the same way: POSIX bash rows disable on `win32`, and `tool-pwsh` enables on Windows.
+
+A model response mentioning Bash is not proof that the correct executor mounted; the resolved host and session composition is.
 
 ## Understand the Windows sandbox
 
