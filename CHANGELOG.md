@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.90 - 2026-08-27
+
+### Added
+
+- A source-backed runbook for rc.2 spawn subagents that inherit provider and model but omit the parent's selected reasoning effort.
+- Parent-versus-child request-header evidence, spawn-versus-fork control testing, reversible containment, diagnostic propagation requirements, and fourteen regression gates.
+- Community-contributed Windows field validation, Windows Minimal rc.8 recovery, and a draft Japanese quickstart.
+
 ## 0.5.89 - 2026-08-20
 
 ### Changed

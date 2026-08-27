@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**115 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**116 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -54,6 +54,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Recover a Session whose committed event sequence repeats | [Duplicate committed seq runbook](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html) |
 | Recover a Web composer stuck read-only after sending an image | [Image-send admission runbook](https://sandbaseai.github.io/deepseek-harness-handbook/image-send-readonly.html) |
 | Set and verify reasoning effort for a headless one-shot run | [Headless reasoning-effort guide](https://sandbaseai.github.io/deepseek-harness-handbook/headless-reasoning-effort.html) |
+| Fix spawn delegations that lose reasoning effort | [Spawn subagent route-fidelity runbook](https://sandbaseai.github.io/deepseek-harness-handbook/spawn-subagent-reasoning-effort.html) |
 | Configure Bailian Token Plan without losing reasoning or model metadata | [Bailian catalog-route runbook](https://sandbaseai.github.io/deepseek-harness-handbook/bailian-token-plan.html) |
 | Recover tools that repeatedly return `Unknown or expired MCP session` | [Expired MCP session loop runbook](https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html) |
 | Understand the shipped CLI, automate one task, or evaluate a community TUI | [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) |
@@ -185,7 +186,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 115 pages |
+| English | Canonical | 116 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -299,6 +300,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Recover duplicated committed Session sequence numbers](docs/en/troubleshooting/duplicate-committed-session-seq.md)
 - [Recover a composer stuck read-only after an image send](docs/en/troubleshooting/image-send-composer-readonly.md)
 - [Set and verify reasoning effort for headless runs](docs/en/guides/headless-reasoning-effort.md)
+- [Fix spawn subagents that drop reasoning effort](docs/en/troubleshooting/spawn-subagent-reasoning-effort.md)
 - [Recover an expired MCP session without a repeated tool-call loop](docs/en/troubleshooting/expired-mcp-session-loop.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)
 - [Remote Web access, SSH, HTTPS, and trust](docs/en/troubleshooting/remote-web-secure-context.md)

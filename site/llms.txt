@@ -13,6 +13,7 @@ API key storage threat model: https://sandbaseai.github.io/deepseek-harness-hand
 Duplicated committed Session seq recovery: https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html
 Image-send composer recovery: https://sandbaseai.github.io/deepseek-harness-handbook/image-send-readonly.html
 Headless reasoning effort: https://sandbaseai.github.io/deepseek-harness-handbook/headless-reasoning-effort.html
+Spawn subagent reasoning-effort recovery: https://sandbaseai.github.io/deepseek-harness-handbook/spawn-subagent-reasoning-effort.html
 Bailian Token Plan catalog route: https://sandbaseai.github.io/deepseek-harness-handbook/bailian-token-plan.html
 Expired MCP session recovery: https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html
 ACP editor integration boundary: https://sandbaseai.github.io/deepseek-harness-handbook/acp-editor-boundary.html
