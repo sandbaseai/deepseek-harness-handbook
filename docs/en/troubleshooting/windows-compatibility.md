@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness on Windows
 locale: en
-content_revision: 7
+content_revision: 8
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -25,6 +25,132 @@ This page separates supported runtime layers from common failure modes so you ca
 | Upstream minimal JSON-RPC example | Not a Windows Agent interface | persistent PTY and `danger-full-access` assumptions are POSIX-oriented |
 | Bash-specific overlays and prompts | Not native Windows tools | use PowerShell syntax, paths, and `$env:NAME` variables |
 | MSYS2 / MINGW shell | Separate compatibility target | its GNU-built Node/npm stack is not the native Windows Node toolchain |
+
+## Decode `3221226505` before blaming DSH
+
+Upstream report #4720 contains only:
+
+```text
+[ELIFECYCLE] Command failed with exit code 3221226505.
+```
+
+The decimal value is the unsigned Windows status `0xC0000409`. Microsoft's NTSTATUS table names that value `STATUS_STACK_BUFFER_OVERRUN`, but modern user-mode software also raises `0xC0000409` through the Fail Fast mechanism for other critical conditions. A Fail Fast exception bypasses ordinary exception handlers, terminates the process, and records a subcode in its first exception parameter. The exit number alone does **not** identify the subcode, crashing module, process, or triggering operation.
+
+Therefore do not conclude any of the following from one pnpm `ELIFECYCLE` line:
+
+- JavaScript exhausted the call stack;
+- a malicious buffer overflow occurred;
+- DeepSeek Harness core was the crashing process;
+- the last visible tool caused the crash;
+- reinstalling Node, DSH, or every plugin will repair it.
+
+`ELIFECYCLE` is the package-manager wrapper reporting that a command exited. The terminated process may be the Node Host, a desktop wrapper, a native-addon worker, PowerShell, a package lifecycle child, or another executable in that tree.
+
+### Preserve the exact process owner
+
+Run one bounded reproduction from a foreground PowerShell window rather than double-clicking a launcher. Before starting, record command resolution and versions:
+
+```powershell
+Get-Command dsh,node,npm,pnpm,pwsh -All |
+  Select-Object Name,CommandType,Source,Version
+node --version
+npm --version
+pnpm --version
+dsh --version
+$PSVersionTable | Format-List
+Get-ComputerInfo -Property WindowsProductName,WindowsVersion,OsBuildNumber,OsArchitecture
+```
+
+Capture standard streams without repeatedly restarting:
+
+```powershell
+$evidence = Join-Path $env:TEMP 'dsh-native-exit-evidence'
+New-Item -ItemType Directory -Force $evidence | Out-Null
+$started = Get-Date
+
+dsh web --no-open 1> (Join-Path $evidence 'stdout.log') `
+                  2> (Join-Path $evidence 'stderr.log')
+$signedExit = [int64]$LASTEXITCODE
+$unsignedExit = if ($signedExit -lt 0) { $signedExit + 0x100000000L } else { $signedExit }
+
+[pscustomobject]@{
+  Signed = $signedExit
+  Unsigned = $unsignedExit
+  Hex = ('0x{0:X8}' -f $unsignedExit)
+  Started = $started.ToUniversalTime().ToString('o')
+  Ended = (Get-Date).ToUniversalTime().ToString('o')
+} | ConvertTo-Json | Set-Content (Join-Path $evidence 'exit.json')
+```
+
+If a wrapper owns startup, capture the process tree while it is healthy. Do not infer ownership from a window title:
+
+```powershell
+Get-CimInstance Win32_Process |
+  Where-Object { $_.Name -in @('node.exe','dsh.exe','pwsh.exe','powershell.exe') } |
+  Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine,CreationDate |
+  Export-Csv (Join-Path $evidence 'processes.csv') -NoTypeInformation
+```
+
+The command line and environment can contain secrets. Redact tokens, signed URLs, private paths, prompts, and credential arguments before sharing. Preserve executable basename, PID/parent PID, version, timestamps, and the non-secret argument shape.
+
+### Correlate Windows Error Reporting
+
+After the one crash, inspect the Application log in the same time window:
+
+```powershell
+Get-WinEvent -FilterHashtable @{ LogName='Application'; StartTime=$started } |
+  Where-Object { $_.Id -in 1000,1001 } |
+  Select-Object TimeCreated,ProviderName,Id,Message |
+  Format-List | Out-File (Join-Path $evidence 'application-events.txt')
+```
+
+The useful event identifies the faulting application, faulting module, exception code, and timestamp. An event for `pwsh.exe` belongs to a different boundary than one for the `node.exe` Host. An Event 1001 report may add a failure bucket, report id, and WER artifact location; preserve those identifiers without publishing private paths.
+
+If event metadata is insufficient, capture a dump of the exact confirmed process. Microsoft ProcDump can monitor unhandled exceptions; Windows Error Reporting can also collect per-application user-mode dumps. Both produce sensitive process-memory artifacts and may require administrator or endpoint-owner approval. Use an encrypted, access-controlled directory with enough space, retain the minimum dump count, and remove the diagnostic policy after the bounded reproduction.
+
+Example after confirming the correct PID and installing ProcDump through an approved Microsoft Sysinternals channel:
+
+```powershell
+procdump.exe -accepteula -ma -e <confirmed-pid> $evidence
+```
+
+Do not attach ProcDump to every `node.exe`, enable a machine-wide full-dump policy casually, upload a dump publicly, or open it on an untrusted analysis service. A full dump can contain API keys, prompts, file content, environment values, and registry or network material.
+
+### Route the evidence, not the numeric label
+
+| Evidence | First owning boundary |
+|---|---|
+| `node.exe`, native module named, Fail Fast subcode present | exact native addon/runtime call stack; compare Node and DSH artifact without changing both |
+| `pwsh.exe` or another tool child crashed while Host remained alive | tool/subprocess provider; one call should settle as failure rather than terminate Host |
+| Node Host exited and package manager only echoed `ELIFECYCLE` | Host stack, loaded native modules, last durable Session seq, and fail-loud boundary |
+| desktop wrapper exited but child Host logs remain | wrapper/process ownership; record both exit codes separately |
+| no WER event and ordinary exit code is small | CLI, package lifecycle, usage, or application-controlled exit—not this native status route |
+| `0xC0000409` appears only under one Node version | native ABI/runtime A/B candidate; keep DSH/profile/workspace constant |
+| appears only with one plugin removed or added | exact package artifact and activation path; do not call the plugin causal until the dump names its code |
+
+Use one-variable A/B tests after preserving the first dump and event evidence:
+
+1. same DSH/profile/workspace, different supported Node version;
+2. same Node/DSH, clean disposable profile versus the failing profile;
+3. same composition, failing action omitted versus executed once;
+4. exact published artifact versus exact source commit only when their identity is known.
+
+Do not broaden sandbox or approval policy: a native Fail Fast is not an authorization denial. Do not delete the Session log: the last durable sequence is needed to distinguish a crash before tool admission, during execution, or during result persistence.
+
+### Native-exit acceptance gates
+
+- [ ] Decimal and eight-digit unsigned hexadecimal status are both recorded.
+- [ ] Command resolution proves the exact dsh, Node, package manager, shell, and wrapper paths.
+- [ ] PID and parent-PID evidence identifies which executable terminated.
+- [ ] Start/end timestamps correlate one crash with one WER event.
+- [ ] Faulting application, module, exception code, and report id are preserved.
+- [ ] The Fail Fast subcode and stack come from a dump or debugger, not guessed from `0xC0000409`.
+- [ ] Standard streams and the last durable Session sequence are captured before repair.
+- [ ] Dumps remain private, encrypted, access-controlled, and retention-bounded.
+- [ ] A/B testing changes only one of Node, DSH artifact, profile, plugin, or action at a time.
+- [ ] A child crash and Host crash are reported as different outcomes.
+- [ ] Reinstall, cache deletion, permission broadening, and whole-home reset are deferred until evidence names their boundary.
+- [ ] The final report states what was observed, inferred, and still unknown.
 
 ## Field validation: npm rc.6 launcher on Windows
 
@@ -464,6 +590,11 @@ Never attach credentials, a full settings file, or an unredacted session log.
 
 ## Official sources
 
+- [Microsoft NTSTATUS values](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55)
+- [Microsoft `__fastfail` contract](https://learn.microsoft.com/en-us/cpp/intrinsics/fastfail?view=msvc-170)
+- [Microsoft Windows Error Reporting user-mode dumps](https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps)
+- [Microsoft Sysinternals ProcDump](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump)
+- [Native exit report #4720](https://github.com/deepseek-ai/deepseek-harness/discussions/4720)
 - [`@deepseek-ai/dsh@0.1.0-rc.6` package](https://www.npmjs.com/package/@deepseek-ai/dsh/v/0.1.0-rc.6)
 - [CLI composition](https://github.com/deepseek-ai/deepseek-harness/blob/master/apps/cli/composition.md)
 - [PowerShell tool](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/shell/tool-pwsh/README.md)
