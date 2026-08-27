@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**140 canonical guides · 148 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
+**141 canonical guides · 149 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -215,7 +215,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 140 pages |
+| English | Canonical | 141 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -331,6 +331,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Compaction summary truncated at the token cap](docs/en/troubleshooting/compaction-summary-truncated.md)
 - [Plugin peer-dependency and ignored-build warnings](docs/en/troubleshooting/plugin-peer-dependency-warnings.md)
 - [Response and reasoning language control](docs/en/troubleshooting/response-language-and-reasoning.md)
+- [Fix cross-provider `reasoning_content` replay on DeepSeek-compatible pi-ai routes](docs/en/troubleshooting/pi-ai-cross-provider-reasoning-replay.md)
 - [Prompt accepted before it became durable](docs/en/troubleshooting/prompt-accepted-before-durable.md)
 - [Windows folder-picker worker crash](docs/en/troubleshooting/windows-folder-picker-worker-crash.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)

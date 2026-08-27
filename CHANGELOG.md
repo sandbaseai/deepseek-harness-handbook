@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.141 - 2026-08-27
+
+### Added
+
+- Added a source-bounded runbook for cross-provider `reasoning_content` replay failures on DeepSeek-compatible `llm-pi-ai` routes.
+- Documented the rc.2 route-level compatibility switch, adapter identification, controlled A/B procedure, provider-switch test matrix, and safe evidence report.
+- Separated wire-shape admission from lossless provider-native replay so operators do not fabricate reasoning or signatures to clear an HTTP 400.
+
 ## 0.5.140 - 2026-08-27
 
 ### Changed
