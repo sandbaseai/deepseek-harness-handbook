@@ -1,10 +1,10 @@
 ---
 title: Author Tool Schemas for the DeepSeek Harness Enforced Subset
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
-upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Author tool schemas for the enforced subset
@@ -191,6 +191,69 @@ When the vocabulary cannot express a domain rule:
 
 Do not translate `pattern` into a description and assume the description is enforcement.
 
+## Route double-encoded structured arguments before coercing them
+
+Some OpenAI-compatible model routes emit a nested object as a JSON-looking string:
+
+```json
+{"plugin":"{\"kind\":\"new\",\"idPrefix\":\"clock\"}"}
+```
+
+The Agent loop parses the outer tool-call argument string exactly once. That correctly produces an object whose `plugin` property is still a string. The shared schema validator then correctly rejects the property when its declared branches require objects.
+
+```text
+provider argument text
+  → one outer JSON.parse
+  → { plugin: "{...}" }
+  → schema validation
+  → zero matching object branches
+```
+
+This is different from malformed outer JSON, a missing parse, and an `execute()` body bug. Capture the raw argument text and the parsed value shape before choosing a repair.
+
+### Fix the declaration before adding tolerance
+
+Use `type: 'json'` only when any lossless JSON scalar, array, or object is truly valid. Its raw representation has no type constraint, so a string is legal. If the tool requires a record or array, declare that structure explicitly so the model and validator receive the same contract.
+
+A bare `oneOf` is valid in the enforced subset, and each branch should carry its own explicit type. Do not add a sibling `type` beside `oneOf`; the subset rejects that composition. Make branch descriptions and required fields discriminating enough for weaker tool-calling models.
+
+### If compatibility coercion is required
+
+Do not mutate values inside the validator. Validation should remain a pure report over the exact candidate that will execute. Put any tolerance in a separate normalization stage before validation, and require all of these gates:
+
+1. the incoming value is a string containing valid JSON;
+2. the declared node has no branch that accepts a string;
+3. the parsed candidate matches exactly one declared branch;
+4. the normalized value is written into a new argument tree, not into the captured raw call;
+5. telemetry records that compatibility coercion occurred, with secrets redacted;
+6. approval and presentation use the same normalized arguments that execution will receive;
+7. normalization happens once and is idempotent;
+8. malformed, ambiguous, deeply nested, or oversized candidates stay rejected.
+
+```ts
+const normalized = normalizeAgainstSchema(schema, parsedArgs)
+const violations = validateArgs(schema, normalized.value)
+if (violations.length > 0) return invalidArguments(violations)
+await execute(normalized.value)
+```
+
+This narrow rule preserves a real JSON-looking string whenever the schema permits strings. It also prevents a validator-local conversion from making validation pass while `execute()` still receives the original value.
+
+### Regression matrix
+
+| Input | Declared shape | Result |
+|---|---|---|
+| nested object | object branch | accept unchanged |
+| JSON-looking string | string branch exists | keep as string |
+| JSON-looking string | object-only exact-one branch | normalize once, then accept with evidence |
+| JSON-looking string | two branches match parsed value | reject as ambiguous |
+| malformed JSON string | object-only branch | reject |
+| oversized or over-depth JSON string | object-only branch | reject before parsing or traversal |
+| array string | array-only branch | normalize only under the same gates |
+| scalar string | unconstrained `json` node | keep as string |
+
+If an argument passes shared validation and changes shape later across a runner or RPC boundary, treat that as a separate transport defect. Do not widen coercion to hide it.
+
 ## A complete safe example
 
 ```ts
@@ -236,6 +299,8 @@ The parameter root is implicit and open. `options` and the output are explicit c
 - Invalid model arguments become `INVALID_ARGS` rather than reaching side effects.
 - Canonical output is validated before rendering.
 - Native and Code Mode exposure produce compatible types and runtime results.
+- Raw capture, normalized presentation, approval, validation, and execution agree on one argument identity.
+- A compatibility coercion is observable and never changes a schema-legal string.
 
 ## Source boundary
 
@@ -245,4 +310,7 @@ Discussion #1040 reported the constraints against rc.6, when the documentation a
 - [rc.8 sandbox `harness.defineTool` normalization](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/extensions/cordis-host-runner/src/guard.ts)
 - [rc.8 enforced raw JSON Schema subset](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/src/json-schema.ts)
 - [rc.8 unified tools contract](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/README.md#schema-dsl-and-runtime-validation)
+- [rc.2 outer argument parse](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/tool-calls.ts)
+- [rc.2 pure schema validator](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/json-schema.ts)
+- [Double-encoded structured argument report #4747](https://github.com/deepseek-ai/deepseek-harness/discussions/4747)
 - [First plugin tutorial](first-plugin.md)
