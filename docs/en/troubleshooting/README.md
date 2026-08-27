@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 57
+content_revision: 58
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Recover a Session root containing both `.jsonl` and `.jsonl.zstd`](live-session-log-durability.md#root-contains-both-physical-encodings)
 - [Separate sandbox denial, unavailable backends, and invalid same-mode escalation](sandbox-denied-vs-unavailable.md)
 - [Fix cross-provider `reasoning_content` replay on DeepSeek-compatible pi-ai routes](pi-ai-cross-provider-reasoning-replay.md)
 - [Diagnose manual compaction aborted by its caller signal](manual-compaction-caller-abort.md)
@@ -33,6 +34,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| one `.jsonl` file in a zstd Session root makes listing, spawn, and resume fail | root-wide physical encoding ownership / opposite artifact producer | stopped-writer inventory, configured compression, both file metadata and digests, decoded logical diff, first creator timeline, and disposable cold-load controls |
 | `sandbox escalation ... is not strictly wider` before a Full Access edit or command | invalid same-or-narrower one-call escalation / call producer | exact tool arguments, effective mode, permission preset, schema owner, and whether model, client, or wrapper inserted both escalation fields |
 | a DeepSeek-compatible pi-ai route returns 400 because historical assistant messages lack `reasoning_content` after a provider switch | provider-history serialization / foreign replay metadata / route compat | source and target provider/model, resolved API, smallest failing history prefix, assistant block shape, sanitized wire keys, and explicit compat-switch A/B |
 | Code Mode fails before a model request with unknown or malformed `{{...}}` in `tools:sdk` | third-party schema text / generated SDK / strict prompt interpolation | exact group and section, tool presentation mode and language, smallest schema carrier, native-mode control, generated SDK fragment, and assembly raw-flag propagation |

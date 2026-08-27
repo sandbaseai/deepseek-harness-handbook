@@ -1,9 +1,10 @@
 ---
 title: Protect and Recover DeepSeek Harness Session Logs
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-27
+verified_upstream: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Protect and recover DeepSeek Harness session logs
@@ -43,6 +44,7 @@ External mutation breaks that handoff:
 | `ENOENT` from `appendLines` or `appendBatch` | durable path disappeared | stop the writer and preserve every surviving artifact |
 | `SessionPersistenceCorruptionError` on load | committed log failed validation | keep the raw file unchanged and identify the first invalid event |
 | sequence gap or duplicate `seq` | append-only ordering | do not append more events or renumber blindly |
+| root contains both `session.jsonl` and `session.jsonl.zstd` | physical encoding ownership | stop every writer; preserve and fingerprint both artifacts |
 | `message must have tool source` | tool result identity | inspect the assistant call, `tool/call`, and `tool/result` as one set |
 | session works until reload | live memory differs from durable replay | export visible evidence, stop cleanly, then test the cold artifact |
 
@@ -84,6 +86,48 @@ zstd -dc /path/to/session.jsonl.zstd > /recovery/session.decoded.jsonl
 ```
 
 The replacement may be internally valid but still conflict with the live session prefix. A successful JSON parse does not prove that it is safe to resume.
+
+### Root contains both physical encodings
+
+The rc.2 JSONL backend selects exactly one physical encoding for an entire configured root:
+
+```text
+compression: zstd  -> session.jsonl.zstd
+compression: none  -> session.jsonl
+```
+
+On list, load, and targeted materialization paths, it checks for the opposite suffix and fails with an encoding-mismatch error. This is intentional fail-fast behavior. Silently ignoring the other file would make authority depend on directory enumeration order and could hide a newer, divergent, or externally created history.
+
+One incompatible artifact can therefore make a root-wide `list()` fail. A subsystem that enumerates Sessions before spawning or resuming children can inherit that blast radius even when the bad directory is unrelated to the requested child.
+
+Do not infer that `/compact` created the plaintext copy merely because the copy appeared after model-context compaction. In rc.2, `/compact` appends compaction events and changes the model-visible surface; the Session persistence backend remains append-only and does not convert `.jsonl.zstd` into `.jsonl`. Establish the file producer separately:
+
+```sh
+stat /stopped-copy/session.jsonl /stopped-copy/session.jsonl.zstd
+shasum -a 256 /stopped-copy/session.jsonl /stopped-copy/session.jsonl.zstd
+```
+
+Then inspect automation and operator history for:
+
+- `zstd -d`, `zstd -dc`, or an export command whose output target was the live Session directory;
+- health, backup, migration, cleanup, or compaction wrappers that materialize decoded JSONL;
+- a previous process configured with `compression: none` against the same root;
+- sync, restore, or manual file-manager operations;
+- plugin code that writes Session artifacts outside the persistence seam.
+
+Byte-identical decoded content is useful evidence, not deletion authority. The compressed artifact can contain concatenated frames, checksums, and a last durable append that a stale comparison missed; timestamps and open writers also matter.
+
+#### Reversible containment
+
+1. Stop all DSH processes and external jobs that can touch the root.
+2. Copy the complete root to a recovery location and record directory-level file inventory plus digests.
+3. Validate both candidates on copies: decode every complete zstd frame, validate JSON lines, header identity, contiguous sequence, and final-turn state.
+4. Confirm which compression mode the intended profile actually configures.
+5. Move—not delete—the opposite-suffix artifact outside the configured root, preserving path, metadata, and digest in an incident note.
+6. Cold-start the matching build against a disposable copy first; require `list()`, affected Session load, unrelated Session load, and subagent enumeration to pass.
+7. Only then apply the same reversible move to the stopped production root and restart once.
+
+Do not implement “prefer `.zstd` when both exist” as automatic recovery. A safe migration needs an explicit source and target encoding, single-writer exclusion, complete validation, atomic publication, rollback, and an audit record.
 
 ### Artifact loads only after a crash
 
@@ -142,6 +186,7 @@ Exclude the active session root from generic retention scripts unless the script
 | cold artifact has only a torn final fragment | let the matching Harness build perform cold recovery on a copy | manual middle-log truncation |
 | cold artifact has a committed middle gap | preserve and report the first invalid sequence | appending a new tail |
 | tool IDs disagree | repair one complete identity set on a copy, with validation | global search and replace |
+| both physical encodings exist | stop writers, preserve both, validate, then move the non-configured artifact out of root | delete by suffix or let listing ignore it |
 | no artifact remains | start a new session from an explicit handoff | fabricating an empty log |
 
 ## Report a reproducible incident
@@ -166,7 +211,11 @@ Separate prevention from historical repair in an upstream proposal. A patch that
 
 ## Source boundary
 
-This page was verified against DeepSeek Harness commit `47f943859bef60e4160492346772ded9b24f765a`.
+This page was reverified against DeepSeek Harness rc.2 commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`.
+
+- [rc.2 JSONL encoding selection and mismatch rejection](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence-jsonl/src/index.ts)
+- [rc.2 opposite-encoding regression tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence-jsonl/tests/zstd.spec.ts)
+- [Dual-encoding field report #4746](https://github.com/deepseek-ai/deepseek-harness/discussions/4746)
 
 - [`appendLines` opens the current JSONL path for append](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/session/session-persistence-jsonl/src/index.ts#L647-L682)
 - [The coordinator filters a live batch from its durable cursor](https://github.com/deepseek-ai/deepseek-harness/blob/47f943859bef60e4160492346772ded9b24f765a/packages/session/session-persistence/src/coordinator.ts#L1353-L1361)
@@ -177,4 +226,3 @@ This page was verified against DeepSeek Harness commit `47f943859bef60e416049234
 - [Runtime deletion report #1891](https://github.com/deepseek-ai/deepseek-harness/discussions/1891)
 - [Live replacement report #1912](https://github.com/deepseek-ai/deepseek-harness/discussions/1912)
 - [Empty tool-call identity report #1915](https://github.com/deepseek-ai/deepseek-harness/discussions/1915)
-
