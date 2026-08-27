@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.144 - 2026-08-27
+
+### Added
+
+- Added a browser-only Agent Harness Evaluation Scorecard covering eight runtime boundaries.
+- Added shareable URL state, a copyable review, evidence definitions, and focused follow-up guides.
+- Made the scorecard the primary homepage path for teams evaluating an agent runtime.
+
 ## 0.5.143 - 2026-08-27
 
 ### Changed
