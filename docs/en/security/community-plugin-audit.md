@@ -1,10 +1,10 @@
 ---
 title: DeepSeek Harness Community Plugin Audit
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-19
-upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Find and install DeepSeek Harness plugins without turning discovery into trust
@@ -28,6 +28,96 @@ Treat every community plugin as a Host software supply-chain decision.
 | successful `dsh plugin add` | package-manager completion | that the profile composes or boots safely |
 
 The official project recommends the `dsh-plugin` topic for discoverability. It does not define the topic as an official marketplace or approval boundary.
+
+## A runtime-tested catalog is still a discovery surface
+
+Discussion #4736 introduces `dsh-verified-market`, backed by an external radar that labels catalog entries `ok`, `incompatible`, and other verdicts after container tests. This is stronger evidence than a topic or star count, but the verdict still needs an artifact identity and a test contract before it can authorize installation.
+
+At the reviewed market commit [`836fc832…`](https://github.com/G-pledge/dsh-verified-market/tree/836fc832023101e256c367a65b7493843fd8231e), the client fetches an unsigned mutable JSON document from the radar repository's `master` branch, validates only the schema string and `plugins` array, and caches it in memory. An `ok` entry is matched by its `name` or repository basename. The installer then independently resolves the repository's current default-branch `package.json` and either:
+
+- installs the npm package at the registry's current `latest` value when repository metadata agrees; or
+- installs `github:owner/repository`, which resolves the repository's current HEAD.
+
+Those steps do not establish that the bytes installed now are the exact bytes the radar tested. Repository agreement reduces namespace confusion, but it does not bind this tuple:
+
+```text
+catalog snapshot digest
+repository identity + full commit
+package name + exact version + dist.integrity
+test image/toolchain + DSH/Node/platform
+test case set + verdict + timestamp
+```
+
+Without that tuple, `ok` means “some radar observation associated with this catalog identity,” not “this selected artifact is known-good,” and never “safe.” A mutable `latest` tag can move; a default branch can advance; Git install may run `prepare`; dependencies can resolve differently; a six-hour cache can retain a verdict after its artifact changes.
+
+### Use four distinct verdict tiers
+
+| Tier | Evidence | Honest label |
+|---|---|---|
+| discovered | name or repository appeared in a source | discovered |
+| installable | one exact package transaction and composition dump completed | installable on the recorded environment |
+| runtime-compatible | a pinned artifact passed a declared smoke/behavior suite | tested compatible with the recorded matrix |
+| security-reviewed | artifact, dependency closure, effects, policy, provenance, and cleanup received a scoped security review | reviewed only for the stated threat model |
+
+Do not compress the last three tiers into a green “verified” badge. Show the tested artifact and matrix on the card itself, and make any version drift visible before enabling Install.
+
+### Bind the catalog to immutable evidence
+
+A trustworthy runtime verdict record should carry at least:
+
+```json
+{
+  "repository": "owner/repo",
+  "commit": "<40-character SHA>",
+  "package": "@scope/name",
+  "version": "1.2.3",
+  "integrity": "sha512-...",
+  "testedAt": "<ISO-8601>",
+  "runner": { "imageDigest": "sha256:...", "dsh": "...", "node": "...", "os": "..." },
+  "suite": { "id": "...", "revision": "<full SHA>" },
+  "verdict": "runtime-compatible"
+}
+```
+
+Sign the catalog or publish it through an immutable release artifact with a digest and verifiable provenance. The marketplace must reject—not silently reinterpret—a record whose commit, version, integrity, repository, or suite evidence is missing. Offline fallback should show the captured digest, age, and artifact binding; it must not authorize an update to a different artifact.
+
+### Separate catalog trust from mutation authority
+
+A marketplace Host plugin can install packages, remove them, execute package-manager lifecycle code, and edit profile composition. Its HTTP or RPC surface is therefore a package-management control plane, not just a catalog viewer.
+
+At the same reviewed commit, the market's mutating routes require matching `Origin` and `Host`, which is a useful CSRF fence but not user authorization. The hot-toggle route accepts an arbitrary row id and writes it into YAML text; the install/update routes eventually spawn the profile package manager. A robust implementation must additionally:
+
+- keep the carrier loopback-only unless it has an authenticated principal and narrow package/profile grants;
+- resolve all actions through server-owned opaque candidate and row identities, not body-supplied names or YAML ids;
+- validate profile identity and prevent cross-profile writes;
+- parse, modify, schema-check, and atomically replace the patch document instead of interpolating YAML text;
+- serialize package and patch transactions and reject stale manifest/lock/patch revisions;
+- show the exact target, lifecycle/build policy, dependency diff, Bundle rows, and source evidence before approval;
+- apply time-bounded operator approval separately to install, update, uninstall, disable, and force-enable;
+- preserve a known-good snapshot and prove rollback after partial pnpm, timeout, process restart, or HMR failure;
+- never return unsanitized package-manager output that can contain local paths, registry credentials, or control sequences;
+- audit principal, profile, candidate digest, action, revisions, result, and rollback—never secret values.
+
+An allowlist narrows available choices; it does not make every caller authorized, every selected version reviewed, or every mutation reversible.
+
+### Marketplace acceptance gates
+
+- [ ] Every green verdict binds a full repository commit and exact package integrity.
+- [ ] The runner image, DSH/Node/platform matrix, suite revision, timestamp, and logs are linked.
+- [ ] Catalog authenticity and immutable digest are verified before a verdict is trusted.
+- [ ] Name and repository-basename collisions cannot select a different entry.
+- [ ] Install refuses artifact drift rather than falling back from a tested npm artifact to mutable Git HEAD.
+- [ ] `latest`, default branches, and unpinned transitive resolution never appear in an approved target.
+- [ ] Runtime compatibility and security review use visibly different labels.
+- [ ] Mutating routes require an authenticated, authorized operator—not same-origin alone.
+- [ ] Client input cannot become package-manager syntax, profile paths, row ids, YAML, shell text, or log control sequences.
+- [ ] Patch edits use parsed schema-aware modification, revision checks, locking, and atomic replacement.
+- [ ] The operator previews package, lock, Bundle, effective-config, lifecycle, and capability changes.
+- [ ] Each action has a separate approval and an idempotent terminal result.
+- [ ] Partial install, timeout, crash, and cold-restart recovery restore the exact known-good profile.
+- [ ] Stale or offline catalogs cannot approve a different artifact than the one tested.
+- [ ] Removal proves dependency, Bundle, patch, process, listener, and Client cleanup.
+- [ ] Audit and UI output are redacted and safe against terminal or HTML injection.
 
 ## The six-gate workflow
 
@@ -313,12 +403,11 @@ Reviewer and date:
 
 ## Official sources
 
-- [Official discovery guidance for the `dsh-plugin` topic](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/README.md)
-- [Official CLI plugin-management contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/reference/README.md#plugin-management)
-- [Official package and install tutorial](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/basic/publish.md)
-- [Official plugins and lifecycle guide](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/user/develop/framework/index.md)
-- [Official profile layer and row replacement contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/docs/architecture.md)
-- [Official config-dump implementation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/apps/cli/src/dump-config.ts)
-- [Official base filesystem and shell rows](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/base/cordis.patch.yml)
+- [rc.2 CLI plugin-management contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/reference/README.md#plugin-management)
+- [rc.2 plugin reconciliation implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/src/plugin.ts)
+- [rc.2 profile composition contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/README.md#profiles)
+- [rc.2 atomic write and lock contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/util/atomic-write/README.md)
 - [Published Mirage bundle patch at the inspected release](https://unpkg.com/@struktoai/mirage-dsh@0.0.1/cordis.patch.yml)
 - [Core-provider replacement report #3421](https://github.com/deepseek-ai/deepseek-harness/discussions/3421)
+- [Verified-market proposal #4736](https://github.com/deepseek-ai/deepseek-harness/discussions/4736)
+- [Reviewed dsh-verified-market commit](https://github.com/G-pledge/dsh-verified-market/tree/836fc832023101e256c367a65b7493843fd8231e)
