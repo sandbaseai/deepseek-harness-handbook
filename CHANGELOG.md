@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.94 - 2026-08-27
+
+### Added
+
+- A source-backed architecture guide for session-scoped MCP across the current DeepSeek Harness ACP boundary, based on official proposal #4694.
+- Four multi-tenant deployment shapes: Host-per-tenant, deployment allowlist, authenticated MCP gateway, and direct client-supplied HTTP.
+- SSRF, credential, namespace, quota, Agent-scoped registration, teardown, and twelve-case acceptance requirements.
+
 ## 0.5.93 - 2026-08-27
 
 ### Added

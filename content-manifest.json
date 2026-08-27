@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/integrations/acp-session-scoped-mcp.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/subagent-unknown-job-id.md",
       "revision": 1,
       "translations": {}
