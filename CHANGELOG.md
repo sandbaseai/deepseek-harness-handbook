@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.159 - 2026-08-27
+
+### Changed
+
+- Mapped the current ungrouped, cross-Workspace discovery, move, and delete UX gaps to distinct navigation, execution-root, global-index, and retention contracts.
+- Rejected cwd-validation bypass and live Session-file deletion as UI shortcuts; added bounded All Sessions and Archive/Trash/Purge product boundaries.
+
 ## 0.5.158 - 2026-08-27
 
 ### Changed
