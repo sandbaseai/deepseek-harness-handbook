@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Windows Minimal Preset Bash Failure and rc.8 Fix
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
-verified_at: 2026-08-22
+verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
 ---
 
@@ -100,19 +100,22 @@ If the Minimal prompt is essential, copy the shipped preset through the supporte
 
 ## dsh-win32 compatibility companion
 
-On rc.8 or later, no community shell replacement is required. [dsh-win32 0.16.0](https://github.com/sjh9714/dsh-win32/releases/tag/v0.16.0) instead checks the official persistent PowerShell and Workspace Write packages, diagnoses common Windows installation failures, and can create the desktop shortcut.
+On rc.8 or later, no community shell replacement is required. [dsh-win32 0.17.1](https://github.com/sjh9714/dsh-win32/releases/tag/v0.17.1) instead checks the official persistent PowerShell and Workspace Write packages, diagnoses common Windows installation failures, can run a live acceptance check of the installed component chain, and can create the desktop shortcut.
 
 ```powershell
-npx dsh-win32@0.16.0 doctor
-npx dsh-win32@0.16.0 setup
+npx dsh-win32@0.17.1 doctor
+npx dsh-win32@0.17.1 verify
+npx dsh-win32@0.17.1 setup
 ```
+
+`doctor` checks published package metadata and local installation failures. `verify` is model- and API-key-free: in isolated temporary directories it loads the installed official terminal, subprocess, persistent PowerShell, Workspace Write policy, and Windows ACL sandbox components, then checks state persistence, write confinement, cancellation recovery, and cleanup. It does not boot a complete stock Minimal Host or make a model request, so a pass is component-chain acceptance rather than a full Session claim.
 
 The default setup does not install a custom bundle or preset. `setup --sandboxed` remains accepted for command compatibility, but current DSH already owns the sandbox configuration.
 
 If upgrading from rc.7 or earlier is impossible and the older Minimal prompt plus persistent shell is still required, the previous Git Bash and busybox-w32 presets remain available only through an explicit legacy setup.
 
 ```powershell
-npx dsh-win32@0.16.0 setup --legacy --sandboxed
+npx dsh-win32@0.17.1 setup --legacy --sandboxed
 ```
 
 This legacy path is a community workaround, not an upstream repair. The sandboxed preset uses busybox-w32 ash rather than Bash or PowerShell. Bash arrays and `[[ ]]` are unavailable. Prefer upgrading DSH over installing the legacy preset.
@@ -156,5 +159,5 @@ The upstream implementation addresses both required layers: the Windows process 
 - [rc.8 Minimal platform-specific shell composition](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/config/agent-presets/minimal/agent.cordis.yml)
 - [rc.8 Windows shell tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/tests/windows-shell.spec.ts)
 - [rc.8 Standard preset shell rows](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/config/agent-presets/standard/agent.cordis.yml)
-- [dsh-win32 Windows details and measured limitations](https://github.com/sjh9714/dsh-win32/blob/v0.16.0/docs/windows-details.md)
+- [dsh-win32 Windows details and measured limitations](https://github.com/sjh9714/dsh-win32/blob/v0.17.1/docs/windows-details.md)
 - [dsh-win32 cross-platform and restricted-token CI](https://github.com/sjh9714/dsh-win32/actions/workflows/ci.yml)
