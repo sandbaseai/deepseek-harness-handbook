@@ -1,9 +1,9 @@
 ---
 title: Windows Folder Picker Crash and Unicode Truncation in DeepSeek Harness
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-27
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
@@ -22,6 +22,8 @@ or when the native dialog returns a visibly shortened path and workspace creatio
 workspace-invalid-path: cannot create a workspace at "D:\...\CAN盒子二次":
 ENOENT: no such file or directory, realpath 'D:\...\CAN盒子二次'
 ```
+
+The same signature is independently reproduced on rc.2 by selecting a desktop folder named `报销`: the native picker returns only `...\报`, because `销 U+9500` is encoded as `00 95` in UTF-16LE.
 
 The worker-exit message states only that the spawned picker terminated before it sent a terminal IPC message. The `ENOENT` case is different: the worker may have returned successfully, but `readUtf16()` corrupted the path before the Host validated it. At least four failures now need separate branches:
 
@@ -223,6 +225,7 @@ Keep browse mode if it meets the product need. If reporting the native failure, 
 - [Official failure discussion #30](https://github.com/deepseek-ai/deepseek-harness/discussions/30)
 - [Confirmed rc.7 UTF-16LE truncation report #3291](https://github.com/deepseek-ai/deepseek-harness/discussions/3291)
 - [Independent workspace-invalid-path confirmation #3484](https://github.com/deepseek-ai/deepseek-harness/discussions/3484)
+- [rc.2 `报销` / `销 U+9500` reproduction #4760](https://github.com/deepseek-ai/deepseek-harness/discussions/4760)
 - [Original directory-name truncation report #3188](https://github.com/deepseek-ai/deepseek-harness/discussions/3188)
 - [rc.8 Win32 UTF-16 decode path](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/host/directory-picker-native/src/win32-dialog-bindings.ts)
 - [Native picker contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/README.md)
