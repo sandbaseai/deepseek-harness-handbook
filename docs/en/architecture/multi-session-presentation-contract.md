@@ -256,7 +256,6 @@ Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2
 - [Session Presentation proposal #4718](https://github.com/deepseek-ai/deepseek-harness/discussions/4718)
 - [rc.2 Session runtime and single staged selection](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/runtime/src/client/sessions/service.ts)
 - [rc.2 renderer Host contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-slots/src/renderer.ts)
-- [rc.2 SessionProvider implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/web-react/src/session-provider.tsx)
+- [rc.2 SessionProvider implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-renderer/src/client/session-provider.tsx)
 - [Conversation SlotMap declaration](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/src/client/contract/slots.ts)
 - [Single active conversation view rendering](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/src/client/skeleton/ConversationSession.tsx)
-
