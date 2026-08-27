@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.147 - 2026-08-27
+
+### Changed
+
+- Added double-encoded structured tool arguments to the enforced Schema guide.
+- Separated outer parsing, pure validation, Schema modeling, compatibility normalization, and later RPC shape loss.
+- Added strict normalization gates and a regression matrix that preserves schema-legal strings.
+
 ## 0.5.146 - 2026-08-27
 
 ### Changed
