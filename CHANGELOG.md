@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.156 - 2026-08-27
+
+### Changed
+
+- Added the independent rc.2 `报销` reproduction to the Windows native folder-picker UTF-16LE truncation branch.
+- Linked the exact `销 U+9500 → 00 95` evidence to the existing two-byte NUL test, browse-backend recovery, and regression matrix.
+
 ## 0.5.155 - 2026-08-27
 
 ### Changed
