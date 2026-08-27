@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.157 - 2026-08-27
+
+### Added
+
+- Added a clearly labeled Simplified Chinese draft of the custom-provider catalog-collision runbook while preserving English as canonical.
+- Refreshed the high-traffic Chinese Overview with the newest provider, token-cost, and translation-extension routes and current 143/152 coverage.
+
 ## 0.5.156 - 2026-08-27
 
 ### Changed
