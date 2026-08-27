@@ -21,6 +21,7 @@ ACP permission request UI: https://sandbaseai.github.io/deepseek-harness-handboo
 ACP permission reverse-request hang: https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-hang.html
 Subagent human question relay: https://sandbaseai.github.io/deepseek-harness-handbook/subagent-question-relay.html
 Subprocess crash isolation and Host survival: https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html
+Session archive, trash, restore, and purge: https://sandbaseai.github.io/deepseek-harness-handbook/session-archive-trash-delete.html
 Stuck tool cancellation: https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html
 Degenerate model output: https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html
 npx install prompt hangs: https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html

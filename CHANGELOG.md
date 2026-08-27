@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.108 - 2026-08-27
+
+### Added
+
+- A source-pinned operating guide for Session archive, offline trash, collision-free restore, and retention-gated purge, based on official discussion #4716.
+- Clear authority boundaries between append-only Session logs, self-healing projection checkpoints, and coordinated workspace domain state.
+- Single-writer quiescence, whole-root snapshots, no-overwrite trash generations, crash journaling, lossy-path protection, and eighteen manager acceptance gates.
+
 ## 0.5.107 - 2026-08-27
 
 ### Changed
