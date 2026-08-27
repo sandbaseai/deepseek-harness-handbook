@@ -280,7 +280,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 
 - [Stop Goal rounds while owned subagents are still running](docs/en/agent-patterns/goal-round-subagent-wait.md)
 - [Render a tool-produced image in its Web result card](docs/en/plugin-development/tool-image-result-card.md)
-- [Design general file attachments from browser intake to bounded Agent evidence](docs/en/integrations/general-file-attachments.md)
+- [Design general files and provider-native PDF/video passthrough](docs/en/integrations/general-file-attachments.md)
 - [Pin OpenRouter providers without arbitrary request-body passthrough](docs/en/integrations/openrouter-provider-pinning.md)
 - [Build your first DeepSeek Harness plugin](docs/en/plugin-development/first-plugin.md)
 - [Run subprocesses safely inside tools](docs/en/plugin-development/async-subprocess-tools.md)
