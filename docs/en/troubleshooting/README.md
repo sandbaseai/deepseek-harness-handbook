@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 55
+content_revision: 56
 status: canonical
 verified_at: 2026-08-20
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-20
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
+- [Fix cross-provider `reasoning_content` replay on DeepSeek-compatible pi-ai routes](pi-ai-cross-provider-reasoning-replay.md)
 - [Diagnose manual compaction aborted by its caller signal](manual-compaction-caller-abort.md)
 - [Fix pnpm store drift during plugin update](pnpm-unexpected-store-plugin-update.md)
 - [Route OpenCode Go models by protocol and entitlement](opencode-go-model-routing.md)
@@ -31,6 +32,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| a DeepSeek-compatible pi-ai route returns 400 because historical assistant messages lack `reasoning_content` after a provider switch | provider-history serialization / foreign replay metadata / route compat | source and target provider/model, resolved API, smallest failing history prefix, assistant block shape, sanitized wire keys, and explicit compat-switch A/B |
 | Code Mode fails before a model request with unknown or malformed `{{...}}` in `tools:sdk` | third-party schema text / generated SDK / strict prompt interpolation | exact group and section, tool presentation mode and language, smallest schema carrier, native-mode control, generated SDK fragment, and assembly raw-flag propagation |
 | manual `/compact` records `compaction/start`, then ends with `DeepSeek request aborted by caller` | caller cancellation / command, gateway, Agent, or Host lifecycle | command and compaction IDs, first-abort source and reason, Remote token generation, maintenance cancel cause, client mount timeline, and surface hash before/after |
 | plugin update reports `ERR_PNPM_UNEXPECTED_STORE` and names two absolute store paths | pnpm linked-store identity / environment-sensitive store selection | exact profile, linked and selected paths from the first error, effective store config, DSH and pnpm versions, filesystem device identity, and manifest/lockfile diff |
