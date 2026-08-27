@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.149 - 2026-08-27
+
+### Changed
+
+- Traced insecure-origin typed RPC failure through `host.describe`, shared connection-generation cancellation, and the repeated `connection lost` warning.
+- Added a four-part evidence gate that separates a pre-fetch UUID exception from WebSocket, Host/Origin trust, and server-lifecycle failures.
+- Refreshed the visual runbook, field-status card, and machine-readable guide description with official rc.2 source and field report #4756.
+
 ## 0.5.148 - 2026-08-27
 
 ### Changed

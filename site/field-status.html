@@ -82,9 +82,9 @@
 
       <article class="status-card severity-medium">
         <div class="status-card-top"><span>Remote Web · browser</span><strong>Environment</strong></div>
-        <h3>rc.7 still has two secure-context UUID paths.</h3>
-        <p>Generic Connection RPC uses the fallback, but typed Host/Workspace calls and draft attachments still call <code>crypto.randomUUID()</code>.</p>
-        <dl><div><dt>First evidence</dt><dd><code>crypto.randomUUID is not a function</code> with no matching typed <code>/api</code> request.</dd></div><div><dt>Next action</dt><dd>Use localhost or authenticated HTTPS; distinguish a pre-fetch throw from a server <code>403</code>.</dd></div></dl>
+        <h3>A typed UUID failure can look like a reconnecting socket.</h3>
+        <p>Typed <code>host.describe</code> can throw before fetch, abort its connection generation, close both event streams, and repeat <code>connection lost</code>.</p>
+        <dl><div><dt>First evidence</dt><dd>Insecure context, missing <code>randomUUID</code>, and no matching typed <code>host.describe</code> request.</dd></div><div><dt>Next action</dt><dd>Compare HTTPS or loopback before changing WebSocket settings; distinguish a pre-fetch throw from a server <code>403</code>.</dd></div></dl>
         <a href="./remote-web-secure-context.html">Open the incident note →</a>
       </article>
 
