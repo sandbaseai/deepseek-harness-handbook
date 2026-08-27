@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.106 - 2026-08-27
+
+### Added
+
+- A source-backed explanation of Goal rounds that repeat while an owned background subagent remains active, based on official report #4715.
+- Current containment through foreground collection or explicit Goal pause/resume ownership, without presenting prompt instructions as an inference-cost fix.
+- A parent-scoped lifecycle latch, generation and pre-step race fences, wake policy, observability, and sixteen regression cases for an event-driven upstream repair.
+
 ## 0.5.105 - 2026-08-27
 
 ### Added
