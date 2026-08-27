@@ -47,7 +47,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Recover when a second core package copy breaks every tool call | [Duplicate core runtime recovery](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-core-runtime.html) |
 | Design session, model, JSON, and exit semantics for headless embedding | [Programmatic headless contract](https://sandbaseai.github.io/deepseek-harness-handbook/headless-programmatic-contract.html) |
 | Build rc.8 in an air-gapped environment without losing provenance | [Air-gapped source-build guide](https://sandbaseai.github.io/deepseek-harness-handbook/air-gapped-source-build.html) |
-| Interpret token estimates, provider usage, UI occupancy, and compaction pressure | [Token accounting map](https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html) |
+| Interpret token estimates or recover `messageTokens` underflow after compaction | [Token accounting and projection recovery](https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html) |
 | Recover stale or competing Cordis preset registrations | [Preset generation and shared-holder recovery](https://sandbaseai.github.io/deepseek-harness-handbook/preset-generation-recovery.html) |
 | Recover raw pinyin, kana, or jamo in the Web composer | [Web IME composition runbook](https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html) |
 | Protect API keys from backups, same-UID tools, or an untrusted Agent | [Credential storage threat model](https://sandbaseai.github.io/deepseek-harness-handbook/api-key-storage.html) |
