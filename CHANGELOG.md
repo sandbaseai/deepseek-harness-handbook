@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.124 - 2026-08-27
+
+### Added
+
+- Added a source-backed diagnosis proving rc.2 `ask_user_question` has no built-in human-answer deadline and routes cancellation through the owning execution signal.
+- Separated browser disconnect and replay, explicit UI cancellation, execution abort, provider disposal, reminders, and real decision deadlines.
+- Added an abort timeline, current containment, typed `ASK_TIMEOUT` design, exactly-once races, a visual settlement map, and twenty-two regression gates.
+
 ## 0.5.123 - 2026-08-27
 
 ### Added

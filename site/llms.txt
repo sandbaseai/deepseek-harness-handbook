@@ -55,6 +55,7 @@ Web IME composition recovery: https://sandbaseai.github.io/deepseek-harness-hand
 
 ## Start here
 
+- [Diagnose ask_user_question aborts](https://sandbaseai.github.io/deepseek-harness-handbook/ask-user-question-aborted.html): Prove rc.2 has no implicit answer timer, correlate the execution signal and provider lifecycle, and keep reminders distinct from typed deadlines.
 - [Diagnose unknown edit tools](https://sandbaseai.github.io/deepseek-harness-handbook/unknown-edit-tool.html): Distinguish Standard, Minimal, Code, Both, and custom Agent tool surfaces before routing lookup, freshness, path, schema, sandbox, or permission failures.
 - [Restore clipped Settings plugin navigation](https://sandbaseai.github.io/deepseek-harness-handbook/settings-plugin-nav-overflow.html): Repair the flex chain so every registered section remains scrollable, focusable, and clickable without moving fixed dialog chrome.
 - [Design Session Collections without invented Workspaces](https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html): Keep navigation membership outside Session identity, cwd, sandbox, archive, and retention; offer explicit conversation-only, ephemeral, or attach-later execution profiles.
