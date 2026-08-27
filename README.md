@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**138 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**138 canonical guides · 146 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -18,11 +18,23 @@ Choose one path and get to evidence quickly:
 
 | Run | Debug | Build |
 |---|---|---|
-| [Five-minute quickstart](docs/en/getting-started/quickstart.md) | [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) | [First plugin lab](docs/en/plugin-development/first-plugin.md) |
-| [CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) | [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) | [MCP guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
+| [Five-minute quickstart](docs/en/getting-started/quickstart.md) | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) | [First plugin lab](docs/en/plugin-development/first-plugin.md) |
+| [CLI and headless map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) | [Profile repair and reset](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) | [MCP guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
 | [API cost boundary](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html) | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) | [Agent runtime map](docs/en/architecture/agent-runtime.md) |
 
-If one of these guides saves an incident or an afternoon, **[star the repository](https://github.com/sandbaseai/deepseek-harness-handbook)**. Stars help the next Agent builder find a source-backed answer instead of another unverified command list.
+### Newly source-verified
+
+| Problem | What the guide proves |
+|---|---|
+| [Repair or reset a broken profile](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) | Classify user-layer, Bundle, dependency, and activation failures; preview one reversible repair without deleting credentials or Sessions. |
+| [Route approval through Web and Feishu](https://sandbaseai.github.io/deepseek-harness-handbook/sdk-human-interaction-wire.html) | Keep many presentation observers behind one authenticated, atomic decision owner. |
+| [Expose remote Settings safely](https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html) | Separate HTTPS, gateway identity, browser principal, and narrow Host-enforced capabilities. |
+| [Understand why AGENTS.md was ignored](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) | Distinguish discovery and model visibility from instruction following and deterministic enforcement. |
+| [Send provider-native PDF or video](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | Bind uploads to an exact route while preserving one local immutable attachment and honest extraction evidence. |
+
+Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is shipped versus proposed, and includes acceptance gates rather than a copy-paste-only happy path.
+
+If the handbook resolves a real question, **[star it on GitHub](https://github.com/sandbaseai/deepseek-harness-handbook)**. That signal helps the next Agent builder find a source-backed answer instead of another unverified command list. If a claim differs from the runtime you operate, [open an evidence report](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new/choose) with the exact DSH version and first failing boundary.
 
 [Browse the visual field guides](https://sandbaseai.github.io/deepseek-harness-handbook/) · [Request a source-backed runbook](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99) · [Subscribe to new guides](https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml) · [Read the changelog](CHANGELOG.md)
 

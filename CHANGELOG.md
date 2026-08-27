@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.131 - 2026-08-27
+
+### Changed
+
+- Revised the repository landing path so new readers can reach a runnable, diagnostic, or extension outcome before entering the complete guide catalog.
+- Added a compact source-verified section for profile repair, multi-channel approval, authenticated remote Settings, AGENTS.md enforcement, and provider-native file input.
+- Made the verification boundary, genuine Star invitation, and evidence-report contribution path explicit without removing the full technical map.
+
 ## 0.5.130 - 2026-08-27
 
 ### Changed
