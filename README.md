@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**120 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**121 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -189,7 +189,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 120 pages |
+| English | Canonical | 121 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -204,6 +204,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Getting started
 
 - [Diagnose manual compaction aborted by its caller signal](docs/en/troubleshooting/manual-compaction-caller-abort.md)
+- [Preserve embedded code through literal file tools](docs/en/troubleshooting/embedded-code-escaping.md)
 - [Fix pnpm store drift during plugin update](docs/en/troubleshooting/pnpm-unexpected-store-plugin-update.md)
 - [Diagnose npx hanging before DeepSeek Harness starts](docs/en/troubleshooting/npx-install-prompt-hangs.md)
 - [What is DeepSeek Harness?](docs/en/what-is-deepseek-harness.md)

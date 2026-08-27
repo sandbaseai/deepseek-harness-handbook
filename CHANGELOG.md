@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.100 - 2026-08-27
+
+### Added
+
+- A source-backed guide for preserving embedded code across model, JSON, literal file-tool, filesystem, and target-parser boundaries.
+- A bounded evidence procedure that distinguishes already-damaged tool arguments from provider writes and later parser behavior.
+- Low-nesting source layout, native validation, literal-edit safeguards, failure routing, edge fixtures, and a visual representation ladder.
+
 ## 0.5.99 - 2026-08-27
 
 ### Added
