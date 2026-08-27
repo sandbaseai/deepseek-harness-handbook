@@ -23,6 +23,7 @@ Subagent human question relay: https://sandbaseai.github.io/deepseek-harness-han
 Subprocess crash isolation and Host survival: https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html
 Session archive, trash, restore, and purge: https://sandbaseai.github.io/deepseek-harness-handbook/session-archive-trash-delete.html
 read_image missing fs injection: https://sandbaseai.github.io/deepseek-harness-handbook/read-image-fs-inject.html
+pi-ai image MIME compatibility: https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-image-media-type.html
 Stuck tool cancellation: https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html
 Degenerate model output: https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html
 npx install prompt hangs: https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html

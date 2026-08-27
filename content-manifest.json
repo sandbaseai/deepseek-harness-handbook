@@ -648,6 +648,11 @@
       "source": "docs/en/troubleshooting/read-image-fs-inject.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/pi-ai-image-media-type.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

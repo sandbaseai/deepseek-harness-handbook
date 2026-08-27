@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.111 - 2026-08-27
+
+### Added
+
+- A source-pinned guide for valid WebP attachments rejected by strict OpenAI-compatible pi-ai backends, based on official report #4615.
+- A capability model separating DSH storage formats, model image modality, provider wire MIME types, and decoder constraints.
+- Immutable originals, policy-owned renditions, fail-closed conversion, animation and metadata semantics, a provider conformance matrix, and sixteen acceptance gates.
+
 ## 0.5.110 - 2026-08-27
 
 ### Changed
