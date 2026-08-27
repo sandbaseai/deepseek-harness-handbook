@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.164 - 2026-08-27
+
+### Changed
+
+- Added the rc.2 same-sequence, different-event, foreign-Session-content incident as a hard isolation conflict that cannot use exact-duplicate removal.
+- Separated original sequence corruption from the secondary header-frame failure caused by generic single-frame Zstandard recompression.
+
 ## 0.5.163 - 2026-08-27
 
 ### Changed
