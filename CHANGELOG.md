@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.139 - 2026-08-27
+
+### Changed
+
+- Refreshed the README first-screen evidence paths around Windows native exits, context-overflow convergence, WebView mutation loops, RTL mixed text, and AGENTS.md enforcement.
+- Tightened the evidence vocabulary to distinguish observed, source-verified, inferred, and proposed claims.
+- Updated repository discovery metadata to state the independent multilingual positioning and emphasize quickstarts plus source-backed runbooks.
+
 ## 0.5.138 - 2026-08-27
 
 ### Added

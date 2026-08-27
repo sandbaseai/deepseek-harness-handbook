@@ -6,7 +6,7 @@
 
 Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources), the community-maintained DSH ecosystem directory.
 
-![DeepSeek Harness Handbook — operator guides, rc.8, Install Doctor, and Failure Router](assets/deepseek-harness-handbook-social-preview-v3.png)
+![DeepSeek Harness Handbook — source-backed operator guides, Install Doctor, and Failure Router](assets/deepseek-harness-handbook-social-preview-v3.png)
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
@@ -26,13 +26,13 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
-| [Repair or reset a broken profile](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) | Classify user-layer, Bundle, dependency, and activation failures; preview one reversible repair without deleting credentials or Sessions. |
-| [Route approval through Web and Feishu](https://sandbaseai.github.io/deepseek-harness-handbook/sdk-human-interaction-wire.html) | Keep many presentation observers behind one authenticated, atomic decision owner. |
-| [Expose remote Settings safely](https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html) | Separate HTTPS, gateway identity, browser principal, and narrow Host-enforced capabilities. |
+| [Route Windows exit 3221226505](https://sandbaseai.github.io/deepseek-harness-handbook/windows-native-exit.html) | Convert the unsigned status, identify the terminated process, and correlate WER, a private dump, and the last durable Session boundary before repairing. |
+| [Stop context-overflow recovery loops](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html) | Classify provider wording, price conversation and compaction envelopes separately, and stop an unchanged failed-range fingerprint. |
+| [Find a WebView MutationObserver loop owner](https://sandbaseai.github.io/deepseek-harness-handbook/webview-mutation-loop.html) | Separate Host, official Web, desktop wrapper, injected client code, and one immutable Session trigger fixture. |
+| [Design RTL and mixed-script rendering](https://sandbaseai.github.io/deepseek-harness-handbook/rtl-mixed-text.html) | Treat direction as semantics across Markdown, code, inline isolation, composer geometry, IME, and accessibility—not as global alignment. |
 | [Understand why AGENTS.md was ignored](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) | Distinguish discovery and model visibility from instruction following and deterministic enforcement. |
-| [Send provider-native PDF or video](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | Bind uploads to an exact route while preserving one local immutable attachment and honest extraction evidence. |
 
-Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is shipped versus proposed, and includes acceptance gates rather than a copy-paste-only happy path.
+Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 
 If the handbook resolves a real question, **[star it on GitHub](https://github.com/sandbaseai/deepseek-harness-handbook)**. That signal helps the next Agent builder find a source-backed answer instead of another unverified command list. If a claim differs from the runtime you operate, [open an evidence report](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new/choose) with the exact DSH version and first failing boundary.
 
