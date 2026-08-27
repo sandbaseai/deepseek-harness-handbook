@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.96 - 2026-08-27
+
+### Added
+
+- A parent-owned human clarification relay for continuable subagents, based on official request #4697 and the rc.2 delegated-caller guard.
+- A versioned clarification envelope, durable relay state machine, idempotent answer delivery, reconnect recovery, and bounded interaction loops.
+- Security rules separating clarification from permission plus twelve acceptance cases.
+
 ## 0.5.95 - 2026-08-27
 
 ### Changed

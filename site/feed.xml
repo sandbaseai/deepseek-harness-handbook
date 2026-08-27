@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-27T07:00:00Z</updated>
+  <updated>2026-08-27T08:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Relay subagent clarification through the parent</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-question-relay.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/subagent-question-relay.html</id><updated>2026-08-27T08:00:00Z</updated><summary>Keep the root Session in control while a continuable child requests clarification and resumes from one durable, correlated answer.</summary></entry>
 
   <entry><title>Fix an unanswered ACP permission request</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-hang.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/acp-permission-r2</id><updated>2026-08-27T07:00:00Z</updated><summary>Trace the reverse request, return one bounded selected or cancelled outcome, and close every race without leaving the Agent turn pending.</summary></entry>
 
