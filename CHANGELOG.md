@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.143 - 2026-08-27
+
+### Changed
+
+- Reverified live Session log recovery against rc.2 and added root-wide `.jsonl` versus `.jsonl.zstd` encoding-conflict diagnosis.
+- Added producer attribution, offline validation, reversible isolation, blast-radius controls, and explicit rejection of suffix-preference auto-repair.
+- Separated temporal correlation with `/compact` from proven physical-file causation: rc.2 context compaction appends events and does not convert the durable artifact encoding.
+
 ## 0.5.142 - 2026-08-27
 
 ### Changed
