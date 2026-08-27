@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.134 - 2026-08-27
+
+### Changed
+
+- Reverified the community plugin audit against rc.2 and reviewed the runtime-tested marketplace proposal at an exact public commit.
+- Separated discovery, installability, runtime compatibility, and scoped security review; defined an immutable verdict tuple binding catalog, commit, package integrity, runner, suite, and time.
+- Added marketplace mutation-plane requirements for authentication, opaque identities, schema-aware atomic patch edits, package transaction preview, rollback, redaction, and sixteen acceptance gates.
+
 ## 0.5.133 - 2026-08-27
 
 ### Changed
