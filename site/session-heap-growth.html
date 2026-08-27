@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Bound DeepSeek Harness Session heap growth | Operator guide</title>
+  <meta name="description" content="Separate model context, live Session events, durable history, and resident subagents before a DeepSeek Harness Web Host reaches its heap limit.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Compaction is not heap collection">
+  <meta property="og:description" content="Four budgets, one retained-path map, and a two-stage Host pressure guard for DeepSeek Harness Sessions.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Bound DeepSeek Harness Session heap growth","description":"Separate model context, live Session events, durable history, and resident subagents before a DeepSeek Harness Web Host reaches its heap limit.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#budgets">Four budgets</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell heap-article">
+    <header class="article-hero heap-hero">
+      <p class="eyebrow">Host memory · Session retention</p>
+      <h1>Compaction is not heap collection.</h1>
+      <p class="article-deck">A smaller prompt can coexist with a growing live log. Measure four budgets before moving the crash boundary.</p>
+      <div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream rc.2 · b150a55</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>Source fact</strong><span>rc.2 appends every accepted event to the live <code>Session.log</code>. A surface replacement changes future model input but does not delete those raw records.</span></div>
+
+      <h2 id="budgets">One Session. Four budgets.</h2>
+      <div class="heap-budgets">
+        <section><span>01 · request</span><strong>Model context</strong><p>Compaction replaces older surface messages with a summary.</p><small>tokens</small></section>
+        <section><span>02 · process</span><strong>Live event log</strong><p>The append-only array stays resident for the Session lifetime.</p><small>heap bytes</small></section>
+        <section><span>03 · storage</span><strong>Durable history</strong><p>Committed events remain the replay and audit source.</p><small>artifact bytes</small></section>
+        <section><span>04 · topology</span><strong>Agent tree</strong><p>Continuable children retain handles and Sessions until settlement.</p><small>live owners</small></section>
+      </div>
+
+      <h2>Follow the retained path.</h2>
+      <div class="heap-path" role="img" aria-label="Events append to the raw log, project into the current model surface, persist to durable history, and can remain reachable through resident Agent handles">
+        <div><span>append</span><strong>Session events</strong><small>chunks · messages · results</small></div><b>→</b>
+        <div class="heap-hot"><span>resident</span><strong>Raw log</strong><small>push, never surface-trimmed</small></div><b>→</b>
+        <div><span>projection</span><strong>Current surface</strong><small>replace can shrink this</small></div>
+        <i aria-hidden="true">↘</i>
+        <div class="heap-durable"><span>append-only</span><strong>Durable archive</strong><small>full replay evidence</small></div>
+      </div>
+
+      <div class="heap-rule"><strong>Prompt size ↓</strong><span>does not prove</span><strong>Resident heap ↓</strong></div>
+
+      <h2>Stop the slope before the abort.</h2>
+      <ol class="containment-sequence">
+        <li><strong>Freeze admission</strong><span>Do not start another fan-out wave or broad Goal round.</span></li>
+        <li><strong>Cancel deliberately</strong><span>Record the parent and children that may have crossed side-effect boundaries.</span></li>
+        <li><strong>Flush evidence</strong><span>Use supported export or flush paths; never edit a live compressed log.</span></li>
+        <li><strong>Restart smaller</strong><span>Use a durable handoff, fresh Session, fewer children, and fixed-size batches.</span></li>
+      </ol>
+
+      <h2>Measure the boundary, not the symptom.</h2>
+      <div class="heap-measures">
+        <section><span>Process</span><strong>heapUsed · heapTotal · RSS</strong><p>Sample at fixed intervals and retain the slope across GC cycles.</p></section>
+        <section><span>Session</span><strong>events by type + bytes</strong><p>Count closed chunks, final messages, surface nodes, and replacement generations.</p></section>
+        <section><span>Topology</span><strong>active · waiting · settled</strong><p>Separate a concurrent fan-out peak from the parent’s cumulative history.</p></section>
+      </div>
+
+      <h2>Use two pressure stages.</h2>
+      <div class="heap-pressure">
+        <section><span>Soft threshold</span><strong>Stop new admission.</strong><p>Emit a typed diagnostic, settle or cancel active work, and flush durable state.</p></section>
+        <section><span>Hard threshold</span><strong>Exit cleanly.</strong><p>Reject new model and tool work, cancel, flush within a deadline, then let a supervisor restart.</p></section>
+      </div>
+      <p>Use sustained samples and hysteresis. Raising <code>--max-old-space-size</code> only delays an unbounded retained term and can move pressure into host swap.</p>
+
+      <h2>Preserve compatibility.</h2>
+      <div class="heap-gates">
+        <span>Durable archive stays complete</span><span>Hot window is byte-bounded</span><span>Cold replay derives the same messages</span><span>Human transcript semantics remain explicit</span><span>Source references still validate</span><span>Plugins release closed chunks</span>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/index.ts">rc.2 Session log and in-memory store</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/surface.ts">rc.2 surface replacement fold</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subagent/subagent/src/continuation.ts">rc.2 continuable Agent lifecycle</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4722">Community Web Host OOM report #4722</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the full operator design.</h2>
+        <p>The canonical guide adds four controlled reproductions, a diagnostic bundle, failure router, compatibility questions, and twenty regression gates.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

@@ -673,6 +673,11 @@
       "source": "docs/en/integrations/sdk-human-interaction-wire.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/operations/session-heap-growth.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

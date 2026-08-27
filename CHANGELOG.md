@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.118 - 2026-08-27
+
+### Added
+
+- Added a source-backed operator guide separating model context, the live Session log, durable history, and resident continuable subagents as four independent memory budgets.
+- Documented emergency containment, four controlled heap reproductions, a diagnostic bundle, byte-aware hot-window design, and separate subagent reclamation.
+- Added a visual retained-path map, two-stage Host heap guard, compatibility questions for closed-message chunk reclamation, and twenty regression gates.
+
 ## 0.5.117 - 2026-08-27
 
 ### Changed

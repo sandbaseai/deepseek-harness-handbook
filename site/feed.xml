@@ -5,9 +5,11 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-28T04:00:00Z</updated>
+  <updated>2026-08-28T05:00:00Z</updated>
   <author><name>SandBase</name><uri>https://github.com/sandbaseai</uri></author>
   <rights>Apache-2.0. Community-maintained and not an official DeepSeek AI project.</rights>
+
+  <entry><title>Bound Session heap separately from model context</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html</id><updated>2026-08-28T05:00:00Z</updated><summary>Separate four memory budgets, reproduce the retained slope, and stop new Host admission before a long Session or resident Agent tree reaches the heap boundary.</summary></entry>
 
   <entry><title>Route narration without inventing a tool call</title><link href="https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/runaway-agent-loop-r2</id><updated>2026-08-28T04:00:00Z</updated><summary>Count streams, turns, and steps; identify every wake source; and stop automatically sourced actionless rounds without converting model prose into action.</summary></entry>
 
