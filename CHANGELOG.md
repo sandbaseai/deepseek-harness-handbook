@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.95 - 2026-08-27
+
+### Changed
+
+- Expanded the ACP permission guide with the unanswered reverse-request hang from official report #4693.
+- Added wire-level diagnosis, client-owned deadlines, exactly-once terminal responses, shutdown handling, and fail-closed conformance gates.
+- Added a visual guide distinguishing automation policy, bounded interactive UI, and independently enforced external execution.
+
 ## 0.5.94 - 2026-08-27
 
 ### Added

@@ -63,7 +63,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix Web Search authentication when chat uses a custom gateway | [Custom-gateway Web Search runbook](https://sandbaseai.github.io/deepseek-harness-handbook/web-search-custom-gateway.html) |
 | Add an MCP server or diagnose missing MCP tools | [MCP preset and connection guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
 | Evaluate DeepSeek Harness as an ACP External Agent in an editor | [ACP editor-integration boundary](https://sandbaseai.github.io/deepseek-harness-handbook/acp-editor-boundary.html) |
-| Render an ACP permission request in a custom Web client | [ACP permission UI contract](https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-request-ui.html) |
+| Fix or render an ACP permission request without hanging the turn | [ACP permission client contract](https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-hang.html) |
 | Move Codex or Claude Code memory without losing provenance or isolation | [Sessions, Skills, and long-term memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |
 | Run Web, headless, ACP, or SDK processes concurrently without sharing a writable Session root | [Single-writer Session topology](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-single-writer.html) |
 | Fix `spawn bash ENOENT` after moving or renaming a workspace | [Moved-workspace recovery runbook](https://sandbaseai.github.io/deepseek-harness-handbook/workspace-moved-spawn-enoent.html) |
