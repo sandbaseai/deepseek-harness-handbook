@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Control stale DeepSeek Harness subagent follow-ups | Inbox map</title>
+  <meta name="description" content="List and cancel only a direct parent's pending subagent follow-ups while preserving settlement notices, other senders, FIFO identity, and claim races.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-inbox-control.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Your follow-ups are not the whole inbox">
+  <meta property="og:description" content="A source-backed authority and race map for safe continuable-subagent queue control.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/subagent-inbox-control.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Control stale DeepSeek Harness subagent follow-ups","description":"List and cancel only a direct parent's pending subagent follow-ups while preserving settlement notices, other senders, FIFO identity, and claim races.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/subagent-inbox-control.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/subagent-inbox-control.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#control">Control set</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell queue-article">
+    <header class="article-hero queue-hero">
+      <p class="eyebrow">Continuable subagents · message authority</p>
+      <h1>Your follow-ups are not the whole inbox.</h1>
+      <p class="article-deck">Control one authorized subsequence. Preserve every runtime notice and race boundary around it.</p>
+      <div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream rc.2 · b150a55</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>The boundary</strong><span>A continuable child uses its ordinary Agent inbox as the only turn queue. Parent follow-ups share that inbox with input owned by other runtime actors.</span></div>
+
+      <h2>One inbox. Several owners.</h2>
+      <div class="queue-lanes" role="img" aria-label="A child Agent inbox contains parent follow-ups, runtime settlement notices, initial and child-local input, plugin input, and next-step steering">
+        <section class="queue-eligible"><span>eligible</span><strong>Direct-parent follow-ups</strong><p>Unclaimed · next-turn · stable message id</p></section>
+        <section><span>preserve</span><strong>Settlement notices</strong><p>Wake the parent when owned children finish</p></section>
+        <section><span>preserve</span><strong>Initial + local input</strong><p>Different lifecycle and authority</p></section>
+        <section><span>preserve</span><strong>Steering + plugins</strong><p>Different target, source, or sender</p></section>
+      </div>
+
+      <div class="queue-equation"><strong>Empty filtered list</strong><span>means</span><strong>no eligible follow-ups</strong><span>not</span><strong>empty inbox</strong></div>
+
+      <h2 id="control">Expose the narrow control set.</h2>
+      <div class="queue-controls">
+        <section><code>list</code><strong>Bound the view.</strong><p>Exact live child, direct parent, stable IDs, short previews, pagination, and no cold resume.</p></section>
+        <section><code>cancel</code><strong>Race the claim.</strong><p>Cancel-first records a durable splice. Claim-first returns false and never aborts the turn.</p></section>
+        <section><code>replace</code><strong>Make it atomic.</strong><p>Cancel and insert one parent-owned follow-up in one generation-checked transaction.</p></section>
+        <section><code>reorder</code><strong>Preserve other owners.</strong><p>Reorder only eligible follow-ups; never move or drop runtime notices.</p></section>
+      </div>
+
+      <h2>Linearize cancellation.</h2>
+      <div class="queue-race">
+        <div><span>Parent</span><strong>cancel(id)</strong></div><b>↘</b>
+        <div class="queue-cut"><span>Mutation boundary</span><strong>eligible + pending?</strong><small>repeat authority check</small></div><b>↗</b>
+        <div><span>Agent</span><strong>claim(id)</strong></div>
+      </div>
+      <div class="queue-outcomes">
+        <section><span>cancel wins</span><strong><code>inbox/spliced</code></strong><p><code>outcome: canceled</code>; no later user message for that id.</p></section>
+        <section><span>claim wins</span><strong>Return false</strong><p>The message owns the active turn. Do not call <code>Agent.cancel()</code>.</p></section>
+      </div>
+
+      <h2>Interrupt is not queue cleanup.</h2>
+      <div class="queue-warning"><strong><code>interrupt()</code></strong><span>cancels current work with <code>keepInbox: true</code></span><strong>pending FIFO survives</strong></div>
+      <p>Until scoped controls exist, keep one unacknowledged correction per child, aggregate related changes, and wait for a report or settlement before sending another order-sensitive follow-up.</p>
+
+      <h2>Six proof gates.</h2>
+      <div class="queue-gates">
+        <span>Exact live direct parent</span><span>Stable occurrence identity</span><span>No cold resume on list</span><span>Claim/cancel race is honest</span><span>Runtime notices never move</span><span>Every acceptance is accounted</span>
+      </div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subagent/subagent/src/continuation.ts">rc.2 continuable subagent manager</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent/src/inbox.ts">rc.2 durable Inbox implementation</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent/README.md">rc.2 Agent inbox contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4631">Pending follow-up control request #4631</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the full subagent contract.</h2>
+        <p>The canonical guide adds current operator workarounds, authority filters, atomic replace semantics, failure routing, and twenty regression gates.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/subagents.md">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

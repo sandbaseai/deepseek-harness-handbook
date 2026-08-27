@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.119 - 2026-08-27
+
+### Changed
+
+- Reverified the continuable-subagent guide against rc.2 and added scoped control for stale pending parent follow-ups.
+- Separated the exact direct parent's eligible follow-up subsequence from initial input, steering, plugin messages, other senders, and runtime settlement notices in the shared Agent inbox.
+- Added bounded list semantics, a linearizable single-message cancel race, atomic replace and safe reorder constraints, a visual authority map, and twenty regression gates.
+
 ## 0.5.118 - 2026-08-27
 
 ### Added

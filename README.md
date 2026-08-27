@@ -149,6 +149,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Design multi-tenant MCP across ACP | [Session-scoped MCP architecture](docs/en/integrations/acp-session-scoped-mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
+| Inspect or cancel one stale pending continuable-subagent follow-up | [Subagent inbox control map](https://sandbaseai.github.io/deepseek-harness-handbook/subagent-inbox-control.html) |
 | Let a subagent request human clarification safely | [Parent-owned question relay](docs/en/agent-patterns/subagent-human-question-relay.md) |
 | Understand the runtime | [The agent-runtime mental model](docs/en/architecture/agent-runtime.md) |
 | Understand one complete turn | [Agent Loop and Session Events](docs/en/architecture/agent-lifecycle.md) |

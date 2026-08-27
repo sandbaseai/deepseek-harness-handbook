@@ -1,9 +1,10 @@
 ---
 title: DeepSeek Harness Subagents Guide
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-27
+upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # DeepSeek Harness Subagents: delegation without one fixed backend
@@ -48,6 +49,8 @@ persisted child Session
 
 No second message queue is introduced. Follow-ups use the child's ordinary Agent inbox, so accepted messages retain one observable FIFO order.
 
+That inbox is not synonymous with “messages I sent.” It can also contain initial input, child-local or plugin input, steering context, and runtime settlement notices that wake a parent after its own child finishes. Any queue-control API must preserve those other owners.
+
 ## Start, follow up, and interrupt
 
 - `startContinuable()` reserves the child ID, records its descriptor, creates the Agent, and accepts the initial prompt.
@@ -55,6 +58,111 @@ No second message queue is introduced. Follow-ups use the child's ordinary Agent
 - `interrupt()` cancels the live target's current work but keeps unclaimed inbox messages and descendants; a later message can resume the queue.
 
 Caller cancellation owns lookup and admission only until inbox acceptance. After acceptance, the continuation manager owns the Activation independently.
+
+## Control stale pending follow-ups without clearing the inbox
+
+Upstream discussion [#4631](https://github.com/deepseek-ai/deepseek-harness/discussions/4631) reports that several corrections sent to a busy continuable child remain FIFO even after earlier corrections become stale. rc.2 exposes no model-facing list, single-message cancel, reorder, priority, or replace-pending operation for that child queue.
+
+`interrupt()` does not solve this problem. It calls `Agent.cancel(..., { keepInbox: true })`: the active turn is interrupted, but unclaimed messages stay pending and can resume later.
+
+Until a scoped control lands:
+
+1. keep at most one unacknowledged correction per child;
+2. ask the child to report or settle before issuing another correction when ordering matters;
+3. combine related corrections into one replacement instruction before sending;
+4. treat an interrupted child as still owning its pending queue;
+5. abandon the child identity and start a fresh bounded child only when repeating old work and losing its private in-flight state is acceptable.
+
+Do not claim that a fresh child cancels the old one. Stop or dispose the old owner through its supported lifecycle and verify external side effects separately.
+
+## Define the controllable subsequence
+
+A safe future API does not expose arbitrary `agent.inbox` mutation. It derives an **eligible subsequence** of pending messages satisfying all of these conditions:
+
+- the target is an exact live resident continuable child;
+- the caller is its exact live direct parent;
+- the message is an unclaimed `next-turn` follow-up admitted through that parent-child relay;
+- its source and admission record identify that same relay and parent;
+- the Activation is not closing;
+- the message is neither initial input, steering/next-step context, child-local input, plugin input, nor a runtime settlement notice.
+
+An empty result means “none of this parent's pending follow-ups,” not “the child's inbox is empty.” This wording matters: hidden ineligible work may still keep the child running or waiting.
+
+### List safely
+
+A list operation should:
+
+- never cold-resume an absent child merely to inspect it;
+- return stable `MessageId` values, target, accepted time or seq, and a bounded preview;
+- paginate with a small default and enforced maximum;
+- omit or redact content the caller is not authorized to see;
+- identify the snapshot generation or durable seq used;
+- label the result as a filtered view, not a complete inbox dump.
+
+The full message body may contain secrets, tool output, or personal data. A model-facing tool usually needs an identifier and short preview, not unrestricted content.
+
+### Cancel one pending message
+
+Cancellation must linearize against claim:
+
+1. authorize the exact live parent and child;
+2. locate the `MessageId` in the eligible pending subsequence;
+3. repeat the eligibility check at the mutation boundary;
+4. remove it through the inbox's durable cancellation path;
+5. return whether cancellation won the race.
+
+In rc.2, `Inbox.remove(messageId)` locates a still-pending message, appends `agent/inbox/spliced { outcome: "canceled" }`, mutates the live projection, and emits `agent/inbox/discarded`. If claim wins first, `remove()` returns `false`; the control must not cancel the active Agent turn or pretend the already-claimed message was withdrawn.
+
+Cancellation is not message deletion from history. The durable splice remains evidence that accepted work was canceled before it ran.
+
+### Replace or reorder only eligible follow-ups
+
+A raw `clear()`, full inbox reorder, or `prepend()` is unsafe as a parent-facing control. It can remove or move settlement notices and break the child's view of its own descendants.
+
+Define any future operation over the eligible subsequence while preserving every ineligible message and the relative order of all ineligible entries. For example:
+
+- `replace_pending` means cancel this parent's eligible pending follow-ups and insert one new follow-up atomically;
+- `move_to_front` means move one eligible follow-up ahead of this parent's other eligible follow-ups, not ahead of arbitrary inbox messages;
+- `priority` selects among eligible messages from the same authority domain; it does not preempt a claimed turn;
+- a generation mismatch refuses rather than applying a stale reorder to a changed inbox.
+
+The cancellation and insertion must be one durable transaction if callers are promised atomic replace. Two independent operations create a window in which a claim can admit the old message, the new message, or both.
+
+## Queue-control failure router
+
+| Observation | Boundary | Safe interpretation |
+|---|---|---|
+| list is empty while child is waiting | filtered visibility | no eligible parent follow-up; hidden settlement/internal work may exist |
+| cancel returns false | claim/cancel race or wrong id | message was not eligible and pending at mutation time |
+| interrupted child later processes old correction | `keepInbox: true` | expected preservation, not a failed interrupt |
+| canceled id has a durable splice but no `user/message` | cancel won before claim | accepted work was accounted without entering a turn |
+| same id appears in a later turn | identity or replay defect | preserve insertion, splice, claim, and `user/message` events |
+| replace removes a settlement notice | authority-filter defect | stop using the operation; child-lifecycle progress may be lost |
+| urgent message runs after old work | FIFO acceptance | priority did not preempt or reorder claimed work |
+| inspection cold-resumes a settled child | observation side effect | redesign list as resident-only or use a separate durable mailbox view |
+
+## Queue-control regression gates
+
+- Listing is bounded, paginated, and resident-only.
+- An empty list is documented as an eligible-subsequence result.
+- Only the exact live direct parent can list or cancel its follow-ups.
+- A host-user address, ancestor, sibling, stale Agent, or caller-supplied source is insufficient authority.
+- Initial input is never listed or canceled as a follow-up.
+- `next-step` steering and injected context are excluded.
+- Settlement and other internal notices are excluded.
+- Messages from another sender are excluded.
+- Previews are length-bounded by Unicode code point and redact protected content.
+- Stable `MessageId` is the occurrence identity; text equality is never used.
+- Cancel-first produces one durable canceled splice and no later claim.
+- Claim-first returns not-canceled and never aborts the active turn.
+- Repeated cancellation is idempotent and reports no second success.
+- Inspection and failed cancellation never cold-resume a child.
+- Replace is atomic or explicitly refuses to promise atomicity.
+- Reorder preserves the positions and relative order of every ineligible entry.
+- Priority never preempts already-claimed work.
+- A generation mismatch rejects a stale list-then-mutate request.
+- Interrupt preserves unclaimed messages exactly as documented.
+- Disposal accounts for every accepted message as claimed, canceled, or explicitly stopped.
 
 ## Authorization boundary
 
@@ -135,8 +243,12 @@ These values are starting bounds, not universal sizing advice. Increase one dime
 
 ## Official sources
 
-- [Subagent subsystem](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/subagent.md)
-- [Subagent packages](https://github.com/deepseek-ai/deepseek-harness/tree/master/packages/subagent)
-- [Extension cookbook](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/cookbook/extension-cookbook.md)
-- [Workflow worker-thread limits](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/workflow/workflow-worker-thread/README.md#config)
+- [rc.2 continuable subagent manager](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subagent/subagent/src/continuation.ts)
+- [rc.2 subagent contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subagent/subagent/README.md)
+- [rc.2 durable Inbox implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent/src/inbox.ts)
+- [rc.2 Agent inbox and cancellation contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent/README.md)
+- [rc.2 concrete Agent loop](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/agent.ts)
+- [Workflow worker-thread limits](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/workflow/workflow-worker-thread/README.md#config)
+- [Pending follow-up control request #4631](https://github.com/deepseek-ai/deepseek-harness/discussions/4631)
+- [Non-upstream list-and-cancel reference implementation](https://github.com/Jstn-1g/deepseek-harness/commit/913172e7972c0541cb08122e0e9e75ae8f6472c9)
 - [480-child JavaScript OOM report](https://github.com/deepseek-ai/deepseek-harness/discussions/1897)
