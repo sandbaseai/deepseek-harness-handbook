@@ -16,20 +16,20 @@ Unlike a command catalog, this handbook follows the complete Agent boundary: mod
 
 Choose one path and get to evidence quickly:
 
-| Run | Debug | Build |
+| Run | Evaluate | Debug or build |
 |---|---|---|
 | [Five-minute quickstart](docs/en/getting-started/quickstart.md) | [Agent Harness Scorecard](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html) | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
-| [CLI and headless map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) | [Profile repair and reset](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) | [MCP guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
-| [API cost boundary](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html) | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) | [Agent runtime map](docs/en/architecture/agent-runtime.md) |
+| [CLI and headless map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) | [Agent runtime map](docs/en/architecture/agent-runtime.md) | [Profile repair and reset](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) |
+| [API cost boundary](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html) | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) | [MCP guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
 
 ### Newly source-verified
 
 | Problem | What the guide proves |
 |---|---|
-| [Route Windows exit 3221226505](https://sandbaseai.github.io/deepseek-harness-handbook/windows-native-exit.html) | Convert the unsigned status, identify the terminated process, and correlate WER, a private dump, and the last durable Session boundary before repairing. |
-| [Stop context-overflow recovery loops](https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html) | Classify provider wording, price conversation and compaction envelopes separately, and stop an unchanged failed-range fingerprint. |
-| [Find a WebView MutationObserver loop owner](https://sandbaseai.github.io/deepseek-harness-handbook/webview-mutation-loop.html) | Separate Host, official Web, desktop wrapper, injected client code, and one immutable Session trigger fixture. |
-| [Design RTL and mixed-script rendering](https://sandbaseai.github.io/deepseek-harness-handbook/rtl-mixed-text.html) | Treat direction as semantics across Markdown, code, inline isolation, composer geometry, IME, and accessibility—not as global alignment. |
+| [Order Agent context without corrupting cache or replay](docs/en/architecture/agent-lifecycle.md#prefix-caching-is-a-message-order-contract) | Separate provenance, instruction recency, durable order, and provider prefix stability before moving injected context. |
+| [Recover question actions clipped by a long header](https://sandbaseai.github.io/deepseek-harness-handbook/missing-question-card.html) | Distinguish a missing Host request from a present card whose fixed header consumes the bounded scroll area. |
+| [Route double-encoded structured tool arguments](docs/en/plugin-development/tool-schema-subset.md#route-double-encoded-structured-arguments-before-coercing-them) | Keep validation pure while any compatibility normalization stays schema-driven, observable, and identical across approval and execution. |
+| [Evaluate eight Agent Harness boundaries](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html) | Review model routing, lifecycle, state, tools, authority, isolation, evidence, and release gates locally in the browser. |
 | [Understand why AGENTS.md was ignored](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) | Distinguish discovery and model visibility from instruction following and deterministic enforcement. |
 
 Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
