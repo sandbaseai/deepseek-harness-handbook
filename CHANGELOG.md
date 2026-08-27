@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.126 - 2026-08-27
+
+### Changed
+
+- Reverified the AGENTS.md scope guide against rc.2 and separated discovery, model visibility, instruction following, and deterministic enforcement.
+- Added a visible-but-ignored diagnosis, concrete rule-writing criteria, adversarial route testing, and policy owners for filesystem, release, command, secret, and production boundaries.
+- Revised the visual guide around the decisive distinction: workspace prose can guide a model, while hard invariants need non-model enforcement.
+
 ## 0.5.125 - 2026-08-27
 
 ### Changed

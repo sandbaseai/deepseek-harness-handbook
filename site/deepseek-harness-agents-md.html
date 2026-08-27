@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>DeepSeek Harness AGENTS.md scope and precedence</title>
-  <meta name="description" content="Map DeepSeek Harness user-global, project, local, nested, and Skill instructions. Diagnose refresh, budget, and DSH_HOME scope collisions.">
+  <title>Why AGENTS.md guidance is not an enforcement gate</title>
+  <meta name="description" content="Separate AGENTS.md discovery, model visibility, instruction following, and deterministic enforcement in DeepSeek Harness rc.2.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Put every instruction at the right scope">
-  <meta property="og:description" content="One visual map for global, repository, local, nested, and task instructions in DeepSeek Harness.">
+  <meta property="og:title" content="Guidance is not a policy gate">
+  <meta property="og:description" content="Prove the rule loaded, then enforce destructive and security invariants outside model prose.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness AGENTS.md scope and precedence","description":"Map DeepSeek Harness user-global, project, local, nested, and Skill instructions. Diagnose refresh, budget, and DSH_HOME scope collisions.","dateModified":"2026-08-19","url":"https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Why AGENTS.md Guidance Is Not an Enforcement Gate","description":"Separate AGENTS.md discovery, model visibility, instruction following, and deterministic enforcement in DeepSeek Harness rc.2.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
@@ -27,21 +27,35 @@
   <main id="main" class="article-shell agents-scope-article">
     <header class="article-hero agents-scope-hero">
       <div>
-        <p class="eyebrow">Agent instruction architecture</p>
-        <h1>Put every instruction at the right scope.</h1>
-        <p class="article-deck">Global, repository, nested, or task-specific. Make the boundary explicit.</p>
-        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+        <p class="eyebrow">AGENTS.md · model context · rc.2</p>
+        <h1>Guidance is not a policy gate.</h1>
+        <p class="article-deck">Prove the rule loaded. Resolve authority. Enforce hard invariants outside model prose.</p>
+        <div class="article-meta"><span>Revision 2 · 2026-08-27</span><span>Upstream b150a55</span></div>
       </div>
-      <div class="scope-stack" role="img" aria-label="DeepSeek Harness instruction files arranged from broad user-global scope to specific nested and task scope">
-        <div><small>Every Session</small><strong>$DSH_HOME/AGENTS.md</strong></div>
-        <div><small>One repository</small><strong>repo/AGENTS.md</strong></div>
-        <div><small>One subtree</small><strong>src/AGENTS.md</strong></div>
-        <div><small>One task type</small><strong>Skill</strong></div>
+      <div class="scope-stack" role="img" aria-label="Four distinct claims: instruction discovery, model visibility, probabilistic following, and deterministic enforcement">
+        <div><small>1 · Loader</small><strong>discovered</strong></div>
+        <div><small>2 · Request</small><strong>model-visible</strong></div>
+        <div><small>3 · Model</small><strong>followed?</strong></div>
+        <div><small>4 · Policy</small><strong>enforced</strong></div>
       </div>
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>Two rules</strong><span>Direct user instructions outrank workspace prose. Inside the workspace chain, the more specific directory wins.</span></div>
+      <div class="signal"><strong>The decisive boundary</strong><span>rc.2 injects workspace instructions as durable user-role guidance. The loader can prove visibility; only a sandbox, approval gate, validator, CI rule, or server policy can prove enforcement.</span></div>
+
+      <h2>Classify the claim before changing the prompt.</h2>
+      <div class="scope-map-grid">
+        <section><span>Loader evidence</span><strong>Discovered</strong><code>source path</code><p>The expected file entered the current instruction chain.</p></section>
+        <section><span>Request evidence</span><strong>Model-visible</strong><code>within budget</code><p>The retained user message reached this model request.</p></section>
+        <section><span>Behavior evidence</span><strong>Followed</strong><code>probabilistic</code><p>The proposed action happened to comply in this turn.</p></section>
+        <section><span>Control evidence</span><strong>Enforced</strong><code>deterministic</code><p>A non-model boundary rejects every forbidden action.</p></section>
+      </div>
+
+      <h2>Give hard rules a real owner.</h2>
+      <div class="scope-contrast">
+        <section><strong><code>AGENTS.md</code></strong><p>“Do not push without approval.” Useful guidance, but the model may still propose or call the action.</p><span>Influences behavior</span></section>
+        <section class="scope-positive"><strong><code>approval + branch rule</code></strong><p>The tool and GitHub reject an unauthorized push or merge regardless of model output.</p><span>Enforces behavior</span></section>
+      </div>
 
       <h2 id="scope-map">Choose by lifetime, not convenience.</h2>
       <div class="scope-map-grid">
@@ -73,7 +87,7 @@
         <span aria-hidden="true">≠</span>
         <div><small>Wanted project meaning</small><strong>$DSH_HOME/AGENTS.md</strong><p>Applies only while editing DSH configuration.</p></div>
       </div>
-      <p>rc.7 provides no second official global path, so these policies cannot be separated in the same file. Treat it as global. Use direct task instructions, an explicit Skill, or a separate configuration repository for local guidance.</p>
+      <p>rc.2 provides no second official global path, so these policies cannot be separated in the same file. Treat it as global. Use direct task instructions, an explicit Skill, or a separate configuration repository for local guidance.</p>
 
       <h2>Budget preserves specificity.</h2>
       <div class="scope-budget">
@@ -91,21 +105,21 @@
         <li><span>05</span>Removal creates a durable removal notice.</li>
         <li><span>06</span>Budget notice names omitted and truncated paths.</li>
         <li><span>07</span>No secret appears in rendered instructions.</li>
-        <li><span>08</span>$DSH_HOME workspace collision is reviewed.</li>
+        <li><span>08</span>Hard safety rules have a deterministic policy owner.</li>
       </ul>
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3285">Upstream scope proposal #3285</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/context/agent-instructions/README.md">Official agent-instructions lifecycle</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/context/agent-instructions/src/config.ts">Discovery defaults and fixed global path</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/context/agent-instructions/src/files.ts">Root walk and bounded loading</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4731">Why AGENTS.md can appear not to constrain the model #4731</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/README.md">Official rc.2 agent-instructions lifecycle</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/src/render.ts">User-role framing and precedence text</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/src/files.ts">Root walk and bounded loading</a></li>
       </ul>
 
       <section class="article-cta">
         <h2>Keep the complete scope runbook.</h2>
-        <p>The canonical guide covers authority, baseline order, local overlays, nested refresh, budgets, collisions, diagnosis, and acceptance.</p>
-        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
+        <p>The canonical guide covers visibility proof, authority, scope, refresh, budgets, concrete rules, deterministic enforcement, adversarial testing, and acceptance.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md">Read the complete guide</a>
       </section>
     </article>
   </main>

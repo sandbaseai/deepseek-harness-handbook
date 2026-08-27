@@ -1,19 +1,48 @@
 ---
 title: DeepSeek Harness AGENTS.md Scope and Precedence
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # DeepSeek Harness AGENTS.md scope and precedence
 
-DeepSeek Harness loads a bounded chain of `AGENTS.md`-compatible files into each Session. The chain is durable context, not a process-wide prompt mutation and not a Skill catalog.
+DeepSeek Harness loads a bounded chain of `AGENTS.md`-compatible files into each Session. The chain is durable user-role context, not a process-wide prompt mutation, a deterministic policy engine, or a Skill catalog.
 
 Use this guide to decide where a rule belongs, predict which files apply to a Session, and diagnose stale or duplicated instructions without editing Session history.
 
 > [!WARNING]
-> This behavior is verified at upstream commit `99f6f02` (rc.7). `$DSH_HOME/AGENTS.md` is currently the fixed user-global path. Discussion #3285 proposes separating that path from project instructions, but the proposal was not implemented at the verification date.
+> This behavior is reverified at upstream commit `b150a55` (`0.1.1-rc.2`). `$DSH_HOME/AGENTS.md` is currently the fixed user-global path. Discussion #3285 proposes separating that path from project instructions, but the proposal was not implemented at the verification date.
+
+## Loaded does not mean enforced
+
+The shipped plugin frames workspace instructions in a durable **user-role** message. Its own text says the rules “may be relevant,” should be used “as guidance when applicable,” and do not override system, developer, or direct user instructions. That distinction explains many reports that an `AGENTS.md` “sometimes cannot constrain the AI.”
+
+There are four separate claims:
+
+| Claim | Evidence that proves it |
+|---|---|
+| discovered | the expected source path is present in the current baseline or update event |
+| model-visible | the derived request contains the retained workspace message within budget |
+| followed | the model's proposed action matches the rule in this turn |
+| enforced | a non-model boundary rejects a forbidden action even when the model proposes it |
+
+`AGENTS.md` can establish the first two. It can influence the third. It cannot by itself establish the fourth.
+
+Use deterministic controls for hard requirements:
+
+| Requirement | Enforcement owner |
+|---|---|
+| “Never write outside this repository” | filesystem containment or sandbox policy |
+| “Do not push without approval” | approval gate plus GitHub branch protection |
+| “Only these commands are allowed” | tool allowlist and argument validator |
+| “Tests must pass before merge” | required CI status checks |
+| “Never expose this secret” | credential isolation, redaction, and egress policy |
+| “Do not delete production data” | least-privilege credentials and server-side authorization |
+
+Keep the matching instruction too—it helps the model choose the safe path—but do not make prose the last security boundary.
 
 ## The authority and scope stack
 
@@ -118,6 +147,31 @@ A file larger than `maxSourceBytes` is ignored rather than partially read. The d
 
 ## Diagnose unexpected behavior
 
+Start by classifying the failure instead of rewriting the rule:
+
+```mermaid
+flowchart TD
+  O[Unexpected Agent action] --> V{Rule visible in current request?}
+  V -->|no| D[Diagnose scope, discovery, refresh, budget]
+  V -->|yes| C{Conflicting higher authority?}
+  C -->|yes| A[Resolve system, developer, direct-user conflict]
+  C -->|no| H{Hard safety invariant?}
+  H -->|yes| E[Add deterministic enforcement]
+  H -->|no| R[Make rule concrete and test compliance]
+```
+
+### A rule is visible but not followed
+
+- Check for a conflicting system, developer, or current direct-user instruction.
+- Replace vague goals such as “be careful” with an observable action, boundary, and stop condition.
+- Separate repository facts from mandatory workflow. Long background prose competes for attention.
+- Put the rule in the narrowest applicable directory instead of repeating it globally and locally.
+- State what to do when the rule cannot be satisfied; otherwise the model may improvise.
+- Test a fresh Session with a small, adversarial task and inspect both the request context and attempted tool call.
+- If violating the rule would cause damage, stop prompt tuning and add a policy or authorization gate.
+
+This is probabilistic instruction following, so a single successful test is not enforcement proof. Run a small matrix across the model routes and task shapes you actually support.
+
 ### A rule never appears
 
 - Confirm the Session cwd and nearest configured project-root marker.
@@ -151,13 +205,18 @@ A file larger than `maxSourceBytes` is ignored rather than partially read. The d
 - [ ] Budget diagnostics identify every omitted or truncated path.
 - [ ] No secret is present in the rendered baseline or Session export.
 - [ ] A `$DSH_HOME` workspace is reviewed for the fixed-global collision.
+- [ ] A visible-but-ignored rule is separated from a missing or stale rule.
+- [ ] Every destructive, security, release, and egress invariant has a deterministic owner outside model prose.
+- [ ] Conflicting higher-authority instructions have an explicit resolution.
+- [ ] Critical rules name an observable action, boundary, failure behavior, and stop condition.
+- [ ] Compliance is tested across supported model routes and adversarial task shapes.
 
 ## Primary sources
 
 - [Upstream scope proposal #3285](https://github.com/deepseek-ai/deepseek-harness/discussions/3285)
-- [`dsh-agent-instructions` README at `99f6f02`](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/context/agent-instructions/README.md)
-- [Discovery configuration and fixed global path](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/context/agent-instructions/src/config.ts)
-- [Root discovery, candidate loading, and bounded reads](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/context/agent-instructions/src/files.ts)
-- [Precedence framing and change messages](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/context/agent-instructions/src/render.ts)
-- [Shipped base composition and 65,536-byte budget](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/bundle/base/cordis.patch.yml)
-
+- [Why AGENTS.md can appear not to constrain the model #4731](https://github.com/deepseek-ai/deepseek-harness/discussions/4731)
+- [`dsh-agent-instructions` README at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/README.md)
+- [Discovery configuration and fixed global path](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/src/config.ts)
+- [Root discovery, candidate loading, and bounded reads](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/src/files.ts)
+- [User-role framing, precedence, and change messages](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/context/agent-instructions/src/render.ts)
+- [Shipped base composition and 65,536-byte budget](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/bundle/base/cordis.patch.yml)
