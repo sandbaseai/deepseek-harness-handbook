@@ -152,7 +152,7 @@ Do not infer support from a provider logo or a model family name. The selected e
 | Lifecycle | Processing states, reuse window, expiry, deletion, residency, and retention? |
 | Output | Page or timestamp citations, token accounting, truncation, and safety signals? |
 
-Current provider documentation demonstrates why the planner cannot use one global Boolean. OpenAI Responses accepts an `input_file` by uploaded file id, URL, or inline file data, while its public quickstart specifically demonstrates PDF input. Gemini documents PDF inline and Files API paths, and a separate video path whose upload can remain in a processing state before becoming active. Those are provider examples, not an rc.2 contract and not evidence that every model behind either API accepts every file type.
+Current provider documentation demonstrates why the planner cannot use one global Boolean. OpenAI Responses accepts an `input_file` by uploaded file id, URL, or inline file data, while its file-input guide specifically documents PDF handling. Gemini documents PDF inline and Files API paths, and a separate video path whose upload can remain in a processing state before becoming active. Those are provider examples, not an rc.2 contract and not evidence that every model behind either API accepts every file type.
 
 Choose one explicit route:
 
@@ -313,7 +313,6 @@ Reconnect, cancellation, deletion, and export behavior:
 - [rc.2 attachment store contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/attachment/attachment/src/index.ts)
 - [rc.2 local image validation and storage](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/attachment/attachment-local/src/store.ts)
 - [rc.2 Session-authorized retrieval](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/host/apiproxy/src/api-proxy.ts)
-- [OpenAI Responses input-file contract](https://platform.openai.com/docs/api-reference/responses-streaming/response/content_part)
-- [OpenAI API file/PDF quickstart](https://platform.openai.com/docs/quickstart/make-your-first-api-request)
+- [OpenAI API file inputs](https://developers.openai.com/api/docs/guides/file-inputs)
 - [Gemini document understanding](https://ai.google.dev/gemini-api/docs/document-processing)
 - [Gemini video understanding](https://ai.google.dev/gemini-api/docs/video-understanding)
