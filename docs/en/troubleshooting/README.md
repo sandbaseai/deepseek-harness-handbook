@@ -88,6 +88,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 | Minimal preset `bash` reports terminal inspection unsupported on `win32` | preset / persistent PTY / process inspector | selected preset, native platform, tool name, and exact stderr |
 | First Windows `workspace-write` freezes Web and unrelated RPCs | synchronous ACL materialization | canonical root, tree size, first/second elapsed time, and control-plane responsiveness |
 | Windows folder picker opens but the worker exits without a result | native dialog / Node-Koffi decode / stale Host | dialog timing, Node version, exact DSH PID, and project-local native import |
+| Windows Web keeps listening but every HTTP request times out after one message | Host availability / stable thread wait | listener PID, timestamped probes, three private full dumps, and repeated main-thread frames |
 | Editing an existing Windows profile file reports `ReplaceFileW EACCES (Win32 5)` | atomic publication / HMR watcher | running Host owner, new-file A/B result, stopped-Host result, attributes, and ACL |
 | Response disappears after reload | persistence/session log | session events and configured store |
 | Session list is empty, or history reports a frame, sequence, or duplicate-start error | physical log / event ordering / client projection | exact signature, stopped-writer process list, immutable artifact copy, and repeated call IDs |
@@ -129,6 +130,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 - [Fix Minimal preset Bash on native Windows](windows-minimal-preset-bash.md)
 - [Diagnose the first Windows workspace-write freeze](windows-first-workspace-write-freeze.md)
 - [Windows folder-picker worker crash](windows-folder-picker-worker-crash.md)
+- [Diagnose a frozen Windows Web Host with repeat process dumps](windows-web-event-loop-hang.md)
 - [Plugin installation and known-good recovery](plugin-install-recovery.md)
 - [Unbrick a profile after an invalid user overlay](invalid-overlay-boot-failure.md)
 - [Find a corrupt package manifest behind a pathless boot SyntaxError](corrupt-package-json-profile-boot.md)

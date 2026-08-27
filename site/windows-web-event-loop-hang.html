@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Diagnose a Frozen DeepSeek Harness Web Host on Windows</title>
+  <meta name="description" content="Capture a Windows DeepSeek Harness Web hang with timestamped probes and three private ProcDump samples before attributing it to Node, zstd, a proxy, or a native module.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The port listens. The Host does not answer.">
+  <meta property="og:description" content="Turn a post-message Windows Web freeze into repeatable process, timeline, and thread evidence.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Diagnose a frozen DeepSeek Harness Web Host on Windows","dateModified":"2026-08-27","step":[{"@type":"HowToStep","name":"Join listener to process","text":"Resolve the listening port to the exact executable and command line."},{"@type":"HowToStep","name":"Prove loss of responsiveness","text":"Record timestamped HTTP probes before and after one bounded message."},{"@type":"HowToStep","name":"Capture repeat dumps","text":"Take three private full ProcDump samples before restarting the Host."},{"@type":"HowToStep","name":"Compare stable frames","text":"Use WinDbg to compare main and worker thread stacks without publishing secrets."}],"author":{"@type":"Organization","name":"SandBase"},"isAccessibleForFree":true,"inLanguage":"en"}</script>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#capture">Capture</a><a href="#classify">Classify</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div><p class="eyebrow">Windows · Web Host · rc.2</p><h1>The port listens.<br>The Host does not answer.</h1><p class="article-deck">Preserve the hung process before a watchdog erases the only root-cause evidence.</p><div class="hero-actions"><a class="button primary" href="#capture">Capture three dumps</a><a class="button secondary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-web-event-loop-hang.md">Full runbook</a></div></div>
+      <div class="identity-seal" role="img" aria-label="A message is submitted, HTTP probes begin timing out while the socket still listens, then three private process dumps preserve the repeated thread state"><div><small>before</small><strong>HTTP 200</strong></div><i>submit once</i><div><small>failure</small><strong>Listen · timeout</strong></div><i>do not restart</i><div><small>evidence</small><strong>3 × full dump</strong></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>Availability failure ≠ proven event-loop root cause.</strong><span>Low CPU, a listening port, no child, and a working standalone fetch narrow the surface. Only repeated thread state can connect the live Host to a stable wait.</span></div>
+
+      <h2>Hold four claims apart.</h2>
+      <div class="identity-proof">
+        <section><strong>Process lives</strong><p>The verified PID still owns port 3080.</p></section>
+        <section><strong>Host is unavailable</strong><p>Independent timestamped HTTP probes time out.</p></section>
+        <section><strong>Turn is the trigger</strong><p>Idle controls pass; one bounded submit precedes the first failure.</p></section>
+        <section><strong>Frame owns the wait</strong><p>The same main-thread stack persists across three dumps.</p></section>
+      </div>
+
+      <h2 id="capture">Capture before recovery.</h2>
+      <div class="remote-change">
+        <section><small>01 · identity</small><strong><code>Get-NetTCPConnection</code></strong><p>Join the listener to one executable and sanitized command line.</p></section><b>→</b>
+        <section><small>02 · timeline</small><strong><code>Invoke-WebRequest</code></strong><p>Record idle and post-submit status at fixed intervals.</p></section><b>→</b>
+        <section><small>03 · state</small><strong><code>procdump -ma -n 3</code></strong><p>Take full samples five seconds apart while requests fail.</p></section>
+      </div>
+      <pre><code>procdump64.exe -accepteula -ma -n 3 -s 5 $dshPid C:\dsh-hang-dumps</code></pre>
+      <aside class="remote-warning"><strong>Keep full dumps private.</strong><p>They can contain API keys, prompts, paths, environment variables, and model output. Publish only sanitized module, symbol, offset, timing, and repetition evidence.</p></aside>
+
+      <h2 id="classify">Route the repeated frames.</h2>
+      <div class="remote-router">
+        <div><code>same wait × 3</code><span>stable owner candidate</span><strong>Resolve module, symbol, and call path.</strong></div>
+        <div><code>different frames</code><span>slow progress</span><strong>Correlate with the probe and provider timeline.</strong></div>
+        <div><code>module loaded</code><span>presence only</span><strong>Do not call it causal.</strong></div>
+        <div><code>TUN changes result</code><span>network correlation</span><strong>Repeat the same prompt and compare stacks.</strong></div>
+        <div><code>standalone fetch 200</code><span>separate process path</span><strong>Do not clear DSH streaming or persistence.</strong></div>
+        <div><code>watchdog restart</code><span>availability recovery</span><strong>Capture the first hang before automation kills it.</strong></div>
+      </div>
+
+      <h2>Source narrows; dumps connect.</h2>
+      <p>The pinned rc.2 production tree contains no <code>Atomics.wait()</code> or <code>execSync()</code>. Its production <code>spawnSync()</code> sites are bounded to paths such as sandbox probes, plugin installation, and Windows process-tree termination. Zstandard append uses promisified <code>node:zlib</code>. None of those facts proves the cause—but they prevent package names from becoming unsupported conclusions.</p>
+
+      <h2>Recover after evidence.</h2>
+      <ol class="remote-tests"><li><strong>Hash the dumps</strong><span>Keep them on an encrypted private volume.</span></li><li><strong>Mark the turn unknown</strong><span>Do not retry any possible side effect blindly.</span></li><li><strong>Try Ctrl+C once</strong><span>Preserve whether the Host can handle it.</span></li><li><strong>Recheck PID ownership</strong><span>Stop only the process that still owns the listener.</span></li><li><strong>Start a new Session</strong><span>Run one-variable A/B tests after restart.</span></li><li><strong>Disable premature watchdogs</strong><span>They restore service but erase the first incident.</span></li></ol>
+
+      <section class="article-cta"><h2>Bring a sequence, not a suspect list.</h2><p>The full runbook includes PowerShell probes, ProcDump handling, WinDbg comparison, safe A/B design, cleanup, and an upstream report checklist.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-web-event-loop-hang.md">Read the complete runbook</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4755">Primary report</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

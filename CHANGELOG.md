@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.150 - 2026-08-27
+
+### Added
+
+- Added a Windows Web Host hang runbook for a process that keeps listening while all HTTP probes time out after message submission.
+- Added listener-to-process evidence, fixed-cadence probes, three private ProcDump samples, WinDbg comparison, bounded A/B tests, and evidence-preserving recovery.
+- Source-checked and rejected unsupported causal shortcuts around `Atomics.wait`, synchronous zstd, package presence, low CPU, and standalone provider fetches.
+
 ## 0.5.149 - 2026-08-27
 
 ### Changed

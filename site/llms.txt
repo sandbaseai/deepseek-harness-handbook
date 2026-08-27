@@ -21,6 +21,7 @@ ACP permission request UI: https://sandbaseai.github.io/deepseek-harness-handboo
 ACP permission reverse-request hang: https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-hang.html
 Subagent human question relay: https://sandbaseai.github.io/deepseek-harness-handbook/subagent-question-relay.html
 Subprocess crash isolation and Host survival: https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html
+Windows Web Host hang evidence capture: https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html
 Session archive, trash, restore, and purge: https://sandbaseai.github.io/deepseek-harness-handbook/session-archive-trash-delete.html
 read_image missing fs injection: https://sandbaseai.github.io/deepseek-harness-handbook/read-image-fs-inject.html
 pi-ai image MIME compatibility: https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-image-media-type.html
@@ -67,6 +68,7 @@ Web IME composition recovery: https://sandbaseai.github.io/deepseek-harness-hand
 - [DeepSeek Harness AGENTS.md scope and enforcement map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html): Separate discovery, model visibility, probabilistic instruction following, and deterministic enforcement; diagnose scope, refresh, budget, and the rc.2 DSH_HOME collision.
 - [DeepSeek Harness CLI map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html): Distinguish the shipped profile launcher from terminal chat, inspect compositions, run one headless task, interpret process evidence, and audit a community TUI.
 - [Windows folder-picker crash and truncation guide](https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-crash.html): Separate Node/Koffi aborts, UTF-16LE U+XX00 path corruption, incomplete native installation, and stale ownership, then switch safely to the shipped browse backend.
+- [Windows Web Host post-message hang](https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html): Join the listener PID to timestamped HTTP probes and three private full dumps, then distinguish a stable thread wait from provider, proxy, persistence, and watchdog correlations.
 - [DeepSeek API fetch failure guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-fetch-failed.html): Separate browser ingress, Node proxy routing, enterprise CA trust, DNS/TCP transport, and provider HTTP responses without disabling TLS.
 - [DeepSeek Harness MCP guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html): Add one server to a user Agent preset, start a fresh Session generation, and route stdio, HTTP, discovery, registration, and reconnect failures.
 - [DeepSeek Harness memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html): Separate Sessions, compaction, Skills, application records, and cross-session memory; migrate Codex or Claude Code state with provenance, isolation, and rollback evidence.
