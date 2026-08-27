@@ -57,6 +57,8 @@ Web IME composition recovery: https://sandbaseai.github.io/deepseek-harness-hand
 
 ## Start here
 
+- [Agent Harness Evaluation Scorecard](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html): Rate eight runtime boundaries with evidence, identify the next gate, and share a local browser-only review.
+
 - [Diagnose ask_user_question aborts](https://sandbaseai.github.io/deepseek-harness-handbook/ask-user-question-aborted.html): Prove rc.2 has no implicit answer timer, correlate the execution signal and provider lifecycle, and keep reminders distinct from typed deadlines.
 - [Diagnose unknown edit tools](https://sandbaseai.github.io/deepseek-harness-handbook/unknown-edit-tool.html): Distinguish Standard, Minimal, Code, Both, and custom Agent tool surfaces before routing lookup, freshness, path, schema, sandbox, or permission failures.
 - [Restore clipped Settings plugin navigation](https://sandbaseai.github.io/deepseek-harness-handbook/settings-plugin-nav-overflow.html): Repair the flex chain so every registered section remains scrollable, focusable, and clickable without moving fixed dialog chrome.

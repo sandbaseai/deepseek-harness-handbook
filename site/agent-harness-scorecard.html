@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Agent Harness Evaluation Scorecard | DeepSeek Harness Handbook</title>
+  <meta name="description" content="Evaluate an agent harness across model routing, lifecycle, state, tools, authority, isolation, evidence, and release gates. Runs locally in your browser.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Agent Harness Evaluation Scorecard">
+  <meta property="og:description" content="Eight evidence gates for deciding whether an agent harness is a demo shell, prototype, bounded runtime, or evidence-ready system.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css?v=0.5.144">
+</head>
+<body>
+  <a class="skip-link" href="#scorecard">Skip to scorecard</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./">Home</a><a href="./diagnose.html">Failure Router</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="scorecard-shell">
+    <section class="scorecard-hero" aria-labelledby="scorecard-title">
+      <div>
+        <p class="eyebrow">Free local tool · no data leaves your browser</p>
+        <h1 id="scorecard-title">Can your agent harness prove its boundaries?</h1>
+        <p>Score eight runtime contracts with evidence, then share the gaps your team should close next.</p>
+      </div>
+      <figure><img src="./handbook-map.png" width="1200" height="400" alt="Agent harness map connecting model, tools, policy, sessions, MCP, and production operations"></figure>
+    </section>
+
+    <section id="scorecard" class="scorecard-workspace" aria-labelledby="assessment-title">
+      <div class="scorecard-main">
+        <div class="scorecard-heading">
+          <p class="scorecard-index">01 / Evidence review</p>
+          <h2 id="assessment-title">Rate what you can prove today.</h2>
+          <p>Choose Proven only when a test, trace, durable event, or enforced policy demonstrates the contract.</p>
+        </div>
+        <div id="criteria" class="criteria-list"></div>
+      </div>
+
+      <aside class="scorecard-result" aria-labelledby="result-title">
+        <p class="scorecard-index">02 / Result</p>
+        <div class="score-number"><strong id="score">0</strong><span>/ 16</span></div>
+        <h2 id="result-title">Demo shell</h2>
+        <p id="result-summary">The system has not yet demonstrated durable runtime boundaries.</p>
+        <dl class="result-facts"><div><dt>Answered</dt><dd id="answered">0 / 8</dd></div><div><dt>Next gate</dt><dd id="next-gate">Model boundary</dd></div></dl>
+        <div class="result-actions">
+          <button id="copy-result" class="button primary" type="button">Copy review</button>
+          <button id="reset-scorecard" class="button secondary" type="button">Reset</button>
+          <span id="scorecard-status" role="status" aria-live="polite"></span>
+        </div>
+        <p class="scorecard-note">This is a self-review aid, not a benchmark, audit, or certification.</p>
+      </aside>
+    </section>
+
+    <section class="scorecard-method" aria-labelledby="method-title">
+      <div><p class="scorecard-index">03 / Method</p><h2 id="method-title">Evidence changes the score.</h2></div>
+      <dl><div><dt>Missing · 0</dt><dd>No explicit contract or no evidence.</dd></div><div><dt>Partial · 1</dt><dd>A contract exists, but important paths remain unproven.</dd></div><div><dt>Proven · 2</dt><dd>Repeatable evidence covers success, denial, and recovery.</dd></div></dl>
+    </section>
+
+    <section class="scorecard-next" aria-labelledby="next-title">
+      <div><p class="scorecard-index">04 / Deepen the review</p><h2 id="next-title">Inspect the weakest boundary.</h2></div>
+      <div class="scorecard-links">
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-runtime.md"><strong>Architecture map</strong><span>Separate model, runtime, effects, and surfaces.</span></a>
+        <a href="./deepseek-harness-plugin-audit.html"><strong>Plugin audit</strong><span>Trace extension authority and supply-chain risk.</span></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/tool-execution-pipeline.md"><strong>Tool pipeline</strong><span>Locate validation, approval, execution, and result gates.</span></a>
+        <a href="./session-log-durability.html"><strong>Session durability</strong><span>Test replay, corruption handling, and recovery.</span></a>
+      </div>
+      <a class="button primary scorecard-star" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star the handbook if it helped <span class="star-count" aria-live="polite"></span></a>
+    </section>
+  </main>
+
+  <footer><p>Independent community field guide by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook/issues">Report a gap</a></div></footer>
+  <script src="./script.js" defer></script>
+  <script src="./agent-harness-scorecard.js" defer></script>
+</body>
+</html>

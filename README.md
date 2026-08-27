@@ -18,7 +18,7 @@ Choose one path and get to evidence quickly:
 
 | Run | Debug | Build |
 |---|---|---|
-| [Five-minute quickstart](docs/en/getting-started/quickstart.md) | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) | [First plugin lab](docs/en/plugin-development/first-plugin.md) |
+| [Five-minute quickstart](docs/en/getting-started/quickstart.md) | [Agent Harness Scorecard](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html) | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | [CLI and headless map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html) | [Profile repair and reset](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html) | [MCP guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
 | [API cost boundary](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-api-cost-boundary.html) | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) | [Agent runtime map](docs/en/architecture/agent-runtime.md) |
 
