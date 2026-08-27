@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.92 - 2026-08-27
+
+### Changed
+
+- Added an evidence-led diagnostic for apparent Windows `workspace-write` deletion outside the workspace, incorporating official report #4688 and its negative CI reproduction.
+- Distinguished read-side visibility from write-boundary proof and documented `Everyone`, standing capability ACE, hard-link, and non-NTFS investigation paths.
+- Added a non-destructive evidence checklist and an explicit rule to reject partial enforcement when the workload requires a complete boundary.
+
 ## 0.5.91 - 2026-08-27
 
 ### Changed
