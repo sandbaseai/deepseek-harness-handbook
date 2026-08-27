@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.114 - 2026-08-27
+
+### Added
+
+- Added a source-backed guide for out-of-tree Typert generation, separating workspace root, aggregate reference, and real-path containment gates.
+- Added a deterministic pinned-staging workflow, two-way manifest intent validation, provenance record, supported single-package API proposal, and sixteen release gates.
+- Published a visual architecture page explaining why a successful empty selection is not a generated artifact.
+
 ## 0.5.113 - 2026-08-27
 
 ### Changed
