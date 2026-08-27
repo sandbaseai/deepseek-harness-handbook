@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**131 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**132 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -37,6 +37,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 
 | I want to… | Start here |
 |---|---|
+| Design two real Session panes without crossing data or interaction identity | [Multi-Session presentation contract](https://sandbaseai.github.io/deepseek-harness-handbook/multi-session-presentation-contract.html) |
 | Customize the Web UI without patching files inside an npx installation | [Persistent Client plugin guide](https://sandbaseai.github.io/deepseek-harness-handbook/persistent-web-ui-client-plugin.html) |
 | Generate strict Typert artifacts for a plugin developed outside the monorepo | [Out-of-tree Typert generation guide](https://sandbaseai.github.io/deepseek-harness-handbook/out-of-tree-typert-generation.html) |
 | Diagnose manual `/compact` ending with `DeepSeek request aborted by caller` | [Manual compaction cancellation runbook](https://sandbaseai.github.io/deepseek-harness-handbook/manual-compaction-aborted.html) |
@@ -195,7 +196,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 131 pages |
+| English | Canonical | 132 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
