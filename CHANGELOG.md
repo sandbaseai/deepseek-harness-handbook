@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.117 - 2026-08-27
+
+### Changed
+
+- Reverified runaway-loop routing against rc.2 and expanded it to diagnose Agents that narrate tool use without issuing a finalized tool call.
+- Separated one degenerate stream, repeated automatically sourced turns, repeated steps, provider retries, and duplicate UI projection by their durable event shapes.
+- Added a source-scoped actionless-round circuit breaker, a controlled four-case reproduction matrix, fifteen regression gates, and a revised visual event map.
+
 ## 0.5.116 - 2026-08-27
 
 ### Added

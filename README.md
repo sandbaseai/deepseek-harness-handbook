@@ -119,7 +119,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Session title stays on the first-prompt fallback with a reasoning model | [Auxiliary title budget diagnosis](https://sandbaseai.github.io/deepseek-harness-handbook/session-title-reasoning-budget.html) |
 | Generate exact installation evidence commands for my OS and install path | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
 | Recover an empty sidebar or unreadable Session without destroying evidence | [Route frame, sequence, and tool-call identity failures](https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html) |
-| Stop a repeating Agent turn before it exhausts a budget | [Runaway Agent loop emergency runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
+| Stop repeated narration, tool calls, or Agent turns before they exhaust a budget | [Event-shaped runaway Agent runbook](docs/en/troubleshooting/runaway-agent-loop.md) |
 | Detect repeated model text inside one streaming attempt | [Degenerate-output guard guide](https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html) |
 | Stop a foreground tool after `session.cancel` is accepted but work remains live | [Stuck-tool cancellation runbook](https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html) |
 | Recover when every turn in one Session returns invalid JSON | [Poisoned Session recovery guide](docs/en/troubleshooting/poisoned-session-invalid-tool-json.md) |

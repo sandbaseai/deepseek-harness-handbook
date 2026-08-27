@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>Stop a runaway DeepSeek Harness Agent loop | Emergency runbook</title>
-  <meta name="description" content="Cancel a runaway DeepSeek Harness Agent turn, distinguish loop types, preserve evidence, and add real spending boundaries before retrying.">
+  <title>Route a narrative-only DeepSeek Harness Agent | Event runbook</title>
+  <meta name="description" content="Separate repeated prose in one stream from repeated Agent turns and steps, identify every wake source, and contain actionless automation safely.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Stop the loop before it spends again">
-  <meta property="og:description" content="A 30-second emergency sequence and source-backed control map for runaway DeepSeek Harness Agent turns.">
+  <meta property="og:title" content="Prose is not a tool call">
+  <meta property="og:description" content="Count durable events, identify every wake source, and contain narrative-only DeepSeek Harness automation without inventing actions.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Stop a runaway DeepSeek Harness Agent loop | Emergency runbook","description":"Cancel a runaway DeepSeek Harness Agent turn, distinguish loop types, preserve evidence, and add real spending boundaries before retrying.","dateModified":"2026-08-19","url":"https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Route a narrative-only DeepSeek Harness Agent | Event runbook","description":"Separate repeated prose in one stream from repeated Agent turns and steps, identify every wake source, and contain actionless automation safely.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
@@ -27,10 +27,10 @@
   <main id="main" class="article-shell loop-article">
     <header class="article-hero loop-hero">
       <div>
-        <p class="eyebrow">Runaway loop response</p>
-        <h1>Stop the spend. Preserve the trace.</h1>
-        <p class="article-deck">Cancel first, prove calls stopped, then identify the layer that repeated.</p>
-        <div class="article-meta"><span>Verified 2026-08-19</span><span>Upstream 99f6f02</span></div>
+        <p class="eyebrow">Narrative-loop field map</p>
+        <h1>Count events, not intentions.</h1>
+        <p class="article-deck">Prose is not a tool call. Another turn needs another wake.</p>
+        <div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream rc.2 · b150a55</span></div>
       </div>
       <div class="emergency-dial" role="img" aria-label="Emergency sequence: cancel, confirm, preserve, change before retry">
         <div><b>01</b><strong>Cancel</strong><span>Esc or Ctrl+C</span></div>
@@ -41,7 +41,7 @@
     </header>
 
     <article class="article-body">
-      <div class="signal"><strong>The boundary</strong><span>The verified Agent loop has no documented aggregate max-steps or per-turn spending limit. Keep an independent provider-side quota.</span></div>
+      <div class="signal"><strong>The invariant</strong><span>A finalized assistant message with zero <code>tool-call</code> blocks completes the step. With no pending inbox input, the ordinary turn closes.</span></div>
 
       <h2>Thirty seconds to containment.</h2>
       <ol class="containment-sequence">
@@ -51,50 +51,62 @@
         <li><strong>Do not resume unchanged.</strong><span>Fix the reachable failure or narrow tools, task, and budget before a fresh Session.</span></li>
       </ol>
 
-      <h2 id="controls">Know what each control bounds.</h2>
-      <div class="control-matrix">
-        <section><code>maxParallelToolCalls</code><strong>One-step concurrency</strong><p>Not total steps, calls, tokens, or spend.</p></section>
-        <section><code>maxTokens</code><strong>One response output</strong><p>Not accumulated input across repeated steps.</p></section>
-        <section><code>compaction</code><strong>Context pressure</strong><p>Not the number of model requests.</p></section>
-        <section class="control-hard"><code>provider quota</code><strong>External consumption</strong><p>The independent hard cost boundary.</p></section>
+      <h2 id="controls">First, count the shape.</h2>
+      <div class="loop-routes">
+        <section><span>01 · one stream</span><strong>Repeated text chunks</strong><p>Generation or adapter boundary. One request is not yet an Agent loop.</p></section>
+        <section><span>02 · many turns</span><strong>Find every wake</strong><p>Join each new turn to its user, Goal, plugin, or policy source.</p></section>
+        <section><span>03 · many steps</span><strong>Find continuation input</strong><p>Join each step to tool results, next-step input, or a turn-stopping hook.</p></section>
+        <section><span>04 · one durable message</span><strong>Check projection</strong><p>A UI can repeat one message without making another provider request.</p></section>
       </div>
 
-      <h2>Route the repetition.</h2>
-      <div class="loop-routes">
-        <section><span>Successful tools repeat</span><strong>Narrow completion.</strong><p>Reduce the reachable tool surface and require a concrete done condition.</p></section>
-        <section><span>The same tool fails</span><strong>Fix the capability.</strong><p>Remove or repair the error source before another turn can reach it.</p></section>
-        <section><span>Provider errors retry</span><strong>Inspect retry policy.</strong><p>Separate transport retries from successful Agent steps.</p></section>
-        <section><span>Work outlives the UI</span><strong>Find the owner.</strong><p>Stop child processes, schedules, and detached work explicitly.</p></section>
+      <h2>Follow the proof chain.</h2>
+      <div class="recovery-route">
+        <div><strong>Chunk types</strong><small>what arrived</small></div><span>→</span>
+        <div><strong>Final blocks</strong><small>what survived</small></div><span>→</span>
+        <div><strong>Wake source</strong><small>who continued</small></div><span>→</span>
+        <div><strong>Owner</strong><small>where to stop</small></div>
       </div>
+
+      <div class="signal"><strong>Never do this</strong><span>Do not parse narration such as “read file” or “edit file” and execute it. That bypasses the tool protocol, schema validation, approval, and call identity.</span></div>
 
       <h2>Bring an event timeline.</h2>
       <pre><code>Version + source commit:
 Profile + model route:
 Turn start / cancel / last charge:
-Repeated assistant and tool events:
+Turn / step / message / call / result events:
+Source of every continuation message:
+Raw chunks and finalized block types:
 Sanitized tool result or error:
 Request usage + provider curve:
 Smallest bounded reproduction:</code></pre>
 
-      <h2>Recover with a smaller blast radius.</h2>
-      <div class="recovery-route">
-        <div><strong>New Session</strong><small>disposable workspace</small></div><span>→</span>
-        <div><strong>Few tools</strong><small>read-only first</small></div><span>→</span>
-        <div><strong>Small quota</strong><small>provider enforced</small></div><span>→</span>
-        <div><strong>One trace</strong><small>cancel on repetition</small></div>
+      <h2>Stop actionless automation at its owner.</h2>
+      <div class="control-matrix">
+        <section><code>scope</code><strong>Automatic sources only</strong><p>Never block a legitimate user-facing explanation, refusal, or final answer.</p></section>
+        <section><code>count</code><strong>Zero finalized calls</strong><p>Also require zero owned durable transition and no goal completion or question.</p></section>
+        <section><code>key</code><strong>Lifecycle + source + revision</strong><p>Reset only on proven action or authenticated human input.</p></section>
+        <section class="control-hard"><code>threshold</code><strong>Pause the owner</strong><p>Leave the Agent idle. Never fabricate a tool call to force progress.</p></section>
       </div>
+
+      <h2>Prove the diagnosis with four cases.</h2>
+      <ol class="containment-sequence">
+        <li><strong>Fresh Session</strong><span>Same route, same tool, short context.</span></li>
+        <li><strong>Long context</strong><span>Reconstruct compaction-sized context without private data.</span></li>
+        <li><strong>Goal disabled</strong><span>Run the same prompt without automatic Goal rounds.</span></li>
+        <li><strong>Control route</strong><span>Use a known tool-capable model/provider route.</span></li>
+      </ol>
 
       <h2>Primary evidence.</h2>
       <ul class="source-list">
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/agent-loop/src/agent.ts">Verified Agent loop implementation</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/agent-loop/README.md">Agent loop configuration contract</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3228">Upstream runaway-loop report #3228</a></li>
-        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3229">Upstream runaway-loop report #3229</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/agent.ts">rc.2 Agent completion and continuation semantics</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/goal/goal-round-driver/src/index.ts">rc.2 Goal round driver and round limit</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4717">Narrative-without-tools report #4717</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3228">Runaway-loop report #3228</a></li>
       </ul>
 
       <section class="article-cta">
-        <h2>Keep the complete runbook.</h2>
-        <p>The canonical guide adds failure branches, a diagnostic bundle, recovery rehearsal, and third-party budget-plugin caveats.</p>
+        <h2>Keep the complete event runbook.</h2>
+        <p>The canonical guide adds the failure router, safe circuit-breaker design, controlled reproduction matrix, and fifteen regression gates.</p>
         <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
       </section>
     </article>
