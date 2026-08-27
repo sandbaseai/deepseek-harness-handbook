@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.116 - 2026-08-27
+
+### Added
+
+- Added a source-backed design review for multi-Session Web presentation, clearly separated from the rc.2 shipped single-Session contract.
+- Defined visible membership, focused interaction, capacity ownership, per-Session render binding, Session-scoped slot multiplicity, and compatibility negotiation.
+- Added transition semantics, persistence validation, a cross-Session failure router, visual architecture page, and twenty-two acceptance cases.
+
 ## 0.5.115 - 2026-08-27
 
 ### Added

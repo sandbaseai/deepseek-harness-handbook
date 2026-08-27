@@ -1,6 +1,6 @@
 {
   "name": "deepseek-harness-handbook",
-  "version": "0.5.115",
+  "version": "0.5.116",
   "private": true,
   "description": "An English-canonical, multilingual-by-design handbook for DeepSeek Harness.",
   "type": "module",
