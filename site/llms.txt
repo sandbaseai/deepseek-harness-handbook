@@ -36,7 +36,7 @@ Persistent Bash CJK locale/readline stalls: https://sandbaseai.github.io/deepsee
 OpenAI-compatible developer-role 400: https://sandbaseai.github.io/deepseek-harness-handbook/openai-compatible-developer-role.html
 tapIndex dollar-sign corruption: https://sandbaseai.github.io/deepseek-harness-handbook/tapindex-dollar-corruption.html
 Session and deployment model routing: https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html
-Context overflow classification: https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html
+Context overflow classification and compaction convergence: https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html
 Canonical content: https://github.com/sandbaseai/deepseek-harness-handbook/tree/main/docs/en
 Language status: English canonical; Simplified Chinese partial and reviewed; Japanese, Korean, and Spanish navigation drafts.
 Atom updates feed: https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml
