@@ -11,7 +11,7 @@ verified_at: 2026-08-27
 
 这是一份从 Agent 视角理解、运行、排查和扩展 DeepSeek Harness 的独立社区手册，由 [SandBase](https://sandbase.ai/) 维护，并非 DeepSeek AI 官方项目。
 
-目前包含 **142 篇英文 canonical 指南和 150 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，本次最新专题摘要为机器辅助草稿，等待流利读者复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
+目前包含 **143 篇英文 canonical 指南和 152 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，本次最新专题摘要为机器辅助草稿，等待流利读者复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
@@ -37,11 +37,11 @@ verified_at: 2026-08-27
 
 | 真实问题 | 英文专题 | 这篇文章证明什么 |
 |---|---|---|
+| 自定义 OpenAI 兼容 Provider 为什么发出了 `/messages` 请求？ | [Provider Catalog 冲突（中文草稿）](troubleshooting/custom-provider-catalog-collision.md) | Provider ID、端点和协议相互独立；如果 ID 命中内置 Catalog 且省略 `api`，请求流仍可能由 Catalog Provider 所有。 |
+| 累计 Token 从 70M 增长到 100M，是否等于单次 Prompt 有 30M？ | [Token Accounting（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html) | 必须按调用拆分 provider usage、当前 occupancy、spill、压力触发的 pruning、compaction 摘要成本与重试，累计值在压缩后不会下降。 |
+| 开启翻译扩展后输入文字不可见，是草稿丢失了吗？ | [Web IME / Translation Extension（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html) | 分别证明 textarea 值、DOM 身份、注入 wrapper、backdrop 与 computed style，不能从“不可见”直接推出数据丢失。 |
 | Windows 上发送一条消息后端口仍监听，但所有 HTTP 请求都超时，应该先查什么？ | [Windows Web Host Hang](https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html) | 先把监听端口绑定到准确 PID，记录 HTTP 时间线并私下保存三份完整转储；低 CPU、单独 `fetch` 成功或某个包存在都不能直接证明根因。 |
 | 远程 Web 不断打印 `connection lost`，一定是 WebSocket 坏了吗？ | [Remote Web Reconnect Loop](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) | 必须同时证明非安全上下文、缺少 `randomUUID`、没有 `host.describe` 请求且 HTTPS/loopback 成功，才能定位为 fetch 之前的 typed RPC 失败。 |
-| 问题卡已经出现，但题目太长把操作按钮挤没了，怎样区分于请求丢失？ | [Long Question Card](https://sandbaseai.github.io/deepseek-harness-handbook/missing-question-card.html) | 先证明卡片存在，再检查固定标题是否消耗受限高度以及真正的滚动容器归属。 |
-| object 或 `oneOf` 工具参数为什么到了插件里变成字符串？ | [Structured Tool Arguments](../en/plugin-development/tool-schema-subset.md#route-double-encoded-structured-arguments-before-coercing-them) | 分开外层解析、纯验证、Schema 建模、有限兼容归一化与后续 RPC 形状丢失，不能把所有字符串都盲目 `JSON.parse`。 |
-| 团队如何系统评估一个 Agent Harness，而不是只看模型回答？ | [Agent Harness Scorecard](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html) | 用八个边界分别检查路由、生命周期、持久状态、工具、权限、隔离、证据与发布门禁，评分数据只保留在浏览器本地。 |
 
 这些结论以 DeepSeek Harness rc.2 的官方源码提交 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) 为解释基线。文章会明确区分已经发布的行为、社区提案和建议的验收契约。
 
