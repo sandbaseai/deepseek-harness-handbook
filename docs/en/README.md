@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Bound live Session heap growth independently from model context](operations/session-heap-growth.md)
 - [Route an Agent that narrates work without calling tools](troubleshooting/runaway-agent-loop.md)
 - [Design a multi-Session Web presentation contract](architecture/multi-session-presentation-contract.md)
 - [Extend the Web UI with a persistent Client plugin](plugin-development/persistent-web-ui-client-plugin.md)
