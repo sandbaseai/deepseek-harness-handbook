@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Host DeepSeek Harness ACP for multiple tenants</title>
+  <meta name="description" content="Design a secure HTTP host around DeepSeek Harness stdio ACP with explicit tenant ownership, process supervision, affinity, replay, permissions, and teardown.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="HTTP does not create a tenant boundary.">
+  <meta property="og:description" content="A remote ACP gateway owns identity, affinity, correlation, replay, quotas, and connection-wide teardown.">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Host DeepSeek Harness ACP for Multiple Tenants","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html","inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./" aria-label="Handbook home"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#owner">Owner</a><a href="#contracts">Contracts</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div><p class="eyebrow">ACP hosting · rc.2</p><h1>HTTP does not create a tenant boundary.</h1><p class="article-deck">The official bridge owns Sessions on one stdio connection. A remote gateway must own everything outside it.</p><div class="article-meta"><span>Verified 2026-08-27</span><span>Source b150a55</span></div></div>
+      <div class="identity-seal" role="img" aria-label="An authenticated principal is bound by a gateway to one child generation, ACP connection, and Session"><div><small>Principal</small><strong>tenant + policy</strong></div><i>server binds</i><div><small>Gateway</small><strong>child generation</strong></div><i>affinity</i><div><small>ACP</small><strong>connection + Session</strong></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>The current seam</strong><span><code>AcpConfig.stream</code> is runtime-only. Production configuration selects provider and model, then uses NDJSON over stdin and stdout.</span></div>
+      <h2 id="owner">Choose the owner before the carrier.</h2>
+      <div class="identity-proof"><section><strong>Per request</strong><p>Simple and disposable, with startup cost and no continuity.</p></section><section><strong>Per tenant</strong><p>Strong workspace and credential separation with higher process density.</p></section><section><strong>Per trust domain</strong><p>Share only a reviewed capability and policy boundary.</p></section><section><strong>Shared connection</strong><p>Efficient, but every Session shares one teardown lifetime.</p></section></div>
+      <h2 id="contracts">A gateway owns five contracts.</h2>
+      <div class="identity-routes"><section><span>01</span><strong>supervision</strong><p>Exact artifact, clean stdout, deadlines, generations, bounded restart.</p></section><section><span>02</span><strong>correlation</strong><p>Requests and reverse permissions return to one authenticated owner.</p></section><section><span>03</span><strong>affinity</strong><p>Every Session stays on the connection that created it.</p></section></div>
+      <div class="identity-routes"><section><span>04</span><strong>delivery</strong><p>Declare cancel, replay, or durable job behavior on disconnect.</p></section><section><span>05</span><strong>teardown</strong><p>Close admission, drain, cancel at deadline, and verify exit.</p></section><section><span>Always</span><strong>authorization</strong><p>Tenant identity comes from server state, never model or client arguments.</p></section></div>
+      <div class="identity-warning"><strong>Do not expose raw stdio as an unauthenticated socket.</strong><p>Use opaque tenant-bound handles, quotas, replay limits, permission expiry, log redaction, and a container-class boundary for untrusted code.</p></div>
+      <h2>Failure must stay generation-scoped.</h2>
+      <p>A child restart invalidates its Session ids. A malformed stdout frame terminates that generation. A rolling deploy stops admission before drain. No old handle may silently alias a new process.</p>
+      <h2>Primary evidence.</h2>
+      <ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4692">Official hosting request #4692</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/acp/acp/src/index.ts">Runtime-only Stream and teardown</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/acp/acp/README.md">Official stdio lifecycle contract</a></li></ul>
+      <section class="article-cta"><h2>Make ownership explicit.</h2><p>The complete guide includes topology choices, an identity ledger, five hosting contracts, an HTTP resource model, failure routing, security minimums, and fourteen acceptance tests.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/acp-remote-hosting.md">Read the complete guide</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

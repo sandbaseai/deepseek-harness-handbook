@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**119 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**120 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -189,7 +189,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 119 pages |
+| English | Canonical | 120 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -251,6 +251,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Integrations
 
 - [Connect MCP servers](docs/en/integrations/mcp.md)
+- [Host stdio-only ACP for multiple tenants](docs/en/integrations/acp-remote-hosting.md)
 - [Evaluate the ACP editor-integration boundary](docs/en/integrations/acp-editor-boundary.md)
 - [Render ACP permission requests safely](docs/en/integrations/acp-permission-request-ui.md)
 - [Recover a silent Node 24 and tsx source build](docs/en/troubleshooting/node24-tsx-silent-build.md)

@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.99 - 2026-08-27
+
+### Added
+
+- A source-pinned guide for hosting stdio-only ACP behind a multi-tenant service boundary, based on official request #4692.
+- Topology choices, an unforgeable ownership ledger, supervision, affinity, reverse-request, replay, and teardown contracts.
+- A remote resource model, failure router, security minimum, fourteen acceptance tests, and a visual architecture brief.
+
 ## 0.5.98 - 2026-08-27
 
 ### Changed
