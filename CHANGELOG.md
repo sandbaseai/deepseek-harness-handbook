@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.153 - 2026-08-27
+
+### Changed
+
+- Added a per-call evidence route for large cumulative token-usage jumps so billing totals are not confused with current context occupancy.
+- Verified that the pinned shipped base explicitly enables 50 KB spill, model-free tool-result pruning, and repeat-call reminders, while documenting their distinct timing and bypasses.
+- Added safe cost-reduction guidance for base64-heavy files, range reads, retry loops, manual compaction, provider cache buckets, and model-visible payload capture.
+
 ## 0.5.152 - 2026-08-27
 
 ### Changed

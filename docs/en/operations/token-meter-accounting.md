@@ -1,7 +1,7 @@
 ---
 title: Interpret DeepSeek Harness token accounting
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -28,6 +28,52 @@ Two rc.2 reports expose a more serious edge: a wide replacement can make the sig
 | cumulative `tokenUsage` | durable sum of usage buckets across calls | provider-reported samples | Session totals, not current context occupancy |
 
 Output tokens belong in cumulative usage and a completed call's total cost, but not in the next prompt occupancy numerator. Reasoning is an output subdivision and must not be added again.
+
+## Diagnose a large cumulative jump before prescribing compaction
+
+A report that Session usage moved from 70M to 100M describes a 30M cumulative increase. It does not show that one request carried a 30M-token prompt, that the context window held 30M tokens, or that automatic compaction failed. First export the per-call usage sequence and separate:
+
+```text
+call identity: turn / step / provider / model
+input buckets: uncached / cache read / cache write
+output buckets: visible / reasoning when reported
+current occupancy: pressureTokens / projectedTokens / contextWindow
+surface event: user message / tool result / assistant result / compaction replacement
+tool payload: kind / UTF-8 bytes / text vs mixed content / inline vs spill notice
+compaction: trigger / measurement / threshold / prune / summary / retry
+```
+
+For each completed call, verify that the provider's input buckets are disjoint according to that adapter before summing them. Then chart input per call, not just the Session cumulative. A roughly increasing staircase points to retained history. One isolated spike points to a large request or tool result. Repeated near-identical rows point to a retry or tool loop. A lower post-compaction prompt followed by continued cumulative growth is normal: compaction reduces future request occupancy; it cannot erase usage already billed.
+
+### Do not diagnose the pinned shipped base from package defaults alone
+
+The `dsh-spill-policy` package default is disabled when `maxInlineBytes` is omitted. That fact does **not** establish that the shipped base composition disables spill. At pinned rc.2 commit `b150a55`, `packages/bundle/base/cordis.patch.yml` explicitly mounts:
+
+- `dsh-spill-local`;
+- `dsh-spill-policy` with `maxInlineBytes: 50000`;
+- `dsh-compaction-tool-result-pruner` with an 8,192-character trigger, 4,096-character head, and 1,024-character tail; and
+- `dsh-repeat-tool-reminder` with thresholds 3, 5, and 8.
+
+Likewise, the pruner is not a proactive below-pressure filter. `compaction-basic` first measures the request and returns when it is below the model-specific threshold. Only after pressure qualifies—or after the provider confirms context overflow—does it invoke the optional pruner, remeasure, and decide whether an LLM summary is still required.
+
+This creates two different protection times:
+
+| Boundary | When it acts | What can bypass it |
+|---|---|---|
+| spill policy | immediately after an accepted ordinary tool result | `read`, mixed-content results, nested executions, blocked/replaced results, missing owner/backend, failed storage, or a notice that cannot fit |
+| tool-result pruner | after compaction pressure or canonical overflow qualifies | all below-threshold history; non-text blocks remain; character limits are not token limits |
+
+Therefore, a 1 MB HTML file with embedded base64 does not by itself prove that 1 MB entered model history. Determine how it crossed the boundary: user prompt or attachment, `read`, ordinary plain-text tool result, mixed-content result, browser snapshot, or generated file that was never returned inline. Capture the model-visible result—not only the source file size—and look for the `(Omitted N bytes...)` spill notice.
+
+### Reduce cost without destroying evidence
+
+1. Keep binary/base64 assets out of prompts and DOM/text dumps; pass a path, metadata, or a bounded structural summary when the tool contract permits.
+2. Query large files by range or search before reading them wholesale. The generic spill policy intentionally skips `read` to avoid a `read → spill → read again` loop.
+3. Split build, validation, and repair into evidence-gated stages. On a repeated failure, change one variable and stop identical retries.
+4. Use `/compact` at a meaningful milestone when the shipped command adapter is present; record pre/post occupancy and remember that summarization is a separate model call.
+5. Do not lower thresholds or add a hard loop block from one cumulative number. Test exact provider/model routes, legitimate polling, mixed-content tools, spill failures, cache reuse, and recovery first.
+
+The repeat-tool reminder is advisory and retained in history. It detects only consecutive calls with the same canonicalized arguments; near-identical variants evade it, legitimate repeated calls remain allowed, and no reminder fires after the highest configured threshold. A hard cap is a product-policy proposal, not a fact about current cost ownership.
 
 ## Understand the rc.2 anchor
 
@@ -157,6 +203,7 @@ Use percentiles, not only the mean. Keep pricing analytics outside the runtime d
 ## Primary evidence
 
 - [Official token-meter accuracy proposal #3514](https://github.com/deepseek-ai/deepseek-harness/discussions/3514)
+- [Large cumulative token-cost analysis #4758](https://github.com/deepseek-ai/deepseek-harness/discussions/4758)
 - [Wide-compaction underflow report #4674](https://github.com/deepseek-ai/deepseek-harness/discussions/4674)
 - [Independent underflow report #4703](https://github.com/deepseek-ai/deepseek-harness/discussions/4703)
 - [Bounded reference patch for both projections](https://github.com/Jstn-1g/deepseek-harness/commit/fd88e82f2d7d379118cceb67d0a02fe7ae30d365)
@@ -164,3 +211,7 @@ Use percentiles, not only the mean. Keep pricing analytics outside the runtime d
 - [rc.2 replay measurement and usage anchor](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/token-meter/src/index.ts)
 - [rc.2 provider-anchored context projection](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/token-meter/src/usage-projection.ts)
 - [rc.2 compaction pressure decision](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/index.ts)
+- [rc.2 shipped base composition](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/bundle/base/cordis.patch.yml)
+- [rc.2 spill-policy contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/spill/spill-policy/README.md)
+- [rc.2 model-free tool-result pruner contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-tool-result-pruner/README.md)
+- [rc.2 repeat-tool reminder contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/guard/repeat-tool-reminder/README.md)
