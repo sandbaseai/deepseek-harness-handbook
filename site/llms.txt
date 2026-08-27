@@ -129,3 +129,4 @@ This is a community-maintained handbook from SandBase, not an official DeepSeek 
 - [Response and reasoning language](https://sandbaseai.github.io/deepseek-harness-handbook/response-language.html): Separate user instruction, deployment persona, provider reasoning, gateway injection, and Web locale before changing language controls.
 - [Prompt send recovery](https://sandbaseai.github.io/deepseek-harness-handbook/prompt-send-recovery.html): Distinguish Host admission from a durable user message, recover missing text safely, and avoid replaying ambiguous side effects.
 AbortSignal.any runtime identity: https://sandbaseai.github.io/deepseek-harness-handbook/abortsignal-any.html
+Multi-tenant ACP remote hosting: https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html
