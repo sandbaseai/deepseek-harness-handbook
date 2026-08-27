@@ -26,11 +26,11 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
+| [Fix a custom OpenAI-compatible route that silently sends `/messages`](https://sandbaseai.github.io/deepseek-harness-handbook/custom-provider-catalog-collision.html) | Provider id, endpoint, and protocol are independent; an omitted `api` can delegate the stream to an installed catalog provider. |
+| [Explain a 70M → 100M cumulative token jump](https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html) | Chart provider usage per call, then separate current occupancy, 50 KB spill, pressure-gated pruning, compaction summary cost, cache buckets, and retries. |
+| [Recover invisible composer text with a translation extension](https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html) | Prove controlled textarea value, DOM identity, injected wrappers, aligned backdrop, and computed style before calling it data loss. |
 | [Capture a Windows Web Host that listens but stops answering](https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html) | Join the listener PID, HTTP probe timeline, and three private full dumps before blaming Node, zstd, a proxy, or a native module. |
 | [Separate an insecure-origin UUID failure from a socket incident](https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html) | Prove when typed `host.describe` fails before fetch, aborts the shared generation, and repeats `connection lost`. |
-| [Recover question actions clipped by a long header](https://sandbaseai.github.io/deepseek-harness-handbook/missing-question-card.html) | Distinguish a missing Host request from a present card whose fixed header consumes the bounded scroll area. |
-| [Route double-encoded structured tool arguments](docs/en/plugin-development/tool-schema-subset.md#route-double-encoded-structured-arguments-before-coercing-them) | Keep validation pure while any compatibility normalization stays schema-driven, observable, and identical across approval and execution. |
-| [Evaluate eight Agent Harness boundaries](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html) | Review model routing, lifecycle, state, tools, authority, isolation, evidence, and release gates locally in the browser. |
 
 Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 

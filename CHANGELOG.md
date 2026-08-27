@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.155 - 2026-08-27
+
+### Changed
+
+- Refreshed the GitHub Overview's source-verified table around the three newest high-intent provider, token-cost, and Web composer failures.
+- Added a dated latest-field-signals section near the site homepage hero so new visitors reach current evidence before the full 138-path index.
+
 ## 0.5.154 - 2026-08-27
 
 ### Added
