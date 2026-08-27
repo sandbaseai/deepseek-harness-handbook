@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.91 - 2026-08-27
+
+### Changed
+
+- Expanded the preset-generation guide with the supported copied-Cordis-preset reproduction from upstream #4675.
+- Rejected replace-on-duplicate and bare-refcount repairs that can silently remove a live inspect provider after out-of-order or repeated disposal.
+- Added a manifest-equivalence and holder-identity contract plus regression cases for coexistence, disposer idempotency, and genuine collisions.
+
 ## 0.5.90 - 2026-08-27
 
 ### Added
