@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Session groups without invented Workspaces | DeepSeek Harness</title>
+  <meta name="description" content="Separate mutable Session Collections from DeepSeek Harness execution roots, Workspace accounting, sandbox policy, and archive state.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A sidebar label is not an execution root.">
+  <meta property="og:description" content="Two planes, three no-Workspace profiles, and one migration boundary for custom DeepSeek Harness Session groups.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Design Session groups without inventing a Workspace","description":"Separate mutable Session Collections from DeepSeek Harness execution roots, Workspace accounting, sandbox policy, and archive state.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#split">Two planes</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell collect-article">
+    <header class="article-hero collect-hero">
+      <p class="eyebrow">Session navigation · Execution authority</p>
+      <h1>A sidebar label is not an execution root.</h1>
+      <p class="article-deck">Custom groups organize conversations. Workspaces authorize relative execution. Keep those contracts orthogonal.</p>
+      <div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream rc.2 · b150a55</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>Shipped boundary</strong><span>rc.2 groups Sessions by registered canonical Workspace and places unaccounted Sessions under <code>Ungrouped</code>. It does not ship user-defined Collections.</span></div>
+
+      <h2 id="split">One request. Two products.</h2>
+      <div class="collect-split">
+        <section><small>Navigation plane</small><strong>Session Collection</strong><p>Mutable title, order, and one optional membership keyed by stable IDs.</p><b>Changes where a row appears.</b></section>
+        <section><small>Execution plane</small><strong>No-Workspace profile</strong><p>Explicit capability contract for a Session without a project directory.</p><b>Changes which tools may run.</b></section>
+      </div>
+
+      <h2>Do not cross the seam.</h2>
+      <div class="collect-map" role="img" aria-label="A Collection references a Session ID on the navigation plane while the Session header working directory and sandbox policy independently govern filesystem and shell execution">
+        <div class="collect-nav"><small>Collection</small><strong>title · order · membership</strong><span>mutable presentation</span></div>
+        <b>references</b>
+        <div class="collect-id"><small>Identity</small><strong>SessionId</strong><span>stable join point</span></div>
+        <b>owns</b>
+        <div class="collect-exec"><small>SessionHeader + policy</small><strong>cwd? · sandbox · grants</strong><span>execution authority</span></div>
+      </div>
+      <p class="collect-rule"><strong>Rename Collection</strong><span>must leave</span><strong>cwd + tools + policy</strong><span>unchanged.</span></p>
+
+      <h2>Offer explicit no-Workspace profiles.</h2>
+      <div class="collect-profiles">
+        <section><small>Safe default</small><strong>Conversation only</strong><p>Filesystem and shell tools are absent from the model request.</p></section>
+        <section><small>Bounded files</small><strong>Ephemeral sandbox</strong><p>A unique empty root, quotas, explicit retention, and sandboxed capabilities.</p></section>
+        <section><small>Deferred root</small><strong>Attach later</strong><p>Tools remain disabled until a folder is selected; fork to a rooted Session.</p></section>
+      </div>
+      <div class="collect-never"><strong>Never infer a root from</strong><span>process cwd</span><span>home</span><span>/</span><span>last Workspace</span><span>Collection title</span></div>
+
+      <h2>Make group mutations boring.</h2>
+      <div class="collect-mutations">
+        <section><small>Create / rename</small><strong>IDs own identity.</strong><p>Duplicate titles are fine. Escape labels and bound their encoded length.</p></section>
+        <section><small>Move</small><strong>Revision checked.</strong><p>Use one idempotency key and reject stale membership instead of bouncing tabs.</p></section>
+        <section><small>Delete</small><strong>Ungroup only.</strong><p>Preserve Session logs, archive state, Workspace accounting, and execution roots.</p></section>
+        <section><small>Archive</small><strong>Hide independently.</strong><p>Keep membership so restore returns to the same Collection.</p></section>
+      </div>
+
+      <h2>Store UI state beside the log.</h2>
+      <div class="collect-store"><div><small>Immutable</small><strong>SessionHeader</strong><code>id · createdAt · cwd? · lineage</code></div><b>≠</b><div><small>Append-only</small><strong>Session log</strong><code>conversation · lifecycle · policy events</code></div><b>≠</b><div><small>Mutable domain</small><strong>Collection registry</strong><code>records · order · membership · revision</code></div></div>
+
+      <h2>Six release gates.</h2>
+      <div class="collect-gates"><span>Legacy Workspace tree still works</span><span>Moves never change execution</span><span>Delete preserves every log</span><span>No root means no file tools</span><span>Reconnect is revision-consistent</span><span>Archive retains membership</span></div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/types.ts">rc.2 immutable Session header and optional cwd</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/workspace/workspace/src/index.ts">rc.2 durable Workspace registry</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-workspace/src/client/tree.ts">rc.2 Workspace and Ungrouped projection</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4721">Session grouping and workspace-less request #4721</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the full compatibility design.</h2>
+        <p>The canonical guide adds data contracts, conflict semantics, execution profiles, migration order, failure routing, and twenty-four acceptance gates.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/session-groups-workspace-less.md">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>

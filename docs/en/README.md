@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Design Session Collections and explicit no-Workspace execution profiles](operations/session-groups-workspace-less.md)
 - [Let an execution tool declare its code-card language](plugin-development/tool-code-card-language.md)
 - [Control stale pending continuable-subagent follow-ups safely](agent-patterns/subagents.md#control-stale-pending-follow-ups-without-clearing-the-inbox)
 - [Bound live Session heap growth independently from model context](operations/session-heap-growth.md)

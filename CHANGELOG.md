@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.121 - 2026-08-27
+
+### Added
+
+- Added a source-backed design response separating user-defined Session Collections from the shipped Workspace-backed grouping model.
+- Defined conversation-only, ephemeral-sandbox, and attach-later no-Workspace profiles without falling back to the Host process directory or mutating immutable Session headers.
+- Added revision-checked membership, archive and deletion semantics, a three-domain visual map, migration order, failure routing, and twenty-four acceptance gates.
+
 ## 0.5.120 - 2026-08-27
 
 ### Added
