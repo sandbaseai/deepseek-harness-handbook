@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Design server-to-client questions and approvals for SDK embeddings](integrations/sdk-human-interaction-wire.md)
 - [Fix valid WebP images rejected by a pi-ai provider route](troubleshooting/pi-ai-image-media-type.md)
 - [Fix `read_image` failing with `cannot get property "fs" without inject`](troubleshooting/read-image-fs-inject.md)
 - [Diagnose manual compaction aborted by its caller signal](troubleshooting/manual-compaction-caller-abort.md)

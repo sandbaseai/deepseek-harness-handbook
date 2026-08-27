@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.112 - 2026-08-27
+
+### Added
+
+- A source-pinned SDK wire design for out-of-process user questions and one-shot approvals, based on official proposal #4708.
+- Explicit capability negotiation, single-provider ownership, separate question and approval vocabularies, and five-part authority correlation.
+- Exactly-once settlement across answer, abort, deadline, EOF, shutdown, disposal, and stale responses, plus hardened current-workaround guidance and twenty conformance gates.
+
 ## 0.5.111 - 2026-08-27
 
 ### Added

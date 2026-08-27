@@ -653,6 +653,11 @@
       "source": "docs/en/troubleshooting/pi-ai-image-media-type.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/integrations/sdk-human-interaction-wire.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
