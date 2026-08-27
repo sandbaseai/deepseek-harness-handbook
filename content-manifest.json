@@ -628,6 +628,11 @@
       "source": "docs/en/integrations/general-file-attachments.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/integrations/openrouter-provider-pinning.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }

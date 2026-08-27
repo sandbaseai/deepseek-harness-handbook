@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.105 - 2026-08-27
+
+### Added
+
+- A source-backed OpenRouter provider-routing guide based on official request #4707 and the current rc.2 compatibility gates.
+- A routing-only OpenRouter Preset workaround that preserves DSH strict schema validation and separates remote routing from the Agent control plane.
+- Preference versus hard-pin semantics, serving-provider verification, typed gateway and source-change requirements, failure routing, and fifteen acceptance gates.
+
 ## 0.5.104 - 2026-08-27
 
 ### Added
