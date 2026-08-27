@@ -1,10 +1,10 @@
 ---
 title: Render DeepSeek Harness ACP Permission Requests Safely
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
-upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # Render DeepSeek Harness ACP permission requests safely
@@ -28,6 +28,33 @@ The official bridge is automation-only. Its permission request is a machine-poli
 ```
 
 Do not invent a command, path, or risk label that the protocol did not provide. Either apply a predeclared machine policy or show an explicitly generic, fail-closed prompt.
+
+## An unanswered reverse request hangs the tool-using turn
+
+At rc.2, the ACP bridge awaits `session/request_permission` without an internal deadline. The method is a reverse JSON-RPC request from the Agent to the ACP client. A client that implements `session/prompt` but ignores reverse requests can appear healthy until the first tool needs approval; that prompt then remains pending with no provider error.
+
+Diagnose this boundary before blaming the model or MCP server:
+
+1. capture the ACP wire in a disposable Session;
+2. find the outgoing `session/request_permission` request and its JSON-RPC id;
+3. confirm whether the client returns one response with an offered option id or a cancelled outcome;
+4. distinguish an unanswered request from a response that never reaches the bridge;
+5. verify that cancelling the parent prompt also closes the client UI and prevents a late answer.
+
+The client must terminate every live permission request. A non-interactive client should use policy established outside model output; an interactive client should apply its own bounded display deadline and return cancellation when it expires. Do not merely hide the dialog while leaving the reverse request unresolved.
+
+```ts
+async function handlePermission(request: PermissionRequest, signal: AbortSignal) {
+  const decision = await decideByPolicyOrUi(request, { signal, timeoutMs: 30_000 })
+    .catch(() => undefined)
+  if (!decision) return { outcome: { outcome: 'cancelled' as const } }
+  const offered = request.params.options.find(option => option.optionId === decision.optionId)
+  if (!offered) return { outcome: { outcome: 'cancelled' as const } }
+  return { outcome: { outcome: 'selected' as const, optionId: offered.optionId } }
+}
+```
+
+Do not copy a blanket `allow-once` workaround unless another independently enforced layer truly owns the effects. Automatically allowing the DSH approval while the same DSH tool performs local effects removes a real boundary; external execution is safe only when the external policy is authenticated, authoritative, and proven to cover that call.
 
 ## What the frame proves—and what it does not
 
@@ -122,6 +149,8 @@ Permission UI is a distributed state machine. Cover these races explicitly:
 4. The Session is disposed: invalidate every pending request owned by it.
 5. An option is missing or unknown: cancel; never synthesize an option id.
 6. Rich metadata cannot be joined: fall back to the honest generic view, not cached data from another call.
+7. The client deadline expires: send cancellation exactly once and close the card.
+8. The client process is shutting down: settle or cancel every reverse request before closing the transport.
 
 ## Acceptance gates
 
@@ -133,16 +162,18 @@ Permission UI is a distributed state machine. Cover these races explicitly:
 - [ ] Rich metadata joins by Session plus exact call id and cannot cross owners.
 - [ ] Display data is redacted and escaped; execution authority remains server-side.
 - [ ] Cancellation, result, disposal, reconnect, timeout, and duplicate-answer races are tested.
+- [ ] Every reverse request receives exactly one selected or cancelled response within the client deadline.
+- [ ] A client that ignores reverse requests fails a conformance test before production traffic.
 - [ ] The audit record links request, offered options, selected outcome, and owning tool result.
 - [ ] The product describes ACP accurately as an automation bridge unless it adds and verifies a richer host integration.
 
 ## Primary sources
 
-Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e8161534` on 2026-08-20.
+Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` on 2026-08-27.
 
 - [Official ACP permission-payload question #3481](https://github.com/deepseek-ai/deepseek-harness/discussions/3481)
-- [rc.8 ACP implementation and permission mapping](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/acp/acp/src/index.ts#L212-L228)
-- [rc.8 ACP automation contract](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/acp/acp/README.md)
-- [rc.8 ACP source-demo permission behavior](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/examples/acp-agent/README.md#session-workspaces-and-permissions)
+- [Official unanswered reverse-request report #4693](https://github.com/deepseek-ai/deepseek-harness/discussions/4693)
+- [rc.2 ACP implementation and permission mapping](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/acp/acp/src/index.ts)
+- [rc.2 ACP automation contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/acp/acp/README.md)
 - [ACP permission-request protocol](https://agentclientprotocol.com/protocol/tool-calls#requesting-permission)
 - [ACP editor-integration boundary](acp-editor-boundary.md)

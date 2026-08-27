@@ -18,6 +18,7 @@ Bailian Token Plan catalog route: https://sandbaseai.github.io/deepseek-harness-
 Expired MCP session recovery: https://sandbaseai.github.io/deepseek-harness-handbook/expired-mcp-session-loop.html
 ACP editor integration boundary: https://sandbaseai.github.io/deepseek-harness-handbook/acp-editor-boundary.html
 ACP permission request UI: https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-request-ui.html
+ACP permission reverse-request hang: https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-hang.html
 Async subprocess tools: https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html
 Stuck tool cancellation: https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html
 Degenerate model output: https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html
