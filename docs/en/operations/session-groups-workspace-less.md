@@ -1,0 +1,230 @@
+---
+title: Design Session Groups Without Inventing a Workspace
+locale: en
+content_revision: 1
+status: canonical
+verified_at: 2026-08-27
+upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+---
+
+# Design Session groups without inventing a Workspace
+
+DeepSeek Harness rc.2 already groups Sessions by registered Workspace. A request for custom grouping and “workspace-less chats” asks for two different capabilities: mutable navigation metadata and an explicit execution mode. Do not make a folder label silently choose a filesystem root, sandbox, or tool authority.
+
+> [!IMPORTANT]
+> This is a design response to upstream discussion [#4721](https://github.com/deepseek-ai/deepseek-harness/discussions/4721), not documentation of a shipped custom-group feature. Current behavior below is verified at commit `b150a55`; the proposed contracts are recommendations.
+
+## Start with the shipped boundary
+
+| rc.2 object | Stable meaning | Current behavior |
+|---|---|---|
+| `SessionHeader.id` | Session identity | immutable, independent of presentation |
+| `SessionHeader.cwd` | absolute working directory at creation, if any | used by filesystem and bash-relative execution |
+| `Workspace` | durable registration for one canonical existing directory | supplies a real group, title, order, and Session accounting |
+| `Ungrouped` | browser bucket, not an execution capability | contains Sessions outside registered Workspace accounts |
+| archive set | registry-global visibility state | hides Sessions without deleting logs or Workspace accounting |
+
+The rc.2 browser builds one group per Host Workspace and a trailing `Ungrouped` bucket. Deleting a Workspace removes only its registration; its Session logs remain and appear under `Ungrouped`. That is useful evidence that membership and retention are already separable. It is **not** evidence that an ungrouped Session is safe to execute without a `cwd`.
+
+## Split the request into two products
+
+### 1. Session Collections
+
+A Collection answers: “Where should this conversation appear in navigation?” It is mutable presentation metadata.
+
+It must not change:
+
+- `SessionId`, fork lineage, or subagent ancestry;
+- `SessionHeader.cwd` or Workspace accounting;
+- sandbox mode, permission grants, or tool availability;
+- model, provider, preset, context, or retention;
+- archive state or durable Session log contents.
+
+Use “Collection” in the contract even if the UI label is “Group.” The name prevents confusion with the existing Workspace-backed `GroupNode` projection.
+
+```ts
+interface SessionCollection {
+  id: CollectionId
+  title: string
+  orderKey: string
+  revision: number
+  createdAt: string
+  updatedAt: string
+}
+
+interface CollectionMembership {
+  sessionId: SessionId
+  collectionId?: CollectionId // absent means No collection
+  revision: number
+}
+```
+
+Start with at most one Collection per top-level Session. Tags and many-to-many membership add ordering, duplicate-row, filtering, and permission questions that the stated navigation problem does not require.
+
+### 2. No-Workspace execution profiles
+
+“No Workspace” answers: “Which capabilities may this Session use without a selected project directory?” This is an execution contract, not a sidebar bucket.
+
+Offer explicit profiles rather than an implicit fallback:
+
+| Profile | Files and shell | Safe default | Lifecycle |
+|---|---|---|---|
+| conversation-only | unavailable | yes | ordinary Session retention |
+| ephemeral sandbox | rooted in a newly allocated empty directory | only with a bounded sandbox policy | create before first tool call; expire by declared policy |
+| attach-later | unavailable until the user selects a directory | yes | persist the explicit attachment event or create a new rooted Session |
+
+Never fall back to the Host process directory, `$HOME`, `/`, the last-opened Workspace, or a directory inferred from a Collection title. Relative paths without an execution root must fail with a typed `workspace-required` result before a capability call starts.
+
+## Keep the planes orthogonal
+
+```text
+Navigation plane                 Execution plane
+
+Collection ──references──▶ SessionId ◀──identifies── SessionHeader
+  title                         │                    cwd?
+  order                         │                    lineage
+  membership                    │                    preset
+                                │
+Archive visibility ─────────────┘        Sandbox policy + grants
+                                            │
+                                            ▼
+                                     filesystem / bash
+```
+
+Renaming, moving, or deleting a Collection must leave the right-hand plane byte-for-byte unchanged. Changing an execution profile must never move a sidebar row as a side effect.
+
+## Define Collection behavior
+
+### Create and rename
+
+- Normalize Unicode consistently and trim surrounding whitespace.
+- Reject empty titles and enforce a bounded encoded length.
+- Permit duplicate display titles; identity comes from `CollectionId`.
+- Treat titles as untrusted text. Never render them as HTML or interpret them as paths.
+
+### Move a Session
+
+Use an idempotency key plus an expected membership revision. The Host commits one authoritative result and broadcasts the complete changed membership or a versioned delta.
+
+```json
+{
+  "sessionId": "s-42",
+  "collectionId": "c-research",
+  "expectedRevision": 8,
+  "idempotencyKey": "move-9d1c"
+}
+```
+
+A stale tab receives `collection-conflict` with the current membership. It must refresh instead of replaying a blind last-writer move.
+
+### Delete a Collection
+
+Deletion ungroups member Sessions atomically. It does not archive, purge, move, fork, or rewrite them. Return the affected Session IDs so clients can reconcile without guessing.
+
+### Archive and restore
+
+Archive is an independent visibility dimension. Preserve Collection membership while a Session is archived so restore returns it to the same navigation location. A Collection with only archived members may remain visible as empty or be hidden by a documented view rule; do not delete it implicitly.
+
+### Forks and subagents
+
+Do not infer membership from lineage at read time. For a user-created top-level fork, define an explicit policy—inherit the parent's Collection is the least surprising default—and persist the resulting membership. Keep subagent children out of the ordinary top-level Collection tree unless the product already exposes them there.
+
+## Store mutable metadata outside the Session log
+
+The rc.2 `SessionHeader` is immutable validated storage metadata and the Session event log is the durable conversation record. Collection title, order, and membership are frequently edited navigation state; placing them in the header would require a format migration, while placing every drag gesture in the conversation log would couple replay to one UI.
+
+Use a coordinated, versioned metadata domain with:
+
+- Collection records by stable ID;
+- a deterministic Collection order;
+- one optional membership per top-level Session;
+- monotonically increasing revisions;
+- a crash-recoverable mutation journal or atomic transaction;
+- referential cleanup that ungroups rather than deletes Sessions.
+
+The Session list remains authoritative for Session existence. A missing Session reference is pruned or quarantined during reconciliation; it must not resurrect a deleted log.
+
+## Make no-Workspace state visible
+
+The composer and header should show the execution profile before the first prompt:
+
+- **Conversation only** — Files and terminal are unavailable.
+- **Ephemeral sandbox** — Files expire according to the displayed policy.
+- **Choose a folder** — Workspace-bound tools remain disabled until selection.
+
+Tool discovery must match execution. Do not advertise `read`, `write`, or shell tools and then let their providers choose a backend default when `cwd` is absent. Either omit those tools from the model request or return a deterministic pre-execution refusal that the UI can explain.
+
+If an existing Session with no `cwd` later attaches to a directory, choose one contract:
+
+1. **Fork into a rooted Session** and preserve an explicit lineage link; or
+2. add a versioned execution-root event whose replay semantics every tool honors.
+
+The first is safer for rc.2 because `SessionHeader.cwd` is immutable and existing filesystem helpers read it directly. Mutating the header in place would violate the current storage contract.
+
+## Migration sequence
+
+1. Add read-only client support for an absent Collection capability.
+2. Introduce capability negotiation and a versioned Collection snapshot.
+3. Migrate existing Sessions to absent membership; keep Workspace grouping unchanged.
+4. Add create, rename, reorder, move, and delete mutations with revision conflicts.
+5. Let the browser switch between Workspace and Collection views without changing execution state.
+6. Add conversation-only Sessions with workspace-bound tools omitted.
+7. Add ephemeral or attach-later profiles only after lifecycle, cleanup, and replay tests pass.
+
+Legacy peers should continue to show the Workspace tree. They may ignore Collection metadata, but they must never misinterpret it as a Workspace path.
+
+## Failure router
+
+| Observation | Likely boundary | Correct response |
+|---|---|---|
+| moving a row changes relative file behavior | Collection leaked into execution root | reject release; compare Session header and tool policy before/after |
+| deleting a Collection deletes history | presentation and retention were coupled | restore logs; make deletion an atomic ungroup operation |
+| two tabs bounce a Session between groups | unversioned writes | require expected revision and reconcile authoritative state |
+| No-Workspace chat reads Host files | provider applied an implicit cwd | disable the tool or reject before provider resolution |
+| shell is absent but filesystem tools remain | capability families diverged | derive all workspace-bound tools from one execution profile |
+| attaching a folder changes an immutable header | in-place Session mutation | fork to a new rooted Session or define a versioned event contract |
+| archived Session reappears under No collection | archive snapshot lost membership | preserve membership independently of visibility |
+| duplicate Collection titles merge | title used as identity | key every operation and DOM row by `CollectionId` |
+
+## Acceptance gates
+
+- Existing rc.2 peers render the Workspace tree unchanged when Collection capability is absent.
+- A new peer can switch between Workspace and Collection views without changing any Session header.
+- Rename and reorder do not alter model context, cwd, sandbox, permissions, tools, lineage, or archive state.
+- Duplicate Collection titles remain distinct by ID.
+- Empty, oversized, malformed, and unsafe display titles fail validation.
+- A move retry with the same idempotency key commits once.
+- A stale expected revision returns the authoritative membership without overwriting it.
+- Deleting a Collection atomically moves every member to No collection and preserves every Session log.
+- Archive hides a Session while retaining its Collection membership.
+- Restore returns the Session to the same Collection.
+- A top-level fork follows the documented inheritance policy exactly once.
+- Subagent children do not leak into the top-level tree through inherited membership.
+- Conversation-only requests advertise no workspace-bound tools.
+- Relative filesystem and shell calls without a root fail before reaching a provider backend.
+- No path falls back to process cwd, home, root, last Workspace, or Collection title.
+- Ephemeral roots are unique, canonical, sandboxed, quota-bound, and cleaned by a documented retention policy.
+- Attaching a folder cannot mutate the immutable rc.2 Session header in place.
+- Reconnect installs one revision-consistent Collection and membership snapshot.
+- Out-of-order deltas cannot roll state backward.
+- A deleted or missing Session reference cannot recreate history.
+- Collection labels are escaped as text and cannot become paths or markup.
+- Search and pagination define whether filters intersect Collection, Workspace, and archive state.
+- Metrics distinguish navigation membership from execution-profile adoption.
+- Removing the feature leaves Session execution and durable history unchanged.
+
+## Primary sources
+
+- [rc.2 immutable `SessionHeader`, including optional `cwd`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/types.ts)
+- [rc.2 durable Workspace registry and Session accounting](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/workspace/workspace/src/index.ts)
+- [rc.2 Workspace-backed browser grouping and `Ungrouped`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-workspace/src/client/tree.ts)
+- [rc.2 filesystem resolution from per-Session `cwd`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/session-cwd.ts)
+- [rc.2 Session-scoped sandbox mode](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sandbox/sandbox-policy/src/session-mode.ts)
+- [Upstream Session grouping and workspace-less request #4721](https://github.com/deepseek-ai/deepseek-harness/discussions/4721)
+
+## Related handbook guides
+
+- [Operate Session archive, trash, restore, and purge](session-archive-trash-delete.md)
+- [Model multi-Session presentation contracts](../architecture/multi-session-presentation-contract.md)
+- [Understand Session model and deployment-default coupling](../troubleshooting/session-model-default-coupling.md)
+- [Separate sandbox denial from unavailable capabilities](../troubleshooting/sandbox-denied-vs-unavailable.md)
