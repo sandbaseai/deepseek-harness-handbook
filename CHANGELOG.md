@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.120 - 2026-08-27
+
+### Added
+
+- Added a source-backed compatibility design for tool-owned code-card language instead of Web classification by the reserved `run_code` wire name.
+- Defined an additive provider-neutral grammar hint, one validated runtime-language source, view-first classification with legacy fallback, and strict separation from execution authority.
+- Added live/replay wire constraints, a third-party tool example, failure routing, a visual presentation pipeline, and twenty regression gates.
+
 ## 0.5.119 - 2026-08-27
 
 ### Changed

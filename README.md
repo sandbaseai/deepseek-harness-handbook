@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**133 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
+**134 canonical guides · rc.8 and rc.2 source coverage · primary-source links · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -77,6 +77,7 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Create, invoke, and debug a reusable Skill | [DeepSeek Harness Skills lab](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html) |
 | Decide whether an instruction belongs in global, project, nested, local, or Skill scope | [AGENTS.md scope and precedence map](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-agents-md.html) |
 | Build, test, package, and install my first plugin | [First DeepSeek Harness plugin lab](docs/en/plugin-development/first-plugin.md) |
+| Let a third-party execution tool render the correct code language | [Tool-owned code-card language design](https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html) |
 | Keep a plugin subprocess from freezing the Agent Host | [Async subprocess tool guide](https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html) |
 | Archive or delete old Sessions without corrupting durable history | [Session archive, trash, and delete guide](https://sandbaseai.github.io/deepseek-harness-handbook/session-archive-trash-delete.html) |
 | Fix native `read_image` failing with a missing `fs` injection | [`read_image` service-scope guide](https://sandbaseai.github.io/deepseek-harness-handbook/read-image-fs-inject.html) |
@@ -198,7 +199,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 133 pages |
+| English | Canonical | 134 pages |
 | 简体中文 | Reviewed | Navigation plus three core guides |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Let a DeepSeek Harness tool own its code-card language</title>
+  <meta name="description" content="Move code-card grammar from the literal run_code name into a provider-neutral DeepSeek Harness tool call view without granting execution authority.">
+  <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The tool knows the language. The card should listen.">
+  <meta property="og:description" content="A compatibility map for tool-owned code cards, legacy name fallback, runtime truth, and safe syntax highlighting.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Let a DeepSeek Harness tool own its code-card language","description":"Move code-card grammar from the literal run_code name into a provider-neutral DeepSeek Harness tool call view without granting execution authority.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/tool-code-card-language.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="DeepSeek Harness Handbook home"><span class="brand-mark" aria-hidden="true">DSH</span><span>Harness Handbook</span></a>
+    <nav aria-label="Primary navigation"><a href="./field-status.html">Field status</a><a href="#contract">Contract</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+
+  <main id="main" class="article-shell grammar-article">
+    <header class="article-hero grammar-hero">
+      <p class="eyebrow">Tool presentation · Client compatibility</p>
+      <h1>The tool knows the language. The card should listen.</h1>
+      <p class="article-deck">Move grammar intent out of the wire name—without letting presentation choose execution.</p>
+      <div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream rc.2 · b150a55</span></div>
+    </header>
+
+    <article class="article-body">
+      <div class="signal"><strong>rc.2 mismatch</strong><span><code>run_code</code> selects the Code row by literal name, and every Code row sends <code>typescript</code> to the highlighter—even when the loaded runtime reports Python.</span></div>
+
+      <h2>Four layers. One hardcoded answer.</h2>
+      <div class="grammar-path" role="img" aria-label="Tool presenter emits execute intent and source, client classifies by wire name, Code row hardcodes TypeScript, and CodeBlock highlights the program">
+        <div><span>Tool</span><strong>execute intent</strong><small>rawInput: program</small></div><b>→</b>
+        <div class="grammar-name"><span>Client</span><strong>name === run_code</strong><small>select Code row</small></div><b>→</b>
+        <div class="grammar-wrong"><span>Row</span><strong>typescript</strong><small>hardcoded grammar</small></div><b>→</b>
+        <div><span>CodeBlock</span><strong>render</strong><small>grammar or plain</small></div>
+      </div>
+
+      <div class="grammar-contrast"><section><span>Python runtime</span><strong>Python schema + SDK</strong></section><b>≠</b><section><span>Web card</span><strong>TypeScript banner</strong></section></div>
+
+      <h2 id="contract">Add one narrow hint.</h2>
+      <pre><code>GenericCallView {
+  card: 'generic'
+  kind: 'execute'
+  rawInput: 'print("hello")'
+  language: 'python'
+}</code></pre>
+      <div class="grammar-rules">
+        <section><span>It is</span><strong>Presentation</strong><p>A banner and syntax grammar hint owned by the tool that produced the call view.</p></section>
+        <section><span>It is not</span><strong>Authority</strong><p>It cannot choose the runtime, executable, sandbox, permission, tool, or policy.</p></section>
+      </div>
+
+      <h2>Require the semantic tuple.</h2>
+      <div class="grammar-tuple">
+        <span><code>card: generic</code></span><b>+</b><span><code>kind: execute</code></span><b>+</b><span><code>rawInput: string</code></span><b>+</b><span><code>language: non-empty</code></span><b>→</b><span class="grammar-code">Code row</span>
+      </div>
+      <p>A language string alone cannot switch card families. Unknown grammar identifiers retain the banner and fall back to plain text; they never trigger an arbitrary dynamic import.</p>
+
+      <h2>Keep old and new peers working.</h2>
+      <div class="grammar-fallbacks">
+        <section><span>new producer · new client</span><strong>View first</strong><p>Use the producer-owned body and language.</p></section>
+        <section><span>old producer · new client</span><strong>Name fallback</strong><p>Keep legacy <code>run_code</code> behavior.</p></section>
+        <section><span>new producer · old client</span><strong>Ignore safely</strong><p>The optional field does not break decode.</p></section>
+        <section><span>unknown grammar</span><strong>Plain body</strong><p>No crash, fetch, execution, or guessed runtime.</p></section>
+      </div>
+
+      <h2>Share one language source.</h2>
+      <div class="grammar-source"><strong>Validated CodeRuntime.language</strong><span>→</span><div><b>schema</b><b>SDK</b><b>call view</b><b>card</b></div></div>
+      <p>Persist the producer-owned hint with the call view. A later profile switch must not relabel an already durable execution.</p>
+
+      <h2>Six release gates.</h2>
+      <div class="grammar-gates"><span>Third-party wire names work</span><span>Python no longer says TypeScript</span><span>Live and replay match</span><span>Unknown grammar stays plain</span><span>Policy never reads the hint</span><span>Legacy peers remain valid</span></div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/presentation.ts">rc.2 provider-neutral presentation types</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/code-mode.ts">rc.2 Code Mode presenter and flavors</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-tool/src/client/tool/components/ToolRow.tsx">rc.2 Web Code row</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4724">Tool-owned code-card proposal #4724</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the full compatibility design.</h2>
+        <p>The canonical guide adds the type proposal, view-first fallback matrix, wire and replay constraints, third-party example, failure router, and twenty regression gates.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/plugin-development/tool-code-card-language.md">Read and star on GitHub</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
