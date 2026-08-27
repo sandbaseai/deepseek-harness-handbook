@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.152 - 2026-08-27
+
+### Changed
+
+- Added Google translation-extension interference as a distinct Web composer failure alongside missing IME candidates and premature Enter.
+- Separated controlled textarea value, stable DOM identity, aligned backdrop, injected wrappers, computed style, and actual remount evidence.
+- Added site-scoped recovery, privacy-safe DevTools capture, and a compatibility contract that preserves translation elsewhere without patching generated code.
+
 ## 0.5.151 - 2026-08-27
 
 ### Changed

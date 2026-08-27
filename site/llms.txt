@@ -54,7 +54,7 @@ Programmatic headless contract: https://sandbaseai.github.io/deepseek-harness-ha
 Air-gapped rc.8 source build: https://sandbaseai.github.io/deepseek-harness-handbook/air-gapped-source-build.html
 Token accounting map: https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html
 Preset generation and shared-provider recovery: https://sandbaseai.github.io/deepseek-harness-handbook/preset-generation-recovery.html
-Web IME composition recovery: https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html
+Web IME and translation-extension composer recovery: https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html
 
 ## Start here
 
