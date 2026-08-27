@@ -1,7 +1,7 @@
 ---
 title: Design Session Groups Without Inventing a Workspace
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -13,6 +13,47 @@ DeepSeek Harness rc.2 already groups Sessions by registered Workspace. A request
 
 > [!IMPORTANT]
 > This is a design response to upstream discussion [#4721](https://github.com/deepseek-ai/deepseek-harness/discussions/4721), not documentation of a shipped custom-group feature. Current behavior below is verified at commit `b150a55`; the proposed contracts are recommendations.
+
+Discussion #4765 restates four concrete operator gaps: ungrouped Sessions cannot be moved into a Workspace, Sessions under another Workspace are not globally discoverable, the UI has no delete action, and there is no cross-Workspace management view. They share a navigation surface, but they do not share one safe mutation.
+
+## Map each UX gap to its owning contract
+
+| Requested action | Current gap | Safe product boundary | Unsafe shortcut |
+|---|---|---|---|
+| show an ungrouped Session under another label | no mutable navigation membership | Session Collection referencing the same `SessionId` | rewrite `SessionHeader.cwd` or fabricate Workspace membership |
+| execute against a different directory | immutable per-Session `cwd` | fork into a new rooted Session, or add a versioned execution-root event honored by every tool | bypass `attachSession` cwd validation |
+| find Sessions across Workspaces | Workspace-scoped tree has no global search | paginated global Session index with Workspace, archive, Collection, and access filters | scan filenames and infer cwd from lossy directory names |
+| remove a Session from the sidebar | archive exists; delete/unarchive do not | online archive now; future authenticated trash/delete API with writer coordination | delete `.jsonl` or `.jsonl.zstd` while a Host may own it |
+
+The rejected `attachSession` call is valuable evidence: current Workspace accounting requires the Session's immutable `cwd` to match the Workspace path. Adding a “manual override” flag would not merely move a row. It would either lie about accounting or silently change which filesystem a historical Session can affect.
+
+### Global discovery contract
+
+An **All Sessions** view should query the running Host, not walk storage filenames in the browser or a companion script. Each row needs at least:
+
+```text
+SessionId / title / created and updated time
+recorded cwd or explicit no-Workspace profile
+registered Workspace match, if any
+Collection membership, if supported
+archive state
+top-level / fork / subagent lineage class
+storage health and loadability, without prompt contents
+```
+
+Pagination and search must define visibility across archive state, Workspace access, remote Hosts, profiles, and storage roots. A global index for one Host is not automatically a global index for every machine or credential domain.
+
+Moving a row from this view into a Collection is presentation-only. Choosing **Use another folder** should instead create a new rooted Session (with an explicit lineage link) until the runtime ships a replay-safe execution-root event.
+
+### Delete UX contract
+
+A context-menu **Delete** button cannot safely be a thin wrapper around filesystem removal. It must distinguish:
+
+- **Archive**: online, reversible visibility change supported by rc.2;
+- **Trash**: recoverable removal requiring writer quiescence, unique generation, manifest, and restore conflict handling; and
+- **Purge**: delayed irreversible retention action after tested backup and authorization.
+
+Until Host APIs own trash, restore, and purge, the UI should offer Archive and a clearly scoped export—not pretend manual file deletion is a supported Session transaction. See the related archive/trash guide for the full storage protocol.
 
 ## Start with the shipped boundary
 
@@ -221,6 +262,7 @@ Legacy peers should continue to show the Workspace tree. They may ignore Collect
 - [rc.2 filesystem resolution from per-Session `cwd`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/session-cwd.ts)
 - [rc.2 Session-scoped sandbox mode](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sandbox/sandbox-policy/src/session-mode.ts)
 - [Upstream Session grouping and workspace-less request #4721](https://github.com/deepseek-ai/deepseek-harness/discussions/4721)
+- [Upstream cross-Workspace discovery, move, and delete gaps #4765](https://github.com/deepseek-ai/deepseek-harness/discussions/4765)
 
 ## Related handbook guides
 
