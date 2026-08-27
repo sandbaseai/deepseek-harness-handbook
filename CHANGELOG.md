@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.146 - 2026-08-27
+
+### Changed
+
+- Added the rc.2 long-question header clipping failure to the missing interaction runbook.
+- Separated absent-card transport failures from a present card whose fixed header consumes the capped height.
+- Added operator recovery, scroll-ownership repair criteria, and accessibility regression gates.
+
 ## 0.5.145 - 2026-08-27
 
 ### Changed

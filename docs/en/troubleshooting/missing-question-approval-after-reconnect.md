@@ -1,20 +1,21 @@
 ---
 title: DeepSeek Harness Missing Question or Approval Card After Reconnect
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-19
-upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
+verified_at: 2026-08-27
+upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
 # The Agent is waiting, but the question card is missing
 
 In DeepSeek Harness rc.7 Web, `ask_user_question` or an approval can remain pending on the Host while the browser shows no answer card. The turn appears stuck; stopping it produces a user-abort result.
 
-Two independent connection-generation failures can produce this same screen:
+Three independent failures can remove the answer path from view:
 
 1. a silent dead WebSocket prevents reconnect and pending-frame replay;
 2. a successful reconnect replays the frame, then Session resync clears the fresh client wait.
+3. the card exists, but an unbounded question header consumes the height cap and clips its actions.
 
 > [!WARNING]
 > Never synthesize an approval or answer through an API call to unstick the Agent. The missing UI is not consent. Recover the authentic pending request or cancel the turn.
@@ -75,6 +76,37 @@ This race is intermittent because frame delivery and resync scheduling decide th
 | tool has a result in history | interaction is no longer pending; diagnose UI projection |
 | only one Session is affected | Session-local pending mirror or turn state |
 | all live updates stop | carrier generation or Host availability |
+| long question is visible but choices and actions are not | fixed header consumes the capped card height |
+| options appear after reducing page zoom | layout clipping, not a missing Host request |
+
+## Failure C: the card exists, but its actions are clipped
+
+The rc.2 generic `QuestionComposer` caps the complete card at `min(60vh, 520px)` and sets `overflow: hidden`. Its header contains `question.question` and has `flex-shrink: 0`. Only the body below it owns `overflow-y: auto`.
+
+```text
+card: max-height min(60vh, 520px) + overflow hidden
+  header: flex-shrink 0 + unbounded question text
+  body: flex 1 + min-height 0 + overflow-y auto
+    options + custom answer + footer actions
+```
+
+Many options are handled because the body scrolls. An unusually long question is different: the header can consume the capped height before the body receives a usable scrollport. The choices and footer still exist in the component tree but become visually unreachable.
+
+Do not interpret a hidden approval button as denial, approval, or an absent option. The human decision remains pending.
+
+### Safe operator recovery
+
+1. Preserve the question text, screenshot, version, viewport, and zoom.
+2. Try the card's collapse and expand control once; do not submit through DevTools.
+3. Temporarily reduce browser zoom only to recover the authentic visible control.
+4. If it remains unreachable, cancel the turn and ask the Agent to restate one concise decision with short option labels.
+5. Never continue the proposed effect based on an inferred answer.
+
+### Repair the scroll ownership
+
+The card needs one bounded scroll owner that includes long question content, choices, validation, and actions, or a separately bounded header whose overflow remains keyboard and screen-reader reachable. A visual text clamp alone is insufficient unless the full accessible question stays available.
+
+Test long Markdown, unbroken strings, browser zoom, translations, one option, many options, optionless custom input, error feedback, and the minimized state.
 
 ## Safe recovery on rc.7
 
@@ -137,6 +169,10 @@ The repair must cover both instantiated Sessions and buffered frames for Session
 10. background-tab throttling does not create duplicate answers;
 11. shutdown clears heartbeat timers and socket pumps;
 12. Session history remains free of synthetic approval/answer events.
+13. a long question cannot push every choice and action outside the card;
+14. 200% zoom preserves a keyboard-reachable answer path;
+15. localized text and long tokens do not create horizontal clipping;
+16. collapsing and expanding preserves the draft and returns focus to a reachable control.
 
 ## Source evidence
 
@@ -146,4 +182,6 @@ The repair must cover both instantiated Sessions and buffered frames for Session
 - [Connection readiness and `onConnected` ordering](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/client/connection.ts)
 - [Host WebSocket downlink](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/connection/src/websocket-downlink.ts)
 - [Host pending registries and mux replay](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/apiproxy/src/api-proxy.ts)
-
+- [rc.2 QuestionComposer layout](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-user-questions/src/client/QuestionComposer.module.css)
+- [rc.2 QuestionComposer component](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-user-questions/src/client/QuestionComposer.tsx)
+- [Long-question clipping report #4748](https://github.com/deepseek-ai/deepseek-harness/discussions/4748)
