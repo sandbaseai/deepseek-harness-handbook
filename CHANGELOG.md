@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.138 - 2026-08-27
+
+### Added
+
+- Added an RTL and mixed-script rendering contract covering first-strong limits, authored versus inferred direction, block overrides, inline isolation, code safety, and composer geometry.
+- Added a cross-browser conformance matrix and sixteen acceptance gates for Arabic, Hebrew, Persian, Urdu, mixed technical prose, Markdown, tables, code, streaming, IME, copy/paste, and accessibility.
+- Added a focused visual guide that distinguishes semantic direction, alignment, isolation, and structural LTR surfaces.
+
 ## 0.5.137 - 2026-08-27
 
 ### Added
