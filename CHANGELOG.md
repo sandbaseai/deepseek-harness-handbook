@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.347 - 2026-08-29
+
+### Added
+
+- Added a Session write-integrity architecture note based on upstream discussion #4942, covering durable watermarks, per-Session writer exclusion, recovery leases, and torn-tail verification.
+
 ## 0.5.346 - 2026-08-29
 
 ### Added
