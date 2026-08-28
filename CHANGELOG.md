@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.292 - 2026-08-28
+
+### Added
+
+- Added a reviewed Chinese localization of the Session storage-format guide, covering Zstandard framing, packed rows, sequence reconstruction, and evidence-preserving format migration.
+- Updated coverage to 159 canonical pages and 176 localized documents.
+
 ## 0.5.291 - 2026-08-28
 
 ### Changed

@@ -247,7 +247,7 @@
     {
       "source": "docs/en/reference/session-log-storage-format.md",
       "revision": 2,
-      "translations": {}
+      "translations": { "zh-CN": "docs/zh-CN/reference/session-log-storage-format.md" }
     },
     {
       "source": "docs/en/reference/deepseek-harness-vs-coding-agents.md",
