@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.393 - 2026-08-30
+
+### Added
+
+- Added the write-side prevention model from upstream #4942: durable append watermarks, per-session writer exclusion, and executor leases before recovery closers.
+
 ## 0.5.392 - 2026-08-30
 
 ### Added
