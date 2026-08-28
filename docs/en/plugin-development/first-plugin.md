@@ -1,7 +1,7 @@
 ---
 title: Build Your First DeepSeek Harness Plugin
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
 ---
@@ -70,7 +70,44 @@ Create `scratch-plugin/cordis.yml`, replacing the example with the absolute path
       name: '/absolute/path/to/deepseek-harness/scratch-plugin/src/my-plugin.ts'
 ```
 
-The path must be absolute because a patch contributes configuration but does not change the profile directory used for module resolution.
+For rc.2 on POSIX, the absolute path is a direct module specifier. Windows drive paths need the URL boundary below. Current `0.1.2-alpha.1` source additionally anchors an inserted `./` or `../` name to the overlay file itself.
+
+### Convert Windows drive paths to file URLs
+
+If Node reports this error, the plugin file exists but its specifier has the wrong representation:
+
+```text
+ERR_UNSUPPORTED_ESM_URL_SCHEME
+On Windows, absolute paths must be valid file:// URLs.
+Received protocol 'f:'
+```
+
+`F:\repo\scratch-plugin\src\my-plugin.ts` is an absolute Windows filesystem path, but Node's ESM loader parses the leading `F:` as an unsupported URL protocol. Do not hand-build the escaping. Generate the canonical URL in PowerShell:
+
+```powershell
+$pluginPath = Join-Path $PWD 'scratch-plugin\src\my-plugin.ts'
+node -e "const {pathToFileURL}=require('node:url'); console.log(pathToFileURL(process.argv[1]).href)" $pluginPath
+```
+
+Paste the printed value into the overlay:
+
+```yaml
+- insert:
+    - id: hello
+      name: 'file:///F:/path/to/deepseek-harness/scratch-plugin/src/my-plugin.ts'
+```
+
+The drive letter, slash direction, spaces, `#`, and non-ASCII characters must remain exactly as `pathToFileURL()` encoded them. `file://F:/...`, a raw `F:\...` string, and a manually percent-escaped guess are not equivalent.
+
+On current alpha source, this shorter overlay is also anchored relative to `scratch-plugin/cordis.yml` before the Loader sees it:
+
+```yaml
+- insert:
+    - id: hello
+      name: './src/my-plugin.ts'
+```
+
+Use the generated `file:` URL when supporting rc.2 or an uncertain mixed prerelease installation. A successful path fix must print `[hello-plugin] loaded`; merely getting past the URL-scheme error can still expose a later TypeScript or dependency failure.
 
 ### Give editor diagnostics an explicit project
 
@@ -285,6 +322,7 @@ pnpm 10 blocks Git dependency build scripts until the consumer explicitly allows
 | First failure | Inspect first |
 |---|---|
 | module not found | absolute local path or packaged `main` entry |
+| Windows ESM reports protocol `f:` or another drive letter | convert the exact absolute path with Node `pathToFileURL()` |
 | editor cannot resolve `@deepseek-ai/cordis` | scratch `tsconfig.json` extending the repository base config |
 | plugin installs but no layer appears | `dsh.bundle.patch` in the installed manifest |
 | service is not declared | missing `inject` or unsafe direct `ctx.service` access |
@@ -301,4 +339,7 @@ pnpm 10 blocks Git dependency build scripts until the consumer explicitly allows
 - [Package and install a plugin](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/basic/publish.md)
 - [CLI profile and plugin contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/cli/reference/README.md)
 - [TypeScript project layout and base-path contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/development.md#typescript-project-layout)
+- [alpha.1 overlay-relative plugin anchoring](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/boot/app-boot/src/index.ts)
+- [Windows absolute-plugin URL regression test](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/tests/mount.spec.ts)
+- [Windows first-plugin report #4814](https://github.com/deepseek-ai/deepseek-harness/discussions/4814)
 - [Services and dependency lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/framework/service.md)

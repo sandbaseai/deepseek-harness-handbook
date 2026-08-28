@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.170 - 2026-08-28
+
+### Changed
+
+- Added the Windows first-plugin `ERR_UNSUPPORTED_ESM_URL_SCHEME` diagnosis and a canonical `pathToFileURL()` recovery that preserves escaping.
+- Distinguished the cross-version file-URL route from alpha.1 overlay-relative plugin anchoring and added a load-success boundary before later TypeScript diagnosis.
+
 ## 0.5.169 - 2026-08-28
 
 ### Changed

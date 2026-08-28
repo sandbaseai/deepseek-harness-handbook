@@ -369,11 +369,11 @@
   </entry>
 
   <entry>
-    <title>Build your first DeepSeek Harness plugin</title>
+    <title>Load your first DeepSeek Harness plugin on Windows</title>
     <link href="https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html"/>
     <id>https://sandbaseai.github.io/deepseek-harness-handbook/first-deepseek-harness-plugin.html</id>
-    <updated>2026-08-19T14:00:00Z</updated>
-    <summary>Load one local module, register a typed Agent tool, package a DSH bundle, inspect an isolated profile, and remove it cleanly.</summary>
+    <updated>2026-08-28T03:30:00Z</updated>
+    <summary>Convert raw Windows drive paths to canonical file URLs, distinguish alpha-relative anchoring, prove plugin load, then continue through type-check and packaging.</summary>
   </entry>
 
   <entry>
