@@ -2,7 +2,7 @@
 title: Awesome DeepSeek Harness エコシステム資源マップ
 locale: ja
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 8
+source_revision: 9
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -28,7 +28,7 @@ verified_at: 2026-08-28
 
 ## 追加のエージェント向けリソース
 
-上流カタログから、モデル比較の [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval)、計画の [dsh-plans](https://github.com/Optim-Agent/dsh-plans)、チーム実行の [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui)、コンテキスト圧縮の [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor)、Web 検索の [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro)、チェックポイント共有の [task-passport](https://github.com/dongsheng123132/task-passport)、継続改善の [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve)、知識パッケージの [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve) を追加しました。導入前に各リポジトリの権限、互換性、ロールバック手順を確認してください。
+上流カタログから、モデル比較の [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval)、計画の [dsh-plans](https://github.com/Optim-Agent/dsh-plans)、チーム実行の [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui)、コンテキスト圧縮の [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor)、Web 検索の [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro)、チェックポイント共有の [task-passport](https://github.com/dongsheng123132/task-passport)、継続改善の [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve)、知識パッケージの [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve)、中英バイリンガルのコミュニティ目录 [fendouai/awesome-deepseek-harness](https://github.com/fendouai/awesome-deepseek-harness) を追加しました。導入前に各リポジトリの権限、互換性、ロールバック手順を確認してください。
 
 ## 四つの安全な開始経路
 

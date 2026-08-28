@@ -53,6 +53,7 @@
     {"capability":"search","name":"dsh-web-search-pro","url":"https://github.com/anweat/dsh-web-search-pro","why":"Persistent multi-engine search with platform routing, extraction, caching, and Playwright rendering."},
     {"capability":"state","name":"task-passport","url":"https://github.com/dongsheng123132/task-passport","why":"Carries durable task checkpoints across DeepSeek Harness, Codex, Claude Code, and other agents."},
     {"capability":"evolution","name":"dsh-continual-evolve","url":"https://github.com/ZK-Andy/dsh-continual-evolve","why":"Versioned, auditable, rollback-safe refinement of prompts, memories, skills, and subagent specs."},
-    {"capability":"knowledge","name":"dsh-kb-sieve","url":"https://github.com/omdsh-dev/dsh-kb-sieve","why":"Builds auditable knowledge-base packages from references and SQL for repeatable research workflows."}
+    {"capability":"knowledge","name":"dsh-kb-sieve","url":"https://github.com/omdsh-dev/dsh-kb-sieve","why":"Builds auditable knowledge-base packages from references and SQL for repeatable research workflows."},
+    {"capability":"community-catalog","name":"fendouai/awesome-deepseek-harness","url":"https://github.com/fendouai/awesome-deepseek-harness","why":"Bilingual ecosystem directory with live link checks, machine-readable registries, and weekly trending refreshes."}
   ]
 }

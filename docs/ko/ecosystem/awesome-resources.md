@@ -2,7 +2,7 @@
 title: 능력별 Awesome DeepSeek Harness 생태계 리소스
 locale: ko
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 8
+source_revision: 9
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -28,7 +28,7 @@ verified_at: 2026-08-28
 
 ## 추가 에이전트 리소스
 
-상위 카탈로그에서 모델 비교용 [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval), 계획용 [dsh-plans](https://github.com/Optim-Agent/dsh-plans), 팀 실행용 [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui), 컨텍스트 압축용 [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor), 웹 검색용 [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro), 체크포인트 공유용 [task-passport](https://github.com/dongsheng123132/task-passport), 지속 개선용 [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve), 지식 패키지용 [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve)를 추가했습니다. 설치 전 권한, 호환성, 롤백 절차를 확인하세요.
+상위 카탈로그에서 모델 비교용 [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval), 계획용 [dsh-plans](https://github.com/Optim-Agent/dsh-plans), 팀 실행용 [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui), 컨텍스트 압축용 [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor), 웹 검색용 [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro), 체크포인트 공유용 [task-passport](https://github.com/dongsheng123132/task-passport), 지속 개선용 [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve), 지식 패키지용 [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve), 중영 커뮤니티 디렉터리 [fendouai/awesome-deepseek-harness](https://github.com/fendouai/awesome-deepseek-harness)를 추가했습니다. 설치 전 권한, 호환성, 롤백 절차를 확인하세요.
 
 ## 네 가지 안전한 시작 경로
 
