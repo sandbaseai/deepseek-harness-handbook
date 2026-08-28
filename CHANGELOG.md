@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.233 - 2026-08-29
+
+### Changed
+
+- Added a visible Latest Release badge to the README and a direct latest-release action on the public homepage, improving provenance and conversion for visitors arriving from search or upstream discussions.
+
 ## 0.5.232 - 2026-08-29
 
 ### Changed
