@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 60
+content_revision: 61
 status: canonical
 verified_at: 2026-08-28
 ---
@@ -10,6 +10,7 @@ verified_at: 2026-08-28
 
 - [Stop and safely retry a stuck Turn](stuck-turn-stop-and-retry.md)
 - [Fix clustered `MISSING_EXPORT` failures after a source revision change](source-build-missing-exports.md)
+- [Resume historical `code` Sessions after the preset became `ptc`](historical-code-preset-resume.md)
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
@@ -37,6 +38,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 | Symptom | Likely layer | First evidence to collect |
 |---|---|---|
+| alpha.1 cannot open a historical Session because preset `code` is missing and `ptc` is available | durable preset identity / roster rename compatibility | producing and target revisions, Session header/projection preset, target roster, preserved old preset directory, and immutable Session copy |
 | one `.jsonl` file in a zstd Session root makes listing, spawn, and resume fail | root-wide physical encoding ownership / opposite artifact producer | stopped-writer inventory, configured compression, both file metadata and digests, decoded logical diff, first creator timeline, and disposable cold-load controls |
 | `sandbox escalation ... is not strictly wider` before a Full Access edit or command | invalid same-or-narrower one-call escalation / call producer | exact tool arguments, effective mode, permission preset, schema owner, and whether model, client, or wrapper inserted both escalation fields |
 | a DeepSeek-compatible pi-ai route returns 400 because historical assistant messages lack `reasoning_content` after a provider switch | provider-history serialization / foreign replay metadata / route compat | source and target provider/model, resolved API, smallest failing history prefix, assistant block shape, sanitized wire keys, and explicit compat-switch A/B |
@@ -109,6 +111,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 ## Focused guides
 
+- [Resume historical `code` Sessions after the preset became `ptc`](historical-code-preset-resume.md)
 - [Recover when a second core package copy breaks every tool call](duplicate-core-runtime-closure.md)
 - [Recover after a preset edit collides with its previous generation](preset-generation-not-reclaimed.md)
 - [Recover Web IME composition without guessing at Enter handling](web-ime-composition.md)

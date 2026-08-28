@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.186 - 2026-08-28
+
+### Added
+
+- Added a historical Session recovery runbook for the shipped `code` → `ptc` preset rename.
+- Documented the durable preset projection failure, user-level compatibility alias, nonblank migration boundary, failed approaches, source-fix contract, and cold-replay regression gates.
+
 ## 0.5.185 - 2026-08-28
 
 ### Changed
