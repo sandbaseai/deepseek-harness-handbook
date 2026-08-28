@@ -783,6 +783,11 @@
       "source": "docs/en/agent-patterns/gitflow-guardrails.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/integrations/text-model-vision-fallback.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
