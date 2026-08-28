@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.239 - 2026-08-29
+
+### Changed
+
+- Expanded the community-plugin audit with #4486's browser-side locale namespace collision, clean-restart evidence, and coexistence checks for multiple UI plugins.
+
 ## 0.5.238 - 2026-08-29
 
 ### Changed

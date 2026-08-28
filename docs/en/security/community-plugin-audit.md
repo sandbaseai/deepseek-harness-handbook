@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Community Plugin Audit
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
 verified_at: 2026-08-29
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -40,6 +40,12 @@ Two recent upstream discussions are useful discovery signals, not security or co
 | `H97y/dsh-devflow` | [#2572](https://github.com/deepseek-ai/deepseek-harness/discussions/2572) | `dsh-devflow` (announcement describes v0.4.0) | `dsh plugin --profile web add dsh-devflow` | exact npm version/integrity, background-agent authority, workspace/worktree writes, merge-to-main behavior, and model/cost controls |
 
 The rows intentionally use **discovered** language. Before installing any candidate, resolve the registry tarball, inspect its `dsh` bundle patch and lifecycle scripts, pin the exact version/integrity, and test in a disposable profile. For an automation plugin that can create worktrees, run tools, and merge to `main`, review repository write authority and approval gates before enabling any background pump. Screenshots, a discussion post, a package name, or a high star count do not promote a row to `installable`, `runtime-compatible`, or `security-reviewed`.
+
+### Audit shared browser namespaces before combining plugins
+
+Field report [#4486](https://github.com/deepseek-ai/deepseek-harness/discussions/4486) shows a separate composition hazard: two otherwise installable Web plugins can claim the same locale namespace and make the browser reject the bundle on restart (for example, `locale namespace "mobileNav" already has locale "zh"`). The error is a Client-side composition failure; an empty Host log does not prove that either plugin is safe or that the package was not installed.
+
+Before enabling a second UI plugin, dump the effective profile and inspect every shared namespace—not only package names. Exercise a clean restart in a copied profile, verify the browser boot report and locale registration, and remove one candidate at a time if the collision appears. Do not silently rename a namespace in an installed package: that can split persisted translation keys or mask a future collision. A plugin author should use a globally unique, documented namespace and test coexistence with the common UI extensions users are expected to install.
 
 ## A runtime-tested catalog is still a discovery surface
 
@@ -423,3 +429,4 @@ Reviewer and date:
 - [Core-provider replacement report #3421](https://github.com/deepseek-ai/deepseek-harness/discussions/3421)
 - [Verified-market proposal #4736](https://github.com/deepseek-ai/deepseek-harness/discussions/4736)
 - [Reviewed dsh-verified-market commit](https://github.com/G-pledge/dsh-verified-market/tree/836fc832023101e256c367a65b7493843fd8231e)
+- [Two UI plugins collide on a locale namespace after restart (#4486)](https://github.com/deepseek-ai/deepseek-harness/discussions/4486)
