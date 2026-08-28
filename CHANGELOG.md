@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.217 - 2026-08-29
+
+### Added
+
+- Added a source-linked Windows 11 / Node 24.15 / DSH rc.6 cold-restart row to the insufficient-tool-messages runbook, documenting failed recovery without implying a repair.
+
 ## 0.5.216 - 2026-08-29
 
 ### Changed

@@ -1,13 +1,25 @@
 ---
 title: Recover a DeepSeek Harness Session With Insufficient Tool Messages
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Recover a Session with insufficient tool messages
+
+## A cold restart is not a repair guarantee
+
+One published-runtime report supplies a useful negative recovery row:
+
+| OS | DSH artifact | Node | Persistence / symptom | Full restart result |
+|---|---|---|---|---|
+| Windows 11 | `0.1.0-rc.6` | `24.15.0` | HMR was followed by `undefined.prepare`; the assistant tool call had no matching result and later requests returned `insufficient tool messages following tool_calls message` | **Failed recovery:** after a complete process stop and restart, no synthetic tool result was appended and the resumed turn still returned HTTP 400 |
+
+The report's original tail already contained `step/end` and `turn/end(error)`. The pinned `interruptedTurnClosers()` logic therefore classified the turn as balanced and had no open crash tail to close. This is evidence that a cold restart can faithfully reload a poisoned, already-closed error turn; it is not evidence that the restart repaired the missing tool result. Preserve the Session and treat the post-restart failure as the observed outcome, not as permission to edit the log in place.
+
+This row is community evidence, not a handbook reproduction. It falsifies the shortcut “restart always repairs an interrupted call” and gives future comparisons an exact artifact, runtime, symptom, and result.
 
 Use this runbook when one DeepSeek Harness Session begins returning the same provider error on every retry or resume:
 
@@ -216,6 +228,7 @@ The validator should return a typed diagnostic rather than throw a raw `UNKNOWN`
 Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`, `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`, `0.1.2-alpha.1` commit `cd5ef8148158c3a752a658978873241fdf8e2bbc`, upstream reproductions #3415 and #4843, and community patch discussion #4668. The plugin-causality claim in #4668 remains unverified without a minimal producer-to-wire reproduction; the #4843 patch is reviewed as a proposal, not described as released behavior.
 
 - [Upstream insufficient-tool-messages reproduction #3415](https://github.com/deepseek-ai/deepseek-harness/discussions/3415)
+- [Cold-restart failed-recovery report #1695](https://github.com/deepseek-ai/deepseek-harness/discussions/1695#discussioncomment-18025447)
 - [Community wire-sanitizer patch discussion #4668](https://github.com/deepseek-ai/deepseek-harness/discussions/4668)
 - [Malformed and orphaned tool-call report #4843](https://github.com/deepseek-ai/deepseek-harness/discussions/4843)
 - [Parallel tool scheduler failure path](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/agent-loop/src/tool-calls.ts)
