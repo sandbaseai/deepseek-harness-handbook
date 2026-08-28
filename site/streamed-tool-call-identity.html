@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>Stop empty tool identity from corrupting a DeepSeek Harness Session</title>
-  <meta name="description" content="Trace empty streamed tool identity through DeepSeek Harness UNKNOWN_TOOL, provider replay 400s, durable Session corruption, and safe recovery.">
+  <meta name="description" content="Trace empty streamed tool identity through DeepSeek Harness rc.2 and alpha.1, UNKNOWN_TOOL, provider replay 400s, durable Session corruption, and safe recovery.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html">
@@ -16,7 +16,7 @@
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/handbook-map.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css?v=0.5.40">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Contain Empty Streamed Tool Identity Before Session Corruption","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html","inLanguage":"en","isAccessibleForFree":true}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Contain Empty Streamed Tool Identity Before Session Corruption","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-28","url":"https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-identity.html","inLanguage":"en","isAccessibleForFree":true}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -28,10 +28,10 @@
   <main id="main" class="article-shell identity-article">
     <header class="article-hero identity-hero">
       <div>
-        <p class="eyebrow">Stream protocol · persistence · rc.2</p>
+        <p class="eyebrow">Stream protocol · persistence · rc.2 / alpha.1</p>
         <h1>One empty tool call can survive longer than the process.</h1>
         <p class="article-deck">Contain the first bad identity before it poisons execution, replay, and the next Session restore.</p>
-        <div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream b150a55</span></div>
+        <div class="article-meta"><span>Verified 2026-08-28</span><span>Sources b150a55 + cd5ef81</span></div>
       </div>
       <div class="identity-trace" role="img" aria-label="A valid first tool-call delta is overwritten by an empty continuation before policy evaluation">
         <div class="trace-good"><small>First delta</small><strong>call_8f2</strong><code>read</code></div>
@@ -44,6 +44,8 @@
 
     <article class="article-body">
       <div class="signal"><strong>The containment rule</strong><span>Stop on the first empty completed identity. Retries can persist the failure, poison provider history, and turn a live protocol fault into an unreadable Session.</span></div>
+
+      <div class="identity-warning"><strong>Tagged alpha.1 still needs the regression.</strong><p>The translator retains the rc.2 overwrite guards. Existing tests cover omitted continuation fields and never-identified calls, but not a valid first identity followed by explicit empty values.</p></div>
 
       <h2>Do not debug the wrong boundary.</h2>
       <div class="identity-contrast">
@@ -95,7 +97,9 @@ resume message must have tool source</code></pre>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3464">Bailian report #3464</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3281">Earlier null-continuation report #3281</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4704">Persistent resume-corruption report #4704</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4851">Current aggregation-gateway report #4851</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/translate.ts">rc.2 DeepSeek stream translator</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-deepseek/src/translate.ts">alpha.1 DeepSeek stream translator</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/index.ts">rc.2 Session validation boundaries</a></li>
       </ul>
 
