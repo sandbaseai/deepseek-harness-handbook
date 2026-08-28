@@ -490,6 +490,13 @@
       "translations": {}
     },
     {
+      "source": "docs/en/agent-patterns/continuable-child-empty-tool-registry.md",
+      "revision": 1,
+      "translations": {
+        "zh-CN": "docs/zh-CN/agent-patterns/continuable-child-empty-tool-registry.md"
+      }
+    },
+    {
       "source": "docs/en/recipes/repository-research-agent.md",
       "revision": 1,
       "translations": {}

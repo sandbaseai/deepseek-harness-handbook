@@ -11,7 +11,7 @@ verified_at: 2026-08-29
 
 这是一份从 Agent 视角理解、运行、排查和扩展 DeepSeek Harness 的独立社区手册，由 [SandBase](https://sandbase.ai/) 维护，并非 DeepSeek AI 官方项目。
 
-目前包含 **157 篇英文 canonical 指南和 170 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，下面五个最新专题摘要已逐行复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
+目前包含 **158 篇英文 canonical 指南和 172 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，下面五个最新专题摘要已逐行复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
@@ -24,6 +24,7 @@ verified_at: 2026-08-29
 - [安装期与子 Agent OOM（英文）](../en/agent-patterns/subagents.md#separate-install-time-oom-from-child-run-oom)：先区分依赖安装、Host 启动和子 Agent 执行阶段，再选择安全探针。
 - [Firefox Web 客户端空白（英文专题）](../en/troubleshooting/firefox-web-client-blank.md)：对比浏览器、保留首个控制台异常和网络请求，避免在没有证据时重置 Session 或凭据。
 - [认证 Token 无法获取或输入（英文专题）](../en/troubleshooting/auth-token-not-available.md)：先区分认证获取、UI 输入、存储和出站授权，避免泄露或盲目轮换密钥。
+- [Continuable 子代理工具注册表为空（英文专题）](../en/agent-patterns/continuable-child-empty-tool-registry.md)：区分父子工具视图、组合顺序与 cold resume，避免把模型幻觉当成真实工具调用。
 
 这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。中文读者也可以参考社区项目 [DeepSeek Harness 橙皮书](https://github.com/alchaincyf/deepseek-harness-orange-book)，两者均独立维护，均不代表 DeepSeek 官方。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
 

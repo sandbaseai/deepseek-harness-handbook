@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.278 - 2026-08-28
+
+### Added
+
+- Added English and Chinese Agent-pattern guides for diagnosing continuable subagents whose inherited tool registry is empty, based on upstream Discussion #4921.
+- Added the new guide to both language navigation pages and refreshed coverage metadata to 158 canonical and 171 localized documents.
+
 ## 0.5.273 - 2026-08-28
 
 ### Added
