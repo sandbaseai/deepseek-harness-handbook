@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.226 - 2026-08-29
+
+### Changed
+
+- Expanded the duplicate-Session-sequence runbook with #4178 prevention evidence: isolate `DSH_HOME` for experiments, distinguish port changes from true storage isolation, and treat community guard/surgeon tools as discovery-only until audited.
+
 ## 0.5.225 - 2026-08-29
 
 ### Changed

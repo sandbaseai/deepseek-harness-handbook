@@ -1,9 +1,9 @@
 ---
 title: Recover a Session Log with Duplicated Committed Sequence Numbers
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-29
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
@@ -102,6 +102,18 @@ Therefore, a normal retry through the same live coordinator should reject a stal
 
 The rc.8 persistence contract explicitly says its revision freshness checks do not add cross-process writer exclusion. The report alone does not distinguish these branches.
 
+### Prevention reports: isolate the home or refuse the second writer
+
+Discussion [#4178](https://github.com/deepseek-ai/deepseek-harness/discussions/4178) adds a practical prevention pattern: use a separate `DSH_HOME` for experiments, or place a single-instance guard in front of a shared home. The report names community tools such as `dsh-single-instance-guard` and `dsh-session-surgeon`, but those names are discovery signals—not an endorsement or a claim that their current artifacts are safe. Audit them with the [community plugin workflow](../security/community-plugin-audit.md), and never install a guard or surgeon into the only profile while that profile is already writing.
+
+For a low-risk experiment, isolate the entire persistence root before starting a second process:
+
+```sh
+DSH_HOME="$HOME/.dsh-experiment" npx @deepseek-ai/dsh@<exact-version> web --port 3081
+```
+
+Changing only the port is not isolation. Both processes can still resolve the same Session files when `DSH_HOME` and the selected Session are shared.
+
 ## Prove an exact duplicate candidate
 
 A version-aware analyzer should:
@@ -199,6 +211,7 @@ Verified against DeepSeek Harness rc.8 <code>141eb6fef83422698aef7a981029e843e81
 
 - [Official duplicated committed sequence report #3499](https://github.com/deepseek-ai/deepseek-harness/discussions/3499)
 - [rc.2 same-seq foreign-content and generic-recompression report #4767](https://github.com/deepseek-ai/deepseek-harness/discussions/4767)
+- [Two Web instances sharing a Session report #4178](https://github.com/deepseek-ai/deepseek-harness/discussions/4178)
 - [rc.2 JSONL/Zstandard physical and writer contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence-jsonl/README.md)
 - [rc.8 committed-region scanner](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/session/session-persistence-jsonl/src/format.ts)
 - [rc.8 append cursor boundary](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/session/session-persistence/src/coordinator.ts)
