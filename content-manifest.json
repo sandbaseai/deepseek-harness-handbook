@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/troubleshooting/long-running-terminal-command-next-prompt-error.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/pi-ai-cross-provider-reasoning-replay.md",
       "revision": 2,
       "translations": {}
