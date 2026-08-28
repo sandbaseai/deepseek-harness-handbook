@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.339 - 2026-08-29
+
+### Changed
+
+- Updated the visual homepage ecosystem card to expose the verified 37-resource count and pinned Awesome snapshot as the starting point.
+
 ## 0.5.338 - 2026-08-29
 
 ### Added
