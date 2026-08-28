@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Sandbox Denied, Unavailable, or Invalid Escalation
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 verified_upstream: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -19,6 +19,19 @@ Four failures that mention sandboxing require different actions:
 | ordinary command/file error | the effect reached its executor and failed normally | possibly; inspect operation evidence |
 
 Do not handle all four by switching to Full Access. First identify the call's effective mode and whether the model supplied escalation arguments.
+
+## When macOS says `spawn sandbox-exec ENOENT`
+
+An executable lookup that succeeds in the host shell does not prove that the Harness sandbox runner can start. In report [#4849](https://github.com/deepseek-ai/deepseek-harness/discussions/4849), macOS could resolve `/usr/bin/sandbox-exec`, and Node could spawn that absolute path directly, while both the default `sandbox-exec` command and the `dsh-sandbox-local` Seatbelt implementation still returned `spawn ... ENOENT` from the Bash tool. Classify this as a **runner-start or environment-bridge failure**, not as a file-access denial and not as evidence that the requested command ran.
+
+Capture these facts before changing the permission preset:
+
+1. the exact executable path and the Harness/Node versions;
+2. a host-side `command -v sandbox-exec` plus a minimal Node spawn of the bare and absolute paths;
+3. the selected sandbox provider and its resolved executable path; and
+4. whether an ordinary unsandboxed control is permitted in a disposable Session.
+
+If the host controls work but the provider path fails, preserve the failed call and report the provider/environment boundary. Do not “repair” it by silently running the original command with Full Access: an unavailable backend must fail closed until the provider can prove an enforcing start.
 
 ## The mode order
 
@@ -175,3 +188,4 @@ The mode order, schema behavior, strict-widening validation, and fail-closed sem
 - [Bash tool escalation contract at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/shell/tool-bash/README.md)
 - [Community report #4742](https://github.com/deepseek-ai/deepseek-harness/discussions/4742)
 - [Full Access reflexive-field report and no-op proposal #4763](https://github.com/deepseek-ai/deepseek-harness/discussions/4763)
+- [macOS `sandbox-exec` runner-start report #4849](https://github.com/deepseek-ai/deepseek-harness/discussions/4849)
