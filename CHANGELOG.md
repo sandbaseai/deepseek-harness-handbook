@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.228 - 2026-08-29
+
+### Changed
+
+- Expanded the multi-Session presentation contract with Discussion #4879's sidebar view-switching seam analysis, including DOM-anchor failure modes and the proposed Host-owned `sidebar.views` boundary.
+
 ## 0.5.227 - 2026-08-29
 
 ### Changed

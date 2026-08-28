@@ -1,9 +1,9 @@
 ---
 title: Design a Multi-Session Presentation Contract for DeepSeek Harness Web
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-29
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -27,6 +27,19 @@ That panel is not automatically a mounted DSH Session. Without a runtime present
 - event-window staging and deferred teardown semantics.
 
 The missing capability is therefore not “draw two columns.” It is “bind two independently scoped Session subtrees to the official renderer at the same time.”
+
+## Sidebar view switching is a separate seam
+
+Do not treat a second sidebar view as a solved form of multi-Session presentation. Upstream Discussion [#4879](https://github.com/deepseek-ai/deepseek-harness/discussions/4879) documents a pure-plugin channel-view implementation that must anchor into private `WorkspaceBrowser` DOM because the current Client catalog exposes `sidebar.workspaces` as a single slot and `sidebar.footer.action` only as an action list. The latter receives `wide`, but not the Host's `requestExpand`/`expandSidebar` control, and there is no public `sidebar.views` registration point for a parallel view with Host-owned rail, tab, tooltip, and active-state semantics.
+
+The implementation consequence is important for extension authors:
+
+- CSS-module suffix selectors, visible label text, and simulated clicks are version-fragile anchors;
+- a `wide`/`rail` toggle can remount the host header and leave duplicate or orphaned injected nodes;
+- content that is visually adjacent to the workspace browser is not automatically Session-scoped or authorized;
+- a stable upstream seam should let the Host own rail geometry and expansion while the plugin supplies only its view component.
+
+Until such a slot exists, label a DOM-anchored view as an unsupported compatibility layer, pin the exact Web build, and provide a clean disposal path. Do not promise that a sidebar view can switch or coexist with Sessions merely because a plugin can render a button in `sidebar.footer.action`.
 
 ## Prove the rc.2 single-Session boundary
 
