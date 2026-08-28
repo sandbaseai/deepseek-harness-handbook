@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.224 - 2026-08-29
+
+### Changed
+
+- Added Windows Node 22 field evidence from Discussion #4874 to the source-build `MISSING_EXPORT` runbook, recording clean-rebuild convergence without overclaiming compatibility.
+
 ## 0.5.223 - 2026-08-29
 
 ### Changed

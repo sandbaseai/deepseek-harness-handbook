@@ -1,7 +1,7 @@
 ---
 title: Fix MISSING_EXPORT Errors in a DeepSeek Harness Source Build
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-29
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -73,6 +73,10 @@ The root build runs the library build before the Web build. Its TypeScript and b
 Upstream Discussion [#4860](https://github.com/deepseek-ai/deepseek-harness/discussions/4860) reports a seven-error `MISSING_EXPORT` cluster while building the current `master` checkout on a MacBook M5. The first names include `resolveSessionPreset`, `ApiRemoteSessionNotFound`, `ApiRemoteSubagentSessionOwnership`, `apiRemoteSubagentOwnershipError`, and `createApiRemoteAgentResolver`; the generated consumer is `lib/types/api-proxy.js`. The report also shows many packages completing before the aggregate build fails, so a long list of `Build complete` lines is not evidence that the runtime or Web bundle is usable.
 
 Treat the report as a source-build failure, not an npm-install failure. Preserve the exact commit, the first importer/owner pair, and the clean/install results before changing exports. A community suggestion to run `pnpm run clean && pnpm install && pnpm run build` is a reasonable bounded experiment, but omit `--frozen-lockfile` only when the repository's documented workflow explicitly permits it; otherwise a successful dependency rewrite can hide the revision mismatch.
+
+### Windows confirmation: clean rebuild can converge
+
+Discussion [#4874](https://github.com/deepseek-ai/deepseek-harness/discussions/4874) reports the same seven-error alpha.1 cluster on Windows with Node `v22.19.0`. The reporter states that the repository-owned clean/install/build sequence resolved it. This is useful confirmation of the stale-output hypothesis, but it is not a blanket Windows compatibility claim: the report does not publish the final commit, lockfile digest, or a completed Web smoke test. Record those artifacts when repeating the recovery, and keep the clean rebuild separate from any source edits.
 
 ## Safe clean and rebuild
 
