@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.234 - 2026-08-29
+
+### Changed
+
+- Expanded the RTL mixed-text guide with the current #696 follow-up and a clear boundary between a community client prototype and an upstream rendering fix.
+
 ## 0.5.233 - 2026-08-29
 
 ### Changed

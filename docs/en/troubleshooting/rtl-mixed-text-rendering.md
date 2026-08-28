@@ -1,9 +1,9 @@
 ---
 title: Design RTL and Mixed-Script Rendering for DeepSeek Harness
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-29
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -31,6 +31,10 @@ The second string can be intended as an Arabic sentence introduced by an English
 - model-generated text has no reliable author-supplied language metadata.
 
 There is no single estimator that is correct for every arbitrary mixed-script paragraph. Make the policy explicit, versioned, and testable. When an authoritative direction exists—user locale, field schema, or authored message metadata—prefer it over inference.
+
+### Current field evidence and plugin boundary
+
+The newer follow-up in Discussion [#696](https://github.com/deepseek-ai/deepseek-harness/discussions/696) confirms the English-prefix case and links a community client plugin that experiments with whole-text dominance. That plugin is useful as a prototype, not as proof of an upstream fix: a Client plugin cannot automatically cover the official Markdown, composer, question, code, and accessibility surfaces, and its heuristic can diverge from the Host's future policy. Evaluate it as a separate artifact with the [community plugin audit](../security/community-plugin-audit.md), then compare its DOM and copy/paste behavior against the source-pinned acceptance matrix below.
 
 ## Separate document, block, and inline direction
 
