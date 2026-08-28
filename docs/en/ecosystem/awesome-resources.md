@@ -21,8 +21,10 @@ The source index is licensed CC0. The descriptions below are concise editorial s
 |---|---|---|
 | Plugin development | [dsh-plugin-dev](https://github.com/dsh-external/dsh-plugin-dev) | Field notes and skills for Cordis composition, TypeScript setup, Windows junctions, and persistence pitfalls. |
 | Plugin authoring skills | [dsh-plugin-skills](https://github.com/dsh-external/dsh-plugin-skills) | Skills for building and testing DeepSeek Harness plugins. |
+| Plugin composition examples | [dsh-cordis-rocks](https://github.com/dsh-external/dsh-cordis-rocks) | Runnable Cordis tutorials covering lifecycle, tools, skills, workflows, and runtime extension. |
 | Find installed/public plugins | [dsh-find-plugins](https://github.com/dsh-external/dsh-find-plugins) | Searches a hub catalog, proposes an install path, and asks you to verify the result. |
 | Context cost audit | [dsh-context-doctor](https://github.com/Zhenyu98/dsh-context-doctor) | Measures instruction, skill-catalog, and tool-schema token cost and reports duplication or conflicts. |
+| Plugin manifest checks | [dsh-plugin-check](https://github.com/dsh-external/dsh-plugin-check) | Performs read-only checks of plugin manifests, patch shape, build traps, and hub status. |
 
 Use discovery tools as indexes, not trust oracles. A listing is not proof that a package is safe, maintained, compatible with your release, or appropriate for a production profile.
 
@@ -35,6 +37,7 @@ Use discovery tools as indexes, not trust oracles. A listing is not proof that a
 | Cross-session memory | [dsh-memory](https://github.com/dsh-external/dsh-memory) | Adds long-term memory across Sessions; inspect its storage and prompt-injection boundaries first. |
 | Cross-agent memory | [zilliztech/memsearch](https://github.com/zilliztech/memsearch) | Provides a DSH plugin and shared memory layer alongside other coding agents. |
 | Session branching | [dsh-rewind](https://github.com/dsh-external/dsh-rewind) | Folds exploration after a checkpoint into a report while retaining the complete log. |
+| Cross-tool Session import | [dsh-session-hub](https://github.com/dsh-external/dsh-session-hub) | Presents opencode, Claude Code, and Antigravity histories and imports them idempotently as native Sessions. |
 
 Memory and repair tools can read sensitive prompts, tool output, and credentials. Test against a copied profile, keep an evidence digest, and confirm whether a command mutates the source before use. See the [Session log storage format](../reference/session-log-storage-format.md) guide for packed rows and version boundaries.
 
@@ -46,6 +49,7 @@ Memory and repair tools can read sensitive prompts, tool output, and credentials
 | Deep research workflow | [dsh-deep-research](https://github.com/dsh-external/dsh-deep-research) | Provides an adaptive research orchestration workflow. |
 | LLM fallback policy | [dsh-llm-fallbacks](https://github.com/dsh-external/dsh-llm-fallbacks) | Applies role-based retry and fallback policy; verify cost and retry limits. |
 | Agent-to-agent routing | [DSH-Subagent-Model-Router](https://github.com/CypherNaught-0x/DSH-Subagent-Model-Router) | Routes delegated work to configured models and exposes join/wait behavior. |
+| Agent budget guard | [dsh-agent-budget](https://github.com/dsh-external/dsh-agent-budget) | Adds an agent-tree token budget boundary; verify whether limits cover descendants and retries. |
 | GitHub credential bridge | [dsh-gh-bridge](https://github.com/dsh-external/dsh-gh-bridge) | Bridges a GitHub token from macOS Keychain into `gh` configuration; audit secret scope carefully. |
 
 Routing and fallback plugins can multiply provider calls. Establish a bounded budget, log the selected model and retry count, and keep approval and sandbox policy outside the plugin's marketing description.
@@ -60,6 +64,8 @@ Routing and fallback plugins can multiply provider calls. Establish a bounded bu
 | Cross-agent history | [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) | Imports histories from multiple coding agents as resumable DSH Sessions. |
 | Translation | [dsh-plugin-translation](https://github.com/863683348/dsh-plugin-translation) | Adds segmented translation, glossary extraction, QA, and translation memory. |
 | Pi bridge | [dsh-pi-adapter](https://github.com/dsh-external/dsh-pi-adapter) | Bridges Pi coding-agent extensions into a Cordis plugin. |
+| Read-only security audit | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | Scans configuration, plugin provenance, Sessions, and network exposure into a redacted local report. |
+| Safe structured tools | [dsh-tool-schema](https://github.com/dsh-external/dsh-tool-schema) | Validates and explains JSON Schema tool contracts without network access or dynamic execution. |
 
 File and browser capabilities expand the effect surface. Confirm path allowlists, network destinations, attachment handling, and human approval behavior in a disposable profile before enabling them for a valuable workspace.
 

@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.301 - 2026-08-28
+
+### Added
+
+- Expanded the Awesome DSH capability map with Cordis examples, manifest checks, cross-tool Session import, Agent budgets, read-only security audit, and schema-safe tools.
+
 ## 0.5.300 - 2026-08-28
 
 ### Added
