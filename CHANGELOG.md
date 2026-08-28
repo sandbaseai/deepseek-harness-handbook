@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.169 - 2026-08-28
+
+### Changed
+
+- Added the Windows rc.2 `standard` → `cordis` `pwsh` collision and its least-invasive recovery to the preset-generation guide.
+- Distinguished true Host-provider sharing from the `0.1.2-alpha.1` standing-scope tool registry, with whole-graph upgrade and cross-preset execution/disposal gates.
+
 ## 0.5.168 - 2026-08-28
 
 ### Changed
