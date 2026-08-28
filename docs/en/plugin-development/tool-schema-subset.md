@@ -1,10 +1,12 @@
 ---
 title: Author Tool Schemas for the DeepSeek Harness Enforced Subset
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4916
 ---
 
 # Author tool schemas for the enforced subset
@@ -201,7 +203,7 @@ Capture both representations before changing the server:
 MCP initialize/tools/list response  →  normalized DSH schema  →  Code Mode type/display
 ```
 
-If a keyword is outside the DSH vocabulary, keep the boundary explicit: remove it from the model-facing schema only when the tool body or MCP server still validates the rule, label the displayed field as unconstrained when necessary, and add a direct execution test that proves invalid input is rejected. Do not silently widen the schema merely to make the UI stop saying `unknown`, and do not infer support from a successful MCP `tools/list` response alone.
+If a keyword is outside the DSH vocabulary, keep the boundary explicit: remove it from the model-facing schema only when the tool body or MCP server still validates the rule, label the displayed field as unconstrained when necessary, and add a direct execution test that proves invalid input is rejected. Do not silently widen the schema merely to make the UI stop saying `unknown`, and do not infer support from a successful MCP `tools/list` response alone. In #4916, `minItems`, `maxItems`, and numeric bounds caused the generated SDK type to collapse to the literal `unknown`; preserve the server-side constraint and test the generated Code Mode declaration separately.
 
 ## Route double-encoded structured arguments before coercing them
 
@@ -325,4 +327,5 @@ Discussion #1040 reported the constraints against rc.6, when the documentation a
 - [rc.2 outer argument parse](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/tool-calls.ts)
 - [rc.2 pure schema validator](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/json-schema.ts)
 - [Double-encoded structured argument report #4747](https://github.com/deepseek-ai/deepseek-harness/discussions/4747)
+- [MCP extended-schema keywords render as `unknown` in Code Mode #4916](https://github.com/deepseek-ai/deepseek-harness/discussions/4916)
 - [First plugin tutorial](first-plugin.md)

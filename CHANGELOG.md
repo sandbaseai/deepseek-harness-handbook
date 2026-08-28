@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.287 - 2026-08-28
+
+### Changed
+
+- Expanded the tool-schema guide with the Code Mode `unknown` failure mode reported in upstream Discussion #4916, including the separate MCP, generated-SDK, and runtime-validation boundaries.
+
 ## 0.5.286 - 2026-08-28
 
 ### Changed
