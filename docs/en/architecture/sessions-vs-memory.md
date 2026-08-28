@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Sessions vs Long-Term Memory
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -234,6 +234,39 @@ Use this release gate:
 
 The [community plugin audit](../security/community-plugin-audit.md) provides the full artifact-inspection and recovery workflow.
 
+### Case study: `dsh-memory-lite` 0.1.0
+
+The community plugin at revision [`fd373ae`](https://github.com/pacoyi/dsh-memory-lite/tree/fd373ae4957807214d597c6b24a60f06481ae13c) is small enough to audit directly. Its explicit four-operation tool, visible tool results, human-readable JSON, bounded result count, loopback UI route, and zero runtime dependencies are useful prototype properties. They do not yet provide a production memory contract.
+
+The most important correction is privacy language. The README says “Nothing leaves your machine,” but a `recall` or `list` result is rendered as a normal text tool result. DeepSeek Harness persists that result in the Session and includes it in the model-visible conversation surface. On the next model step, recalled memory can therefore be sent to the configured remote model provider. The store itself is local; the retrieved content is not local-only.
+
+At this revision, restrict evaluation to disposable, non-sensitive data because:
+
+- every project and profile owned by the same operating-system home shares one fixed `~/.dsh/memory-lite.json`; there is no tenant, user, Workspace, Agent, or profile namespace;
+- tool and browser writes perform independent read-modify-write cycles without an in-process queue, cross-process lock, revision check, or idempotency key, so concurrent saves can allocate the same ID and the later whole-file write can lose the other update;
+- `writeFile()` replaces the live store directly, without a synced temporary file, no-overwrite publish, backup generation, or directory durability protocol; a crash can leave invalid or truncated JSON;
+- `loadStore()` treats missing **and corrupt** JSON identically as an empty store; the next successful save can overwrite the only damaged copy instead of failing closed or quarantining it;
+- notes, tags, entry count, file bytes, and rendered output bytes have no bounds beyond the 100-record result-count cap; one large note or many tags can consume context and disk independently of `limit`;
+- recalled strings carry no scope, provenance, author, update time, trust label, supersession state, or source digest, so the model cannot distinguish a user-approved preference from stale or instruction-like text;
+- the model can save and permanently forget entries without an approval or application-level audit record, and a retry can duplicate a save;
+- the Settings delete action has no confirmation or undo, while editing the JSON file manually during Host activity races plugin writes;
+- the package pins an early `@deepseek-ai/dsh-tools` peer range and publishes no automated concurrency, crash-recovery, upgrade, privacy, or real-Host lifecycle tests.
+
+Do not place credentials, customer data, private source, authentication material, or policy instructions in this store. If evaluating 0.1.0, use one stopped profile and one synthetic namespace, keep an external backup, avoid manual edits while it runs, and assume every recalled byte can reach the selected provider and remain in the Session log.
+
+A minimally safe next revision should:
+
+1. derive an opaque scope from Host-owned execution context and include it in every key;
+2. serialize mutations through one queue and use a cross-process lock plus revision or compare-and-swap;
+3. write a synced temporary generation, validate it, publish atomically, and retain a recoverable prior generation;
+4. distinguish missing, unsupported-version, and corrupt stores; quarantine corruption and refuse mutation;
+5. validate and bound note/tag/count/file/result bytes and estimated result tokens;
+6. return typed records with scope, provenance, created/updated time, trust label, and stable ID;
+7. require explicit approval or policy for save/forget, with idempotency and durable audit evidence;
+8. label recalled text as untrusted evidence and never treat it as system or developer instruction;
+9. state clearly that retrieval may send content to the selected model provider and duplicate it into Session history;
+10. test two simultaneous Hosts, interrupted writes, duplicate retries, corrupt files, large entries, cross-scope denial, uninstall, and restore.
+
 ## Current upstream status
 
 - Durable Session events, resume, fork, and compaction are shipped runtime mechanisms.
@@ -255,3 +288,5 @@ Pin the upstream revision you deploy and re-check this boundary after upgrades.
 - [MCP client](https://github.com/deepseek-ai/deepseek-harness/tree/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/mcp/mcp-client)
 - [Community memory migration discussion](https://github.com/deepseek-ai/deepseek-harness/discussions/14)
 - [Community `ctx.memory` proposal](https://github.com/deepseek-ai/deepseek-harness/discussions/1638)
+- [`dsh-memory-lite` 0.1.0 source](https://github.com/pacoyi/dsh-memory-lite/tree/fd373ae4957807214d597c6b24a60f06481ae13c)
+- [`dsh-memory-lite` announcement #4835](https://github.com/deepseek-ai/deepseek-harness/discussions/4835)
