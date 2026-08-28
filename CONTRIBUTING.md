@@ -16,6 +16,8 @@ Start with the [public roadmap](ROADMAP.md), propose an evidence-backed topic in
 
 If you are maintaining a public DeepSeek Harness plugin, Agent workflow, or companion tool, use the [resource validation template](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=resource-validation.yml). Include the exact repository or catalog URL, a pinned revision, one harmless probe with its observable result, and the permission/network boundaries. Remove credentials, private paths, and sensitive prompts before submitting. The handbook curates pointers; a submission is not an endorsement or a compatibility guarantee.
 
+To refresh the curated map, compare the current Awesome `main` commit with the pinned revision before editing. Record the new full SHA, inspect only the changed catalog entries, and verify each selected repository is public and non-archived. Update the JSON index, its item count in the static page, the English/Chinese ecosystem rows, and `scripts/verify-resource-index.mjs` together. Run `npm run check:resources` and `npm run check:links`; do not silently move the pin when an entry is merely discovered through an unverified mirror.
+
 ## Choose the smallest useful evidence unit
 
 You do not need to write a complete guide or spend money on a model request to contribute.

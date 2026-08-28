@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.336 - 2026-08-29
+
+### Changed
+
+- Added a repeatable procedure for refreshing the pinned Awesome catalog and keeping the JSON, static page count, multilingual rows, and verifier synchronized.
+
 ## 0.5.335 - 2026-08-29
 
 ### Changed
