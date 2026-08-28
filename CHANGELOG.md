@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.237 - 2026-08-29
+
+### Changed
+
+- Expanded the npx install-boundary runbook with current npm peer-resolution CPU-loop and OOM reports (#3786, #3890, #4236), including a disposable `--legacy-peer-deps` diagnostic and its runtime-risk boundary.
+
 ## 0.5.236 - 2026-08-29
 
 ### Changed

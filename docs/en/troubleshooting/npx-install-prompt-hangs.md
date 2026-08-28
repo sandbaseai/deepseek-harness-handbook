@@ -1,9 +1,9 @@
 ---
 title: Diagnose npx Hanging While Installing DeepSeek Harness
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-28
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
@@ -157,6 +157,12 @@ The package phase is complete only when the `dsh` executable begins. Compare the
 
 If `--version` succeeds but `web` does not, retain the exact same version and diagnose the first Harness error. Dumping the resolved composition, testing a disposable DSH home, and checking profile/plugin closure are more relevant than changing npm cache state.
 
+### When npm itself spins or OOMs
+
+Recent field reports add a different install boundary. Discussions [#3786](https://github.com/deepseek-ai/deepseek-harness/discussions/3786), [#3890](https://github.com/deepseek-ai/deepseek-harness/discussions/3890), and [#4236](https://github.com/deepseek-ai/deepseek-harness/discussions/4236) describe npm 10/11 spending all CPU—or exhausting the default Node heap—while resolving the published package's peer graph. In those reports there is no registry traffic and no Harness process yet. Treat this as npm Arborist/dependency resolution, not a Web boot hang.
+
+Capture the exact package version, Node/npm versions, RSS or heap evidence, and whether the same attempt completes with the repository's supported package manager. As a bounded diagnostic, one isolated install with `--legacy-peer-deps` can test whether peer resolution is the boundary; it is not a production fix. That flag skips peer contracts and may leave runtime packages absent, so install only in a disposable directory and follow with `dsh --version` plus a Web smoke test. Do not present a successful legacy-peer install as proof that the published dependency metadata is correct, and do not add the flag to every command without recording the trade-off.
+
 Do not run repeated `npx` attempts in parallel. They can compete for bandwidth, repeat package work, obscure which log belongs to which attempt, and leave several future Host processes if the network recovers.
 
 ## Acceptance gates
@@ -182,6 +188,9 @@ Do not run repeated `npx` attempts in parallel. They can compete for bandwidth, 
 Verified on 2026-08-20 against the official package registry and DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e8161534`.
 
 - [Official report #3485](https://github.com/deepseek-ai/deepseek-harness/discussions/3485)
+- [npm peer-resolution CPU loop report #3786](https://github.com/deepseek-ai/deepseek-harness/discussions/3786)
+- [Linux npm OOM report #3890](https://github.com/deepseek-ai/deepseek-harness/discussions/3890)
+- [npm install peer-dependency loop report #4236](https://github.com/deepseek-ai/deepseek-harness/discussions/4236)
 - [npm exec and npx execution contract](https://docs.npmjs.com/cli/v11/commands/npm-exec/)
 - [npm cache guidance](https://docs.npmjs.com/cli/v11/commands/npm-cache/)
 - [npm logging and timing guidance](https://docs.npmjs.com/cli/v11/using-npm/logging/)
