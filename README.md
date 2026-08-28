@@ -77,6 +77,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 |---|---|
 | Install or run DeepSeek Harness for the first time | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
 | UI looks reset after changing launch commands | [Install identity and `DSH_HOME` guide](docs/en/getting-started/install-deepseek-harness.md#state-is-separate-from-the-executable) |
+| `npx` installs but `dsh web` burns CPU without a port | [Post-install Web startup boundary](docs/en/getting-started/install-deepseek-harness.md#install-success-does-not-prove-dsh-web-startup) |
 | Diagnose a failing install | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
 | Route an Agent, model, tool, Session, or UI failure | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Check what is shipped, inferred, or proposed | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |

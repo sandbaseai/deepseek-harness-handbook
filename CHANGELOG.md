@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.344 - 2026-08-29
+
+### Added
+
+- Added a source-backed Windows post-install Web startup runbook for the `dsh web` CPU busy-loop and missing listener report in upstream discussion #4944.
+
 ## 0.5.343 - 2026-08-29
 
 ### Added

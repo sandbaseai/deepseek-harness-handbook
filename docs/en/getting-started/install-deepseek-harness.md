@@ -1,7 +1,7 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 7
+content_revision: 8
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -21,6 +21,20 @@ This guide separates those choices before configuration or troubleshooting begin
 An upstream startup report used macOS 27 beta with Node `v25.9.0` and observed a process that appeared to hang before the UI became usable ([discussion #111](https://github.com/deepseek-ai/deepseek-harness/discussions/111)). The report does not prove that Node 25 caused the hang, but it is enough to keep the runtime version in the reproduction record.
 
 For a first comparison, use the Node range declared by the exact DSH source revision (the rc.8 checkout declares `^22.19.0 || >=24.0.0`), then A/B the same profile and `DSH_HOME` on the beta runtime. Capture `node --version`, package version, launch command, first visible log line, and whether the process opens a port. Do not “fix” a startup hang by deleting profile state until the supported-runtime comparison has been preserved.
+
+### Install success does not prove `dsh web` startup
+
+Official Windows report [#4944](https://github.com/deepseek-ai/deepseek-harness/discussions/4944) describes `npx --yes @deepseek-ai/dsh@latest web` completing its install, then burning one CPU core indefinitely without printing output or binding `127.0.0.1:3080`. The reporter reproduced it on Node 24 and Node 25 and ruled out the npx cache, so classify this as a post-install startup boundary rather than automatically blaming the registry or runtime version. The report is a reproduction to investigate, not a universal claim about every release.
+
+Run the smallest probes before changing state:
+
+```powershell
+npx --yes @deepseek-ai/dsh@latest --version
+npx --yes @deepseek-ai/dsh@latest web *> dsh-web.log
+Get-NetTCPConnection -LocalPort 3080 -ErrorAction SilentlyContinue
+```
+
+Record the exact package version, Node version, CPU time, whether the log remains empty, and whether a listener appears. If `--version` succeeds but Web never binds, preserve the npx cache and profile, capture a process sample, and compare one disposable `DSH_HOME`; do not repeatedly reinstall or delete `%LocalAppData%\\npm-cache\\_npx` as a first response.
 
 ## Verify the package before execution
 
