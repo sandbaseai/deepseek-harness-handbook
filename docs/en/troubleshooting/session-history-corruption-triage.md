@@ -1,7 +1,7 @@
 ---
 title: Recover DeepSeek Harness Session History Without Destroying Evidence
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -131,6 +131,58 @@ An empty visible page does not prove that the durable history ended. Keep these 
 | Remote or carrier returns an error | read unavailable | retryable/terminal load failure, never end of history |
 | event page is valid but a presenter/assembler rejects it | projection unavailable | preserve raw-history access and name the failed projection |
 
+## Failure F: the server has the tail but the Web UI stops rendering
+
+A repeatable visual cutoff is not proof of a corrupt Session. Report #4830 describes a stronger control experiment: 6,287 Zstandard frames decoded, 22,196 JSON lines remained valid through the latest sequence, and `POST /api/session.history` returned the complete requested window while the Web UI stopped at an earlier event. A hard refresh stopped at the same place; minutes later the missing assistant content and already-accepted user messages appeared.
+
+That evidence excludes physical truncation and an incomplete server history response for the captured request. It does **not** prove a particular React race, nor does proximity make `llm/retry`, `llm/retry-started`, `agent/inbox/spliced`, or `session/end-seed` causal. Self-recovery with unchanged durable history is consistent with a downstream timing, admission, assembly, publication, or rendering failure; it is an inference to test, not a diagnosis.
+
+### Reconcile four authorities
+
+Record the highest exact sequence admitted by each boundary. “The history is complete” is too coarse for a client cutoff.
+
+| Boundary | Evidence to capture | What agreement proves |
+|---|---|---|
+| physical Session | artifact hash, frame count, last valid JSON event and seq | bytes contain a readable tail |
+| Host history | request payload, response status, first/last event seq, `hasMore` | the requested range crossed the server boundary |
+| client window / assembler | first/last accepted seq, open generation, live-buffer and gap-repair state, first rejected event/type | the browser admitted or rejected each event before view construction |
+| rendered view | last message/event identity present in Chat and Trajectory DOM, active view, timestamp | publication reached the operator-visible surface |
+
+If Host history ends at seq `H`, the client assembler admits only through `A`, and the DOM ends at `R`, then route the first inequality rather than editing the log:
+
+```text
+durable tail D == history tail H > assembler tail A  → admission / stitching / assembly
+durable tail D == history tail H == assembler tail A > rendered tail R  → publication / renderer
+D > H                                            → Host history / request window
+invalid durable event before D                   → storage or logical log
+```
+
+The rc.2 source makes this split operational. `Session.installWindow()` installs the returned history, calls `conversation.replaceWindow()`, then drains buffered live events through `appendLive()`. `ConversationNodeAssembler.replaceWindow()` sorts inputs, matches every entry, replays dependencies, and requests immediate publication; `flush()` then builds or applies registered view snapshots. These are multiple boundaries, but rc.2 does not publish their last-successful sequence as a diagnostic state. An empty browser console therefore does not establish successful progress through them.
+
+### Capture a bounded reproduction
+
+1. Stop submitting prompts when newly sent text is not visible. An accepted prompt may still execute, so repeated sends can duplicate work or side effects.
+2. Preserve the original Session and export the complete server history response. Record the request's `beforeSeq`, `maxMessages`, response first/tail seq, and `hasMore`.
+3. Identify the last visible message/event and the first server-returned event not represented in Chat. Check the Trajectory view separately; the two views help split conversation projection from shared Session admission.
+4. Repeat from a copied Session with a cold page load and record Network plus Performance traces, not only Console output. Timestamp the request settlement, last DOM mutation, and any later self-recovery.
+5. Bisect a disposable event prefix around the first missing sequence. Test the smallest prefix that reproduces, then remove one correlated cluster at a time. Keep event order and identities intact.
+6. Compare live-tail delivery with cold replay of the same immutable prefix. A failure in only one path narrows the boundary; it does not authorize rewriting the original.
+
+Dense 429 retry storms and inbox splice clusters are useful stress fixtures because they exercise many adjacent events. Treat them as variables: reproduce the cutoff with and without each cluster before assigning causality. Likewise, a lone `session/end-seed` is a correlation until a minimized replay changes when that record changes.
+
+For urgent continuation, open a clean Session and provide a concise handoff from the authoritative server history. Do not delete `projcache`, truncate frames, or edit events merely to make the view advance; those actions destroy the comparison between durable, transported, assembled, and rendered tails.
+
+### Product contract for a non-silent client
+
+- expose the last history seq received, admitted, assembled, published, and rendered;
+- surface the exact event seq/type and node definition when matching or view construction fails;
+- give every open, gap-repair, and page request an observable loaded, retryable-failure, gap, or terminal result;
+- bound live-buffer and render backpressure, with deduplication by authoritative event identity;
+- make cold replay and live-tail delivery converge on the same view or the same explicit error;
+- retain already-accepted prompt state when rendering is degraded and warn before another send;
+- stress-test long Sessions with tens of thousands of events, thousands of frames, retry storms, inbox splices, and delayed history responses;
+- prove self-recovery cannot silently omit, duplicate, or reorder messages.
+
 At rc.2, `loadOlder()` does not preserve that distinction for the operator. A non-OK history result leaves the current window unchanged without publishing a load error. A discontinuous page logs to the browser console, clears `hasMore`, and prepends an empty terminal page. A thrown error is also console-only. The visible effect can therefore be indistinguishable from reaching the beginning even when the durable file was not examined or modified.
 
 Do not infer from that symptom that a trailing aborted turn corrupted the artifact. First prove four facts on an immutable copy:
@@ -185,6 +237,9 @@ Choose the least destructive route that restores operation:
 - A failed older-page request retains the last authoritative cursor and `hasMore` until a validated replacement arrives.
 - Trailing aborted turns and cancelled Assistant prefixes remain renderable after cold reload.
 - Alpha.1 packed history ranges validate first and last logical seq, not only record count.
+- Complete Host history cannot silently stop at a client assembly or rendering boundary.
+- Client diagnostics reconcile durable, transported, admitted, assembled, and rendered tail sequences.
+- Cold replay and live tail produce an equivalent view under retry storms and inbox splice clusters.
 - Original evidence remains byte-for-byte preserved and rollback is tested.
 
 ## Source boundary
@@ -196,6 +251,7 @@ Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc94
 - [Concurrent writers create a sequence gap #3401](https://github.com/deepseek-ai/deepseek-harness/discussions/3401)
 - [Id-less plugin notice report #4819](https://github.com/deepseek-ai/deepseek-harness/discussions/4819)
 - [Silent “no more history” contract analysis #4795](https://github.com/deepseek-ai/deepseek-harness/discussions/4795)
+- [Complete server history with a temporary Web render cutoff #4830](https://github.com/deepseek-ai/deepseek-harness/discussions/4830)
 - [Zstandard header-frame validation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/src/index.ts)
 - [Committed sequence scanner](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/src/format.ts)
 - [Conversation window rebuild](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/runtime/src/client/sessions/conversation-assembler.ts)
@@ -205,6 +261,7 @@ Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc94
 - [rc.2 Inbox persistence and identity check](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent/src/inbox.ts)
 - [rc.2 Zstandard header-only listing boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence-jsonl/src/index.ts)
 - [rc.2 fail-soft older-page handling](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/runtime/src/client/sessions/session.ts)
+- [rc.2 conversation window assembly](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/runtime/src/client/sessions/conversation-assembler.ts)
 - [alpha.1 Session journal transport](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/client/transport.ts)
 - [alpha.1 older-page Session handling](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/client/sessions/session.ts)
 - [Live session log protection](live-session-log-durability.md)

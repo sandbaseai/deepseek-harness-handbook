@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.184 - 2026-08-28
+
+### Changed
+
+- Added a four-authority route for Web UI cutoffs where physical Session data and `session.history` are complete but client assembly or rendering stops earlier.
+- Added exact tail-sequence reconciliation, bounded cold/live replay bisection, safe containment for unseen accepted prompts, and a non-silent client product contract derived from upstream report #4830.
+
 ## 0.5.183 - 2026-08-28
 
 ### Changed
