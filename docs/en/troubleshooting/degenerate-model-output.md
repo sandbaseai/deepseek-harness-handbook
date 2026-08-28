@@ -1,15 +1,15 @@
 ---
 title: Detect and Recover from Degenerate Repeated Model Output
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
-upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
+verified_at: 2026-08-28
+verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Detect and recover from degenerate repeated model output
 
-A model can enter a degenerate stream that repeats a word, phrase, or n-gram until the output-token ceiling. DeepSeek Harness rc.8 does not classify that pattern by itself: the provider can still finish with ordinary `stop` or `max-tokens`, so the Agent sees a successful attempt unless a plugin rejects it.
+A model can enter a degenerate stream that repeats a word, phrase, digit, or n-gram until the output-token ceiling. DeepSeek Harness alpha.1 does not classify that pattern by itself: the provider can still finish with ordinary `stop` or `max-tokens`, so the Agent sees a successful attempt unless a plugin rejects it.
 
 Treat this as a model-output failure, not a runaway Agent loop. A runaway loop opens multiple model steps or tool calls; degenerate output happens inside one streaming model attempt.
 
@@ -43,6 +43,21 @@ Configured retry policy:
 ```
 
 Keep the raw chunk boundaries when possible. A detector that works only on complete strings can miss a repeated unit split across deltas, while one that evaluates each delta independently can invent boundaries that the model never produced.
+
+## Contain a live repetition before it consumes the cap
+
+When the UI starts producing `000000...`, one phrase repeatedly, or another clearly useless sequence:
+
+1. click **Stop generating** once;
+2. wait until the Turn closes durably as aborted instead of repeatedly clicking or sending a new prompt;
+3. record whether the repetition appeared in visible answer text, the reasoning/Think surface, tool-call arguments, or tool output;
+4. capture provider/model/route, request id, raw stream deltas, usage, finish reason, request `maxTokens`, and the last non-repeated prefix;
+5. inspect `llm/retry` events before replaying—the same deterministic route may generate and bill the same degeneration again;
+6. retry only with a finite budget, preferably a different route or materially changed sampling/task boundary, after external effects are reconciled.
+
+Stopping the browser display does not prove provider billing stopped at that instant. Cancellation crosses the browser, Session Remote, Agent loop, adapter, and provider stream; report observed usage or its absence rather than estimating saved tokens.
+
+If alpha.1 shows **Output token limit reached** after a long repetition, that terminal state proves the provider reported a length ceiling. It does not make the repeated content valid, and it does not by itself prove which ceiling—request cap, route output capability, or remaining context headroom—was smallest. Preserve both classifications: `max-tokens` is the observed finish reason; degeneration is the content-shape diagnosis.
 
 ## Classify the failure first
 
@@ -91,7 +106,7 @@ Track precision, recall, detection latency, characters already shown to a live U
 
 ## Make retry an explicit, finite policy
 
-In rc.8, an omitted normal policy permits two retries for `EMPTY_RESPONSE`, `RATE_LIMIT`, `SERVER`, `TIMEOUT`, and `TRANSPORT`. `DEGENERATE_OUTPUT` is not included. Add it explicitly only after the detector's false-positive rate is acceptable:
+In alpha.1, an omitted normal policy permits five retries for `EMPTY_RESPONSE`, `RATE_LIMIT`, `SERVER`, `TIMEOUT`, and `TRANSPORT`. `DEGENERATE_OUTPUT` is not included. Add it explicitly only after the detector's false-positive rate is acceptable:
 
 ```yaml
 - name: '@deepseek-ai/dsh-llm-deepseek'
@@ -112,6 +127,8 @@ In rc.8, an omitted normal policy permits two retries for `EMPTY_RESPONSE`, `RAT
 ```
 
 The retry plugin acts at the Agent loop's failed-step boundary. Direct consumers of `ctx.llm.stream()` remain single-attempt, even if the guard classifies the failure. A retry is a new provider request and may repeat input and output charges. Deterministic settings may reproduce the same degeneration, so keep the budget finite and alert on exhaustion.
+
+The example deliberately lowers the candidate degeneration retry budget to two; it is not restating alpha.1's five-retry default for ordinary transient failures. Do not add `DEGENERATE_OUTPUT` to an existing policy without deciding its separate cost ceiling.
 
 Do not enable `mode: always` as a shortcut. It retries every model-request failure without an attempt limit until success, cancellation, or disposal.
 
@@ -149,11 +166,12 @@ If detection happens before the provider's terminal usage chunk, exact usage may
 
 ## Primary sources
 
-Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e8161534` on 2026-08-20.
+Verified against DeepSeek Harness alpha.1 commit `cd5ef8148158c3a752a658978873241fdf8e2bbc` on 2026-08-28. The official source contains the provider-neutral stream interception and retry-policy surfaces, but no built-in `DEGENERATE_OUTPUT` classifier. The proposed error code and thresholds remain design input from discussion #3480, not shipped alpha.1 behavior.
 
 - [Official repetition-guard proposal #3480](https://github.com/deepseek-ai/deepseek-harness/discussions/3480)
-- [rc.8 LLM streaming contract](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/docs/subsystems/llm-streaming.md)
-- [rc.8 provider retry policy](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm/src/retry-policy.ts)
-- [rc.8 Agent-loop retry plugin](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-retry/README.md)
+- [Repeated zeros and output-cap report #4841](https://github.com/deepseek-ai/deepseek-harness/discussions/4841)
+- [Alpha.1 LLM streaming contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/subsystems/llm-streaming.md)
+- [Alpha.1 provider retry policy](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm/src/retry-policy.ts)
+- [Alpha.1 Agent-loop retry plugin](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-retry/README.md)
 - [Stop a runaway Agent loop](runaway-agent-loop.md)
 - [Diagnose an output-token ceiling](output-token-limit-reached.md)

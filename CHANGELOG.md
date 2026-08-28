@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.191 - 2026-08-28
+
+### Changed
+
+- Re-verified degenerate repeated-output handling against alpha.1 and corrected the default normal retry budget from the older rc.8 value to five retries.
+- Added live repetition containment, reasoning/text/tool channel capture, billing uncertainty, `max-tokens` dual classification, and a separate finite cost budget for experimental degeneration retries.
+
 ## 0.5.190 - 2026-08-28
 
 ### Added
