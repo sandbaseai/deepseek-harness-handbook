@@ -1,10 +1,10 @@
 ---
 title: Run Subprocesses Safely Inside DeepSeek Harness Tools
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-27
-upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+verified_at: 2026-08-28
+upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Run subprocesses safely inside DeepSeek Harness tools
@@ -68,6 +68,39 @@ At commit `b150a55`, `dsh-subprocess-local` uses asynchronous `child_process.spa
 The upstream tests explicitly make a child exit without reading roughly 1 MiB of stdin. The resulting `EPIPE` does not reject or crash the Host; `done` reports the child's exit code. Separate tests exercise ordinary managed-tree cleanup after direct Host exit, an uncaught exception, and an unhandled rejection.
 
 These are strong source-level expectations, not proof about an arbitrary desktop distribution. A packager can replace the process owner, omit the official provider, add its own pipes, or turn a contained rejection into a fatal main-process error.
+
+## Route a Windows nested-child hang before changing executors
+
+Official report #4796 records a narrower Windows failure: a Python preflight program completes through `ctx.shell.run()` and PowerShell, but hangs through direct `ctx.subprocess.spawn()` when the Python program creates about nineteen children. A single-level direct child works, and wrapping the same argv in `cmd.exe /c` does not repair it.
+
+Do not infer that every nested-child hang is a shell-selection bug. The PowerShell result proves that changing the intermediary process, console, environment, quoting, and handle topology changes the outcome; it does not identify which change is causal. Keep these states separate:
+
+| Observed boundary | Likely investigation | Required evidence |
+|---|---|---|
+| direct child is still alive and stops making progress | application wait, inherited handle, console, pipe backpressure, or child-management logic | process tree, per-process CPU, last child start/exit, pipe consumption |
+| direct child exits but `handle.done` remains pending | a descendant may still hold an inherited stdout or stderr handle | timestamped `exit` and `close`, descendant tree, stdio disposition |
+| cancellation returns but descendants remain | tree termination or quiescence boundary | PID tree before abort and after the grace period |
+| only PowerShell completes | executor topology is material, but root cause is still open | exact direct, `cmd`, and PowerShell argv/env/cwd comparison |
+
+The rc.2 implementation already bounds the second state: after the direct child's `exit`, collected pipes may delay `close` only through `graceMs`, after which `done` settles and Harness-owned collected streams are destroyed. On Windows, however, `waitForExit()` can observe only the direct child's exit; tree termination is delegated best-effort to `taskkill /T /F`. The current `0.1.2-alpha.1` source keeps this `spawn.ts` behavior, and its process-group grandchild test remains POSIX-only. There is no source-level basis to claim that alpha.1 fixes the reported direct Windows Python hang.
+
+Capture one disposable, side-effect-free matrix before choosing a workaround:
+
+```text
+runner                 stdio                 direct exit   close/done   descendants
+python.exe + argv      collected             timestamp     timestamp    PID states
+cmd.exe /d /s /c ...   collected             timestamp     timestamp    PID states
+powershell + command   collected             timestamp     timestamp    PID states
+python.exe + argv      inherit or ignore*    timestamp     timestamp    PID states
+
+* diagnostic run only; losing captured output is not a production fix
+```
+
+Keep argv, cwd, input, Python version, environment delta, `graceMs`, and cancellation deadline identical. Record whether every nested child consumes and closes its stdin/stdout/stderr. If changing only collected output to `inherit` or `ignore` releases the run, investigate pipe ownership and backpressure. If the direct child itself stops before spawning or reaping a child, instrument that runner rather than waiting only on the outer Promise.
+
+`ctx.shell.run()` can be a documented Windows-specific deployment choice for a trusted, static command after this matrix proves it reliable. It is not a drop-in safety upgrade: it changes quoting and shell semantics, expands the execution-policy surface, and may run a profile or prelude. Never concatenate model or user input into its command string. Prefer repairing the nested runner's handle ownership or adding a direct subprocess regression test when direct argv execution is the intended contract.
+
+A sufficient Windows regression fixture must prove all of the following: the direct parent creates multiple grandchildren; collected stdout and stderr are preserved; `handle.done` settles; timeout and cancellation terminate the tree; `waitForExit()` does not claim quiescence while work survives; and OS inspection finds no orphan after the grace period.
 
 ## Find and capture the blocking path
 
@@ -281,19 +314,24 @@ In a disposable workspace verify success, nonzero exit, self-termination, extern
 - [ ] Global exception handlers perform crash cleanup and exit; they do not continue unknown state.
 - [ ] Cancellation, timeout, and disposal leave no descendants.
 - [ ] The promise settles only after owned work reaches quiescence.
+- [ ] A Windows nested-child fixture distinguishes direct-child `exit` from stdio `close` and tree quiescence.
+- [ ] A PowerShell-only success is recorded as a topology comparison, not asserted as root-cause proof.
 - [ ] Another Session and the Web control plane remain responsive.
 - [ ] The Session contains one authoritative result for the call.
 
 ## Primary sources
 
-Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` on 2026-08-27.
+Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` and `0.1.2-alpha.1` source commit `cd5ef8148158c3a752a658978873241fdf8e2bbc` on 2026-08-28.
 
 - [Official `spawnSync` freeze report #3477](https://github.com/deepseek-ai/deepseek-harness/discussions/3477)
 - [Windows child termination and community desktop crash report #4713](https://github.com/deepseek-ai/deepseek-harness/discussions/4713)
+- [Windows nested-subprocess hang report #4796](https://github.com/deepseek-ai/deepseek-harness/discussions/4796)
 - [rc.2 local subprocess runtime](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/src/spawn.ts)
 - [rc.2 EPIPE containment regression test](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/tests/spawn.spec.ts)
 - [rc.2 Host-exit tree cleanup tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/tests/process-exit.spec.ts)
 - [rc.2 subprocess provider contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/README.md)
+- [alpha.1 local subprocess runtime](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/subprocess/subprocess-local/src/spawn.ts)
+- [alpha.1 subprocess regression tests](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/subprocess/subprocess-local/tests/spawn.spec.ts)
 - [Python `os.kill()` Windows semantics](https://docs.python.org/3.12/library/os.html#os.kill)
 - [Node.js child-process documentation](https://nodejs.org/api/child_process.html)
 - [Tool execution pipeline](../architecture/tool-execution-pipeline.md)

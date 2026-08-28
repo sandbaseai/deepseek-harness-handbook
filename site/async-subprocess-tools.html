@@ -1,1 +1,250 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="./favicon.svg" type="image/svg+xml"><title>Keep DeepSeek Harness alive after a child process exits</title><meta name="description" content="Run subprocesses safely in DeepSeek Harness tools: avoid synchronous freezes, contain Windows child termination, and prove the Host survives every process outcome."><link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html"><meta property="og:type" content="article"><meta property="og:title" content="A child failure is one tool outcome, not a Host outcome."><meta property="og:description" content="Separate child, official Host, desktop wrapper, and renderer identities before repairing the process boundary."><meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html"><meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-handbook-social-preview-v3.png"><meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="./styles.css?v=0.5.40"><script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Run Subprocesses Safely Inside DeepSeek Harness Tools","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html","inLanguage":"en","isAccessibleForFree":true}</script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="./" aria-label="Handbook home"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#route">Route</a><a href="#proof">Proof</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header><main id="main" class="article-shell identity-article"><header class="article-hero identity-hero"><div><p class="eyebrow">Plugin tools · Windows · crash isolation</p><h1>A child failure is one tool outcome, not a Host outcome.</h1><p class="article-deck">Keep the Host alive, preserve the raw exit fact, and assign every pipe and rejection to its real owner.</p><div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream b150a55</span></div></div><div class="identity-trace" role="img" aria-label="A child process terminates, its pipe and close events settle one tool result, and the Host remains alive"><div class="trace-stop"><small>Child</small><strong>terminates</strong><code>code or signal</code></div><span>→</span><div class="trace-empty"><small>Process owner</small><strong>settles once</strong><code>drain + cleanup</code></div><span>→</span><div class="trace-good"><small>DSH Host</small><strong>survives</strong><code>next command</code></div></div></header><article class="article-body"><div class="signal"><strong>Do not collapse four process identities</strong><span>A third-party program, official DSH Host, community desktop main process, and renderer can fail independently. “The window closed” is not root-cause evidence.</span></div><h2 id="route">Route the first terminal fact.</h2><div class="identity-contrast"><section><span>Ordinary runtime exit</span><strong>Resolve the command outcome</strong><p>Preserve exit code or signal after close and bounded pipe drainage.</p></section><section class="identity-active"><span>Spawn-level failure</span><strong>Reject one tool call</strong><p>Contain ENOENT, abort, kill, and stream failures at the owning process seam.</p></section></div><h2>rc.2 already defines the core boundary.</h2><div class="identity-pipeline"><div><b>spawn</b><code>async</code></div><i>→</i><div><b>exit</b><code>fact</code></div><i>→</i><div><b>close</b><code>pipes</code></div><i>→</i><div><b>done</b><code>once</code></div><i>→</i><div><b>health</b><code>alive</code></div></div><h2>Repair locally, exit globally.</h2><div class="identity-safety"><section><strong>Own EPIPE</strong><p>Stop stdin writes and keep the authoritative child outcome.</p></section><section><strong>Bound every stream</strong><p>Consume, cap, spill, close, and record truncation explicitly.</p></section><section><strong>Do not limp on</strong><p>A global unknown exception is a cleanup and supervised-restart boundary.</p></section></div><h2 id="proof">Six proof gates.</h2><ul class="identity-gates"><li><span>01</span>The abrupt child exit settles exactly one tool result.</li><li><span>02</span>The exact official Host PID remains alive.</li><li><span>03</span>A second command and another Session still work.</li><li><span>04</span>No owned child or grandchild survives teardown.</li><li><span>05</span>Desktop and renderer exits are captured separately.</li><li><span>06</span>The copied Session replays through its last committed event.</li></ul><h2>Primary evidence.</h2><ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4713">Official report #4713</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/src/spawn.ts">rc.2 subprocess runtime</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/tests/process-exit.spec.ts">rc.2 Host-exit tests</a></li><li><a href="https://docs.python.org/3.12/library/os.html#os.kill">Python Windows kill semantics</a></li></ul><section class="article-cta"><h2>Prove survival beyond the visible window.</h2><p>The canonical guide covers synchronous freezes, Windows self-termination, official versus community ownership, raw stream handling, global exception policy, safe reproduction, and nineteen acceptance gates.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/plugin-development/async-subprocess-tools.md">Read the complete guide</a></section></article></main><footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>Keep DeepSeek Harness alive after a child process exits</title>
+    <meta
+      name="description"
+      content="Run subprocesses safely in DeepSeek Harness tools: avoid synchronous freezes, contain Windows child termination, and prove the Host survives every process outcome."
+    />
+    <link
+      rel="canonical"
+      href="https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="A child failure is one tool outcome, not a Host outcome."
+    />
+    <meta
+      property="og:description"
+      content="Separate child, official Host, desktop wrapper, and renderer identities before repairing the process boundary."
+    />
+    <meta
+      property="og:url"
+      content="https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html"
+    />
+    <meta
+      property="og:image"
+      content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-handbook-social-preview-v3.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="./styles.css?v=0.5.40" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Run Subprocesses Safely Inside DeepSeek Harness Tools",
+        "author": { "@type": "Organization", "name": "SandBase" },
+        "dateModified": "2026-08-28",
+        "url": "https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html",
+        "inLanguage": "en",
+        "isAccessibleForFree": true
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Handbook home"
+        ><span class="brand-mark">DSH</span><span>Harness Handbook</span></a
+      >
+      <nav>
+        <a href="#route">Route</a><a href="#proof">Proof</a
+        ><a href="https://github.com/sandbaseai/deepseek-harness-handbook"
+          >GitHub</a
+        >
+      </nav>
+    </header>
+    <main id="main" class="article-shell identity-article">
+      <header class="article-hero identity-hero">
+        <div>
+          <p class="eyebrow">Plugin tools · Windows · crash isolation</p>
+          <h1>A child failure is one tool outcome, not a Host outcome.</h1>
+          <p class="article-deck">
+            Keep the Host alive, preserve the raw exit fact, and assign every
+            pipe and rejection to its real owner.
+          </p>
+          <div class="article-meta">
+            <span>Verified 2026-08-28</span><span>Upstream cd5ef81</span>
+          </div>
+        </div>
+        <div
+          class="identity-trace"
+          role="img"
+          aria-label="A child process terminates, its pipe and close events settle one tool result, and the Host remains alive"
+        >
+          <div class="trace-stop">
+            <small>Child</small><strong>terminates</strong
+            ><code>code or signal</code>
+          </div>
+          <span>→</span>
+          <div class="trace-empty">
+            <small>Process owner</small><strong>settles once</strong
+            ><code>drain + cleanup</code>
+          </div>
+          <span>→</span>
+          <div class="trace-good">
+            <small>DSH Host</small><strong>survives</strong
+            ><code>next command</code>
+          </div>
+        </div>
+      </header>
+      <article class="article-body">
+        <div class="signal">
+          <strong>Do not collapse four process identities</strong
+          ><span
+            >A third-party program, official DSH Host, community desktop main
+            process, and renderer can fail independently. “The window closed” is
+            not root-cause evidence.</span
+          >
+        </div>
+        <h2 id="route">Route the first terminal fact.</h2>
+        <div class="identity-contrast">
+          <section>
+            <span>Ordinary runtime exit</span
+            ><strong>Resolve the command outcome</strong>
+            <p>
+              Preserve exit code or signal after close and bounded pipe
+              drainage.
+            </p>
+          </section>
+          <section class="identity-active">
+            <span>Spawn-level failure</span
+            ><strong>Reject one tool call</strong>
+            <p>
+              Contain ENOENT, abort, kill, and stream failures at the owning
+              process seam.
+            </p>
+          </section>
+        </div>
+        <h2>rc.2 already defines the core boundary.</h2>
+        <div class="identity-pipeline">
+          <div><b>spawn</b><code>async</code></div>
+          <i>→</i>
+          <div><b>exit</b><code>fact</code></div>
+          <i>→</i>
+          <div><b>close</b><code>pipes</code></div>
+          <i>→</i>
+          <div><b>done</b><code>once</code></div>
+          <i>→</i>
+          <div><b>health</b><code>alive</code></div>
+        </div>
+        <h2>Diagnose nested Windows children.</h2>
+        <div class="identity-safety">
+          <section>
+            <strong>Child still alive</strong>
+            <p>Capture CPU, process-tree, child start/exit, and pipe progress. This is not a close-delay diagnosis yet.</p>
+          </section>
+          <section>
+            <strong>Exit without close</strong>
+            <p>A descendant may hold an inherited pipe. Timestamp both events and vary stdio only in a disposable probe.</p>
+          </section>
+          <section>
+            <strong>PowerShell works</strong>
+            <p>Treat it as an executor-topology comparison, not proof that a shell is the general fix.</p>
+          </section>
+        </div>
+        <div class="signal">
+          <strong>alpha.1 is not a proven fix for report #4796</strong>
+          <span>The relevant spawn boundary is unchanged and the grandchild process-group test is POSIX-only. A Windows fixture must prove done settlement, output preservation, cancellation, tree exit, and no orphans.</span>
+        </div>
+        <h2>Repair locally, exit globally.</h2>
+        <div class="identity-safety">
+          <section>
+            <strong>Own EPIPE</strong>
+            <p>Stop stdin writes and keep the authoritative child outcome.</p>
+          </section>
+          <section>
+            <strong>Bound every stream</strong>
+            <p>Consume, cap, spill, close, and record truncation explicitly.</p>
+          </section>
+          <section>
+            <strong>Do not limp on</strong>
+            <p>
+              A global unknown exception is a cleanup and supervised-restart
+              boundary.
+            </p>
+          </section>
+        </div>
+        <h2 id="proof">Six proof gates.</h2>
+        <ul class="identity-gates">
+          <li>
+            <span>01</span>The abrupt child exit settles exactly one tool
+            result.
+          </li>
+          <li><span>02</span>The exact official Host PID remains alive.</li>
+          <li>
+            <span>03</span>A second command and another Session still work.
+          </li>
+          <li>
+            <span>04</span>No owned child or grandchild survives teardown.
+          </li>
+          <li>
+            <span>05</span>Desktop and renderer exits are captured separately.
+          </li>
+          <li>
+            <span>06</span>The copied Session replays through its last committed
+            event.
+          </li>
+        </ul>
+        <h2>Primary evidence.</h2>
+        <ul class="source-list">
+          <li>
+            <a
+              href="https://github.com/deepseek-ai/deepseek-harness/discussions/4713"
+              >Official report #4713</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4796">Windows nested-child report #4796</a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/src/spawn.ts"
+              >rc.2 subprocess runtime</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subprocess/subprocess-local/tests/process-exit.spec.ts"
+              >rc.2 Host-exit tests</a
+            >
+          </li>
+          <li>
+            <a href="https://docs.python.org/3.12/library/os.html#os.kill"
+              >Python Windows kill semantics</a
+            >
+          </li>
+        </ul>
+        <section class="article-cta">
+          <h2>Prove survival beyond the visible window.</h2>
+          <p>
+            The canonical guide covers synchronous freezes, Windows
+            self-termination, official versus community ownership, raw stream
+            handling, global exception policy, safe reproduction, and twenty
+            acceptance gates.
+          </p>
+          <a
+            class="button primary"
+            href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/plugin-development/async-subprocess-tools.md"
+            >Read the complete guide</a
+          >
+        </section>
+      </article>
+    </main>
+    <footer>
+      <p>
+        Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not
+        an official DeepSeek AI project.
+      </p>
+      <div>
+        <a href="https://github.com/deepseek-ai/deepseek-harness"
+          >Official runtime</a
+        ><a href="./">Handbook home</a>
+      </div>
+    </footer>
+  </body>
+</html>

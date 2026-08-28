@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.171 - 2026-08-28
+
+### Changed
+
+- Added a Windows nested-subprocess decision table that separates a live-child stall, inherited-pipe close delay, and incomplete tree termination.
+- Classified PowerShell success as a controlled executor-topology comparison, documented the direct/`cmd`/PowerShell/stdio evidence matrix, and added Windows grandchild regression gates.
+- Verified that the relevant `spawn.ts` boundary is unchanged in `0.1.2-alpha.1` and avoided claiming the reported Python hang is fixed without a Windows regression test.
+
 ## 0.5.170 - 2026-08-28
 
 ### Changed
