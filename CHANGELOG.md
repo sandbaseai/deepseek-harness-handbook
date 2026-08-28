@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.288 - 2026-08-28
+
+### Changed
+
+- Refined the WebView performance runbook with upstream #4917's Safari ordered-list clipping evidence, the transcript scroll-container boundary, and the em-sized marker-gutter regression path.
+
 ## 0.5.287 - 2026-08-28
 
 ### Changed

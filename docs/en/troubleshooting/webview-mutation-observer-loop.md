@@ -1,12 +1,13 @@
 ---
 title: Diagnose a DeepSeek Harness WebView MutationObserver CPU Loop
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 sources:
   - https://github.com/deepseek-ai/deepseek-harness/discussions/4920
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4917
 ---
 
 # Diagnose a WebView MutationObserver CPU loop
@@ -20,6 +21,8 @@ That stack proves a renderer is repeatedly delivering DOM mutation records. It d
 Upstream discussion [#4917](https://github.com/deepseek-ai/deepseek-harness/discussions/4917) reports ordered-list markers clipped on the left edge in Safari while the same Markdown renders normally in Chrome. A clipped `1.` or `2.` with normal text flow is a layout/overflow symptom, not evidence of a MutationObserver feedback loop. First compare browsers, capture the computed list padding and `list-style-position`, and check horizontal clipping at the message container. Only investigate observer ownership when CPU, mutation counts, or a repeated callback trace also crosses the loop boundary below.
 
 Do not “fix” the Safari symptom by deleting the Session or disabling every plugin. Preserve a screenshot and DOM/CSS sample, then test a sufficient marker gutter (for example, the existing source-list spacing) or an inside-positioned marker in a disposable client. Keep the ordered-list fixture and the WebView performance trace as separate evidence artifacts.
+
+The upstream verification narrows the likely CSS boundary: top-level Markdown lists still use `padding-left: 18px` with outside-positioned markers, while the transcript scroll container clips the inline-start edge. A two-digit marker can therefore be cut even when list text flows normally. Test an em-sized gutter (the shipped source-list fix uses about `2.35em`) before changing `list-style-position`; if only Safari still clips the marker, also compare the marker line-height with the `li` line box. Do not call the issue an observer loop unless a performance trace shows repeated callback delivery and an observer-owned write.
 
 ### Route `removeChild` recursion as a DOM ownership failure
 
@@ -178,6 +181,7 @@ Private evidence location and retention owner:
 ## Primary sources
 
 - [WebView MutationObserver loop report #4737](https://github.com/deepseek-ai/deepseek-harness/discussions/4737)
+- [Safari ordered-list marker clipping report #4917](https://github.com/deepseek-ai/deepseek-harness/discussions/4917)
 - [rc.2 official application roots](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps)
 - [rc.2 complex-history performance probes](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/web/tests/complex-history.perf.ts)
 - [rc.2 conversation shell and scrollport contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-conversation/README.md)
