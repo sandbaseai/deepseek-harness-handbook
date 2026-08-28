@@ -1,7 +1,7 @@
 ---
 title: Configure and Diagnose DeepSeek Harness Image Input
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-22
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
@@ -143,6 +143,7 @@ Runtime test credential: not used
 
 ## Official sources
 
+- [Third-party vision-model report (#112)](https://github.com/deepseek-ai/deepseek-harness/discussions/112)
 - [dsh-v0.1.1-rc.2 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.1-rc.2)
 - [`dsh-llm-deepseek` README at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/packages/llm/llm-deepseek/README.md)
 - [rc.2 Files API client](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/packages/llm/llm-deepseek/src/files-api.ts)
