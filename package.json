@@ -7,6 +7,7 @@
   "scripts": {
     "check": "node scripts/verify-content.mjs",
     "check:links": "node scripts/verify-content.mjs --external-links",
+    "check:resources": "node scripts/verify-resource-index.mjs",
     "sync:article-schema": "node scripts/sync-article-schema.mjs"
   },
   "engines": {

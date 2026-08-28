@@ -98,6 +98,7 @@ The upstream catalog is not the only discovery surface. These public projects cu
 |---|---|---|
 | Community plugin catalog | [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) | Whether each listing is current, public, and compatible with your DSH revision. |
 | Context observability | [dsh-context](https://github.com/bowenliang123/dsh-context) | Token accounting, compression events, and data kept outside the session. |
+| Mobile access | [dsh-pocket](https://github.com/shaobeichen/dsh-pocket) | LAN/public exposure, authentication, and session privacy when accessing DSH from a phone. |
 | Vision bridge | [modlens](https://github.com/liustack/modlens) | Image upload path, external endpoints, and structured-output guarantees. |
 | Agent teams | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | Child-agent authority, shared workspace behavior, and cancellation semantics. |
 | Vision routing | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | Provider fallback, key handling, and whether image turns remain auditable. |

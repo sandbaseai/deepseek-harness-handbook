@@ -18,6 +18,7 @@ jobs:
         with:
           node-version: 22
       - run: npm run check
+      - run: npm run check:resources
       - run: npm run check:links
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

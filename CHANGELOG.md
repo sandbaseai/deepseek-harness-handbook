@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.323 - 2026-08-29
+
+### Added
+
+- Added an automated resource-index verifier and CI step that keeps JSON entries, snapshot provenance, URL uniqueness, and ItemList counts aligned.
+
 ## 0.5.322 - 2026-08-29
 
 ### Changed

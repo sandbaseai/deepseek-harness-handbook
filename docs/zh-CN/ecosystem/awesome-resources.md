@@ -96,6 +96,7 @@ verified_at: 2026-08-28
 |---|---|---|
 | 社区插件目录 | [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) | 条目是否最新、公开，以及是否兼容你的 DSH 版本。 |
 | 上下文观测 | [dsh-context](https://github.com/bowenliang123/dsh-context) | token 统计、压缩事件和会话外保存的数据。 |
+| 移动端访问 | [dsh-pocket](https://github.com/shaobeichen/dsh-pocket) | 从手机访问 DSH 时的局域网/公网暴露、认证和会话隐私。 |
 | 视觉桥 | [modlens](https://github.com/liustack/modlens) | 图片上传路径、外部端点和结构化输出保证。 |
 | Agent 团队 | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | 子 Agent 权限、共享工作区行为和取消语义。 |
 | 视觉路由 | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | provider 回退、密钥处理和图像回合的可审计性。 |
