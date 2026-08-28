@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.241 - 2026-08-29
+
+### Changed
+
+- Expanded the reasoning replay guide with #4709's provider-owned `tool_choice` rejection boundary and sanitized outbound-key evidence requirements.
+
 ## 0.5.240 - 2026-08-29
 
 ### Changed

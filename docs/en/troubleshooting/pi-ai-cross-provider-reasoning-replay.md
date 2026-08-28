@@ -1,7 +1,7 @@
 ---
 title: Fix reasoning_content Replay Across Providers and Thinking Modes
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 verified_upstream: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -16,6 +16,10 @@ A Session works on one provider, then a DeepSeek-compatible `openai-completions`
 ```
 
 Treat this as a **current-request/history serialization mismatch**, not a tool failure and not Session corruption. The same provider text can describe two opposite failures: a reasoning request that is missing required passback, or a non-reasoning request that still carries stale reasoning history.
+
+### Keep provider rejections separate from Harness request construction
+
+Discussion [#4709](https://github.com/deepseek-ai/deepseek-harness/discussions/4709) is a useful ownership check: `Thinking mode does not support this tool_choice` was returned by the selected DeepSeek-compatible API, while the Harness adapter did not construct a `tool_choice` field in the inspected source path. Before changing a DSH profile, capture the sanitized outbound JSON keys and the raw provider error. A model/API capability rejection belongs to the provider contract; it is not evidence that the Agent tool registry or plugin failed. Do not add an unsupported request field through a plugin simply because another provider documents it, and do not claim a Harness fix until the exact serialized request proves DSH emitted the disputed key.
 
 ## Route the two opposite 400s first
 
@@ -210,3 +214,4 @@ The pi-ai configuration and replay behavior above are source-verified at rc.2 co
 - [Direct DeepSeek assistant serialization](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/serialize.ts)
 - [Community field report #4745](https://github.com/deepseek-ai/deepseek-harness/discussions/4745)
 - [Thinking-off history field report #4822](https://github.com/deepseek-ai/deepseek-harness/discussions/4822)
+- [Provider-owned `tool_choice` rejection report #4709](https://github.com/deepseek-ai/deepseek-harness/discussions/4709)
