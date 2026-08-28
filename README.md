@@ -26,11 +26,11 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
+| [Evaluate cross-Session memory without leaking scope or losing the store](docs/en/architecture/sessions-vs-memory.md#case-study-dsh-memory-lite-010) | A local JSON file is not a local-only data path once recall becomes a model-visible tool result; require scoped identity, atomic writes, corruption quarantine, retrieval budgets, and explicit privacy copy. |
+| [Edit model capabilities without mistaking declarations for proof](docs/en/getting-started/model-providers.md#evaluate-a-third-party-capability-editor-before-production-use) | Image, reasoning, capacity, and gateway fields declare a route contract; verify the real endpoint and keep headers out of whole-namespace presets. |
 | [Diagnose a terminal command still shown after 40 minutes](https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html) | Standard alpha.1 foreground Bash cannot explain that timer by default; route background jobs, persistent terminals, live processes, and stale presentation before retrying. |
 | [Repair count-balanced but ID-invalid tool history](docs/en/troubleshooting/dangling-tool-calls-insufficient-results.md#add-the-alpha1-identity-and-compaction-branches) | Equal call/result counts do not prove valid pairing; use an ordered identity ledger and keep request stripping observable as containment. |
-| [Fix `HTML did not preload @deepseek-ai/dsh-client-modules/client.js`](docs/en/troubleshooting/client-modules-html-did-not-preload.md) | The package name is not the diagnosis: capture one boot generation and route Host injection, revisioned `/plugins` bytes, script order, proxies, caches, and unsupported bare frontend launches. |
-| [Stop repeated `000000...` output before it consumes the cap](docs/en/troubleshooting/degenerate-model-output.md) | Preserve answer/reasoning/tool channel and billing evidence; `max-tokens` is the finish reason while degeneration is a separate content-shape failure. |
-| [Repair a TUI where every registry slash command reads `undefined.aborted`](docs/en/troubleshooting/tui-slash-command-signal-images-slot.md) | The official ABI is `(agent, line, images, signal)`; patch both dispatch paths, keep `[]` in the image slot, and verify cancellation rather than masking the caller mismatch. |
+| [Stop repeated `000000...` output and export the evidence](docs/en/troubleshooting/degenerate-model-output.md#export-the-evidence-from-the-web-profile) | Preserve route, channel, finish, usage, and retry facts from the flushed Session export without publishing prompts, schemas, paths, or credentials. |
 
 Each entry above names its pinned official source revision—currently rc.2 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) or alpha.1 [`cd5ef814…`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc)—records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 
@@ -46,6 +46,25 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 > DeepSeek Harness is in developer preview and may introduce compatibility-breaking changes. Pages in this handbook name their verification date and link to primary sources. Pin the revision you deploy.
 
 ## Start with your goal
+
+Choose the smallest path that matches the job. The full task index remains available below without occupying the repository's first screen.
+
+| Goal | Fastest useful path |
+|---|---|
+| Install or run DeepSeek Harness for the first time | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
+| Diagnose a failing install | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
+| Route an Agent, model, tool, Session, or UI failure | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
+| Check what is shipped, inferred, or proposed | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
+| Configure a model, gateway, image route, or reasoning level | [Model provider guide](docs/en/getting-started/model-providers.md) |
+| Build and package a plugin | [First plugin lab](docs/en/plugin-development/first-plugin.md) |
+| Connect MCP tools | [MCP integration guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
+| Understand Sessions, Skills, and long-term memory | [Memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |
+| Audit permissions, credentials, or a community plugin | [Security guides](#security) |
+
+<details>
+<summary><strong>Browse the complete task-specific index</strong></summary>
+
+### Every current task route
 
 | I want to… | Start here |
 |---|---|
@@ -185,6 +204,8 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 | Fix first Session flush when the filesystem rejects hard links | [Session hard-link compatibility runbook](https://sandbaseai.github.io/deepseek-harness-handbook/session-hard-link-unsupported.html) |
 | Fix a failing installation or run | [Troubleshooting index](docs/en/troubleshooting/README.md) |
 | Track upstream changes | [Updates and breaking changes](docs/en/updates/README.md) |
+
+</details>
 
 ## The agent-first mental model
 
