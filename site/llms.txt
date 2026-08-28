@@ -6,7 +6,7 @@ Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
 Latest field update (v0.5.276): DOM ownership and settings.section removeChild recursion: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/webview-mutation-observer-loop.md
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.320): withdrawn/private Awesome entries now resolve to a pinned catalog snapshot instead of dead direct links; external-link verification passes: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.320
+Latest release (v0.5.321): add six high-signal public community projects to the Awesome resource map and JSON index, with explicit audit boundaries: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.321
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme
 Latest field update (v0.5.283): pnpm isolated-tarball fallback closure and empty provider table: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/web-loading-plugins-pnpm-symlink.md

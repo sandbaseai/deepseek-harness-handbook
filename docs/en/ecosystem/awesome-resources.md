@@ -90,6 +90,19 @@ The full catalog is intentionally broad. These additional projects are useful wh
 
 These entries are pointers for further reading, not a recommendation to install everything together. Combining context, memory, routing, and background-agent plugins can change prompt size, cost, and authority boundaries in ways that are hard to see from a marketplace description.
 
+## High-signal community projects
+
+The upstream catalog is not the only discovery surface. These public projects currently have meaningful community attention and are useful starting points for an Agent builder. Popularity is only a discovery signal; inspect the repository, release history, permissions, and install contract yourself.
+
+| Focus | Resource | What to verify |
+|---|---|---|
+| Community plugin catalog | [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) | Whether each listing is current, public, and compatible with your DSH revision. |
+| Context observability | [dsh-context](https://github.com/bowenliang123/dsh-context) | Token accounting, compression events, and data kept outside the session. |
+| Vision bridge | [modlens](https://github.com/liustack/modlens) | Image upload path, external endpoints, and structured-output guarantees. |
+| Agent teams | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | Child-agent authority, shared workspace behavior, and cancellation semantics. |
+| Vision routing | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | Provider fallback, key handling, and whether image turns remain auditable. |
+| Community field guide | [DeepSeek Harness Orange Book](https://github.com/alchaincyf/deepseek-harness-orange-book) | Which observations are version-pinned experiments versus informal advice. |
+
 ## Four practical starter paths
 
 Use a small, testable path instead of assembling a profile from the entire catalog:

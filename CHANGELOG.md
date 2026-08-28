@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.321 - 2026-08-29
+
+### Added
+
+- Added six high-signal public community projects to the Awesome resource map and JSON index, including plugin discovery, context observability, vision, Agent teams, and field-guide paths.
+
 ## 0.5.320 - 2026-08-29
 
 ### Fixed

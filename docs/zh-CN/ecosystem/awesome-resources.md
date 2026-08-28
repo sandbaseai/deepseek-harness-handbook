@@ -88,6 +88,19 @@ verified_at: 2026-08-28
 
 这些条目是进一步阅读的入口，不代表建议全部同时安装。上下文、记忆、路由和后台 Agent 插件叠加后，可能改变 prompt 大小、成本和权限边界，而这些变化往往不会出现在市场描述里。
 
+## 高关注社区项目
+
+上游目录之外，还有一些目前关注度较高且公开可访问的社区项目，适合 Agent 构建者作为起点。热度只代表发现信号；仍需自行检查仓库、发布历史、权限和安装契约。
+
+| 方向 | 资源 | 首先核验 |
+|---|---|---|
+| 社区插件目录 | [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) | 条目是否最新、公开，以及是否兼容你的 DSH 版本。 |
+| 上下文观测 | [dsh-context](https://github.com/bowenliang123/dsh-context) | token 统计、压缩事件和会话外保存的数据。 |
+| 视觉桥 | [modlens](https://github.com/liustack/modlens) | 图片上传路径、外部端点和结构化输出保证。 |
+| Agent 团队 | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | 子 Agent 权限、共享工作区行为和取消语义。 |
+| 视觉路由 | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | provider 回退、密钥处理和图像回合的可审计性。 |
+| 社区实践手册 | [DeepSeek Harness 橙皮书](https://github.com/alchaincyf/deepseek-harness-orange-book) | 哪些是固定版本实测，哪些只是非正式建议。 |
+
 ## 四条实用起步路径
 
 不要从全量目录拼装 profile，先选择一条可观测、可回滚的小路径：

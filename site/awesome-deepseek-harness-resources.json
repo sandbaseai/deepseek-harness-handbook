@@ -30,6 +30,12 @@
     {"capability":"input","name":"dsh-reference-anything","url":"https://github.com/Chael-Chael/dsh-reference-anything","why":"On-demand references from files, skills, sessions, and other chats."},
     {"capability":"migration","name":"dsh-claude-move","url":"https://github.com/PerryLink/dsh-claude-move","why":"Approval-gated migration of sessions, memories, skills, and commands."},
     {"capability":"visual","name":"gewu-tools","url":"https://github.com/nyantused-cpun/gewu-tools","why":"Screenshot-based inspection followed by source-truth verification."},
-    {"capability":"profile","name":"DeepSeek Harness Ultimate","url":"https://github.com/18126295767-cell/deepseek-harness-ultimate","why":"Pinned, reproducible community profile bundle with multilingual guides."}
+    {"capability":"profile","name":"DeepSeek Harness Ultimate","url":"https://github.com/18126295767-cell/deepseek-harness-ultimate","why":"Pinned, reproducible community profile bundle with multilingual guides."},
+    {"capability":"community-catalog","name":"awesome-dsh-plugin","url":"https://github.com/awesome-dsh-plugin/awesome-dsh-plugin","why":"Large community plugin directory; audit each listing before installation."},
+    {"capability":"context","name":"dsh-context","url":"https://github.com/bowenliang123/dsh-context","why":"Context dashboard for token composition, evolution, and compression evidence."},
+    {"capability":"vision","name":"modlens","url":"https://github.com/liustack/modlens","why":"Vision bridge for text-only Agents with structured evidence."},
+    {"capability":"orchestration","name":"dsh-agent-teams","url":"https://github.com/NanmiCoder/dsh-agent-teams","why":"Community AgentTeams plugin for coordinated DSH work."},
+    {"capability":"vision","name":"dsh-vision-router","url":"https://github.com/ysr666/dsh-vision-router","why":"DSH-native vision routing with tool-calling turns."},
+    {"capability":"community-guide","name":"deepseek-harness-orange-book","url":"https://github.com/alchaincyf/deepseek-harness-orange-book","why":"Community field guide with startup checklist and observed session logs."}
   ]
 }
