@@ -1,9 +1,9 @@
 ---
 title: Recover DeepSeek Harness Web from a Client Plugin Boot Failure
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-28
 ---
 
 # Recover the Web UI without hiding the failed plugin
@@ -39,6 +39,22 @@ Do not infer that every listed entry is independently broken. A provider may fai
 | dependency settle | entry remains `pending (waiting for service...)` | a required provider never became active |
 
 The rc.8 module system uses classic script elements for arrival. Bundle execution only registers a factory. The factory runs later during materialization, and the Cordis Loader then applies its exported plugin. A `200` response and syntactically valid file can still fail during factory execution or apply.
+
+### When the shell says a module was not preloaded
+
+The error `client-modules: HTML did not preload @deepseek-ai/dsh-client-modules/client.js` is an earlier, narrower failure: the client-module loader expected a preload marker in the HTML shell and did not find the exact module identity. Treat it as a shell/asset contract mismatch, not as proof that the named plugin itself is broken. The report in [upstream discussion #4836](https://github.com/deepseek-ai/deepseek-harness/discussions/4836) is a useful reproduction signal.
+
+Capture the raw HTML response, the `<link rel="preload">` entries, the script/module URL that the loader requests, and the build or revision marker. Compare URL, `as` value, origin, and path normalization byte-for-byte. A stale browser cache, a reverse proxy stripping preload tags, a base-path rewrite, or HTML and JavaScript generated from different builds can produce the same message.
+
+Recover in this order:
+
+1. Open the same URL with a clean profile and disable cache for one reload.
+2. Confirm the HTML and module response come from the same Host, profile, and revision.
+3. Check that the preload URL is not rewritten or dropped by the proxy and that its `as` attribute matches the loader’s expectation.
+4. Restart the Web process after rebuilding the shell and Client artifact together; do not edit `node_modules` or add an ad-hoc preload by hand.
+5. If the mismatch remains, preserve the HTML, request trace, and exact error, then report the generated revision and deployment topology.
+
+Do not “fix” this by disabling the preload assertion. The assertion detects a broken boot contract; bypassing it can turn a deterministic shell failure into an incomplete module graph.
 
 ## Capture browser-side evidence
 
@@ -117,6 +133,7 @@ Skipping is unsafe when the failed entry provides identity, transport, authoriza
 Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e8161534`. The safe-mode and Host-reporting controls above are design requirements, not rc.8 features.
 
 - [Upstream Client plugin failure report #3536](https://github.com/deepseek-ai/deepseek-harness/discussions/3536)
+- [Upstream client-module preload mismatch report #4836](https://github.com/deepseek-ai/deepseek-harness/discussions/4836)
 - [rc.8 Web boot kernel](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/web/src/boot.ts)
 - [rc.8 framework-free boot page](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/web/src/boot-page.ts)
 - [rc.8 Client module system](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/modules/src/client/system.ts)
