@@ -2,6 +2,36 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.374 - 2026-08-30
+
+### Added
+
+- Added a source-backed Agent-first guide for evaluating the dsh-codex-ui Web client plugin, including extension-point ownership, Session preservation, acceptance probes, and rollback.
+
+## 0.5.373 - 2026-08-30
+
+### Changed
+
+- Aligned README, LLM index, and Atom feed discovery copy with the verified 49-resource Awesome map.
+
+## 0.5.372 - 2026-08-30
+
+### Added
+
+- Added the bilingual `fendouai/awesome-deepseek-harness` community catalog mirror to the Agent-first resource map.
+
+## 0.5.371 - 2026-08-30
+
+### Changed
+
+- Refreshed public release entry points after pinning Awesome catalog links to snapshot `c2cc7c97`.
+
+## 0.5.370 - 2026-08-30
+
+### Changed
+
+- Replaced stale Awesome catalog links in the English, Chinese, and JSON resource maps with the pinned `c2cc7c97` snapshot.
+
 ## 0.5.365 - 2026-08-30
 
 ### Added
