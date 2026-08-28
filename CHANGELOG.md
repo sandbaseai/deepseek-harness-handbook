@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.326 - 2026-08-29
+
+### Added
+
+- Added a dedicated static SandBase Harness bridge page and surfaced it from the handbook homepage and sitemap for direct discovery by SandBase users.
+
 ## 0.5.325 - 2026-08-29
 
 ### Added
