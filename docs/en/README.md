@@ -12,6 +12,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 
 ## Featured guides
 
+- [Diagnose a long-running terminal command followed by a prompt error](troubleshooting/long-running-terminal-command-next-prompt-error.md)
 - [Diagnose why AGENTS.md loaded but did not constrain an action](agent-patterns/agents-md-scope.md)
 - [Design general files and provider-native PDF/video passthrough](integrations/general-file-attachments.md)
 - [Trace `ask_user_question` aborts without inventing an answer timeout](troubleshooting/ask-user-question-aborted.md)
