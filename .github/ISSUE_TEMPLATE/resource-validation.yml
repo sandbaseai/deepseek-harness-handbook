@@ -3,6 +3,7 @@ description: Validate or propose one Agent-first DeepSeek Harness resource
 title: "resource: "
 labels:
   - documentation
+  - resource-validation
 body:
   - type: input
     id: resource

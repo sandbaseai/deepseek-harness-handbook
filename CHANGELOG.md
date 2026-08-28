@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.340 - 2026-08-29
+
+### Changed
+
+- Added a dedicated `resource-validation` label and attached it to the Awesome resource Issue template for focused community triage.
+
 ## 0.5.339 - 2026-08-29
 
 ### Changed
