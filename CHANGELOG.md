@@ -26,6 +26,12 @@ All notable handbook and publishing changes are recorded here. DeepSeek Harness 
 
 - Extended the WebView mutation-loop runbook with upstream #4920's `settings.section` `removeChild` recursion signature and a separate DOM ownership/generation diagnostic path.
 
+## 0.5.277 - 2026-08-28
+
+### Changed
+
+- Promoted the Firefox, auth-token, and `removeChild` incident guides into the README's source-verified table for faster discovery from GitHub.
+
 ## 0.5.244 - 2026-08-29
 
 ### Changed

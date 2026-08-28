@@ -27,6 +27,9 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
+| [Firefox shows a blank Web client while Chrome works](docs/en/troubleshooting/firefox-web-client-blank.md) | Separate browser bootstrap, cached assets, origin/WebSocket, and extension boundaries before touching provider credentials or durable Sessions. |
+| [An alpha.1 auth token cannot be obtained or entered](docs/en/troubleshooting/auth-token-not-available.md) | Keep acquisition, UI entry, credential storage, token scope, and outbound authorization as separate contracts with redacted evidence. |
+| [A settings section recurses on `removeChild`](docs/en/troubleshooting/webview-mutation-observer-loop.md) | Route `NotFoundError` through DOM ownership and render-generation evidence instead of misclassifying it as a proven MutationObserver CPU loop. |
 | [Evaluate cross-Session memory without leaking scope or losing the store](docs/en/architecture/sessions-vs-memory.md#case-study-dsh-memory-lite-010) | A local JSON file is not a local-only data path once recall becomes a model-visible tool result; require scoped identity, atomic writes, corruption quarantine, retrieval budgets, and explicit privacy copy. |
 | [Edit model capabilities without mistaking declarations for proof](docs/en/getting-started/model-providers.md#evaluate-a-third-party-capability-editor-before-production-use) | Image, reasoning, capacity, and gateway fields declare a route contract; verify the real endpoint and keep headers out of whole-namespace presets. |
 | [Diagnose a terminal command still shown after 40 minutes](https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html) | Standard alpha.1 foreground Bash cannot explain that timer by default; route background jobs, persistent terminals, live processes, and stale presentation before retrying. |
