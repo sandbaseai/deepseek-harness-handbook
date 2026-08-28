@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.210 - 2026-08-28
+
+### Added
+
+- A Ralph-specific design guide for an optional, bounded failure successor, grounded in upstream Discussion #109 and the alpha.1 fixed workflow contract.
+- Failure-class, cancellation, budget, handoff, and regression boundaries that preserve Ralph's fail-closed default.
+
 ## 0.5.209 - 2026-08-28
 
 ### Fixed
