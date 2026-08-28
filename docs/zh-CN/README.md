@@ -37,7 +37,7 @@ verified_at: 2026-08-29
 - [SandBase Harness 集成专题](integrations/sandbase-harness-bridge.md)：通过 DeepSeek Harness stdio MCP Bridge 连接 SandBase Runtime，并验证 Session、凭据、沙箱和回滚边界。
 - [Cordis client inspect 永久 Pending](troubleshooting/cordis-inspect-client-query-hangs.md)：区分页面拒绝和 Host 结算，保留首个有效页面并为所有 inspect 等待设置上限。
 
-这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。中文读者也可以参考社区项目 [DeepSeek Harness 橙皮书](https://github.com/alchaincyf/deepseek-harness-orange-book)，两者均独立维护，均不代表 DeepSeek 官方。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
+这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。中文读者也可以参考社区项目 [DeepSeek Harness 橙皮书](https://github.com/alchaincyf/deepseek-harness-orange-book)，或阅读最新的 [Show & Tell](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/286)。这些项目均独立维护，均不代表 DeepSeek 官方。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
 
 ## 按你的任务开始
 

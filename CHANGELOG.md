@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.341 - 2026-08-29
+
+### Changed
+
+- Linked the v0.5.334 Show & Tell from the English and Simplified Chinese README discovery paths.
+
 ## 0.5.340 - 2026-08-29
 
 ### Changed
