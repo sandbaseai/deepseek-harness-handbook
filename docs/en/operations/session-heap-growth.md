@@ -1,7 +1,7 @@
 ---
 title: Bound DeepSeek Harness Session Heap Growth
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -24,6 +24,21 @@ A compacted conversation can fit the model context while its Host process keeps 
 | resident Agent tree | Host, Agent handles, continuable subagent activations | nothing directly | live Agent/Session count, fan-out, heap slope |
 
 This distinction explains the misleading combination “the context meter is healthy, but Node still runs out of heap.” Compaction is a model-input policy, not a garbage collector or Session-retention API.
+
+## Separate renderer DOM growth from Host heap growth
+
+Long conversations can also exhaust memory in the Web renderer even when the Host Session log is bounded. Upstream report [#4900](https://github.com/deepseek-ai/deepseek-harness/discussions/4900) describes a ChatView that renders the full conversation without virtualization, with Safari renderer memory rising with conversation length. Treat a multi-gigabyte renderer peak as incident evidence, not as proof of a universal threshold or a Host persistence leak.
+
+Capture both processes independently:
+
+| Signal | Renderer / ChatView | Host / Session |
+|---|---|---|
+| growth owner | DOM nodes, layout, decoded media, UI caches | event log, SessionStore, Agent tree |
+| useful evidence | browser task manager, heap snapshot, node count, paint/layout time | RSS, `heapUsed`, event count, live Session/child count |
+| safe mitigation | collapse or paginate history, limit rendered attachments, restart the tab | stop admission, cancel, flush/export, hand off to a new Session |
+| what it does not prove | model context or durable log deletion | renderer virtualization or DOM retention |
+
+Do not “solve” renderer pressure by deleting durable Session events, and do not infer that `/compact` will free DOM nodes. A virtualization or windowing change must preserve scroll position, message identity, tool-result expansion, and accessibility while rendering only a bounded visible slice. Test a cold restore and a long live conversation separately; a successful restart can hide a renderer leak without fixing it.
 
 ## What rc.2 actually retains
 
@@ -273,6 +288,7 @@ Never claim that a graceful exit preserved in-flight side effects. A tool may ha
 - [rc.2 cold Session preparation pipeline](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence/src/coordinator.ts)
 - [Upstream in-memory Session OOM report #4722](https://github.com/deepseek-ai/deepseek-harness/discussions/4722)
 - [Upstream macOS cold-restore and restart-loop report #4807](https://github.com/deepseek-ai/deepseek-harness/discussions/4807)
+- [Upstream Web ChatView non-virtualized memory report #4900](https://github.com/deepseek-ai/deepseek-harness/discussions/4900)
 - [Closed-message chunk elision proposal #4678](https://github.com/deepseek-ai/deepseek-harness/discussions/4678)
 - [`sourceEventSeqs` history overflow report #4633](https://github.com/deepseek-ai/deepseek-harness/discussions/4633)
 
