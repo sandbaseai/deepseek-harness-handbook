@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.388 - 2026-08-30
+
+### Added
+
+- Expanded the context-window runbook with upstream #4956: self-hosted vLLM may return flat error JSON, preventing automatic overflow classification and compaction retry.
+
 ## 0.5.387 - 2026-08-30
 
 ### Changed

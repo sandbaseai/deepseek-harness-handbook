@@ -3,10 +3,10 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
-Latest field update (v0.5.387): correct the Windows shared-console Ctrl+C failure boundary from upstream #4713: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/plugin-development/async-subprocess-tools.md#route-a-child-crash-to-the-correct-layer
+Latest field update (v0.5.388): classify flat self-hosted vLLM context errors before compaction/retry: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/context-window-exceeded.md#self-hosted-vllm-has-a-second-classification-boundary
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.387): correct the Windows shared-console subprocess failure boundary and host-survival probe: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.387
+Latest release (v0.5.388): document the self-hosted vLLM error-shape boundary for automatic context recovery: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.388
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 SandBase Harness MCP bridge guide: https://sandbaseai.github.io/deepseek-harness-handbook/sandbase-harness-bridge.html
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme

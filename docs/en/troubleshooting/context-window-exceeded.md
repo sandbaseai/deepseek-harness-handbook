@@ -1,7 +1,7 @@
 ---
 title: Fix DeepSeek Harness Context Window Exceeded Errors
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -63,6 +63,12 @@ At rc.2, the shared classifier recognizes structured names such as `context_leng
 Do not globally reinterpret every `quota_limit_reached` as context overflow. Providers also use quota language for account balance and usage limits. The proposed narrow match requires `input token(s)` followed immediately by an `exceed... the limit` phrase.
 
 Do not confuse this with an output that stopped because it actually reached `maxTokens`. That case preserves the partial answer and the Web UI shows **Output token limit reached**. A context-window rejection happens before normal generation begins.
+
+### Self-hosted vLLM has a second classification boundary
+
+The recovery policy can be correct while a self-hosted provider still bypasses it. Upstream report [#4956](https://github.com/deepseek-ai/deepseek-harness/discussions/4956) shows vLLM returning an OpenAI-compatible error with `message`, `type`, `param`, and `code` at the top level, rather than nested under an `error` object. The rc.2 DeepSeek adapter only reads `parsed.error`, so the context-length text becomes an empty detail and the 400 is normalized as `INVALID_REQUEST`; `compaction-basic` never receives `CONTEXT_WINDOW_EXCEEDED` and cannot compact/retry.
+
+When testing vLLM, capture the raw (sanitized) JSON shape before changing compaction thresholds. Confirm the adapter's normalized failure code, then verify whether `agent/request-error` fired and whether `maxOverflowRetries` was consumed. A lower `maxTokens` or manual `/compact` is a workaround, not proof that automatic recovery works. The durable fix is to normalize both nested and flat provider error shapes at the adapter boundary, with tests for a generic flat 400 and a flat context-overflow 400 so unrelated invalid requests are not reclassified.
 
 ## Recovery must fit and converge
 
@@ -352,3 +358,4 @@ This revision was verified against DeepSeek Harness commit `b150a551b8d465e31e41
 - [rc.2 compaction region transaction](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/region.ts)
 - [rc.2 request construction and capacity-record ordering](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/agent.ts)
 - [Large-to-small model context report #4826](https://github.com/deepseek-ai/deepseek-harness/discussions/4826)
+- [Self-hosted vLLM flat error-shape report #4956](https://github.com/deepseek-ai/deepseek-harness/discussions/4956)
