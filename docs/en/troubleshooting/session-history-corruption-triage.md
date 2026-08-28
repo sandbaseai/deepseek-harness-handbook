@@ -1,7 +1,7 @@
 ---
 title: Recover DeepSeek Harness Session History Without Destroying Evidence
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -19,6 +19,8 @@ stored session ... failed validation: session event at seq N lacks an identified
 ```
 
 These failures can look identical to an empty or exhausted history, but they cross physical storage, logical ordering, message construction, projection, and read-state boundaries. Do not rewrite a log until you know which boundary failed.
+
+The current Windows report [#4855](https://github.com/deepseek-ai/deepseek-harness/discussions/4855) shows the startup-level form of the first signature: `@deepseek-ai/dsh-workspace` enumerates persisted artifacts during plugin initialization, one corrupt Zstandard session aborts the loader, and Web never reaches workspace selection. Treat this as a single-artifact failure until enumeration proves otherwise; do not delete the whole profile or reinstall the launcher before isolating the named Session directory.
 
 ## Stop before inspecting
 
@@ -53,6 +55,8 @@ Recovery boundary:
 - restore only after a reader compatible with the exact format validates it.
 
 Do not assume `zstd -dc file | zstd -o file` is a repair. It normally changes a multi-frame artifact into a different physical layout.
+
+On Windows, the same corruption can appear as `plugin tree failed to load` rather than a missing conversation. Capture the outer loader stage and the innermost persistence error separately. The outer error identifies the startup owner (`workspace`); only the inner `first frame is not exactly one header line` identifies the artifact boundary. A successful `npx` download or clean launcher version does not make existing profile bytes valid.
 
 ## Failure B: the committed sequence goes backward
 
@@ -262,6 +266,7 @@ Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc94
 - [rc.2 Zstandard header-only listing boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence-jsonl/src/index.ts)
 - [rc.2 fail-soft older-page handling](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/runtime/src/client/sessions/session.ts)
 - [rc.2 conversation window assembly](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/runtime/src/client/sessions/conversation-assembler.ts)
+- [Current Windows startup report #4855](https://github.com/deepseek-ai/deepseek-harness/discussions/4855)
 - [alpha.1 Session journal transport](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/client/transport.ts)
 - [alpha.1 older-page Session handling](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/client/sessions/session.ts)
 - [Live session log protection](live-session-log-durability.md)
