@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.329 - 2026-08-29
+
+### Fixed
+
+- Make Pages deployments cancel superseded runs and allow a longer deployment window, reducing queued installation-API requests during rapid content iteration.
+
 ## 0.5.328 - 2026-08-29
 
 ### Changed
