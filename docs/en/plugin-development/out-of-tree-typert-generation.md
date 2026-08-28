@@ -1,9 +1,9 @@
 ---
 title: Generate Strict Typert Artifacts for an Out-of-Tree DeepSeek Harness Plugin
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -41,6 +41,14 @@ For each existing aggregate, registration walks only `parsed.projectReferences`.
   references[]
     -> <workspace>/packages/community/example/tsconfig.json
 ```
+
+### External packages can pass discovery and still fail Remote generation
+
+Installed protocol packages introduce a second boundary. Upstream reports [#2981](https://github.com/deepseek-ai/deepseek-harness/discussions/2981) and [#4579](https://github.com/deepseek-ai/deepseek-harness/discussions/4579) show that recognizing `@Remote` metadata is not enough when the Agent-scoped `Agent` or `SessionId` wire type is declared in `node_modules`. A public type can be canonical and exported yet be rejected as “not a workspace-owned public type.”
+
+Treat the dependency as an external type-graph target, not as a package to copy into workspace registration. Accept only an exact, non-root `package.json#exports` subpath whose resolved file remains inside the dependency root. Preserve its resolved symbol identity through the generated declaration; do not replace `Agent` with a caller-supplied string or redeclare a look-alike `SessionId` alias. Those workarounds remove Host lookup, Agent Scope, or codec identity from the Remote contract.
+
+Prove this layer separately: resolve the physical package root and exact export subpath; reject root and wildcard exports; inspect the generated import target for the canonical wire symbol; typecheck same-named symbols from two dependencies; then pack the plugin and run a real browser Remote call through the generated strict codec. If metadata discovery fails, diagnose #2981 first. If discovery succeeds but the public wire symbol is rejected, diagnose this ownership/export layer. “Generator exited zero” proves neither.
 
 ### 3. The resolved package root must be inside `packages`
 
@@ -185,9 +193,11 @@ Renaming the existing constructor option to `workspaceRoot`, or replacing the po
 
 ## Source boundary
 
-Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` and the out-of-tree generation report in discussion #4679.
+Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` and the out-of-tree generation reports in discussions #4679, #2981, and #4579.
 
 - [Out-of-tree Typert generation discussion #4679](https://github.com/deepseek-ai/deepseek-harness/discussions/4679)
+- [Typert misses `@Remote` metadata from npm protocols (#2981)](https://github.com/deepseek-ai/deepseek-harness/discussions/2981)
+- [Typert rejects external public Agent wire types (#4579)](https://github.com/deepseek-ai/deepseek-harness/discussions/4579)
 - [Workspace generator implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/typert/generator/src/workspace.ts)
 - [Workspace discovery and containment](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/typert/generator/src/analyzer.ts)
 - [Empty-selection contract tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/typert/generator/tests/type-model.spec.ts)
