@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.190 - 2026-08-28
+
+### Added
+
+- Added a boot-protocol runbook for `HTML did not preload @deepseek-ai/dsh-client-modules/client.js`.
+- Separated missing Host injection, failed `/plugins` responses, proxy rewrites, mixed revisions, script reordering, stale service workers, and unsupported bare frontend launches, with a ten-point regression contract.
+
 ## 0.5.189 - 2026-08-28
 
 ### Added
