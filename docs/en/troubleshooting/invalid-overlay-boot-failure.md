@@ -1,9 +1,9 @@
 ---
 title: Unbrick DeepSeek Harness After an Invalid Overlay
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-29
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
@@ -16,6 +16,20 @@ A row inserted into `cordis.patch.yml` can name a package that the selected prof
     - id: probe
       name: '@example/not-installed'
 ```
+
+## Separate a mount failure from a damaged Session
+
+Upstream Discussion [#4263](https://github.com/deepseek-ai/deepseek-harness/discussions/4263) reports `preset standard failed to mount` after adding a Web Search plugin and restarting. That message identifies the profile composition boundary; it does not, by itself, prove that a Session log is corrupt. Conversely, a bad persisted Session can make the surrounding startup error look like a preset failure when the loader is scanning history.
+
+Classify the two paths independently:
+
+| Evidence | First owner | Safe containment |
+|---|---|---|
+| package/import/patch error names a missing or incompatible plugin | profile overlay / Bundle loader | preserve the patch, disable or remove only the implicated row, and rebuild the profile closure |
+| `history unavailable`, `seq gap`, unsupported event, or invalid message identity names one Session | persistence / Session query | freeze writers, hash and quarantine only that Session, then start a fresh one |
+| both appear after one restart | two independent boundaries may be present | capture each first error and repair composition before touching durable history |
+
+Renaming the entire `profiles` directory can restore a boot, but it is a broad destructive diagnostic: it discards the active composition from the loader's view and can hide which row caused the failure. Copy it first, preserve the original path and hashes, and prefer a disposable profile or one-row rollback. Do not install a Session surgeon or another recovery plugin into the only profile while the profile itself cannot mount.
 
 On a cold start, the Loader tries to import every enabled entry. An unresolved module makes boot fail loud, the partial tree is disposed, and a Web surface disappears with it. This is not a degraded plugin row.
 
@@ -179,4 +193,5 @@ Recovery is complete only when:
 - [Recover a plugin installation](plugin-install-recovery.md)
 - [Recover a Git plugin missing its built export](git-plugin-missing-dist.md)
 - [Recover a partial plugin add](plugin-add-nonzero-reconcile.md)
+- [Community report: plugin add followed by preset mount failure #4263](https://github.com/deepseek-ai/deepseek-harness/discussions/4263)
 - [Audit a community plugin](../security/community-plugin-audit.md)

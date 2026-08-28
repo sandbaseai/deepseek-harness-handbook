@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.229 - 2026-08-29
+
+### Changed
+
+- Expanded the invalid-overlay recovery runbook with Discussion #4263 evidence and a two-path triage for profile mount failures versus damaged Session history.
+
 ## 0.5.228 - 2026-08-29
 
 ### Changed
