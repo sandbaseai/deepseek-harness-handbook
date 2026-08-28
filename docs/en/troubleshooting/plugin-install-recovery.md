@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Plugin Install and Recovery
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -63,6 +63,59 @@ This means a missing entry is not enough evidence that `plugin add` replaced the
 | `settings namespace not registered` | service lifecycle | declare the required `settings` service or make it explicitly optional |
 | module, schema, or patch resolution error | composition | run `--dump-config` and inspect the first named row or source layer |
 | Web process dies during an in-process restart | process ownership | restart from a supervisor outside the process tree being terminated |
+
+## Runtime export mismatch after a Harness upgrade
+
+This startup signature names an out-of-tree plugin compatibility failure, not a core source-build failure:
+
+```text
+failed to import loader entry dsh-agy (@a1soyo0/dsh-agy)
+The requested module '@deepseek-ai/dsh-llm' does not provide an export named 'CallId'
+```
+
+Read the deepest ESM cause first. In report #4827, both the Host and Web rows fail inside the installed profile package:
+
+```text
+$DSH_HOME/profiles/web/node_modules/@a1soyo0/dsh-agy/lib/...
+import { CallId } from "@deepseek-ai/dsh-llm"
+```
+
+rc.2 exported a runtime brand constructor named `CallId`. Alpha.1 renamed that public brand to `ToolCallId`; there is no `CallId` value in its `brand.ts` or root re-export. A plugin bundle built against the rc.2 value surface therefore cannot instantiate under the alpha.1 core closure merely because pnpm installed it successfully.
+
+### Choose one compatible closure
+
+| Requirement | Safe choice | Proof |
+|---|---|---|
+| alpha.1 is required | install a plugin release that explicitly supports alpha.1 / `ToolCallId` | cold boot plus one plugin-owned operation |
+| current plugin is required | run the last compatible Harness release in a separate pinned installation/profile | exact core and plugin versions plus cold boot |
+| Web access is urgent; plugin is optional | remove the plugin from only the affected profile | manifest/lockfile diff, reconciled Bundle list, cold boot |
+| no compatible pair is known | keep the broken profile as evidence and create a clean control profile | control boot does not mutate the original |
+
+For the optional-plugin route, stop the profile, capture its manifest and lockfile, then use the supported profile package transaction:
+
+```sh
+dsh plugin --profile web remove @a1soyo0/dsh-agy
+dsh --profile web --dump-config > after-remove.yml
+dsh --profile web
+```
+
+The plugin command forwards `remove` to pnpm in that profile, then reconciles dependency-managed Bundle membership. It does not remove in-box template Bundles. Inspect the manifest, lockfile, resolved tree, and dump before cold boot; if pnpm fails, treat the transaction as potentially partial and restore the captured pair rather than deleting `node_modules` by hand.
+
+Do not add a fake `CallId` export to alpha.1, edit the plugin's built `.mjs`, or alias `CallId` to `ToolCallId` globally. The rename may accompany broader schema and lifecycle changes, and a booting import is not proof of behavioral compatibility.
+
+### Compatibility regression contract
+
+A third-party Bundle should test its declared Harness peer range against each supported release family:
+
+1. install into an empty profile with a frozen lockfile;
+2. import every Host and Web entrypoint under Node ESM;
+3. dump the composed tree;
+4. cold boot the selected profile;
+5. invoke one plugin-owned feature;
+6. uninstall and prove Bundle reconciliation;
+7. reject unsupported core versions before Loader activation with an actionable version message.
+
+For type-only identifiers, use `import type` so the bundler erases the import. When a branded constructor is required at runtime, import the exact supported value and declare a peer range that matches that API surface.
 
 Do not keep adding recovery plugins to a profile that cannot compose. Return to the captured state first, reproduce with one added package, and preserve the first error.
 
@@ -240,6 +293,8 @@ dsh.profile.bundles before and after:
 First dump-config difference:
 First boot error and owning row:
 Clean-profile reproduction result:
+Deepest ESM importer path and missing export:
+Installed plugin version and declared Harness peer range:
 ```
 
 Do not include credentials or the full user home. A small reproduction profile is more useful than a screenshot of the dead Web surface.
@@ -248,6 +303,10 @@ Do not include credentials or the full user home. A small reproduction profile i
 
 - [rc.2 CLI profile and plugin contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/reference/README.md)
 - [rc.2 plugin reconciliation implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/src/plugin.ts)
+- [rc.2 `CallId` runtime brand](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/brand.ts)
+- [Alpha.1 `ToolCallId` runtime brand](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm/src/brand.ts)
+- [Alpha.1 plugin management contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/cli/reference/README.md#plugin-management)
+- [Third-party plugin export mismatch report #4827](https://github.com/deepseek-ai/deepseek-harness/discussions/4827)
 - [rc.2 profile composition and live-layer ownership](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/apps/cli/src/profile-boot.ts)
 - [rc.2 app-boot profile and transactional HMR contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/README.md)
 - [rc.2 atomic file replacement and lock contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/util/atomic-write/README.md)
