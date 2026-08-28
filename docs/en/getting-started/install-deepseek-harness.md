@@ -1,10 +1,10 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-22
-upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
+verified_at: 2026-08-28
+upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Install DeepSeek Harness: choose the right execution topology
@@ -38,13 +38,47 @@ npm view @deepseek-ai/dsh \
 
 Confirm the scoped name, DeepSeek AI repository, expected version, and `dsh` binary. A repository title, unscoped package, or copied `dsh` command is not sufficient provenance.
 
+## A GitHub release is not automatically an npm release
+
+At the 2026-08-28 verification point, the official channels are intentionally—or temporarily—split:
+
+| Coordinate | Observed value | What it authorizes |
+|---|---|---|
+| GitHub Release | `dsh-v0.1.2-alpha.1` | release notes and source tag exist |
+| Git tag | `dsh-v0.1.2-alpha.1` → `cd5ef814…` | exact source checkout is addressable |
+| source CLI manifest | `@deepseek-ai/dsh` version `0.1.2-alpha.1` | source build reports the prerelease version |
+| npm `latest` | `0.1.1-rc.2` | bare npm/npx installation resolves rc.2 |
+| npm `next` | `0.1.1-rc.2` | `@next` also resolves rc.2 |
+| npm exact alpha query | `E404` for `@deepseek-ai/dsh@0.1.2-alpha.1` | no registry artifact is available from the queried registry |
+
+These statements are compatible. A release page and a package manifest describe repository state; npm installation requires a registry packument entry and downloadable tarball for the exact version. Do not infer publication from matching text in `package.json`.
+
+Capture all channels without executing the candidate:
+
+```sh
+npm view @deepseek-ai/dsh version dist-tags versions --json
+npm view @deepseek-ai/dsh@0.1.2-alpha.1 \
+  version dist.integrity dist.tarball --json
+git ls-remote --tags https://github.com/deepseek-ai/deepseek-harness.git \
+  refs/tags/dsh-v0.1.2-alpha.1
+```
+
+Route the result:
+
+- **Need a supported npm artifact:** use the exact registry-visible rc.2 coordinate and its integrity; do not rename it alpha.1.
+- **Need to test alpha.1 source:** check out the official tag, use its declared Node and pnpm versions, build the whole workspace, isolate `DSH_HOME`, and report the Git commit plus dirty state.
+- **Need an alpha.1 npm tarball:** wait for the official publisher. A GitHub source archive is not a substitute for a built multi-package npm closure.
+- **See alpha.1 on another registry or mirror:** capture the registry URL, package metadata, tarball integrity, and publisher provenance before execution. It is not evidence that the official npm registry has the artifact.
+
+Do not use `npm install github:deepseek-ai/deepseek-harness#dsh-v0.1.2-alpha.1` as a shortcut. The repository root is a private pnpm workspace, the CLI depends on many `workspace:^` packages, and the npm CLI artifact expects built `lib` output. A Git dependency does not reproduce the official multi-package publish pipeline.
+
 ## Choose by objective
 
 | Objective | Topology | Command | Tradeoff |
 |---|---|---|---|
 | First bounded evaluation | ephemeral npm execution | `npx @deepseek-ai/dsh@0.1.1-rc.2 web` | smallest setup; package cache is not a deployment manifest |
 | Repeatable local evaluation | project-local exact dependency | `npm install --save-exact @deepseek-ai/dsh@0.1.1-rc.2` | version recorded in a disposable project and lockfile |
-| Upstream development | official source checkout | `pnpm install && pnpm run build && pnpm dsh web` | tests source and built artifacts, not the published npm package |
+| Upstream development or unpublished prerelease evaluation | official source checkout at an exact tag | `pnpm install && pnpm run build && pnpm dsh web` | tests source and locally built artifacts, not a published npm package |
 | Persistent shell-wide command | global install | package-manager global bin | convenient but easiest to confuse with another executable or stale store |
 
 The official README documents npm execution and source execution. Project-local and global forms are ordinary package-manager topologies around the published `dsh` binary; use them only when their operational tradeoff is useful.
@@ -165,6 +199,7 @@ Use this first task:
 | First symptom | Compare first | Do not assume |
 |---|---|---|
 | package name or repository mismatch | npm metadata and official coordinates | a matching executable name is official |
+| exact prerelease returns npm `E404` but GitHub Release exists | npm versions, exact-version query, Git tag, and source manifest | a GitHub release guarantees an npm tarball |
 | `dsh` reports an unexpected version | shell-selected path and global/project package tree | reinstalling changed the selected binary |
 | source checkout cannot boot | Git revision, pnpm version, and `pnpm run build` | the TypeScript launcher builds missing artifacts |
 | global install cannot load a native helper | exact-version project-local A/B | the profile plugin itself is missing |
@@ -198,3 +233,6 @@ Exact-version project-local comparison result:
 - [CLI profile, plugin, and source-execution contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/reference/README.md)
 - [Official CLI package manifest](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/package.json)
 - [Official rc.2 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.1-rc.2)
+- [Official alpha.1 GitHub Release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.2-alpha.1)
+- [Official alpha.1 CLI manifest](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/cli/package.json)
+- [npm publication gap report #4833](https://github.com/deepseek-ai/deepseek-harness/discussions/4833)
