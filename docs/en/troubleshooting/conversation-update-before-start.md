@@ -1,7 +1,7 @@
 ---
 title: Recover a Conversation That Updates Before Its Start Match
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-20
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
@@ -16,6 +16,10 @@ conversation Context 9:turn-tail8 received an update before its start Match
 ```
 
 This is a client conversation-projection failure. A surface replacement can copy an update for a turn before it copies that turn's `turn/start`. The durable Session may still be structurally valid and usable by non-conversation readers.
+
+### Related symptom: tools render but the assistant answer is missing
+
+Upstream report [#4964](https://github.com/deepseek-ai/deepseek-harness/discussions/4964) describes a nearby projection failure on Windows rc.2: the trajectory shows the model's answer, but the conversation page renders only tool operations until a manual Web refresh. Treat the trajectory as evidence that the turn may have been persisted, not as proof that the conversation projection is complete. Capture the Session ID, last durable sequence, trajectory tail, and conversation DOM/network payload before refreshing; then compare the cold rebuild with the live view. Do not resend the prompt or mutate the Session to “make the answer appear.” A fix should make the assistant message observable without refresh and keep refresh idempotent.
 
 Do not edit or renumber the live Session log. Preserve an export, move active work to a fresh Session, and treat any local runtime patch as disposable until an upstream release owns the behavior.
 
@@ -177,6 +181,7 @@ Sanitized two-event reproduction attached: yes/no
 Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e8161534`. The upstream report reproduced the failure on rc.7; the three invariant checks remain present at the verified rc.8 commit.
 
 - [Upstream reproduction #3450](https://github.com/deepseek-ai/deepseek-harness/discussions/3450)
+- [Tools render while the assistant answer is missing #4964](https://github.com/deepseek-ai/deepseek-harness/discussions/4964)
 - [rc.8 conversation assembler](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/runtime/src/client/sessions/conversation-assembler.ts)
 - [rc.8 Session export command](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/session-query/session-log-export/README.md)
 - [rc.8 Session query surface validation](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/session-query/session-query/README.md)

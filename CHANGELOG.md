@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.394 - 2026-08-30
+
+### Added
+
+- Added a related conversation-projection path from upstream #4964: when tools render but the assistant answer is absent, capture trajectory and DOM evidence before refresh or replay.
+
 ## 0.5.393 - 2026-08-30
 
 ### Added
