@@ -793,6 +793,11 @@
       "source": "docs/en/troubleshooting/concurrent-dsh-home-session-membership.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/architecture/context-compression-profiles.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
