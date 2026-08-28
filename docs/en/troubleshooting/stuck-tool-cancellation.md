@@ -1,9 +1,9 @@
 ---
 title: Stop a DeepSeek Harness Tool That Will Not Cancel
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-29
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
@@ -28,6 +28,17 @@ Stop click
 ```
 
 If the tool ignores its signal, blocks the event loop, or leaves a descendant alive, the last three transitions may never happen.
+
+## Isolate plugin-origin tools from plugin code
+
+Discussion [#4551](https://github.com/deepseek-ai/deepseek-harness/discussions/4551) reports a particularly misleading shape: built-in tools settle, while every tool registered by a third-party plugin remains pending even though its `execute` function returns quickly when called directly. The plugin declared `timeoutMs`, but the Host never surfaced either a result or a timeout. That points at the plugin-to-Host tool bridge or its registration/composition boundary—not proof that the plugin's scanner or business logic is slow.
+
+Run two bounded probes before changing the plugin implementation:
+
+1. call the underlying plugin function directly in a disposable process and record its own promise settlement;
+2. invoke the same tool through the composition-created Agent registry with the same arguments and a short timeout.
+
+If only the second probe hangs, preserve the effective profile, tool name, registration owner, `defineTool` metadata, and Host/Client versions. Do not “fix” it by adding more retries or by assuming the declared timeout is enforced across the bridge. A correct repair must make the bridge propagate the caller-owned signal, enforce a finite deadline around the remote invocation, emit one typed timeout result, and dispose the pending waiter without leaving the Agent turn running forever. Keep plugin code and bridge code as separate hypotheses until the exact composition path is instrumented.
 
 ## First prove where cancellation stopped
 
@@ -152,6 +163,7 @@ For downloads and installations, prefer background-job mode when available. A jo
 Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e8161534` on 2026-08-20.
 
 - [Official stuck-tool cancellation report #3400](https://github.com/deepseek-ai/deepseek-harness/discussions/3400)
+- [Plugin-origin tools never settle despite declared timeout #4551](https://github.com/deepseek-ai/deepseek-harness/discussions/4551)
 - [rc.8 Web Host `session.cancel` implementation](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/host/apiproxy/src/api-proxy.ts#L2617-L2633)
 - [rc.8 cooperative tool cancellation contract](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/README.md#cancellation)
 - [rc.8 Agent cancellation implementation](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/agent-loop/src/agent.ts#L134-L140)

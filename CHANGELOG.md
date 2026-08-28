@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.240 - 2026-08-29
+
+### Changed
+
+- Expanded stuck-tool cancellation with #4551's plugin-origin bridge hang, direct-versus-composed probes, and timeout propagation requirements.
+
 ## 0.5.239 - 2026-08-29
 
 ### Changed
