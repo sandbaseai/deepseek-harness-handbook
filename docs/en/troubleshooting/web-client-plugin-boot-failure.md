@@ -1,7 +1,7 @@
 ---
 title: Recover DeepSeek Harness Web from a Client Plugin Boot Failure
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 ---
@@ -11,6 +11,10 @@ verified_at: 2026-08-28
 Use this runbook when DeepSeek Harness Web shows `Failed to load plugins`, names one entry, or remains on the HARNESS boot screen while the Host still returns HTTP 200.
 
 A healthy server does not prove a healthy browser runtime. In rc.8, the Host emits a boot graph and serves each Client bundle, but the browser fetches, registers, materializes, and applies those bundles. A JavaScript error can therefore fail entirely after the server has done its job.
+
+## Duplicate loader IDs are a profile merge failure
+
+Upstream report [#4957](https://github.com/deepseek-ai/deepseek-harness/discussions/4957) shows a Linux `dsh web` service failing before the browser can load: an `agent-presets` entry declared in `settings.yaml` is merged with the same entry from an installed plugin include, and the loader throws `duplicate loader entry id`. Under `systemd` with `Restart=on-failure`, the same uncaught error can produce a restart loop every few seconds. Treat this as a configuration/include provenance problem, not as a browser cache issue. Capture the profile path, direct settings entries, include chain, loader IDs, and first uncaught stack; then stop the restart loop before removing anything. A safe fix removes one authoritative declaration in a copied profile, verifies the resulting entry graph has unique IDs, and proves one clean boot plus one controlled failure without an automatic restart storm.
 
 ## Read the boot screen as evidence
 
@@ -134,6 +138,7 @@ Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e
 
 - [Upstream Client plugin failure report #3536](https://github.com/deepseek-ai/deepseek-harness/discussions/3536)
 - [Upstream client-module preload mismatch report #4836](https://github.com/deepseek-ai/deepseek-harness/discussions/4836)
+- [Upstream duplicate loader entry report #4957](https://github.com/deepseek-ai/deepseek-harness/discussions/4957)
 - [rc.8 Web boot kernel](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/web/src/boot.ts)
 - [rc.8 framework-free boot page](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/web/src/boot-page.ts)
 - [rc.8 Client module system](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/client/modules/src/client/system.ts)

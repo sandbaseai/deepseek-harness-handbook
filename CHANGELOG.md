@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.398 - 2026-08-30
+
+### Added
+
+- Added duplicate plugin-loader ID triage from upstream #4957, including include-chain provenance, systemd restart-loop containment, and copied-profile recovery.
+
 ## 0.5.397 - 2026-08-30
 
 ### Added
