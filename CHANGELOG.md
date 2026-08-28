@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.397 - 2026-08-30
+
+### Added
+
+- Added PWA asset guidance from upstream #4962: maskable Android icons, adaptive safe zones, manifest/cache coherence, and fresh-install verification for persistent Web UI plugins.
+
 ## 0.5.396 - 2026-08-30
 
 ### Added

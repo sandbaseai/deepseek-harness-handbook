@@ -1,7 +1,7 @@
 ---
 title: Extend the DeepSeek Harness Web UI With a Persistent Client Plugin
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -253,6 +253,10 @@ For every DSH update:
 7. keep the previous package and DSH versions as an atomic rollback pair.
 
 A plugin survives replacement of the installed DSH package; it does not make private APIs stable. Version compatibility must remain explicit.
+
+## PWA assets are part of the client contract
+
+Upstream report [#4962](https://github.com/deepseek-ai/deepseek-harness/discussions/4962) shows an Android PWA installing with a white square when the manifest exposes only an SVG favicon with `purpose: any`. A persistent client plugin that changes the Web surface also owns the installable shell: provide maskable raster icons at the required sizes, keep the artwork inside the adaptive-icon safe zone, and verify a fresh install on Android rather than trusting the desktop browser preview. Check that the manifest, service-worker cache, theme color, and uninstall path all refer to the same plugin revision; an icon fix must not silently pin stale client assets.
 
 ## Acceptance gates
 

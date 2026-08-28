@@ -3,10 +3,10 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
-Latest field update (v0.5.396): evaluate consent-bound live voice turns before enabling audio capabilities: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md#high-signal-community-projects
+Latest field update (v0.5.397): verify maskable PWA icons as part of the persistent Web UI plugin contract: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/plugin-development/persistent-web-ui-client-plugin.md#pwa-assets-are-part-of-the-client-contract
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.396): document live voice consent, isolation, and teardown boundaries: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.396
+Latest release (v0.5.397): document Android PWA asset, manifest, and install verification boundaries: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.397
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 SandBase Harness MCP bridge guide: https://sandbaseai.github.io/deepseek-harness-handbook/sandbase-harness-bridge.html
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme
