@@ -11,7 +11,7 @@ verified_at: 2026-08-29
 
 这是一份从 Agent 视角理解、运行、排查和扩展 DeepSeek Harness 的独立社区手册，由 [SandBase](https://sandbase.ai/) 维护，并非 DeepSeek AI 官方项目。
 
-目前包含 **162 篇英文 canonical 指南和 191 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，下面五个最新专题摘要已逐行复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
+目前包含 **162 篇英文 canonical 指南、191 份多语言文档和 35 个精选 Awesome 资源**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，下面五个最新专题摘要已逐行复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
@@ -32,6 +32,8 @@ verified_at: 2026-08-29
 - [工具执行管线](../en/architecture/tool-execution-pipeline.md)：区分 Permission、Approval、Guard、Sandbox，并排查 waterfall listener 短路导致的全局工具失败。
 - [Harness 与 Framework 的区别](../en/what-is-deepseek-harness.md#harness-versus-framework)：把模型、Provider、Framework 和 Runtime 的职责分开，避免在错误边界验证工具、上下文或长时 Agent 能力。
 - [Awesome 生态资源能力地图](ecosystem/awesome-resources.md)：从公开目录按技能、记忆、路由、UI、文件和研究能力选择资源，并执行安全安装流程；也可直接打开[可搜索的资源专题页](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html)。
+
+资源地图目前还收录了 [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine)（工作流组装）、[dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover)（跨 Agent Skill 迁移）、[dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news)（研究输入）和 [dsh-replay](https://github.com/zoahdev/dsh-replay)（会话回放）。这些是发现入口，不是兼容性或安全背书。
 - [SandBase Harness 集成专题](integrations/sandbase-harness-bridge.md)：通过 DeepSeek Harness stdio MCP Bridge 连接 SandBase Runtime，并验证 Session、凭据、沙箱和回滚边界。
 - [Cordis client inspect 永久 Pending](troubleshooting/cordis-inspect-client-query-hangs.md)：区分页面拒绝和 Host 结算，保留首个有效页面并为所有 inspect 等待设置上限。
 

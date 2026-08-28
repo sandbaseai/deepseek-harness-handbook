@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.333 - 2026-08-29
+
+### Changed
+
+- Surfaced the 35-resource Awesome map and its newest Agent workflow entries in the high-traffic English and Simplified Chinese README entry points.
+
 ## 0.5.332 - 2026-08-29
 
 ### Added
