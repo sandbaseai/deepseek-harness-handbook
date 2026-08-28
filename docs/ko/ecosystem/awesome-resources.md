@@ -1,0 +1,37 @@
+---
+title: 능력별 Awesome DeepSeek Harness 생태계 리소스
+locale: ko
+source: docs/en/ecosystem/awesome-resources.md
+source_revision: 3
+status: reviewed
+verified_at: 2026-08-28
+---
+
+# 능력별로 고르는 DeepSeek Harness 리소스
+
+[Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness)는 DSH 플러그인, 도구, 운영 리소스를 모은 공개 카탈로그입니다. 이 문서는 전체 목록을 복사하지 않고 Agent 설계와 검증에 유용한 대표 항목을 문제별로 정리합니다.
+
+## Agent 워크플로에 유용한 대표 항목
+
+| 분야 | 리소스 | 먼저 확인할 것 |
+|---|---|---|
+| Agent 비교 | [dsh-agent-arena](https://github.com/LeemanCheung/dsh-agent-arena) | worktree 격리와 결정적 검증. |
+| 멀티 Agent | [dsh-collaboration](https://github.com/Socialist-Sister/dsh-collaboration) | dispatch protocol, 모델 roster, 권한. |
+| 백그라운드 Agent | [dsh-background-agents](https://github.com/PerryLink/dsh-background-agents) | 자식 Session 수명, scope, 중단. |
+| 컨텍스트 | [dsh-context](https://github.com/bowenliang123/dsh-context) | token 측정과 압축 이벤트 증거. |
+| MCP 검색 | [dsh-mcp-lens](https://github.com/labmimors/dsh-mcp-lens) | 지연 연결, schema, 캐시 한도. |
+| 메모리 거버넌스 | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) | claim 권한, scope 격리, 주입 한도. |
+| 웹 검색 | [dsh-free-web-search](https://github.com/delef/dsh-free-web-search) | fallback 순서, 외부 전송, 캐시. |
+| 운영 거버넌스 | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | provenance, network, redaction, rollback. |
+
+## 네 가지 안전한 시작 경로
+
+비교는 `dsh-agent-arena`, 감독형 팀은 `dsh-collaboration`, 연구·기억은 `dsh-deep-research` + `dsh-memory-gate`, 운영 통제는 `dsh-security-audit`부터 시작합니다. 전체 카탈로그를 한꺼번에 활성화하지 말고 manifest, 로드된 module, network, token/cost, 제거 결과를 기록하세요.
+
+목록에 있다는 사실은 안전성·호환성·유지보수를 보장하지 않습니다. 실제 profile에 넣기 전에 README, license, manifest, install script와 최근 변경을 확인하고 복사한 profile에서 무해한 probe와 rollback을 실행합니다.
+
+## 출처
+
+- [Awesome DeepSeek Harness README](https://github.com/0xsline/awesome-deepseek-harness/blob/main/README.md)
+- [Awesome DeepSeek Harness catalog](https://github.com/0xsline/awesome-deepseek-harness/blob/main/CATALOG.md)
+- [Community plugin audit guide](../../en/security/community-plugin-audit.md)

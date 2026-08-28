@@ -14,5 +14,6 @@ Una guía comunitaria independiente para comprender, ejecutar, depurar y extende
 La ruta comienza con la interfaz Web, la configuración del modelo, el workspace y una verificación segura. Después explica cómo Agent Loop, Tools, Session Events, Permissions y Sandbox forman un runtime de agentes.
 
 - [Turn y ciclo de vida padre-hijo del Agent](architecture/agent-lifecycle.md): separa eventos durables del Agent vivo y verifica handoff, recuperación de hijos bloqueados y settlement al destruir el padre.
+- [Mapa de recursos del ecosistema Awesome](ecosystem/awesome-resources.md): puntos de entrada para comparación de Agents, colaboración, contexto, MCP, memoria, búsqueda y gobernanza.
 
 La edición inglesa es la fuente canónica. Esta traducción está pendiente de revisión por una persona fluida; los comandos, identificadores y nombres de eventos no se traducen.

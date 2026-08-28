@@ -816,7 +816,12 @@
     {
       "source": "docs/en/ecosystem/awesome-resources.md",
       "revision": 3,
-      "translations": { "zh-CN": "docs/zh-CN/ecosystem/awesome-resources.md" }
+      "translations": {
+        "zh-CN": "docs/zh-CN/ecosystem/awesome-resources.md",
+        "ja": "docs/ja/ecosystem/awesome-resources.md",
+        "ko": "docs/ko/ecosystem/awesome-resources.md",
+        "es": "docs/es/ecosystem/awesome-resources.md"
+      }
     },
     {
       "source": "docs/en/troubleshooting/cordis-inspect-client-query-hangs.md",
