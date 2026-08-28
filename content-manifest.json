@@ -519,6 +519,11 @@
       }
     },
     {
+      "source": "docs/en/agent-patterns/nested-followups-evaluation.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/recipes/repository-research-agent.md",
       "revision": 1,
       "translations": {}

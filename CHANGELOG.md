@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.359 - 2026-08-30
+
+### Added
+
+- Added an Agent-first evaluation guide for nested follow-up Sessions, based on upstream discussion #4938 and the dsh-nested-followups project.
+
 ## 0.5.357 - 2026-08-30
 
 ### Changed
