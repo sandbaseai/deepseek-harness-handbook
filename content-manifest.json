@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/integrations/dsh-codex-ui-extension-boundary.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/queued-followup-wake-latch.md",
       "revision": 1,
       "translations": {}
