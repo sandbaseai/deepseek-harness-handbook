@@ -21,8 +21,8 @@ The source index is licensed CC0. The descriptions below are concise editorial s
 |---|---|---|
 | Plugin development | [dsh-plugin-dev](https://github.com/dsh-external/dsh-plugin-dev) | Field notes and skills for Cordis composition, TypeScript setup, Windows junctions, and persistence pitfalls. |
 | Plugin authoring skills | [dsh-plugin-skills](https://github.com/dsh-external/dsh-plugin-skills) | Skills for building and testing DeepSeek Harness plugins. |
-| Plugin composition examples | [dsh-cordis-rocks (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The upstream catalog records runnable Cordis tutorials; verify current repository visibility before installing. |
-| Find installed/public plugins | [dsh-find-plugins (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The upstream catalog records the discovery tool; verify current repository visibility before installing. |
+| Plugin composition examples | [dsh-cordis-rocks (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The upstream catalog records runnable Cordis tutorials; verify current repository visibility before installing. |
+| Find installed/public plugins | [dsh-find-plugins (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The upstream catalog records the discovery tool; verify current repository visibility before installing. |
 | Context cost audit | [dsh-context-doctor](https://github.com/Zhenyu98/dsh-context-doctor) | Measures instruction, skill-catalog, and tool-schema token cost and reports duplication or conflicts. |
 | Plugin manifest checks | [dsh-plugin-check](https://github.com/dsh-external/dsh-plugin-check) | Performs read-only checks of plugin manifests, patch shape, build traps, and hub status. |
 
@@ -32,12 +32,12 @@ Use discovery tools as indexes, not trust oracles. A listing is not proof that a
 
 | Capability | Resource | Why it is useful |
 |---|---|---|
-| Session repair | [dsh-session-repair-skill (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records a read-first repair workflow; verify current repository visibility before installing. |
+| Session repair | [dsh-session-repair-skill (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a read-first repair workflow; verify current repository visibility before installing. |
 | Session health | [dsh-session-health](https://github.com/dsh-external/dsh-session-health) | Scans multi-frame Zstandard Session files for torn, empty, or corrupt artifacts. |
-| Cross-session memory | [dsh-memory (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records a long-term memory plugin; verify current repository visibility and prompt-injection boundaries first. |
+| Cross-session memory | [dsh-memory (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a long-term memory plugin; verify current repository visibility and prompt-injection boundaries first. |
 | Cross-agent memory | [zilliztech/memsearch](https://github.com/zilliztech/memsearch) | Provides a DSH plugin and shared memory layer alongside other coding agents. |
 | Session branching | [dsh-rewind](https://github.com/dsh-external/dsh-rewind) | Folds exploration after a checkpoint into a report while retaining the complete log. |
-| Cross-tool Session import | [dsh-session-hub (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records cross-tool history import; verify current repository visibility before installing. |
+| Cross-tool Session import | [dsh-session-hub (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records cross-tool history import; verify current repository visibility before installing. |
 
 Memory and repair tools can read sensitive prompts, tool output, and credentials. Test against a copied profile, keep an evidence digest, and confirm whether a command mutates the source before use. See the [Session log storage format](../reference/session-log-storage-format.md) guide for packed rows and version boundaries.
 
@@ -45,12 +45,12 @@ Memory and repair tools can read sensitive prompts, tool output, and credentials
 
 | Capability | Resource | Why it is useful |
 |---|---|---|
-| Plan/execute routing | [dsh-plan-execute (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records separate planning and execution models; verify current repository visibility before installing. |
+| Plan/execute routing | [dsh-plan-execute (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records separate planning and execution models; verify current repository visibility before installing. |
 | Deep research workflow | [dsh-deep-research](https://github.com/dsh-external/dsh-deep-research) | Provides an adaptive research orchestration workflow. |
 | LLM fallback policy | [dsh-llm-fallbacks](https://github.com/dsh-external/dsh-llm-fallbacks) | Applies role-based retry and fallback policy; verify cost and retry limits. |
 | Agent-to-agent routing | [DSH-Subagent-Model-Router](https://github.com/CypherNaught-0x/DSH-Subagent-Model-Router) | Routes delegated work to configured models and exposes join/wait behavior. |
 | Agent budget guard | [dsh-agent-budget](https://github.com/dsh-external/dsh-agent-budget) | Adds an agent-tree token budget boundary; verify whether limits cover descendants and retries. |
-| GitHub credential bridge | [dsh-gh-bridge (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records a Keychain bridge; verify current repository visibility and audit secret scope carefully. |
+| GitHub credential bridge | [dsh-gh-bridge (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a Keychain bridge; verify current repository visibility and audit secret scope carefully. |
 
 Routing and fallback plugins can multiply provider calls. Establish a bounded budget, log the selected model and retry count, and keep approval and sandbox policy outside the plugin's marketing description.
 
@@ -58,12 +58,12 @@ Routing and fallback plugins can multiply provider calls. Establish a bounded bu
 
 | Capability | Resource | Why it is useful |
 |---|---|---|
-| Browser panel | [dsh-browser-panel (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records a visible browser panel; verify current repository visibility before installing. |
-| Office files | [dsh-office (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records an Office-file workflow; verify current repository visibility before installing. |
-| Design workflows | [dsh-design (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records design-agent workflows; verify current repository visibility before installing. |
+| Browser panel | [dsh-browser-panel (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a visible browser panel; verify current repository visibility before installing. |
+| Office files | [dsh-office (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records an Office-file workflow; verify current repository visibility before installing. |
+| Design workflows | [dsh-design (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records design-agent workflows; verify current repository visibility before installing. |
 | Cross-agent history | [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) | Imports histories from multiple coding agents as resumable DSH Sessions. |
 | Translation | [dsh-plugin-translation](https://github.com/863683348/dsh-plugin-translation) | Adds segmented translation, glossary extraction, QA, and translation memory. |
-| Pi bridge | [dsh-pi-adapter (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/58aaffcd5a338fb0c30c14071ad28d5dcc800d17/CATALOG.md) | The catalog records a Pi bridge; verify current repository visibility before installing. |
+| Pi bridge | [dsh-pi-adapter (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a Pi bridge; verify current repository visibility before installing. |
 | Read-only security audit | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | Scans configuration, plugin provenance, Sessions, and network exposure into a redacted local report. |
 | Safe structured tools | [dsh-tool-schema](https://github.com/dsh-external/dsh-tool-schema) | Validates and explains JSON Schema tool contracts without network access or dynamic execution. |
 
