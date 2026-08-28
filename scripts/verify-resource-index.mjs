@@ -26,6 +26,10 @@ if (index) {
   }
   const html = read('site/awesome-deepseek-harness-resources.html');
   if (!html.includes(`\"numberOfItems\":${index.resources.length}`)) errors.push('Static resource page ItemList count does not match JSON');
+  const readme = read('README.md');
+  if (!readme.includes(`${index.resources.length} curated Awesome resources`)) errors.push('English README resource count does not match JSON');
+  const chineseReadme = read('docs/zh-CN/README.md');
+  if (!chineseReadme.includes(`${index.resources.length} 个精选 Awesome 资源`)) errors.push('Chinese README resource count does not match JSON');
 }
 
 if (errors.length) {

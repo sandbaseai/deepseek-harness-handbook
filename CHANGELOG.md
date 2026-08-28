@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.338 - 2026-08-29
+
+### Added
+
+- Extended the resource-index verifier to enforce English and Simplified Chinese README counts alongside the JSON and static-page ItemList count.
+
 ## 0.5.337 - 2026-08-29
 
 ### Fixed
