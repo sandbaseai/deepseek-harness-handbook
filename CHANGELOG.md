@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.327 - 2026-08-29
+
+### Fixed
+
+- Added the missing consumer-guide anchor and explicit LLM index link for the SandBase Harness bridge page so machine-directed visitors land on the intended section.
+
 ## 0.5.326 - 2026-08-29
 
 ### Added
