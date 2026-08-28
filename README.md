@@ -13,7 +13,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 If this handbook saves you a debugging cycle, [star the repository](https://github.com/sandbaseai/deepseek-harness-handbook). That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**162 canonical guides · 191 localized documents · 35 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**162 canonical guides · 191 localized documents · 37 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 

@@ -1,8 +1,8 @@
 {
   "name": "Awesome DeepSeek Harness resources",
   "source": "https://github.com/0xsline/awesome-deepseek-harness",
-  "snapshot": "58aaffcd5a338fb0c30c14071ad28d5dcc800d17",
-  "verified_at": "2026-08-28",
+  "snapshot": "c2cc7c971f33340d0fed614341041be52e35f9dc",
+  "verified_at": "2026-08-29",
   "consumer_guide": "https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html#consume-the-index-from-an-agent-workflow",
   "purpose": "Agent-first pointers into the upstream catalog; entries are not compatibility or security endorsements.",
   "resources": [
@@ -40,6 +40,8 @@
     {"capability":"orchestration","name":"dsh-equip-engine","url":"https://github.com/wuykjl/dsh-equip-engine","why":"Task-driven plugin selection with synergy, conflict, cost, and trust signals."},
     {"capability":"migration","name":"dsh-skill-mover","url":"https://github.com/mjylfz/dsh-skill-mover","why":"Migrates and deduplicates skills across multiple Agent platforms with rollback paths."},
     {"capability":"search","name":"dsh-hacker-news","url":"https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news","why":"Hacker News feeds, threads, search, and profiles exposed to DSH workflows."},
-    {"capability":"sessions","name":"dsh-replay","url":"https://github.com/zoahdev/dsh-replay","why":"Replay and diff complete session trajectories for debugging and review."}
+    {"capability":"sessions","name":"dsh-replay","url":"https://github.com/zoahdev/dsh-replay","why":"Replay and diff complete session trajectories for debugging and review."},
+    {"capability":"desktop","name":"dsh-tray","url":"https://github.com/liulifu/dsh-tray","why":"Windows tray guardian with restart, multi-profile bindings, recovery snapshots, and plugin-failure containment."},
+    {"capability":"desktop","name":"dsh-whale-musume","url":"https://github.com/Sutera-Diffusus/dsh-whale-musume","why":"Local-first DSH Web desktop pet with work-state feedback and no telemetry."}
   ]
 }

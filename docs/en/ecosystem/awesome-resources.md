@@ -107,6 +107,8 @@ The upstream catalog is not the only discovery surface. These public projects cu
 | Skill migration | [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover) | Cross-Agent skill discovery, deduplication, and rollback behavior. |
 | Research intake | [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news) | Feed, thread, search, and profile boundaries before adding live research context. |
 | Session replay | [dsh-replay](https://github.com/zoahdev/dsh-replay) | Trajectory replay and diff behavior for debugging and review. |
+| Desktop lifecycle | [dsh-tray](https://github.com/liulifu/dsh-tray) | Restart, multi-profile binding, recovery snapshots, and plugin-failure containment. |
+| Local-first desktop feedback | [dsh-whale-musume](https://github.com/Sutera-Diffusus/dsh-whale-musume) | Work-state feedback and telemetry boundaries for a DSH Web desktop pet. |
 
 ## Four practical starter paths
 

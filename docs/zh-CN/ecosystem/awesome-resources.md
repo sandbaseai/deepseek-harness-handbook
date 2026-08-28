@@ -105,6 +105,8 @@ verified_at: 2026-08-28
 | Skill 迁移 | [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover) | 跨 Agent 发现、去重并可回滚地迁移 Skill。 |
 | 研究输入 | [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news) | 在把实时研究上下文加入 Agent 前检查订阅、线程和搜索边界。 |
 | 会话回放 | [dsh-replay](https://github.com/zoahdev/dsh-replay) | 用于调试和复核的轨迹回放与差异比较。 |
+| 桌面生命周期 | [dsh-tray](https://github.com/liulifu/dsh-tray) | 检查重启、多配置绑定、恢复快照和插件故障隔离。 |
+| 本地优先桌面反馈 | [dsh-whale-musume](https://github.com/Sutera-Diffusus/dsh-whale-musume) | 检查 DSH Web 桌面宠物的工作状态反馈和遥测边界。 |
 
 ## 四条实用起步路径
 

@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.334 - 2026-08-29
+
+### Added
+
+- Updated the Awesome source pin to `c2cc7c97` and added the latest public desktop lifecycle resources: `dsh-tray` and `dsh-whale-musume`.
+
 ## 0.5.333 - 2026-08-29
 
 ### Changed
