@@ -1,9 +1,10 @@
 ---
 title: Configure Model Providers in DeepSeek Harness
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-15
+verified_at: 2026-08-28
+upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Configure DeepSeek and other model providers
@@ -36,6 +37,42 @@ Use **Add a custom provider** for a company gateway, self-hosted endpoint, or un
 Provider IDs become part of requests, saved sessions, defaults, and credential references. To rename one, create a new provider and remove the old route.
 
 ![Official DeepSeek Harness custom provider form](https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/master/docs/user/guide/providers-custom-form.png)
+
+## Recover providers after an alpha.1 upgrade
+
+Official report #4817 says previously configured third-party models disappeared and **Add provider** stopped responding after upgrading to `dsh@0.1.2-alpha.1`. The report does not include browser, Host, profile, or configuration evidence, so it does not yet prove that alpha.1 removed third-party-provider support. The alpha.1 official guide still documents catalog and custom providers, while its `llm-pi-ai` dynamic-configuration tests prove that a settings write can register a new route and make its models callable.
+
+The upgrade did change the Models page's client/Host contract. rc.2 loaded one wrapped `llm.providers({})` RPC response; alpha.1 joins separate typed `llm.listProviders()` and `llm.listConfigurableProviders()` results, and its settings and credentials calls use the new Remote shapes. A stale browser bundle or a partially mixed package closure can therefore fail before provider configuration is evaluated. That is a compatibility boundary, not proof that it caused every silent button.
+
+Route the first observable failure:
+
+| UI boundary | Evidence to capture | Next owner |
+|---|---|---|
+| **Add provider** does not open a draft | browser console; failed `/api` request; served asset URL/hash; Host stderr | client bundle / Remote compatibility |
+| the draft opens but the action stays disabled | Provider ID, base URL, protocol, and presence of at least one valid model row | form validation |
+| Apply starts but no provider is stored | response/error for settings mutation; redacted `settings.yaml` section; Host settings error | settings and credential write |
+| profile exists but picker has no models | resolved `llm-pi-ai.providers` entry; route registration error; model catalog failure | adapter activation/catalog |
+| model is selectable but the first request fails | exact provider/model ID, endpoint response, credential reference, network reachability | provider transport |
+
+Do not delete `$DSH_HOME`, `.credentials.yaml`, or the provider entry. First stop the writer and preserve the small evidence set without printing secrets:
+
+```sh
+dsh --version
+dsh --profile web --dump-config > web-effective-config.txt
+dsh plugin --profile web list --depth 0
+```
+
+Record how DSH was installed and upgraded, the launch command, `$DSH_HOME` path, Node version, browser console error, failed request response, and Host stderr over the same click. Inspect only the `llm-pi-ai` section name and provider/model IDs in `$DSH_HOME/settings.yaml`; do not paste `.credentials.yaml` or credential values into an issue.
+
+Then choose the matching recovery:
+
+1. **Installed release:** stop every old DSH process, verify the executable selected by the shell, restart the same `web` profile, and hard-reload the page. A tab connected to an old process is not repaired by installing a new CLI elsewhere.
+2. **Source checkout:** run the repository's required build for the checked-out commit before starting it. The alpha.1 CLI reference explicitly warns that source launch does not check frontend freshness, so existing bundles can silently run older browser code.
+3. **Mixed external profile packages:** use `dsh plugin --profile web list --depth 0` and `why <package>` to identify profile-owned copies. Do not install duplicate DSH core packages as a quick fix; in-box bundles must resolve from the running DSH installation, while third-party bundles own their declared dependency closure.
+4. **Valid form but rejected write:** preserve the response and repair only the rejected field. For a truly custom route, supply an explicit protocol and model list; a route absent from the installed catalog cannot resolve from an empty profile.
+5. **Stored route but old Session:** select the restored route in a new Session. Existing Sessions retain their recorded model selection.
+
+The repair is proven only when the same process serves a matching client, the settings mutation returns success, the provider row survives a reload, a new Session lists the exact provider/model pair, and one bounded request reaches the intended endpoint. UI appearance alone does not prove the credential or inference route.
 
 ### Local Ollama through the custom-provider form
 
@@ -99,9 +136,14 @@ Selecting a model makes it the default for new sessions. A session that already 
 | Image refused before sending | declare `input: [text, image]` for that custom model |
 | Provider rejects an image | remove the incorrect modality claim and start a new session |
 | Composer blocks after provider deletion | choose another configured model |
+| Add provider is silent immediately after alpha.1 upgrade | capture the browser/Host Remote failure; rule out a stale source bundle or mixed runtime before editing provider data |
 
 ## Official sources
 
 - [Configure models](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/providers.md)
 - [Configuration catalog](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/config-catalog.md)
 - [`dsh-llm-deepseek`](https://github.com/deepseek-ai/deepseek-harness/tree/master/packages/llm/llm-deepseek)
+- [Official alpha.1 provider-upgrade report #4817](https://github.com/deepseek-ai/deepseek-harness/discussions/4817)
+- [alpha.1 Models store and Remote calls](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-settings-models/src/client/store.ts)
+- [alpha.1 dynamic provider configuration tests](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-pi-ai/tests/dynamic-config.spec.ts)
+- [alpha.1 CLI source-build and profile reference](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/cli/reference/README.md)
