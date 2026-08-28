@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.221 - 2026-08-29
+
+### Changed
+
+- Extended the source-build `MISSING_EXPORT` runbook with current-master field evidence from upstream Discussion #4860, including the seven-error cluster and the distinction between completed package lines and a usable Web build.
+
 ## 0.5.220 - 2026-08-29
 
 ### Added

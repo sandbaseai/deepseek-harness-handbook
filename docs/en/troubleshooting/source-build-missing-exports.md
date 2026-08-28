@@ -1,9 +1,9 @@
 ---
 title: Fix MISSING_EXPORT Errors in a DeepSeek Harness Source Build
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-28
+verified_at: 2026-08-29
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
@@ -67,6 +67,12 @@ flowchart LR
 At alpha.1 commit `cd5ef814`, `packages/preset/agent-presets/src/index.ts` no longer exports `resolveSessionPreset`, and `packages/api/remotes/src/index.ts` no longer exports the Host resolver symbols named in report #4824. The failing generated `lib/types/api-proxy.js` still imports them. That pair cannot describe one clean alpha.1 build.
 
 The root build runs the library build before the Web build. Its TypeScript and bundling stages consume generated package outputs, so a stale consumer can fail before current outputs converge.
+
+### Field evidence: current `master` can fail before Web starts
+
+Upstream Discussion [#4860](https://github.com/deepseek-ai/deepseek-harness/discussions/4860) reports a seven-error `MISSING_EXPORT` cluster while building the current `master` checkout on a MacBook M5. The first names include `resolveSessionPreset`, `ApiRemoteSessionNotFound`, `ApiRemoteSubagentSessionOwnership`, `apiRemoteSubagentOwnershipError`, and `createApiRemoteAgentResolver`; the generated consumer is `lib/types/api-proxy.js`. The report also shows many packages completing before the aggregate build fails, so a long list of `Build complete` lines is not evidence that the runtime or Web bundle is usable.
+
+Treat the report as a source-build failure, not an npm-install failure. Preserve the exact commit, the first importer/owner pair, and the clean/install results before changing exports. A community suggestion to run `pnpm run clean && pnpm install && pnpm run build` is a reasonable bounded experiment, but omit `--frozen-lockfile` only when the repository's documented workflow explicitly permits it; otherwise a successful dependency rewrite can hide the revision mismatch.
 
 ## Safe clean and rebuild
 
@@ -153,3 +159,4 @@ The build order, package-manager contract, cleaner scope, and changed export sur
 - [Alpha.1 agent-presets public surface](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/src/index.ts)
 - [Alpha.1 API remotes public surface](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/remotes/src/index.ts)
 - [Community source-build report #4824](https://github.com/deepseek-ai/deepseek-harness/discussions/4824)
+- [Community current-master build report #4860](https://github.com/deepseek-ai/deepseek-harness/discussions/4860)
