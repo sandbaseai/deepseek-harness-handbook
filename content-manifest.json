@@ -210,6 +210,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/architecture/session-framing-performance.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/acp-inline-image-python-sdk.md",
       "revision": 1,
       "translations": {}

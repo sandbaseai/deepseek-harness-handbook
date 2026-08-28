@@ -13,7 +13,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 If this handbook saves you a debugging cycle, [star the repository](https://github.com/sandbaseai/deepseek-harness-handbook). That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**166 canonical guides · 191 localized documents · 40 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**167 canonical guides · 191 localized documents · 40 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -82,6 +82,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 | A resumed Agent intermittently loses a registered tool | [Resumed tool-view boundary](docs/en/troubleshooting/resumed-agent-tool-view-missing.md) |
 | Evaluate nested follow-up Sessions safely | [Nested follow-up evaluation](docs/en/agent-patterns/nested-followups-evaluation.md) |
 | Sessions corrupt under concurrent writers or recovery | [Session write-integrity invariants](docs/en/architecture/session-write-integrity.md) |
+| Session cold-open is dominated by zstd frames | [Session framing performance](docs/en/architecture/session-framing-performance.md) |
 | Diagnose a failing install | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
 | Route an Agent, model, tool, Session, or UI failure | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Check what is shipped, inferred, or proposed | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
@@ -270,7 +271,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 166 pages |
+| English | Canonical | 167 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation plus ecosystem resource map |
 | 한국어 | Draft | Navigation plus ecosystem resource map |

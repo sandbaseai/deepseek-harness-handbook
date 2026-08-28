@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.360 - 2026-08-30
+
+### Added
+
+- Added a Session framing performance guide based on upstream measurement #4949, separating decompression, parsing, physical frame merging, and UI projection costs.
+
 ## 0.5.359 - 2026-08-30
 
 ### Added
