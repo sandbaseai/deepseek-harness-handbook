@@ -205,6 +205,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/web-dollar-math-rendering.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/architecture/session-write-integrity.md",
       "revision": 1,
       "translations": {}

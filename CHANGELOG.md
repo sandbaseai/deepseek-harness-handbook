@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.364 - 2026-08-30
+
+### Added
+
+- Added a Web renderer runbook for the dollar-as-math display bug from upstream discussion #4951, separating projection damage from intact stored content.
+
 ## 0.5.363 - 2026-08-30
 
 ### Changed
