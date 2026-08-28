@@ -1,7 +1,7 @@
 ---
 title: Verify the Official DeepSeek Harness Project
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -32,6 +32,12 @@ Before execution, require all of the following:
 - a downloaded binary has a publisher/signature and checksum that can be independently verified.
 
 An unofficial GUI may be a legitimate community composition, but it must be treated as a separate product with its own trust, update, telemetry, credential, and sandbox boundaries. “Uses DeepSeek Harness” is not the same as “is the official DeepSeek Harness distribution.”
+
+### Desktop shells add another provenance boundary
+
+Community desktop builds can package a Web renderer behind `file://` and connect it to a local Host through IPC. The upstream desktop showcase [#3118](https://github.com/deepseek-ai/deepseek-harness/discussions/3118) is a useful example of that topology; it is not evidence that the shell is an official DeepSeek AI distribution.
+
+Before using any desktop shell, verify the binary publisher and checksum, the exact embedded `@deepseek-ai/dsh` version, the IPC method allowlist, the effective `DSH_HOME`, and the profile/plugin roots. Test whether credentials are owned by the official Host or copied into the wrapper, and identify which process actually launches tools. A `file://` origin changes browser trust and CORS assumptions; an IPC bridge can also expose capabilities that the official Web surface does not. Keep the shell, Host, Agent, and provider as separate identities in incident reports.
 
 ## Short answer: which DeepSeek Harness is official?
 
