@@ -412,9 +412,11 @@ DeepSeek Harness remains the subject of every technical page. SandBase maintains
 
 ## Contributing
 
-Corrections, reproducible examples, diagrams, troubleshooting cases, upstream change notes, and fluent translation reviews are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and run `npm run check` before submitting a pull request.
+Corrections, reproducible examples, diagrams, troubleshooting cases, upstream change notes, and fluent translation reviews are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md), follow the [Code of Conduct](CODE_OF_CONDUCT.md), and run `npm run check` before submitting a pull request.
 
-New here? Choose a scoped task from the [public roadmap](ROADMAP.md), or open a [documentation request](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=documentation-request.yml). Reproducible evidence is more valuable than a large patch.
+New here? Choose a scoped task from the [public roadmap](ROADMAP.md), open a [documentation request](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=documentation-request.yml), or use the [support router](SUPPORT.md) to find the correct project. Reproducible evidence is more valuable than a large patch.
+
+Two current evidence units are intentionally small: [review five Simplified Chinese navigation summaries](https://github.com/sandbaseai/deepseek-harness-handbook/issues/226), or [validate one cold-restart Session recovery row](https://github.com/sandbaseai/deepseek-harness-handbook/issues/16). Both issues define the privacy boundary and observable acceptance evidence.
 
 ## Primary sources
 
