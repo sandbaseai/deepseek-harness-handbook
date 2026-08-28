@@ -13,6 +13,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 ## Featured guides
 
 - [Trace prompt assembly, runtime facts, and tool-schema provenance](architecture/prompt-assembly-provenance.md)
+- [Run SandBase Harness through the DeepSeek Harness MCP bridge](integrations/sandbase-harness-bridge.md)
 - [Turn GitFlow from a prompt request into an execution guard](agent-patterns/gitflow-guardrails.md)
 - [Route images through a vision model without changing the Agent](integrations/text-model-vision-fallback.md)
 - [Protect workspace Session membership across concurrent instances](troubleshooting/concurrent-dsh-home-session-membership.md)

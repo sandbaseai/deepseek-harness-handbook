@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.328 - 2026-08-29
+
+### Changed
+
+- Surfaced the SandBase Harness MCP bridge guide in both the canonical English and high-traffic Chinese README navigation.
+
 ## 0.5.327 - 2026-08-29
 
 ### Fixed
