@@ -1,9 +1,9 @@
 ---
 title: Fix UNKNOWN_TOOL from Empty Streamed Tool Identity
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -13,16 +13,19 @@ If DeepSeek Harness reports `UNKNOWN_TOOL`, `unknown tool ""`, or `tool "" is di
 
 Do not treat this as only a live tool failure. In rc.2, the empty identity can cross three boundaries: the completed assistant block, the `tool/call`, and the synthesized `tool/result`. A later resume can reject that persisted result with `SessionPersistenceCorruptionError`, while provider replay can reject the empty function name with HTTP 400. The first bad turn is therefore the containment point.
 
-This guide covers three reported shapes:
+This guide covers four reported shapes:
 
 - an rc.7 gateway stream whose continuation deltas used an empty ID and `null` name; and
 - Alibaba Cloud Bailian (DashScope) `deepseek-v4-flash` on rc.8, whose continuation deltas use empty strings for both ID and name; and
-- an rc.2 OpenAI-compatible route where an empty final identity entered the durable Session, poisoned provider replay, and made the next resume fail validation.
+- an rc.2 OpenAI-compatible route where an empty final identity entered the durable Session, poisoned provider replay, and made the next resume fail validation; and
+- a current `llm-deepseek` aggregation-gateway report where continuation chunks supplied `id: ""` and `function.name: ""`, leaving complete arguments but producing `UNKNOWN_TOOL` for Bash and filesystem calls.
 
 The second case is especially easy to misdiagnose because the same DSH tools work through the official DeepSeek API, Bailian Qwen models work, and Bailian's non-streaming response contains the correct function identity.
 
 > [!WARNING]
 > The current source path is verified at upstream commit `b150a55` (`0.1.1-rc.2`). The translator still accepts explicit empty continuation identity. The live append path and restored-event path also do not enforce the same message-shape boundary. Do not patch generated `lib/`, a global `node_modules` installation, or a live Session artifact in place.
+
+> **Current alpha.1 status:** the translator at `cd5ef814` still uses the same `!== undefined` guards. Its happy-path test covers omitted continuation identity, while its defensive empty-identity test starts without any valid ID or name; neither protects a valid first identity from later explicit empty values. This is source verification, not proof that every alpha.1 distribution or gateway reproduces the failure.
 
 ## Route the symptom before touching anything
 
@@ -172,6 +175,8 @@ if (call.id) block.callId = call.id
 if (call.function?.name) block.name = call.function.name
 ```
 
+This guard is appropriate only because a tool call requires a non-empty identity. Pair it with terminal validation: skipping an empty continuation must preserve a previous valid value, while a stream that never supplies a valid value must fail as a protocol error before policy or persistence. Silently converting both cases into the same empty completed block preserves the original ambiguity.
+
 The important regression is not a single happy-path chunk. It must feed at least two deltas for one index:
 
 1. first delta: non-empty `id` and `name`;
@@ -221,8 +226,11 @@ Original Session directory copied and hashed: yes/no
 - [Bailian `deepseek-v4-flash` report #3464](https://github.com/deepseek-ai/deepseek-harness/discussions/3464)
 - [Earlier null-continuation report #3281](https://github.com/deepseek-ai/deepseek-harness/discussions/3281)
 - [Persistent empty-identity and resume-corruption report #4704](https://github.com/deepseek-ai/deepseek-harness/discussions/4704)
+- [Current aggregation-gateway report #4851](https://github.com/deepseek-ai/deepseek-harness/discussions/4851)
 - [rc.2 DeepSeek stream translator](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/translate.ts)
 - [rc.2 translator tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/tests/translate.spec.ts)
 - [rc.2 Session append and restored-event validation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/index.ts)
 - [rc.2 crash-tail repair](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/repair.ts)
 - [rc.2 persistence coordinator append boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence/src/coordinator.ts)
+- [alpha.1 DeepSeek stream translator](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-deepseek/src/translate.ts)
+- [alpha.1 translator tests](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-deepseek/tests/translate.spec.ts)
