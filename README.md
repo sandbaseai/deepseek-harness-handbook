@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**144 canonical guides · 153 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
+**145 canonical guides · 154 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -216,7 +216,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 144 pages |
+| English | Canonical | 145 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -284,6 +284,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Render ACP permission requests safely](docs/en/integrations/acp-permission-request-ui.md)
 - [Recover a silent Node 24 and tsx source build](docs/en/troubleshooting/node24-tsx-silent-build.md)
 - [Fix clustered `MISSING_EXPORT` failures after a source revision change](docs/en/troubleshooting/source-build-missing-exports.md)
+- [Stop and safely retry a stuck Turn](docs/en/troubleshooting/stuck-turn-stop-and-retry.md)
 - [Fix double-brace tool text breaking Code Mode prompt assembly](docs/en/troubleshooting/code-mode-unknown-prompt-variable.md)
 - [Fix npm ETARGET while installing rc.8](docs/en/troubleshooting/npm-etarget-rc8.md)
 - [Fix missing `dsh-client-schema-form` after npm installation](docs/en/troubleshooting/missing-client-schema-form.md)

@@ -56,6 +56,7 @@ Duplicate core runtime recovery: https://sandbaseai.github.io/deepseek-harness-h
 Programmatic headless contract: https://sandbaseai.github.io/deepseek-harness-handbook/headless-programmatic-contract.html
 Air-gapped rc.8 source build: https://sandbaseai.github.io/deepseek-harness-handbook/air-gapped-source-build.html
 Source-build MISSING_EXPORT recovery: https://sandbaseai.github.io/deepseek-harness-handbook/source-build-missing-exports.html
+Stuck Turn stop and safe retry: https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-retry.html
 Token accounting map: https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html
 Preset generation, shared-provider, and scoped-tool recovery: https://sandbaseai.github.io/deepseek-harness-handbook/preset-generation-recovery.html
 Web IME and translation-extension composer recovery: https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html
