@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.302 - 2026-08-28
+
+### Changed
+
+- Added a visible ecosystem entry to the static homepage so visitors can reach the capability map without first reading the repository README.
+
 ## 0.5.301 - 2026-08-28
 
 ### Added
