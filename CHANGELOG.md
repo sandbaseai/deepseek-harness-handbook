@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.215 - 2026-08-28
+
+### Changed
+
+- Added the Ralph failure-successor guide to the public Atom feed with a direct canonical GitHub link, so subscribers can verify the source even when a generated article page is not part of the static site subset.
+
 ## 0.5.214 - 2026-08-28
 
 ### Fixed
