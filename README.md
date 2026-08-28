@@ -82,7 +82,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 | A resumed Agent intermittently loses a registered tool | [Resumed tool-view boundary](docs/en/troubleshooting/resumed-agent-tool-view-missing.md) |
 | Evaluate nested follow-up Sessions safely | [Nested follow-up evaluation](docs/en/agent-patterns/nested-followups-evaluation.md) |
 | Sessions corrupt under concurrent writers or recovery | [Session write-integrity invariants](docs/en/architecture/session-write-integrity.md) |
-| Session cold-open is dominated by zstd frames | [Session framing performance](docs/en/architecture/session-framing-performance.md) |
+| Session cold-open is dominated by zstd frames | [Session framing performance](docs/en/architecture/session-framing-performance.md#choose-compression-level-with-a-write-path-budget) |
 | Diagnose a failing install | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
 | Route an Agent, model, tool, Session, or UI failure | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Check what is shipped, inferred, or proposed | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |

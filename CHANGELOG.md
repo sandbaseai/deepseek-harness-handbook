@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.361 - 2026-08-30
+
+### Changed
+
+- Expanded Session framing performance guidance with the measured zstd level tradeoff and corpus-gated writer acceptance from upstream discussion #4948.
+
 ## 0.5.360 - 2026-08-30
 
 ### Added

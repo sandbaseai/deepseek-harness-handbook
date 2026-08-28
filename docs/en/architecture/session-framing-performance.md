@@ -1,7 +1,7 @@
 ---
 title: Measure Session Framing Performance
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-30
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -40,5 +40,11 @@ Treat frame merging as a physical-format change. The first frame must preserve t
 5. Measure UI projection separately before claiming cold-open improvement.
 
 The roadmap's seek/index and frame-merge stages are complementary: fewer frames reduce physical work, while an index can avoid scanning irrelevant frames. Keep both changes behind the same reader and recovery acceptance gates.
+
+## Choose compression level with a write-path budget
+
+Follow-up measurement [#4948](https://github.com/deepseek-ai/deepseek-harness/discussions/4948) compared the JSONL writer's current zstd defaults with explicit levels on real Session text. Level 9 reduced whole-log storage by about 11%; on 100 turn-sized batches it added about 0.9 ms per batch, while `fsync` remained the dominant write cost. Levels 15–19 saved more bytes but multiplied latency, so they are archive-policy choices rather than safe defaults. Existing frames remain readable because the level affects new writes only.
+
+Treat this as a deployment tradeoff, not a universal benchmark: measure the batch path on your hardware, keep the level configurable, and run the corruption corpus after any writer change. A dictionary tuned for another backend is not automatically transferable to JSONL.
 
 Primary source: [upstream discussion #4949](https://github.com/deepseek-ai/deepseek-harness/discussions/4949).
