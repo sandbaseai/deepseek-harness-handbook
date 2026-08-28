@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.188 - 2026-08-28
+
+### Changed
+
+- Defined Regenerate reply as a previous-Turn fork plus ordered human-input replay, rather than mutation or blind resubmission in the source Session.
+- Added exact fork-anchor semantics, steering reconstruction, Session-scoped image re-admission, side-effect gates, partial-child recovery, and twelve implementation and regression gates.
+
 ## 0.5.187 - 2026-08-28
 
 ### Changed
