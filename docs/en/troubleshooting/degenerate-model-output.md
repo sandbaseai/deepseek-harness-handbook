@@ -1,7 +1,7 @@
 ---
 title: Detect and Recover from Degenerate Repeated Model Output
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -43,6 +43,57 @@ Configured retry policy:
 ```
 
 Keep the raw chunk boundaries when possible. A detector that works only on complete strings can miss a repeated unit split across deltas, while one that evaluates each delta independently can invent boundaries that the model never produced.
+
+## Export the evidence from the Web profile
+
+On alpha.1 Web, wait for the affected Turn to stop, then use the **Session log** action in the Session header or enter `/export`. The browser downloads a ZIP containing the root Session's decoded durable JSONL artifact plus descendants and referenced media. Export crosses the Host's persistence flush barrier; it does not create a model turn or add the archive to model context.
+
+Work on a copy of the ZIP. Do not edit the live Session artifact, and do not publish the full export: request headers can contain system instructions and tool schemas, while messages and tool results can contain source code, paths, prompts, credentials, or customer data.
+
+After extracting the archive, select the root `.jsonl` file—not a file below `subagents/`—and query only the diagnostic event types. For example, with `jq`:
+
+```bash
+LOG=./session.jsonl
+
+jq -c '
+  select(
+    .type == "request/context" or
+    .type == "request/header" or
+    .type == "llm/retry" or
+    .type == "llm/retry-started" or
+    .type == "turn/end" or
+    (.type == "assistant/message" and .data.usage != null)
+  ) |
+  {seq, type, data}
+' "$LOG"
+```
+
+Read the output as follows:
+
+| Question | Durable evidence | Important limit |
+|---|---|---|
+| Which provider and model? | latest applicable `request/header.data.header.config`; `request/context.data` also records route and advertised capacity when they change | a screenshot of the model picker does not prove which request was sent |
+| Which channel repeated? | `text-chunks`, `reasoning-chunks`, or `tool-call-chunks`; unpacked `assistant/chunk.data.chunk.type` uses `text-delta`, `reasoning-delta`, or `tool-call-delta` | alpha.1 packs consecutive delta events, so not every raw row is named `assistant/chunk` |
+| Why did streaming finish? | uncompressed `assistant/chunk` whose chunk type is `finish` | provider finish is per attempt; it is not the same as the whole-Turn outcome |
+| How did the Turn end? | `turn/end.data.reason` | `max-tokens` preserves that at least one step hit the ceiling |
+| What usage was reported? | `assistant/message.data.usage`, or the stream `usage` chunk immediately before finish | absence means usage was not reported locally; it does not prove zero billing |
+| Was a retry scheduled? | `llm/retry.data`, paired with `llm/retry-started` by `retryId` | no event means no Harness retry was durably scheduled; it does not rule out provider-internal behavior |
+
+To classify the stored stream rows without printing their text or arguments:
+
+```bash
+jq -r '
+  if .type == "text-chunks" or
+     .type == "reasoning-chunks" or
+     .type == "tool-call-chunks"
+  then [(.seq0|tostring), .type] | @tsv
+  elif .type == "assistant/chunk"
+  then [(.seq|tostring), .data.chunk.type] | @tsv
+  else empty end
+' "$LOG"
+```
+
+Before sharing evidence, reduce it to the affected Turn and retain only event sequence, event type, provider/model, finish reason, usage counters, and retry metadata. Redact prompts, system text, tool schemas and arguments, paths, endpoint URLs, request identifiers that a provider treats as sensitive, and all credentials. Keep the unredacted ZIP locally so maintainers can request a narrower field if necessary.
 
 ## Contain a live repetition before it consumes the cap
 
@@ -173,5 +224,7 @@ Verified against DeepSeek Harness alpha.1 commit `cd5ef8148158c3a752a65897887324
 - [Alpha.1 LLM streaming contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/subsystems/llm-streaming.md)
 - [Alpha.1 provider retry policy](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm/src/retry-policy.ts)
 - [Alpha.1 Agent-loop retry plugin](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-retry/README.md)
+- [Alpha.1 Web Session-log export contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session-query/session-log-export/README.md)
+- [Alpha.1 packed stream-delta storage rows](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/core/session/src/chunk-rows.ts)
 - [Stop a runaway Agent loop](runaway-agent-loop.md)
 - [Diagnose an output-token ceiling](output-token-limit-reached.md)
