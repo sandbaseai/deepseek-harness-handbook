@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.214 - 2026-08-28
+
+### Fixed
+
+- Added the missing direct source link for the malformed-argument retry example cited by the Ralph failure-successor guide.
+
 ## 0.5.213 - 2026-08-28
 
 ### Changed

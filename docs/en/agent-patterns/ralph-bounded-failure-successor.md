@@ -1,7 +1,7 @@
 ---
 title: Design a Bounded Failure Successor for DeepSeek Harness Ralph
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -132,4 +132,5 @@ Verified against alpha.1 commit `cd5ef8148158c3a752a658978873241fdf8e2bbc` on 20
 - [Ralph package contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/workflow/tool-ralph/README.md)
 - [Ralph fixed workflow implementation](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/workflow/tool-ralph/src/index.ts)
 - [Failure successor proposal, Discussion #109](https://github.com/deepseek-ai/deepseek-harness/discussions/109) (including the structured-marker and no-change circuit-breaker review)
-- [Deterministic repeated-failure examples, Discussions #3489 and #3568](https://github.com/deepseek-ai/deepseek-harness/discussions/3489)
+- [Deterministic repeated-failure example, Discussion #3489](https://github.com/deepseek-ai/deepseek-harness/discussions/3489)
+- [Deterministic malformed-argument retry example, Discussion #3568](https://github.com/deepseek-ai/deepseek-harness/discussions/3568)
