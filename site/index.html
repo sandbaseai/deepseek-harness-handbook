@@ -11,7 +11,7 @@
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="DeepSeek Harness Handbook | Operate the agent runtime">
-  <meta property="og:description" content="155 source-backed guides plus interactive tools for installing, operating, debugging, and extending DeepSeek Harness.">
+  <meta property="og:description" content="156 source-backed guides plus interactive tools for installing, operating, debugging, and extending DeepSeek Harness.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-handbook-social-preview-v3.png">
   <meta property="og:image:type" content="image/png">
@@ -20,7 +20,7 @@
   <meta property="og:image:alt" content="DeepSeek Harness architecture map from model and tools through policy, sessions, MCP, and production operations">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="DeepSeek Harness Handbook | Operate the agent runtime">
-  <meta name="twitter:description" content="155 source-backed guides plus interactive tools for running and debugging DeepSeek Harness.">
+  <meta name="twitter:description" content="156 source-backed guides plus interactive tools for running and debugging DeepSeek Harness.">
   <meta name="twitter:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-handbook-social-preview-v3.png">
   <meta name="twitter:image:alt" content="DeepSeek Harness architecture map from model and tools through policy, sessions, MCP, and production operations">
   <link rel="alternate" type="application/atom+xml" title="DeepSeek Harness Handbook updates" href="./feed.xml">
@@ -84,7 +84,7 @@
     </section>
 
     <section class="evidence-strip" aria-label="Handbook evidence and scope">
-      <div><strong>155</strong><span>canonical English guides</span></div>
+      <div><strong>156</strong><span>canonical English guides</span></div>
       <div><strong>Version-pinned</strong><span>rc and alpha claims identify their exact source revision</span></div>
       <div><strong>Primary sources</strong><span>linked from version-sensitive claims</span></div>
       <div><strong>Independent</strong><span>maintained by SandBase, not DeepSeek AI</span></div>
@@ -150,11 +150,11 @@
     <section id="guide-index" class="paths section-shell" aria-labelledby="paths-title">
       <div class="paths-intro">
         <h2 id="paths-title">Pick the path that matches the job.</h2>
-        <p>Explore 155 canonical guides. Each one states the expected evidence, failure branch, and safety boundary.</p>
+        <p>Explore 156 canonical guides. Each one states the expected evidence, failure branch, and safety boundary.</p>
         <div class="guide-search">
           <label for="guide-query">Search the field guide</label>
           <input id="guide-query" type="search" inputmode="search" autocomplete="off" placeholder="Try Windows, MCP, context, plugin..." aria-describedby="guide-results">
-          <p id="guide-results" class="guide-results" role="status" aria-live="polite">149 indexed paths</p>
+          <p id="guide-results" class="guide-results" role="status" aria-live="polite">150 indexed paths</p>
           <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/README.md">Open the complete canonical index</a>
         </div>
       </div>
@@ -162,6 +162,7 @@
         <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/prompt-assembly-provenance.md"><span>Prompt assembly · provenance · schemas</span><strong>Trace the three prompt pipelines</strong><small>Separate stable sections, runtime-fact snapshots, and tool schemas before changing a plugin or mode</small></a>
         <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/gitflow-guardrails.md"><span>GitFlow · Agent policy · audit</span><strong>Turn branch rules into an execution guard</strong><small>Block protected refspecs before spawn, keep an external audit trail, and retain repository branch protection as the final authority</small></a>
         <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/text-model-vision-fallback.md"><span>Vision fallback · routing · provenance</span><strong>Keep a text Agent while routing images safely</strong><small>Use a bounded vision adapter, preserve derived-evidence provenance, and measure the second request honestly</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/concurrent-dsh-home-session-membership.md"><span>DSH_HOME · concurrent instances · Sessions</span><strong>Keep workspace membership from being pruned</strong><small>Separate home-level stores, stop multi-writer metadata races, and recover Sessions that fall into Ungrouped</small></a>
         <a href="./long-running-terminal.html"><span>Terminal lifecycle · jobs · message durability</span><strong>The timer is not the process</strong><small>Classify foreground Bash, background jobs, persistent terminals, and stale presentation before retrying</small></a>
         <a href="./model-input-modalities.html"><span>Models UI · vision · route metadata</span><strong>Selectable is not image-capable</strong><small>Author one narrow model modality, preserve hidden fields, and prove the resolved route with a fresh Session</small></a>
         <a href="./ask-user-question-aborted.html"><span>Questions · cancellation · replay</span><strong>No answer is not a timeout</strong><small>Trace the owning signal, keep reconnect separate, and design reminders independently from typed decision deadlines</small></a>
