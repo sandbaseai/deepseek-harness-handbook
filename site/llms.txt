@@ -3,10 +3,10 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
-Latest field update (v0.5.395): prevent iOS Safari composer auto-zoom from being misdiagnosed as IME failure: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/web-ime-composition.md#ios-safari-zoom-is-a-separate-composer-boundary
+Latest field update (v0.5.396): evaluate consent-bound live voice turns before enabling audio capabilities: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md#high-signal-community-projects
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.395): document mobile Safari composer zoom and viewport evidence: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.395
+Latest release (v0.5.396): document live voice consent, isolation, and teardown boundaries: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.396
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 SandBase Harness MCP bridge guide: https://sandbaseai.github.io/deepseek-harness-handbook/sandbase-harness-bridge.html
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme

@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.396 - 2026-08-30
+
+### Added
+
+- Added the consent-bound `dsh-live-voice` preview to the ecosystem guide, including microphone disclosure, transcript promotion, provider isolation, and teardown checks from upstream #4958.
+
 ## 0.5.395 - 2026-08-30
 
 ### Added

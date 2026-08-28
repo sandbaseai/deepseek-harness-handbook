@@ -2,7 +2,7 @@
 title: 능력별 Awesome DeepSeek Harness 생태계 리소스
 locale: ko
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 12
+source_revision: 13
 status: reviewed
 verified_at: 2026-08-28
 ---

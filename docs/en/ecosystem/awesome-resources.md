@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 12
+content_revision: 13
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -120,6 +120,7 @@ The upstream catalog is not the only discovery surface. These public projects cu
 | Research intake | [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news) | Feed, thread, search, and profile boundaries before adding live research context. |
 | Session replay | [dsh-replay](https://github.com/zoahdev/dsh-replay) | Trajectory replay and diff behavior for debugging and review. |
 | Agent tracing | [Braintrust DeepSeek Harness plugin](https://www.braintrust.dev/docs/integrations/agent-frameworks/deepseek-harness) | Traces user turns, LLM steps, tool calls, and child Sessions; verify API-key scope and data residency before enabling it. |
+| Live voice preview | [dsh-live-voice](https://github.com/Jstn-1g/dsh-live-voice) | Consent-bound manual Qwen audio turns; verify recording gesture, destination disclosure, transcript promotion, and teardown before any credential-backed test. |
 | Desktop lifecycle | [dsh-tray](https://github.com/liulifu/dsh-tray) | Restart, multi-profile binding, recovery snapshots, and plugin-failure containment. |
 | Local-first desktop feedback | [dsh-whale-musume](https://github.com/Sutera-Diffusus/dsh-whale-musume) | Work-state feedback and telemetry boundaries for a DSH Web desktop pet. |
 | Session corruption repair | [dsh-corrupt-session-repair](https://github.com/MedicineKing/dsh-corrupt-session-repair) | Zero-install scanner, deterministic corpus, and repair evidence for crash-recovery sequence corruption; keep real logs private. |
@@ -163,3 +164,4 @@ For an automated consumer, cache the snapshot and compare `snapshot` before refr
 - [Community plugin audit guide](../security/community-plugin-audit.md)
 - [Tool execution pipeline](../architecture/tool-execution-pipeline.md)
 - [Upstream Braintrust plugin announcement #4960](https://github.com/deepseek-ai/deepseek-harness/discussions/4960)
+- [Upstream DSH Live Voice preview #4958](https://github.com/deepseek-ai/deepseek-harness/discussions/4958)
