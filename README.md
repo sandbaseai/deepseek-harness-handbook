@@ -50,6 +50,8 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 > [!IMPORTANT]
 > DeepSeek Harness is in developer preview and may introduce compatibility-breaking changes. Pages in this handbook name their verification date and link to primary sources. Pin the revision you deploy.
 
+> **This repository is documentation, not a DeepSeek Harness plugin.** Do not run `dsh plugin add github:sandbaseai/deepseek-harness-handbook`; the handbook has no `dsh.bundle` activation contract. Read the guides from GitHub or the visual field site instead.
+
 ## Start with your goal
 
 Choose the smallest path that matches the job. The full task index remains available below without occupying the repository's first screen.

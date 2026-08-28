@@ -426,7 +426,7 @@
     },
     {
       "source": "docs/en/README.md",
-      "revision": 1,
+      "revision": 2,
       "translations": {
         "zh-CN": "docs/zh-CN/README.md",
         "ja": "docs/ja/README.md",

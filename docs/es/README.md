@@ -2,7 +2,7 @@
 title: Manual de DeepSeek Harness
 locale: es
 source: docs/en/README.md
-source_revision: 1
+source_revision: 2
 status: draft
 verified_at: 2026-08-14
 ---

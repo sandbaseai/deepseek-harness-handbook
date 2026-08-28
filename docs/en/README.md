@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Handbook
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -117,3 +117,5 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - **Operator:** troubleshooting, persistence, cancellation, sandboxing, and upstream changes.
 
 DeepSeek Harness is in developer preview. Follow the verification metadata and primary-source links on each page.
+
+> **Documentation boundary:** this repository is not a DSH plugin or bundle. Do not install it with `dsh plugin add`; use the guides and visual field site as documentation.
