@@ -11,7 +11,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**158 canonical guides · 172 localized documents · rc.2 + alpha.1 source-pinned analysis · runnable recovery paths**
+**159 canonical guides · 173 localized documents · rc.2 + alpha.1 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -28,6 +28,7 @@ Choose one path and get to evidence quickly:
 | Problem | What the guide proves |
 |---|---|
 | [A continuable child exposes only `report`](docs/en/agent-patterns/continuable-child-empty-tool-registry.md) | Separate parent/child tool views, preset composition order, `toolFilter`, and cold-resume evidence before treating model prose as a tool result. |
+| [Read-only Windows PowerShell succeeds with noisy stderr](docs/en/troubleshooting/windows-readonly-pwsh-stderr.md) | Separate command output from ConstrainedLanguage preamble diagnostics and preserve the ACL sandbox while validating a narrow fix. |
 | [Firefox shows a blank Web client while Chrome works](docs/en/troubleshooting/firefox-web-client-blank.md) | Separate browser bootstrap, cached assets, origin/WebSocket, and extension boundaries before touching provider credentials or durable Sessions. |
 | [An alpha.1 auth token cannot be obtained or entered](docs/en/troubleshooting/auth-token-not-available.md) | Keep acquisition, UI entry, credential storage, token scope, and outbound authorization as separate contracts with redacted evidence. |
 | [A settings section recurses on `removeChild`](docs/en/troubleshooting/webview-mutation-observer-loop.md) | Route `NotFoundError` through DOM ownership and render-generation evidence instead of misclassifying it as a proven MutationObserver CPU loop. |
@@ -250,7 +251,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 158 pages |
+| English | Canonical | 159 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |

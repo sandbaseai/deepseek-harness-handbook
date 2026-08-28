@@ -28,6 +28,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Let an execution tool declare its code-card language](plugin-development/tool-code-card-language.md)
 - [Control stale pending continuable-subagent follow-ups safely](agent-patterns/subagents.md#control-stale-pending-follow-ups-without-clearing-the-inbox)
 - [Diagnose a continuable child with an empty tool registry](agent-patterns/continuable-child-empty-tool-registry.md)
+- [Diagnose read-only PowerShell stderr noise on Windows](troubleshooting/windows-readonly-pwsh-stderr.md)
 - [Bound live Session heap growth and diagnose cold-restore restart loops](operations/session-heap-growth.md)
 - [Route an Agent that narrates work without calling tools](troubleshooting/runaway-agent-loop.md)
 - [Design a multi-Session Web presentation contract](architecture/multi-session-presentation-contract.md)

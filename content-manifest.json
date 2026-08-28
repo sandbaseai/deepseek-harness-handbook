@@ -410,6 +410,13 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/windows-readonly-pwsh-stderr.md",
+      "revision": 1,
+      "translations": {
+        "zh-CN": "docs/zh-CN/troubleshooting/windows-readonly-pwsh-stderr.md"
+      }
+    },
+    {
       "source": "docs/en/reference/cheat-sheet.md",
       "revision": 1,
       "translations": {}
