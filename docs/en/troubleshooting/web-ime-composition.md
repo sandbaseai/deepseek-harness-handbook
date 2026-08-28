@@ -1,7 +1,7 @@
 ---
 title: Recover Web IME composition in DeepSeek Harness
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 ---
@@ -11,6 +11,10 @@ verified_at: 2026-08-27
 Use this runbook when the DeepSeek Harness Web composer prints raw pinyin, kana, or jamo instead of opening the operating-system candidate window. Keep that symptom separate from a second failure in which a candidate appears but Enter submits the prompt too early.
 
 The official macOS report is specific: the system Simplified Pinyin input method works elsewhere, `dsh tui` accepts Chinese, but a new rc.8 Web Session inserts Latin letters directly. That comparison localizes the failure to the browser composer path; it does not yet identify the responsible layer.
+
+## iOS Safari zoom is a separate composer boundary
+
+Upstream report [#4961](https://github.com/deepseek-ai/deepseek-harness/discussions/4961) identifies a mobile-only variant: focusing the `contenteditable` composer at a computed `14px` font causes iOS Safari to auto-zoom, and `visualViewport`-based scroll-into-view can then make the page jump while the keyboard is open. Do not diagnose this as an IME event-order problem. In a disposable mobile profile, capture the computed font size, viewport scale, pointer/width media queries, and scroll events; verify that a narrow coarse-pointer rule raising editable controls to at least `16px` prevents zoom without changing submission or composition events. Desktop browsers and non-iOS mobile browsers are comparison controls.
 
 ## Start with the two observable failures
 

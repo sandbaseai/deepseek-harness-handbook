@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.395 - 2026-08-30
+
+### Added
+
+- Added the iOS Safari composer zoom boundary from upstream #4961, with mobile evidence capture and a 16px editable-control regression check.
+
 ## 0.5.394 - 2026-08-30
 
 ### Added
