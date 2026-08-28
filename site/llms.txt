@@ -22,6 +22,7 @@ ACP permission request UI: https://sandbaseai.github.io/deepseek-harness-handboo
 ACP permission reverse-request hang: https://sandbaseai.github.io/deepseek-harness-handbook/acp-permission-hang.html
 Subagent human question relay: https://sandbaseai.github.io/deepseek-harness-handbook/subagent-question-relay.html
 Windows nested-child hangs, subprocess crash isolation, and Host survival: https://sandbaseai.github.io/deepseek-harness-handbook/async-subprocess-tools.html
+rc.2 to alpha.1 upgrade preflight: https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-deepseek-harness.html
 Recover third-party providers after an alpha.1 upgrade: https://sandbaseai.github.io/deepseek-harness-handbook/provider-upgrade-no-response.html
 Recover an id-less plugin notice without corrupting Zstandard framing: https://sandbaseai.github.io/deepseek-harness-handbook/idless-plugin-notice.html
 Windows Web Host hang evidence capture: https://sandbaseai.github.io/deepseek-harness-handbook/windows-web-event-loop-hang.html

@@ -1,9 +1,9 @@
 ---
 title: Upgrade and Roll Back DeepSeek Harness
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-22
+verified_at: 2026-08-28
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28
 ---
 
@@ -175,6 +175,83 @@ Minimum gates:
 
 Do not use a successful UI load as the only acceptance signal.
 
+## rc.2 → alpha.1 preflight: test the seams that actually moved
+
+The generic gates above are necessary but too broad for the current prerelease transition. Recent upstream reports expose five independent failure surfaces. Passing one does not imply the others are compatible.
+
+| Seam | Concrete alpha.1 risk signal | Isolated proof before promotion | Rollback object |
+|---|---|---|---|
+| source outputs | generated `lib/types` imports names absent from current source | clean, frozen install, full library + Web build | prior commit plus its generated-output rebuild inputs |
+| third-party Bundle API | plugin imports rc.2 runtime `CallId`; alpha.1 exposes `ToolCallId` | ESM-import every Host/Web entrypoint and invoke one feature | exact plugin/core compatible pair and profile lockfile |
+| third-party provider Settings | provider editor appears inert or mutation returns no usable result | create one provider in a clean alpha.1 home, reload, resolve, and send a bounded request | provider section, profile graph, credentials reference—not secret values |
+| Session event compatibility | alpha.1 no longer carries the historical custom-event `ignorable` envelope | cold-open a copied corpus containing every plugin event type | stopped-writer Session backup plus plugin/event schema versions |
+| route transition and reasoning replay | smaller context route or thinking-off request reuses history built under another mode | run fresh and mature Session matrices before/after each switch | original Session copy and exact route/model settings |
+
+### 1. Source checkout must be one revision
+
+After changing a source tag or commit, do not rely on an incremental build that already contains another revision's `lib` outputs:
+
+```sh
+git status --short --branch
+git rev-parse HEAD
+pnpm clean
+pnpm install --frozen-lockfile
+pnpm run build
+```
+
+At alpha.1 the official cleaner derives output roots from the project-reference graph and removes repository-owned `lib` and incremental state while refusing unsafe orphan directories. Preserve intentional source changes before running it. A clustered `MISSING_EXPORT` failure is an importer/owner identity problem until proven otherwise, not permission to restore removed source APIs.
+
+### 2. External Bundles need a runtime-import gate
+
+Run the clean target without external Bundles first. Add each pinned Bundle separately, record its declared peer range, import every entrypoint, dump the composition, cold boot, exercise one feature, then remove it and prove reconciliation.
+
+The rc.2→alpha.1 `CallId`→`ToolCallId` change is a runtime value rename, not merely a TypeScript spelling update. A plugin that imports `CallId` from `@deepseek-ai/dsh-llm` fails during Loader activation. Do not patch built `.mjs` files or globally alias the brand; select a plugin/core pair whose compatibility is declared and tested.
+
+### 3. Prove provider authoring end to end
+
+For every third-party provider required after upgrade:
+
+1. open Settings in the isolated home;
+2. add one provider with a non-production credential reference;
+3. capture the mutation response and Host error, not only the button state;
+4. reload and confirm persistence;
+5. inspect resolved provider/model identity;
+6. send one bounded fresh-Session request;
+7. cold restart and repeat the resolution check.
+
+An unresponsive editor, rejected settings write, missing catalog route, and inference failure are different boundaries. Preserve the first one instead of repeatedly clicking Add.
+
+### 4. Read a copied Session corpus before importing it
+
+Inventory every non-core Session event producer and its exact version. Alpha.1 removed the prior custom-event `ignorable` envelope, so plugins must own valid registration and schema behavior rather than depending on that historical marker. Test list, cold open, replay, search/reconciliation, export, and one new write against a copied corpus. Never make the target prerelease the first writer to the only copy.
+
+### 5. Switch routes only inside a disposable matrix
+
+Use fresh and mature Session controls for:
+
+- large→small context window and small→large;
+- reasoning on→off and off→on;
+- same provider/different model;
+- different provider with plain text;
+- different provider with reasoning and tool calls;
+- cold reload before the switch.
+
+Record the outgoing route, context capacity, thinking mode, sanitized message keys, normalized error, and whether automatic compaction ran before provider admission. A successful fresh Session does not prove mature history is portable.
+
+## Alpha.1 promotion record
+
+```text
+rc.2 exact artifact/commit and integrity:
+alpha.1 exact artifact/commit and integrity:
+clean source rebuild result:
+external Bundle versions, peer ranges, import/feature results:
+third-party provider create/reload/request results:
+copied Session corpus event producers and cold-read results:
+route-switch matrix results:
+known incompatible rows removed or pinned:
+rollback rehearsal from target-written state:
+```
+
 ## 8. Promote or roll back
 
 Promote the exact artifact that passed, not a moving tag resolved later. Preserve the target version, integrity, profile manifest, lockfile, patches, resolved graph, and acceptance evidence together.
@@ -230,3 +307,10 @@ Reviewer and date:
 - [Official CLI package manifest](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/apps/cli/package.json)
 - [Official rc.2 release](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.1-rc.2)
 - [Session persistence contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28/packages/session/session-persistence/README.md)
+- [Official alpha.1 source revision](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc)
+- [Alpha.1 repository cleaner](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/scripts/clean.ts)
+- [Alpha.1 `ToolCallId` runtime brand](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm/src/brand.ts)
+- [Alpha.1 third-party provider report #4817](https://github.com/deepseek-ai/deepseek-harness/discussions/4817)
+- [Alpha.1 custom Session-event compatibility request #4815](https://github.com/deepseek-ai/deepseek-harness/discussions/4815)
+- [Revision-mixed source-build report #4824](https://github.com/deepseek-ai/deepseek-harness/discussions/4824)
+- [Third-party Bundle runtime-export report #4827](https://github.com/deepseek-ai/deepseek-harness/discussions/4827)

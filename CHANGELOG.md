@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.183 - 2026-08-28
+
+### Changed
+
+- Added an rc.2→alpha.1 preflight matrix covering source outputs, third-party Bundle runtime APIs, provider Settings, custom Session events, and route/history transitions.
+- Added seam-specific isolated proofs, rollback objects, a route-switch matrix, and a reusable alpha.1 promotion record derived from recent upstream incidents.
+
 ## 0.5.182 - 2026-08-28
 
 ### Added
