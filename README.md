@@ -13,7 +13,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 If this handbook saves you a debugging cycle, [star the repository](https://github.com/sandbaseai/deepseek-harness-handbook). That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**173 canonical guides · 202 localized documents · 49 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**173 canonical guides · 202 localized documents · 52 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -27,7 +27,7 @@ Choose one path and get to evidence quickly:
 
 ### Explore the Agent ecosystem
 
-The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 49 source-linked starting points. For workflow assembly, inspect [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine); for cross-Agent Skill migration, [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover); for research intake, [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news); for evidence-driven debugging, [dsh-replay](https://github.com/zoahdev/dsh-replay); for a Codex-style Web surface, [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui); and for isolated side questions, [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups). Each entry is a discovery lead, not a compatibility or security endorsement.
+The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 52 source-linked starting points. For workflow assembly, inspect [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine); for cross-Agent Skill migration, [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover); for research intake, [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news); for evidence-driven debugging, [dsh-replay](https://github.com/zoahdev/dsh-replay); for a Codex-style Web surface, [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui); for profile recovery, [dsh-backup](https://github.com/xiaoyuyu6420/dsh-backup); and for isolated side questions, [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups). Each entry is a discovery lead, not a compatibility or security endorsement.
 
 For Chinese-language peer discussion, see the upstream community’s [Feishu group discussion](https://github.com/deepseek-ai/deepseek-harness/discussions/4783) for the current invite and context. It is community-run and not official DeepSeek support; do not share credentials, private Session logs, or sensitive workspace data.
 

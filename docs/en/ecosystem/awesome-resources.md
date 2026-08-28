@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 9
+content_revision: 10
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -25,6 +25,7 @@ The source index is licensed CC0. The descriptions below are concise editorial s
 | Find installed/public plugins | [dsh-find-plugins (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The upstream catalog records the discovery tool; verify current repository visibility before installing. |
 | Context cost audit | [dsh-context-doctor](https://github.com/Zhenyu98/dsh-context-doctor) | Measures instruction, skill-catalog, and tool-schema token cost and reports duplication or conflicts. |
 | Plugin manifest checks | [dsh-plugin-check](https://github.com/dsh-external/dsh-plugin-check) | Performs read-only checks of plugin manifests, patch shape, build traps, and hub status. |
+| Bilingual plugin directory | [Awesome-DeepSeek-Harness-Plugins](https://github.com/Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins) | Browse plugins, extensions, tools, skills, clients, runtimes, and integrations in English and Chinese before selecting a candidate. |
 
 Use discovery tools as indexes, not trust oracles. A listing is not proof that a package is safe, maintained, compatible with your release, or appropriate for a production profile.
 
@@ -37,6 +38,7 @@ Use discovery tools as indexes, not trust oracles. A listing is not proof that a
 | Cross-session memory | [dsh-memory (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a long-term memory plugin; verify current repository visibility and prompt-injection boundaries first. |
 | Cross-agent memory | [zilliztech/memsearch](https://github.com/zilliztech/memsearch) | Provides a DSH plugin and shared memory layer alongside other coding agents. |
 | Session branching | [dsh-rewind](https://github.com/dsh-external/dsh-rewind) | Folds exploration after a checkpoint into a report while retaining the complete log. |
+| Profile backup and recovery | [dsh-backup](https://github.com/xiaoyuyu6420/dsh-backup) | Captures upgrade snapshots, repairs session logs, redacts credentials, and supports restore before risky profile changes. |
 | Cross-tool Session import | [dsh-session-hub (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records cross-tool history import; verify current repository visibility before installing. |
 
 Memory and repair tools can read sensitive prompts, tool output, and credentials. Test against a copied profile, keep an evidence digest, and confirm whether a command mutates the source before use. See the [Session log storage format](../reference/session-log-storage-format.md) guide for packed rows and version boundaries.
@@ -87,6 +89,7 @@ The full catalog is intentionally broad. These additional projects are useful wh
 | Todo evidence | [dsh-todo-guard](https://github.com/a903067276-rgb/dsh-todo-guard) | Evidence states, restart recovery, and the boundary between verified and claimed work. |
 | Core utility tools | [dsh-toolkit](https://github.com/dsh-external/dsh-toolkit) | Zero-dependency tool surface and input validation before enabling broad profiles. |
 | Plugin marketplace | [dsh-plugin-hub](https://github.com/Noob-stupid/dsh-plugin-hub) | Index provenance, enable/disable semantics, rollback, and package verification. |
+| Plugin workshop UI | [dsh-plugin-workshop](https://github.com/yyyyukari/dsh-plugin-workshop) | GitHub-powered search, trending windows, signature filtering, and explicit install/update/uninstall behavior. |
 | Model comparison | [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval) | Run the same coding prompt in isolated worktrees and compare traces before applying a candidate. |
 | Planning discipline | [dsh-plans](https://github.com/Optim-Agent/dsh-plans) | Turn repository research into traceable plans, critic rounds, and a verifier checklist. |
 | Agent team UI | [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui) | Manage persistent multi-model squads and bounded DAG runs from a visual control surface. |

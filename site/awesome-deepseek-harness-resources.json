@@ -54,6 +54,9 @@
     {"capability":"state","name":"task-passport","url":"https://github.com/dongsheng123132/task-passport","why":"Carries durable task checkpoints across DeepSeek Harness, Codex, Claude Code, and other agents."},
     {"capability":"evolution","name":"dsh-continual-evolve","url":"https://github.com/ZK-Andy/dsh-continual-evolve","why":"Versioned, auditable, rollback-safe refinement of prompts, memories, skills, and subagent specs."},
     {"capability":"knowledge","name":"dsh-kb-sieve","url":"https://github.com/omdsh-dev/dsh-kb-sieve","why":"Builds auditable knowledge-base packages from references and SQL for repeatable research workflows."},
-    {"capability":"community-catalog","name":"fendouai/awesome-deepseek-harness","url":"https://github.com/fendouai/awesome-deepseek-harness","why":"Bilingual ecosystem directory with live link checks, machine-readable registries, and weekly trending refreshes."}
+    {"capability":"community-catalog","name":"fendouai/awesome-deepseek-harness","url":"https://github.com/fendouai/awesome-deepseek-harness","why":"Bilingual ecosystem directory with live link checks, machine-readable registries, and weekly trending refreshes."},
+    {"capability":"community-catalog","name":"Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins","url":"https://github.com/Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins","why":"English and Chinese directory spanning plugins, extensions, tools, skills, clients, runtimes, and integrations."},
+    {"capability":"recovery","name":"dsh-backup","url":"https://github.com/xiaoyuyu6420/dsh-backup","why":"Backup and restore ~/.dsh with upgrade snapshots, session-log repair, credential redaction, and GitHub sync."},
+    {"capability":"discovery","name":"dsh-plugin-workshop","url":"https://github.com/yyyyukari/dsh-plugin-workshop","why":"GitHub-powered plugin browsing with trending windows, signature filtering, and install/update/uninstall flows."}
   ]
 }
