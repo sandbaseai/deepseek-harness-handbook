@@ -23,6 +23,7 @@ verified_at: 2026-08-29
 - [Continuable Subagents 生命周期（英文）](../en/agent-patterns/subagents.md#bind-child-lifetime-to-the-parent-owner)：把父级所有权、级联销毁、挂起回收和结算交接变成可验证契约。
 - [安装期与子 Agent OOM（英文）](../en/agent-patterns/subagents.md#separate-install-time-oom-from-child-run-oom)：先区分依赖安装、Host 启动和子 Agent 执行阶段，再选择安全探针。
 - [Firefox Web 客户端空白（英文专题）](../en/troubleshooting/firefox-web-client-blank.md)：对比浏览器、保留首个控制台异常和网络请求，避免在没有证据时重置 Session 或凭据。
+- [认证 Token 无法获取或输入（英文专题）](../en/troubleshooting/auth-token-not-available.md)：先区分认证获取、UI 输入、存储和出站授权，避免泄露或盲目轮换密钥。
 
 这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。中文读者也可以参考社区项目 [DeepSeek Harness 橙皮书](https://github.com/alchaincyf/deepseek-harness-orange-book)，两者均独立维护，均不代表 DeepSeek 官方。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
 

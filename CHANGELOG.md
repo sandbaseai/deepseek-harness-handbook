@@ -8,6 +8,12 @@ All notable handbook and publishing changes are recorded here. DeepSeek Harness 
 
 - Added an English-canonical and Chinese-localized Firefox blank-client troubleshooting guide based on upstream Discussion #4919, with browser comparison, clean-profile, network, WebSocket, and minimal-reproduction checks.
 
+## 0.5.274 - 2026-08-28
+
+### Added
+
+- Added an English-canonical and Chinese-localized auth-token troubleshooting guide based on upstream Discussion #4918, separating token acquisition, UI entry, storage, and outbound authorization without exposing credentials.
+
 ## 0.5.244 - 2026-08-29
 
 ### Changed
