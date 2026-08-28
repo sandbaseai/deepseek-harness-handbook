@@ -1,10 +1,12 @@
 ---
 title: DeepSeek Harness Agent Turn and Step Lifecycle
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 verified_upstream: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4909
 ---
 
 # One DeepSeek Harness turn, step by step
@@ -46,6 +48,21 @@ sequenceDiagram
 - Steering or queued next-step input can extend a turn.
 - A rejected first `agent/pre-step` decision can still produce a durable zero-step turn.
 - Cancellation and provider errors must close or recover at the correct boundary.
+
+## Parent disposal is a separate lifecycle contract
+
+Upstream architecture report [#4909](https://github.com/deepseek-ai/deepseek-harness/discussions/4909) identifies a failure mode that a normal turn trace cannot prove: a parent Agent can dispose while a continuable child remains owned by a service/factory scope. Explicit `drainChildren()` calls, a child waiting forever for `whenIdle()`, and a settlement callback that returns when the parent is gone create four distinct gaps—ownership, cascade cleanup, hung-child reclamation, and settlement delivery.
+
+Treat those as separate acceptance checks. A parent-owned child must be released or deliberately handed off when the parent scope ends; a hung child needs a bounded timeout or force-reclaim policy; and settlement must be durable enough to explain whether it was delivered, queued for handoff, cancelled, or dropped because policy chose that outcome. Do not infer any of these guarantees from a successful child tool call or from an explicit drain API that callers may forget to invoke.
+
+```text
+parent dispose
+  → child ownership decision (cascade | handoff | reject)
+  → bounded child drain / reclaim
+  → durable settlement disposition
+```
+
+The minimum safe regression fixture creates a parent, starts a child that has not settled, disposes the parent first, and then exercises both a normal child settlement and a hung-child timeout. Assert no orphaned activation remains, no settlement notification is silently lost, and the parent Session records the disposition without rewriting prior durable events. The repository's jobs/schedule paths provide a useful ownership comparison, but a community reference patch is not evidence that the main branch already provides this contract.
 
 ## A search frontier belongs outside the default linear driver
 
@@ -201,4 +218,5 @@ When a turn looks stuck, identify the last durable event:
 - [Skill catalog insertion at rc.2](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/skill/tool-skill/src/index.ts)
 - [Prefix-cache report and measurements](https://github.com/deepseek-ai/deepseek-harness/discussions/4749)
 - [Frontier-selection extension request #4761](https://github.com/deepseek-ai/deepseek-harness/discussions/4761)
+- [Lifecycle handoff and orphaned child report #4909](https://github.com/deepseek-ai/deepseek-harness/discussions/4909)
 - [rc.2 AgentLoop public/private boundary](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/README.md)

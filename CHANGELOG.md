@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.289 - 2026-08-28
+
+### Changed
+
+- Extended the Agent lifecycle architecture guide with upstream #4909's parent-dispose, child handoff, hung-child reclamation, and settlement-disposition contract.
+
 ## 0.5.288 - 2026-08-28
 
 ### Changed
