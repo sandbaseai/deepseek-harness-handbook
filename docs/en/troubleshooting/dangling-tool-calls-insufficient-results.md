@@ -1,10 +1,10 @@
 ---
 title: Recover a DeepSeek Harness Session With Insufficient Tool Messages
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
-upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+upstream_ref: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Recover a Session with insufficient tool messages
@@ -70,6 +70,33 @@ Finally, the DeepSeek adapter serializes assistant tool calls and later tool-res
 The same source-level invariant remains relevant in rc.2. Recent reports show scheduler `prepare` failures that append `tool/call`, then `step/end` and `turn/end(error)` without `tool/result`. A later serializer cannot infer from message shape alone whether a side effect started, completed, or remained unknown.
 
 Discussion #4668 proposes a wire serializer that fills pending calls and handles orphan results. Its title attributes the problem to plugins, but the post provides no plugin, injected message, resulting Session events, or minimal reproduction. Treat “plugin caused it” as an unverified hypothesis until the producer boundary is identified. The proposed code is useful design input, not authoritative evidence of the ingress defect.
+
+## Add the alpha.1 identity and compaction branches
+
+Discussion #4843 reports the same provider-visible 400 through three additional malformed-history paths. The alpha.1 source confirms the relevant boundaries, while the attached patch remains a community proposal until merged.
+
+### Empty streamed call identity
+
+The alpha.1 DeepSeek stream translator assembles tool-call blocks by wire index. When the provider never supplies `id` or `function.name`, `closeBlock()` currently emits an empty ID or name; streamed deltas likewise expose an empty ID until one arrives. Empty identity is not a harmless placeholder: several incomplete calls can collapse onto the same correlation key, and a later result cannot prove which call it belongs to.
+
+Reject an incomplete block before it becomes an executable assistant message, or synthesize an identity only from an explicit, collision-free, request-scoped rule that every downstream result uses consistently. A random replacement created independently at multiple boundaries is not correlation.
+
+### Count-balanced but identity-invalid compaction
+
+The alpha.1 compaction helper tracks only an integer count:
+
+```text
+assistant calls: [call_A]
+tool results:    [call_B]
+count balance:  1 - 1 = 0
+identity truth: call_A remains open; call_B is orphaned
+```
+
+Therefore, a cut marked “balanced” by cardinality can still be invalid for the provider. Compaction safety needs an ordered identity ledger, not only a count. Each result must close one exact open ID; empty, duplicate, and unknown IDs are explicit failures.
+
+### Request-boundary stripping
+
+Dropping malformed calls immediately before a model request can contain a 400, but it does not repair durable history or prove that an external tool had no effect. Record which immutable source blocks were excluded, why, and whether any corresponding execution evidence exists. The next compaction, export, replay, or adapter must not silently reach a different conclusion from the same Session.
 
 ## Recover without falsifying side effects
 
@@ -174,6 +201,10 @@ The validator should return a typed diagnostic rather than throw a raw `UNKNOWN`
 - Repeated retry of a poisoned fixture is unnecessary because the first repaired request succeeds or fails for a new reason.
 - An orphan result never fabricates an assistant tool name, arguments, or intent.
 - Empty and duplicate call IDs fail before correlation.
+- Equal call/result counts with mismatched IDs fail the identity ledger.
+- A streamed tool-call block cannot close with an empty ID, name, or invalid argument representation.
+- Compaction cuts are accepted by exact open-call identity, not cardinality alone.
+- Request-boundary containment reports every excluded source block without rewriting durable history.
 - Multiple parallel calls retain declaration order and exactly one result each.
 - A malformed argument string can fail presentation without changing transcript cardinality.
 - Serializer containment reports whether it used unknown-outcome or quarantined-orphan handling.
@@ -182,14 +213,18 @@ The validator should return a typed diagnostic rather than throw a raw `UNKNOWN`
 
 ## Source boundary
 
-Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`, `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`, upstream reproduction #3415, and community patch discussion #4668. The plugin-causality claim in #4668 remains unverified without a minimal producer-to-wire reproduction.
+Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`, `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`, `0.1.2-alpha.1` commit `cd5ef8148158c3a752a658978873241fdf8e2bbc`, upstream reproductions #3415 and #4843, and community patch discussion #4668. The plugin-causality claim in #4668 remains unverified without a minimal producer-to-wire reproduction; the #4843 patch is reviewed as a proposal, not described as released behavior.
 
 - [Upstream insufficient-tool-messages reproduction #3415](https://github.com/deepseek-ai/deepseek-harness/discussions/3415)
 - [Community wire-sanitizer patch discussion #4668](https://github.com/deepseek-ai/deepseek-harness/discussions/4668)
+- [Malformed and orphaned tool-call report #4843](https://github.com/deepseek-ai/deepseek-harness/discussions/4843)
 - [Parallel tool scheduler failure path](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/agent-loop/src/tool-calls.ts)
 - [Interrupted-turn repair semantics](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/repair.ts)
 - [DeepSeek message serializer](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/serialize.ts)
 - [Official session persistence recovery contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/README.md)
 - [rc.2 DeepSeek message serializer](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/serialize.ts)
 - [rc.2 immutable message and source types](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/message.ts)
+- [alpha.1 DeepSeek streamed tool-call translation](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-deepseek/src/translate.ts)
+- [alpha.1 compaction tool-pairing balance](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/compaction/compaction/src/tool-pairing.ts)
+- [alpha.1 Agent request construction](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/core/agent-loop/src/agent.ts)
 - [Session history recovery router](session-history-corruption-triage.md)
