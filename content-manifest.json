@@ -210,6 +210,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/request-extension-inventory-failure.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/architecture/session-write-integrity.md",
       "revision": 1,
       "translations": {}

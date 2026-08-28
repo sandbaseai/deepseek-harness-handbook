@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.365 - 2026-08-30
+
+### Added
+
+- Added a request-extension boundary runbook for plugin inventory preparation failures from upstream discussion #4950.
+
 ## 0.5.364 - 2026-08-30
 
 ### Added
