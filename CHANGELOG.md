@@ -2,6 +2,14 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.192 - 2026-08-28
+
+### Changed
+
+- Refreshed the repository's highest-traffic English and Simplified Chinese entry points using GitHub Traffic evidence rather than adding another low-discovery page.
+- Replaced the stale featured-guide set with five current rc.2/alpha.1 problems and direct canonical links that remain available while GitHub Pages deployment is rate-limited.
+- Corrected the Simplified Chinese corpus totals from 143/152 to 148/157 and made the mixed rc.2 plus alpha.1 verification baseline explicit.
+
 ## 0.5.191 - 2026-08-28
 
 ### Changed
