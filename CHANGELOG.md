@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.325 - 2026-08-29
+
+### Added
+
+- Added English and Chinese runbooks for connecting SandBase Harness through its DeepSeek Harness stdio MCP bridge, including bounded setup, seam probes, permission checks, and rollback evidence.
+
 ## 0.5.324 - 2026-08-29
 
 ### Changed

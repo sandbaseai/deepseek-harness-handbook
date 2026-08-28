@@ -77,6 +77,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 | Configure a model, gateway, image route, or reasoning level | [Model provider guide](docs/en/getting-started/model-providers.md) |
 | Build and package a plugin | [First plugin lab](docs/en/plugin-development/first-plugin.md) |
 | Connect MCP tools | [MCP integration guide](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html) |
+| Connect SandBase Harness as a real MCP runtime | [SandBase Harness bridge guide](docs/en/integrations/sandbase-harness-bridge.md) |
 | Understand Sessions, Skills, and long-term memory | [Memory architecture](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) |
 | Audit permissions, credentials, or a community plugin | [Security guides](#security) |
 
