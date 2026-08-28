@@ -6,7 +6,7 @@ Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
 Latest field update (v0.5.382): Python SDK restart-resume boundary and lossy history replay after `id collision`: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/python-sdk.md#restart-recovery-sessionprompt-is-not-a-resume-operation
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.382): document the Python SDK restart-resume boundary from upstream #4954, with evidence-first recovery and a lossy replay fallback: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.382
+Latest release (v0.5.384): refresh the Atom feed with the latest source-backed guides, resource-map expansion, and maintenance-loop updates: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.384
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 SandBase Harness MCP bridge guide: https://sandbaseai.github.io/deepseek-harness-handbook/sandbase-harness-bridge.html
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme
