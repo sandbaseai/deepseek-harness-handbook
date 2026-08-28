@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.291 - 2026-08-28
+
+### Changed
+
+- Extended the Session storage-format guide with upstream #4910's distinction between unsupported versions and corruption, plus migration, rollback, and evidence-preserving acceptance gates.
+
 ## 0.5.290 - 2026-08-28
 
 ### Added

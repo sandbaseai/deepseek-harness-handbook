@@ -1,10 +1,12 @@
 ---
 title: DeepSeek Harness Session Log Storage Format
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-28
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4910
 ---
 
 # Read a DeepSeek Harness Session log without losing packed output
@@ -15,6 +17,14 @@ A DeepSeek Harness Session log is not simply “one `SessionEvent` per JSONL lin
 2. runs of streamed assistant deltas are stored as `text-chunks`, `reasoning-chunks`, or `tool-call-chunks` rows by default.
 
 Those packed rows are storage records, not Session events. A parser that recognizes only the generated event catalog can silently omit most assistant output.
+
+## Version refusal is not a migration strategy
+
+Architecture report [#4910](https://github.com/deepseek-ai/deepseek-harness/discussions/4910) inventories several persistence layers that stamp a version and hard-refuse anything non-current, while shipping no migration, mixed-root fallback, or dual-write path. A reader must therefore distinguish **unsupported format** from **corrupt data**: an older, structurally valid header is not permission to rewrite the file, and upgrading the executable does not prove that an old Session can load.
+
+Before changing a format, record the exact version at each boundary—Session header, persistence backend, subagent descriptor, upload index, and provider replay—and define one of `migrate`, `read-old/write-new`, `dual-write`, `export-only`, or `reject-with-preserved-evidence`. Test the rollback story with a copied root. If the current build rejects the version, preserve the original bytes, emit an actionable disposition, and use a supported export or pinned reader; never “repair” the header in place or silently drop unknown fields.
+
+For maintainers, the minimum evolution fixture writes a representative v0 root, opens it with the next reader, exercises normal replay and append, interrupts during conversion, and opens the result with both readers. Acceptance requires an atomic destination, a resumable or clearly restartable migration, a retained source digest, explicit mixed-version policy, and a user-visible failure when no safe path exists. The format version must change together with its documented migration contract, not merely with a schema edit.
 
 ## The four layers
 
@@ -153,6 +163,7 @@ The strongest regression is a round trip: create a known event stream containing
 - [rc.8 packed-row codec](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/session/src/chunk-rows.ts)
 - [rc.8 JSONL scanner and `eventLines`](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/session/session-persistence-jsonl/src/format.ts)
 - [Official packed-row catalog gap report](https://github.com/deepseek-ai/deepseek-harness/discussions/3458)
+- [Persistence format evolution gap report](https://github.com/deepseek-ai/deepseek-harness/discussions/4910)
 
 ## Related handbook guides
 
