@@ -1,7 +1,7 @@
 ---
 title: Stop and Safely Retry a Stuck DeepSeek Harness Turn
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -90,6 +90,62 @@ flowchart TD
 
 Alpha.1 exposes **Branch into a new conversation** at an eligible Turn tail. Branching preserves history up to its selected durable sequence; it does not undo calls already made. A brand-new Session with a concise handoff is safer when you cannot prove which tail event is safe to inherit.
 
+## Regenerate reply means branch, then replay
+
+A trustworthy **Regenerate reply** action must not delete the last answer or append a duplicate prompt to the source Session. For a completed target Turn `T`, it should fork from the previous completed Turn `P`, reconstruct only the human-owned input admitted during `T`, and submit that input once in the child Session.
+
+```text
+source: ... → turn/end P → user input U → effects E → turn/end T
+                         │
+                         └─ fork at P → child seed through P → re-admit U → new answer
+
+source T remains immutable; external effects E are not rolled back
+```
+
+This distinction matters because alpha.1's `sessions.fork({ atSeq })` does not cut at the exact supplied event. It resolves an in-log anchor to the first `turn/end` at or after that sequence, then seeds the child through that boundary and stops before the next `turn/start`. To regenerate `T`, supply a sequence owned by `P`—normally `P`'s final visible node—not `T`'s user-message sequence. Anchoring inside `T` would include the completed target Turn instead of removing it.
+
+The action is eligible only when all of these facts are true:
+
+- `T` is the last durably completed Turn and has no later chat node;
+- a previous completed Turn `P` exists, so the first Turn never offers this action;
+- the complete event window for `T` is loaded and its human input is unambiguous;
+- every replayed `user/message` has `source.kind === 'user'`; plugin context, Goal notices, runtime injection, commands, and child settlement are excluded;
+- queued input consumed as steering is reconstructed from the durable inbox splice history, not guessed from bubble position;
+- external effects from `T` are absent, idempotent and reconciled, or explicitly accepted by the operator.
+
+### Preserve ordered input and re-admit images
+
+All human user and steering messages in `T` are part of the replay contract. Preserve message order and content-part order; do not flatten several admissions into one string or silently discard steering. A durable image part contains an attachment identity scoped to the source Session. Alpha.1's `readAttachment(attachmentId)` returns the authenticated reference plus decoded bytes, while `prompt()` accepts text plus **browser-owned temporary image uploads**. Therefore a child cannot safely reuse the source attachment reference: read every required image from the source, construct fresh child uploads, and finish the entire prompt payload before sending anything.
+
+If the public prompt API cannot preserve multiple user/steering admissions and their placement faithfully, disable one-click regeneration for that Turn and offer a reviewed manual branch. A plausible-looking combined prompt is not equivalent history.
+
+### Fork is not an atomic transaction
+
+The source Session remains unchanged on every failure, but the operation as a whole is not atomic. The official controller creates the child before workspace attachment finishes. Attachment reads and replay admission necessarily happen later. Record the returned child identity as soon as it exists and reconcile that child before allowing another click.
+
+| Failure boundary | Durable result | Safe UI response |
+|---|---|---|
+| fork rejected before creation | no child | keep source selected; show the exact error |
+| child created, workspace attach fails | child may already exist | expose/recover that child; do not create another blindly |
+| source attachment read or upload preparation fails | child exists; replay not sent | keep the child as incomplete or offer explicit cleanup |
+| child prompt admission is rejected | child exists; no accepted replay | retain payload and child identity for a deliberate retry |
+| navigation fails after prompt acceptance | child may already be running | reconnect to the same child and inspect it before retrying |
+
+Use a click-scoped operation identity, disable duplicate gestures while any phase is unresolved, and persist `{sourceSession, sourceTurn, boundarySeq, childSession, phase}` across reload. “Source unchanged” must never be presented as “nothing was created.”
+
+### Manual regeneration with the shipped UI
+
+Alpha.1 ships a Turn-tail **Branch into a new conversation** action, but not the proposed combined replay operation. Until an explicit action is implemented:
+
+1. reconcile tool and external effects produced by the answer you want to replace;
+2. branch at the tail of the previous completed Turn;
+3. open the returned child Session and verify the inherited preset, model route, workspace, and final seeded event;
+4. reconstruct the target Turn's user input in its original order;
+5. reattach images from trusted original bytes, because attachment identities are Session-scoped;
+6. send once, then retain the source and child Session IDs as provenance.
+
+If steering grouping, an attachment, or effect status cannot be reconstructed, use a concise reviewed handoff in a clean Session instead of claiming an exact regeneration.
+
 ## Side-effect gate before resubmission
 
 Before sending anything that could repeat work, classify the last step:
@@ -131,6 +187,21 @@ A safe Retry control cannot mean “send the same text again.” It should:
 9. expose cancel, admission, request, and final outcome separately;
 10. regression-test cold reload, offline/reconnect, provider timeout, tool execution, and repeated UI gestures.
 
+For a Turn-tail **Regenerate reply (branches, then re-answers)** control, extend that baseline with:
+
+1. hide the action for the first Turn, open Turns, incomplete history, later chat nodes, and non-replayable input;
+2. anchor the fork inside the previous completed Turn and verify the returned child's seed boundary;
+3. select only human-owned input from the target Turn, using inbox history to distinguish steering;
+4. preserve message and content-part order without flattening distinct admissions;
+5. read every source image and re-admit fresh child-owned uploads before prompt submission;
+6. build and validate the complete payload before the first replay write;
+7. preserve source and target Turn evidence, with explicit provenance on the new child operation;
+8. disclose inherited preset, provider/model selection, workspace attachment, and child Session identity;
+9. treat workspace attach, attachment preparation, prompt admission, and navigation as separate recoverable phases;
+10. deduplicate clicks and reconnect to an already-created child instead of creating orphans;
+11. block or warn on unreconciled external effects because branching does not undo them;
+12. test text-only, multiple steering messages, mixed images, aborted targets, attach failure, prompt rejection, lost navigation, reconnect, cold reload, and repeated clicks.
+
 ## Product contract for Stop with pending input
 
 A Stop action needs a visible policy for pending user work. If the intended contract is “interrupt and send queued input immediately,” the implementation should:
@@ -171,7 +242,7 @@ Remove credentials, prompts, private tool output, and proprietary payloads.
 
 ## Verification boundary
 
-The Stop control, scoped Session cancellation, durable interrupted Turn presentation, parked pre-cancel inbox behavior, abort-convergence wake latch, and Turn-tail branch action are source-verified at alpha.1 commit [`cd5ef814`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc). Discussion #4823 reports a visually stuck Turn and a successful separate provider request, but provides no Session events or cancellation trace yet. Discussion #4832 proposes immediate delivery of preserved user input; its linked fork is design input, not merged upstream behavior.
+The Stop control, scoped Session cancellation, durable interrupted Turn presentation, parked pre-cancel inbox behavior, abort-convergence wake latch, Turn-tail branch action, fork boundary rules, Session-scoped attachment read, and user-versus-steering reconstruction are source-verified at alpha.1 commit [`cd5ef814`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc). Discussion #4823 reports a visually stuck Turn and a successful separate provider request, but provides no Session events or cancellation trace yet. Discussions #4831 and #4832 propose combined regeneration and immediate pending-input delivery; their linked forks are design input, not merged upstream behavior.
 
 ## Pinned official sources
 
@@ -182,4 +253,8 @@ The Stop control, scoped Session cancellation, durable interrupted Turn presenta
 - [Stop-and-deliver pending input proposal #4832](https://github.com/deepseek-ai/deepseek-harness/discussions/4832)
 - [Alpha.1 interrupted Turn end-to-end proof](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/web/tests/turn-tail-actions.e2e.ts)
 - [Alpha.1 Turn-tail branch action](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-chat/src/client/chat/TurnTailNodeView.tsx)
+- [Alpha.1 fork boundary and partial workspace-attachment behavior](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/commands.ts)
+- [Alpha.1 Session prompt and attachment contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/client/contract/session.ts)
+- [Alpha.1 durable steering reconstruction](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-chat/src/client/model/steering-history.ts)
+- [Regenerate-reply proposal #4831](https://github.com/deepseek-ai/deepseek-harness/discussions/4831)
 - [Stuck conversation and Retry request #4823](https://github.com/deepseek-ai/deepseek-harness/discussions/4823)
