@@ -1,9 +1,9 @@
 ---
 title: Diagnose Manual Compaction Aborted by the Caller in DeepSeek Harness
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-28
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
@@ -52,6 +52,20 @@ At rc.8:
 - the DeepSeek adapter maps an aborted options signal to `LlmError(..., "ABORTED")`.
 
 That chain establishes caller-side cancellation. It does not yet distinguish UI cancellation, command-channel disposal, Agent maintenance disposal, profile reload, Host shutdown, or a gateway Remote-token lifecycle race.
+
+## Distinguish a caller abort from a silent summarization hang
+
+Upstream Discussion [#3711](https://github.com/deepseek-ai/deepseek-harness/discussions/3711) describes a different failure shape in rc.8: `compaction/start` is the last durable event, `session.list` remains `running: true`, and neither `compaction/summary`, `compaction/end`, nor an error ever arrives. That is not evidence of an aborted caller. The compaction signal may still be live while the summarization provider never returns, because the turn signal is cancellation—not a finite deadline.
+
+Use the last event sequence, not a flat step counter, for liveness:
+
+| Observation | Interpretation |
+|---|---|
+| `compaction/end` with an abort error | a signal owner cancelled the request; use the chain above |
+| `compaction/start` remains last event and `running: true` | possible summarization hang; preserve the Session and enforce an external watchdog |
+| `compaction/end` with a timeout or provider error | bounded failure; inspect the original provider response and retry policy |
+
+Do not “fix” the silent-hang shape by repeatedly issuing `/compact` or by deleting the Session. A host-side watchdog can cancel one owned attempt after a policy deadline, record the timeout with command and compaction IDs, and let the existing failed-compaction path close the transaction. A runtime change should make that deadline configurable (for example, a finite default with `0` explicitly disabling it), preserve explicit user cancellation, and emit `compaction/end` on expiry. Treat the five-minute value proposed in #3711 as a field-test starting point, not a universal safe default.
 
 ## Build one joined timeline
 
@@ -187,3 +201,4 @@ Verified against DeepSeek Harness rc.8 commit `141eb6fef83422698aef7a981029e843e
 - [rc.8 API gateway Remote-token cancellation](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/api/gateway/src/client/index.ts)
 - [rc.8 DeepSeek adapter cancellation mapping](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-deepseek/src/adapter.ts)
 - [Official compaction lifecycle contract](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/docs/subsystems/compaction.md)
+- [Compaction summarization with no deadline can hang indefinitely (#3711)](https://github.com/deepseek-ai/deepseek-harness/discussions/3711)

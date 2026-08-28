@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.236 - 2026-08-29
+
+### Changed
+
+- Expanded the manual compaction runbook with upstream Discussion #3711's silent summarization-hang signature, event-sequence liveness check, and bounded-watchdog guidance, keeping it distinct from caller cancellation.
+
 ## 0.5.235 - 2026-08-29
 
 ### Fixed
