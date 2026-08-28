@@ -11,7 +11,7 @@ verified_at: 2026-08-29
 
 这是一份从 Agent 视角理解、运行、排查和扩展 DeepSeek Harness 的独立社区手册，由 [SandBase](https://sandbase.ai/) 维护，并非 DeepSeek AI 官方项目。
 
-目前包含 **160 篇英文 canonical 指南和 181 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，下面五个最新专题摘要已逐行复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
+目前包含 **161 篇英文 canonical 指南和 184 份多语言文档**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，下面五个最新专题摘要已逐行复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
@@ -29,6 +29,8 @@ verified_at: 2026-08-29
 - [Agent 回合与父子生命周期](architecture/agent-lifecycle.md)：区分 durable turn/step 事件与 live Agent，并验证父级销毁时的子 Agent 交接、挂起回收和 settlement 记录。
 - [Session 日志存储格式](reference/session-log-storage-format.md)：解释 Zstandard frame、packed rows、事件序号重建，以及格式版本拒绝与迁移的边界。
 - [长会话 ChatView 内存增长](troubleshooting/chatview-long-session-memory.md)：区分渲染器 DOM 保留与 Host 内存，保留 Session，并在将刷新作为缓解前测量虚拟化边界。
+- [工具执行管线](../en/architecture/tool-execution-pipeline.md)：区分 Permission、Approval、Guard、Sandbox，并排查 waterfall listener 短路导致的全局工具失败。
+- [Awesome 生态资源能力地图](ecosystem/awesome-resources.md)：从公开目录按技能、记忆、路由、UI、文件和研究能力选择资源，并执行安全安装流程。
 
 这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。中文读者也可以参考社区项目 [DeepSeek Harness 橙皮书](https://github.com/alchaincyf/deepseek-harness-orange-book)，两者均独立维护，均不代表 DeepSeek 官方。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
 

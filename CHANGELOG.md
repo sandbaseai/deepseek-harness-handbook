@@ -2,6 +2,20 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.300 - 2026-08-28
+
+### Added
+
+- Added an English canonical and Chinese reviewed capability map derived from the CC0 Awesome DeepSeek Harness catalog, with safety-aware selection and installation boundaries.
+- Updated coverage to 161 canonical pages and 184 localized documents.
+
+## 0.5.299 - 2026-08-28
+
+### Added
+
+- Added a reviewed Chinese localization of the Tool Execution Pipeline guide, including Permission/Approval/Guard/Sandbox boundaries and the #4906 waterfall short-circuit contract.
+- Updated coverage to 160 canonical pages and 182 localized documents.
+
 ## 0.5.298 - 2026-08-28
 
 ### Changed

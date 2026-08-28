@@ -479,7 +479,7 @@
     {
       "source": "docs/en/architecture/tool-execution-pipeline.md",
       "revision": 3,
-      "translations": {}
+      "translations": { "zh-CN": "docs/zh-CN/architecture/tool-execution-pipeline.md" }
     },
     {
       "source": "docs/en/agent-patterns/designing-an-agent.md",
@@ -812,6 +812,11 @@
       "source": "docs/en/architecture/context-compression-profiles.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/ecosystem/awesome-resources.md",
+      "revision": 1,
+      "translations": { "zh-CN": "docs/zh-CN/ecosystem/awesome-resources.md" }
     },
     {
       "source": "docs/en/troubleshooting/chatview-long-session-memory.md",
