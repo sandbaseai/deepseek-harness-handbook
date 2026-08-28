@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.185 - 2026-08-28
+
+### Changed
+
+- Added a split-release decision path for alpha.1: the official GitHub Release, tag, and source manifest exist while the official npm registry returns `E404` for the exact CLI version.
+- Updated official project identity coordinates to rc.2 on npm and alpha.1 on GitHub, with source, registry artifact, dist-tag, and executable treated as separate evidence.
+
 ## 0.5.184 - 2026-08-28
 
 ### Changed
