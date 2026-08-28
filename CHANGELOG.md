@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.335 - 2026-08-29
+
+### Changed
+
+- Documented the resource-validation submission loop in `CONTRIBUTING.md`, linking the structured Issue template and its privacy/evidence requirements.
+
 ## 0.5.334 - 2026-08-29
 
 ### Added

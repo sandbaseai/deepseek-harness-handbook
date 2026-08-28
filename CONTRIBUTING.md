@@ -12,6 +12,10 @@ Thank you for helping developers understand and use DeepSeek Harness.
 
 Start with the [public roadmap](ROADMAP.md), propose an evidence-backed topic in [What should we verify next?](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99), or open a structured [documentation request](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=documentation-request.yml). Small, reviewable changes are encouraged.
 
+### Add or validate an Awesome resource
+
+If you are maintaining a public DeepSeek Harness plugin, Agent workflow, or companion tool, use the [resource validation template](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=resource-validation.yml). Include the exact repository or catalog URL, a pinned revision, one harmless probe with its observable result, and the permission/network boundaries. Remove credentials, private paths, and sensitive prompts before submitting. The handbook curates pointers; a submission is not an endorsement or a compatibility guarantee.
+
 ## Choose the smallest useful evidence unit
 
 You do not need to write a complete guide or spend money on a model request to contribute.
