@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.238 - 2026-08-29
+
+### Changed
+
+- Expanded the first-plugin guide with the #4455 function-shaped `apply` lifecycle boundary: returned cleanup or pending promises may be lost by a constructible runner, so exact-loader tests and fail-closed activation are required.
+
 ## 0.5.237 - 2026-08-29
 
 ### Changed

@@ -1,7 +1,7 @@
 ---
 title: Build Your First DeepSeek Harness Plugin
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 ---
@@ -61,6 +61,12 @@ export function apply(ctx: Context) {
 ```
 
 A plugin contributes capabilities through `apply(ctx)`. Keep side effects inside that lifecycle. Cordis automatically disposes registrations made through the context; external resources must return an explicit disposer from `ctx.effect()`.
+
+### Treat function-shaped `apply` returns as an integration boundary
+
+Upstream Discussion [#4455](https://github.com/deepseek-ai/deepseek-harness/discussions/4455) reports a Cordis runner edge in which a plugin exported as an object with a plain `function apply()` is treated as constructible. In that reported shape, a returned disposer is not collected and a returned Promise is not awaited, so `fiber.await()` can look healthy while plugin work is still pending. This is a community field report, not proof that every release has the same behavior.
+
+Keep the smallest `apply(ctx)` synchronous while validating a target runtime. Register cleanup through `ctx.effect()` and make asynchronous initialization explicit and observable at the supported lifecycle boundary. Test both a returned disposer and a rejected or never-settling initialization path through the exact composition loader; a direct module import does not exercise the runner. If a plugin requires asynchronous boot, pin the DSH/Cordis revision, record whether the loader actually awaits it, and fail closed rather than reporting an active row before its required work is ready.
 
 Create `scratch-plugin/cordis.yml`, replacing the example with the absolute path to your checkout:
 
@@ -343,3 +349,4 @@ pnpm 10 blocks Git dependency build scripts until the consumer explicitly allows
 - [Windows absolute-plugin URL regression test](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/tests/mount.spec.ts)
 - [Windows first-plugin report #4814](https://github.com/deepseek-ai/deepseek-harness/discussions/4814)
 - [Services and dependency lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/develop/framework/service.md)
+- [Function-shaped plugin `apply` can drop cleanup and pending failures (#4455)](https://github.com/deepseek-ai/deepseek-harness/discussions/4455)
