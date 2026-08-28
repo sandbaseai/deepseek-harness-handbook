@@ -14,6 +14,12 @@ All notable handbook and publishing changes are recorded here. DeepSeek Harness 
 
 - Added an English-canonical and Chinese-localized auth-token troubleshooting guide based on upstream Discussion #4918, separating token acquisition, UI entry, storage, and outbound authorization without exposing credentials.
 
+## 0.5.275 - 2026-08-28
+
+### Changed
+
+- Synchronized README coverage metadata with the current 157 canonical and 170 localized documents.
+
 ## 0.5.244 - 2026-08-29
 
 ### Changed
