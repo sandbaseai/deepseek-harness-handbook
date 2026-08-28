@@ -6,7 +6,7 @@ Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
 Latest field update (v0.5.276): DOM ownership and settings.section removeChild recursion: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/webview-mutation-observer-loop.md
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.281): Windows read-only PowerShell stderr runbook and 159/176 coverage: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.281
+Latest release (v0.5.282): Windows read-only PowerShell stderr runbook and verified 159/174 coverage: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.282
 Auth token acquisition and entry boundaries (v0.5.274): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/auth-token-not-available.md
 Firefox blank Web client diagnostics (v0.5.273): https://sandbaseai.github.io/deepseek-harness-handbook/firefox-web-client-blank.html
 Code Mode literal-section boundary: https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-unknown-prompt-variable.html
