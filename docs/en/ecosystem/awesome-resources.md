@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 13
+content_revision: 14
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -126,6 +126,21 @@ The upstream catalog is not the only discovery surface. These public projects cu
 | Session corruption repair | [dsh-corrupt-session-repair](https://github.com/MedicineKing/dsh-corrupt-session-repair) | Zero-install scanner, deterministic corpus, and repair evidence for crash-recovery sequence corruption; keep real logs private. |
 | Codex-style Web UI | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | Public DSH Web extension points for workspace/session navigation, search, and turn orientation; verify compatibility before installing. |
 | Nested follow-ups | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | Recursively isolated child Sessions for side questions; verify ancestry, tool scope, and no cross-branch writes. |
+
+## Additional picks from the community catalog
+
+The upstream README also highlights smaller projects that are useful when an Agent workflow needs a clear operational boundary. These are source-backed pointers; the links were checked on 2026-08-29.
+
+| Focus | Resource | Why it belongs in an Agent workflow |
+|---|---|---|
+| Operations and recovery | [dsh-harness-ops](https://github.com/fakechris/dsh-harness-ops) | Packages snapshot rotation, self-healing web startup, and interrupted-session continuation so recovery is observable instead of an ad-hoc restart. |
+| Agent-to-agent routing | [dsh-routed-subagent](https://github.com/bpc-oss/dsh-routed-subagent) | Mounts a bounded child run on a selected preset with model/provider overrides and continuable background jobs. |
+| Session workflow | [dsh-track](https://github.com/fakechris/dsh-track) | Keeps decisions, captured ideas, and task state in an evidence-oriented lifecycle that an Agent can query. |
+| Persistent squads | [dsh-kirocrew](https://github.com/zoahdev/dsh-kirocrew) | Bridges a DSH Agent to a persistent development workspace over ACP, making the external boundary explicit. |
+| Commander workflow | [dsh-commander](https://github.com/qwert702/dsh-commander) | Separates planning from execution by turning structured task blocks into explicit actions in the Web UI. |
+| Parallel evaluation | [dsh-kimicode-swarm](https://github.com/hongyue0721/dsh-kimicode-swarm) | Dispatches independent subtasks with bounded concurrency, live progress, and resumable Agent IDs. |
+
+Before installing any of these, inspect the repository's manifest, permissions, model-routing defaults, and teardown path. A catalog entry is a discovery lead, not a compatibility or security guarantee.
 
 ## Four practical starter paths
 

@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.399 - 2026-08-30
+
+### Added
+
+- Added an Agent-first resource sweep from `0xsline/awesome-deepseek-harness`, covering operations, routed subagents, persistent squads, commander workflows, and bounded parallel evaluation.
+- Added empty `__DSH_BOOT__` manifest triage from upstream #4955, distinguishing Host-side inventory/build failures from browser preload races.
+
 ## 0.5.398 - 2026-08-30
 
 ### Added
