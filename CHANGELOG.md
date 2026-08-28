@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.178 - 2026-08-28
+
+### Changed
+
+- Split `reasoning_content` failures into missing passback on pi-ai cross-provider routes and stale passback after a direct DeepSeek thinking on→off switch.
+- Verified the mode-blind direct-adapter assistant serializer in rc.2 and alpha.1, and added a safe isolation matrix, containment, source-fix contract, and regression gates.
+
 ## 0.5.177 - 2026-08-28
 
 ### Changed

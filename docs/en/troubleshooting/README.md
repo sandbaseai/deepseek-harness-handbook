@@ -12,7 +12,7 @@ Diagnose the failing layer before reinstalling or changing configuration.
 
 - [Recover a Session root containing both `.jsonl` and `.jsonl.zstd`](live-session-log-durability.md#root-contains-both-physical-encodings)
 - [Separate sandbox denial, unavailable backends, and invalid same-mode escalation](sandbox-denied-vs-unavailable.md)
-- [Fix cross-provider `reasoning_content` replay on DeepSeek-compatible pi-ai routes](pi-ai-cross-provider-reasoning-replay.md)
+- [Fix `reasoning_content` replay across providers and thinking modes](pi-ai-cross-provider-reasoning-replay.md)
 - [Diagnose manual compaction aborted by its caller signal](manual-compaction-caller-abort.md)
 - [Fix pnpm store drift during plugin update](pnpm-unexpected-store-plugin-update.md)
 - [Route OpenCode Go models by protocol and entitlement](opencode-go-model-routing.md)

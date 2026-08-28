@@ -332,7 +332,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Compaction summary truncated at the token cap](docs/en/troubleshooting/compaction-summary-truncated.md)
 - [Plugin peer-dependency and ignored-build warnings](docs/en/troubleshooting/plugin-peer-dependency-warnings.md)
 - [Response and reasoning language control](docs/en/troubleshooting/response-language-and-reasoning.md)
-- [Fix cross-provider `reasoning_content` replay on DeepSeek-compatible pi-ai routes](docs/en/troubleshooting/pi-ai-cross-provider-reasoning-replay.md)
+- [Fix `reasoning_content` replay across providers and thinking modes](docs/en/troubleshooting/pi-ai-cross-provider-reasoning-replay.md)
 - [Prompt accepted before it became durable](docs/en/troubleshooting/prompt-accepted-before-durable.md)
 - [Windows folder-picker worker crash](docs/en/troubleshooting/windows-folder-picker-worker-crash.md)
 - [DeepSeek API fetch failures behind a proxy or enterprise CA](docs/en/troubleshooting/deepseek-api-fetch-failed-proxy-ca.md)

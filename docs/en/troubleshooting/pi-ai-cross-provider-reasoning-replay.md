@@ -1,13 +1,13 @@
 ---
-title: Fix Cross-Provider reasoning_content Replay in DeepSeek Harness
+title: Fix reasoning_content Replay Across Providers and Thinking Modes
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-27
 verified_upstream: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
-# Fix cross-provider `reasoning_content` replay in `llm-pi-ai`
+# Fix `reasoning_content` replay across providers and thinking modes
 
 A Session works on one provider, then a DeepSeek-compatible `openai-completions` route rejects a later tool-using request:
 
@@ -15,15 +15,24 @@ A Session works on one provider, then a DeepSeek-compatible `openai-completions`
 400 ... The `reasoning_content` in the thinking mode must be passed back to the API
 ```
 
-Treat this as a **provider-history serialization mismatch**, not a tool failure and not Session corruption. The durable history may be valid Harness data while the selected endpoint requires a wire field that a foreign-provider assistant message cannot reproduce losslessly.
+Treat this as a **current-request/history serialization mismatch**, not a tool failure and not Session corruption. The same provider text can describe two opposite failures: a reasoning request that is missing required passback, or a non-reasoning request that still carries stale reasoning history.
+
+## Route the two opposite 400s first
+
+| Current request | Historical assistant wire shape | Likely boundary | First containment |
+|---|---|---|---|
+| thinking enabled | required `reasoning_content` missing | `llm-pi-ai` cross-provider compatibility | declare the requirement only on the affected route |
+| thinking disabled | old `reasoning_content` still present | direct `llm-deepseek` mode-switch serialization | start a fresh Session, or keep thinking enabled for that Session |
+
+Do not apply the first row's compatibility flag to the second row. It asks the serializer to emit more reasoning passback when the immediate problem is that an off-mode request still contains it.
 
 ## Fast route
 
 1. Stop repeated retries; the same serialized history usually produces the same 400.
 2. Record the exact target route, model, API protocol, and first failing turn/step.
-3. Confirm whether the route is owned by `@deepseek-ai/dsh-llm-pi-ai` or the direct DeepSeek adapter.
+3. Confirm whether the route is owned by `@deepseek-ai/dsh-llm-pi-ai` or the direct DeepSeek adapter, and record the current request's resolved thinking mode.
 4. Reproduce in a copied Session or disposable profile; do not edit the original Session log.
-5. For a hand-declared DeepSeek-compatible `openai-completions` route, test the explicit compatibility switch shown below.
+5. For a hand-declared DeepSeek-compatible `openai-completions` route with thinking enabled, test the explicit compatibility switch shown below.
 6. Verify both a fresh Session and the affected cross-provider history before promoting the change.
 
 ## Why provider switching changes the wire
@@ -65,7 +74,29 @@ Then record:
 | previous assistant source provider/model | decides whether native replay metadata can be reused |
 | presence of tool calls | many thinking endpoints enforce stricter history rules on tool-use turns |
 
-The direct `dsh-llm-deepseek` adapter has its own serializer. At the verified source revision, it passes non-empty durable reasoning back as `reasoning_content`. Do not apply a `llm-pi-ai` profile fix to a route owned by that adapter.
+The direct `dsh-llm-deepseek` adapter has its own serializer. At rc.2 and alpha.1, both its text and image paths call an assistant serializer that emits every non-empty durable reasoning block as `reasoning_content`. The request builder resolves `reasoning_effort: off` to `thinking: {type: "disabled"}` separately; it does not pass that resolved mode into assistant serialization. A Session that first accumulated reasoning and then switches thinking off can therefore send both a disabled current mode and historical `reasoning_content`.
+
+That source shape explains the incompatibility reported in upstream discussion #4822. It does not prove how every DeepSeek-compatible gateway treats the combination.
+
+## Direct-adapter thinking-mode switch
+
+Use this bounded matrix before changing configuration:
+
+| Test | Expected diagnostic value |
+|---|---|
+| fresh Session, thinking off | proves the off-mode route works without reasoning history |
+| same Session after a thinking turn, then off | isolates historical replay as the trigger |
+| same history with thinking left enabled | distinguishes mode-switch mismatch from generally invalid history |
+| copied Session after cold reload | proves the behavior is durable, not only in-memory state |
+
+Safe containment today:
+
+1. Start a fresh Session when switching reasoning off after a Session has reasoning history.
+2. Alternatively, keep the Session's thinking mode consistent when policy, latency, and cost permit.
+3. Preserve the original Session as evidence. Do not delete its reasoning blocks or rewrite its JSONL.
+4. Capture only sanitized request keys and roles; reasoning text, prompts, and credentials are not needed for the reproduction.
+
+A robust source fix should resolve the current thinking state before message conversion, pass that state through both text and image serialization, omit historical `reasoning_content` when thinking is disabled, and preserve provider-required passback when it is enabled. Regression tests should cover tool calls, reasoning-only turns, image requests, cold reload, on→off and off→on switches, and confirm that durable blocks are never mutated.
 
 ## Configuration-level containment
 
@@ -122,6 +153,7 @@ Do not repeatedly submit a production Session merely to see whether the 400 chan
 | direct DeepSeek route passes, pi-ai private route fails | adapter/profile compatibility boundary confirmed | keep routes distinct and report the minimal wire diff |
 | both routes fail on the same history | shared durable content may be malformed | inspect assistant/tool pairing and first bad Session event |
 | switching back to the original provider passes | cross-provider projection is decisive | start a clean target-provider Session or define an explicit migration contract |
+| fresh off-mode Session passes, same Session after thinking fails | direct-adapter historical reasoning is decisive | use a fresh off-mode Session; report the mode-aware serialization gap |
 
 ## Prevention contract
 
@@ -147,26 +179,28 @@ For every row, assert both Harness block preservation and the exact provider wir
 - Do not delete tool results to make the request smaller.
 - Do not classify every HTTP 400 as retryable.
 - Do not enable a compatibility flag globally when only one route requires it.
+- Do not enable `requiresReasoningContentOnAssistantMessages` to fix a direct-adapter thinking-off failure.
 - Do not publish raw reasoning, prompts, credentials, or proprietary gateway payloads in an issue.
 
 ## Report a useful upstream reproduction
 
 Include:
 
-- exact DSH and `dsh-llm-pi-ai` versions;
+- exact DSH and adapter versions;
 - target protocol and sanitized hostname class;
 - source and target provider/model identities;
 - smallest ordered Harness block sequence that fails;
 - whether native replay metadata exists and matches the source;
 - sanitized before/after wire message keys;
 - fresh-Session, same-provider, and direct-adapter controls;
-- whether the explicit compat switch changes the result.
+- whether the explicit compat switch changes the result on pi-ai routes;
+- current wire `thinking.type`, and whether a fresh off-mode Session differs from an on→off Session.
 
 This evidence separates a Harness replay defect, pi-ai conversion rule, incomplete route declaration, and endpoint-specific contract.
 
 ## Verification boundary
 
-The DSH configuration and replay behavior above are source-verified at rc.2 commit [`b150a551`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e). The reported private-gateway 400 is a community observation; this handbook did not send credentials or requests to that endpoint. Whether an empty compatibility field satisfies any specific gateway must be verified against that gateway's contract and a controlled request capture.
+The pi-ai configuration and replay behavior above are source-verified at rc.2 commit [`b150a551`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e). The direct DeepSeek mode-blind assistant serialization is present in both rc.2 and alpha.1 commit [`cd5ef814`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc). The two provider 400s are community observations; this handbook did not send credentials or requests to those endpoints. Endpoint acceptance must be verified against its contract and a controlled request capture.
 
 ## Pinned official sources
 
@@ -175,3 +209,4 @@ The DSH configuration and replay behavior above are source-verified at rc.2 comm
 - [`llm-pi-ai` durable replay conversion](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-pi-ai/src/replay.ts)
 - [Direct DeepSeek assistant serialization](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/serialize.ts)
 - [Community field report #4745](https://github.com/deepseek-ai/deepseek-harness/discussions/4745)
+- [Thinking-off history field report #4822](https://github.com/deepseek-ai/deepseek-harness/discussions/4822)
