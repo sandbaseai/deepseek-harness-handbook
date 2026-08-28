@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.280 - 2026-08-28
+
+### Changed
+
+- Corrected localized coverage metadata after adding the Windows read-only PowerShell guide pair: 159 canonical and 174 localized documents.
+
 ## 0.5.279 - 2026-08-28
 
 ### Added
