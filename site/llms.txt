@@ -6,7 +6,7 @@ Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
 Latest field update (v0.5.276): DOM ownership and settings.section removeChild recursion: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/webview-mutation-observer-loop.md
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.330): correct visible multilingual coverage metadata to 191 documents after adding the SandBase bridge translations: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.330
+Latest release (v0.5.331): add a structured resource-validation Issue template for pinned revisions, harmless probes, and permission/network evidence: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.331
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 SandBase Harness MCP bridge guide: https://sandbaseai.github.io/deepseek-harness-handbook/sandbase-harness-bridge.html
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme

@@ -1,0 +1,50 @@
+name: Awesome resource validation
+description: Validate or propose one Agent-first DeepSeek Harness resource
+title: "resource: "
+labels:
+  - documentation
+body:
+  - type: input
+    id: resource
+    attributes:
+      label: Resource URL
+      description: Link the public repository or the relevant pinned catalog entry.
+      placeholder: https://github.com/owner/repository
+    validations:
+      required: true
+  - type: input
+    id: capability
+    attributes:
+      label: Capability
+      description: Choose one primary capability such as orchestration, context, MCP, memory, vision, or governance.
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Tested revision
+      description: Provide a tag or full commit SHA for version-sensitive observations.
+    validations:
+      required: true
+  - type: textarea
+    id: probe
+    attributes:
+      label: Minimal probe and result
+      description: Describe the harmless install or runtime probe and the observable success or failure signal.
+      placeholder: Installed in a copied profile; listed tools; removed layer; baseline booted.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Permission and network boundaries
+      description: Note credentials, file access, sandbox authority, network destinations, and rollback behavior.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed tokens, credentials, private paths, and sensitive prompts from this report.
+          required: true

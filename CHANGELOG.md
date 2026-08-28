@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.331 - 2026-08-29
+
+### Added
+
+- Added a structured Awesome resource validation Issue template that captures capability, pinned revision, harmless probe evidence, and permission/network boundaries.
+
 ## 0.5.330 - 2026-08-29
 
 ### Fixed
