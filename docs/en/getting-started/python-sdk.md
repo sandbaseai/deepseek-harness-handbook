@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Python SDK Quickstart
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 ---
@@ -9,6 +9,20 @@ verified_at: 2026-08-28
 # DeepSeek Harness Python SDK quickstart
 
 The rc.2 Python SDK is a programmatic alternative to the Web UI. It starts a bundled Harness runtime, runs a checked-in Agent composition, and returns a structured result to Python.
+
+## Restart recovery: `session/prompt` is not a resume operation
+
+The Python SDK `0.1.1rc1` has an important restart boundary. A `session/prompt` call with an ID that was persisted before a Harness restart can fail with `id collision`: the SDK server calls `agents.create()` again, while the persistence layer expects an existing log to be opened through a resume path. In-process continuation works; cross-restart continuation does not. This is tracked in upstream discussion [#4954](https://github.com/deepseek-ai/deepseek-harness/discussions/4954).
+
+Treat a restart as a state-recovery decision, not as a normal retry:
+
+1. Keep the original session ID and the exact `dsh_home` so the failure is reproducible.
+2. Capture the structured `turn/end` error and the persisted log before changing files.
+3. Do not overwrite the log and retry the same `session/prompt`; that only repeats creation against an existing ID.
+4. If the task can tolerate losing harness-internal state, use a copied profile and replay the client-owned conversation history as content blocks with a new session ID.
+5. Verify that the recovered turn has the expected visible context, and record that tool results, summaries, and other runtime state were not restored.
+
+The replay workaround is intentionally lossy. A safe client should expose `resume unavailable` as a distinct state, preserve the original artifact, and request an explicit SDK resume/open method rather than silently clearing a user's session. Acceptance requires: same-ID in-process continuation succeeds; same-ID after restart produces a classified error; the original log remains intact; and the fallback path creates a new ID only after the user or operator accepts the loss of internal state.
 
 > [!IMPORTANT]
 > This page is pinned to the rc.2 source snapshot. The current `0.1.2-alpha.1` source tree no longer includes `examples/jsonrpc-agent`; do not expect the commands below to work unchanged after cloning current `master`.

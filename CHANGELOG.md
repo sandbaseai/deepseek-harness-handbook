@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.382 - 2026-08-30
+
+### Added
+
+- Expanded the Python SDK quickstart with the restart-resume boundary from upstream discussion #4954, including `id collision` evidence, a lossy history-replay workaround, and acceptance checks that preserve the original session log.
+
 ## 0.5.380 - 2026-08-30
 
 ### Added
