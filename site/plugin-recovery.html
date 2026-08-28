@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>DeepSeek Harness repair and reset | Recover one profile safely</title>
-  <meta name="description" content="Diagnose a broken DeepSeek Harness profile without deleting user state. Preview one scoped repair, verify cold boot, and restore the exact snapshot on failure.">
+  <meta name="description" content="Diagnose a broken DeepSeek Harness profile, route third-party runtime-export mismatches, verify one scoped repair, and preserve user state.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html">
@@ -16,7 +16,7 @@
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness repair and reset | Recover one profile safely","description":"Diagnose a broken DeepSeek Harness profile without deleting user state. Preview one scoped repair, verify cold boot, and restore the exact snapshot on failure.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness repair and reset | Recover one profile safely","description":"Diagnose broken profiles and third-party runtime-export mismatches without deleting user state.","dateModified":"2026-08-28","url":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
@@ -27,7 +27,7 @@
   <main id="main" class="article-shell recovery-article">
     <header class="article-hero recovery-hero">
       <div>
-        <p class="eyebrow">Repair contract · rc.2 verified</p>
+        <p class="eyebrow">Repair contract · rc.2 → alpha.1</p>
         <h1>Repair one layer.<br>Never erase the home.</h1>
         <p class="article-deck">A safe reset names its profile, previews every mutation, verifies a cold boot, and can restore the exact snapshot.</p>
       </div>
@@ -105,6 +105,15 @@ dsh --profile web --dump-config &gt; after.yml</code></pre>
         <section><code>restart never returns</code><strong>Move ownership outside.</strong><p>A process cannot reliably run the continuation after terminating its own process tree.</p></section>
       </div>
 
+      <h2>Missing runtime export: choose one compatible closure.</h2>
+      <div class="recovery-routes">
+        <section><code>alpha.1 required</code><strong>Update the plugin.</strong><p>Require a release that imports <code>ToolCallId</code> and explicitly supports the alpha.1 peer surface.</p></section>
+        <section><code>plugin required</code><strong>Pin the core.</strong><p>Use the last compatible Harness release in a separate pinned installation and profile.</p></section>
+        <section><code>plugin optional</code><strong>Remove one profile dependency.</strong><p>Use <code>dsh plugin --profile web remove</code>, inspect reconciliation, then cold boot.</p></section>
+        <section><code>compat unknown</code><strong>Preserve and probe.</strong><p>Keep the broken profile as evidence and create a clean control profile.</p></section>
+      </div>
+      <div class="signal"><strong>A renamed brand may imply more than renamed text.</strong><span>Do not patch built plugin files or globally alias rc.2 <code>CallId</code> to alpha.1 <code>ToolCallId</code>. Import success is not behavioral compatibility.</span></div>
+
       <h2>Catalog metadata is not route ownership.</h2>
       <div class="ownership-contrast">
         <section><span>Request dispatch</span><strong><code>registerAdapter()</code></strong><p>Owns the live provider route and rejects duplicates atomically.</p></section>
@@ -137,6 +146,8 @@ Clean-profile reproduction:</code></pre>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/boot/app-boot/README.md">rc.2 profile and transactional HMR contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/util/atomic-write/README.md">rc.2 atomic write and lock contract</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4735">Automatic repair and reset request #4735</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4827">Third-party runtime-export mismatch #4827</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm/src/brand.ts">alpha.1 ToolCallId runtime brand</a></li>
       </ul>
 
       <section class="article-cta">

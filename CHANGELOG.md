@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.181 - 2026-08-28
+
+### Changed
+
+- Added a runtime-export compatibility route for third-party Bundles that still import rc.2 `CallId` after alpha.1 renamed the runtime brand to `ToolCallId`.
+- Documented compatible-closure choices, profile-scoped removal, unsafe aliasing boundaries, peer-range evidence, and a seven-gate plugin compatibility contract.
+
 ## 0.5.180 - 2026-08-28
 
 ### Added
