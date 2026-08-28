@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -68,6 +68,27 @@ Routing and fallback plugins can multiply provider calls. Establish a bounded bu
 | Safe structured tools | [dsh-tool-schema](https://github.com/dsh-external/dsh-tool-schema) | Validates and explains JSON Schema tool contracts without network access or dynamic execution. |
 
 File and browser capabilities expand the effect surface. Confirm path allowlists, network destinations, attachment handling, and human approval behavior in a disposable profile before enabling them for a valuable workspace.
+
+## More resources from the upstream catalog
+
+The full catalog is intentionally broad. These additional projects are useful when you are designing an Agent workflow rather than only adding a single tool:
+
+| Focus | Resource | What to inspect first |
+|---|---|---|
+| Agent comparison | [dsh-agent-arena](https://github.com/LeemanCheung/dsh-agent-arena) | Isolated worktrees, deterministic validation, and how the winning candidate is applied. |
+| Multi-agent collaboration | [dsh-collaboration](https://github.com/Socialist-Sister/dsh-collaboration) | Dispatch protocol, model roster, relay topology, and multimodal bridge permissions. |
+| Background agents | [dsh-background-agents](https://github.com/PerryLink/dsh-background-agents) | Child-session lifetime, tool scoping, delegation depth, and interruption behavior. |
+| GitHub intelligence | [dsh-github-intelligence](https://github.com/zoahdev/dsh-github-intelligence) | Read-only boundaries, provider coverage, caching, and rate-limit handling. |
+| Context visibility | [dsh-context](https://github.com/bowenliang123/dsh-context) | Per-request token accounting and whether compression/injection events are auditable. |
+| MCP discovery | [dsh-mcp-lens](https://github.com/labmimors/dsh-mcp-lens) | Lazy connections, exact schemas, remote catalog trust, and cache bounds. |
+| Memory governance | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) | Claim authority rules, scope isolation, injection caps, and local storage format. |
+| Cross-agent import | [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) | Source transcript handling, resumability, and reverse export behavior. |
+| Search without a key | [dsh-free-web-search](https://github.com/delef/dsh-free-web-search) | Fallback order, page extraction, caching, and which engines send user data off-box. |
+| Todo evidence | [dsh-todo-guard](https://github.com/a903067276-rgb/dsh-todo-guard) | Evidence states, restart recovery, and the boundary between verified and claimed work. |
+| Core utility tools | [dsh-toolkit](https://github.com/dsh-external/dsh-toolkit) | Zero-dependency tool surface and input validation before enabling broad profiles. |
+| Plugin marketplace | [dsh-plugin-hub](https://github.com/Noob-stupid/dsh-plugin-hub) | Index provenance, enable/disable semantics, rollback, and package verification. |
+
+These entries are pointers for further reading, not a recommendation to install everything together. Combining context, memory, routing, and background-agent plugins can change prompt size, cost, and authority boundaries in ways that are hard to see from a marketplace description.
 
 ## A safe selection loop
 

@@ -2,7 +2,7 @@
 title: DeepSeek Harness 生态资源能力地图
 locale: zh-CN
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 1
+source_revision: 2
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -66,6 +66,27 @@ verified_at: 2026-08-28
 | 安全结构化工具 | [dsh-tool-schema](https://github.com/dsh-external/dsh-tool-schema) | 在无网络、无动态执行条件下验证和解释 JSON Schema 工具契约。 |
 
 文件和浏览器能力会扩大副作用面。请在 disposable profile 中确认路径白名单、网络目的地、附件处理和人工审批行为，再用于重要工作区。
+
+## 上游目录中的更多资源
+
+上游全量目录覆盖面很广。下面这些项目更适合用来设计 Agent 工作流，而不只是增加一个孤立工具：
+
+| 方向 | 资源 | 首先核对什么 |
+|---|---|---|
+| Agent 对比 | [dsh-agent-arena](https://github.com/LeemanCheung/dsh-agent-arena) | 隔离 worktree、确定性校验，以及胜出候选如何应用。 |
+| 多 Agent 协作 | [dsh-collaboration](https://github.com/Socialist-Sister/dsh-collaboration) | 分发协议、模型队列、中继拓扑和多模态桥接权限。 |
+| 后台 Agent | [dsh-background-agents](https://github.com/PerryLink/dsh-background-agents) | 子 Session 生命周期、工具范围、委托深度和中断行为。 |
+| GitHub 情报 | [dsh-github-intelligence](https://github.com/zoahdev/dsh-github-intelligence) | 只读边界、覆盖的 Provider、缓存和限流处理。 |
+| 上下文可见性 | [dsh-context](https://github.com/bowenliang123/dsh-context) | 单次请求 token 统计，以及压缩/注入事件是否可审计。 |
+| MCP 发现 | [dsh-mcp-lens](https://github.com/labmimors/dsh-mcp-lens) | 延迟连接、精确 schema、远程目录信任和缓存上限。 |
+| 记忆治理 | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) | claim 权限规则、作用域隔离、注入上限和本地存储格式。 |
+| 跨 Agent 导入 | [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) | 源会话处理、可恢复性和反向导出行为。 |
+| 无 Key 搜索 | [dsh-free-web-search](https://github.com/delef/dsh-free-web-search) | fallback 顺序、页面抽取、缓存，以及哪些引擎会把数据发到外部。 |
+| Todo 证据 | [dsh-todo-guard](https://github.com/a903067276-rgb/dsh-todo-guard) | 证据状态、重启恢复，以及 verified 与 claimed 的边界。 |
+| 核心工具集 | [dsh-toolkit](https://github.com/dsh-external/dsh-toolkit) | 零依赖工具面和启用宽 profile 前的输入校验。 |
+| 插件市场 | [dsh-plugin-hub](https://github.com/Noob-stupid/dsh-plugin-hub) | 索引来源、启停语义、回滚和包验证。 |
+
+这些条目是进一步阅读的入口，不代表建议全部同时安装。上下文、记忆、路由和后台 Agent 插件叠加后，可能改变 prompt 大小、成本和权限边界，而这些变化往往不会出现在市场描述里。
 
 ## 安全选择流程
 
