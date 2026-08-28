@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.390 - 2026-08-30
+
+### Added
+
+- Expanded the pi-ai retry runbook with upstream #4361: punctuated `network_error` finish reasons can miss a word-boundary classifier and bypass bounded transport retry.
+
 ## 0.5.389 - 2026-08-30
 
 ### Added

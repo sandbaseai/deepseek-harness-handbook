@@ -1,7 +1,7 @@
 ---
 title: Fix OpenAI-Compatible server_error Responses That DeepSeek Harness Does Not Retry
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-20
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
@@ -28,6 +28,12 @@ provider overload
 ```
 
 Do not enable unconditional retries or add every unknown error to the retryable set. First prove the provider response, classified code, route policy, and durable event sequence.
+
+### Punctuated transport reasons can miss the same classifier
+
+Upstream report [#4361](https://github.com/deepseek-ai/deepseek-harness/discussions/4361) records a related failure for relays that end a stream with wire `finish_reason: network_error`. pi-ai turns that into `Provider finish_reason: network_error`, but a classifier rule written as `\bnetwork\b` does not match the underscore variant because `_` is a word character. The message then falls through to `PI_AI_ERROR`, which normal mode does not retry by default.
+
+Capture the exact finish reason before widening policy. A narrow source fix should recognize transport variants such as `network_error`, `connection error`, and `socket-error` while preserving the existing `AUTH`, quota, context, and policy classifications. Add a regression case for the exact provider message and verify one bounded `llm/retry` sequence; adding `PI_AI_ERROR` to every profile's retry list is only a temporary, less-safe workaround.
 
 ## Capture one failed step
 
@@ -151,6 +157,7 @@ The first event proves scheduling was durable. The second proves the wait comple
 ## Primary sources
 
 - [Official `server_error` report #3407](https://github.com/deepseek-ai/deepseek-harness/discussions/3407)
+- [Wire `network_error` retry classification report #4361](https://github.com/deepseek-ai/deepseek-harness/discussions/4361)
 - [rc.8 pi-ai error classifier](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-pi-ai/src/stream.ts)
 - [rc.8 provider retry policy](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm/src/retry-policy.ts)
 - [rc.8 durable retry executor](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/llm/llm-retry/src/index.ts)
