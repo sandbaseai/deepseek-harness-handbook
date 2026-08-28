@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.286 - 2026-08-28
+
+### Changed
+
+- Extended the Web client-modules boot runbook with the new upstream #4840 rebuild/startup report, while keeping its screenshot-only evidence explicitly non-diagnostic.
+
 ## 0.5.285 - 2026-08-28
 
 ### Changed

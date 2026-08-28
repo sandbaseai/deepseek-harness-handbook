@@ -1,10 +1,13 @@
 ---
 title: Fix "HTML Did Not Preload @deepseek-ai/dsh-client-modules/client.js"
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4840
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4885
 ---
 
 # Fix `HTML did not preload @deepseek-ai/dsh-client-modules/client.js`
@@ -49,7 +52,7 @@ curl -i 'http://127.0.0.1:PORT/plugins/??...&rev=...'
 
 Preserve status, content type, content length, redirect chain, content encoding, and a hash of the body. In browser DevTools, export a HAR and record the first console error. Redact credentials and private plugin names before sharing evidence.
 
-The bootstrap URL is normally a revisioned `/plugins/??...` combo containing the client-modules row. Do not invent the URL, strip its `rev`, or reuse one captured before a restart.
+The bootstrap URL is normally a revisioned `/plugins/??...` combo containing the client-modules row. Do not invent the URL, strip its `rev`, or reuse one captured before a restart. The same visible error has now been reported after a source pull and rebuild in #4840; that report contains only a screenshot, so treat it as a reproduction lead rather than proof that the dependency is missing.
 
 ### Check the Node resolver signature before blaming the browser
 
@@ -150,3 +153,4 @@ The queue facade, exact error condition, structured index injection order, parse
 - [Alpha.1 boot protocol tests](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/modules/tests/node-half.client.spec.ts)
 - [Alpha.1 Web frontend package contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/web/package.json)
 - [Boot error report #4836](https://github.com/deepseek-ai/deepseek-harness/discussions/4836)
+- [Rebuild/startup report #4840](https://github.com/deepseek-ai/deepseek-harness/discussions/4840)
