@@ -1,7 +1,7 @@
 ---
 title: Spawn Subagent Drops Reasoning Effort
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -18,6 +18,21 @@ Use this runbook when a parent Agent can call a reasoning model successfully, bu
 On DeepSeek Harness `0.1.1-rc.2`, the in-process `spawn` route inherits the parent's provider, model, and output-token cap, but not its selected `reasoningEffort`. A provider that permits omission may hide the gap. A provider that requires an explicit thinking level rejects the child's first request.
 
 This is a child-route fidelity failure. It is not proof that the parent model setting is invalid.
+
+## Do not trust the Session-creation model snapshot
+
+A separate failure can look like reasoning-effort drift: the Web UI switches the current conversation from one model to another, but a plain `subagent` spawned afterward continues using the model captured when the Session was created. Upstream report [#1472](https://github.com/deepseek-ai/deepseek-harness/discussions/1472) observed a visible `deepseek-v4-flash` selection while every child still used `deepseek-v4-pro`, with the corresponding unexpected billing.
+
+Keep these values separate in evidence:
+
+| Value | Scope | Safe interpretation |
+|---|---|---|
+| Session `options.model` | creation-time snapshot | Default route captured at Session creation |
+| current UI selection | live per-request choice | Model the current turn intends to use |
+| child first-request header | executed child route | Authoritative model/provider evidence |
+| `settings.yaml` default | fallback when no Session model exists | Does not override an existing Session snapshot |
+
+When cost or quality matters, inspect the child’s first request/header rather than the model chip in the parent UI. A new Session with the desired model or a workflow tool with an explicit child model is a workaround; changing a global default is not proof that existing Sessions changed.
 
 > **Version boundary:** the source tagged `dsh-v0.1.2-alpha.1` adds `reasoningEffort` to `AgentOptions`, reads the parent's latest request header, and carries the effort into fresh children. If the same failure appears in an environment described as alpha.1, first prove the active package graph and child header. Do not assume the tagged fix is the code actually executing.
 
@@ -185,6 +200,8 @@ Per-delegation selection is a separate product surface. Fixing inheritance does 
 - [alpha.1 AgentOptions with reasoning effort](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/core/agent/src/runtime-types.ts)
 - [alpha.1 child route inheritance](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/subagent/subagent/src/child-agent.ts)
 - [Official alpha.1 symptom report #4850](https://github.com/deepseek-ai/deepseek-harness/discussions/4850)
+- [Subagents inherit a stale Session-start model (#1472)](https://github.com/deepseek-ai/deepseek-harness/discussions/1472)
+- [Subagent preset/model/effort override showcase (#4254)](https://github.com/deepseek-ai/deepseek-harness/discussions/4254)
 
 ## Related handbook guides
 
