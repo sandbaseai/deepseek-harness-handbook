@@ -1,7 +1,7 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -198,6 +198,31 @@ workspace with the redundant field removed. Keep the approval boundary explicit:
 Never work around this class of error by silently rewriting a user-approved
 permission into a wider one. The serialized request and the runtime's effective
 mode are separate evidence, and both belong in the incident record.
+
+## Missing exports during a source build
+
+If a Windows source checkout fails in `build:lib` with several `MISSING_EXPORT`
+errors across `agent-presets` or `api-remotes`, classify it as a workspace
+revision or generated-artifact mismatch before changing Node. Upstream report
+[discussion #4794](https://github.com/deepseek-ai/deepseek-harness/discussions/4794)
+shows the failure on Windows 11 with Node 24.15.0.
+
+Preserve the commit, branch, Node and pnpm versions, then verify the dependency
+graph from that same checkout:
+
+```sh
+git rev-parse HEAD
+git status --short
+node --version
+pnpm --version
+pnpm install --frozen-lockfile
+pnpm run build
+```
+
+Do not copy `lib` output from another commit or add ad-hoc re-exports to make the
+bundle pass. If a clean, frozen install still reports imports that the provider
+package does not export, record the first missing symbol and source paths and
+report the cross-package revision mismatch upstream.
 
 The invoking directory is the default workspace root. Therefore a valid reproduction record needs three independent coordinates:
 
