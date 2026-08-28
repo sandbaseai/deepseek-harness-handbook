@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.355 - 2026-08-30
+
+### Added
+
+- Added the public `dsh-codex-ui` project to the Agent-first resource map, covering its DSH Web extension-point and session-navigation boundaries.
+
 ## 0.5.353 - 2026-08-30
 
 ### Changed

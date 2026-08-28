@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -110,6 +110,7 @@ The upstream catalog is not the only discovery surface. These public projects cu
 | Desktop lifecycle | [dsh-tray](https://github.com/liulifu/dsh-tray) | Restart, multi-profile binding, recovery snapshots, and plugin-failure containment. |
 | Local-first desktop feedback | [dsh-whale-musume](https://github.com/Sutera-Diffusus/dsh-whale-musume) | Work-state feedback and telemetry boundaries for a DSH Web desktop pet. |
 | Session corruption repair | [dsh-corrupt-session-repair](https://github.com/MedicineKing/dsh-corrupt-session-repair) | Zero-install scanner, deterministic corpus, and repair evidence for crash-recovery sequence corruption; keep real logs private. |
+| Codex-style Web UI | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | Public DSH Web extension points for workspace/session navigation, search, and turn orientation; verify compatibility before installing. |
 
 ## Four practical starter paths
 
