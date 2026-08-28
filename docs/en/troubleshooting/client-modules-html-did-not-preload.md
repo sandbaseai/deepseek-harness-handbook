@@ -1,7 +1,7 @@
 ---
 title: Fix "HTML Did Not Preload @deepseek-ai/dsh-client-modules/client.js"
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-28
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -50,6 +50,12 @@ curl -i 'http://127.0.0.1:PORT/plugins/??...&rev=...'
 Preserve status, content type, content length, redirect chain, content encoding, and a hash of the body. In browser DevTools, export a HAR and record the first console error. Redact credentials and private plugin names before sharing evidence.
 
 The bootstrap URL is normally a revisioned `/plugins/??...` combo containing the client-modules row. Do not invent the URL, strip its `rev`, or reuse one captured before a restart.
+
+### Check the Node resolver signature before blaming the browser
+
+Upstream discussion [#4885](https://github.com/deepseek-ai/deepseek-harness/discussions/4885) reports the same visible error on Node `24.9.0`, while Node 22 starts normally. In that case `resolveSync` was called with the older argument order; Node 24 threw a type error, the loader caught it and returned `undefined`, and the resulting empty client table caused the HTML invariant to fail. The browser message is therefore downstream evidence, not proof of a missing package or a cache defect.
+
+Record the Node version, the first Host-side resolver exception, and whether the client table is empty before changing proxy or HTML settings. Compare a pinned Node 22 run with the same profile and source revision, then rebuild the client modules under the intended Node version. Do not “fix” the symptom by relaxing the preload assertion: a missing registration still means the Web runtime cannot safely construct its client graph.
 
 ## Route the failure
 
