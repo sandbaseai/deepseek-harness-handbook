@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.346 - 2026-08-29
+
+### Added
+
+- Added a resumed-Agent tool-view runbook based on upstream discussion #4946, separating bridge disposal lifecycle from core scope binding.
+
 ## 0.5.345 - 2026-08-29
 
 ### Added

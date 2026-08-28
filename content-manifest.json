@@ -200,6 +200,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/resumed-agent-tool-view-missing.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/acp-inline-image-python-sdk.md",
       "revision": 1,
       "translations": {}
