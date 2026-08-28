@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.243 - 2026-08-29
+
+### Changed
+
+- Extended the npx install-boundary guide with #4872's npm OOM report and pnpm control result, while keeping package-manager behavior distinct from package-graph correctness.
+
 ## 0.5.242 - 2026-08-29
 
 ### Changed

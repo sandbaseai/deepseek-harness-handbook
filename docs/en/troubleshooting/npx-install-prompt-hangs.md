@@ -1,7 +1,7 @@
 ---
 title: Diagnose npx Hanging While Installing DeepSeek Harness
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
@@ -159,7 +159,7 @@ If `--version` succeeds but `web` does not, retain the exact same version and di
 
 ### When npm itself spins or OOMs
 
-Recent field reports add a different install boundary. Discussions [#3786](https://github.com/deepseek-ai/deepseek-harness/discussions/3786), [#3890](https://github.com/deepseek-ai/deepseek-harness/discussions/3890), and [#4236](https://github.com/deepseek-ai/deepseek-harness/discussions/4236) describe npm 10/11 spending all CPU—or exhausting the default Node heap—while resolving the published package's peer graph. In those reports there is no registry traffic and no Harness process yet. Treat this as npm Arborist/dependency resolution, not a Web boot hang.
+Recent field reports add a different install boundary. Discussions [#3786](https://github.com/deepseek-ai/deepseek-harness/discussions/3786), [#3890](https://github.com/deepseek-ai/deepseek-harness/discussions/3890), [#4236](https://github.com/deepseek-ai/deepseek-harness/discussions/4236), and the newer [#4872](https://github.com/deepseek-ai/deepseek-harness/discussions/4872) describe npm 10/11 spending all CPU—or exhausting the default Node heap—while resolving the published package's peer graph. In those reports there is no registry traffic and no Harness process yet. Treat this as npm Arborist/dependency resolution, not a Web boot hang. #4872 adds a useful control: the same environment completed with pnpm, which narrows the boundary to the package-manager path but does not prove the package graph is correct.
 
 Capture the exact package version, Node/npm versions, RSS or heap evidence, and whether the same attempt completes with the repository's supported package manager. As a bounded diagnostic, one isolated install with `--legacy-peer-deps` can test whether peer resolution is the boundary; it is not a production fix. That flag skips peer contracts and may leave runtime packages absent, so install only in a disposable directory and follow with `dsh --version` plus a Web smoke test. Do not present a successful legacy-peer install as proof that the published dependency metadata is correct, and do not add the flag to every command without recording the trade-off.
 
@@ -191,6 +191,7 @@ Verified on 2026-08-20 against the official package registry and DeepSeek Harnes
 - [npm peer-resolution CPU loop report #3786](https://github.com/deepseek-ai/deepseek-harness/discussions/3786)
 - [Linux npm OOM report #3890](https://github.com/deepseek-ai/deepseek-harness/discussions/3890)
 - [npm install peer-dependency loop report #4236](https://github.com/deepseek-ai/deepseek-harness/discussions/4236)
+- [npx npm dependency-resolution OOM report #4872](https://github.com/deepseek-ai/deepseek-harness/discussions/4872)
 - [npm exec and npx execution contract](https://docs.npmjs.com/cli/v11/commands/npm-exec/)
 - [npm cache guidance](https://docs.npmjs.com/cli/v11/commands/npm-cache/)
 - [npm logging and timing guidance](https://docs.npmjs.com/cli/v11/using-npm/logging/)
