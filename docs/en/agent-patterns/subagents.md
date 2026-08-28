@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Subagents Guide
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -50,6 +50,19 @@ persisted child Session
 No second message queue is introduced. Follow-ups use the child's ordinary Agent inbox, so accepted messages retain one observable FIFO order.
 
 That inbox is not synonymous with “messages I sent.” It can also contain initial input, child-local or plugin input, steering context, and runtime settlement notices that wake a parent after its own child finishes. Any queue-control API must preserve those other owners.
+
+## Bind child lifetime to the parent owner
+
+The child identity is durable, but its live Activation still has an owner. Treating the continuation manager's service scope as that owner creates a production trap: a parent can dispose while a child remains live, and the child can continue consuming memory or waiting on a settlement that no longer has a receiver. Upstream discussion [#4909](https://github.com/deepseek-ai/deepseek-harness/discussions/4909) describes this as a missing lifecycle-handoff contract.
+
+Use the parent Agent's effect scope as the disposal boundary when the child is owned by that parent. The contract should make four edges observable:
+
+1. **Ownership:** parent disposal marks every owned child as closing and prevents new follow-ups.
+2. **Cascade:** disposal drains descendants exactly once; an explicit `drain` call is not a substitute for the owner hook.
+3. **Hung work:** a child that never settles has a bounded watchdog or an explicit force-reclaim policy; waiting on `whenIdle()` alone is not a timeout.
+4. **Settlement:** a child settlement either reaches its live parent or is durably recorded as an orphaned handoff; silently returning because the parent disappeared loses operator evidence.
+
+Verify the boundary with parent-first, child-first, hung-child, and crash-restart tests. Record child id, parent id, ownership scope, disposal reason, and final settlement status. A prompt asking a child to stop is not lifecycle control: the host must still prove that the Activation was disposed and that external effects were independently checked.
 
 ## Start, follow up, and interrupt
 
