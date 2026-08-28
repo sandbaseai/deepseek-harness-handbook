@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.179 - 2026-08-28
+
+### Changed
+
+- Added the 1M→200K model-switch capacity transition and explained why rc.2 can run pre-step pressure checks against the previous durable route before recording the smaller route.
+- Added a pre-switch recovery procedure, safe post-failure containment, transition-aware source contract, and large→small regression gates.
+
 ## 0.5.178 - 2026-08-28
 
 ### Changed

@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>DeepSeek Harness context overflow and compaction loops</title>
-  <meta name="description" content="Classify DeepSeek Harness context overflow correctly, price the separate recovery envelope, and stop identical non-converging compaction attempts.">
+  <meta name="description" content="Classify DeepSeek Harness context overflow, make large-to-small model switches safe, price the recovery envelope, and stop non-converging compaction attempts.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html">
   <meta property="og:type" content="article"><meta property="og:title" content="Recovery is a second request. It must fit and converge.">
-  <meta property="og:description" content="Classify the provider error, price both envelopes, and stop a stable failed-range fingerprint.">
+  <meta property="og:description" content="Classify the provider error, guard model-capacity transitions, price both envelopes, and stop a stable failed-range fingerprint.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image"><link rel="stylesheet" href="./styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness context overflow and compaction loops","description":"Classify DeepSeek Harness context overflow correctly, price the separate recovery envelope, and stop identical non-converging compaction attempts.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"DeepSeek Harness context overflow and compaction loops","description":"Classify context overflow, guard large-to-small model transitions, price the recovery envelope, and stop non-converging compaction attempts.","dateModified":"2026-08-28","url":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/context-window-overflow.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
@@ -24,7 +24,7 @@
 
   <main id="main" class="article-shell overflow-article">
     <header class="article-hero overflow-hero">
-      <div><p class="eyebrow">Context overflow · compaction · rc.2</p><h1>Recovery is a second request.<br>It must fit and converge.</h1><p class="article-deck">Classify the provider error, price both envelopes, and stop identical failed ranges.</p><div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream b150a55</span></div></div>
+      <div><p class="eyebrow">Context overflow · model switch · compaction</p><h1>Recovery is a second request.<br>It must fit and converge.</h1><p class="article-deck">Guard capacity transitions, classify the provider error, price both envelopes, and stop identical failed ranges.</p><div class="article-meta"><span>Verified 2026-08-28</span><span>rc.2 · b150a55</span></div></div>
       <div class="overflow-trace" role="img" aria-label="DeepSeek returns quota limit reached, Harness normalizes it as invalid request, and automatic recovery is not called">
         <section><small>Classify</small><strong>canonical code</strong><code>not generic 5xx</code></section><i>→</i>
         <section><small>Price</small><strong>recovery envelope</strong><code>system + tools + replay</code></section><i>→</i>
@@ -57,6 +57,13 @@
         <section class="overflow-path-missed"><small>Compaction</small><code>system + tools + selected replay</code><strong>+ instruction + summary output</strong><p>A recovery label does not make this envelope smaller.</p></section>
       </div>
 
+      <h2>A smaller model is a capacity transition.</h2>
+      <div class="overflow-paths">
+        <section><small>Pre-step check</small><code>last durable route: 1M</code><strong>old threshold</strong><p>rc.2 pressure handling reads the latest Session request header.</p></section>
+        <section class="overflow-path-missed"><small>Request build</small><code>pending route: 200K</code><strong>new denominator</strong><p>The smaller capacity is recorded after pre-step, before the provider call.</p></section>
+      </div>
+      <div class="signal"><strong>Compact before the downgrade.</strong><span>If prompt plus requested output cannot fit 200K with headroom, compact while the approved 1M route can still read the Session—or continue in a new Session with a concise handoff.</span></div>
+
       <h2>Stop a stable failure fingerprint.</h2>
       <div class="overflow-evidence"><pre><code>trigger + route + replaceGeneration
 + selected start:end + token count
@@ -80,6 +87,7 @@
       <ul class="source-list">
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/3399">Upstream report #3399</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4420">llama.cpp recovery and media report #4420</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4826">1M→200K model-switch report #4826</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/error.ts">rc.2 shared error classifier</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/index.ts">rc.2 recovery and retry proof</a></li>
         <li><a href="./pi-ai-image-media-type.html">Related WebP media-capability route</a></li>

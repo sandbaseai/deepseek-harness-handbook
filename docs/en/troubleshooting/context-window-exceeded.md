@@ -1,9 +1,9 @@
 ---
 title: Fix DeepSeek Harness Context Window Exceeded Errors
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -125,6 +125,34 @@ provider admission      = prompt + requested completion <= context window
 The System, Tools, and Messages rows in the meter are also a heuristic composition estimate. They are not expected to add up to the provider-anchored numerator. The fixed estimator can underprice CJK text and JSON schemas, while the headline stays anchored to the newest provider usage sample plus later surface changes.
 
 Reasoning tokens are not simply missing from cumulative usage: they are included in `outputTokens`. They do not belong to the prompt-only occupancy numerator. When deciding whether the next request fits, read the provider error and combine the displayed prompt estimate with the active completion reservation.
+
+## Switching to a smaller model is a capacity transition
+
+A Session that fits a 1M-token model can become immediately unsendable when its route changes to a 200K-token model. A meter above 100 percent after that switch is not proof that the automatic compactor ignored a normal threshold crossing: at rc.2, the pressure listener and the new request do not necessarily resolve the route at the same moment.
+
+The source order is:
+
+```text
+agent/pre-step
+  → automatic compaction reads session.requestHeader() (last durable request route)
+  → request construction resolves current Agent options
+  → new request/header and request/context are appended
+  → provider call
+```
+
+If the last durable request used the 1M model, the pre-step pressure check can still price the Session against that old route. The 200K capacity is recorded only when the next request is built. That request can reach the provider before another pre-step gets a chance to compact against the smaller denominator. This is a **route-transition timing gap**, distinct from a missing overflow classifier.
+
+### Safe model-downgrade procedure
+
+1. Before switching, record the old and new provider/model IDs, exact `contextWindow` values, active `maxTokens`, and current projected prompt tokens.
+2. Calculate the new admission budget: `projected prompt + requested output <= new contextWindow`.
+3. If the Session is already above the new safe budget, compact while the old large route can still read it, or create a concise continuation in a new Session.
+4. Switch only after the reduced surface fits the smaller model with useful headroom.
+5. Send one small control prompt and confirm the newest `request/header` and `request/context` name the smaller route.
+
+If the route was already switched and both the next turn and `/compact` fail, stop retrying. Switch back only to perform one evidence-preserving compaction if the original model remains approved and available; otherwise create a new Session with a short handoff. Switching back does not repair an already-open or stuck turn by itself, and repeated toggles obscure which request header owns each failure.
+
+For a source fix, pressure handling should compare the pending step's resolved route with the last durable route before provider admission. A capacity decrease that puts the measured surface above the new threshold should compact or reject the transition with an actionable diagnostic. Regression coverage needs 1M→200K and 200K→1M changes, same-provider and cross-provider changes, cold reload, missing capacity metadata, failed summarization, and proof that the first smaller-model request is never sent over budget.
 
 ## Fast recovery for one conversation
 
@@ -269,6 +297,8 @@ After changing configuration or compacting, verify all of these:
 10. The priced recovery envelope fits the configured summarization route before a provider call is repeated.
 11. A truncated or non-shrinking summary leaves the original surface unchanged and closes its transaction durably.
 12. The same failed range and surface generation are not summarized again without an adaptive change.
+13. A large→small model switch is checked against the pending route before its first provider call.
+14. A failed downgrade leaves the original Session intact and offers a clean-continuation path.
 
 ## Diagnostic bundle for an upstream report
 
@@ -295,11 +325,14 @@ Summary finish reason and output usage:
 Repeated failure fingerprint count:
 Was /compact available and what did it report?:
 Did a new empty session reproduce?:
+Previous provider/model and contextWindow:
+Pending provider/model and contextWindow:
+Did the first smaller-route request reach the provider before compaction?:
 ```
 
 ## Source boundary
 
-This revision was verified against DeepSeek Harness commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` (`0.1.1-rc.2`). The #4420 request sizes and failure rates are reporter measurements, not independent Handbook reproductions.
+This revision was verified against DeepSeek Harness commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e` (`0.1.1-rc.2`). The #4420 request sizes and failure rates and the #4826 1M→200K failure are reporter measurements, not independent Handbook reproductions.
 
 - [Shared context-overflow classifier](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm/src/error.ts)
 - [Direct DeepSeek HTTP error normalization](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-deepseek/src/adapter.ts)
@@ -317,3 +350,5 @@ This revision was verified against DeepSeek Harness commit `b150a551b8d465e31e41
 - [rc.2 pi-ai failure mapping](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-pi-ai/src/stream.ts)
 - [rc.2 overflow recovery and retry proof](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/index.ts)
 - [rc.2 compaction region transaction](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/compaction/compaction-basic/src/region.ts)
+- [rc.2 request construction and capacity-record ordering](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/agent-loop/src/agent.ts)
+- [Large-to-small model context report #4826](https://github.com/deepseek-ai/deepseek-harness/discussions/4826)
