@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**148 canonical guides · 157 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
+**148 canonical guides · 157 localized documents · rc.2 + alpha.1 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -26,13 +26,13 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
-| [Recover a same-seq event carrying foreign Session content](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html) | Treat different values as an isolation conflict, preserve restricted evidence, and separate original corruption from a generic Zstandard recompression failure. |
-| [Enable cross-Session transcript search without calling it memory](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) | rc.2 ships Session query, SQLite FTS, Host search, and model tools; base indexing and Agent access remain deliberate opt-ins. |
-| [Design PDF and non-image composer attachments](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | Browser intake, durable Session replay, and Agent-readable evidence are three contracts; a Host disk path must not become the message identity. |
-| [Choose `single`, `chain`, `keyed`, or `list` for a Client slot](docs/en/plugin-development/persistent-web-ui-client-plugin.md) | Slot cardinality encodes ownership: replacement, election, dispatch, or coexistence; independent Turn badges require an ordered list. |
-| [Place beam/search frontier selection at the correct runtime boundary](docs/en/architecture/agent-lifecycle.md) | Multi-candidate expansion, scoring, budgets, effect isolation, and deterministic replay belong outside the linear driver and intra-step tool scheduler. |
+| [Fix `HTML did not preload @deepseek-ai/dsh-client-modules/client.js`](docs/en/troubleshooting/client-modules-html-did-not-preload.md) | The package name is not the diagnosis: capture one boot generation and route Host injection, revisioned `/plugins` bytes, script order, proxies, caches, and unsupported bare frontend launches. |
+| [Stop repeated `000000...` output before it consumes the cap](docs/en/troubleshooting/degenerate-model-output.md) | Preserve answer/reasoning/tool channel and billing evidence; `max-tokens` is the finish reason while degeneration is a separate content-shape failure. |
+| [Repair a TUI where every registry slash command reads `undefined.aborted`](docs/en/troubleshooting/tui-slash-command-signal-images-slot.md) | The official ABI is `(agent, line, images, signal)`; patch both dispatch paths, keep `[]` in the image slot, and verify cancellation rather than masking the caller mismatch. |
+| [Implement Regenerate reply without mutating history](docs/en/troubleshooting/stuck-turn-stop-and-retry.md#regenerate-reply-means-branch-then-replay) | Fork from the previous completed Turn, re-admit ordered human input and images into the child, reconcile partial child creation, and never pretend branching rolls back external effects. |
+| [Install alpha.1 when its GitHub Release exists but npm returns E404](docs/en/getting-started/install-deepseek-harness.md) | GitHub Release, tag, source manifest, npm artifact, dist-tag, and executable are separate identities; select only a route whose exact bytes are actually published. |
 
-Each entry above is checked against the official rc.2 source at [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e), records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
+Each entry above names its pinned official source revision—currently rc.2 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) or alpha.1 [`cd5ef814…`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc)—records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 
 If the handbook resolves a real question, **[star it on GitHub](https://github.com/sandbaseai/deepseek-harness-handbook)**. That signal helps the next Agent builder find a source-backed answer instead of another unverified command list. If a claim differs from the runtime you operate, [open an evidence report](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new/choose) with the exact DSH version and first failing boundary.
 
