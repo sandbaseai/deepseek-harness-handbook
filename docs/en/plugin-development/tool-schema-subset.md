@@ -1,7 +1,7 @@
 ---
 title: Author Tool Schemas for the DeepSeek Harness Enforced Subset
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -190,6 +190,18 @@ When the vocabulary cannot express a domain rule:
 5. document the body-owned constraint beside the tool.
 
 Do not translate `pattern` into a description and assume the description is enforcement.
+
+### Keep Code Mode schemas inside the SDK vocabulary
+
+An MCP server may accept extended JSON Schema keywords while the DeepSeek Harness Code Mode SDK can render only its enforced subset. Upstream discussion [#4916](https://github.com/deepseek-ai/deepseek-harness/discussions/4916) reports those fields appearing as `unknown` in the generated `run_code` tool. This is a presentation and contract mismatch, not proof that the MCP server lost its runtime validation.
+
+Capture both representations before changing the server:
+
+```text
+MCP initialize/tools/list response  →  normalized DSH schema  →  Code Mode type/display
+```
+
+If a keyword is outside the DSH vocabulary, keep the boundary explicit: remove it from the model-facing schema only when the tool body or MCP server still validates the rule, label the displayed field as unconstrained when necessary, and add a direct execution test that proves invalid input is rejected. Do not silently widen the schema merely to make the UI stop saying `unknown`, and do not infer support from a successful MCP `tools/list` response alone.
 
 ## Route double-encoded structured arguments before coercing them
 
