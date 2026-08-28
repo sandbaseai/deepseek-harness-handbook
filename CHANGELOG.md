@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.222 - 2026-08-29
+
+### Changed
+
+- Added a current discovery-only intake table for `dsh-graph` and `dsh-subagent-workspace-ui`, linking upstream announcements while keeping artifact, runtime, and security verdicts explicitly unproven.
+
 ## 0.5.221 - 2026-08-29
 
 ### Changed

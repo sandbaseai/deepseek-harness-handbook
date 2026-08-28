@@ -1,9 +1,9 @@
 ---
 title: DeepSeek Harness Community Plugin Audit
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-29
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -28,6 +28,17 @@ Treat every community plugin as a Host software supply-chain decision.
 | successful `dsh plugin add` | package-manager completion | that the profile composes or boots safely |
 
 The official project recommends the `dsh-plugin` topic for discoverability. It does not define the topic as an official marketplace or approval boundary.
+
+### Current community announcements: discovered, not approved
+
+Two recent upstream discussions are useful discovery signals, not security or compatibility verdicts:
+
+| Project | Announcement | Claimed release | Intake command | What is still unproven |
+|---|---|---:|---|---|
+| `miuzel/dsh-graph` | [#4877](https://github.com/deepseek-ai/deepseek-harness/discussions/4877) | `dsh-graph@0.7.2` | `dsh plugin --profile <name> add dsh-graph` | exact npm integrity, lifecycle effects, graph-file trust boundary, and runtime matrix |
+| `miuzel/dsh-subagent-ui` | [#4876](https://github.com/deepseek-ai/deepseek-harness/discussions/4876) | `dsh-subagent-workspace-ui@1.1.3` | `dsh plugin --profile web add dsh-subagent-workspace-ui` | exact artifact, browser-local state behavior, session-read scope, and cleanup after removal |
+
+The rows intentionally use **discovered** language. Before installing either candidate, resolve the registry tarball, inspect its `dsh` bundle patch and lifecycle scripts, pin the exact version/integrity, and test in a disposable profile. Screenshots, a discussion post, a package name, or a high star count do not promote a row to `installable`, `runtime-compatible`, or `security-reviewed`.
 
 ## A runtime-tested catalog is still a discovery surface
 
