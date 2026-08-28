@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.216 - 2026-08-29
+
+### Changed
+
+- Completed the fluent review requested in issue #226 for the five Simplified Chinese README topic summaries.
+- Marked the Chinese landing page `reviewed` and synchronized its verified corpus totals to 151 canonical and 160 localized documents.
+
 ## 0.5.215 - 2026-08-28
 
 ### Changed
