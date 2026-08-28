@@ -1,7 +1,7 @@
 ---
 title: Generate Strict Typert Artifacts for an Out-of-Tree DeepSeek Harness Plugin
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -49,6 +49,12 @@ Installed protocol packages introduce a second boundary. Upstream reports [#2981
 Treat the dependency as an external type-graph target, not as a package to copy into workspace registration. Accept only an exact, non-root `package.json#exports` subpath whose resolved file remains inside the dependency root. Preserve its resolved symbol identity through the generated declaration; do not replace `Agent` with a caller-supplied string or redeclare a look-alike `SessionId` alias. Those workarounds remove Host lookup, Agent Scope, or codec identity from the Remote contract.
 
 Prove this layer separately: resolve the physical package root and exact export subpath; reject root and wildcard exports; inspect the generated import target for the canonical wire symbol; typecheck same-named symbols from two dependencies; then pack the plugin and run a real browser Remote call through the generated strict codec. If metadata discovery fails, diagnose #2981 first. If discovery succeeds but the public wire symbol is rejected, diagnose this ownership/export layer. “Generator exited zero” proves neither.
+
+### “Strict” must reject unknown fixed-object fields
+
+The generated codec is another contract boundary. Upstream report [#4535](https://github.com/deepseek-ai/deepseek-harness/discussions/4535) shows rc.2 fixed-property objects emitted with Zod’s default `z.object`, which accepts an undeclared field and silently strips it. A payload such as `{ objective, projectId }` can therefore report success while the carrier receives only `{ objective }`; downstream code cannot tell a conforming request from one that attempted to add scope or policy.
+
+For fixed JSON objects, test the intended behavior explicitly: unknown top-level and nested request fields, unknown result fields, inherited/intersection properties, empty DTOs, and recursive shapes must be rejected or reported according to the documented contract. Preserve open semantics for `Record<K,V>`, index signatures, `object`, `unknown`, `any`, and `src-json` fallbacks. A successful `safeParse` after changing the caller’s value is not strict validation.
 
 ### 3. The resolved package root must be inside `packages`
 
@@ -184,6 +190,7 @@ Renaming the existing constructor option to `workspaceRoot`, or replacing the po
 - The exact artifact allowlist is present; empty and extra sets fail.
 - Host and Client exports point to the correct face files.
 - Remote export exists only when Remote methods are emitted.
+- Fixed-object codecs reject unknown request and result fields without creating business state or Session events.
 - `files` includes every published JavaScript and declaration artifact.
 - The packed package contains the same verified bytes.
 - A clean consumer can resolve every declared subpath.
@@ -198,6 +205,7 @@ Verified against DeepSeek Harness `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2
 - [Out-of-tree Typert generation discussion #4679](https://github.com/deepseek-ai/deepseek-harness/discussions/4679)
 - [Typert misses `@Remote` metadata from npm protocols (#2981)](https://github.com/deepseek-ai/deepseek-harness/discussions/2981)
 - [Typert rejects external public Agent wire types (#4579)](https://github.com/deepseek-ai/deepseek-harness/discussions/4579)
+- [Typert strict object codecs strip unknown fields (#4535)](https://github.com/deepseek-ai/deepseek-harness/discussions/4535)
 - [Workspace generator implementation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/typert/generator/src/workspace.ts)
 - [Workspace discovery and containment](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/typert/generator/src/analyzer.ts)
 - [Empty-selection contract tests](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/typert/generator/tests/type-model.spec.ts)
