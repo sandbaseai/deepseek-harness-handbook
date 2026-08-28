@@ -1,7 +1,7 @@
 ---
 title: Resume Historical DeepSeek Harness Sessions After the code to ptc Preset Rename
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -18,6 +18,20 @@ agent-presets: preset "code" not found
 ```
 
 This is a preset-identity migration failure, not evidence that the Session log is corrupt. Preserve the Session and restore a compatible preset name before considering any durable-history edit.
+
+## Separate the new PTC vocabulary from durable Session data
+
+The alpha.1 release continues the rename in user-facing documentation and spill-policy prose: new references should say **PTC** (the shipped preset id is `ptc`), not “Code Mode” or the old `code` preset. That vocabulary cleanup does **not** retroactively migrate a stored Session. A historical header or projection can still contain `code`, while event and plugin names may intentionally retain Code terminology for compatibility.
+
+When reviewing an upgrade, treat these as two independent checks:
+
+| Layer | What to expect after the upgrade | Safe operator action |
+|---|---|---|
+| Presentation and current docs | PTC/`ptc` naming in the shipped roster, notes, and spill policy | update new runbooks and screenshots to PTC terminology |
+| Durable Session identity | an existing `agentPreset: code` may remain | preserve it and use the explicit compatibility alias below |
+| Session-persistent event/plugin vocabulary | legacy Code names may remain by design | do not bulk-rename serialized values |
+
+The upstream rename follow-up is therefore evidence about terminology, not permission to rewrite compressed history. If a log opens under a current `ptc` Session but its archived projection still says `code`, keep the original artifact and record which compatibility object resolved it.
 
 ## Why the old name blocks the whole Session
 
@@ -127,10 +141,11 @@ A durable fix should make the compatibility decision explicit and versioned:
 
 ## Source boundary
 
-Verified against the official rename commit `3ca9c7d4891760ba366123bf9f5d45ed7133c088` and alpha.1 commit `cd5ef8148158c3a752a658978873241fdf8e2bbc` on 2026-08-28. Discussion #4829 is the incident observation; this handbook did not mutate or execute the reporter's Session.
+Verified against the official rename commit `3ca9c7d4891760ba366123bf9f5d45ed7133c088`, the alpha.1 release commit `cd5ef8148158c3a752a658978873241fdf8e2bbc`, and the follow-up terminology sync `188d77e` on 2026-08-28. Discussion #4829 is the incident observation; this handbook did not mutate or execute the reporter's Session.
 
 - [Historical Session failure report #4829](https://github.com/deepseek-ai/deepseek-harness/discussions/4829)
 - [Official `code` → `ptc` rename commit](https://github.com/deepseek-ai/deepseek-harness/commit/3ca9c7d4891760ba366123bf9f5d45ed7133c088)
+- [Follow-up PTC terminology sync](https://github.com/deepseek-ai/deepseek-harness/commit/188d77e)
 - [Alpha.1 Session resume and preset composition](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/agent.ts)
 - [Alpha.1 preset identity and unknown-preset error](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/src/preset.ts)
 - [Alpha.1 preset authoring and copy boundary](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/src/authoring.ts)

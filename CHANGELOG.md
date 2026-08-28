@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.208 - 2026-08-28
+
+### Changed
+
+- Clarified the alpha.1 `code` → `ptc` migration boundary: current presentation terminology can change while durable Session identities and event vocabulary remain intentionally historical.
+- Added the upstream PTC terminology-sync source and a review table so operators do not rewrite compressed Session history during an upgrade.
+
 ## 0.5.193 - 2026-08-28
 
 ### Changed
