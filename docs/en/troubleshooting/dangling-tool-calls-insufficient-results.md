@@ -1,7 +1,7 @@
 ---
 title: Recover a DeepSeek Harness Session With Insufficient Tool Messages
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -225,7 +225,7 @@ The validator should return a typed diagnostic rather than throw a raw `UNKNOWN`
 
 ## Source boundary
 
-Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`, `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`, `0.1.2-alpha.1` commit `cd5ef8148158c3a752a658978873241fdf8e2bbc`, upstream reproductions #3415 and #4843, and community patch discussion #4668. The plugin-causality claim in #4668 remains unverified without a minimal producer-to-wire reproduction; the #4843 patch is reviewed as a proposal, not described as released behavior.
+Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc9470f5907c29f74ca`, `0.1.1-rc.2` commit `b150a551b8d465e31e418e1b2eaf5e79bbb7d28e`, `0.1.2-alpha.1` commit `cd5ef8148158c3a752a658978873241fdf8e2bbc`, upstream reproductions #3415, #1695, and #4843, and community patch discussion #4668. The #1695 cold-restart row is community evidence of failed recovery, not a handbook reproduction. The plugin-causality claim in #4668 remains unverified without a minimal producer-to-wire reproduction; the #4843 patch is reviewed as a proposal, not described as released behavior.
 
 - [Upstream insufficient-tool-messages reproduction #3415](https://github.com/deepseek-ai/deepseek-harness/discussions/3415)
 - [Cold-restart failed-recovery report #1695](https://github.com/deepseek-ai/deepseek-harness/discussions/1695#discussioncomment-18025447)

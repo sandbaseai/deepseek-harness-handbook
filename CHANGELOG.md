@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.219 - 2026-08-29
+
+### Fixed
+
+- Declared the #1695 cold-restart evidence row in the insufficient-tool-messages runbook's Source boundary, explicitly distinguishing community evidence from handbook reproduction.
+
 ## 0.5.218 - 2026-08-29
 
 ### Changed
