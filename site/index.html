@@ -98,6 +98,7 @@
       <div class="path-index">
         <a href="./streamed-tool-call-identity.html"><span>Streaming · tools · persistence</span><strong>Empty continuation fields can erase a valid call</strong><small>Both rc.2 and tagged alpha.1 need a regression that retains the first identity and rejects a never-identified tool call</small></a>
         <a href="./session-history-recovery.html"><span>Sessions · storage · startup</span><strong>One corrupt Session can hide the whole workspace</strong><small>Separate the outer plugin-loader error from the inner Zstandard frame failure, then quarantine one artifact</small></a>
+        <a href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/sandbox-denied-vs-unavailable.md#when-macos-says-spawn-sandbox-exec-enoent"><span>macOS · sandbox · runner startup</span><strong>Host lookup is not provider startup</strong><small>Classify <code>spawn sandbox-exec ENOENT</code> separately from a denied file effect and keep unavailable backends fail closed</small></a>
         <a href="./spawn-subagent-reasoning-effort.html"><span>Subagent · version · route fidelity</span><strong>The same 400 has two version branches</strong><small>rc.2 drops effort; alpha.1 carries it, so prove the active package graph before calling the symptom a regression</small></a>
       </div>
     </section>
