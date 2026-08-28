@@ -51,6 +51,17 @@
         <article class="status-card"><h3>Background and evidence</h3><p><a href="https://github.com/PerryLink/dsh-background-agents">dsh-background-agents</a> adds durable children; <a href="https://github.com/a903067276-rgb/dsh-todo-guard">dsh-todo-guard</a> distinguishes verified evidence from claimed completion.</p></article>
         <article class="status-card"><h3>Search and utilities</h3><p><a href="https://github.com/delef/dsh-free-web-search">dsh-free-web-search</a> provides a fallback chain; <a href="https://github.com/dsh-external/dsh-toolkit">dsh-toolkit</a> provides a small, zero-dependency tool surface.</p></article>
       </div>
+      <h2>Consume the index from an Agent workflow</h2>
+      <p>Keep discovery separate from installation. Fetch the pinned JSON, filter by a capability, then inspect the repository before enabling anything.</p>
+      <pre><code># shell + jq
+curl -fsSL https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json \
+  | jq '.resources[] | select(.capability == "orchestration") | {name, url}'
+
+# Node.js
+const index = await fetch(
+  'https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json',
+).then((response) =&gt; response.json());
+const candidates = index.resources.filter(({ capability }) =&gt; capability === 'mcp');</code></pre>
       <h2>Before enabling a resource</h2>
       <ol><li>Read its README, license, manifest, install script, and recent changes.</li><li>Install into a copied profile and capture exact package bytes, permissions, and loaded modules.</li><li>Run a harmless probe, record token/cost and network destinations, then test removal.</li></ol>
       <div class="article-cta"><h2>Read the complete map.</h2><p>The canonical handbook page includes more resources, multilingual mirrors, install boundaries, and rollback guidance.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md">Open the ecosystem guide</a><a class="button" href="https://github.com/sandbaseai/deepseek-harness-handbook/issues/285">Help validate the index</a><a class="button" href="https://github.com/sandbaseai/deepseek-harness-handbook">Star the handbook on GitHub</a></div>

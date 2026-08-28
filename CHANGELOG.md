@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.319 - 2026-08-29
+
+### Added
+
+- Added `curl`/`jq` and Node.js examples for consuming the Awesome resource index without coupling discovery to installation.
+
 ## 0.5.317 - 2026-08-29
 
 ### Changed

@@ -3,6 +3,7 @@
   "source": "https://github.com/0xsline/awesome-deepseek-harness",
   "snapshot": "58aaffcd5a338fb0c30c14071ad28d5dcc800d17",
   "verified_at": "2026-08-28",
+  "consumer_guide": "https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html#consume-the-index-from-an-agent-workflow",
   "purpose": "Agent-first pointers into the upstream catalog; entries are not compatibility or security endorsements.",
   "resources": [
     {"capability":"plugin-authoring","name":"dsh-plugin-dev","url":"https://github.com/dsh-external/dsh-plugin-dev","why":"Cordis composition, TypeScript setup, and persistence notes."},
