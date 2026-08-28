@@ -188,6 +188,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 | Connect external MCP tools | [MCP integration guide](docs/en/integrations/mcp.md) |
 | Design multi-tenant MCP across ACP | [Session-scoped MCP architecture](docs/en/integrations/acp-session-scoped-mcp.md) |
 | Add reusable Agent instructions | [Skills guide](docs/en/agent-patterns/skills.md) |
+| Evaluate an optional bounded recovery round in Ralph | [Ralph failure-successor design guide](docs/en/agent-patterns/ralph-bounded-failure-successor.md) |
 | Delegate work to child Agents | [Subagents guide](docs/en/agent-patterns/subagents.md) |
 | Inspect or cancel one stale pending continuable-subagent follow-up | [Subagent inbox control map](https://sandbaseai.github.io/deepseek-harness-handbook/subagent-inbox-control.html) |
 | Let a subagent request human clarification safely | [Parent-owned question relay](docs/en/agent-patterns/subagent-human-question-relay.md) |

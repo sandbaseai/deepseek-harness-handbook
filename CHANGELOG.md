@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.211 - 2026-08-28
+
+### Changed
+
+- Promoted the Ralph failure-successor guide into the English README and documentation landing page so the new upstream discussion is discoverable from the primary entry points.
+
 ## 0.5.210 - 2026-08-28
 
 ### Added
