@@ -13,4 +13,6 @@ Agent 관점에서 DeepSeek Harness를 이해하고 실행하며 디버깅하고
 
 Web UI, 모델 설정, 워크스페이스와 안전한 검증부터 시작한 뒤 Agent Loop, Tools, Session Events, Permissions, Sandbox가 하나의 Agent Runtime에서 어떻게 협력하는지 설명합니다.
 
+- [Agent 턴과 부모-자식 수명 주기](architecture/agent-lifecycle.md): durable event와 live Agent를 구분하고 부모 dispose 시 child handoff, hung-child 회수, settlement를 검증합니다.
+
 영어 문서가 기준입니다. 이 한국어 문서는 현재 검토가 필요한 초안이며 명령어, 식별자, 이벤트 이름은 번역하지 않습니다.
