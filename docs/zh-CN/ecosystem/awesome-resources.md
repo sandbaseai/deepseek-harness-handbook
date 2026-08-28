@@ -101,6 +101,10 @@ verified_at: 2026-08-28
 | Agent 团队 | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | 子 Agent 权限、共享工作区行为和取消语义。 |
 | 视觉路由 | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | provider 回退、密钥处理和图像回合的可审计性。 |
 | 社区实践手册 | [DeepSeek Harness 橙皮书](https://github.com/alchaincyf/deepseek-harness-orange-book) | 哪些是固定版本实测，哪些只是非正式建议。 |
+| 工作流组装 | [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine) | 按协同、冲突、成本和信任信号选择插件。 |
+| Skill 迁移 | [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover) | 跨 Agent 发现、去重并可回滚地迁移 Skill。 |
+| 研究输入 | [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news) | 在把实时研究上下文加入 Agent 前检查订阅、线程和搜索边界。 |
+| 会话回放 | [dsh-replay](https://github.com/zoahdev/dsh-replay) | 用于调试和复核的轨迹回放与差异比较。 |
 
 ## 四条实用起步路径
 

@@ -36,6 +36,10 @@
     {"capability":"vision","name":"modlens","url":"https://github.com/liustack/modlens","why":"Vision bridge for text-only Agents with structured evidence."},
     {"capability":"orchestration","name":"dsh-agent-teams","url":"https://github.com/NanmiCoder/dsh-agent-teams","why":"Community AgentTeams plugin for coordinated DSH work."},
     {"capability":"vision","name":"dsh-vision-router","url":"https://github.com/ysr666/dsh-vision-router","why":"DSH-native vision routing with tool-calling turns."},
-    {"capability":"community-guide","name":"deepseek-harness-orange-book","url":"https://github.com/alchaincyf/deepseek-harness-orange-book","why":"Community field guide with startup checklist and observed session logs."}
+    {"capability":"community-guide","name":"deepseek-harness-orange-book","url":"https://github.com/alchaincyf/deepseek-harness-orange-book","why":"Community field guide with startup checklist and observed session logs."},
+    {"capability":"orchestration","name":"dsh-equip-engine","url":"https://github.com/wuykjl/dsh-equip-engine","why":"Task-driven plugin selection with synergy, conflict, cost, and trust signals."},
+    {"capability":"migration","name":"dsh-skill-mover","url":"https://github.com/mjylfz/dsh-skill-mover","why":"Migrates and deduplicates skills across multiple Agent platforms with rollback paths."},
+    {"capability":"search","name":"dsh-hacker-news","url":"https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news","why":"Hacker News feeds, threads, search, and profiles exposed to DSH workflows."},
+    {"capability":"sessions","name":"dsh-replay","url":"https://github.com/zoahdev/dsh-replay","why":"Replay and diff complete session trajectories for debugging and review."}
   ]
 }

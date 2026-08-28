@@ -103,6 +103,10 @@ The upstream catalog is not the only discovery surface. These public projects cu
 | Agent teams | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | Child-agent authority, shared workspace behavior, and cancellation semantics. |
 | Vision routing | [dsh-vision-router](https://github.com/ysr666/dsh-vision-router) | Provider fallback, key handling, and whether image turns remain auditable. |
 | Community field guide | [DeepSeek Harness Orange Book](https://github.com/alchaincyf/deepseek-harness-orange-book) | Which observations are version-pinned experiments versus informal advice. |
+| Workflow assembly | [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine) | Plugin selection signals for synergy, conflicts, cost, and trust. |
+| Skill migration | [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover) | Cross-Agent skill discovery, deduplication, and rollback behavior. |
+| Research intake | [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news) | Feed, thread, search, and profile boundaries before adding live research context. |
+| Session replay | [dsh-replay](https://github.com/zoahdev/dsh-replay) | Trajectory replay and diff behavior for debugging and review. |
 
 ## Four practical starter paths
 

@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.332 - 2026-08-29
+
+### Added
+
+- Added four public Awesome catalog resources for Agent workflow assembly, skill migration, Hacker News research intake, and session replay.
+
 ## 0.5.331 - 2026-08-29
 
 ### Added
