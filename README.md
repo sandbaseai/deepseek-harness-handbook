@@ -27,7 +27,7 @@ Choose one path and get to evidence quickly:
 
 ### Explore the Agent ecosystem
 
-The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 35 source-linked starting points. For workflow assembly, inspect [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine); for cross-Agent Skill migration, [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover); for research intake, [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news); and for evidence-driven debugging, [dsh-replay](https://github.com/zoahdev/dsh-replay). Each entry is a discovery lead, not a compatibility or security endorsement.
+The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 37 source-linked starting points. For workflow assembly, inspect [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine); for cross-Agent Skill migration, [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover); for research intake, [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news); and for evidence-driven debugging, [dsh-replay](https://github.com/zoahdev/dsh-replay). Each entry is a discovery lead, not a compatibility or security endorsement.
 
 ### Newly source-verified
 
