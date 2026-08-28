@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.317 - 2026-08-29
+
+### Changed
+
+- Added a community validation issue and linked it from the resource map and README so catalog corrections can be submitted with reproducible evidence.
+
 ## 0.5.316 - 2026-08-29
 
 ### Added
