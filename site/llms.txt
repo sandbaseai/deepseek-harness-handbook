@@ -3,10 +3,10 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
-Latest field update (v0.5.390): classify punctuated `network_error` finish reasons before bounded pi-ai retry: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/pi-ai-server-error-not-retried.md#punctuated-transport-reasons-can-miss-the-same-classifier
+Latest field update (v0.5.391): add Braintrust Agent tracing boundaries from upstream #4960: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md#high-signal-community-projects
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.390): document the `network_error` retry-classification boundary: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.390
+Latest release (v0.5.391): document Braintrust tracing, key scope, and residency checks: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.391
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 SandBase Harness MCP bridge guide: https://sandbaseai.github.io/deepseek-harness-handbook/sandbase-harness-bridge.html
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme

@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.391 - 2026-08-30
+
+### Added
+
+- Added the Braintrust DeepSeek Harness tracing integration to the ecosystem guide, with Agent-turn, tool-call, child-Session, API-key, and data-residency boundaries from upstream #4960.
+
 ## 0.5.390 - 2026-08-30
 
 ### Added
