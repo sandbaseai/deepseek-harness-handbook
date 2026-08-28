@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.193 - 2026-08-28
+
+### Changed
+
+- Closed a reviewed-translation parity gap on the high-traffic Simplified Chinese Quickstart by adding the canonical source-build route, Host-versus-bare-frontend boundary, and next-step navigation.
+- Refreshed the Simplified Chinese landing page with the same five current rc.2/alpha.1 problems as the English entry point, using direct canonical links while Pages is rate-limited.
+
 ## 0.5.192 - 2026-08-28
 
 ### Changed

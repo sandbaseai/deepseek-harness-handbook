@@ -37,13 +37,13 @@ verified_at: 2026-08-27
 
 | 真实问题 | 英文专题 | 这篇文章证明什么 |
 |---|---|---|
-| Session 中出现相同 `seq`、不同事件，甚至含另一 Session 内容，能否删掉较长的一行？ | [Session Sequence Conflict（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/duplicate-session-seq.html) | 不同值属于隔离冲突，不是可自动删除的幂等重复；还要把原始污染与普通 `zstd` 重压造成的二次 frame 错误分开。 |
-| 跨 Session 搜索原始对话是不是完全没有实现？ | [Sessions, Search, and Memory（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-memory.html) | rc.2 已包含 Session Query、SQLite FTS、Host Search 和 Agent 工具包，但基础组合默认关闭全文索引，也不默认挂载模型工具。 |
-| Composer 能否直接支持 PDF、DOCX 等非图片文件？ | [General File Attachments（英文）](https://sandbaseai.github.io/deepseek-harness-handbook/general-file-attachments.html) | 浏览器接收、Session 持久重放与 Agent 可读证据是三个独立承诺；Host 磁盘路径不能成为消息身份。 |
-| 插件应该选择 `single`、`chain`、`keyed` 还是 `list` Slot？ | [Persistent Client Plugin（英文）](../en/plugin-development/persistent-web-ui-client-plugin.md) | Slot cardinality 分别表达替换、选举、按 key 分派与并存；多个 Turn badge 需要有序 `list`，不能共用只选一个赢家的 `chain`。 |
-| Beam Search、分支剪枝与 Frontier Selection 应该接入工具 Scheduler 吗？ | [Agent Lifecycle（英文）](../en/architecture/agent-lifecycle.md) | 多候选扩展、评分、预算、效果隔离与确定性 replay 属于线性 driver 外部的编排层，不属于单个 step 内的工具并发调度。 |
+| 启动后出现 `HTML did not preload @deepseek-ai/dsh-client-modules/client.js`，是不是 npm 缺包？ | [Client Modules Boot（英文）](../en/troubleshooting/client-modules-html-did-not-preload.md) | 错误证明浏览器 registration queue 缺少 bootstrap factory；需要从同一代 HTML、`/plugins` bytes、script 顺序、代理缓存和启动方式逐层定位。 |
+| 模型连续输出 `000000...` 并最终达到输出 token 上限，应该直接加大上限吗？ | [Degenerate Model Output（英文）](../en/troubleshooting/degenerate-model-output.md) | `max-tokens` 是 finish reason，重复退化是独立的内容形态故障；先停止、保留 channel 与 usage 证据，再决定有限重试。 |
+| TUI 中所有 registry slash command 都报 `undefined.aborted`，是 `/compact` 坏了吗？ | [TUI Command ABI（英文）](../en/troubleshooting/tui-slash-command-signal-images-slot.md) | 官方调用是 `(agent, line, images, signal)`；必须修复两个 dispatch path，把 `[]` 放在 image slot，而不是把 signal 改成可选。 |
+| “重新生成回复”能否直接删除最后答案后重发？ | [Regenerate Reply Contract（英文）](../en/troubleshooting/stuck-turn-stop-and-retry.md#regenerate-reply-means-branch-then-replay) | 应从上一已完成 Turn 分叉，在 child Session 重新准入有序用户输入和图片；分叉不会回滚外部副作用。 |
+| GitHub 已有 alpha.1 Release，但 npm 安装 exact version 返回 E404，哪个才是真的？ | [Install Identity（英文）](../en/getting-started/install-deepseek-harness.md) | GitHub Release、tag、源码 manifest、npm artifact、dist-tag 与本地 executable 是不同证据，只有真实发布的 bytes 才能安装。 |
 
-这些结论以 DeepSeek Harness rc.2 的官方源码提交 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) 为解释基线。文章会明确区分已经发布的行为、社区提案和建议的验收契约。
+这些结论分别固定到 DeepSeek Harness rc.2 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) 或 alpha.1 [`cd5ef814…`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc) 的官方源码。文章会明确区分已经发布的行为、社区提案和建议的验收契约。
 
 如果你的实际版本与文章不同，请提交[手册错误报告](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new?template=bug-report.yml)，写明 DSH 版本、操作系统、入口和第一个错误。日志应移除 API Key、Token、签名 URL、私人路径、无关 Prompt 与凭据值。
 

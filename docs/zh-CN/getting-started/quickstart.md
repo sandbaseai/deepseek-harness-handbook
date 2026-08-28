@@ -4,7 +4,7 @@ locale: zh-CN
 source: docs/en/getting-started/quickstart.md
 source_revision: 1
 status: reviewed
-verified_at: 2026-08-14
+verified_at: 2026-08-28
 ---
 
 # DeepSeek Harness 快速开始：完成第一次有效 Agent 运行
@@ -64,6 +64,29 @@ npx @deepseek-ai/dsh --profile web --dump-config
 ```
 
 这会打印当前机器实际启动的 Cordis 配置树，是排查 Bundle、Plugin、工具和策略层的最快入口。
+
+## 从源码运行
+
+只有在参与上游开发或需要检查具体 package 时才走源码路径：
+
+```sh
+git clone https://github.com/deepseek-ai/deepseek-harness.git
+cd deepseek-harness
+pnpm install
+pnpm run build
+pnpm dsh web
+```
+
+`pnpm run build` 负责生成仓库运行所需的 artifacts；`pnpm dsh web` 使用这些已经构建的产物，不会替你重新构建。请使用仓库声明的 Node、pnpm 和 lockfile 组合，并固定要验证的上游 commit。不要把裸 `apps/web` Vite、IDE 静态预览或只复制出来的 `dist/` 当成完整的 DSH Host；动态插件路由和启动 HTML 注入来自 Host composition。
+
+包管理器安装会执行来自仓库的代码。第一次构建应放在可丢弃环境中，先检查来源和提交，再安装依赖。
+
+## 下一步
+
+- [理解 Agent Runtime](../architecture/agent-runtime.md)
+- [跟踪一个完整 Turn（英文）](../../en/architecture/agent-lifecycle.md)
+- [按症状排查问题（英文）](../../en/troubleshooting/README.md)
+- [安装版本与发布身份说明（英文）](../../en/getting-started/install-deepseek-harness.md)
 
 ## 官方来源
 
