@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.209 - 2026-08-28
+
+### Fixed
+
+- Corrected the README corpus total to match the verifier's 150 canonical and 159 localized-document result.
+
 ## 0.5.208 - 2026-08-28
 
 ### Changed
