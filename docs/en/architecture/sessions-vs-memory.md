@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Sessions vs Long-Term Memory
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -79,6 +79,21 @@ audit policy for human and Agent queries
 ```
 
 Test deletion and authorization against the index, not only the Session files. A stale hit after access revocation or Session deletion is a privacy failure even if opening the original Session is denied.
+
+### Exclude derived Sessions without deleting evidence
+
+Some plugins persist projection windows, mirrors, or character transcripts as separate Sessions. They are useful for rendering but are not independent user history. Indexing every derivative as a normal cross-session result can multiply one conversation into N+2 duplicate hits and crowd real evidence out of a bounded result page. Upstream discussion [#4913](https://github.com/deepseek-ai/deepseek-harness/discussions/4913) proposes deployment-owned exclusion rules for this boundary.
+
+Keep the full FTS index and filter only the discovery surface. A deployment-owned policy can use explicit ID prefixes with optional exempt suffixes:
+
+```yaml
+searchExcludeIdPrefixes: ['roleplay-projection-']
+searchExcludeIdExemptSuffixes: ['-archive']
+```
+
+The predicate should be pure and fail closed on malformed entries: hide an ID when it starts with an excluded prefix and ends with none of the exempt suffixes. Exact reads by a known Session ID, event-scoped searches, and lineage traces remain available. This preserves auditability and avoids a destructive reindex while keeping ordinary Agent discovery useful.
+
+Evaluate the policy with one source conversation and at least two derived projections. Prove that ordinary search returns one source hit, an exempt archive remains discoverable, an exact read still works for a hidden projection, and deleting or revoking the source removes all corresponding hits. Treat the exclusion list as privacy-sensitive deployment configuration, not as a model-authored query parameter.
 
 ## Decide what you are migrating
 
