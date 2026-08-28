@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.173 - 2026-08-28
+
+### Changed
+
+- Added the id-less plugin-notice failure to Session corruption triage and separated producer attribution, live acceptance, cold-load validation, and Zstandard framing.
+- Documented the `createUserMessage()` ownership boundary, the fail-late validation gap, consistent inbox/message identity repair requirements, and cold-reload regression gates.
+
 ## 0.5.172 - 2026-08-28
 
 ### Changed
