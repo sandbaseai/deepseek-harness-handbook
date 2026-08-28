@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.353 - 2026-08-30
+
+### Changed
+
+- Refreshed the visual homepage's latest field-signal date after the v0.5.352 upstream runbook update.
+
 ## 0.5.352 - 2026-08-30
 
 ### Changed
