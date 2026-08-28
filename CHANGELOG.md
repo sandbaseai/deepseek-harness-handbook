@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.297 - 2026-08-28
+
+### Added
+
+- Added an English canonical and Chinese reviewed runbook for long-session ChatView memory growth, based on upstream #4900's renderer RSS measurements and virtualization boundary.
+- Updated coverage to 160 canonical pages and 181 localized documents.
+
 ## 0.5.296 - 2026-08-28
 
 ### Added

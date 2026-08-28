@@ -812,6 +812,11 @@
       "source": "docs/en/architecture/context-compression-profiles.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/chatview-long-session-memory.md",
+      "revision": 1,
+      "translations": { "zh-CN": "docs/zh-CN/troubleshooting/chatview-long-session-memory.md" }
     }
   ]
 }

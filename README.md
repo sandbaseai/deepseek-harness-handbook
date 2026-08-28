@@ -11,7 +11,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**159 canonical guides · 179 localized documents · rc.2 + alpha.1 source-pinned analysis · runnable recovery paths**
+**160 canonical guides · 181 localized documents · rc.2 + alpha.1 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -32,6 +32,7 @@ Choose one path and get to evidence quickly:
 | [Firefox shows a blank Web client while Chrome works](docs/en/troubleshooting/firefox-web-client-blank.md) | Separate browser bootstrap, cached assets, origin/WebSocket, and extension boundaries before touching provider credentials or durable Sessions. |
 | [An alpha.1 auth token cannot be obtained or entered](docs/en/troubleshooting/auth-token-not-available.md) | Keep acquisition, UI entry, credential storage, token scope, and outbound authorization as separate contracts with redacted evidence. |
 | [A settings section recurses on `removeChild`](docs/en/troubleshooting/webview-mutation-observer-loop.md) | Route `NotFoundError` through DOM ownership and render-generation evidence instead of misclassifying it as a proven MutationObserver CPU loop. |
+| [Long ChatView sessions grow WebContent memory](docs/en/troubleshooting/chatview-long-session-memory.md) | Separate renderer DOM retention from Host memory, preserve Sessions, and measure a virtualization boundary before using reload as containment. |
 | [Evaluate cross-Session memory without leaking scope or losing the store](docs/en/architecture/sessions-vs-memory.md#case-study-dsh-memory-lite-010) | A local JSON file is not a local-only data path once recall becomes a model-visible tool result; require scoped identity, atomic writes, corruption quarantine, retrieval budgets, and explicit privacy copy. |
 | [Edit model capabilities without mistaking declarations for proof](docs/en/getting-started/model-providers.md#evaluate-a-third-party-capability-editor-before-production-use) | Image, reasoning, capacity, and gateway fields declare a route contract; verify the real endpoint and keep headers out of whole-namespace presets. |
 | [Diagnose a terminal command still shown after 40 minutes](https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html) | Standard alpha.1 foreground Bash cannot explain that timer by default; route background jobs, persistent terminals, live processes, and stale presentation before retrying. |
@@ -251,7 +252,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 159 pages |
+| English | Canonical | 160 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
