@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.182 - 2026-08-28
+
+### Added
+
+- Added a stuck-Turn runbook that separates Session cancellation, internal model retry, revised follow-up, branch, and clean continuation.
+- Documented durable abort proof, apparent-freeze routing, external side-effect reconciliation, unavailable-Stop containment, and a ten-gate explicit Retry product contract.
+
 ## 0.5.181 - 2026-08-28
 
 ### Changed

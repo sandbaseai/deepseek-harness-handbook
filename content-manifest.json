@@ -481,7 +481,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 59,
+      "revision": 60,
       "translations": {}
     },
     {
@@ -636,6 +636,11 @@
     },
     {
       "source": "docs/en/troubleshooting/source-build-missing-exports.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/stuck-turn-stop-and-retry.md",
       "revision": 1,
       "translations": {}
     },

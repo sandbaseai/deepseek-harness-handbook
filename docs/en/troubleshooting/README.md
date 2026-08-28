@@ -1,13 +1,14 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 59
+content_revision: 60
 status: canonical
 verified_at: 2026-08-28
 ---
 
 # DeepSeek Harness troubleshooting
 
+- [Stop and safely retry a stuck Turn](stuck-turn-stop-and-retry.md)
 - [Fix clustered `MISSING_EXPORT` failures after a source revision change](source-build-missing-exports.md)
 
 Diagnose the failing layer before reinstalling or changing configuration.
