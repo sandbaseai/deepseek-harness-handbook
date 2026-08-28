@@ -9,6 +9,7 @@ Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbas
 Latest release (v0.5.282): Windows read-only PowerShell stderr runbook and verified 159/174 coverage: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.282
 Latest field update (v0.5.283): pnpm isolated-tarball fallback closure and empty provider table: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/web-loading-plugins-pnpm-symlink.md
 Latest field update (v0.5.284): headless first-tool-call scheduler failure and duplicate core closure: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/duplicate-core-runtime-closure.md
+Latest field update (v0.5.285): corrupt attachment references and misleading TRANSPORT retries: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/general-file-attachments.md
 Auth token acquisition and entry boundaries (v0.5.274): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/auth-token-not-available.md
 Firefox blank Web client diagnostics (v0.5.273): https://sandbaseai.github.io/deepseek-harness-handbook/firefox-web-client-blank.html
 Code Mode literal-section boundary: https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-unknown-prompt-variable.html

@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.285 - 2026-08-28
+
+### Changed
+
+- Extended the attachment architecture guide with upstream #4922's corrupt-reference failure, generic `TRANSPORT` wrapping, and immutable-session recovery contract.
+
 ## 0.5.284 - 2026-08-28
 
 ### Changed

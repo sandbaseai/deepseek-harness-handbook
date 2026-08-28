@@ -1,10 +1,12 @@
 ---
 title: Design General Files and Provider-Native PDF/Video Passthrough
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4922
 ---
 
 # Design general files and provider-native PDF/video passthrough
@@ -12,6 +14,21 @@ upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 DeepSeek Harness `0.1.1-rc.2` accepts pasted and dropped raster images in Web, but it does not provide a first-party path for PDF, video, DOCX, XLSX, TXT, ZIP, or arbitrary binary files. This is not a missing MIME entry. The current contract is image-specific from the browser draft through durable storage and Session-authorized retrieval.
 
 Use this guide to separate three promises that a file button is often assumed to make:
+
+## Treat a corrupt attachment as content failure, not transport failure
+
+Upstream report [#4922](https://github.com/deepseek-ai/deepseek-harness/discussions/4922) shows a durable image reference that declares PNG/820×582 while the stored bytes are JPEG/52×70. Every later request containing that reference fails during attachment validation, but the non-`LlmError` exception is wrapped as generic `TRANSPORT` and retried. Other Sessions continue working, so this is deterministic request-content failure rather than network evidence.
+
+Preserve four separate facts in the incident record:
+
+| Fact | Required evidence |
+|---|---|
+| Reference metadata | media type, dimensions, byte count, attachment id |
+| Stored bytes | detected media type/dimensions and content hash |
+| Failure boundary | validation stack/cause before provider I/O, if available |
+| Recovery state | whether the Session can omit, replace, or clone without the bad reference |
+
+Do not “fix” this branch by increasing transport retries or deleting the Session immediately. Validate bytes at `attachments.saveImage`, retain the original error cause or a typed `ATTACHMENT_MISMATCH`, and provide a deliberate clone/omit path that records the discarded attachment. A recovery request must prove that the new prompt no longer contains the invalid reference while leaving the original immutable history intact.
 
 1. **transport**: the browser can send bytes to the Host;
 2. **durability and authorization**: the Host can retain and retrieve those bytes for the owning Session;
