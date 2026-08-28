@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.290 - 2026-08-28
+
+### Added
+
+- Added a reviewed Chinese localization of the Agent lifecycle guide, including the parent-dispose/child-handoff contract from upstream #4909.
+- Updated coverage metadata to 159 canonical pages and 175 localized documents.
+
 ## 0.5.289 - 2026-08-28
 
 ### Changed
