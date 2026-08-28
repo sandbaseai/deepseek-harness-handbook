@@ -180,6 +180,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 | Fix an OpenAI-compatible `server_error` that never retries | [pi-ai classification and retry evidence](https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-server-error-retry.html) |
 | Recover an old Session that throws `received an update before its start Match` | [Conversation projection recovery](https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html) |
 | Recover when pnpm leaves a plugin package behind but DSH skips reconciliation | [Partial plugin install recovery](https://sandbaseai.github.io/deepseek-harness-handbook/plugin-add-nonzero-reconcile.html) |
+| `allowBuilds` blocks an rc.8 registry plugin install | [Review pnpm's approval gate](docs/en/troubleshooting/plugin-add-nonzero-reconcile.md#registry-packages-can-hit-pnpm-11s-approval-gate-too) |
 | Recover when a Node 24 + tsx build exits 0 but creates no artifacts | [Silent source-build recovery](https://sandbaseai.github.io/deepseek-harness-handbook/node24-tsx-silent-build.html) |
 | Fix unknown or malformed prompt variables such as `{{hexagon}}` or `{{dotted.state.path}}` in `tools:sdk` | [Code Mode literal-section boundary](https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-unknown-prompt-variable.html) |
 | Fix npm `ETARGET` for `dsh-agent-loop@^0.1.0-rc.8` | [Registry and cache recovery](https://sandbaseai.github.io/deepseek-harness-handbook/npm-etarget-rc8.html) |

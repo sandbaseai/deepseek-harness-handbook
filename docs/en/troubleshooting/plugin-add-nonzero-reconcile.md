@@ -1,7 +1,7 @@
 ---
 title: Recover a Plugin Materialized After pnpm Exits Nonzero
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-20
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
@@ -84,6 +84,19 @@ Then inspect the resolved package manifest and every runtime target named by `ex
 | bundle already present despite nonzero exit | pre-existing or independently changed state | diff against the captured baseline before boot |
 
 The first nonzero diagnostic remains authoritative. Later file presence tells you the partial state; it does not retroactively make the command successful.
+
+### Registry packages can hit pnpm 11's approval gate too
+
+Upstream discussion [#3699](https://github.com/deepseek-ai/deepseek-harness/discussions/3699) reports rc.8 profile upgrades where pnpm 11 writes an `allowBuilds` entry such as `'@scope/package': set this to true or false`, then stops with `ERR_PNPM_IGNORED_BUILDS`. The quoted key is normal YAML for a scoped package; the placeholder value is a deliberate security stop, not proof of malformed YAML. The report also notes that DSH's extra guidance was clearer for Git specs than for registry packages.
+
+Treat this as an approval decision, not an installation failure to bypass:
+
+1. read the exact package identity and the profile path printed by pnpm;
+2. inspect the package lifecycle scripts and provenance;
+3. set only that reviewed key to `true`, or use the profile's supported `approve-builds` flow if available;
+4. rerun the original command and require a zero exit before trusting reconciliation.
+
+Do not set every placeholder to `true`, use `--ignore-scripts` to hide the gate, or delete the profile workspace file. The safety boundary is correct; the missing piece is an explicit, package-specific recovery path.
 
 ## Recovery path A: complete a reviewed Git build
 

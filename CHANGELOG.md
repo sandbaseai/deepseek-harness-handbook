@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.352 - 2026-08-30
+
+### Changed
+
+- Expanded plugin-install recovery with a source-backed pnpm 11 `allowBuilds` approval runbook for registry packages from upstream discussion #3699.
+
 ## 0.5.350 - 2026-08-30
 
 ### Changed
