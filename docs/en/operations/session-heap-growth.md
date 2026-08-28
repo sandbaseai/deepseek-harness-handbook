@@ -1,7 +1,7 @@
 ---
 title: Bound DeepSeek Harness Session Heap Growth
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -80,6 +80,14 @@ At rc.2, cold preparation is partly asynchronous but Session reconstruction is s
 5. Each event is envelope-checked, request/message invariants are checked, the surface transition is validated, the restored object graph is frozen, and the event is pushed to the live log.
 
 That source path establishes an event-loop-blocking risk proportional to the restored graph. It does **not** establish the timeout of a particular desktop wrapper, prove that a watchdog killed the process, or make any reported event count a universal threshold. Discussion [#4807](https://github.com/deepseek-ai/deepseek-harness/discussions/4807) reports synthetic heartbeat gaps and one local bounded trial; treat those measurements as incident evidence, not an official benchmark.
+
+Follow-up live sampling in [#4911](https://github.com/deepseek-ai/deepseek-harness/discussions/4911)
+shows why one snapshot is insufficient: the suspected `Array.some` hot path was
+dominant in some five-second samples but nearly absent in others, while a
+one-second CPU series still pulsed from idle to saturation. The sample identifies
+a time-varying symptom, not a unique JavaScript root cause or proof that the
+candidate path caused send latency. Preserve several timestamped rounds and keep
+projection-miss latency separate from restore cost when comparing fixes.
 
 ### Capture one process timeline
 
