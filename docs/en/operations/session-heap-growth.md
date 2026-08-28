@@ -1,9 +1,9 @@
 ---
 title: Bound DeepSeek Harness Session Heap Growth
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
 ---
 
@@ -51,6 +51,62 @@ If resident memory keeps climbing during a long Session:
 6. **Keep a provider budget.** A heap guard does not bound model spend, and a provider quota does not protect Host memory.
 
 Increasing `--max-old-space-size` can buy diagnostic time. It is not a retention fix: it moves the abort boundary and may push the machine into swap. Record the old and new limit, then remove the override after the bounded reproduction.
+
+## Route a cold-restore restart loop
+
+A desktop wrapper can report the same visible cycle for three different boundaries: the Host is still computing, the Host has crashed, or a supervisor has terminated a live but temporarily unresponsive child. Do not call all three a “Session crash.”
+
+At rc.2, cold preparation is partly asynchronous but Session reconstruction is synchronous:
+
+1. `PersistenceCoordinator.prepareCore()` awaits the backend read.
+2. It adopts and checks the stored event array and synthesizes any interrupted-turn closers.
+3. It calls `ctx.sessions.prepare(..., { seedSource: 'persistence' })`.
+4. `Session.fromRestore()` enters a synchronous loop over every seed event.
+5. Each event is envelope-checked, request/message invariants are checked, the surface transition is validated, the restored object graph is frozen, and the event is pushed to the live log.
+
+That source path establishes an event-loop-blocking risk proportional to the restored graph. It does **not** establish the timeout of a particular desktop wrapper, prove that a watchdog killed the process, or make any reported event count a universal threshold. Discussion [#4807](https://github.com/deepseek-ai/deepseek-harness/discussions/4807) reports synthetic heartbeat gaps and one local bounded trial; treat those measurements as incident evidence, not an official benchmark.
+
+### Capture one process timeline
+
+Before changing a profile or retrying the same Session, collect:
+
+```text
+Desktop/main PID and start time:
+Web Host PID, PPID, start time, and exact command:
+Listener owner and port:
+Session open/resume timestamp:
+Last successful HTTP probe:
+First slow or failed probe:
+Signal, exit status, or supervisor termination line:
+Replacement Host PID and start time:
+Target Session artifact id, event count, and byte size:
+Profile path and resolved package realpaths:
+```
+
+On macOS, `ps -o pid,ppid,lstart,command -p <pid>`, `lsof -nP -iTCP:<port> -sTCP:LISTEN`, and a timestamped `curl` to the already configured loopback URL can bind the observations. Use an endpoint the wrapper actually considers healthy; a successful TCP connection alone does not prove application readiness. Preserve private logs locally because commands, paths, prompts, and tool results may contain secrets.
+
+### Run a bounded isolation ladder
+
+1. **Fresh Session, same profile and process generation.** If it opens while one historical Session stalls, the evidence points toward Session-specific restore or projections rather than general boot.
+2. **Copied artifact, stopped writer.** Preserve the exact stored artifact and metadata before any experiment. Never edit the live compressed file underneath the Host.
+3. **Small and large disposable fixtures.** Keep event shapes and payload sizes fixed while varying count. Measure event-loop delay and HTTP latency separately from total restore duration.
+4. **Direct Host versus desktop-managed Host.** Use the same profile, build, port semantics, and target Session. A direct Host that eventually responds while the wrapper-owned child is terminated isolates a supervision-policy difference; it does not prove the restore path is healthy.
+5. **One runtime closure.** Resolve the packages used by the actual Host process. A global installation and a profile-local `node_modules` tree are separate physical copies even when their package versions match.
+
+Do not “fix” the incident by patching both copies. First prove which copy the recorded PID loaded. A global edit that leaves the profile copy active is a no-op; aligning both copies destroys the comparison and creates an unsupported hybrid installation.
+
+### Interpret the result
+
+| Observation | What it proves | Next action |
+|---|---|---|
+| Host PID remains alive, CPU is high, probes pause, then recover | temporary event-loop starvation is plausible | capture restore size and delay; test bounded/yielding reconstruction in an isolated build |
+| Host exits with its own error before a supervisor decision | Host failure | preserve exit status and stack; diagnose that error before tuning probes |
+| wrapper logs a deliberate termination while the Host is still alive | supervisor policy participated | preserve the policy, threshold, and probe endpoint; compare a longer diagnostic grace window |
+| fresh Session works; only one cold Session repeats the cycle | Session-specific replay path | quarantine only a copied artifact or avoid auto-opening it; retain the original for upstream diagnosis |
+| direct and desktop-managed Hosts load different realpaths | runtime-copy drift | restore one supported installation owner; re-run with identical bytes |
+| restart is healthy until the same Session is resumed | disk state rebuilds the pressure | measure seed events, bytes, surface folds, and projection construction |
+
+Starting with a blank home may restore service, but it is not a recovery proof and can hide the triggering artifact. Keep the original home immutable, use a separate diagnostic home, and prove how any retained Sessions will be reintroduced.
 
 ## Build a minimal heap reproduction
 
@@ -214,7 +270,9 @@ Never claim that a graceful exit preserved in-flight side effects. A tool may ha
 - [rc.2 Session package contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/README.md)
 - [rc.2 continuable subagent activation lifecycle](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subagent/subagent/src/continuation.ts)
 - [rc.2 persistence contract and known retention limitation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence/README.md)
+- [rc.2 cold Session preparation pipeline](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence/src/coordinator.ts)
 - [Upstream in-memory Session OOM report #4722](https://github.com/deepseek-ai/deepseek-harness/discussions/4722)
+- [Upstream macOS cold-restore and restart-loop report #4807](https://github.com/deepseek-ai/deepseek-harness/discussions/4807)
 - [Closed-message chunk elision proposal #4678](https://github.com/deepseek-ai/deepseek-harness/discussions/4678)
 - [`sourceEventSeqs` history overflow report #4633](https://github.com/deepseek-ai/deepseek-harness/discussions/4633)
 

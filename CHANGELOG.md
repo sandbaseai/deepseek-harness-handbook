@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.175 - 2026-08-28
+
+### Changed
+
+- Added a cold-restore restart-loop router that separates synchronous Session reconstruction, Host failure, desktop supervisor termination, and profile/global runtime-copy drift.
+- Documented the rc.2 prepare pipeline, one-process timeline, bounded isolation ladder, artifact-preserving recovery, and evidence limits for upstream macOS report #4807.
+
 ## 0.5.174 - 2026-08-28
 
 ### Changed
