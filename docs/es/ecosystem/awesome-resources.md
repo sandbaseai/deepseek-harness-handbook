@@ -2,7 +2,7 @@
 title: Recursos del ecosistema Awesome DeepSeek Harness por capacidad
 locale: es
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 7
+source_revision: 8
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -25,6 +25,10 @@ verified_at: 2026-08-28
 | Gobernanza de producción | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | Provenance, red, redacción y rollback. |
 | UI Web estilo Codex | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | Navegación de workspace, árbol de Sessions, búsqueda y turnos mediante puntos de extensión públicos. |
 | Follow-ups anidados | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | Sessions hijas aisladas; verifica ascendencia, scope de herramientas y escrituras entre ramas. |
+
+## Recursos adicionales para agentes
+
+Del catálogo upstream añadimos [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval) para comparar modelos, [dsh-plans](https://github.com/Optim-Agent/dsh-plans) para planificar, [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui) para equipos, [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor) para compresión de contexto, [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro) para búsqueda, [task-passport](https://github.com/dongsheng123132/task-passport) para compartir checkpoints, [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve) para evolución con rollback y [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve) para paquetes de conocimiento auditables. Verifica permisos, compatibilidad y rollback antes de instalar.
 
 ## Cuatro rutas seguras para empezar
 

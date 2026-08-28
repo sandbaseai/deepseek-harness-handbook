@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 7
+content_revision: 8
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -87,6 +87,14 @@ The full catalog is intentionally broad. These additional projects are useful wh
 | Todo evidence | [dsh-todo-guard](https://github.com/a903067276-rgb/dsh-todo-guard) | Evidence states, restart recovery, and the boundary between verified and claimed work. |
 | Core utility tools | [dsh-toolkit](https://github.com/dsh-external/dsh-toolkit) | Zero-dependency tool surface and input validation before enabling broad profiles. |
 | Plugin marketplace | [dsh-plugin-hub](https://github.com/Noob-stupid/dsh-plugin-hub) | Index provenance, enable/disable semantics, rollback, and package verification. |
+| Model comparison | [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval) | Run the same coding prompt in isolated worktrees and compare traces before applying a candidate. |
+| Planning discipline | [dsh-plans](https://github.com/Optim-Agent/dsh-plans) | Turn repository research into traceable plans, critic rounds, and a verifier checklist. |
+| Agent team UI | [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui) | Manage persistent multi-model squads and bounded DAG runs from a visual control surface. |
+| Context compression | [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor) | Reduce tool/history payloads for small models while keeping a resumable task flow. |
+| Web search routing | [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro) | Route multi-engine and platform search through extraction, caching, and browser rendering. |
+| Cross-agent checkpoints | [task-passport](https://github.com/dongsheng123132/task-passport) | Carry machine-readable task state across multiple coding-agent runtimes. |
+| Continuous evolution | [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve) | Refine prompts, memories, skills, and subagent specs with versioning and rollback. |
+| Knowledge packages | [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve) | Assemble auditable knowledge-base packages from references and SQL. |
 
 These entries are pointers for further reading, not a recommendation to install everything together. Combining context, memory, routing, and background-agent plugins can change prompt size, cost, and authority boundaries in ways that are hard to see from a marketplace description.
 

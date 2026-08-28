@@ -2,7 +2,7 @@
 title: DeepSeek Harness 生态资源能力地图
 locale: zh-CN
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 7
+source_revision: 8
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -85,6 +85,14 @@ verified_at: 2026-08-28
 | Todo 证据 | [dsh-todo-guard](https://github.com/a903067276-rgb/dsh-todo-guard) | 证据状态、重启恢复，以及 verified 与 claimed 的边界。 |
 | 核心工具集 | [dsh-toolkit](https://github.com/dsh-external/dsh-toolkit) | 零依赖工具面和启用宽 profile 前的输入校验。 |
 | 插件市场 | [dsh-plugin-hub](https://github.com/Noob-stupid/dsh-plugin-hub) | 索引来源、启停语义、回滚和包验证。 |
+| 模型对比 | [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval) | 在隔离 worktree 中运行同一编码任务，对比轨迹后再应用候选结果。 |
+| 规划纪律 | [dsh-plans](https://github.com/Optim-Agent/dsh-plans) | 将仓库研究转为可追踪计划、批评回合和校验清单。 |
+| Agent 团队界面 | [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui) | 在可视化控制面管理持久多模型小队和有界 DAG 运行。 |
+| 上下文压缩 | [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor) | 为小模型压缩工具/历史载荷，同时保留可恢复任务流。 |
+| Web 搜索路由 | [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro) | 通过抽取、缓存和浏览器渲染路由多引擎与平台搜索。 |
+| 跨 Agent 检查点 | [task-passport](https://github.com/dongsheng123132/task-passport) | 在多个编码 Agent 运行时之间传递机器可读任务状态。 |
+| 持续演进 | [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve) | 对 prompt、记忆、技能和子 Agent 规格进行可版本化、可回滚的改进。 |
+| 知识包 | [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve) | 从参考资料和 SQL 组装可审计知识库包。 |
 
 这些条目是进一步阅读的入口，不代表建议全部同时安装。上下文、记忆、路由和后台 Agent 插件叠加后，可能改变 prompt 大小、成本和权限边界，而这些变化往往不会出现在市场描述里。
 

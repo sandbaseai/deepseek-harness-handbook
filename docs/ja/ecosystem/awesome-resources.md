@@ -2,7 +2,7 @@
 title: Awesome DeepSeek Harness エコシステム資源マップ
 locale: ja
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 7
+source_revision: 8
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -25,6 +25,10 @@ verified_at: 2026-08-28
 | 本番ガバナンス | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | provenance、network、redaction、rollback。 |
 | Codex 風 Web UI | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | 公開 extension point による workspace、Session tree、検索、turn ナビゲーション。 |
 | Nested follow-ups | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | 隔離された子 Session。祖先、tool scope、枝間書き込みを確認。 |
+
+## 追加のエージェント向けリソース
+
+上流カタログから、モデル比較の [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval)、計画の [dsh-plans](https://github.com/Optim-Agent/dsh-plans)、チーム実行の [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui)、コンテキスト圧縮の [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor)、Web 検索の [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro)、チェックポイント共有の [task-passport](https://github.com/dongsheng123132/task-passport)、継続改善の [dsh-continual-evolve](https://github.com/ZK-Andy/dsh-continual-evolve)、知識パッケージの [dsh-kb-sieve](https://github.com/omdsh-dev/dsh-kb-sieve) を追加しました。導入前に各リポジトリの権限、互換性、ロールバック手順を確認してください。
 
 ## 四つの安全な開始経路
 

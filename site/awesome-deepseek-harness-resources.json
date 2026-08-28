@@ -45,6 +45,14 @@
     {"capability":"desktop","name":"dsh-whale-musume","url":"https://github.com/Sutera-Diffusus/dsh-whale-musume","why":"Local-first DSH Web desktop pet with work-state feedback and no telemetry."},
     {"capability":"sessions","name":"dsh-corrupt-session-repair","url":"https://github.com/MedicineKing/dsh-corrupt-session-repair","why":"Zero-install scanner and repair workflow for crash-recovery sequence corruption; keep real session artifacts local."},
     {"capability":"ui","name":"dsh-codex-ui","url":"https://github.com/MichengAI/dsh-codex-ui","why":"Codex-style DSH Web navigation, workspace session tree, search, and turn navigation through public extension points."},
-    {"capability":"sessions","name":"dsh-nested-followups","url":"https://github.com/sluminositys/dsh-nested-followups","why":"Isolated, recursively nested child Sessions for side questions without mutating the main Agent task."}
+    {"capability":"sessions","name":"dsh-nested-followups","url":"https://github.com/sluminositys/dsh-nested-followups","why":"Isolated, recursively nested child Sessions for side questions without mutating the main Agent task."},
+    {"capability":"evaluation","name":"dsh-dual-model-eval","url":"https://github.com/huangdaxianer/dsh-dual-model-eval","why":"Runs one coding prompt across isolated worktrees and compares model traces before applying a candidate."},
+    {"capability":"planning","name":"dsh-plans","url":"https://github.com/Optim-Agent/dsh-plans","why":"Planning-first preset with traceable Markdown plans, critic rounds, and a verifier checklist."},
+    {"capability":"orchestration","name":"dsh-agent-team-gui","url":"https://github.com/toolclub/dsh-agent-team-gui","why":"Persistent multi-model squads with bounded DAG runs, optional review, and run-center reporting."},
+    {"capability":"context","name":"dsh-context-compressor","url":"https://github.com/qwert702/dsh-context-compressor","why":"Compresses tool output and history for small models while preserving a resumable task flow."},
+    {"capability":"search","name":"dsh-web-search-pro","url":"https://github.com/anweat/dsh-web-search-pro","why":"Persistent multi-engine search with platform routing, extraction, caching, and Playwright rendering."},
+    {"capability":"state","name":"task-passport","url":"https://github.com/dongsheng123132/task-passport","why":"Carries durable task checkpoints across DeepSeek Harness, Codex, Claude Code, and other agents."},
+    {"capability":"evolution","name":"dsh-continual-evolve","url":"https://github.com/ZK-Andy/dsh-continual-evolve","why":"Versioned, auditable, rollback-safe refinement of prompts, memories, skills, and subagent specs."},
+    {"capability":"knowledge","name":"dsh-kb-sieve","url":"https://github.com/omdsh-dev/dsh-kb-sieve","why":"Builds auditable knowledge-base packages from references and SQL for repeatable research workflows."}
   ]
 }
