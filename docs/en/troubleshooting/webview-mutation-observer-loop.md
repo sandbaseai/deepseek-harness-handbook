@@ -5,6 +5,8 @@ content_revision: 2
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4920
 ---
 
 # Diagnose a WebView MutationObserver CPU loop
@@ -18,6 +20,12 @@ That stack proves a renderer is repeatedly delivering DOM mutation records. It d
 Upstream discussion [#4917](https://github.com/deepseek-ai/deepseek-harness/discussions/4917) reports ordered-list markers clipped on the left edge in Safari while the same Markdown renders normally in Chrome. A clipped `1.` or `2.` with normal text flow is a layout/overflow symptom, not evidence of a MutationObserver feedback loop. First compare browsers, capture the computed list padding and `list-style-position`, and check horizontal clipping at the message container. Only investigate observer ownership when CPU, mutation counts, or a repeated callback trace also crosses the loop boundary below.
 
 Do not “fix” the Safari symptom by deleting the Session or disabling every plugin. Preserve a screenshot and DOM/CSS sample, then test a sufficient marker gutter (for example, the existing source-list spacing) or an inside-positioned marker in a disposable client. Keep the ordered-list fixture and the WebView performance trace as separate evidence artifacts.
+
+### Route `removeChild` recursion as a DOM ownership failure
+
+Upstream discussion [#4920](https://github.com/deepseek-ai/deepseek-harness/discussions/4920) reports repeated `NotFoundError: Failed to execute 'removeChild' on 'Node'` frames from a `settings.section` slot. This is a different signature from a proven `MutationObserver` feedback loop, but it belongs to the same ownership investigation: one renderer path is attempting to remove a node that another path has already detached or replaced.
+
+Capture the first `removeChild` exception, the slot/plugin name, the parent and child identity, and the render generation that created both. Then reproduce with the suspect settings section absent, with one plugin at a time, and in a clean client. A fix should make removal idempotent or generation-aware, cancel stale slot work before a replacement, and preserve the host shell when one section crashes. Do not hide the exception by swallowing `NotFoundError`, and do not delete Sessions before proving whether a particular rendered block or plugin owns the stale node.
 
 Official report [#4737](https://github.com/deepseek-ai/deepseek-harness/discussions/4737) recovered after all Sessions for one project were moved out of the active Session root. That is strong evidence that the active presentation surface matters. It does not yet prove which Session, event, rendered block, extension, wrapper script, or interaction creates the feedback loop.
 

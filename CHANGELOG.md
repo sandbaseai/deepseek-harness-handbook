@@ -20,6 +20,12 @@ All notable handbook and publishing changes are recorded here. DeepSeek Harness 
 
 - Synchronized README coverage metadata with the current 157 canonical and 170 localized documents.
 
+## 0.5.276 - 2026-08-28
+
+### Changed
+
+- Extended the WebView mutation-loop runbook with upstream #4920's `settings.section` `removeChild` recursion signature and a separate DOM ownership/generation diagnostic path.
+
 ## 0.5.244 - 2026-08-29
 
 ### Changed
