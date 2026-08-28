@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.232 - 2026-08-29
+
+### Changed
+
+- Added `H97y/dsh-devflow` to the discovery-only community plugin intake, with explicit review gates for background agents, worktree writes, merge-to-main authority, and model/cost controls.
+
 ## 0.5.231 - 2026-08-29
 
 ### Changed
