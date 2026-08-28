@@ -1,21 +1,22 @@
 ---
 title: Persist Custom Plugin Events Without Breaking Session Resume
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
+upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Persist custom plugin events without breaking Session resume
 
-At upstream commit `99f6f02`, an out-of-tree plugin can extend the TypeScript `SessionEventMap` and append its own event type, but that does not make the type known to the persistence reader. The next cold load can refuse the complete Session—even with the same Harness version and the plugin still installed:
+At upstream rc.7 commit `99f6f02`, an out-of-tree plugin can extend the TypeScript `SessionEventMap` and append its own event type, but that does not make the type known to the persistence reader. The next cold load can refuse the complete Session—even with the same Harness version and the plugin still installed:
 
 ```text
 session "…" contains event type "plugin/example" (seq N) unknown to this
 harness and not marked ignorable; refusing to interpret the log
 ```
 
-Until the public writer API can persist the `ignorable` envelope for downstream event types, keep plugin-only audit and telemetry records outside the core durable Session log.
+The historical reader could skip an unknown record carrying `ignorable: true`, although the public writer exposed no way to set it. Alpha.1 removes `ignorable` from the event envelope, reader, SQLite schema, and generated vocabulary contract. Every unknown type is now required and refused. Until a formal registration or optional-record surface ships, keep out-of-tree event types outside the core durable Session log.
 
 ## What the rc.7 incident proves
 
@@ -102,7 +103,7 @@ Acceptance requires at least:
 | Durable envelope | `ignorable?: true` exists on stored events | only the writer can truthfully declare that loss is safe |
 | Reader vocabulary | generated `KNOWN_SESSION_EVENT_TYPES` contains in-repository events | downstream types are unknown by construction |
 
-The reader already skips an unknown event when its stored envelope carries `ignorable: true`. At the verified revision, `Session.append()` exposes a `SurfaceIntent` options tuple only for built-in surface event types and exposes no options tuple for other event types. The read-side escape hatch exists; the public downstream write path does not yet expose it.
+At rc.7 the reader skips an unknown event when its stored envelope carries `ignorable: true`. `Session.append()` exposes a `SurfaceIntent` options tuple only for built-in surface event types and exposes no options tuple for other event types, so the read-side escape hatch never had a public downstream writer. Alpha.1 removes that escape hatch completely: its fixed envelope rejects an `ignorable` key, its reader refuses every unknown type, and SQLite replaces the old `ignorable` column with an `is_packed` storage discriminator.
 
 ```mermaid
 flowchart LR
@@ -113,6 +114,70 @@ flowchart LR
   K -->|no + ignorable| S[Skip safely]
   K -->|no + required| X[Refuse resume]
 ```
+
+## Specify a compatibility surface, not only a mutable set
+
+Discussion #4815 consolidates twelve threads and at least nine downstream consumers into three materially different requirements. A safe extension design must not solve them with one boolean:
+
+| Consumer shape | Missing plugin behavior | Required contract |
+|---|---|---|
+| optional audit or presentation record | core Session remains reconstructable but plugin UI may lose decoration | durable optionality plus explicit degraded projection |
+| required plugin state transition | later records cannot be interpreted without the plugin | registered decoder/validator/migrator; absence refuses before reconstruction |
+| foreign compatibility record | event belongs to another ecosystem and may need translation | versioned importer into owned semantics, not blanket recognition |
+
+An event can be optional for model-history reconstruction while still affecting a plugin's visible conversation rows. Therefore “skippable” must name what may degrade. At minimum classify effects on model history, surface ordering, source references, policy/security, tool correlation, plugin state, search extraction, and UI projection. If any later core or plugin event depends on the record, it is required.
+
+A registration entry needs more than a type string:
+
+```ts
+interface SessionEventRegistration {
+  type: `${string}/${string}`
+  owner: { package: string; version: string }
+  schemaVersion: number
+  semantics: 'optional-observation' | 'required-state'
+  validate(data: unknown): JsonValue
+  upgrade?(from: number, data: JsonValue): JsonValue
+  projections: {
+    modelHistory: 'none' | 'required'
+    surface: 'none' | 'optional' | 'required'
+    search: 'none' | 'optional' | 'required'
+  }
+}
+```
+
+This sketch is a design checklist, not an upstream API. The runtime also needs these lifecycle rules:
+
+- registration completes before persistence inspection, Session listing, resume, search reconciliation, or fork;
+- a type has one owner; duplicate registration fails atomically with both identities;
+- registration is effect-owned and HMR-safe, but cannot disappear while a live or stored required event depends on it;
+- the writer may append only while the matching registration is active and must bind the event to its schema version;
+- JSONL and SQLite encode the same logical metadata and enforce the same decision;
+- cold readers without an optional registration skip only the payloads whose on-disk contract says the named projections may degrade;
+- required-event absence produces a typed compatibility refusal naming type, owner, schema version, Session, and recovery direction;
+- uninstall and downgrade are tested against real stopped-process artifacts, not inferred from same-process behavior.
+
+A global mutable `Set<string>` proves only name admission. It does not validate payload bytes, distinguish optional from required semantics, resolve two plugins claiming the same name, migrate versions, explain uninstallation, or keep HMR disposal from changing the meaning of an already-open Session.
+
+### Separate write authority from read capability
+
+Registration should grant a plugin authority to write only its namespaced type. A reader registration proves that this exact plugin version can validate and interpret the stored schema. Do not let “plugin is installed” imply either claim: a Bundle can be disabled, fail activation, load after Session discovery, or contain a different schema version under the same package name.
+
+For optional events, persist origin, type, schema version, and the writer's explicit semantic classification in a core-owned envelope. The reader must validate the envelope without executing plugin code before deciding whether the payload can be skipped. For required events, load the registered interpreter first and fail closed if it is absent or incompatible.
+
+### Prove the proposal with a compatibility matrix
+
+Use immutable artifacts from each writer version:
+
+| Reader | optional event | required event | expected result |
+|---|---|---|---|
+| same plugin version | present | present | exact replay |
+| plugin disabled | present | absent | resume with declared degraded projections |
+| plugin disabled | absent | present | typed refusal; no partial Session |
+| newer compatible plugin | present | present | validated upgrade then replay |
+| older plugin | newer schema | newer schema | skip only if on-disk optional contract permits; otherwise refuse |
+| conflicting registration | either | either | boot/registration fails before reading or writing |
+
+Repeat for JSONL/Zstandard and SQLite, cold resume, Session fork, export, search reconciliation, plugin uninstall/reinstall, HMR reload, and mixed compatible/incompatible corpora. An optional-event success is incomplete unless the UI and search explicitly disclose what was omitted.
 
 ## Choose storage by semantics
 
@@ -179,7 +244,7 @@ For an rc.7 downstream type, “compatible” cannot mean merely reinstalling th
 
 Create a new Session and bring forward a reviewed summary plus explicit source artifacts. Keep the rejected log immutable for diagnosis. A summary continuation is data loss compared with a valid resume, but it is safer than silently deleting an event whose semantics are unknown.
 
-## When an official `ignorable` writer ships
+## If an official optional-event writer ships
 
 Adopt it only for an event where all of these are true:
 
@@ -189,7 +254,7 @@ Adopt it only for an event where all of these are true:
 - the plugin behaves correctly when every such event is absent;
 - a cold-load test without the plugin proves the same visible Session state.
 
-Use an explicit version gate in the plugin manifest or release notes. Do not use an unsafe TypeScript cast to send an option that the installed runtime does not support.
+Use an explicit version gate in the plugin manifest or release notes. Do not use an unsafe TypeScript cast to send an option that the installed runtime does not support. Alpha.1 does not support the historical `ignorable` key.
 
 ## Avoid fragile workarounds
 
@@ -224,6 +289,10 @@ Rollback path:
 - [`Session.append()` option surface](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/index.ts)
 - [Strict persistence read validation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/src/coordinator.ts)
 - [Global reconciliation incident #4811](https://github.com/deepseek-ai/deepseek-harness/discussions/4811)
+- [Ecosystem registration request and consumer census #4815](https://github.com/deepseek-ai/deepseek-harness/discussions/4815)
+- [`0.1.2-alpha.1` removal of the historical envelope marker](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/core/session/src/types.ts)
+- [`0.1.2-alpha.1` generated fail-closed vocabulary](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/core/session/src/known-event-types.ts)
+- [`0.1.2-alpha.1` SQLite logical envelope and packing discriminator](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session/session-persistence-sqlite/src/compression.ts)
 - [`0.1.2-alpha.1` strict format refusal](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session/session-persistence/src/coordinator.ts)
 - [`0.1.2-alpha.1` SQLite observation boundary](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session-query/session-query-sqlite/src/index.ts)
 - [`0.1.2-alpha.1` unknown-event search extraction](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session-query/session-query/src/extraction.ts)

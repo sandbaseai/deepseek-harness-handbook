@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.174 - 2026-08-28
+
+### Changed
+
+- Updated custom Session-event compatibility for alpha.1's complete removal of the historical `ignorable` envelope and SQLite column.
+- Added optional-observation, required-state, and foreign-import contracts; a registration schema checklist; lifecycle rules; write/read authority separation; and a cross-backend compatibility matrix.
+
 ## 0.5.173 - 2026-08-28
 
 ### Changed
