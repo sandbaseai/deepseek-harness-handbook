@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.242 - 2026-08-29
+
+### Changed
+
+- Added `dsh-durable-context` from upstream Show Your Plugins discussion #4812 to the discovery-only community audit, explicitly withholding artifact, compatibility, provenance, and retention claims until independently verified.
+
 ## 0.5.241 - 2026-08-29
 
 ### Changed

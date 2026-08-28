@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Community Plugin Audit
 locale: en
-content_revision: 6
+content_revision: 7
 status: canonical
 verified_at: 2026-08-29
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -38,6 +38,7 @@ Two recent upstream discussions are useful discovery signals, not security or co
 | `miuzel/dsh-graph` | [#4877](https://github.com/deepseek-ai/deepseek-harness/discussions/4877) | `dsh-graph@0.7.2` | `dsh plugin --profile <name> add dsh-graph` | exact npm integrity, lifecycle effects, graph-file trust boundary, and runtime matrix |
 | `miuzel/dsh-subagent-ui` | [#4876](https://github.com/deepseek-ai/deepseek-harness/discussions/4876) | `dsh-subagent-workspace-ui@1.1.3` | `dsh plugin --profile web add dsh-subagent-workspace-ui` | exact artifact, browser-local state behavior, session-read scope, and cleanup after removal |
 | `H97y/dsh-devflow` | [#2572](https://github.com/deepseek-ai/deepseek-harness/discussions/2572) | `dsh-devflow` (announcement describes v0.4.0) | `dsh plugin --profile web add dsh-devflow` | exact npm version/integrity, background-agent authority, workspace/worktree writes, merge-to-main behavior, and model/cost controls |
+| `NickUserVorname/dsh-durable-context` | [#4812](https://github.com/deepseek-ai/deepseek-harness/discussions/4812) | experimental control layer (announcement does not establish a published package) | inspect the repository before any install | exact artifact, selective-capture correctness, source-provenance binding, retention behavior, and compatibility with the active Session format |
 
 The rows intentionally use **discovered** language. Before installing any candidate, resolve the registry tarball, inspect its `dsh` bundle patch and lifecycle scripts, pin the exact version/integrity, and test in a disposable profile. For an automation plugin that can create worktrees, run tools, and merge to `main`, review repository write authority and approval gates before enabling any background pump. Screenshots, a discussion post, a package name, or a high star count do not promote a row to `installable`, `runtime-compatible`, or `security-reviewed`.
 
