@@ -2,7 +2,7 @@
 title: DeepSeek Harness 生态资源能力地图
 locale: zh-CN
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 2
+source_revision: 3
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -87,6 +87,19 @@ verified_at: 2026-08-28
 | 插件市场 | [dsh-plugin-hub](https://github.com/Noob-stupid/dsh-plugin-hub) | 索引来源、启停语义、回滚和包验证。 |
 
 这些条目是进一步阅读的入口，不代表建议全部同时安装。上下文、记忆、路由和后台 Agent 插件叠加后，可能改变 prompt 大小、成本和权限边界，而这些变化往往不会出现在市场描述里。
+
+## 四条实用起步路径
+
+不要从全量目录拼装 profile，先选择一条可观测、可回滚的小路径：
+
+| 目标 | 从这里开始 | 只有在基线可观测后再加入 |
+|---|---|---|
+| 在同一编码任务上比较 Agent | [dsh-agent-arena](https://github.com/LeemanCheung/dsh-agent-arena) | [dsh-context](https://github.com/bowenliang123/dsh-context)，观察 token 和压缩证据。 |
+| 运行受监督的多 Agent 团队 | [dsh-collaboration](https://github.com/Socialist-Sister/dsh-collaboration) | [dsh-background-agents](https://github.com/PerryLink/dsh-background-agents)，再加预算保护。 |
+| 构建研究与记忆工作流 | [dsh-deep-research](https://github.com/dsh-external/dsh-deep-research) | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) 和 [dsh-free-web-search](https://github.com/delef/dsh-free-web-search)，记录来源与成本。 |
+| 运营受治理的生产 profile | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | [dsh-plugin-check](https://github.com/dsh-external/dsh-plugin-check)、[dsh-tool-schema](https://github.com/dsh-external/dsh-tool-schema)，并明确测试回滚。 |
+
+每条路径都应记录 profile manifest、加载模块、网络目的地、token/成本行为和卸载结果。这样才能把目录实验变成可重复的 Agent runbook。
 
 ## 安全选择流程
 

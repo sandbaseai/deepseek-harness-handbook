@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -89,6 +89,19 @@ The full catalog is intentionally broad. These additional projects are useful wh
 | Plugin marketplace | [dsh-plugin-hub](https://github.com/Noob-stupid/dsh-plugin-hub) | Index provenance, enable/disable semantics, rollback, and package verification. |
 
 These entries are pointers for further reading, not a recommendation to install everything together. Combining context, memory, routing, and background-agent plugins can change prompt size, cost, and authority boundaries in ways that are hard to see from a marketplace description.
+
+## Four practical starter paths
+
+Use a small, testable path instead of assembling a profile from the entire catalog:
+
+| If you are trying to… | Start with | Add only after the baseline is observable |
+|---|---|---|
+| Compare agents on the same coding task | [dsh-agent-arena](https://github.com/LeemanCheung/dsh-agent-arena) | [dsh-context](https://github.com/bowenliang123/dsh-context) for token and compression evidence. |
+| Run a supervised multi-agent team | [dsh-collaboration](https://github.com/Socialist-Sister/dsh-collaboration) | [dsh-background-agents](https://github.com/PerryLink/dsh-background-agents) for durable children, then a budget guard. |
+| Build a research-and-memory workflow | [dsh-deep-research](https://github.com/dsh-external/dsh-deep-research) | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) and [dsh-free-web-search](https://github.com/delef/dsh-free-web-search), with source and cost logging. |
+| Operate a governed production profile | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | [dsh-plugin-check](https://github.com/dsh-external/dsh-plugin-check), [dsh-tool-schema](https://github.com/dsh-external/dsh-tool-schema), and an explicit rollback test. |
+
+For each path, capture the profile manifest, loaded modules, network destinations, token/cost behavior, and removal result. That evidence turns a catalog experiment into a repeatable Agent runbook.
 
 ## A safe selection loop
 
