@@ -1,7 +1,7 @@
 ---
 title: Design Session Groups Without Inventing a Workspace
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -158,6 +158,26 @@ Use an idempotency key plus an expected membership revision. The Host commits on
 
 A stale tab receives `collection-conflict` with the current membership. It must refresh instead of replaying a blind last-writer move.
 
+#### Do not confuse a Collection move with storage migration
+
+Moving a navigation reference is a metadata mutation. Relocating an existing Session to another execution directory is a storage and authority migration. The latter is not supported by the public rc.2 Workspace interface: `attachSession` accepts a Session only when its persisted header `cwd` resolves to the same canonical directory as the Workspace.
+
+An out-of-tree migrator that rewrites `SessionHeader.cwd` therefore needs an explicit experimental boundary. Copying only `session.jsonl.zstd`, rewriting its first line, calling internal registry methods, and deleting the old Session directory is not a safe transaction. It can race a writer, collide with an existing destination, strand Workspace accounting after a crash, discard unknown future Session-owned files, and depend on private APIs that may change without compatibility guarantees.
+
+Before a supported migration API exists, prefer **fork into a new rooted Session**. If an operator still evaluates a cold-migration prototype, require all of these gates:
+
+1. Prove the Session has no live writer and hold an exclusive migration lease through commit or rollback.
+2. Inventory and preserve the complete Session-owned directory; treat unknown companion files as data, not garbage.
+3. Create the destination with no-overwrite semantics and reject an existing Session ID or path before copying.
+4. Preserve the append-oriented JSONL framing contract, or use an official persistence-layer transformation instead of fully decompressing and recompressing an unbounded log on the Host event loop.
+5. Durably write and verify the destination before changing indexes; fsync files and parent directories where the platform requires it.
+6. Update Session persistence and Workspace accounting through public, versioned APIs in one recoverable protocol. A private method such as `WorkspaceRegistry.indexHeader` is not a compatibility contract.
+7. Cold-load the migrated Session, validate its identity, header, event sequence, and target `cwd`, then detach the old accounting entry.
+8. Keep a manifest-backed backup until an independent restore test succeeds; delete the old directory only as the final committed step.
+9. Inject failures after every boundary—copy, header transform, publish, index update, attach, detach, and cleanup—and verify restart recovery on POSIX and Windows.
+
+“The decoded event lines still match” is useful but insufficient evidence. A migration test must also cover destination collision, concurrent writers, large logs with bounded memory, interrupted rename, stale indexes, unknown companion files, rollback collision, and authorization of any HTTP control endpoint.
+
 ### Delete a Collection
 
 Deletion ungroups member Sessions atomically. It does not archive, purge, move, fork, or rewrite them. Return the affected Session IDs so clients can reconcile without guessing.
@@ -246,6 +266,10 @@ Legacy peers should continue to show the Workspace tree. They may ignore Collect
 - No path falls back to process cwd, home, root, last Workspace, or Collection title.
 - Ephemeral roots are unique, canonical, sandboxed, quota-bound, and cleaned by a documented retention policy.
 - Attaching a folder cannot mutate the immutable rc.2 Session header in place.
+- A physical Session migration cannot overwrite an existing destination or run while any writer owns the source.
+- Crash injection at every migration boundary yields exactly one loadable authoritative copy after restart.
+- Migration preserves unknown Session-owned companion files and validates restore before source cleanup.
+- Plugins use public Workspace and persistence contracts; private registry indexing is never treated as stable API.
 - Reconnect installs one revision-consistent Collection and membership snapshot.
 - Out-of-order deltas cannot roll state backward.
 - A deleted or missing Session reference cannot recreate history.
@@ -258,6 +282,7 @@ Legacy peers should continue to show the Workspace tree. They may ignore Collect
 
 - [rc.2 immutable `SessionHeader`, including optional `cwd`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/types.ts)
 - [rc.2 durable Workspace registry and Session accounting](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/workspace/workspace/src/index.ts)
+- [rc.2 public Workspace contract and canonical-cwd validation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/workspace/workspace/src/types.ts)
 - [rc.2 Workspace-backed browser grouping and `Ungrouped`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-workspace/src/client/tree.ts)
 - [rc.2 filesystem resolution from per-Session `cwd`](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/fs/tool-fs/src/session-cwd.ts)
 - [rc.2 Session-scoped sandbox mode](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sandbox/sandbox-policy/src/session-mode.ts)
