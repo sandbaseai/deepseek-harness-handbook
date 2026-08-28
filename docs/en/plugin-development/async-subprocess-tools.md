@@ -1,7 +1,7 @@
 ---
 title: Run Subprocesses Safely Inside DeepSeek Harness Tools
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -27,9 +27,9 @@ This is a different failure from a child that exits abruptly. An asynchronously 
 
 ## Route a child crash to the correct layer
 
-Official report #4713 describes a Windows community desktop build based on `dataelement/dsh-desktop`. A third-party Python application called `os.kill(os.getpid(), 0)` while trying to probe liveness. On Windows, Python does not give `sig=0` the POSIX probe meaning: values other than the two console-control events call `TerminateProcess`, and the supplied value becomes the exit code. The Python process therefore terminated itself.
+The corrected evidence in official report [#4713](https://github.com/deepseek-ai/deepseek-harness/discussions/4713) describes a Windows community desktop build based on `dataelement/dsh-desktop`. A third-party Python application called `os.kill(os.getpid(), 0)` while trying to probe liveness. On Windows, `CTRL_C_EVENT` is numerically `0`, so this is not the POSIX liveness probe: Python routes it through `GenerateConsoleCtrlEvent`, broadcasting Ctrl+C to every process sharing the console. Because `dsh-subprocess-local` uses `detached: false` on Windows, the child and Host share that console; the Host can therefore exit with `0xC000013A` (`STATUS_CONTROL_C_EXIT`) without a useful stderr message.
 
-That explains the child's disappearance. It does not, by itself, prove why the Electron application exited. Keep four identities separate:
+The child disappearing and the Host exiting are separate boundaries. Keep four identities separate:
 
 ```text
 third-party program
@@ -49,6 +49,8 @@ Capture the process tree and the first terminal fact for each boundary. “Tool 
 - the desktop process itself crashed independently;
 - a supervisor terminated both processes;
 - the user interface disconnected while the Host remained alive.
+
+For a Windows regression probe, run the same self-liveness call through the official Host and through a direct `dsh-subprocess-local` seam, record `$LASTEXITCODE`, and compare it with a normal child exit and a nonexistent-PID probe. A contained child failure must settle one tool call without terminating the Host. Until the runtime creates an independent process group/console (or the caller replaces the Windows-unsafe liveness probe), do not treat `os.kill(pid, 0)` as a safe subprocess health check.
 
 Do not report a core Harness regression until the reproduction uses an official composition or identifies the official package and line that crossed the failure boundary.
 

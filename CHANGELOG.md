@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.387 - 2026-08-30
+
+### Changed
+
+- Corrected the Windows subprocess guidance from upstream #4713: `os.kill(pid, 0)` can broadcast Ctrl+C through a shared console and terminate the Host; the guide now separates child, Host, desktop, and renderer evidence.
+
 ## 0.5.386 - 2026-08-30
 
 ### Changed
