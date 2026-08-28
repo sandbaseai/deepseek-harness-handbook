@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.180 - 2026-08-28
+
+### Added
+
+- Added a source-build runbook for clustered Rolldown `MISSING_EXPORT` failures caused by generated `lib/types` output from another revision.
+- Documented the official cleaner boundary, work-preserving clean/install/build sequence, frozen-lockfile proof, result router, and alpha.1 export evidence behind report #4824.
+
 ## 0.5.179 - 2026-08-28
 
 ### Changed

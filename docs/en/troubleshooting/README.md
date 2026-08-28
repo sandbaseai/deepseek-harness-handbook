@@ -1,12 +1,14 @@
 ---
 title: DeepSeek Harness Troubleshooting
 locale: en
-content_revision: 58
+content_revision: 59
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-28
 ---
 
 # DeepSeek Harness troubleshooting
+
+- [Fix clustered `MISSING_EXPORT` failures after a source revision change](source-build-missing-exports.md)
 
 Diagnose the failing layer before reinstalling or changing configuration.
 
