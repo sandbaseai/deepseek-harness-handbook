@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.218 - 2026-08-29
+
+### Changed
+
+- Published the cold-restart failure evidence update in the Atom feed, linking subscribers to the existing insufficient-tool-messages article and its source-backed recovery boundary.
+
 ## 0.5.217 - 2026-08-29
 
 ### Added
