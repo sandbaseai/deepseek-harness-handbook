@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.322 - 2026-08-29
+
+### Changed
+
+- Added search keywords and ItemList structured data to the 31-entry Awesome resource page so search engines and Agent indexers can identify its scope and count.
+
 ## 0.5.321 - 2026-08-29
 
 ### Added
