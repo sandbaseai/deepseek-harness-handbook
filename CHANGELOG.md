@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.176 - 2026-08-28
+
+### Changed
+
+- Added a Session history read-state router that separates genuine exhaustion, empty nonterminal pages, cursor discontinuity, Remote failure, and projection failure.
+- Compared rc.2 fail-soft pagination with alpha.1 journal repair and interrupted-prefix rendering, while documenting the remaining invisible `loadOlder()` failure state.
+
 ## 0.5.175 - 2026-08-28
 
 ### Changed
