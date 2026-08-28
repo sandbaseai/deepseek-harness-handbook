@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.316 - 2026-08-29
+
+### Added
+
+- Added a machine-readable JSON index of 24 Agent-first resources selected from the pinned Awesome DeepSeek Harness catalog, with capability labels, source links, and verification boundaries.
+- Exposed the JSON index from the visual resource map, README, and sitemap for Agent workflows and search discovery.
+
 ## 0.5.304 - 2026-08-28
 
 ### Changed
