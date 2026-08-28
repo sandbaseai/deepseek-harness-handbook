@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.177 - 2026-08-28
+
+### Changed
+
+- Added the rc.2 Models UI input-modality gap and a safe `models[].input` authoring, round-trip, and fresh-Session verification workflow.
+- Documented modality resolution precedence, hidden-field preservation limits, narrow model declarations, and acceptance gates for a complete UI control.
+
 ## 0.5.176 - 2026-08-28
 
 ### Changed

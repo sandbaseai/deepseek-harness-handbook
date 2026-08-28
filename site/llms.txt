@@ -58,6 +58,7 @@ Air-gapped rc.8 source build: https://sandbaseai.github.io/deepseek-harness-hand
 Token accounting map: https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html
 Preset generation, shared-provider, and scoped-tool recovery: https://sandbaseai.github.io/deepseek-harness-handbook/preset-generation-recovery.html
 Web IME and translation-extension composer recovery: https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html
+Model input-modality authoring: https://sandbaseai.github.io/deepseek-harness-handbook/model-input-modalities.html
 
 ## Start here
 

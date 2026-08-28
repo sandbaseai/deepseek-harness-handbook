@@ -1,7 +1,7 @@
 ---
 title: Configure Model Providers in DeepSeek Harness
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -120,6 +120,56 @@ llm-pi-ai:
 
 This is a claim about the route, not a capability test. If the endpoint cannot accept images, it can still reject the request.
 
+### The rc.2 Models UI cannot author input modalities
+
+Upstream report [#4820](https://github.com/deepseek-ai/deepseek-harness/discussions/4820) identifies a real rc.2 surface gap. The `llm-pi-ai` schema accepts `models[].input` with `text` and `image`, and resolution uses the model entry first, then an installed catalog entry, then the provider's `defaultInput`. The default is text-only because over-claiming image support admits a durable request the provider may reject mid-turn.
+
+The rc.2 custom-provider `ModelListEditor` exposes only four model fields:
+
+- `id` and optional `name` in the collapsed row;
+- optional `contextWindow` and `maxTokens` in the advanced disclosure.
+
+It has no input-modality control or validation copy. **Fetch available models** also adopts only the discovered ID, name, and capacities; discovery does not prove vision support.
+
+Use the configuration file as the current authoring boundary:
+
+```yaml
+llm-pi-ai:
+  providers:
+    aiping:
+      models:
+        - id: GLM-5.3-Flash
+          input: [text, image]
+```
+
+Stop the profile writer, preserve the current settings file, edit the exact existing provider/model row, and restart or reload through the supported settings path. Do not create a second provider row with the same route or paste credentials into the YAML example.
+
+Then prove the effective route instead of trusting the file:
+
+1. dump the resolved profile and confirm the exact provider/model entry contains both modalities;
+2. reopen **Settings → Models** and verify the same row still exists;
+3. save an unrelated visible field only on a disposable copy first;
+4. dump configuration again and confirm `input` survived the round trip;
+5. start a fresh Session, select that exact route, attach one synthetic small image, and prove the request reaches the intended endpoint;
+6. remove the incorrect image claim immediately if the provider rejects the modality.
+
+The rc.2 editors keep their model drafts structurally open and spread unknown/future fields through visible edits, so an existing `input` field is intended to survive an ID/name/capacity edit. That preservation is a source property, not a reason to edit production settings without a backup. A model removal, model-array reset, or provider replacement still removes the owning data deliberately.
+
+### What a complete UI control must preserve
+
+A modality picker is not only two checkboxes. It should:
+
+- require `text` and allow `image` only as an additional declared capability;
+- distinguish an omitted model field from an explicit provider fallback;
+- show whether the value comes from the model, installed catalog, or `defaultInput`;
+- preserve hidden `reasoningEfforts`, `compat`, and future model fields;
+- never infer image support from `/models`, a model name, or successful text inference;
+- write the complete `models` array without dropping sibling rows or unknown fields;
+- disable image attachment before persistence when the selected resolved route is text-only;
+- prove save, reload, fresh-Session selection, one image request, reset, and rollback.
+
+Do not change the global `defaultInput` merely to enable one vision model. That broadens every otherwise undeclared model on the route; prefer the narrow `models[].input` declaration unless the provider contract genuinely applies to all of them.
+
 ## Session behavior
 
 Selecting a model makes it the default for new sessions. A session that already sent a request keeps the model recorded in its own event log. When testing route changes, start a new session unless continuity is intentional.
@@ -134,6 +184,7 @@ Selecting a model makes it the default for new sessions. A session that already 
 | Ollama form cannot be created | add at least one exact model ID; the base URL alone is not enough |
 | Ollama works with `curl` on the laptop but not in Harness | test from the Harness host/container; its loopback may be different |
 | Image refused before sending | declare `input: [text, image]` for that custom model |
+| Models UI has no image/text control | edit the existing `models[].input` in settings with the writer stopped, then prove the field survives reload and a fresh-Session request |
 | Provider rejects an image | remove the incorrect modality claim and start a new session |
 | Composer blocks after provider deletion | choose another configured model |
 | Add provider is silent immediately after alpha.1 upgrade | capture the browser/Host Remote failure; rule out a stale source bundle or mixed runtime before editing provider data |
@@ -144,6 +195,9 @@ Selecting a model makes it the default for new sessions. A session that already 
 - [Configuration catalog](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/config-catalog.md)
 - [`dsh-llm-deepseek`](https://github.com/deepseek-ai/deepseek-harness/tree/master/packages/llm/llm-deepseek)
 - [Official alpha.1 provider-upgrade report #4817](https://github.com/deepseek-ai/deepseek-harness/discussions/4817)
+- [Official rc.2 input-modality UI report #4820](https://github.com/deepseek-ai/deepseek-harness/discussions/4820)
+- [rc.2 custom-provider model editor](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings-models/src/client/ModelListEditor.tsx)
+- [rc.2 pi-ai modality schema and resolution](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/llm/llm-pi-ai/src/config.ts)
 - [alpha.1 Models store and Remote calls](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-settings-models/src/client/store.ts)
 - [alpha.1 dynamic provider configuration tests](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-pi-ai/tests/dynamic-config.spec.ts)
 - [alpha.1 CLI source-build and profile reference](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/cli/reference/README.md)
