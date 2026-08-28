@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Diagnose a long-running DeepSeek Harness terminal command</title>
+  <meta name="description" content="Classify a long-running DeepSeek Harness terminal command as foreground Bash, a background job, a persistent terminal, or stale presentation before retrying.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The timer is not the process.">
+  <meta property="og:description" content="Identify the execution lane, prove message durability, and recover without launching duplicate work.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-handbook-social-preview-v3.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Diagnose a long-running DeepSeek Harness terminal command","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-28","url":"https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html","inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Handbook home"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a>
+    <nav><a href="#router">Classify</a><a href="#recover">Recover</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav>
+  </header>
+  <main id="main" class="article-shell terminalrun-article">
+    <header class="article-hero terminalrun-hero">
+      <div>
+        <p class="eyebrow">Terminal lifecycle</p>
+        <h1>The timer is not the process.</h1>
+        <p class="article-deck">Identify the execution lane before you cancel, resend, or start the same work twice.</p>
+        <div class="article-meta"><span>Verified 2026-08-28</span><span>alpha.1 source</span></div>
+      </div>
+      <div class="terminalrun-lanes" aria-label="DeepSeek Harness terminal execution lanes">
+        <section><small>Foreground Bash</small><strong>120 seconds</strong><span>default, capped at 600 seconds</span></section>
+        <section><small>Background job</small><strong>No foreground timeout</strong><span>owned by a job ID</span></section>
+        <section><small>Persistent Bash</small><strong>300 seconds</strong><span>separate terminal and marker lifecycle</span></section>
+        <section class="terminalrun-contradiction"><small>Forty-minute card</small><strong>Classify first</strong><span>custom lane, live job, or stale projection</span></section>
+      </div>
+    </header>
+
+    <article class="article-body">
+      <div class="terminalrun-warning"><strong>Do not press Enter again yet.</strong><p>A failed toast does not prove the message was rejected. A visible timer does not prove the process is alive.</p></div>
+
+      <section id="router" class="terminalrun-router" aria-labelledby="router-title">
+        <div class="terminalrun-router-copy">
+          <h2 id="router-title">Classify the lane.</h2>
+          <p>Choose the strongest evidence you have. The router keeps every uncertain branch explicit.</p>
+          <form id="terminal-router-form">
+            <fieldset>
+              <legend>Did the tool return a job ID?</legend>
+              <label><input type="radio" name="job" value="yes"> Yes</label>
+              <label><input type="radio" name="job" value="no"> No</label>
+              <label><input type="radio" name="job" value="unknown" checked> Unknown</label>
+            </fieldset>
+            <fieldset>
+              <legend>Is persistent Bash or a PTY plugin loaded?</legend>
+              <label><input type="radio" name="persistent" value="yes"> Yes</label>
+              <label><input type="radio" name="persistent" value="no"> No</label>
+              <label><input type="radio" name="persistent" value="unknown" checked> Unknown</label>
+            </fieldset>
+            <fieldset>
+              <legend>Is the operating-system process still alive?</legend>
+              <label><input type="radio" name="process" value="yes"> Yes</label>
+              <label><input type="radio" name="process" value="no"> No</label>
+              <label><input type="radio" name="process" value="unknown" checked> Unknown</label>
+            </fieldset>
+          </form>
+        </div>
+        <aside class="terminalrun-result" aria-live="polite" aria-atomic="true">
+          <small>Current route</small>
+          <strong id="terminal-route-title">Evidence incomplete</strong>
+          <p id="terminal-route-reason">Preserve the card, Session ID, exact error, and process identity before changing state.</p>
+          <div id="terminal-route-action">Next: inspect the process tree and Session event tail.</div>
+        </aside>
+      </section>
+
+      <h2 id="recover">Recover by authority.</h2>
+      <div class="terminalrun-recovery">
+        <section><small>Job ID exists</small><strong>Read, then decide</strong><p>Use <code>job_output</code>. Keep it alive or call <code>job_kill</code> once.</p></section>
+        <section><small>Foreground call</small><strong>Stop once</strong><p>Prove process exit, tool settlement, and <code>turn/end</code> before replacement work.</p></section>
+        <section><small>Process is gone</small><strong>Preserve projection evidence</strong><p>Capture Session and browser state before refresh. Do not recreate a finished side effect.</p></section>
+        <section><small>Message is durable</small><strong>Do not resubmit</strong><p>A queued follow-up can remain behind the active Turn inside one running interval.</p></section>
+      </div>
+
+      <h2>Join six identities.</h2>
+      <div class="terminalrun-ledger">
+        <div><strong>Session</strong><span>event sequence</span></div>
+        <div><strong>Turn</strong><span>open or closed</span></div>
+        <div><strong>Tool call</strong><span>foreground or detached</span></div>
+        <div><strong>Job or terminal</strong><span>owner and status</span></div>
+        <div><strong>Process</strong><span>PID and process group</span></div>
+        <div><strong>Submit attempt</strong><span>durable message ID</span></div>
+      </div>
+
+      <div class="terminalrun-rule"><strong>Long work needs job control.</strong><p>Use background mode, keep the returned ID, wait in bounded intervals, and collect or kill every relevant job before the final answer.</p></div>
+
+      <h2>Primary evidence.</h2>
+      <ul class="source-list">
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4844">Long-running terminal report #4844</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/shell/bash-local/src/index.ts">alpha.1 local Bash lifecycle</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/shell/tool-bash/src/index.ts">alpha.1 foreground and background contract</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/jobs/tool-jobs/README.md">alpha.1 job controls</a></li>
+      </ul>
+
+      <section class="article-cta">
+        <h2>Keep the complete incident runbook.</h2>
+        <p>The canonical guide includes the joined timeline, message-admission matrix, safe recovery branches, regression contract, and redacted incident bundle.</p>
+        <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/long-running-terminal-command-next-prompt-error.md">Read the full runbook</a>
+      </section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+  <script src="./long-running-terminal.js" defer></script>
+</body>
+</html>

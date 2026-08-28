@@ -26,11 +26,11 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
+| [Diagnose a terminal command still shown after 40 minutes](https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html) | Standard alpha.1 foreground Bash cannot explain that timer by default; route background jobs, persistent terminals, live processes, and stale presentation before retrying. |
+| [Repair count-balanced but ID-invalid tool history](docs/en/troubleshooting/dangling-tool-calls-insufficient-results.md#add-the-alpha1-identity-and-compaction-branches) | Equal call/result counts do not prove valid pairing; use an ordered identity ledger and keep request stripping observable as containment. |
 | [Fix `HTML did not preload @deepseek-ai/dsh-client-modules/client.js`](docs/en/troubleshooting/client-modules-html-did-not-preload.md) | The package name is not the diagnosis: capture one boot generation and route Host injection, revisioned `/plugins` bytes, script order, proxies, caches, and unsupported bare frontend launches. |
 | [Stop repeated `000000...` output before it consumes the cap](docs/en/troubleshooting/degenerate-model-output.md) | Preserve answer/reasoning/tool channel and billing evidence; `max-tokens` is the finish reason while degeneration is a separate content-shape failure. |
 | [Repair a TUI where every registry slash command reads `undefined.aborted`](docs/en/troubleshooting/tui-slash-command-signal-images-slot.md) | The official ABI is `(agent, line, images, signal)`; patch both dispatch paths, keep `[]` in the image slot, and verify cancellation rather than masking the caller mismatch. |
-| [Implement Regenerate reply without mutating history](docs/en/troubleshooting/stuck-turn-stop-and-retry.md#regenerate-reply-means-branch-then-replay) | Fork from the previous completed Turn, re-admit ordered human input and images into the child, reconcile partial child creation, and never pretend branching rolls back external effects. |
-| [Install alpha.1 when its GitHub Release exists but npm returns E404](docs/en/getting-started/install-deepseek-harness.md) | GitHub Release, tag, source manifest, npm artifact, dist-tag, and executable are separate identities; select only a route whose exact bytes are actually published. |
 
 Each entry above names its pinned official source revision—currently rc.2 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) or alpha.1 [`cd5ef814…`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc)—records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 

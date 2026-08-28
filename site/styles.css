@@ -16,6 +16,45 @@
   --max: 1240px;
 }
 
+/* Long-running terminal lane router */
+.terminalrun-article{width:min(calc(100% - 40px),1160px)}
+.terminalrun-hero{display:grid;grid-template-columns:minmax(0,.88fr) minmax(430px,1.12fr);gap:clamp(2rem,5vw,5rem);align-items:center;min-height:auto}
+.terminalrun-hero h1{max-width:690px;font-size:clamp(3rem,5vw,4.7rem)}
+.terminalrun-article .article-body{max-width:920px;margin-inline:auto}
+.terminalrun-lanes{display:grid;grid-template-columns:1fr 1fr;gap:1px;padding:1px;background:var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.terminalrun-lanes section{min-height:155px;display:flex;flex-direction:column;padding:1rem;background:var(--surface)}
+.terminalrun-lanes small{color:var(--accent);font:700 .68rem ui-monospace,monospace}
+.terminalrun-lanes strong{margin-top:1rem;font-size:1.25rem}
+.terminalrun-lanes span{margin-top:auto;color:var(--muted);font-size:.8rem}
+.terminalrun-lanes .terminalrun-contradiction{background:var(--surface-strong);border-top:3px solid var(--accent)}
+.terminalrun-warning,.terminalrun-rule{display:grid;grid-template-columns:.8fr 1.2fr;gap:2rem;margin:0 0 2rem;padding:1.25rem;border-left:4px solid var(--accent);background:var(--surface-strong)}
+.terminalrun-warning strong,.terminalrun-rule strong{font-size:1.2rem}
+.terminalrun-warning p,.terminalrun-rule p{margin:0;color:var(--muted)}
+.terminalrun-router{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:1.5rem;align-items:start;margin:1.25rem 0 4rem}
+.terminalrun-router-copy{padding:1.25rem;background:var(--surface)}
+.terminalrun-router-copy h2{margin-top:0}
+.terminalrun-router-copy>p{color:var(--muted)}
+.terminalrun-router fieldset{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin:1.25rem 0 0;padding:0;border:0}
+.terminalrun-router legend{grid-column:1/-1;margin-bottom:.6rem;font-weight:750}
+.terminalrun-router label{display:flex;gap:.45rem;align-items:center;min-height:42px;padding:.65rem;border:1px solid var(--line);border-radius:.55rem;cursor:pointer}
+.terminalrun-router label:has(input:checked){border-color:var(--accent);background:var(--surface-strong);color:var(--accent)}
+.terminalrun-router input{accent-color:var(--accent)}
+.terminalrun-result{position:sticky;top:6rem;padding:1.25rem;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+.terminalrun-result small{color:var(--accent);font:700 .68rem ui-monospace,monospace}
+.terminalrun-result strong{display:block;margin:1rem 0 .7rem;font-size:1.65rem}
+.terminalrun-result p{color:var(--muted)}
+.terminalrun-result div{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--line);font-weight:700}
+.terminalrun-recovery{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:1.25rem 0 3rem;padding:1px;background:var(--line)}
+.terminalrun-recovery section{min-height:180px;display:flex;flex-direction:column;padding:1rem;background:var(--surface)}
+.terminalrun-recovery small{color:var(--accent);font:700 .68rem ui-monospace,monospace}
+.terminalrun-recovery strong{margin-top:1.2rem;font-size:1.1rem}
+.terminalrun-recovery p{margin-top:auto;color:var(--muted)}
+.terminalrun-ledger{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin:1.25rem 0 3rem}
+.terminalrun-ledger div{min-height:115px;display:flex;flex-direction:column;justify-content:space-between;padding:1rem;border-top:2px solid var(--accent);background:var(--surface)}
+.terminalrun-ledger span{color:var(--muted);font-size:.8rem}
+@media(max-width:980px){.terminalrun-hero,.terminalrun-router{grid-template-columns:1fr}.terminalrun-result{position:static}}
+@media(max-width:700px){.terminalrun-article{width:min(calc(100% - 28px),1160px)}.terminalrun-hero h1{font-size:clamp(2.6rem,12vw,3.5rem)}.terminalrun-lanes,.terminalrun-recovery,.terminalrun-ledger,.terminalrun-warning,.terminalrun-rule{grid-template-columns:1fr}.terminalrun-router fieldset{grid-template-columns:1fr}.terminalrun-lanes section{min-height:125px}}
+
 /* Agent Harness Evaluation Scorecard */
 .scorecard-shell { width:min(calc(100% - 40px),var(--max)); margin-inline:auto; }
 .scorecard-hero { display:grid; grid-template-columns:minmax(0,.9fr) minmax(430px,1.1fr); gap:clamp(2rem,6vw,5rem); align-items:center; padding:clamp(4rem,8vw,7rem) 0; }

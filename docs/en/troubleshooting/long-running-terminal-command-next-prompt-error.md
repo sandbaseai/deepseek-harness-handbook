@@ -1,7 +1,7 @@
 ---
 title: Diagnose a Long-Running Terminal Command Followed by a Prompt Error
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -12,6 +12,8 @@ upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 Use this runbook when DeepSeek Harness shows a terminal command running for a long time and submitting another message then produces an error. Do not assume the elapsed timer proves that one foreground `bash` process is still alive.
 
 At `dsh@0.1.2-alpha.1`, the standard local Bash executor defaults foreground calls to 120 seconds and caps a requested timeout at 600 seconds. Background Bash deliberately ignores that timeout and returns a job ID; persistent Bash has a separate 300-second default. A UI card visible after 40 minutes therefore contradicts the default foreground path and must be classified before recovery.
+
+[Use the interactive execution-lane router](https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html) for a compact first pass, then return here for the complete evidence and recovery contract.
 
 ## Protect the work first
 
