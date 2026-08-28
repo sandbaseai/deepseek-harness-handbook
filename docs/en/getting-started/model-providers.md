@@ -1,7 +1,7 @@
 ---
 title: Configure Model Providers in DeepSeek Harness
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -170,6 +170,41 @@ A modality picker is not only two checkboxes. It should:
 
 Do not change the global `defaultInput` merely to enable one vision model. That broadens every otherwise undeclared model on the route; prefer the narrow `models[].input` declaration unless the provider contract genuinely applies to all of them.
 
+## Evaluate a third-party capability editor before production use
+
+The community `dsh-plugin-model-capability` 1.0.0 fills several real UI gaps: it exposes model modalities, capacities, reasoning-level mappings, route defaults, and compatibility fields; uses revision-fenced Settings writes; preserves unknown route fields when its ordinary model editor replaces a model array; and disables writes when the Settings scope is not writable. Those are useful implementation patterns.
+
+It is still a configuration editor, not a capability detector. A successful Settings write proves only that the profile satisfies Harness schema and resolver checks. It does not prove that the selected endpoint accepts an image, a role, a reasoning dialect, an output field, or a claimed capacity.
+
+At source revision [`308d090`](https://github.com/yuioi666/dsh-plugin-model-capability/tree/308d090711a704eef85ade8cc653578b87f7c70e), apply these restrictions before evaluating it on a disposable profile:
+
+| Surface | What the control changes | Required safety boundary |
+|---|---|---|
+| **Image ready** preset | declares `[text, image]` on the route and every listed model | prove one synthetic image request per exact endpoint/model; remove a false claim and start a fresh Session |
+| **Max thinking** preset | offers all seven canonical levels and maps each to its same-named wire value | replace with provider-documented levels and wire spellings; do not assume `xhigh` or `max` exists |
+| gateway presets | override route-wide compatibility fields | capture the actual outbound role, reasoning payload, and output-cap field; one endpoint family name is not evidence |
+| **Apply to all models** | rewrites the entire route's model array from the current resolved snapshot | diff every model and preserve installed-catalog versus hand-declared semantics |
+| custom preset restore | calls `settings.replace` with the saved whole `llm-pi-ai` user section | treat it as a namespace rollback: it can remove unrelated routes or changes made after the snapshot |
+| custom headers | stores arbitrary plain string headers | never enter credentials; alpha.1 explicitly says `headers` can carry secrets the redactor does not hide |
+
+Two source-level issues make version 1.0.0 unsuitable for blind production rollout:
+
+1. The ordinary model writer correctly avoids nested Settings paths through `models`, because `applyPathOp` traverses plain objects, not arrays. The per-model compatibility editor nevertheless sends a path shaped like `providers/<route>/models/<index>/compat/<field>`. At the verified Settings implementation, the candidate section replaces the `models` array with object-shaped data and the adapter validator should reject the write, leaving stored settings unchanged. Patch it to clone the route, update the selected model, and write the complete route exactly as the ordinary model writer does.
+2. A saved custom preset serializes the complete user-layer `providers` dictionary. The plugin also exposes the route `headers` dictionary, while the official adapter warns that `Authorization` and `api-key` values there are returned verbatim by redacted Settings reads. A custom preset can therefore duplicate credentials into `model-capability.customPresets` and later return them to the browser. Remove header editing from the snapshot, reject credential-shaped header names, and migrate any existing presets after rotating exposed keys.
+
+Use this rollout matrix:
+
+1. create a separate DSH home/profile with synthetic credentials and one test route;
+2. save the before-state and resolved provider/model catalog;
+3. exercise one control at a time and inspect the exact Settings diff;
+4. test per-model compatibility separately—it follows a different write path in 1.0.0;
+5. verify text, image, reasoning-on, reasoning-off, tool use, max-token finish, and provider-switch replay against the real gateway;
+6. create an unrelated route after saving a custom preset, restore the preset, and confirm whether that route survives;
+7. place a canary value in a non-sensitive header, save a preset, and prove it is excluded before allowing any real header;
+8. stop the profile, restore the before-state, restart, and prove the original route still serves a fresh Session.
+
+Do not use a full user-layer preset as a secrets backup, and do not copy a production Settings snapshot into a bug report. Share only field names, route/model identifiers, redacted diffs, resolver errors, and synthetic request evidence.
+
 ## Session behavior
 
 Selecting a model makes it the default for new sessions. A session that already sent a request keeps the model recorded in its own event log. When testing route changes, start a new session unless continuity is intentional.
@@ -188,6 +223,8 @@ Selecting a model makes it the default for new sessions. A session that already 
 | Provider rejects an image | remove the incorrect modality claim and start a new session |
 | Composer blocks after provider deletion | choose another configured model |
 | Add provider is silent immediately after alpha.1 upgrade | capture the browser/Host Remote failure; rule out a stale source bundle or mixed runtime before editing provider data |
+| per-model compat edit rejects or changes `models` shape | stop editing; restore the route snapshot and use a whole-route array-preserving write |
+| custom preset restore removes a newer route | restore the pre-apply Settings document; treat presets as whole-namespace snapshots, not additive recipes |
 
 ## Official sources
 
@@ -201,3 +238,6 @@ Selecting a model makes it the default for new sessions. A session that already 
 - [alpha.1 Models store and Remote calls](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-settings-models/src/client/store.ts)
 - [alpha.1 dynamic provider configuration tests](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-pi-ai/tests/dynamic-config.spec.ts)
 - [alpha.1 CLI source-build and profile reference](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/cli/reference/README.md)
+- [alpha.1 Settings path-operation implementation](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/settings/settings/src/index.ts)
+- [alpha.1 pi-ai configuration schema and header warning](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-pi-ai/README.md)
+- [`dsh-plugin-model-capability` 1.0.0 source](https://github.com/yuioi666/dsh-plugin-model-capability/tree/308d090711a704eef85ade8cc653578b87f7c70e)
