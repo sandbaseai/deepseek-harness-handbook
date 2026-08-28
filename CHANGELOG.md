@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.330 - 2026-08-29
+
+### Fixed
+
+- Corrected the visible multilingual coverage count from 189 to 191 after adding the SandBase bridge translations.
+
 ## 0.5.329 - 2026-08-29
 
 ### Fixed
