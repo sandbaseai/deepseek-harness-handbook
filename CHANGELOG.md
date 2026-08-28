@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.304 - 2026-08-28
+
+### Changed
+
+- Extended the workspace recovery runbook with an evidence-first branch for same-name parent/child directories and workspace-scoped skill discovery, based on upstream Discussion #4927.
+
 ## 0.5.303 - 2026-08-28
 
 ### Added

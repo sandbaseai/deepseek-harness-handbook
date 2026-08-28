@@ -1,9 +1,11 @@
 ---
 title: Recover spawn ENOENT After a DeepSeek Harness Workspace Moves
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-28
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4927
 ---
 
 # Recover `spawn bash ENOENT` after a workspace moves
@@ -37,6 +39,24 @@ flowchart LR
 If the recorded path no longer resolves, the shell runner can fail before `bash -c` executes. Grep and glob can fail for the same reason because their search process also needs a valid root.
 
 The Session does not automatically adopt the new directory name. Its cwd is an identity boundary used by Session persistence, workspace membership, sandbox roots, local instructions, skills, tools, and subagents. Silently rewriting it would change more than a display path.
+
+## When a parent and child directory have the same name
+
+Discussion #4927 reports a different workspace identity symptom: a project contains `KairosEngine/KairosEngine/.agent/`, but selecting the inner directory makes a skill such as `/wayfind` invisible; moving `.agent` to the parent makes it appear. The report does not by itself prove whether the defect is path canonicalization, workspace indexing, or skill discovery. Treat it as an identity-resolution investigation, not as evidence that moving project files is a fix.
+
+Capture both the lexical selection and the resolved path before changing layout:
+
+```sh
+selected='/absolute/path/to/KairosEngine/KairosEngine'
+printf 'selected=%s\n' "$selected"
+realpath "$selected"
+find "$selected" -maxdepth 3 -type d -name .agent -print
+find "$selected" -maxdepth 4 -type f -path '*/.agent/skill/*' -print
+```
+
+Then compare a fresh Session selected at the inner directory with one selected at the parent. Keep the profile, DSH version, plugin set, and skill content constant. Record the workspace id, displayed path, `realpath`, the directory containing `.agent`, and the first discovery result. A valid `cwd` and a successful shell spawn do not prove that workspace-scoped instructions or skills were indexed from that same directory.
+
+Do not move `.agent` merely to make the command appear. That changes the project layout and can hide whether the selected workspace, the instruction loader, or the skill search root is wrong. If the inner selection is the intended execution root, use a new Session there and report the smallest pair of paths that reproduces the mismatch.
 
 ## Confirm the failure without another Agent turn
 
@@ -174,3 +194,4 @@ This page was verified against DeepSeek Harness commit `99f6f02fecdb7dff40c3fbc9
 - [Canonical sandbox roots resolve symlinks and preserve missing paths conservatively](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/sandbox/sandbox/src/roots.ts#L20-L40)
 - [Session persistence refuses a stored/live cwd mismatch](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/src/coordinator.ts#L1245-L1253)
 - [Community reproduction and immediate diagnostic workaround](https://github.com/deepseek-ai/deepseek-harness/discussions/3277)
+- [Community report: same-name parent/child workspace selects the wrong project node](https://github.com/deepseek-ai/deepseek-harness/discussions/4927)
