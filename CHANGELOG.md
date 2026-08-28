@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.212 - 2026-08-28
+
+### Changed
+
+- Added the Ralph failure-successor decision to the README's source-verified map, making the latest upstream orchestration discussion visible from the primary project entry point.
+
 ## 0.5.211 - 2026-08-28
 
 ### Changed
