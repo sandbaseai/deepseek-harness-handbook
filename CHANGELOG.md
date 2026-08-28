@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.281 - 2026-08-28
+
+### Added
+
+- Added English and Chinese runbooks for Windows read-only PowerShell stderr noise caused by a ConstrainedLanguage-incompatible encoding preamble, based on upstream Discussion #4924.
+- Refreshed coverage metadata to 159 canonical and 176 localized documents.
+
 ## 0.5.280 - 2026-08-28
 
 ### Changed
