@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.400 - 2026-08-30
+
+### Added
+
+- Clarified the README ecosystem entry point with the six new Agent-first picks from the Awesome DeepSeek Harness catalog.
+
 ## 0.5.399 - 2026-08-30
 
 ### Added
