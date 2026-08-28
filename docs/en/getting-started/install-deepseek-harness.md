@@ -1,7 +1,7 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -15,6 +15,12 @@ This guide separates those choices before configuration or troubleshooting begin
 
 > [!WARNING]
 > DeepSeek Harness is in developer preview and can run tools that read or modify the selected workspace. Start in a disposable repository, use limited credentials, and review every approval request.
+
+## Treat unreleased Node versions as a separate variable
+
+An upstream startup report used macOS 27 beta with Node `v25.9.0` and observed a process that appeared to hang before the UI became usable ([discussion #111](https://github.com/deepseek-ai/deepseek-harness/discussions/111)). The report does not prove that Node 25 caused the hang, but it is enough to keep the runtime version in the reproduction record.
+
+For a first comparison, use the Node range declared by the exact DSH source revision (the rc.8 checkout declares `^22.19.0 || >=24.0.0`), then A/B the same profile and `DSH_HOME` on the beta runtime. Capture `node --version`, package version, launch command, first visible log line, and whether the process opens a port. Do not “fix” a startup hang by deleting profile state until the supported-runtime comparison has been preserved.
 
 ## Verify the package before execution
 
