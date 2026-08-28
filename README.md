@@ -13,7 +13,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 If this handbook saves you a debugging cycle, [star the repository](https://github.com/sandbaseai/deepseek-harness-handbook). That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**165 canonical guides · 191 localized documents · 39 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**165 canonical guides · 191 localized documents · 40 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -27,7 +27,7 @@ Choose one path and get to evidence quickly:
 
 ### Explore the Agent ecosystem
 
-The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 39 source-linked starting points. For workflow assembly, inspect [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine); for cross-Agent Skill migration, [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover); for research intake, [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news); and for evidence-driven debugging, [dsh-replay](https://github.com/zoahdev/dsh-replay). Each entry is a discovery lead, not a compatibility or security endorsement.
+The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 40 source-linked starting points. For workflow assembly, inspect [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine); for cross-Agent Skill migration, [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover); for research intake, [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news); and for evidence-driven debugging, [dsh-replay](https://github.com/zoahdev/dsh-replay). Each entry is a discovery lead, not a compatibility or security endorsement.
 
 ### Newly source-verified
 

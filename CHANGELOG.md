@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.356 - 2026-08-30
+
+### Added
+
+- Added the public `dsh-nested-followups` project to the Agent-first resource map, with ancestry, isolation, and tool-scope review guidance.
+
 ## 0.5.355 - 2026-08-30
 
 ### Added

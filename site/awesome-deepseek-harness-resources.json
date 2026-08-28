@@ -44,6 +44,7 @@
     {"capability":"desktop","name":"dsh-tray","url":"https://github.com/liulifu/dsh-tray","why":"Windows tray guardian with restart, multi-profile bindings, recovery snapshots, and plugin-failure containment."},
     {"capability":"desktop","name":"dsh-whale-musume","url":"https://github.com/Sutera-Diffusus/dsh-whale-musume","why":"Local-first DSH Web desktop pet with work-state feedback and no telemetry."},
     {"capability":"sessions","name":"dsh-corrupt-session-repair","url":"https://github.com/MedicineKing/dsh-corrupt-session-repair","why":"Zero-install scanner and repair workflow for crash-recovery sequence corruption; keep real session artifacts local."},
-    {"capability":"ui","name":"dsh-codex-ui","url":"https://github.com/MichengAI/dsh-codex-ui","why":"Codex-style DSH Web navigation, workspace session tree, search, and turn navigation through public extension points."}
+    {"capability":"ui","name":"dsh-codex-ui","url":"https://github.com/MichengAI/dsh-codex-ui","why":"Codex-style DSH Web navigation, workspace session tree, search, and turn navigation through public extension points."},
+    {"capability":"sessions","name":"dsh-nested-followups","url":"https://github.com/sluminositys/dsh-nested-followups","why":"Isolated, recursively nested child Sessions for side questions without mutating the main Agent task."}
   ]
 }
