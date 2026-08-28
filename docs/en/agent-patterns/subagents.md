@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Subagents Guide
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -241,6 +241,18 @@ The relevant composition row is `workflow-worker-thread`. In a copied preset, ke
 ```
 
 These values are starting bounds, not universal sizing advice. Increase one dimension at a time from measured evidence. A run that needs 480 translations is usually safer as several restartable batches than one process-lifetime fan-out.
+
+### Separate install-time OOM from child-run OOM
+
+Upstream discussion [#4914](https://github.com/deepseek-ai/deepseek-harness/discussions/4914) reports a memory blow-up while installing `0.1.1-rc.2`. That is a different boundary from a workflow that exhausts heap after starting many child Agents. Capture the phase before changing `maxTotalAgents` or Node heap flags:
+
+| Phase | First evidence | Safe next probe |
+|---|---|---|
+| package install | npm/pnpm process, resolver, or postinstall owns the heap | repeat in a disposable cache with one package manager and record peak RSS |
+| Host startup | no Agent call yet; loader or plugin graph is being built | dump the resolved graph and compare package versions/duplicate runtime copies |
+| child execution | one or more Agent calls are active or settled | lower concurrency/total calls and split the durable workload into batches |
+
+Do not claim that a larger `--max-old-space-size` fixes installation, and do not use an install failure as evidence that the child-limit policy is wrong. The reproduction record should include package manager, lockfile state, Node version, peak memory, phase, and the first failing command.
 
 ## Failure checklist
 
