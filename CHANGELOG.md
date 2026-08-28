@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.223 - 2026-08-29
+
+### Changed
+
+- Updated the Windows folder-picker runbook with Discussion #4878 evidence that fix `51c24274` exists on upstream master but remains absent from checked npm artifacts; added exact tarball verification commands.
+
 ## 0.5.222 - 2026-08-29
 
 ### Changed

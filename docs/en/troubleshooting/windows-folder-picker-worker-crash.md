@@ -1,9 +1,9 @@
 ---
 title: Windows Folder Picker Crash and Unicode Truncation in DeepSeek Harness
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
-verified_at: 2026-08-27
+verified_at: 2026-08-29
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
 ---
 
@@ -125,6 +125,19 @@ Do not patch an installed `lib` file as an operator workaround. The durable upst
 
 **Evidence for this branch:** the dialog completes; the error quotes a path truncated immediately before `开`, `一`, `刀`, `退`, or another `U+XX00` code point; the full selected directory exists.
 
+### Release status: a master fix is not an npm fix
+
+Upstream Discussion [#4878](https://github.com/deepseek-ai/deepseek-harness/discussions/4878) reports the same defect with `需 U+9700` and `开 U+5F00`, and identifies upstream fix commit [`51c24274`](https://github.com/deepseek-ai/deepseek-harness/commit/51c24274). The report also checked the published `@deepseek-ai/dsh-host-directory-picker-native@0.1.1-rc.2` tarball and the nested copies in `@deepseek-ai/dsh@0.1.1-rc.1` / `0.1.1-rc.2`; those artifacts still contain the one-byte terminator check. A newer source checkout may contain the repair while an npm-installed runtime remains vulnerable.
+
+Verify the artifact actually running before calling the issue fixed:
+
+```sh
+npm view @deepseek-ai/dsh-host-directory-picker-native@<version> dist.integrity dist.tarball --json
+npm view @deepseek-ai/dsh@<version> version dist.integrity dist.tarball --json
+```
+
+Inspect the extracted tarball with scripts disabled for the two-byte `00 00` terminator logic. Do not infer npm publication from a Git commit, a GitHub discussion, or a release note alone.
+
 ### C. Dialog never appears and native modules failed during install
 
 Inspect the original npm output for Koffi or native build/install-script failure. An isolated `npx` dependency tree does not necessarily use a globally installed `koffi` or `node-pty`; installing another global copy can leave the failing tree unchanged.
@@ -226,6 +239,7 @@ Keep browse mode if it meets the product need. If reporting the native failure, 
 - [Confirmed rc.7 UTF-16LE truncation report #3291](https://github.com/deepseek-ai/deepseek-harness/discussions/3291)
 - [Independent workspace-invalid-path confirmation #3484](https://github.com/deepseek-ai/deepseek-harness/discussions/3484)
 - [rc.2 `报销` / `销 U+9500` reproduction #4760](https://github.com/deepseek-ai/deepseek-harness/discussions/4760)
+- [Community unpublished-fix report #4878](https://github.com/deepseek-ai/deepseek-harness/discussions/4878)
 - [Original directory-name truncation report #3188](https://github.com/deepseek-ai/deepseek-harness/discussions/3188)
 - [rc.8 Win32 UTF-16 decode path](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/host/directory-picker-native/src/win32-dialog-bindings.ts)
 - [Native picker contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/host/directory-picker-native/README.md)
