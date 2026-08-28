@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.283 - 2026-08-28
+
+### Changed
+
+- Extended the pnpm Web loading runbook with upstream #4923's isolated-tarball provider-table failure and the two-level realpath regression contract.
+
 ## 0.5.282 - 2026-08-28
 
 ### Added

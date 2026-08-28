@@ -1,9 +1,11 @@
 ---
 title: Recover Web stuck on Loading plugins in a pnpm source checkout
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-28
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4923
 ---
 
 # Recover `dsh web` stuck on “Loading plugins…” in a pnpm source checkout
@@ -11,6 +13,14 @@ verified_at: 2026-08-20
 In an rc.8 source checkout, the Host can finish server-side activation and listen successfully while the browser remains on `HARNESS / Loading plugins…` forever. One reported branch is a broken profile module fallback: pnpm workspace packages are symlinked, the fallback walker computes dependency lookup paths from a literal symlink anchor, and transitive client packages never become resolvable from the profile.
 
 This is not a generic “clear the browser cache” symptom. Prove the client graph, bundle endpoints, and fallback links before changing pnpm layout or the profile.
+
+## Recognize the isolated-tarball variant
+
+Upstream Discussion [#4923](https://github.com/deepseek-ai/deepseek-harness/discussions/4923) reports the same boundary in an out-of-tree profile that consumes individually pinned release tarballs. The Web page shows `web boot: N entries did not activate`, the `window.__DSH_BOOT__.entries` provider table may be empty, and every client plugin remains pending without a server-side error.
+
+In that layout, the fallback breadth-first search can resolve the first dependency through a pnpm symlink but use the symlink's literal parent for the next lookup. Transitive packages that exist beside the real store instance are then skipped as “not installed.” A local comparison found a shallow closure of 17 entries versus 481 after canonicalizing each anchor; those figures are environment-specific, not thresholds.
+
+Treat this as the same realpath invariant, not as evidence that the package tarballs are individually corrupt. The repair should canonicalize the initial install anchor and every discovered package directory before the next `createRequire(...).resolve.paths(...)` lookup. Add a two-level symlink fixture that fails before the change and finds the transitive package after it. Do not accept a workaround that merely prelinks the missing provider or suppresses the pending status.
 
 ## Recognize the exact branch
 
