@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.357 - 2026-08-30
+
+### Changed
+
+- Promoted the two newest UI and Session resources in the README ecosystem discovery sentence for better search and first-visit routing.
+
 ## 0.5.356 - 2026-08-30
 
 ### Added
