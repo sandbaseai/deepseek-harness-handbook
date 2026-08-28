@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.362 - 2026-08-30
+
+### Changed
+
+- Corrected public resource-page canonical-guide count and Atom feed update timestamp to match the latest published content.
+
 ## 0.5.361 - 2026-08-30
 
 ### Changed
