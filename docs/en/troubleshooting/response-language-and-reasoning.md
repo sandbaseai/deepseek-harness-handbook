@@ -1,15 +1,28 @@
 ---
 title: Control DeepSeek Harness Response and Reasoning Language
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-20
+verified_at: 2026-08-29
 upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
 ---
 
 # Control response and reasoning language in DeepSeek Harness
 
 If you write in Chinese but the Agent answers or reasons in English, diagnose two outputs separately:
+
+## A different failure: reasoning can leak into the text channel
+
+Do not confuse a language preference with a block-classification failure. Upstream Discussion [#3021](https://github.com/deepseek-ai/deepseek-harness/discussions/3021) records intermittent rc.7/rc.2 turns in which long provider reasoning is stored and rendered as ordinary `text`. The strongest signature is a multi-tool-call turn where `reasoning-chunks` drops to zero (or near zero), `text-chunks` inflates, and the durable `assistant/message` plus replay metadata contain `[text, tool-call]` with no `reasoning` block. The same-session neighboring turns can be healthy.
+
+Use these checks before changing prompts or forcing a different language:
+
+1. Compare one leaking turn with an adjacent healthy turn under the same provider, model, and reasoning setting.
+2. Count typed `reasoning-chunks`, `text-chunks`, and `tool-call-chunks`; do not infer the channel from visible prose.
+3. Inspect the durable block shape and replay metadata. If the reasoning block is absent there too, the client renderer is not the owner.
+4. Preserve the exact DSH package, route, turn sequence, and sanitized request headers; avoid deleting the Session while collecting evidence.
+
+This report points to the assembler/adapter seam that maps provider `reasoning_content` and interleaved tool-call deltas, not to translation. Until a release fixes that seam, treat leaked thinking as a privacy and output-budget defect: use a fresh disposable Session for sensitive work, keep reasoning display policy explicit, and report the smallest decoded evidence rather than the full hidden monologue.
 
 - **answer text** is the provider's visible assistant content;
 - **reasoning text** is the provider's `reasoning_content`, rendered in a separate Think row.

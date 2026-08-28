@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.225 - 2026-08-29
+
+### Changed
+
+- Expanded the response/reasoning language guide with the upstream #3021 reasoning-to-text leakage signature, durable evidence checks, and privacy/output-budget handling.
+
 ## 0.5.224 - 2026-08-29
 
 ### Changed
