@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.189 - 2026-08-28
+
+### Added
+
+- Added a TUI slash-command failure runbook for `Cannot read properties of undefined (reading 'aborted')` caused by passing `AbortSignal` in the command image slot.
+- Documented the two-call-site adapter fix, loaded-bundle diagnostics, safe fallback routing, behavioral verification, and an eight-point integration regression contract.
+
 ## 0.5.188 - 2026-08-28
 
 ### Changed
