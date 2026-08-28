@@ -68,6 +68,7 @@ Model input-modality authoring: https://sandbaseai.github.io/deepseek-harness-ha
 ## Start here
 
 - [Prompt assembly and provenance](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/prompt-assembly-provenance.md): Separate ordered prompt sections, runtime-fact snapshots, and tool schemas; measure Plan and Code Mode with explicit execution and cache evidence.
+- [GitFlow guardrails](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/gitflow-guardrails.md): Turn branch-role rules into a pre-execution Agent guard with external audit evidence, while retaining repository branch protection as the final authority.
 - [Agent lifecycle and prefix-cache ordering](https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-lifecycle.md): Trace turns and steps, then separate provenance, recency, durable order, and cache stability before moving injected context.
 - [Agent Harness Evaluation Scorecard](https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html): Rate eight runtime boundaries with evidence, identify the next gate, and share a local browser-only review.
 

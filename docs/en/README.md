@@ -13,6 +13,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 ## Featured guides
 
 - [Trace prompt assembly, runtime facts, and tool-schema provenance](architecture/prompt-assembly-provenance.md)
+- [Turn GitFlow from a prompt request into an execution guard](agent-patterns/gitflow-guardrails.md)
 - [Diagnose a long-running terminal command followed by a prompt error](troubleshooting/long-running-terminal-command-next-prompt-error.md)
 - [Diagnose why AGENTS.md loaded but did not constrain an action](agent-patterns/agents-md-scope.md)
 - [Evaluate an optional bounded recovery round in Ralph](agent-patterns/ralph-bounded-failure-successor.md)

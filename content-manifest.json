@@ -778,6 +778,11 @@
       "source": "docs/en/plugin-development/tool-code-card-language.md",
       "revision": 1,
       "translations": {}
+    },
+    {
+      "source": "docs/en/agent-patterns/gitflow-guardrails.md",
+      "revision": 1,
+      "translations": {}
     }
   ]
 }
