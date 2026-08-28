@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Tool Execution Pipeline
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -68,6 +68,23 @@ The durable `tool/call` event lets clients render pending work and lets replay p
 ## Extension rule of thumb
 
 Use `tools/post-execute` only when changing the result. Use `tools/result` when observing final metrics, audit, or capture. Put timeouts and retries around `tools/execute`. Put owner policy that must never be reordered in a guard.
+
+## A waterfall listener can veto every tool
+
+`tools/pre-execute` is a waterfall, not an ordinary notification. A listener
+that returns without calling `next()` can prevent the built-in decision handler
+from running. If the consumer then assumes a decision object exists, every tool
+may fail with an opaque `Cannot read properties of undefined (reading 'kind')`
+error. Upstream discussion [#4906](https://github.com/deepseek-ai/deepseek-harness/discussions/4906)
+documents this failure mode in a third-party marketplace plugin.
+
+When all tools fail after installing one plugin, compare a minimal profile with
+the plugin removed before changing the model or workspace. Inspect the listener's
+payload contract: a pre-execute handler must either call `next()` for unrelated
+tools or return an explicit `{ kind: 'allow' | 'deny' | 'ask' }` decision. Treat
+an undefined or malformed gate as a fail-closed compatibility defect, preserve
+the plugin and profile versions, and report the exact event sequence. Do not
+retry every tool call; the failure is at the shared policy boundary.
 
 ## Official sources
 
