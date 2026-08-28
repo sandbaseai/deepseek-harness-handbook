@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.168 - 2026-08-28
+
+### Changed
+
+- Extended custom Session event compatibility from cold-resume refusal to the `0.1.2-alpha.1` SQLite reconciliation blast radius behind generic `session history storage is unavailable` failures.
+- Added four-fact diagnosis, exact-artifact reversible quarantine, degraded-result disclosure, per-artifact runtime repair boundaries, and regression gates.
+
 ## 0.5.167 - 2026-08-28
 
 ### Changed

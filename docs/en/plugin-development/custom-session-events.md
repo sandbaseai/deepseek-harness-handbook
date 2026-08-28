@@ -1,9 +1,9 @@
 ---
 title: Persist Custom Plugin Events Without Breaking Session Resume
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-19
+verified_at: 2026-08-28
 ---
 
 # Persist custom plugin events without breaking Session resume
@@ -33,6 +33,63 @@ This sharpens the diagnosis:
 | adding `ignorable: true` to a copied artifact passes validation | the missing envelope capability is the blocking boundary |
 
 The last row is forensic confirmation, not a general editing recipe. A format-aware repair must preserve frames, sequence, checksums, source references, and the original artifact; only the plugin author can assert that dropping the event is semantically safe.
+
+## One incompatible artifact can block corpus search
+
+The failure is not necessarily confined to opening the affected Session. At upstream `0.1.2-alpha.1` commit `cd5ef814`, SQLite session search reconciles persisted artifacts before every search. For each changed artifact not shadowed by a live Session, reconciliation calls the persistence service's `inspect()` method.
+
+That creates this current control flow:
+
+```text
+session_search
+  → reconcile every changed persisted artifact
+    → inspect one artifact
+      → reject an unknown required event
+        → wrap as SESSION_QUERY_PERSISTENCE_FAILED
+          → "session history storage is unavailable"
+```
+
+The per-event search extractor is already defensive: a declaration-merged event with no first-party search semantics contributes an empty string. That does **not** help when persistence refuses the artifact before document extraction begins. Interpretation remains correctly fail-closed for the incompatible Session, while the reconciliation loop currently lacks per-artifact failure isolation.
+
+Incident #4811 observed a healthy SQLite `PRAGMA quick_check`, fewer indexed rows than persisted artifacts, and two artifacts rejected on `demo/hello`. Reversibly quarantining exactly those artifacts restored `session_search` for the remaining corpus. This is evidence for that recorded mixed-prerelease environment, not proof that every version, backend, or generic storage error has the same cause.
+
+### Diagnose the blast radius without rewriting history
+
+Use four joined facts before attributing the generic message:
+
+| Evidence | Interpretation |
+|---|---|
+| SQLite opens and `PRAGMA quick_check` is `ok` | the index file is not generically corrupt |
+| persisted artifact count exceeds indexed Session count | reconciliation is incomplete, but the cause is not yet proven |
+| one artifact's read fails with `SessionFormatUnsupportedError` naming type and sequence | the artifact is intact but incompatible with this reader |
+| moving only that frozen artifact out of the active root restores search | bounded containment confirms the scan participant |
+
+Do not infer the incompatible Session from a missing index row alone. Stop the writer, identify the exact failing artifact through supported inspection or complete error evidence, record its location and SHA-256, and preserve an immutable copy before changing active discovery.
+
+### Contain one artifact reversibly
+
+1. Stop every process that can write the Session root.
+2. Record the active artifact inventory and hashes.
+3. Move only the proven incompatible Session directory to a quarantine outside the active scan root; do not delete or edit it.
+4. Start the same runtime composition and rerun a bounded search.
+5. Confirm the quarantined hash is unchanged and record that results exclude one Session.
+6. Restore the artifact only into an isolated compatible-reader environment, never blindly into the recovered production scan.
+
+If exact identity cannot be proven, stop. Broadly moving Sessions until the error disappears destroys attribution and can hide a second failure.
+
+### Preserve strict reads while limiting global impact
+
+A runtime repair should catch only `SessionFormatUnsupportedError` at the per-artifact observation boundary. It should leave the raw artifact untouched, remove or tombstone any stale rows for that identity atomically, emit an actionable warning with Session identity and location, continue indexing compatible artifacts, and return an explicit degraded/partial-result marker. Corruption, transport, cancellation, database, and identity-conflict errors must keep their existing typed failure paths.
+
+Acceptance requires at least:
+
+- one unknown required event degrades only its own Session;
+- an unknown event is never silently interpreted or indexed;
+- stale search rows for the incompatible identity cannot survive;
+- every result page discloses degraded corpus coverage;
+- a later compatible reader can re-admit the unchanged artifact;
+- two incompatible artifacts produce two stable diagnostics without aborting compatible indexing;
+- cancellation and database failures are not mislabeled as format incompatibility.
 
 > [!CAUTION]
 > Do not patch a live Session log, cast around the append API, or hand-edit the generated known-type catalog. The strict read refusal protects reconstruction integrity: an unknown required event may change the meaning of every event after it.
@@ -166,3 +223,8 @@ Rollback path:
 - [Durable `ignorable` envelope contract](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/types.ts)
 - [`Session.append()` option surface](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/core/session/src/index.ts)
 - [Strict persistence read validation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence/src/coordinator.ts)
+- [Global reconciliation incident #4811](https://github.com/deepseek-ai/deepseek-harness/discussions/4811)
+- [`0.1.2-alpha.1` strict format refusal](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session/session-persistence/src/coordinator.ts)
+- [`0.1.2-alpha.1` SQLite observation boundary](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session-query/session-query-sqlite/src/index.ts)
+- [`0.1.2-alpha.1` unknown-event search extraction](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session-query/session-query/src/extraction.ts)
+- [`SESSION_QUERY_PERSISTENCE_FAILED` tool presentation](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/session-query/tool-session-query/src/service-boundary.ts)

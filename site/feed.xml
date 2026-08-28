@@ -401,11 +401,11 @@
   </entry>
 
   <entry>
-    <title>Persist custom plugin events without breaking Session resume</title>
+    <title>Keep one incompatible Session from blocking global search</title>
     <link href="https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html"/>
     <id>https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html</id>
-    <updated>2026-08-19T10:00:00Z</updated>
-    <summary>Choose plugin storage by reconstruction semantics, preserve strict unknown-event refusal, and test cold resume across plugin and Harness versions.</summary>
+    <updated>2026-08-28T01:30:00Z</updated>
+    <summary>Preserve strict unknown-event refusal while diagnosing the SQLite reconciliation blast radius, quarantining one proven artifact, and disclosing degraded search coverage.</summary>
   </entry>
 
   <entry>
