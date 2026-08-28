@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.298 - 2026-08-28
+
+### Changed
+
+- Refined the Tool Execution Pipeline guide with upstream #4906's waterfall short-circuit evidence and the fail-closed consumer contract for malformed pre-execute decisions.
+
 ## 0.5.297 - 2026-08-28
 
 ### Added

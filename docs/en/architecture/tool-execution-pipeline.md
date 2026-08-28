@@ -1,9 +1,11 @@
 ---
 title: DeepSeek Harness Tool Execution Pipeline
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-28
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4906
 ---
 
 # DeepSeek Harness tool execution pipeline
@@ -83,8 +85,10 @@ the plugin removed before changing the model or workspace. Inspect the listener'
 payload contract: a pre-execute handler must either call `next()` for unrelated
 tools or return an explicit `{ kind: 'allow' | 'deny' | 'ask' }` decision. Treat
 an undefined or malformed gate as a fail-closed compatibility defect, preserve
-the plugin and profile versions, and report the exact event sequence. Do not
-retry every tool call; the failure is at the shared policy boundary.
+the plugin and profile versions, and report the exact event sequence. The
+consumer should surface a named diagnostic and emit a deliberate deny/blocked
+outcome, not let a later `gate.kind` access turn the defect into a generic tool
+error. Do not retry every tool call; the failure is at the shared policy boundary.
 
 ## Official sources
 
