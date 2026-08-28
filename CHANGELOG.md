@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.235 - 2026-08-29
+
+### Fixed
+
+- Corrected the machine-readable `site/llms.txt` description so the Field Status page is identified as an rc.7 baseline with alpha.1 migration context rather than a current rc.7 release-health claim.
+
 ## 0.5.234 - 2026-08-29
 
 ### Changed
