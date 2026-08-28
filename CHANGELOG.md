@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.220 - 2026-08-29
+
+### Added
+
+- Added an English runbook for upstream Discussion #4862: reject HTTP(S) URLs before filesystem path resolution, preserve the original input, and route remote retrieval to a web/fetch capability.
+
 ## 0.5.219 - 2026-08-29
 
 ### Fixed

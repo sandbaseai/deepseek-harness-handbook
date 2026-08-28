@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**151 canonical guides · 160 localized documents · rc.2 + alpha.1 source-pinned analysis · runnable recovery paths**
+**152 canonical guides · 161 localized documents · rc.2 + alpha.1 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -35,6 +35,7 @@ Choose one path and get to evidence quickly:
 | [Classify macOS `sandbox-exec ENOENT`](docs/en/troubleshooting/sandbox-denied-vs-unavailable.md#when-macos-says-spawn-sandbox-exec-enoent) | Host executable lookup can succeed while the Harness sandbox provider cannot start; preserve fail-closed behavior and prove the provider boundary before changing authority. |
 | [Keep a single `~` literal in Markdown](docs/en/troubleshooting/markdown-single-tilde.md) | alpha.1 calls both GFM parsers without disabling single-tilde strikethrough; verify source and served bundle across streaming, finalized, and plain-text projections. |
 | [Evaluate a bounded Ralph failure successor](docs/en/agent-patterns/ralph-bounded-failure-successor.md) | Discussion #109's recovery proposal can remain fail-closed: default off, fresh child only, shared budgets, observable failure state, no-change circuit breaking, and no retry for infrastructure failures. |
+| [Keep HTTP(S) URLs out of filesystem tools](docs/en/troubleshooting/filesystem-url-as-path.md) | Discussion #4862's Windows reproduction is a capability-boundary failure: reject URI-like input before local path resolution, preserve the original value, and route network retrieval to a web/fetch tool. |
 
 Each entry above names its pinned official source revision—currently rc.2 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) or alpha.1 [`cd5ef814…`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc)—records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 
@@ -242,7 +243,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 151 pages |
+| English | Canonical | 152 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
