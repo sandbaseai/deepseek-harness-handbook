@@ -481,7 +481,7 @@
     },
     {
       "source": "docs/en/troubleshooting/README.md",
-      "revision": 58,
+      "revision": 59,
       "translations": {}
     },
     {
@@ -631,6 +631,11 @@
     },
     {
       "source": "docs/en/troubleshooting/node24-tsx-silent-build.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
+      "source": "docs/en/troubleshooting/source-build-missing-exports.md",
       "revision": 1,
       "translations": {}
     },
