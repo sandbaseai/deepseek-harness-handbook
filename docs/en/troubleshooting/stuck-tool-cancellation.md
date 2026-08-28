@@ -1,7 +1,7 @@
 ---
 title: Stop a DeepSeek Harness Tool That Will Not Cancel
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-20
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
@@ -97,7 +97,7 @@ running → cancellation requested → stopping → idle
 
 After `session.cancel` returns `accepted`, keep observing durable Session events or Agent status. The product should not render “Stopped” until the Agent reaches idle and the turn records its terminal outcome. If stopping exceeds a bounded UI threshold, disclose that work is still quiescing and offer diagnostic evidence—not another synthetic cancel.
 
-The Web Host currently cancels ordinary Sessions with `keepInbox: true`. Pending inbox messages are preserved and resume FIFO after cancellation settles. A user can therefore see new work start after a genuine aborted turn. That is not proof the cancel failed; inspect which queued message opened the next turn.
+The Web Host currently cancels ordinary Sessions with `keepInbox: true`. Pending inbox messages are preserved, but input already waiting before Stop is parked when the active Turn aborts; cancellation does not itself arm another wake. A waking message that arrives after abort begins but before idle convergence is latched and replays after settlement. A later ordinary prompt sent while idle also wakes the driver and can claim the older parked queue. New work after a genuine aborted Turn is therefore not proof the cancel failed, while silence is not proof the queue was deleted. Inspect stable pending ids, targets, sources, and the message that actually armed the wake.
 
 ## Understand restart recovery before saying “continue”
 
@@ -126,7 +126,7 @@ An upstream repair should prove all of these, not merely make the button respons
 - no return occurs while a child, pipe, worker, or timer remains owned;
 - skipped sibling tool calls receive their correct durable results;
 - the active turn closes as aborted only after tool settlement;
-- queued inbox work resumes only after that boundary;
+- queued inbox work is preserved through that boundary and resumes only through an explicit, observable wake policy;
 - disposal follows the same cancel-then-quiesce contract;
 - the Web control plane remains responsive while the tool stops.
 

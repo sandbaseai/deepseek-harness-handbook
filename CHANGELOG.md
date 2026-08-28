@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.187 - 2026-08-28
+
+### Changed
+
+- Corrected Stop semantics: alpha.1 preserves pre-cancel queued and steering input with `keepInbox`, but parks it without arming a wake; only post-abort convergence input is latched automatically.
+- Added pending-id evidence capture, safe parked-queue containment, and a ten-gate Stop-and-deliver product contract covering ownership, ordering, identity, races, attachments, and side effects.
+
 ## 0.5.186 - 2026-08-28
 
 ### Added

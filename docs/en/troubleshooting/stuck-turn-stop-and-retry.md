@@ -1,7 +1,7 @@
 ---
 title: Stop and Safely Retry a Stuck DeepSeek Harness Turn
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-28
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -26,6 +26,38 @@ Use this sequence:
 5. Only then decide whether another request is safe.
 
 Do not repeatedly click Stop or immediately submit the same prompt. Cancellation is asynchronous across the browser, Session Remote, Agent loop, provider stream, and possibly an executing tool.
+
+## Stop preserves queued input but may not deliver it
+
+Alpha.1's Session cancellation controller calls:
+
+```text
+agent.cancel({ kind: 'user' }, { keepInbox: true })
+```
+
+That choice avoids deleting unclaimed `next-turn` queue messages and `next-step` steering. Preservation is not delivery. The official Agent Loop test named `parks queued work after an active turn aborts` proves that input queued **before** cancellation remains in the inbox after the Agent reaches idle, while no second model request starts. A later waking message causes the preserved input to be claimed, but until then the user's visible bubble can look permanently unanswered.
+
+Keep three timing classes separate:
+
+| Input timing | Current alpha.1 result | Operator meaning |
+|---|---|---|
+| already claimed by the active driver | abort closes the active Turn; `keepInbox` cannot restore the claimed message | do not expect the interrupted input to return to the queue |
+| unclaimed before Stop | remains pending, but the Stop call does not arm a future wake | preserved but parked |
+| waking input sent after abort begins and before idle convergence | inserted as `next-turn` and `wakeRequested` is latched | runs after the aborted activity converges |
+| input sent after Agent is already idle | opens an ordinary new Turn | also wakes any older parked items |
+
+This is why an aborted Turn followed by silence does not prove that queued text was lost, and why a later message can appear to “unstick” several older bubbles. Inspect the pending queue and durable `agent/inbox/spliced` events before resubmitting text.
+
+### Safe containment for parked user input
+
+1. Wait until the stopped Turn is durably aborted and the Agent is idle.
+2. Inventory pending `next-turn` and `next-step` messages by stable message id, target, source, and order.
+3. Separate user-authored queue/steering messages from plugin context, Goal notices, child settlement, and other non-user owners.
+4. Reconcile external side effects from the aborted Turn.
+5. If every pending user message is still valid, send one explicit wake follow-up such as “Continue with the queued messages; do not repeat completed effects,” then verify each prior id is claimed once.
+6. If any pending message is stale, sensitive, duplicated, or would repeat an uncertain effect, do not wake the whole inbox. Use the queue's supported cancel/edit operations where available, or move to a clean Session with a reviewed handoff.
+
+Do not repeatedly send copies of invisible queued text. The originals may still be pending and will later arrive alongside the duplicates.
 
 ## Route the apparent freeze
 
@@ -99,6 +131,23 @@ A safe Retry control cannot mean “send the same text again.” It should:
 9. expose cancel, admission, request, and final outcome separately;
 10. regression-test cold reload, offline/reconnect, provider timeout, tool execution, and repeated UI gestures.
 
+## Product contract for Stop with pending input
+
+A Stop action needs a visible policy for pending user work. If the intended contract is “interrupt and send queued input immediately,” the implementation should:
+
+1. snapshot only eligible user-owned `next-turn` and `next-step` messages; injected plugin/runtime context keeps its existing non-waking semantics;
+2. preserve stable message identity, target provenance, attachments, and FIFO order;
+3. abort the current Turn with `keepInbox` and re-arm exactly one wake after convergence;
+4. never restore a message already claimed by the aborted driver;
+5. serialize Stop, queue edit/cancel, claim, and replay so each id is claimed, canceled, or retained exactly once;
+6. convert pre-abort steering to an explicit next-Turn delivery policy, because the aborted step no longer exists;
+7. expose `stopping`, `queued for next Turn`, `claimed`, and `failed` separately in the UI;
+8. keep non-user context parked unless its owner deliberately wakes the Agent;
+9. retain side-effect reconciliation before any replay-like user action;
+10. test queued-first/steering-second order, attachments, multiple Stop clicks, slow abort convergence, idle Stop, reconnect, and cold reload.
+
+Removing and reinserting messages is not sufficient proof by itself. A safe implementation must show what happens when claim or queue mutation wins between those operations, and it must not create a new identity that disconnects the optimistic bubble from durable inbox and `user/message` events.
+
 ## Evidence for an upstream report
 
 ```text
@@ -112,6 +161,9 @@ last assistant/tool event before abort:
 provider request ID and first-byte time:
 tool/subprocess/external effect outcome:
 reload result and last event seq:
+pending next-turn/next-step ids before Stop:
+pending ids after Agent became idle:
+new wake sent during abort convergence: yes / no
 browser console and Host error:
 ```
 
@@ -119,12 +171,15 @@ Remove credentials, prompts, private tool output, and proprietary payloads.
 
 ## Verification boundary
 
-The Stop control, scoped Session cancellation, durable interrupted Turn presentation, and Turn-tail branch action are source-verified at alpha.1 commit [`cd5ef814`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc). Discussion #4823 reports a visually stuck Turn and a successful separate provider request, but provides no Session events or cancellation trace yet.
+The Stop control, scoped Session cancellation, durable interrupted Turn presentation, parked pre-cancel inbox behavior, abort-convergence wake latch, and Turn-tail branch action are source-verified at alpha.1 commit [`cd5ef814`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc). Discussion #4823 reports a visually stuck Turn and a successful separate provider request, but provides no Session events or cancellation trace yet. Discussion #4832 proposes immediate delivery of preserved user input; its linked fork is design input, not merged upstream behavior.
 
 ## Pinned official sources
 
 - [Alpha.1 Stop control wiring](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-conversation/src/client/apply.ts)
 - [Alpha.1 scoped Session cancellation](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-conversation/src/client/service.ts)
+- [Alpha.1 Session controller `keepInbox` cancellation](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/api/session-controller/src/commands.ts)
+- [Alpha.1 parked queue and abort-convergence wake tests](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/core/agent-loop/tests/cancel.spec.ts)
+- [Stop-and-deliver pending input proposal #4832](https://github.com/deepseek-ai/deepseek-harness/discussions/4832)
 - [Alpha.1 interrupted Turn end-to-end proof](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/apps/web/tests/turn-tail-actions.e2e.ts)
 - [Alpha.1 Turn-tail branch action](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-chat/src/client/chat/TurnTailNodeView.tsx)
 - [Stuck conversation and Retry request #4823](https://github.com/deepseek-ai/deepseek-harness/discussions/4823)
