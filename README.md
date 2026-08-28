@@ -27,6 +27,7 @@ Choose one path and get to evidence quickly:
 
 | Problem | What the guide proves |
 |---|---|
+| [Understand Harness versus framework](docs/en/what-is-deepseek-harness.md#harness-versus-framework) | Separate model, provider, framework, and runtime responsibilities so tool, context, and long-running Agent claims are tested at the right boundary. |
 | [A continuable child exposes only `report`](docs/en/agent-patterns/continuable-child-empty-tool-registry.md) | Separate parent/child tool views, preset composition order, `toolFilter`, and cold-resume evidence before treating model prose as a tool result. |
 | [Read-only Windows PowerShell succeeds with noisy stderr](docs/en/troubleshooting/windows-readonly-pwsh-stderr.md) | Separate command output from ConstrainedLanguage preamble diagnostics and preserve the ACL sandbox while validating a narrow fix. |
 | [Firefox shows a blank Web client while Chrome works](docs/en/troubleshooting/firefox-web-client-blank.md) | Separate browser bootstrap, cached assets, origin/WebSocket, and extension boundaries before touching provider credentials or durable Sessions. |

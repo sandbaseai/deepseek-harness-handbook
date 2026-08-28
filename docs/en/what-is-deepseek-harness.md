@@ -1,7 +1,7 @@
 ---
 title: What Is DeepSeek Harness?
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -34,6 +34,19 @@ flowchart LR
 | Harness | run the Agent loop and govern tools, state, and interfaces | What may the Agent do, remember, and expose? |
 
 Calling a DeepSeek model does not automatically give you a durable Agent. The harness adds the execution contract around that model.
+
+## Harness versus framework
+
+The distinction is practical when you are choosing an integration boundary:
+
+| You need to… | A framework usually provides | A harness must additionally make observable |
+|---|---|---|
+| call a model | prompts, adapters, and orchestration primitives | the exact provider route, retry budget, and request evidence |
+| add a tool | a function wrapper or schema | permission, approval, sandbox, execution, and durable result boundaries |
+| keep context | a memory or retrieval helper | scope, injection order, token cost, persistence, and recovery behavior |
+| run for hours | a loop or workflow graph | Session identity, resumability, cancellation, child ownership, and rollback |
+
+In other words, a framework helps you assemble an Agent; a harness is the operating environment that makes the Agent's effects, state, and failure paths governable. Use the [ecosystem map](ecosystem/awesome-resources.md) to choose one capability at a time, then verify the resulting profile rather than assuming the package description is the runtime contract.
 
 ## “Everything is a plugin” in practical terms
 

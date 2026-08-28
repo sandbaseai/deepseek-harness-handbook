@@ -2,7 +2,7 @@
 title: DeepSeek Harness 是什么？
 locale: zh-CN
 source: docs/en/what-is-deepseek-harness.md
-source_revision: 1
+source_revision: 2
 status: reviewed
 verified_at: 2026-08-14
 ---
@@ -35,6 +35,19 @@ flowchart LR
 | Harness | 运行 Agent Loop，管理工具、状态、安全控制与界面 |
 
 调用 DeepSeek 模型并不会自动得到一个持久、可操作的 Agent。Harness 提供的是包围模型的执行契约。
+
+## Harness 与 Framework 的区别
+
+选择集成边界时，这个区别很实际：
+
+| 你要做什么 | Framework 通常提供 | Harness 还必须让什么可观测 |
+|---|---|---|
+| 调用模型 | Prompt、适配器和编排原语 | 确切 Provider 路由、重试预算和请求证据 |
+| 添加工具 | 函数包装器或 schema | 权限、审批、沙箱、执行和持久化结果边界 |
+| 保持上下文 | 记忆或检索助手 | 作用域、注入顺序、token 成本、持久化和恢复行为 |
+| 运行数小时 | 循环或工作流图 | Session 身份、可恢复性、取消、子 Agent 所有权和回滚 |
+
+换句话说，Framework 帮你组装 Agent；Harness 是让 Agent 的副作用、状态和失败路径可治理的运行环境。可以从[生态资源能力地图](ecosystem/awesome-resources.md)一次选择一个能力，然后验证最终 profile，不要把包描述当成 Runtime 契约。
 
 ## “Everything is a plugin”意味着什么？
 

@@ -30,6 +30,7 @@ verified_at: 2026-08-29
 - [Session 日志存储格式](reference/session-log-storage-format.md)：解释 Zstandard frame、packed rows、事件序号重建，以及格式版本拒绝与迁移的边界。
 - [长会话 ChatView 内存增长](troubleshooting/chatview-long-session-memory.md)：区分渲染器 DOM 保留与 Host 内存，保留 Session，并在将刷新作为缓解前测量虚拟化边界。
 - [工具执行管线](../en/architecture/tool-execution-pipeline.md)：区分 Permission、Approval、Guard、Sandbox，并排查 waterfall listener 短路导致的全局工具失败。
+- [Harness 与 Framework 的区别](../en/what-is-deepseek-harness.md#harness-versus-framework)：把模型、Provider、Framework 和 Runtime 的职责分开，避免在错误边界验证工具、上下文或长时 Agent 能力。
 - [Awesome 生态资源能力地图](ecosystem/awesome-resources.md)：从公开目录按技能、记忆、路由、UI、文件和研究能力选择资源，并执行安全安装流程。
 - [Cordis client inspect 永久 Pending](troubleshooting/cordis-inspect-client-query-hangs.md)：区分页面拒绝和 Host 结算，保留首个有效页面并为所有 inspect 等待设置上限。
 
