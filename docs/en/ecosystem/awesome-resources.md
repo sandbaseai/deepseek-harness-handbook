@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-28
 sources:

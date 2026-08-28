@@ -2,7 +2,7 @@
 title: Awesome DeepSeek Harness エコシステム資源マップ
 locale: ja
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 3
+source_revision: 4
 status: reviewed
 verified_at: 2026-08-28
 ---
@@ -29,6 +29,19 @@ verified_at: 2026-08-28
 比較は `dsh-agent-arena`、監督付きチームは `dsh-collaboration`、研究と記憶は `dsh-deep-research` + `dsh-memory-gate`、本番統制は `dsh-security-audit` から始めます。最初から全カタログを有効にせず、manifest、ロード済み module、network、token/cost、削除結果を記録してください。
 
 一覧への掲載は安全性・互換性・保守の保証ではありません。実 profile へ入れる前に README、license、manifest、install script、最近の変更を読み、コピーした profile で無害な probe と rollback を行います。
+
+## 注目度の高いコミュニティプロジェクト
+
+以下は公開され、現在コミュニティからの発見シグナルが強いプロジェクトです。人気は安全性や互換性の保証ではないため、権限、インストール契約、リリース履歴を確認してください。
+
+| 分野 | リソース | 最初に確認すること |
+|---|---|---|
+| プラグイン一覧 | [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) | 各項目の公開状態と DSH バージョン。 |
+| コンテキスト可観測性 | [dsh-context](https://github.com/bowenliang123/dsh-context) | token 計測、圧縮イベント、セッション外データ。 |
+| ビジョンブリッジ | [modlens](https://github.com/liustack/modlens) | 画像経路、外部送信、構造化出力。 |
+| Agent チーム | [dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | 子 Agent の権限、共有 workspace、停止処理。 |
+| モバイルアクセス | [dsh-pocket](https://github.com/shaobeichen/dsh-pocket) | LAN/公開アクセスと認証境界。 |
+| 実践ガイド | [DeepSeek Harness Orange Book](https://github.com/alchaincyf/deepseek-harness-orange-book) | 固定版の実測と一般的な助言の区別。 |
 
 ## 出典
 

@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.324 - 2026-08-29
+
+### Changed
+
+- Synchronized the Awesome ecosystem map to revision 4 across English, Chinese, Japanese, Korean, and Spanish, adding the high-signal community projects to every reviewed language entry.
+
 ## 0.5.323 - 2026-08-29
 
 ### Added
