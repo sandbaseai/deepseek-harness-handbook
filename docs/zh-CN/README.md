@@ -15,6 +15,12 @@ verified_at: 2026-08-29
 
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
+最近的英文专题也已同步到主入口：
+
+- [官方项目身份与下载站 provenance](../en/reference/official-project-identity.md)：核对仓库、npm integrity、release commit、安装权限和二进制签名。
+- [filesystem 工具与 HTTP(S) URL 边界](../en/troubleshooting/filesystem-url-as-path.md)：拒绝把 URL 当作本地路径，并将网络读取交给 web/fetch 能力。
+- [rc.7 baseline 与 alpha.1 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)：历史现场证据与当前源码边界分开阅读。
+
 这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
 
 ## 按你的任务开始

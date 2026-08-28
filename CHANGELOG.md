@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.231 - 2026-08-29
+
+### Changed
+
+- Refreshed the high-traffic Simplified Chinese README with direct links to the newest English identity, filesystem URL, and rc.7/alpha.1 status guides, keeping English canonical while improving discovery.
+
 ## 0.5.230 - 2026-08-29
 
 ### Fixed
