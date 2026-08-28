@@ -2,6 +2,19 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.380 - 2026-08-30
+
+### Added
+
+- Expanded the pinned Awesome DeepSeek Harness map to 52 curated resources, adding bilingual plugin discovery, profile backup/recovery, and plugin workshop workflows.
+- Added a release-loop note explaining how to diff snapshots, re-audit changed entries, and preserve historical references without turning a catalog into a trust list.
+
+## 0.5.379 - 2026-08-30
+
+### Changed
+
+- Aligned the homepage ecosystem card with the 49-resource JSON map.
+
 ## 0.5.374 - 2026-08-30
 
 ### Added

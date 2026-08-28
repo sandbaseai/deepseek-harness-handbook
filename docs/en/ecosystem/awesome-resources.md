@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 10
+content_revision: 11
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -148,6 +148,12 @@ For each path, capture the profile manifest, loaded modules, network destination
 6. Record the result in your project notes; a catalog entry is not a compatibility guarantee.
 
 The upstream index changes frequently. Treat this page as a dated map and use the source catalog for the current complete list.
+
+## Keep the map fresh without making it a trust list
+
+Treat resource curation as a small release loop. Pin the upstream commit, diff names and URLs against the previous snapshot, and record why each new entry belongs to a capability. Run link checks, inspect each repository's manifest and recent activity, and publish the JSON map only after the checks pass. If a repository disappears, changes ownership, or becomes inactive, keep the old commit addressable but mark the entry as historical rather than silently replacing it. This preserves reproducibility while still giving Agents a current discovery surface.
+
+For an automated consumer, cache the snapshot and compare `snapshot` before refreshing. A changed snapshot is a signal to re-audit—not permission to install new packages. Keep installation, network, and rollback evidence in the consuming project's own record.
 
 ## Source and boundary
 
