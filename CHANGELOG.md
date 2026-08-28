@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.244 - 2026-08-29
+
+### Changed
+
+- Expanded the response/reasoning language guide with #4834's Think-row clipping boundary, distinguishing a renderer preview crop from durable reasoning leakage.
+
 ## 0.5.243 - 2026-08-29
 
 ### Changed

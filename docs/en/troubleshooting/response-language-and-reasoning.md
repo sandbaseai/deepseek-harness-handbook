@@ -1,7 +1,7 @@
 ---
 title: Control DeepSeek Harness Response and Reasoning Language
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-29
 upstream_revision: 99f6f02fecdb7dff40c3fbc9470f5907c29f74ca
@@ -23,6 +23,12 @@ Use these checks before changing prompts or forcing a different language:
 4. Preserve the exact DSH package, route, turn sequence, and sanitized request headers; avoid deleting the Session while collecting evidence.
 
 This report points to the assembler/adapter seam that maps provider `reasoning_content` and interleaved tool-call deltas, not to translation. Until a release fixes that seam, treat leaked thinking as a privacy and output-budget defect: use a fresh disposable Session for sensitive work, keep reasoning display policy explicit, and report the smallest decoded evidence rather than the full hidden monologue.
+
+## A clipped Think row is a rendering problem, not proof of leakage
+
+Discussion [#4834](https://github.com/deepseek-ai/deepseek-harness/discussions/4834) describes a different presentation defect: the collapsed Think-row summary can begin mid-word with no leading ellipsis or fade. That visual crop can look like truncated or leaked reasoning, but it does not change the durable `reasoning`/`text` block classification. Inspect the stored assistant blocks and the expanded row before escalating a privacy incident.
+
+For a UI fix, preserve the distinction between content and its preview: expose an explicit clipped state, keep the full text available through the disclosure, and test long unbroken strings, CJK text, RTL text, zoom, narrow viewports, and screen-reader labels. Do not “repair” a clipped preview by copying reasoning into the visible text channel or by changing provider serialization. A renderer-only change is not evidence that the upstream assembler bug in #3021 is fixed.
 
 - **answer text** is the provider's visible assistant content;
 - **reasoning text** is the provider's `reasoning_content`, rendered in a separate Think row.
@@ -189,3 +195,4 @@ For each, record answer language, reasoning language when enabled, exact technic
 - [Pinned DeepSeek reasoning configuration](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/README.md)
 - [Pinned reasoning/content stream translation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/llm/llm-deepseek/src/translate.ts)
 - [Pinned Web reasoning rendering](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/ui-conversation/src/client/chat/AssistantMarkdown.tsx)
+- [Think-row clipping presentation report #4834](https://github.com/deepseek-ai/deepseek-harness/discussions/4834)
