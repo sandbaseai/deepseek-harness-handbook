@@ -1,7 +1,7 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -175,6 +175,29 @@ Changing how the CLI is installed does not automatically create clean profile st
 2. the profile's `cordis.patch.yml`;
 3. the home-level `$DSH_HOME/cordis.patch.yml`;
 4. command-line `--patch` overlays.
+
+## Full access is not a reason to request a wider sandbox
+
+When a caller already runs with a **Full access** sandbox, a tool payload that
+repeats `sandbox_permissions: danger-full-access` is not an escalation. Upstream
+reports describe this being rejected as “not strictly wider than this call's
+current mode” ([discussion #4904](https://github.com/deepseek-ai/deepseek-harness/discussions/4904)).
+Treat the request as a payload-construction or compatibility defect, not as a
+signal to grant broader permissions.
+
+For a safe reproduction, capture the effective permission mode, the serialized
+tool payload, and the exact error. Compare the same tool call in a disposable
+workspace with the redundant field removed. Keep the approval boundary explicit:
+
+1. **Full access already effective:** omit the redundant escalation field.
+2. **Restricted access:** request the narrowest documented capability and wait
+   for the normal approval flow.
+3. **Unknown or mixed modes:** stop and inspect the resolved profile and caller
+   rather than retrying with a broader value.
+
+Never work around this class of error by silently rewriting a user-approved
+permission into a wider one. The serialized request and the runtime's effective
+mode are separate evidence, and both belong in the incident record.
 
 The invoking directory is the default workspace root. Therefore a valid reproduction record needs three independent coordinates:
 
