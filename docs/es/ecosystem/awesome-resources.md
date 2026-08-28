@@ -23,6 +23,8 @@ verified_at: 2026-08-28
 | Gobernanza de memoria | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) | Autoridad de claims, aislamiento y límite de inyección. |
 | Búsqueda web | [dsh-free-web-search](https://github.com/delef/dsh-free-web-search) | Orden de fallback, envío externo y caché. |
 | Gobernanza de producción | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | Provenance, red, redacción y rollback. |
+| UI Web estilo Codex | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | Navegación de workspace, árbol de Sessions, búsqueda y turnos mediante puntos de extensión públicos. |
+| Follow-ups anidados | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | Sessions hijas aisladas; verifica ascendencia, scope de herramientas y escrituras entre ramas. |
 
 ## Cuatro rutas seguras para empezar
 

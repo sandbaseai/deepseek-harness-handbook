@@ -23,6 +23,8 @@ verified_at: 2026-08-28
 | 메모리 거버넌스 | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) | claim 권한, scope 격리, 주입 한도. |
 | 웹 검색 | [dsh-free-web-search](https://github.com/delef/dsh-free-web-search) | fallback 순서, 외부 전송, 캐시. |
 | 운영 거버넌스 | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | provenance, network, redaction, rollback. |
+| Codex 스타일 Web UI | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | 공개 extension point 기반 workspace, Session tree, 검색과 turn 탐색. |
+| 중첩 follow-up | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | 격리된 자식 Session; ancestry, tool scope와 브랜치 간 쓰기를 확인. |
 
 ## 네 가지 안전한 시작 경로
 

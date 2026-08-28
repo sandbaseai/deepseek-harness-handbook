@@ -107,6 +107,8 @@ verified_at: 2026-08-28
 | 会话回放 | [dsh-replay](https://github.com/zoahdev/dsh-replay) | 用于调试和复核的轨迹回放与差异比较。 |
 | 桌面生命周期 | [dsh-tray](https://github.com/liulifu/dsh-tray) | 检查重启、多配置绑定、恢复快照和插件故障隔离。 |
 | 本地优先桌面反馈 | [dsh-whale-musume](https://github.com/Sutera-Diffusus/dsh-whale-musume) | 检查 DSH Web 桌面宠物的工作状态反馈和遥测边界。 |
+| Codex 风格 Web 界面 | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | 基于公开扩展点提供工作区、会话树、搜索和轮次导航。 |
+| 嵌套 follow-up | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | 隔离侧问题 Session；检查祖先路径、工具 scope 和跨分支写入。 |
 
 ## 四条实用起步路径
 

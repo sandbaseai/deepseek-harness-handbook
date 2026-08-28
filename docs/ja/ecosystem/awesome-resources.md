@@ -23,6 +23,8 @@ verified_at: 2026-08-28
 | メモリ統制 | [dsh-memory-gate](https://github.com/GIT121995/dsh-memory-gate) | claim の権限、scope 分離、注入上限。 |
 | Web 検索 | [dsh-free-web-search](https://github.com/delef/dsh-free-web-search) | fallback 順序、外部送信、キャッシュ。 |
 | 本番ガバナンス | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | provenance、network、redaction、rollback。 |
+| Codex 風 Web UI | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | 公開 extension point による workspace、Session tree、検索、turn ナビゲーション。 |
+| Nested follow-ups | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | 隔離された子 Session。祖先、tool scope、枝間書き込みを確認。 |
 
 ## 四つの安全な開始経路
 
