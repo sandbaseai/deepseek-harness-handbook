@@ -6,8 +6,8 @@ Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
 Latest field update (v0.5.276): DOM ownership and settings.section removeChild recursion: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/webview-mutation-observer-loop.md
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.307): multilingual ecosystem resource maps in English, Chinese, Japanese, Korean, and Spanish, with verified 162/189 coverage: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.307
-Multilingual Awesome DeepSeek Harness ecosystem maps (v0.5.307): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md
+Latest release (v0.5.308): homepage and README now surface four bounded Agent starter paths and multilingual ecosystem maps, with verified 162/189 coverage: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.308
+Four bounded Agent starter paths and multilingual Awesome maps (v0.5.308): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md
 Latest field update (v0.5.283): pnpm isolated-tarball fallback closure and empty provider table: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/web-loading-plugins-pnpm-symlink.md
 Latest field update (v0.5.284): headless first-tool-call scheduler failure and duplicate core closure: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/duplicate-core-runtime-closure.md
 Latest field update (v0.5.285): corrupt attachment references and misleading TRANSPORT retries: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/general-file-attachments.md
