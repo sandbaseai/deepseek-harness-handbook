@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.320 - 2026-08-29
+
+### Fixed
+
+- Replaced 11 withdrawn or private `dsh-external` direct links in the Awesome resource maps with a pinned catalog snapshot reference, preserving provenance while preventing dead-link failures.
+
 ## 0.5.319 - 2026-08-29
 
 ### Added
