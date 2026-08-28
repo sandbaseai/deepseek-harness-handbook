@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <title>Bound DeepSeek Harness Session heap growth | Operator guide</title>
-  <meta name="description" content="Separate model context, live Session events, durable history, and resident subagents before a DeepSeek Harness Web Host reaches its heap limit.">
+  <meta name="description" content="Separate retained Session growth, synchronous cold restore, Host failure, desktop supervision, and runtime-copy drift in DeepSeek Harness.">
   <meta name="theme-color" content="#eef5f1" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111714" media="(prefers-color-scheme: dark)">
   <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Compaction is not heap collection">
-  <meta property="og:description" content="Four budgets, one retained-path map, and a two-stage Host pressure guard for DeepSeek Harness Sessions.">
+  <meta property="og:description" content="Four memory budgets plus a cold-restore restart-loop router for DeepSeek Harness Sessions.">
   <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html">
   <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/field-status-social-preview-rc7.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./styles.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Bound DeepSeek Harness Session heap growth","description":"Separate model context, live Session events, durable history, and resident subagents before a DeepSeek Harness Web Host reaches its heap limit.","dateModified":"2026-08-27","url":"https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Bound DeepSeek Harness Session heap growth","description":"Separate retained Session growth, synchronous cold restore, Host failure, desktop supervision, and runtime-copy drift in DeepSeek Harness.","dateModified":"2026-08-28","url":"https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html","mainEntityOfPage":"https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html","author":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"publisher":{"@type":"Organization","name":"SandBase","url":"https://sandbase.ai/"},"inLanguage":"en","isAccessibleForFree":true}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,7 +30,7 @@
       <p class="eyebrow">Host memory · Session retention</p>
       <h1>Compaction is not heap collection.</h1>
       <p class="article-deck">A smaller prompt can coexist with a growing live log. Measure four budgets before moving the crash boundary.</p>
-      <div class="article-meta"><span>Verified 2026-08-27</span><span>Upstream rc.2 · b150a55</span></div>
+      <div class="article-meta"><span>Verified 2026-08-28</span><span>Upstream rc.2 · b150a55</span></div>
     </header>
 
     <article class="article-body">
@@ -63,6 +63,23 @@
         <li><strong>Restart smaller</strong><span>Use a durable handoff, fresh Session, fewer children, and fixed-size batches.</span></li>
       </ol>
 
+      <h2>Route a cold-restore restart loop.</h2>
+      <p>At rc.2, the backend read is asynchronous, but <code>Session.fromRestore()</code> synchronously validates, surface-folds, freezes, and appends every seed event. That proves an event-loop-blocking risk—not a universal crash threshold and not the policy of an unidentified desktop wrapper.</p>
+      <div class="heap-measures">
+        <section><span>Host alive</span><strong>CPU high · probes pause</strong><p>Temporary event-loop starvation is plausible. Measure delay against events and bytes.</p></section>
+        <section><span>Host exits</span><strong>Own error first</strong><p>Preserve the exit status and stack before changing supervisor thresholds.</p></section>
+        <section><span>Wrapper acts</span><strong>Deliberate termination</strong><p>Record its endpoint, threshold, decision time, and replacement PID.</p></section>
+      </div>
+      <div class="signal"><strong>Preserve the discriminator</strong><span>A fresh Session working while one historical Session repeats the cycle points to Session-specific replay. Keep the original home immutable; test a copied artifact under a separate diagnostic home.</span></div>
+
+      <h2>Bind the runtime copy to the PID.</h2>
+      <div class="heap-path" role="img" aria-label="The desktop wrapper starts a profile-owned Web Host that can load profile-local packages rather than a separately edited global installation">
+        <div><span>supervisor</span><strong>Desktop wrapper</strong><small>probe · decision · signal</small></div><b>→</b>
+        <div class="heap-hot"><span>owned child</span><strong>Web Host PID</strong><small>command · cwd · listener</small></div><b>→</b>
+        <div><span>resolved closure</span><strong>Profile node_modules</strong><small>realpath · hash · version</small></div>
+      </div>
+      <p>Do not patch both a global installation and a profile copy. Prove which realpaths the recorded Host loaded, restore one supported installation owner, then repeat with identical bytes.</p>
+
       <h2>Measure the boundary, not the symptom.</h2>
       <div class="heap-measures">
         <section><span>Process</span><strong>heapUsed · heapTotal · RSS</strong><p>Sample at fixed intervals and retain the slope across GC cycles.</p></section>
@@ -87,12 +104,14 @@
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/index.ts">rc.2 Session log and in-memory store</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/session/src/surface.ts">rc.2 surface replacement fold</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/subagent/subagent/src/continuation.ts">rc.2 continuable Agent lifecycle</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/session/session-persistence/src/coordinator.ts">rc.2 cold Session preparation pipeline</a></li>
         <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4722">Community Web Host OOM report #4722</a></li>
+        <li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4807">Community macOS cold-restore report #4807</a></li>
       </ul>
 
       <section class="article-cta">
         <h2>Keep the full operator design.</h2>
-        <p>The canonical guide adds four controlled reproductions, a diagnostic bundle, failure router, compatibility questions, and twenty regression gates.</p>
+        <p>The canonical guide adds four controlled reproductions, a cold-restore isolation ladder, one-process timeline, failure router, compatibility questions, and regression gates.</p>
         <a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook">Read and star on GitHub</a>
       </section>
     </article>
