@@ -1,10 +1,10 @@
 ---
 title: Recover a stale DeepSeek Harness preset generation
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
-verified_at: 2026-08-27
-upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+verified_at: 2026-08-28
+upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
 # Recover after a preset edit collides with its previous generation
@@ -25,6 +25,39 @@ At `0.1.1-rc.2` source revision `b150a55`, the roster does not count joined Agen
 Both can end at `already registered`, but the durable fixes differ. Generation reclamation addresses the first path after no Agents remain joined. Moving or safely sharing process-global registrations addresses the second. Making registration silently idempotent is unsafe unless disposer ownership and provider equivalence are defined.
 
 Official report #4675 proves the cross-preset path through the supported preset-copy flow: copy the shipped `cordis` preset, leave `tool-cordis` mounted, then select the built-in and copied presets in one Web Host lifetime. Whichever preset mounts second loses. Closing or archiving a Session does not release the standing mount.
+
+## The rc.2 `pwsh` collision has a newer scope boundary
+
+Official report #4798 records a separate cross-preset collision on Windows rc.2:
+
+1. a Session keeps the shipped `standard` preset mounted;
+2. the default changes to the shipped `cordis` preset;
+3. New Session returns HTTP 200 with `ok: false` and `agent-preset-invalid`;
+4. its nested cause says `tool "pwsh" is already registered`;
+5. switching the default back to `standard` restores creation without a process restart.
+
+At rc.2, both shipped compositions contained an unisolated `tool-pwsh` row, and the registry's root layer rejected the second name. That is the same visible symptom as the inspect-provider collision, but it is a different registry and must not inherit the shared-provider holder design automatically.
+
+At current `0.1.2-alpha.1` commit `cd5ef814`, the compositions still contain the same tool row by design, while tool registration is scope-layered. Each preset mounts once under a standing scope, and joined Agents inherit that scope. `tools.register()` inserts into the calling scope's layer; duplicate names fail within one layer, while sibling preset layers remain separate. The alpha source therefore contains a structural fix boundary for this exact cross-preset tool-name collision.
+
+This is source evidence, not a claim that an arbitrary mixed prerelease installation is fixed. All packages participating in preset mounting, scope propagation, and the tool registry must come from one compatible release graph.
+
+### Recover on rc.2 without editing shipped presets
+
+If switching back to the already-mounted preset restores creation, use that as the least invasive immediate recovery. Preserve the failed RPC and version evidence, then schedule a complete Host restart or an isolated whole-graph upgrade. Do not remove `tool-pwsh` from the shipped preset: upgrades replace shipped files, and the edited preset would silently lose its Windows shell capability.
+
+For upgrade verification on Windows:
+
+1. create an isolated DSH home and install one exact release graph;
+2. start Web with `standard` as the default;
+3. create Session A and run one harmless `pwsh` call;
+4. change the default to `cordis` while A remains live;
+5. create Session B and run one harmless `pwsh` call;
+6. return to A and prove its tool still works;
+7. dispose B, create Session C on `standard`, and repeat;
+8. cold-restart and repeat the sequence once.
+
+Passing New Session alone is insufficient: both sibling scope views must resolve their own `pwsh` definition, dispatch through the correct Agent, and unwind without deleting the survivor's tool.
 
 ## Preserve the live-generation evidence
 
@@ -125,6 +158,9 @@ Test more than the happy save-then-create case:
 | B mount fails | A remains usable by joined Agents; partial B effects are gone |
 | Agent recompose A → B | ownership moves exactly once |
 | two presets need inspect tools | process-global provider ownership remains unambiguous |
+| Windows `standard` and `cordis` stay live together | each standing scope resolves and executes its own `pwsh` tool |
+| dispose the second preset scope | the first preset's `pwsh` remains visible and callable |
+| call `tools.register()` twice inside one preset scope | duplicate still fails loudly within that layer |
 | equivalent A and B mount, then B disposes | A continues to list and query all four providers |
 | one holder disposer runs twice | remaining holders and provider entries are unchanged |
 | same ID with a different manifest | mount fails loudly; the original provider remains usable |
@@ -141,3 +177,8 @@ Also measure watcher count, open handles, registry entries, and standing-generat
 - [rc.2 documented standing-generation limitation](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/preset/agent-presets/README.md)
 - [rc.2 `tool-cordis` provider registration](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/extensions/tool-cordis/src/index.ts)
 - [rc.2 process-global inspect registry](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/extensions/cordis-host-runner/src/inspect-registry.ts)
+- [rc.2 shipped-preset `pwsh` collision #4798](https://github.com/deepseek-ai/deepseek-harness/discussions/4798)
+- [alpha.1 standing preset scope contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/README.md)
+- [alpha.1 scope-layered tool registry](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/core/tools/src/index.ts)
+- [alpha.1 shipped `standard` composition](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/presets/standard/agent.cordis.yml)
+- [alpha.1 shipped `cordis` composition](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/preset/agent-presets/presets/cordis/agent.cordis.yml)
