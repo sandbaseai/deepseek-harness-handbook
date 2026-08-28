@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.343 - 2026-08-29
+
+### Added
+
+- Added a source-backed installation runbook for whitespace-corrupted `DSH_HOME` values that silently resolve a new empty data root (upstream discussion #2153).
+
 ## 0.5.342 - 2026-08-29
 
 ### Added

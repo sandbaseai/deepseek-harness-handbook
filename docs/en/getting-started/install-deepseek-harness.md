@@ -1,7 +1,7 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 6
+content_revision: 7
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -175,6 +175,20 @@ Changing how the CLI is installed does not automatically create clean profile st
 2. the profile's `cordis.patch.yml`;
 3. the home-level `$DSH_HOME/cordis.patch.yml`;
 4. command-line `--patch` overlays.
+
+### A whitespace-corrupted `DSH_HOME` can look like a reset
+
+Official discussion [#2153](https://github.com/deepseek-ai/deepseek-harness/discussions/2153) reports that a trailing space in `DSH_HOME` is treated as part of the path. The process then resolves a different, empty data root: the UI can appear factory-reset even though the original Sessions and settings are intact elsewhere. The report is a concrete reproduction, not proof that every shell or release trims the value differently.
+
+Before deleting state, print the value with delimiters and compare the resolved directory to the one that contains the expected profile and Session files:
+
+```sh
+printf 'DSH_HOME=<%s>\\n' "$DSH_HOME"
+node -e 'console.log(JSON.stringify(process.env.DSH_HOME ?? ""))'
+test -d "$DSH_HOME/profiles" && printf '%s\\n' 'profiles directory present'
+```
+
+If the delimiters reveal trailing or leading whitespace, stop the runtime, export the exact intended path without trimming unrelated configuration, and verify one known Session and the redacted profile manifest before relaunching. Do not copy files into the empty root or remove either directory until the resolved path, process environment, and profile ownership are recorded.
 
 ## Full access is not a reason to request a wider sandbox
 
