@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.392 - 2026-08-30
+
+### Added
+
+- Expanded session-corruption triage with upstream #3896: stale recovery cursors can replay committed events, create duplicate sequences, and leave a missing durable range after restart.
+
 ## 0.5.391 - 2026-08-30
 
 ### Added

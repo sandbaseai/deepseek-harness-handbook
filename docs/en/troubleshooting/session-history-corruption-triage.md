@@ -1,7 +1,7 @@
 ---
 title: Recover DeepSeek Harness Session History Without Destroying Evidence
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -225,6 +225,10 @@ Choose the least destructive route that restores operation:
 - **Need to continue working:** start a fresh session and attach the preserved transcript or summary as evidence.
 - **Need exact durable recovery:** wait for or build a format-aware tool pinned to the producing version; validate on a copy before replacement.
 
+### Failure G: recovery reuses a stale write cursor
+
+Upstream report [#3896](https://github.com/deepseek-ai/deepseek-harness/discussions/3896) describes a more dangerous variant than a torn tail: after a restart during a tool turn, an in-memory recovery cursor replays already committed events while another writer advances the durable cursor. The result can contain duplicate sequence numbers followed by a missing range, so the strict reader rejects the entire history and some events were never persisted. Do not “repair” this by renumbering a live log in place. Stop every writer, preserve the original bytes, and compare the last committed on-disk sequence with every prepared/recovery cursor before choosing a copy for analysis. A safe implementation rebuilds the prepared cache from the durable prefix, rejects a batch whose first sequence does not equal the file tail plus one, and only then emits interrupted-turn closers.
+
 ## Regression gates
 
 - One malformed artifact does not hide healthy sessions.
@@ -244,6 +248,7 @@ Choose the least destructive route that restores operation:
 - Complete Host history cannot silently stop at a client assembly or rendering boundary.
 - Client diagnostics reconcile durable, transported, admitted, assembled, and rendered tail sequences.
 - Cold replay and live tail produce an equivalent view under retry storms and inbox splice clusters.
+- Recovery after a restart during a tool turn cannot reuse a stale prepared cursor or append a duplicate sequence batch.
 - Original evidence remains byte-for-byte preserved and rollback is tested.
 
 ## Source boundary
@@ -256,6 +261,7 @@ Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc94
 - [Id-less plugin notice report #4819](https://github.com/deepseek-ai/deepseek-harness/discussions/4819)
 - [Silent “no more history” contract analysis #4795](https://github.com/deepseek-ai/deepseek-harness/discussions/4795)
 - [Complete server history with a temporary Web render cutoff #4830](https://github.com/deepseek-ai/deepseek-harness/discussions/4830)
+- [Recovery cursor mismatch and duplicate sequence batches #3896](https://github.com/deepseek-ai/deepseek-harness/discussions/3896)
 - [Zstandard header-frame validation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/src/index.ts)
 - [Committed sequence scanner](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/src/format.ts)
 - [Conversation window rebuild](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/runtime/src/client/sessions/conversation-assembler.ts)
