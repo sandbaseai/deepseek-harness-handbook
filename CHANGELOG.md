@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.389 - 2026-08-30
+
+### Added
+
+- Added root-navigation guidance from upstream #4963: keep URL visits idempotent and prevent unstarted ghost Sessions from polluting history, search, and metrics.
+
 ## 0.5.388 - 2026-08-30
 
 ### Added

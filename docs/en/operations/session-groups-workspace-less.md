@@ -1,7 +1,7 @@
 ---
 title: Design Session Groups Without Inventing a Workspace
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -260,6 +260,10 @@ Legacy peers should continue to show the Workspace tree. They may ignore Collect
 | archived Session reappears under No collection | archive snapshot lost membership | preserve membership independently of visibility |
 | duplicate Collection titles merge | title used as identity | key every operation and DOM row by `CollectionId` |
 
+## Root navigation must not create ghost Sessions
+
+Upstream discussion [#4963](https://github.com/deepseek-ai/deepseek-harness/discussions/4963) reports that opening the Web root URL creates an empty Session in the last-active Workspace. That is a navigation policy, not evidence that a user requested a new execution context. Keep the root route idempotent: either resume a clearly identified recent Session or show a picker, and only call the create path after an explicit action. If product policy intentionally creates a draft, mark it as an unstarted draft and exclude it from ordinary history, metrics, and search until the first user turn commits it. Test refresh, back/forward navigation, reconnect, and two tabs so one URL visit cannot multiply empty shells.
+
 ## Acceptance gates
 
 - Existing rc.2 peers render the Workspace tree unchanged when Collection capability is absent.
@@ -301,6 +305,7 @@ Legacy peers should continue to show the Workspace tree. They may ignore Collect
 - [rc.2 Session-scoped sandbox mode](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/sandbox/sandbox-policy/src/session-mode.ts)
 - [Upstream Session grouping and workspace-less request #4721](https://github.com/deepseek-ai/deepseek-harness/discussions/4721)
 - [Upstream cross-Workspace discovery, move, and delete gaps #4765](https://github.com/deepseek-ai/deepseek-harness/discussions/4765)
+- [Upstream root navigation creates an empty Session #4963](https://github.com/deepseek-ai/deepseek-harness/discussions/4963)
 
 ## Related handbook guides
 
