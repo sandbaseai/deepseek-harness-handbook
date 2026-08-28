@@ -20,6 +20,8 @@ verified_at: 2026-08-29
 - [官方项目身份与下载站 provenance](../en/reference/official-project-identity.md)：核对仓库、npm integrity、release commit、安装权限和二进制签名。
 - [filesystem 工具与 HTTP(S) URL 边界](../en/troubleshooting/filesystem-url-as-path.md)：拒绝把 URL 当作本地路径，并将网络读取交给 web/fetch 能力。
 - [rc.7 baseline 与 alpha.1 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)：历史现场证据与当前源码边界分开阅读。
+- [Continuable Subagents 生命周期（英文）](../en/agent-patterns/subagents.md#bind-child-lifetime-to-the-parent-owner)：把父级所有权、级联销毁、挂起回收和结算交接变成可验证契约。
+- [安装期与子 Agent OOM（英文）](../en/agent-patterns/subagents.md#separate-install-time-oom-from-child-run-oom)：先区分依赖安装、Host 启动和子 Agent 执行阶段，再选择安全探针。
 
 这份手册已被社区维护的 [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness#ecosystem-services--resources) 收录。如果你遇到尚未覆盖的真实故障，可以在[下一篇指南选题入口](https://github.com/sandbaseai/deepseek-harness-handbook/discussions/99)提交脱敏证据；中文报告同样欢迎。
 
