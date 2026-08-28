@@ -10,7 +10,7 @@ Listed in [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek
 
 > The agent-first, English-canonical field guide to understanding, running, debugging, and extending [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), with reviewed Simplified Chinese coverage and multilingual foundations. — **Community-maintained and open-source.**
 
-**145 canonical guides · 154 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
+**146 canonical guides · 155 localized documents · rc.2 source-pinned analysis · runnable recovery paths**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -216,7 +216,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 145 pages |
+| English | Canonical | 146 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation only |
 | 한국어 | Draft | Navigation only |
@@ -347,6 +347,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Fix `unknown job` after a background subagent run](docs/en/troubleshooting/subagent-unknown-job-id.md)
 - [Recover an expired MCP session without a repeated tool-call loop](docs/en/troubleshooting/expired-mcp-session-loop.md)
 - [Plugin installation and known-good recovery](docs/en/troubleshooting/plugin-install-recovery.md)
+- [Resume historical `code` Sessions after the preset became `ptc`](docs/en/troubleshooting/historical-code-preset-resume.md)
 - [Remote Web access, SSH, HTTPS, and trust](docs/en/troubleshooting/remote-web-secure-context.md)
 - [Route OpenCode Go models by protocol and entitlement](docs/en/troubleshooting/opencode-go-model-routing.md)
 - [Recover Web from a Client plugin boot failure](docs/en/troubleshooting/web-client-plugin-boot-failure.md)
