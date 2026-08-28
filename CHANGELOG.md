@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.172 - 2026-08-28
+
+### Changed
+
+- Added an alpha.1 third-party-provider recovery route that distinguishes a silent Models UI, invalid draft, rejected settings write, missing catalog route, and inference failure.
+- Documented the rc.2-to-alpha.1 Models Remote boundary, source-checkout stale-bundle risk, non-secret evidence capture, reversible recovery choices, and end-to-end proof gates.
+
 ## 0.5.171 - 2026-08-28
 
 ### Changed

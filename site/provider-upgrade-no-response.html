@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Recover third-party model providers after a DeepSeek Harness upgrade</title>
+  <meta name="description" content="Diagnose a silent Add provider action after upgrading DeepSeek Harness to 0.1.2-alpha.1 without deleting settings or credentials.">
+  <link rel="canonical" href="https://sandbaseai.github.io/deepseek-harness-handbook/provider-upgrade-no-response.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A silent provider button is not a removed provider feature.">
+  <meta property="og:description" content="Separate client/Host compatibility, form validation, settings writes, route activation, and inference.">
+  <meta property="og:url" content="https://sandbaseai.github.io/deepseek-harness-handbook/provider-upgrade-no-response.html">
+  <meta property="og:image" content="https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-handbook-social-preview-v3.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Recover third-party model providers after a DeepSeek Harness upgrade","author":{"@type":"Organization","name":"SandBase"},"dateModified":"2026-08-28","url":"https://sandbaseai.github.io/deepseek-harness-handbook/provider-upgrade-no-response.html","inLanguage":"en","isAccessibleForFree":true}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><a class="brand" href="./"><span class="brand-mark">DSH</span><span>Harness Handbook</span></a><nav><a href="#route">Route</a><a href="#recover">Recover</a><a href="https://github.com/sandbaseai/deepseek-harness-handbook">GitHub</a></nav></header>
+  <main id="main" class="article-shell identity-article">
+    <header class="article-hero identity-hero">
+      <div><p class="eyebrow">alpha.1 upgrade · Models UI · third-party routes</p><h1>A silent button is not proof that providers were removed.</h1><p class="article-deck">Find the first broken boundary before touching settings or credentials.</p><div class="article-meta"><span>Verified 2026-08-28</span><span>Upstream cd5ef81</span></div></div>
+      <div class="identity-pipeline" role="img" aria-label="Provider configuration flows from browser client through Remote calls to settings, adapter registration, model picker, and inference"><div><b>Client</b><code>click</code></div><i>→</i><div><b>Remote</b><code>call</code></div><i>→</i><div><b>Settings</b><code>write</code></div><i>→</i><div><b>Route</b><code>register</code></div><i>→</i><div><b>Model</b><code>request</code></div></div>
+    </header>
+    <article class="article-body">
+      <div class="signal"><strong>Third-party providers still exist in alpha.1.</strong><span>The official guide documents both catalog and custom routes, and the runtime tests register a settings-born provider and call its model. Report #4817 does not yet contain enough evidence to locate its failure.</span></div>
+      <h2 id="route">Route the first fact.</h2>
+      <div class="identity-proof">
+        <section><strong>No draft opens</strong><p>Capture browser console, failed API request, asset hash, and Host stderr.</p></section>
+        <section><strong>Action disabled</strong><p>Validate provider ID, base URL, protocol, and at least one model.</p></section>
+        <section><strong>Apply fails</strong><p>Preserve the settings response and redacted provider section.</p></section>
+        <section><strong>Picker is empty</strong><p>Inspect route registration and catalog errors.</p></section>
+      </div>
+      <h2>The upgrade changed the wire boundary.</h2>
+      <div class="identity-contrast"><section><span>rc.2 client</span><strong><code>llm.providers({})</code></strong><p>One wrapped RPC response.</p></section><section class="identity-active"><span>alpha.1 client</span><strong>two typed list calls</strong><p><code>listProviders()</code> joins <code>listConfigurableProviders()</code>.</p></section></div>
+      <p>A stale source-build frontend or partially mixed package closure can therefore fail before provider configuration is evaluated. That is a concrete compatibility boundary, not a universal diagnosis.</p>
+      <h2 id="recover">Recover without erasing state.</h2>
+      <pre><code>dsh --version
+dsh --profile web --dump-config &gt; web-effective-config.txt
+dsh plugin --profile web list --depth 0</code></pre>
+      <ul class="identity-gates">
+        <li><span>01</span>Stop old DSH processes and verify which executable the shell launches.</li>
+        <li><span>02</span>Restart the same profile, then hard-reload the browser.</li>
+        <li><span>03</span>For a source checkout, rebuild the checked-out commit; source launch does not detect stale bundles.</li>
+        <li><span>04</span>Inspect profile-owned packages without installing duplicate DSH core packages.</li>
+        <li><span>05</span>Repair only the field rejected by the settings response.</li>
+        <li><span>06</span>Prove persistence after reload and run one bounded request in a new Session.</li>
+      </ul>
+      <div class="identity-warning"><strong>Do not publish credentials.</strong><p>Record provider and model IDs plus the credential reference. Never paste <code>.credentials.yaml</code> or secret values into an issue.</p></div>
+      <h2>Primary evidence.</h2>
+      <ul class="source-list"><li><a href="https://github.com/deepseek-ai/deepseek-harness/discussions/4817">Provider-upgrade report #4817</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/docs/user/guide/providers.md">alpha.1 provider guide</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/client/ui-settings-models/src/client/store.ts">alpha.1 Models store</a></li><li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/llm-pi-ai/tests/dynamic-config.spec.ts">dynamic provider tests</a></li></ul>
+      <section class="article-cta"><h2>Keep the complete recovery runbook.</h2><p>The canonical guide covers installed releases, source builds, mixed profile packages, custom endpoints, image claims, Session routing, and end-to-end proof.</p><a class="button primary" href="https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md#recover-providers-after-an-alpha1-upgrade">Read and star on GitHub</a></section>
+    </article>
+  </main>
+  <footer><p>Maintained by <a href="https://github.com/sandbaseai">SandBase</a>. Not an official DeepSeek AI project.</p><div><a href="https://github.com/deepseek-ai/deepseek-harness">Official runtime</a><a href="./">Handbook home</a></div></footer>
+</body>
+</html>
