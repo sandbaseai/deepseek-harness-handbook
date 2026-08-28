@@ -29,6 +29,8 @@ Choose one path and get to evidence quickly:
 
 The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 49 source-linked starting points. For workflow assembly, inspect [dsh-equip-engine](https://github.com/wuykjl/dsh-equip-engine); for cross-Agent Skill migration, [dsh-skill-mover](https://github.com/mjylfz/dsh-skill-mover); for research intake, [dsh-hacker-news](https://github.com/heartleo/hn-cli/tree/main/plugins/hacker-news); for evidence-driven debugging, [dsh-replay](https://github.com/zoahdev/dsh-replay); for a Codex-style Web surface, [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui); and for isolated side questions, [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups). Each entry is a discovery lead, not a compatibility or security endorsement.
 
+For Chinese-language peer discussion, the upstream community has a [Feishu group](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=781sa5d9-64c7-416f-b44f-9d19cd7a3656). It is community-run and not official DeepSeek support; do not share credentials, private Session logs, or sensitive workspace data.
+
 ### Newly source-verified
 
 | Problem | What the guide proves |

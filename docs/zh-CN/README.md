@@ -13,6 +13,8 @@ verified_at: 2026-08-29
 
 目前包含 **173 篇英文 canonical 指南、202 份多语言文档和 49 个精选 Awesome 资源**，所有版本敏感结论都标注验证日期和上游源码；简体中文提供核心内容与任务导航，下面五个最新专题摘要已逐行复核。英文原文始终是事实来源，中文入口不会假装拥有完整翻译覆盖率。
 
+如果希望用中文交流使用技巧、插件开发和版本动态，可以加入上游讨论中公布的[飞书交流群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=781sa5d9-64c7-416f-b44f-9d19cd7a3656)。该群由社区自发组织，不代表 DeepSeek 官方支持；请勿分享凭据、私有 Session 日志或敏感工作区数据。
+
 先从[英文可视化首页](https://sandbaseai.github.io/deepseek-harness-handbook/)选择任务，或直接使用 [Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) 与 [Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)。如果这份手册帮你少走了一次弯路，请为 [deepseek-harness-handbook 点一个 Star](https://github.com/sandbaseai/deepseek-harness-handbook)。这个公开信号能让更多 Agent 开发者找到经过源码验证的答案，而不是继续复制未经验证的命令。
 
 最近的英文专题也已同步到主入口：
