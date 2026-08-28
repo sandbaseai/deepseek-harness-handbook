@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.303 - 2026-08-28
+
+### Added
+
+- Added an English canonical and Chinese reviewed runbook for upstream Discussion #4926, separating client-page refusals from Host settlement and defining a bounded Cordis inspect timeout contract.
+- Updated coverage to 162 canonical pages and 186 localized documents.
+
 ## 0.5.302 - 2026-08-28
 
 ### Changed

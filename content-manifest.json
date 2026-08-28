@@ -819,6 +819,11 @@
       "translations": { "zh-CN": "docs/zh-CN/ecosystem/awesome-resources.md" }
     },
     {
+      "source": "docs/en/troubleshooting/cordis-inspect-client-query-hangs.md",
+      "revision": 1,
+      "translations": { "zh-CN": "docs/zh-CN/troubleshooting/cordis-inspect-client-query-hangs.md" }
+    },
+    {
       "source": "docs/en/troubleshooting/chatview-long-session-memory.md",
       "revision": 1,
       "translations": { "zh-CN": "docs/zh-CN/troubleshooting/chatview-long-session-memory.md" }
