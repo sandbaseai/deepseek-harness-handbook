@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.348 - 2026-08-30
+
+### Added
+
+- Added the public `dsh-corrupt-session-repair` project to the Agent-first Awesome resource map, with privacy and repair-boundary guidance.
+
 ## 0.5.347 - 2026-08-29
 
 ### Added
