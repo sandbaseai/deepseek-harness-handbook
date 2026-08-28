@@ -1,7 +1,7 @@
 ---
 title: Verify the Official DeepSeek Harness Project
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -10,6 +10,28 @@ upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 # Verify the official DeepSeek Harness project
 
 Several unrelated repositories and packages use similar names. Before installing, reporting a bug, or applying a workaround, verify that all coordinates point to the DeepSeek AI agent runtime:
+
+## Search results and download sites are not provenance
+
+Upstream Discussion [#4875](https://github.com/deepseek-ai/deepseek-harness/discussions/4875) warns about third-party sites appearing in search results as “DeepSeek Harness” clients. The screenshots and domains in that report are discovery signals only; this handbook does not claim a malware verdict without an artifact sample and a scoped analysis. The actionable rule is simpler: do not download a desktop binary, run an installer, or paste an API key into a similarly named site merely because it ranks for the project name.
+
+Use the official repository and package coordinates as the starting point:
+
+```text
+GitHub source: https://github.com/deepseek-ai/deepseek-harness
+CLI package:  @deepseek-ai/dsh
+Executable:    dsh
+```
+
+Before execution, require all of the following:
+
+- the URL is the official repository or a documented release/package link;
+- the package name, version, `dist.integrity`, repository metadata, and release commit agree;
+- installation scripts and requested permissions are visible before approval;
+- credentials are entered only into the verified runtime or provider, never into a search landing page;
+- a downloaded binary has a publisher/signature and checksum that can be independently verified.
+
+An unofficial GUI may be a legitimate community composition, but it must be treated as a separate product with its own trust, update, telemetry, credential, and sandbox boundaries. “Uses DeepSeek Harness” is not the same as “is the official DeepSeek Harness distribution.”
 
 ## Short answer: which DeepSeek Harness is official?
 

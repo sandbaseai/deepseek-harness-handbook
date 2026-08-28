@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.227 - 2026-08-29
+
+### Changed
+
+- Expanded the official-project identity guide with the upstream #4875 search-result/download-site warning, package provenance checks, and a clear distinction between unofficial clients and the official runtime.
+
 ## 0.5.226 - 2026-08-29
 
 ### Changed
