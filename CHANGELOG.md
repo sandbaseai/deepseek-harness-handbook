@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.294 - 2026-08-28
+
+### Fixed
+
+- Synchronized the Chinese overview's localized-document count with the verifier result: 159 canonical pages and 177 localized documents.
+
 ## 0.5.293 - 2026-08-28
 
 ### Added
