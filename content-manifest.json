@@ -10,6 +10,11 @@
   },
   "pages": [
     {
+      "source": "docs/en/architecture/prompt-assembly-provenance.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/troubleshooting/filesystem-url-as-path.md",
       "revision": 1,
       "translations": {}
