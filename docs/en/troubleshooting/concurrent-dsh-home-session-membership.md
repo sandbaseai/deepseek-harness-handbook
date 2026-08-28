@@ -1,7 +1,7 @@
 ---
 title: Protect Workspace Session Membership Across Concurrent DeepSeek Harness Instances
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-28
 verified_upstream: 1485
@@ -56,6 +56,23 @@ Choose one of these topologies before running concurrent instances:
 
 The practical workaround is to give each concurrently running profile a distinct `DSH_HOME` (and therefore distinct `storages`), or to run only one writer for a workspace. Merely changing the Session JSONL root is not enough.
 
+## Inspect durable accounts without widening membership
+
+The opposite failure is also easy to introduce during recovery: a Host needs to inspect which durable Workspace account once referenced a Session whose directory is now unavailable, but that does not make the Session a currently valid member. The [upstream inspection proposal (#4899)](https://github.com/deepseek-ai/deepseek-harness/discussions/4899) keeps these boundaries separate.
+
+Use a read-only inspection result with an explicit validation state:
+
+| Inspection result | Meaning | May mutate `Workspace.sessionIds`? |
+|---|---|---|
+| `valid` | Header is known and its canonical cwd matches | Only through the normal attach contract |
+| `cwd-unavailable` | Durable account exists, but the directory/header cannot be validated | No; show recovery evidence instead |
+| `cwd-mismatch` | Header is known and belongs to another path | No; require an explicit re-attach decision |
+| `undefined` | No durable account contains the Session id | No |
+
+An inspection API should be synchronous and read-only from the caller’s perspective: return the durable account and validation state, do not persist, and do not replace live `Workspace.status()`. This lets a source-bound integration report `source_changed` or ask for recovery without turning historical metadata into execution authority.
+
+Do not “fix” missing membership by making the membership projection accept every durable ID. That would preserve the race but widen a validated capability into an unvalidated historical list. Keep inspection, validation, and mutation as three separate stages.
+
 ## Reproduce without risking real Sessions
 
 Use a disposable workspace and copied configuration:
@@ -87,12 +104,14 @@ Do not “fix” the issue by deleting and recreating the workspace. That can di
 - Archive and active Sessions survive a restart and a subsequent attachment from the other profile.
 - The test inspects the durable workspace file, not only each process’s in-memory `workspace.list` response.
 - Recovery remains possible after a crash because the writer uses an atomic update or a documented lock.
+- A read-only durable-account inspection reports `cwd-unavailable` or `cwd-mismatch` without adding the ID to `Workspace.sessionIds`.
 
 An Agent-facing plugin should surface the writer, store path, profile, and decision in diagnostics, but it must not silently modify another profile’s workspace file. Treat the workspace store as shared mutable state and apply the same single-writer discipline used for Session roots.
 
 ## Primary evidence
 
 - [Upstream concurrent `DSH_HOME` workspace-membership bug (#1485)](https://github.com/deepseek-ai/deepseek-harness/discussions/1485)
+- [Upstream durable Workspace account inspection proposal (#4899)](https://github.com/deepseek-ai/deepseek-harness/discussions/4899)
 - [Single-writer Session topology](../operations/single-writer-session-roots.md)
 - [Session Collections and no-Workspace profiles](../operations/session-groups-workspace-less.md)
 - [Archive, trash, and delete Sessions safely](../operations/session-archive-trash-delete.md)
