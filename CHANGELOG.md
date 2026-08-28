@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.213 - 2026-08-28
+
+### Changed
+
+- Extended the Ralph failure-successor guide with structured orchestrator-owned failure state, workspace fingerprint admission, and a no-change circuit breaker based on the latest Discussion #109 review.
+
 ## 0.5.212 - 2026-08-28
 
 ### Changed

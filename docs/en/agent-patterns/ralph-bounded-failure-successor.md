@@ -1,7 +1,7 @@
 ---
 title: Design a Bounded Failure Successor for DeepSeek Harness Ralph
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -62,6 +62,26 @@ for round in 1..maxRounds:
 
 The implementation should count a successor as a normal round before starting it. A successor may itself fail; it does not earn another hidden retry unless the explicit cap still permits one. Cancellation always wins: once the parent signal is aborted, no successor may start.
 
+## Make failure state observable to the orchestrator
+
+A prompt-only marker is useful context but is not enough policy state. The fixed script should carry a bounded, machine-readable failure record alongside the handoff, for example:
+
+```json
+{
+  "kind": "ordinary-child-no-report",
+  "failedRound": 2,
+  "successorsStarted": 1,
+  "workspaceFingerprintBefore": "sha256:…",
+  "workspaceFingerprintAfter": "sha256:…"
+}
+```
+
+The successor may receive a human-readable rendering of that record, but the orchestrator must own the counters and fingerprints. That lets it distinguish one ordinary failure from repeated identical failures, report how many successors actually ran, and avoid asking a fresh child to rediscover a deterministic failure that left the authoritative workspace unchanged.
+
+Use the fingerprint as a cheap admission and circuit-breaker signal, not as completion evidence. A deployment can require a workspace change before another successor, or stop early after `N` consecutive no-report failures with no change. Define what is fingerprinted (for example, tracked and relevant untracked paths, excluding volatile logs), record the algorithm, and treat an unreadable or racing snapshot as “cannot prove change”—which should fail closed rather than silently admit another retry.
+
+This guard is especially important for deterministic tool or transport failures: fresh context removes conversational memory, but it cannot repair an unchanged broken dependency. A changed workspace is not proof that the objective is solved; it only says a successor may have new evidence worth inspecting.
+
 ## Keep the failure-class boundary narrow
 
 Only a child that successfully started but failed to produce a valid structured report is a candidate. Do not route these failures into a successor:
@@ -111,4 +131,5 @@ Verified against alpha.1 commit `cd5ef8148158c3a752a658978873241fdf8e2bbc` on 20
 
 - [Ralph package contract](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/workflow/tool-ralph/README.md)
 - [Ralph fixed workflow implementation](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/workflow/tool-ralph/src/index.ts)
-- [Failure successor proposal, Discussion #109](https://github.com/deepseek-ai/deepseek-harness/discussions/109)
+- [Failure successor proposal, Discussion #109](https://github.com/deepseek-ai/deepseek-harness/discussions/109) (including the structured-marker and no-change circuit-breaker review)
+- [Deterministic repeated-failure examples, Discussions #3489 and #3568](https://github.com/deepseek-ai/deepseek-harness/discussions/3489)
