@@ -13,7 +13,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 If this handbook saves you a debugging cycle, [star the repository](https://github.com/sandbaseai/deepseek-harness-handbook). That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**162 canonical guides · 191 localized documents · 37 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**163 canonical guides · 191 localized documents · 37 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -78,6 +78,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 | Install or run DeepSeek Harness for the first time | [Five-minute quickstart](docs/en/getting-started/quickstart.md) |
 | UI looks reset after changing launch commands | [Install identity and `DSH_HOME` guide](docs/en/getting-started/install-deepseek-harness.md#state-is-separate-from-the-executable) |
 | `npx` installs but `dsh web` burns CPU without a port | [Post-install Web startup boundary](docs/en/getting-started/install-deepseek-harness.md#install-success-does-not-prove-dsh-web-startup) |
+| ACP inline images fail in the Python SDK | [ACP inline-image contract](docs/en/troubleshooting/acp-inline-image-python-sdk.md) |
 | Diagnose a failing install | [Interactive Install Doctor](https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html) |
 | Route an Agent, model, tool, Session, or UI failure | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Check what is shipped, inferred, or proposed | [Current field status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
@@ -265,7 +266,7 @@ An agent is not just a prompt. A useful Agent has a task boundary, allowed effec
 
 | Locale | Current status | Published coverage |
 |---|---|---|
-| English | Canonical | 162 pages |
+| English | Canonical | 163 pages |
 | 简体中文 | Draft refresh | Reviewed core guides plus a machine-assisted current navigation awaiting fluent review |
 | 日本語 | Draft | Navigation plus ecosystem resource map |
 | 한국어 | Draft | Navigation plus ecosystem resource map |

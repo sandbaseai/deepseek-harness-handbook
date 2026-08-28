@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.345 - 2026-08-29
+
+### Added
+
+- Added an ACP inline-image and Python SDK contract runbook based on upstream discussion #4943, including the file-mode false-positive boundary.
+
 ## 0.5.344 - 2026-08-29
 
 ### Added

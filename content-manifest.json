@@ -200,6 +200,11 @@
       "translations": {}
     },
     {
+      "source": "docs/en/troubleshooting/acp-inline-image-python-sdk.md",
+      "revision": 1,
+      "translations": {}
+    },
+    {
       "source": "docs/en/guides/headless-reasoning-effort.md",
       "revision": 1,
       "translations": {}
