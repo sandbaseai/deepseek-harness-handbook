@@ -1,7 +1,7 @@
 ---
 title: Configure Model Providers in DeepSeek Harness
 locale: en
-content_revision: 5
+content_revision: 6
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -35,6 +35,26 @@ Use **Add a custom provider** for a company gateway, self-hosted endpoint, or un
 - at least one model.
 
 Provider IDs become part of requests, saved sessions, defaults, and credential references. To rename one, create a new provider and remove the old route.
+
+### A custom provider catalog is not automatically multi-protocol
+
+Upstream discussion [#4947](https://github.com/deepseek-ai/deepseek-harness/discussions/4947) reports a sharper boundary: a provider can return a complete live `/models` catalog while DSH discovery still filters candidates by the provider-level default API. In the reported rc.2 reproduction, models served through `anthropic-messages` or `openai-responses` were therefore undiscoverable when the custom route defaulted to Chat Completions. This is an upstream behavior report, not proof that every provider or release behaves identically.
+
+For a bounded workaround, declare the protocol on each model and verify the exact route before enabling it:
+
+```yaml
+llm-pi-ai:
+  providers:
+    oc:
+      api: openai-responses
+      baseURL: https://example.invalid/v1
+      apiKeyEnv: OC_API_KEY
+      models:
+        - { id: response-model, api: openai-responses }
+        - { id: messages-model, api: anthropic-messages }
+```
+
+Use a synthetic key and a disposable profile. Capture the provider default, each model's explicit `api`, the live `/models` response, the selected request endpoint, and the first successful or rejected response. A visible model row or a successful catalog fetch does not prove that the chosen protocol, reasoning fields, image input, or credential route is accepted by the endpoint. Keep the workaround separate from the built-in provider snapshot and remove the model declaration if the endpoint rejects its dialect.
 
 ![Official DeepSeek Harness custom provider form](https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/master/docs/user/guide/providers-custom-form.png)
 

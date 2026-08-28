@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.342 - 2026-08-29
+
+### Added
+
+- Added a source-backed custom-provider multi-protocol discovery runbook based on upstream discussion #4947, including explicit per-model API declarations and endpoint verification.
+
 ## 0.5.341 - 2026-08-29
 
 ### Changed
