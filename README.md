@@ -128,7 +128,7 @@ Choose the smallest path that matches the job. The full task index remains avail
 | Fix a plugin boot crash for missing `@deepseek-ai/dsh-client-schema-form` | [Plugin distribution-closure runbook](https://sandbaseai.github.io/deepseek-harness-handbook/missing-client-schema-form.html) |
 | Fix `additionalProperties`, type-array, or `oneOf` tool schema errors | [Tool schema subset guide](https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html) |
 | Distinguish the official Agent runtime from same-name API wrappers | [Official DeepSeek Harness identity guide](https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html) |
-| Check current rc.7 boundaries and safer next actions | [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
+| Check rc.7 baseline and alpha.1 migration context | [DeepSeek Harness Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html) |
 | Capture the package and source revision that actually ran | [DeepSeek Harness Version Evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html) |
 | Find the first broken runtime boundary | [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html) |
 | Keep the essential commands and checks in one tab | [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md) |
@@ -343,7 +343,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 ### Searchable operations
 
 - [Verify the official DeepSeek Harness project](docs/en/reference/official-project-identity.md)
-- [DeepSeek Harness rc.7 Field Status](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)
+- [DeepSeek Harness Field Status: rc.7 baseline + alpha.1 context](https://sandbaseai.github.io/deepseek-harness-handbook/field-status.html)
 - [DeepSeek Harness Version Evidence](https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html)
 - [Interactive Failure Router](https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html)
 - [DeepSeek Harness cheat sheet](docs/en/reference/cheat-sheet.md)

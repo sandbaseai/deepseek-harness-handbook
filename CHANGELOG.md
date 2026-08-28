@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.230 - 2026-08-29
+
+### Fixed
+
+- Reframed the public Field Status page as an rc.7 baseline with explicit alpha.1 context, updating homepage and README links so current visitors are not misled by the older snapshot.
+
 ## 0.5.229 - 2026-08-29
 
 ### Changed
