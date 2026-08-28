@@ -1,7 +1,7 @@
 ---
 title: Design Session Groups Without Inventing a Workspace
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -42,6 +42,19 @@ storage health and loadability, without prompt contents
 ```
 
 Pagination and search must define visibility across archive state, Workspace access, remote Hosts, profiles, and storage roots. A global index for one Host is not automatically a global index for every machine or credential domain.
+
+### Keep projection values JSON-safe before publishing list events
+
+An otherwise valid new Session can disappear from the list when a plugin writes an explicit `undefined` into a projection cache. Upstream discussion [#4915](https://github.com/deepseek-ai/deepseek-harness/discussions/4915) records this failure in `dsh-context`: the list path trusted a `SessionProjectionValue` cast, then lossless JSON validation rejected the `api-session/added` event before the first request had populated every optional field.
+
+Treat projection caches as an untrusted boundary. Before emitting a list event:
+
+1. validate against the actual `JsonValue` schema, not a TypeScript cast;
+2. omit absent optional fields or encode them with an explicit nullable/absent representation;
+3. reject the whole projection update with a typed diagnostic if a plugin value is not serializable;
+4. preserve the durable Session header so a failed projection can be rebuilt without losing the Session.
+
+The regression should create a Session, install the projection plugin, publish it before the first model request, and assert that the list contains the Session. Repeat with a populated optional field, a deliberately invalid value, a cold restart, and a rebuild from the durable source. A missing row is a projection/serialization incident—not evidence that the Session was never created—and widening the JSON schema to accept arbitrary values only hides the boundary.
 
 Moving a row from this view into a Collection is presentation-only. Choosing **Use another folder** should instead create a new rooted Session (with an explicit lineage link) until the runtime ships a replay-safe execution-root event.
 
