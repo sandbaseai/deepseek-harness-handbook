@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.284 - 2026-08-28
+
+### Changed
+
+- Extended the duplicate-core runtime runbook with upstream #4529's headless first-tool-call failure branch and fresh-process evidence requirements.
+
 ## 0.5.283 - 2026-08-28
 
 ### Changed

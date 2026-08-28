@@ -1,10 +1,12 @@
 ---
 title: Recover a duplicated DeepSeek Harness core runtime
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4529
 ---
 
 # Recover when a second core package copy breaks every tool call
@@ -36,6 +38,8 @@ Two physical module instances create two different symbols even when package nam
 This error proves that the scheduler lookup returned `undefined`. A duplicate or independently evaluated `@deepseek-ai/dsh-tools` module is a direct mechanism, but the error string alone does not prove how that split arose.
 
 ## Classify the timeline before changing packages
+
+Discussion [#4529](https://github.com/deepseek-ai/deepseek-harness/discussions/4529) is a useful early-failure branch: `--profile headless` can crash on the first native or MCP tool call while model-only output still works. Treat that as a fresh-process scheduler lookup failure and collect the resolved package paths before attempting a reinstall. A headless profile name does not change the singleton requirement; it only changes which composition reaches the scheduler first.
 
 | First failing call | Strongest current hypothesis | Discriminating evidence |
 |---|---|---|
