@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.350 - 2026-08-30
+
+### Changed
+
+- Refreshed the resource-page metadata and repository description to expose the current 38-resource Agent-first map.
+
 ## 0.5.348 - 2026-08-30
 
 ### Added
