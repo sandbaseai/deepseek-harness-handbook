@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.363 - 2026-08-30
+
+### Changed
+
+- Corrected public multilingual-document counts to match the content verifier's current 196-document result.
+
 ## 0.5.362 - 2026-08-30
 
 ### Changed
