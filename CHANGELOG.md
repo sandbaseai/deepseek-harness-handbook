@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.403 - 2026-08-30
+
+### Added
+
+- Advanced the pinned Awesome catalog snapshot to `0727823` and added the newly listed `lynkr-dsh-plugin` model-gateway resource.
+- Updated the JSON index, static schema, homepage, and bilingual counts to 59 resources.
+
 ## 0.5.402 - 2026-08-30
 
 ### Added

@@ -1,7 +1,7 @@
 {
   "name": "Awesome DeepSeek Harness resources",
   "source": "https://github.com/0xsline/awesome-deepseek-harness",
-  "snapshot": "c2cc7c971f33340d0fed614341041be52e35f9dc",
+  "snapshot": "07278233cba25e6f2d011018751187b7a4d8ed52",
   "verified_at": "2026-08-29",
   "consumer_guide": "https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html#consume-the-index-from-an-agent-workflow",
   "purpose": "Agent-first pointers into the upstream catalog; entries are not compatibility or security endorsements.",
@@ -63,6 +63,7 @@
     {"capability":"state","name":"dsh-track","url":"https://github.com/fakechris/dsh-track","why":"Evidence-oriented decisions, idea capture, and task lifecycle state for Agent workflows."},
     {"capability":"orchestration","name":"dsh-kirocrew","url":"https://github.com/zoahdev/dsh-kirocrew","why":"Persistent development workspace bridge over ACP with an explicit external boundary."},
     {"capability":"workflow","name":"dsh-commander","url":"https://github.com/qwert702/dsh-commander","why":"Separates planning from execution by turning structured task blocks into explicit Web UI actions."},
-    {"capability":"evaluation","name":"dsh-kimicode-swarm","url":"https://github.com/hongyue0721/dsh-kimicode-swarm","why":"Bounded parallel subtask dispatch with live progress and resumable Agent IDs."}
+    {"capability":"evaluation","name":"dsh-kimicode-swarm","url":"https://github.com/hongyue0721/dsh-kimicode-swarm","why":"Bounded parallel subtask dispatch with live progress and resumable Agent IDs."},
+    {"capability":"model-gateway","name":"lynkr-dsh-plugin","url":"https://github.com/veerareddyvishal144/lynkr-dsh-plugin","why":"Routes DSH requests through a self-hosted tiering gateway that selects a provider/model by request difficulty."}
   ]
 }

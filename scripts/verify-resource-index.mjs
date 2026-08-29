@@ -12,7 +12,7 @@ try {
 }
 
 if (index) {
-  if (index.snapshot !== 'c2cc7c971f33340d0fed614341041be52e35f9dc') errors.push('Resource index snapshot is not the pinned Awesome catalog commit');
+  if (index.snapshot !== '07278233cba25e6f2d011018751187b7a4d8ed52') errors.push('Resource index snapshot is not the pinned Awesome catalog commit');
   if (!/^https:\/\//.test(index.consumer_guide ?? '')) errors.push('Resource index is missing an HTTPS consumer guide');
   if (!Array.isArray(index.resources) || index.resources.length < 1) errors.push('Resource index must contain resources');
   const names = new Set();
