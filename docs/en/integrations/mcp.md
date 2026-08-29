@@ -1,9 +1,11 @@
 ---
 title: Connect MCP Servers to DeepSeek Harness
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
-verified_at: 2026-08-14
+verified_at: 2026-08-29
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4971
 ---
 
 # Connect MCP servers to DeepSeek Harness
@@ -93,6 +95,12 @@ For stdio, explicitly pass only required secrets. For HTTP, use TLS for non-loca
 ## Current limitations
 
 The official bridge currently exposes MCP **tools**. MCP resources and prompts do not yet have Harness consumers. Native model rendering of non-text MCP content is lossy: canonical execution data retains JSON blocks, while model context uses placeholders for image, audio, resource, and unsupported blocks.
+
+### webMCP is a separate boundary
+
+The community question in [discussion #4971](https://github.com/deepseek-ai/deepseek-harness/discussions/4971) asks whether DSH will support **webMCP**. Do not interpret the existing Streamable HTTP transport as webMCP support: the current bridge is a Host-composed MCP client that connects to a configured server and registers tools on `ctx.tools`. A browser-native webMCP surface would introduce a different owner for discovery, origin policy, user consent, lifecycle, and credential custody.
+
+Until an official design and implementation land, classify webMCP as **not verified**. Keep browser-exposed tools behind the same explicit server configuration and normal Harness approval pipeline; do not silently translate a page's advertised webMCP tools into a trusted DSH plugin row. A future implementation should document origin allowlists, per-page/session lifetime, prompt-injection handling, tool-name collision rules, and teardown before it is treated as equivalent to the current MCP client.
 
 ## Official sources
 
