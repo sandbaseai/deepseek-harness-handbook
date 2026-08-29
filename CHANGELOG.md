@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.436 - 2026-08-29
+
+### Fixed
+
+- Aligned the machine-readable latest-release pointers with v0.5.436.
+
 ## 0.5.435 - 2026-08-29
 
 ### Fixed
