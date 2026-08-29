@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 20
+content_revision: 21
 status: canonical
 verified_at: 2026-08-29
 sources:
@@ -131,6 +131,20 @@ The full catalog is intentionally broad. These additional projects are useful wh
 | Community catalog mirror | [fendouai/awesome-deepseek-harness](https://github.com/fendouai/awesome-deepseek-harness) | Bilingual directory with live link checks, machine-readable registries, and weekly trending refreshes. |
 
 These entries are pointers for further reading, not a recommendation to install everything together. Combining context, memory, routing, and background-agent plugins can change prompt size, cost, and authority boundaries in ways that are hard to see from a marketplace description.
+
+### Five additions from the latest catalog sweep
+
+The machine-readable index now includes five additional hub projects that make the Agent control loop easier to inspect:
+
+| Capability | Resource | Agent boundary to test |
+|---|---|---|
+| Code intelligence | [dsh-code-map](https://github.com/dsh-external/dsh-code-map) | Confirm symbol indexing stays inside the workspace and does not silently upload source. |
+| Progressive tools | [dsh-tool-search](https://github.com/dsh-external/dsh-tool-search) | Measure prompt-size reduction and verify undisclosed tools cannot be invoked implicitly. |
+| Session health | [dsh-session-health](https://github.com/dsh-external/dsh-session-health) | Run the scanner read-only against a copied profile before attempting repair. |
+| Vision bridge | [dsh-vision-toolkit](https://github.com/dsh-external/dsh-vision-toolkit) | Check image retention, provider routing, and structured evidence for every image turn. |
+| Workflow visualization | [dsh-web-workflow-visualizer](https://github.com/dsh-external/dsh-web-workflow-visualizer) | Review generated workflow scripts and approval gates before enabling mutations. |
+
+These five are source-linked discovery leads, not compatibility claims. The [JSON index](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json) is the canonical count and link surface for Agents.
 
 ## High-signal community projects
 
