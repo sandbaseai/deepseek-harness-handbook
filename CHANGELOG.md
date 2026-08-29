@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.401 - 2026-08-30
+
+### Added
+
+- Promoted six Agent-first picks from the Awesome catalog into the machine-readable JSON index, updating the site schema, homepage, and README counts from 52 to 58.
+
 ## 0.5.400 - 2026-08-30
 
 ### Added

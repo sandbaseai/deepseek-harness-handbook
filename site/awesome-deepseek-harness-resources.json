@@ -57,6 +57,12 @@
     {"capability":"community-catalog","name":"fendouai/awesome-deepseek-harness","url":"https://github.com/fendouai/awesome-deepseek-harness","why":"Bilingual ecosystem directory with live link checks, machine-readable registries, and weekly trending refreshes."},
     {"capability":"community-catalog","name":"Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins","url":"https://github.com/Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins","why":"English and Chinese directory spanning plugins, extensions, tools, skills, clients, runtimes, and integrations."},
     {"capability":"recovery","name":"dsh-backup","url":"https://github.com/xiaoyuyu6420/dsh-backup","why":"Backup and restore ~/.dsh with upgrade snapshots, session-log repair, credential redaction, and GitHub sync."},
-    {"capability":"discovery","name":"dsh-plugin-workshop","url":"https://github.com/yyyyukari/dsh-plugin-workshop","why":"GitHub-powered plugin browsing with trending windows, signature filtering, and install/update/uninstall flows."}
+    {"capability":"discovery","name":"dsh-plugin-workshop","url":"https://github.com/yyyyukari/dsh-plugin-workshop","why":"GitHub-powered plugin browsing with trending windows, signature filtering, and install/update/uninstall flows."},
+    {"capability":"operations","name":"dsh-harness-ops","url":"https://github.com/fakechris/dsh-harness-ops","why":"Snapshot rotation, self-healing startup, and interrupted-session continuation for observable recovery."},
+    {"capability":"orchestration","name":"dsh-routed-subagent","url":"https://github.com/bpc-oss/dsh-routed-subagent","why":"Bounded child runs with preset and model/provider overrides plus continuable background jobs."},
+    {"capability":"state","name":"dsh-track","url":"https://github.com/fakechris/dsh-track","why":"Evidence-oriented decisions, idea capture, and task lifecycle state for Agent workflows."},
+    {"capability":"orchestration","name":"dsh-kirocrew","url":"https://github.com/zoahdev/dsh-kirocrew","why":"Persistent development workspace bridge over ACP with an explicit external boundary."},
+    {"capability":"workflow","name":"dsh-commander","url":"https://github.com/qwert702/dsh-commander","why":"Separates planning from execution by turning structured task blocks into explicit Web UI actions."},
+    {"capability":"evaluation","name":"dsh-kimicode-swarm","url":"https://github.com/hongyue0721/dsh-kimicode-swarm","why":"Bounded parallel subtask dispatch with live progress and resumable Agent IDs."}
   ]
 }
