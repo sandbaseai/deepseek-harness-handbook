@@ -2,6 +2,16 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.438 - 2026-08-29
+
+### Added
+
+- Added the `dsh-v0.1.2-alpha.1` upstream note to the updates desk: tag-only release facts (npm not published), breaking changes (`code-mode` → PTC rename, client-modules rewrite, Remote controllers, RPC envelope, one-shot token auth, DOM selector changes), new capabilities, and the Node 24.0–24.11.1 launch-window caution with the #4968 fix proposal and dsh-launch-doctor (#4970) references.
+
+### Fixed
+
+- Corrected the official-project identity routing table: the official `deepseek-ai/deepseek-harness` tracker disables Issues and Pull Requests (`hasIssuesEnabled` is false), so runtime bugs, feature requests, and proposals go to Discussions only, with fork/gist patch links from the discussion (#4403, #4404, #4405, #4968).
+
 ## 0.5.437 - 2026-08-29
 
 ### Fixed
