@@ -1,7 +1,7 @@
 ---
 title: Fix Unknown or Malformed Prompt Variables from Tool Descriptions in Code Mode
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-20
 upstream_revision: 141eb6fef83422698aef7a981029e843e8161534
@@ -182,6 +182,19 @@ Include:
 - whether the double-brace group occurs in a description, property name, enum, or const value; and
 - the generated SDK fragment after any proposed escaping.
 
+## Related failure: programmatic Agent creation silently no-ops
+
+Discussion [#4967](https://github.com/deepseek-ai/deepseek-harness/discussions/4967) reports a different prompt-variable boundary: programmatic Agent creation can appear to succeed while a loop swallows `prompt variable "{{model}}" has no value`. Treat this as a control-flow failure, not as proof that the Agent was created.
+
+Capture the resolved prompt variables and the return value at the creation boundary, then run one bounded probe that must produce an observable child Session or explicit error. Do not continue dispatching work until the following are true:
+
+1. `model` is resolved in the same preset/profile used by the programmatic call;
+2. the creation promise is awaited and its rejection is surfaced;
+3. the loop records a per-attempt status instead of treating an empty result as success; and
+4. a fresh child Session, model/provider identity, and first tool boundary are visible in the evidence bundle.
+
+This failure shares the same ownership lesson as Code Mode interpolation: a literal prompt variable can be valid syntax while still being unresolved at runtime. Keep template resolution, Agent creation, and loop success as separate contracts.
+
 ## Primary sources
 
 - [Official discussion #3454](https://github.com/deepseek-ai/deepseek-harness/discussions/3454)
@@ -191,3 +204,4 @@ Include:
 - [rc.8 TypeScript SDK renderer](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/src/ts-types.ts)
 - [rc.8 Python SDK renderer](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/src/py-types.ts)
 - [rc.8 tool-presentation and `tools:sdk` registration](https://github.com/deepseek-ai/deepseek-harness/blob/141eb6fef83422698aef7a981029e843e8161534/packages/core/tools/src/index.ts)
+- [Programmatic Agent creation and unresolved `{{model}}` variable #4967](https://github.com/deepseek-ai/deepseek-harness/discussions/4967)
