@@ -1,13 +1,15 @@
 ---
 title: Fix "HTML Did Not Preload @deepseek-ai/dsh-client-modules/client.js"
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-28
 verified_upstream: cd5ef8148158c3a752a658978873241fdf8e2bbc
 sources:
   - https://github.com/deepseek-ai/deepseek-harness/discussions/4840
   - https://github.com/deepseek-ai/deepseek-harness/discussions/4885
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4968
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4970
 ---
 
 # Fix `HTML did not preload @deepseek-ai/dsh-client-modules/client.js`
@@ -63,6 +65,22 @@ Record the Node version, the first Host-side resolver exception, and whether the
 ### An empty `__DSH_BOOT__` is a Host-side boundary
 
 Upstream report [#4955](https://github.com/deepseek-ai/deepseek-harness/discussions/4955) narrows the symptom further: the page contains `__DSH_BOOT__`, but its `entries` and `batches` arrays are empty. That is not a browser preload race. Preserve the raw HTML and inspect the Host-side plugin inventory, profile, launch revision, and resolver error before clearing browser storage. A valid response must advertise the client-modules row and its bootstrap URL; if the manifest is empty, repair the Host composition or build output first, then re-run the exact HTML and `/plugins` checks from a clean profile.
+
+### Run a zero-dependency launch diagnosis first
+
+Discussion [#4970](https://github.com/deepseek-ai/deepseek-harness/discussions/4970) publishes `dsh-launch-doctor`, a small Node-only diagnostic companion to the resolver-shape fix in [#4968](https://github.com/deepseek-ai/deepseek-harness/discussions/4968). It checks five boundaries that are otherwise easy to conflate: the Node version range, the actual `resolveSync` API shape, `__DSH_BOOT__` integrity, preload/bootstrap tags, and the `/plugins` response.
+
+Run it against a disposable profile or a running local Web process:
+
+```bash
+node bin/dsh-launch-doctor.mjs --node-only
+node bin/dsh-launch-doctor.mjs --json
+node bin/dsh-launch-doctor.mjs
+```
+
+The tool reports Node `24.0`–`24.11.1` as the known loader-shape failure range and distinguishes it from a healthy `24.12+` resolver. It also treats an empty `entries` array, zero preload links, or a non-200 `/plugins` response as separate evidence instead of collapsing them into one browser error. Keep the JSON output with the HTML/HAR sample; it is a diagnostic aid, not proof that a third-party fix is compatible with your release.
+
+If the doctor reproduces the Node range, compare the same profile under a supported Node 22 release or a current Node 24 release, then rebuild and re-run the exact checks. Do not pass an auth token on the command line; the companion discovers the local Web log token and should be run only on a machine you trust. The upstream project is community-authored and MIT-licensed, so inspect its source before using it in an automated support bundle.
 
 ## Route the failure
 
