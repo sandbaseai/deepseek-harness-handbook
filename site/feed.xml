@@ -5,7 +5,8 @@
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/feed.xml" rel="self" type="application/atom+xml"/>
   <link href="https://sandbaseai.github.io/deepseek-harness-handbook/" rel="alternate" type="text/html"/>
   <id>https://sandbaseai.github.io/deepseek-harness-handbook/</id>
-  <updated>2026-08-29T02:27:00Z</updated>
+  <updated>2026-08-29T02:36:00Z</updated>
+  <entry><title>Backfill the release changelog</title><link href="https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.435"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/changelog-backfill-r112</id><updated>2026-08-29T02:36:00Z</updated><summary>Align the public changelog with the actual v0.5.418–v0.5.434 release history.</summary></entry>
   <entry><title>Surface the webMCP boundary</title><link href="https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.433"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/webmcp-navigation-r111</id><updated>2026-08-29T02:27:00Z</updated><summary>Expose the current MCP versus webMCP boundary from canonical README navigation.</summary></entry>
   <entry><title>Align the homepage ecosystem count</title><link href="https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.432"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/homepage-ecosystem-count-r110</id><updated>2026-08-29T02:26:00Z</updated><summary>Keep the high-traffic Pages ecosystem card aligned with the 82-resource machine-readable map.</summary></entry>
   <entry><title>Refresh Agent discovery pointers</title><link href="https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.430"/><id>https://sandbaseai.github.io/deepseek-harness-handbook/updates/agent-discovery-pointers-r108</id><updated>2026-08-29T02:18:00Z</updated><summary>Point machine-readable consumers to the latest release and launch-doctor ecosystem map.</summary></entry>
