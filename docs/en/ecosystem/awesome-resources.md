@@ -146,6 +146,23 @@ The machine-readable index now includes five additional hub projects that make t
 
 These five are source-linked discovery leads, not compatibility claims. The [JSON index](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json) is the canonical count and link surface for Agents.
 
+### Session composition and operator surfaces
+
+The latest upstream catalog also contains several building blocks for making Agent work observable and reversible. Four are currently catalog-only pointers: the repository may be private, renamed, or unavailable even though the pinned catalog records it.
+
+| Capability | Resource | Agent boundary to test |
+|---|---|---|
+| Exploration checkpoints | [dsh-checkpoint (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | Confirm a checkpoint is metadata only and does not rewrite the source Session. |
+| Context rewind | [dsh-rewind](https://github.com/dpskh/dsh-rewind) | Verify the report is reproducible and the complete log remains recoverable. |
+| Cross-tool search | [dsh-session-search (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | Check which local Session roots are read and whether indexes persist prompt content. |
+| Side Sessions | [dsh-sidechain](https://github.com/omdsh-dev/dsh-sidechain) | Test that /side and /btw cannot silently write to the parent task. |
+| Child-Agent visibility | [dsh-subagent-tree (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | Inspect delegation depth, cancellation, and branch ownership in the workspace. |
+| Visible browser actions | [dsh-browser-panel (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | Record navigation, downloads, and credentials before allowing browser writes. |
+| Office artifacts | [dsh-office (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | Keep document paths, conversion tools, and output retention explicit. |
+| Cordis learning examples | [dsh-cordis-examples (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | Start from minimal lifecycle/tool examples before adding authority-bearing hooks. |
+
+These additions expand discovery coverage; they do not change the handbook's compatibility policy. Use the `availability` field in the JSON index to distinguish a checked repository from a catalog-only lead.
+
 ## High-signal community projects
 
 The upstream catalog is not the only discovery surface. These public projects currently have meaningful community attention and are useful starting points for an Agent builder. Popularity is only a discovery signal; inspect the repository, release history, permissions, and install contract yourself.

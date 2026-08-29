@@ -97,6 +97,23 @@ verified_at: 2026-08-29
 
 这些条目是进一步阅读的入口，不代表建议全部同时安装。上下文、记忆、路由和后台 Agent 插件叠加后，可能改变 prompt 大小、成本和权限边界，而这些变化往往不会出现在市场描述里。
 
+### Session 组合与操作者界面
+
+上游最新目录还包含一组帮助 Agent 保持可观测、可回滚的组件。其中四项目前只是目录快照入口：源仓库可能是私有、改名或暂不可见，安装前必须重新核验。
+
+| 能力 | 资源 | Agent 边界 |
+|---|---|---|
+| 探索检查点 | [dsh-checkpoint（目录快照）](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | 确认 checkpoint 只是元数据，不会重写源 Session。 |
+| 上下文回退 | [dsh-rewind](https://github.com/dpskh/dsh-rewind) | 验证报告可复现，完整日志仍可恢复。 |
+| 跨工具搜索 | [dsh-session-search（目录快照）](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | 检查读取哪些本地 Session 根目录，以及索引是否持久化 prompt。 |
+| 侧 Session | [dsh-sidechain](https://github.com/omdsh-dev/dsh-sidechain) | 验证 /side 与 /btw 不会静默写入父任务。 |
+| 子 Agent 可见性 | [dsh-subagent-tree（目录快照）](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | 检查委托深度、取消行为和分支归属。 |
+| 可见浏览器操作 | [dsh-browser-panel（目录快照）](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | 在允许浏览器写入前记录导航、下载和凭据边界。 |
+| Office 产物 | [dsh-office（目录快照）](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | 明确文档路径、转换工具和输出保留策略。 |
+| Cordis 学习示例 | [dsh-cordis-examples（目录快照）](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) | 先从最小生命周期/工具示例开始，再加入有权限影响的 hook。 |
+
+这些新增内容扩大了发现覆盖，不改变 handbook 的兼容性政策。请用 JSON 索引中的 `availability` 字段区分已核对仓库和仅目录线索。
+
 ## 高关注社区项目
 
 上游目录之外，还有一些目前关注度较高且公开可访问的社区项目，适合 Agent 构建者作为起点。热度只代表发现信号；仍需自行检查仓库、发布历史、权限和安装契约。
