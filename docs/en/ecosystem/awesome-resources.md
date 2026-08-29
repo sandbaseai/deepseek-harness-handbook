@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 18
+content_revision: 19
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -22,6 +22,21 @@ Treat an entry as a lead for an Agent experiment, not as an install command. Bef
 For a disposable profile, record the baseline (`node --version`, DSH version, enabled bundles, and a redacted environment summary), install only one candidate, and run one bounded task. Compare loaded modules, child processes, filesystem writes, outbound hosts, token usage, and Session mutations against the baseline. Keep the evidence digest beside the experiment. If the resource changes routing, memory, or approval behavior, require an explicit before/after review rather than accepting a successful demo as proof of compatibility.
 
 Use this decision rule when an entry is ambiguous: **catalog-only** means link discovery is useful but repository visibility or installability still needs proof; **source-linked** means the URL and purpose were checked, not that the package is safe; **validated in your profile** means you reproduced the behavior with a pinned revision and recorded rollback evidence. The JSON index preserves the first two states; your local experiment log should be the authority for the third.
+
+### Copyable evidence template
+
+```text
+candidate: <owner/repository>@<commit>
+profile: <disposable profile path>
+baseline: DSH <version>; bundles=<list>; node=<version>
+permissions: files=<allowlist>; network=<hosts>; credentials=<none or named scope>
+task: <one bounded prompt and expected artifact>
+observed: modules=<...>; writes=<...>; children=<...>; requests=<...>; tokens=<...>
+rollback: disable/uninstall command=<...>; profile restored=<yes/no>; evidence=<digest or log path>
+decision: catalog-only | source-linked | validated in this profile
+```
+
+Keeping this record next to the Session evidence makes a later upgrade comparable: rerun the same task against the new commit, diff the permission and network fields first, then inspect output quality. If any field is unknown, leave the decision at `source-linked` instead of silently promoting it.
 
 ## Start with discovery and authoring
 

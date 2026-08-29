@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.408 - 2026-08-30
+
+### Added
+
+- Added a copyable evidence template for auditing catalog resources, comparing upgrades, and keeping unknown permissions explicitly unverified.
+
 ## 0.5.407 - 2026-08-30
 
 ### Added
