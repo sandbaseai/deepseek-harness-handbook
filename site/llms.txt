@@ -3,10 +3,10 @@
 > An independent, source-backed, agent-first field guide to the official DeepSeek Harness runtime.
 
 Canonical site: https://sandbaseai.github.io/deepseek-harness-handbook/
-Latest field update (v0.5.436): align release metadata across machine-readable discovery surfaces: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/CHANGELOG.md
+Latest field update (v0.5.437): align release metadata across machine-readable discovery surfaces: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/CHANGELOG.md
 Continuable child empty-tool-registry diagnosis (v0.5.278): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/continuable-child-empty-tool-registry.md
 Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-readonly-pwsh-stderr.md
-Latest release (v0.5.436): align release metadata across machine-readable discovery surfaces: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.436
+Latest release (v0.5.437): align release metadata across machine-readable discovery surfaces: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.437
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 The JSON index contains 82 source-linked resources grouped by Agent capability; treat each as a discovery lead and verify permissions, credentials, network access, and rollback before activation.
 The pinned upstream catalog is much larger (271 hub repositories + 1,000 public dsh-plugin topic repositories + 471 manual additions); this handbook intentionally exposes a reviewed subset: https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md
