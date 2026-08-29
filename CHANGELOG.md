@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.411 - 2026-08-30
+
+### Added
+
+- Made the 69-resource scope and Agent-first verification boundary explicit in the machine-readable LLM index.
+
 ## 0.5.410 - 2026-08-30
 
 ### Fixed
