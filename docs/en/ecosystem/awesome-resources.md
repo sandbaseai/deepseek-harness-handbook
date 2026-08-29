@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 15
+content_revision: 16
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -22,9 +22,11 @@ The source index is licensed CC0. The descriptions below are concise editorial s
 | Plugin development | [dsh-plugin-dev](https://github.com/dsh-external/dsh-plugin-dev) | Field notes and skills for Cordis composition, TypeScript setup, Windows junctions, and persistence pitfalls. |
 | Plugin authoring skills | [dsh-plugin-skills](https://github.com/dsh-external/dsh-plugin-skills) | Skills for building and testing DeepSeek Harness plugins. |
 | Plugin composition examples | [dsh-cordis-rocks (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The upstream catalog records runnable Cordis tutorials; verify current repository visibility before installing. |
-| Find installed/public plugins | [dsh-find-plugins (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The upstream catalog records the discovery tool; verify current repository visibility before installing. |
+| Find installed/public plugins | [dsh-find-plugins](https://github.com/Nagi-ovo/dsh-find-plugins) | Finds, installs, and verifies GitHub plugins from an Agent workflow; inspect install commands and trust boundaries first. |
 | Context cost audit | [dsh-context-doctor](https://github.com/Zhenyu98/dsh-context-doctor) | Measures instruction, skill-catalog, and tool-schema token cost and reports duplication or conflicts. |
 | Plugin manifest checks | [dsh-plugin-check](https://github.com/dsh-external/dsh-plugin-check) | Performs read-only checks of plugin manifests, patch shape, build traps, and hub status. |
+| Data analysis | [dsh-data-agent](https://github.com/omdsh-dev/dsh-data-agent) | Connects DSH to databases for conversational analysis; constrain credentials, SQL scope, and result exfiltration before use. |
+| Adversarial workflow review | [dsh-inspect](https://github.com/omdsh-dev/dsh-inspect) | Runs a checkup → fix → review loop on the official workflow engine with an explicit verification pass. |
 | Bilingual plugin directory | [Awesome-DeepSeek-Harness-Plugins](https://github.com/Zhiyuan-Fan/Awesome-DeepSeek-Harness-Plugins) | Browse plugins, extensions, tools, skills, clients, runtimes, and integrations in English and Chinese before selecting a candidate. |
 
 Use discovery tools as indexes, not trust oracles. A listing is not proof that a package is safe, maintained, compatible with your release, or appropriate for a production profile.
@@ -51,7 +53,7 @@ Memory and repair tools can read sensitive prompts, tool output, and credentials
 | Deep research workflow | [dsh-deep-research](https://github.com/dsh-external/dsh-deep-research) | Provides an adaptive research orchestration workflow. |
 | LLM fallback policy | [dsh-llm-fallbacks](https://github.com/dsh-external/dsh-llm-fallbacks) | Applies role-based retry and fallback policy; verify cost and retry limits. |
 | Agent-to-agent routing | [DSH-Subagent-Model-Router](https://github.com/CypherNaught-0x/DSH-Subagent-Model-Router) | Routes delegated work to configured models and exposes join/wait behavior. |
-| Agent budget guard | [dsh-agent-budget](https://github.com/dsh-external/dsh-agent-budget) | Adds an agent-tree token budget boundary; verify whether limits cover descendants and retries. |
+| Agent budget guard | [dsh-agent-budget](https://github.com/vibeinging/dsh-agent-budget) | Adds an Agent-tree token budget boundary; verify descendant, retry, and provider accounting before relying on the limit. |
 | GitHub credential bridge | [dsh-gh-bridge (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a Keychain bridge; verify current repository visibility and audit secret scope carefully. |
 
 Routing and fallback plugins can multiply provider calls. Establish a bounded budget, log the selected model and retry count, and keep approval and sandbox policy outside the plugin's marketing description.

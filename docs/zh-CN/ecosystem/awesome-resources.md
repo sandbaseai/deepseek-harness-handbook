@@ -2,7 +2,7 @@
 title: DeepSeek Harness 生态资源能力地图
 locale: zh-CN
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 15
+source_revision: 16
 status: reviewed
 verified_at: 2026-08-28
 ---

@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.405 - 2026-08-30
+
+### Added
+
+- Added five source-linked Agent resources from the latest Awesome DeepSeek Harness catalog: plugin discovery, plugin health checks, database analysis, adversarial workflow review, and Agent-tree budgets.
+- Synchronized the 64-resource count across the JSON index, static schema, homepage, README, and Chinese entry point.
+
 ## 0.5.404 - 2026-08-30
 
 ### Added

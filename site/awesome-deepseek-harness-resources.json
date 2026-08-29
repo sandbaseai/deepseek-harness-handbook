@@ -64,6 +64,11 @@
     {"capability":"orchestration","name":"dsh-kirocrew","url":"https://github.com/zoahdev/dsh-kirocrew","why":"Persistent development workspace bridge over ACP with an explicit external boundary."},
     {"capability":"workflow","name":"dsh-commander","url":"https://github.com/qwert702/dsh-commander","why":"Separates planning from execution by turning structured task blocks into explicit Web UI actions."},
     {"capability":"evaluation","name":"dsh-kimicode-swarm","url":"https://github.com/hongyue0721/dsh-kimicode-swarm","why":"Bounded parallel subtask dispatch with live progress and resumable Agent IDs."},
-    {"capability":"model-gateway","name":"lynkr-dsh-plugin","url":"https://github.com/veerareddyvishal144/lynkr-dsh-plugin","why":"Routes DSH requests through a self-hosted tiering gateway that selects a provider/model by request difficulty."}
+    {"capability":"model-gateway","name":"lynkr-dsh-plugin","url":"https://github.com/veerareddyvishal144/lynkr-dsh-plugin","why":"Routes DSH requests through a self-hosted tiering gateway that selects a provider/model by request difficulty."},
+    {"capability":"discovery","name":"dsh-find-plugins","url":"https://github.com/Nagi-ovo/dsh-find-plugins","why":"Finds, installs, and verifies GitHub plugins from an Agent workflow; inspect install commands and trust boundaries first."},
+    {"capability":"governance","name":"dsh-plugin-check","url":"https://github.com/omdsh-dev/dsh-plugin-check","why":"Performs read-only checks of plugin manifests, patch shape, build traps, and hub status before activation."},
+    {"capability":"tools","name":"dsh-data-agent","url":"https://github.com/omdsh-dev/dsh-data-agent","why":"Connects DSH to databases for conversational analysis; constrain credentials, SQL scope, and result exfiltration before use."},
+    {"capability":"orchestration","name":"dsh-inspect","url":"https://github.com/omdsh-dev/dsh-inspect","why":"Runs a checkup → fix → review loop on the official workflow engine with an explicit verification pass."},
+    {"capability":"context","name":"dsh-agent-budget","url":"https://github.com/vibeinging/dsh-agent-budget","why":"Adds an Agent-tree token budget boundary; verify descendant, retry, and provider accounting before relying on the limit."}
   ]
 }
