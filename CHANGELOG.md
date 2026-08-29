@@ -2,6 +2,19 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.434–0.5.418 - 2026-08-29
+
+### Added and fixed
+
+- Refreshed machine-readable `llms.txt` and Atom feed pointers through v0.5.434 so Agents and RSS consumers discover the current release first.
+- Aligned the Pages homepage ecosystem card with the canonical 82-resource map (v0.5.432).
+- Added the MCP versus webMCP boundary to canonical navigation and synchronized multilingual README revisions (v0.5.433).
+- Added `dsh-launch-doctor` to the bilingual Agent-first ecosystem map with explicit catalog, token, and compatibility boundaries (v0.5.429).
+- Documented the official alpha.1 token-meter retry version boundary and the community launch-doctor diagnosis path (v0.5.427–v0.5.428).
+- Expanded the Awesome DeepSeek Harness resource map from 74 to 82 entries, including checkpoint/rewind, side Sessions, child-Agent visibility, browser/Office surfaces, and Cordis examples (v0.5.418–v0.5.426).
+
+All entries in this range passed `npm run check`; the resource index also passed `npm run check:resources` against snapshot `07278233`.
+
 ## 0.5.417 - 2026-08-30
 
 ### Added
