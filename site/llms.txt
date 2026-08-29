@@ -9,6 +9,7 @@ Windows read-only PowerShell stderr noise (v0.5.279): https://github.com/sandbas
 Latest release (v0.5.418): refresh the Awesome catalog snapshot links across the 74-resource Agent-first index: https://github.com/sandbaseai/deepseek-harness-handbook/releases/tag/v0.5.418
 Resource JSON index: https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.json
 The JSON index contains 74 source-linked resources grouped by Agent capability; treat each as a discovery lead and verify permissions, credentials, network access, and rollback before activation.
+The pinned upstream catalog is much larger (271 hub repositories + 1,000 public dsh-plugin topic repositories + 471 manual additions); this handbook intentionally exposes a reviewed subset: https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md
 SandBase Harness MCP bridge guide: https://sandbaseai.github.io/deepseek-harness-handbook/sandbase-harness-bridge.html
 English README and Star call-to-action (v0.5.315): https://github.com/sandbaseai/deepseek-harness-handbook#readme
 Latest field update (v0.5.283): pnpm isolated-tarball fallback closure and empty provider table: https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/web-loading-plugins-pnpm-symlink.md

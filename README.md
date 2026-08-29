@@ -40,6 +40,8 @@ Choose one path and get to evidence quickly:
 
 The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 74 source-linked starting points, including plugin discovery and health checks, database analysis, adversarial workflow review, Agent evolution, mobile access, and provider fallback controls. Each entry is an Agent-oriented discovery lead, not a compatibility or security endorsement; inspect permissions, credentials, and rollback paths before installation.
 
+For scale context, the pinned [upstream catalog snapshot](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) contains 271 hub repositories, 1,000 public `dsh-plugin` topic repositories, and 471 manual additions. This handbook deliberately curates a smaller, source-linked subset so every entry has an explicit Agent boundary to inspect.
+
 For Chinese-language peer discussion, see the upstream community’s [Feishu group discussion](https://github.com/deepseek-ai/deepseek-harness/discussions/4783) for the current invite and context. It is community-run and not official DeepSeek support; do not share credentials, private Session logs, or sensitive workspace data.
 
 ### Newly source-verified
