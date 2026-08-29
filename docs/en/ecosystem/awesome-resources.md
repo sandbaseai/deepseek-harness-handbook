@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 21
+content_revision: 22
 status: canonical
 verified_at: 2026-08-29
 sources:
@@ -187,6 +187,7 @@ The upstream catalog is not the only discovery surface. These public projects cu
 | Session corruption repair | [dsh-corrupt-session-repair](https://github.com/MedicineKing/dsh-corrupt-session-repair) | Zero-install scanner, deterministic corpus, and repair evidence for crash-recovery sequence corruption; keep real logs private. |
 | Codex-style Web UI | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | Public DSH Web extension points for workspace/session navigation, search, and turn orientation; verify compatibility before installing. |
 | Nested follow-ups | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | Recursively isolated child Sessions for side questions; verify ancestry, tool scope, and no cross-branch writes. |
+| Launch diagnosis | [dsh-launch-doctor](https://github.com/Shizuku-keop/dsh-launch-doctor) | Zero-dependency checks for Node resolver shape, `__DSH_BOOT__`, preload tags, and `/plugins`; inspect source and token handling before automation. |
 
 ## Additional picks from the community catalog
 

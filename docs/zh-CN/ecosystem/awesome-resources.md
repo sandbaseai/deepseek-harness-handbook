@@ -2,7 +2,7 @@
 title: DeepSeek Harness 生态资源能力地图
 locale: zh-CN
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 21
+source_revision: 22
 status: reviewed
 verified_at: 2026-08-29
 ---
@@ -135,6 +135,7 @@ verified_at: 2026-08-29
 | 本地优先桌面反馈 | [dsh-whale-musume](https://github.com/Sutera-Diffusus/dsh-whale-musume) | 检查 DSH Web 桌面宠物的工作状态反馈和遥测边界。 |
 | Codex 风格 Web 界面 | [dsh-codex-ui](https://github.com/MichengAI/dsh-codex-ui) | 基于公开扩展点提供工作区、会话树、搜索和轮次导航。 |
 | 嵌套 follow-up | [dsh-nested-followups](https://github.com/sluminositys/dsh-nested-followups) | 隔离侧问题 Session；检查祖先路径、工具 scope 和跨分支写入。 |
+| 启动诊断 | [dsh-launch-doctor](https://github.com/Shizuku-keop/dsh-launch-doctor) | 零依赖检查 Node resolver、`__DSH_BOOT__`、preload 标签和 `/plugins`；自动化前先审阅源码与 token 处理。 |
 
 ## 四条实用起步路径
 
