@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.409 - 2026-08-30
+
+### Fixed
+
+- Refreshed `llms.txt` and the Atom feed to point at the latest audit-template release and current evidence workflow.
+
 ## 0.5.408 - 2026-08-30
 
 ### Added
