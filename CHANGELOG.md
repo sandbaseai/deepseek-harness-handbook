@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.415 - 2026-08-30
+
+### Fixed
+
+- Advanced the LLM index and Atom feed pointers to the latest citation and backlink release.
+
 ## 0.5.414 - 2026-08-30
 
 ### Added
