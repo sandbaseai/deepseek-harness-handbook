@@ -483,7 +483,7 @@
     },
     {
       "source": "docs/en/README.md",
-      "revision": 2,
+      "revision": 3,
       "translations": {
         "zh-CN": "docs/zh-CN/README.md",
         "ja": "docs/ja/README.md",

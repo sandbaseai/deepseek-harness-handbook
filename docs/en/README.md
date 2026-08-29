@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Handbook
 locale: en
-content_revision: 2
+content_revision: 3
 status: canonical
 verified_at: 2026-08-14
 ---
@@ -29,6 +29,7 @@ This is the canonical language edition. Begin with the [quickstart](getting-star
 - [Let an execution tool declare its code-card language](plugin-development/tool-code-card-language.md)
 - [Control stale pending continuable-subagent follow-ups safely](agent-patterns/subagents.md#control-stale-pending-follow-ups-without-clearing-the-inbox)
 - [Diagnose a continuable child with an empty tool registry](agent-patterns/continuable-child-empty-tool-registry.md)
+- [Understand the current MCP versus webMCP boundary](integrations/mcp.md#webmcp-is-a-separate-boundary)
 - [Diagnose read-only PowerShell stderr noise on Windows](troubleshooting/windows-readonly-pwsh-stderr.md)
 - [Bound live Session heap growth and diagnose cold-restore restart loops](operations/session-heap-growth.md)
 - [Route an Agent that narrates work without calling tools](troubleshooting/runaway-agent-loop.md)

@@ -2,7 +2,7 @@
 title: DeepSeek Harness 开发者手册
 locale: zh-CN
 source: docs/en/README.md
-source_revision: 2
+source_revision: 3
 status: reviewed
 verified_at: 2026-08-29
 ---
