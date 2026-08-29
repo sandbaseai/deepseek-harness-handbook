@@ -1,7 +1,7 @@
 ---
 title: Recover DeepSeek Harness Session History Without Destroying Evidence
 locale: en
-content_revision: 7
+content_revision: 8
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -233,6 +233,22 @@ The write-side design proposal [#4942](https://github.com/deepseek-ai/deepseek-h
 
 ## Regression gates
 
+### Build a corruption corpus before changing the reader
+
+Official discussion [#4945](https://github.com/deepseek-ai/deepseek-harness/discussions/4945) proposes a regression gate for the whole Session layer: keep small, synthetic artifacts for torn Zstandard headers, duplicate committed sequences, stale recovery cursors, missing message identities, and interrupted tool turns. Run the corpus through both cold replay and live-tail ingestion.
+
+Each fixture should declare its expected boundary (`reject`, `quarantine`, `resume`, or `render`) and the evidence that proves it. Keep fixtures byte-stable, version-tagged, and free of real prompts or credentials. A useful minimum matrix is:
+
+| Fixture | Expected result | Must remain observable |
+|---|---|---|
+| Truncated first frame | Reject and quarantine | Session id, byte offset, no message text |
+| Duplicate committed sequence | Reject before append | First conflicting seq and writer generation |
+| Stale prepared cursor | Rebuild from durable prefix | Durable tail vs prepared cursor |
+| Missing tool/message identity | Reject before inbox insertion | Message kind and validation reason |
+| Aborted assistant prefix | Render as interrupted | Cancellation/abort marker after cold reload |
+
+Run the same matrix after every persistence or recovery change. Passing a happy-path replay is not a regression test for corruption; the corpus must prove that healthy Sessions remain visible while the damaged artifact stays isolated and recoverable.
+
 - One malformed artifact does not hide healthy sessions.
 - Errors identify the session id or path without leaking message content.
 - The first Zstandard frame is exactly one header line.
@@ -265,6 +281,7 @@ Verified against DeepSeek Harness `0.1.0-rc.7` commit `99f6f02fecdb7dff40c3fbc94
 - [Complete server history with a temporary Web render cutoff #4830](https://github.com/deepseek-ai/deepseek-harness/discussions/4830)
 - [Recovery cursor mismatch and duplicate sequence batches #3896](https://github.com/deepseek-ai/deepseek-harness/discussions/3896)
 - [Write-side watermark, lock, and lease proposal #4942](https://github.com/deepseek-ai/deepseek-harness/discussions/4942)
+- [Session-layer corruption regression corpus proposal #4945](https://github.com/deepseek-ai/deepseek-harness/discussions/4945)
 - [Zstandard header-frame validation](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/src/index.ts)
 - [Committed sequence scanner](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/session/session-persistence-jsonl/src/format.ts)
 - [Conversation window rebuild](https://github.com/deepseek-ai/deepseek-harness/blob/99f6f02fecdb7dff40c3fbc9470f5907c29f74ca/packages/client/runtime/src/client/sessions/conversation-assembler.ts)
