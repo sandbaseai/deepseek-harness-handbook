@@ -1,7 +1,7 @@
 ---
 title: Remote DeepSeek Harness Web Access
 locale: en
-content_revision: 8
+content_revision: 9
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -405,6 +405,14 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 - history loading, reconnect, cancellation, and first live event remain ordered;
 - diagnostics distinguish readiness-guard expiry, unary failure, stream close, and downstream history failure.
 
+## Related failure: path-prefix reverse proxies can swallow RPC calls
+
+Official discussion [#4966](https://github.com/deepseek-ai/deepseek-harness/discussions/4966) reports a Web GUI where slash commands and permission chips fail silently behind a reverse proxy mounted under a path prefix. A page that renders is not proof that the RPC base path, WebSocket path, and asset base agree.
+
+Capture one failing request in browser DevTools and compare the browser-visible prefix with the upstream DSH route. Verify all three surfaces independently: static assets, HTTP RPC (including the method and permission request), and the streaming/WebSocket endpoint. A proxy rewrite that fixes HTML while dropping the prefix on `/api` can leave the UI apparently healthy but make every client call disappear.
+
+Keep the recovery bounded: use a dedicated prefix in a disposable profile, log the final request URL and response status for one read-only RPC, then test one permission request before enabling writes. Do not “fix” silent failures by widening CORS, disabling authentication, or forwarding both prefixed and unprefixed routes without an explicit ownership map.
+
 ## Route common symptoms
 
 | Symptom | First boundary |
@@ -447,6 +455,7 @@ If upstream changes readiness behavior, test 2.9-second, 3.1-second, and 15-seco
 - [Slow-link field report #3413](https://github.com/deepseek-ai/deepseek-harness/discussions/3413)
 - [Official remote-listening discussion #76](https://github.com/deepseek-ai/deepseek-harness/discussions/76)
 - [Official rc.2 non-loopback Settings report #4695](https://github.com/deepseek-ai/deepseek-harness/discussions/4695)
+- [Path-prefix reverse-proxy RPC failure #4966](https://github.com/deepseek-ai/deepseek-harness/discussions/4966)
 - [Authenticated non-loopback Settings request #4732](https://github.com/deepseek-ai/deepseek-harness/discussions/4732)
 - [rc.2 client Settings mirror non-loopback contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/src/client/settings-mirror.ts)
 - [rc.2 Settings scope unavailable state](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-settings/src/client/settings-scope.ts)
