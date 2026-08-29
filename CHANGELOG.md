@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.417 - 2026-08-30
+
+### Added
+
+- Updated the Session archive/trash guide with official discussion #2613 evidence and a warning against treating internal storage edits as a supported unarchive API.
+
 ## 0.5.416 - 2026-08-30
 
 ### Added

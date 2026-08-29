@@ -1,15 +1,19 @@
 ---
 title: Archive, Trash, and Delete DeepSeek Harness Sessions Safely
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-27
 upstream_ref: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/2613
 ---
 
 # Archive, trash, and delete Sessions safely
 
 DeepSeek Harness currently supports **archiving**, not physical Session deletion or unarchive. Archive through the running Host when you only want a Session hidden. Treat trash, restore, cache cleanup, and permanent deletion as offline storage migrations until the official persistence contract grows a deletion API.
+
+The official discussion on the missing unarchive path (#2613) is a useful compatibility check: if a UI appears to restore an archived Session, verify whether it is editing internal storage rather than calling a supported Host operation. Keep the original log and record the storage mutation before attempting recovery.
 
 This guide is pinned to upstream commit [`b150a55`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) (`0.1.1-rc.2`) and responds to [official discussion #4716](https://github.com/deepseek-ai/deepseek-harness/discussions/4716). The standalone manager discussed there fills a real UI gap, but its live file-mutation claims cross contracts the official runtime does not expose.
 
@@ -160,4 +164,3 @@ Use official Archive when the goal is decluttering. Export before risky maintena
 - [API proxy Session archive contract](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/host/apiproxy/README.md)
 - [Current UI workspace limitations](https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/client/ui-workspace/README.md)
 - [Standalone manager discussion #4716](https://github.com/deepseek-ai/deepseek-harness/discussions/4716)
-
