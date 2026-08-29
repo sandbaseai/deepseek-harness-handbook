@@ -2,9 +2,9 @@
 title: Awesome DeepSeek Harness エコシステム資源マップ
 locale: ja
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 19
+source_revision: 20
 status: reviewed
-verified_at: 2026-08-28
+verified_at: 2026-08-29
 ---
 
 # 能力別に選ぶ DeepSeek Harness 資源
