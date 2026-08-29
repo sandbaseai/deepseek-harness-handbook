@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.416 - 2026-08-30
+
+### Added
+
+- Added a dedicated support route for validating community resources and linked it to the Agent-first catalog evidence template.
+
 ## 0.5.415 - 2026-08-30
 
 ### Fixed
