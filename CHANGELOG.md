@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.410 - 2026-08-30
+
+### Fixed
+
+- Corrected the machine-readable release pointers so `llms.txt` and the Atom feed resolve to the latest discovery-feed release.
+
 ## 0.5.409 - 2026-08-30
 
 ### Fixed
