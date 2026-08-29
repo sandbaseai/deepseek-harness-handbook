@@ -1,9 +1,9 @@
 ---
 title: Verify the Official DeepSeek Harness Project
 locale: en
-content_revision: 6
+content_revision: 7
 status: canonical
-verified_at: 2026-08-28
+verified_at: 2026-08-29
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
@@ -183,12 +183,18 @@ No. It is an independent, source-backed SandBase community handbook. It links ev
 
 | Work | Destination |
 |---|---|
-| Runtime bug, proposal, or plugin showcase | official `deepseek-ai/deepseek-harness` Discussions or pull requests |
+| Runtime bug, proposal, or plugin showcase | official `deepseek-ai/deepseek-harness` Discussions (Issues and Pull Requests are disabled upstream) |
 | Handbook correction or new operator guide | `sandbaseai/deepseek-harness-handbook` issue or pull request |
 | Fix living only in a fork | cite the fork commit and state that it is not released upstream |
 | Security-sensitive runtime finding | follow the official repository security policy or maintainer disclosure route |
 
 Never move a runtime bug into the handbook tracker merely because a guide links to it. Never imply that SandBase can approve or release an upstream runtime fix.
+
+### The official tracker is Discussions-only
+
+The official `deepseek-ai/deepseek-harness` repository disables the Issues tracker (`hasIssuesEnabled` is false), and because GitHub binds Pull Requests to the same switch, the tracker offers neither an issue nor a pull-request channel. Runtime bugs, feature requests, proposals, and plugin showcases all land in [the official Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions). Recent examples include a WebUI long-history bug report ([#4403](https://github.com/deepseek-ai/deepseek-harness/discussions/4403)) and feature requests for in-Session preset switching ([#4404](https://github.com/deepseek-ai/deepseek-harness/discussions/4404)) and a Git-commit-tree Trace visualization ([#4405](https://github.com/deepseek-ai/deepseek-harness/discussions/4405)).
+
+Code changes are still welcome: keep the patch in a fork branch or a gist and link it from the discussion, as the loader-shape fix [#4968](https://github.com/deepseek-ai/deepseek-harness/discussions/4968) does. Do not open an issue or pull request against the official repository expecting a normal channel; a 404 or a missing tracker is the expected state, not a routing failure on your side.
 
 ## Minimal provenance record
 
