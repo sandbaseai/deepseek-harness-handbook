@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.412 - 2026-08-30
+
+### Added
+
+- Updated the ACP multi-tenant hosting guide with official discussion #4965 evidence and clarified that native multi-tenancy is not yet a released transport contract.
+
 ## 0.5.411 - 2026-08-30
 
 ### Added

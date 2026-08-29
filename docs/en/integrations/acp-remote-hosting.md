@@ -1,10 +1,12 @@
 ---
 title: Host DeepSeek Harness ACP for Multiple Tenants
 locale: en
-content_revision: 1
+content_revision: 2
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
+sources:
+  - https://github.com/deepseek-ai/deepseek-harness/discussions/4965
 ---
 
 # Host stdio-only DeepSeek Harness ACP without inventing a remote security boundary
@@ -14,6 +16,8 @@ DeepSeek Harness rc.2 exposes its automation bridge over newline-delimited JSON-
 This is not a missing command-line flag. It is an ownership boundary. If a platform wraps ACP with HTTP, that platform becomes responsible for authentication, tenant binding, process supervision, request correlation, reconnect semantics, quotas, and teardown.
 
 Use this guide to decide whether to keep one child per trust domain, build a reviewed gateway, or wait for a supported upstream transport contract.
+
+The official discussion on native multi-tenant support (#4965) reinforces this boundary: tenant isolation is a deployment and authorization concern, not something created by assigning different ACP Session ids. Treat that discussion as a design signal, not as a released transport contract.
 
 ## Verify the current contract first
 
