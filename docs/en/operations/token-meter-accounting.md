@@ -1,7 +1,7 @@
 ---
 title: Interpret DeepSeek Harness token accounting
 locale: en
-content_revision: 3
+content_revision: 4
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -26,6 +26,14 @@ Two rc.2 reports expose a more serious edge: a wide replacement can make the sig
 | system/tools/messages breakdown | heuristic context composition | heuristic | relative composition, never an additive billing total |
 | `measure().totalTokens` | baseline plus signed surface delta for compaction | usage-backed only when the anchor is reusable and conservative; otherwise estimated | automatic compaction pressure |
 | cumulative `tokenUsage` | durable sum of usage buckets across calls | provider-reported samples | Session totals, not current context occupancy |
+
+### Treat compaction and retry usage as separate billing events
+
+Upstream measurement report [#1886](https://github.com/deepseek-ai/deepseek-harness/discussions/1886) found two projection boundaries that matter when an Agent reports cost. First, `compaction/summary.usage` is a provider call in its own right; it is not an ordinary loop step and must be added as a plain usage sample. If it is absent from the fold, the UI can look correct while long-session summarization cost disappears from cumulative totals.
+
+Second, a retry can emit multiple usage samples under one `(turn, step)`. The ordinary chunk-plus-final-message pair is a replacement (one request observed twice), but a sample before `llm/retry` and a sample after `llm/retry-started` represent separate attempts and should be added. Do not deduplicate by `(turn, step)` alone; include the retry boundary or `retryId` in the ledger.
+
+For an auditable fold, preserve an ordered record with `seq`, event kind, `(turn, step)`, retry identifier, provider/model route, and each input/output bucket. Assert that a terminal summary contributes once, an ordinary chunk/message pair contributes once, and each retry attempt contributes independently. The report measured 48,895 omitted tokens across three compaction calls; it did not claim a retry undercount because that corpus's failed attempt reported zero usage. Keep those measured and inferred claims separate.
 
 Output tokens belong in cumulative usage and a completed call's total cost, but not in the next prompt occupancy numerator. Reasoning is an output subdivision and must not be added again.
 
@@ -204,6 +212,7 @@ Use percentiles, not only the mean. Keep pricing analytics outside the runtime d
 
 - [Official token-meter accuracy proposal #3514](https://github.com/deepseek-ai/deepseek-harness/discussions/3514)
 - [Large cumulative token-cost analysis #4758](https://github.com/deepseek-ai/deepseek-harness/discussions/4758)
+- [Token projection compaction and retry audit #1886](https://github.com/deepseek-ai/deepseek-harness/discussions/1886)
 - [Wide-compaction underflow report #4674](https://github.com/deepseek-ai/deepseek-harness/discussions/4674)
 - [Independent underflow report #4703](https://github.com/deepseek-ai/deepseek-harness/discussions/4703)
 - [Bounded reference patch for both projections](https://github.com/Jstn-1g/deepseek-harness/commit/fd88e82f2d7d379118cceb67d0a02fe7ae30d365)

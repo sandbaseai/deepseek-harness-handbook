@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.402 - 2026-08-30
+
+### Added
+
+- Added a token-meter accounting guide for compaction summary usage and retry-attempt boundaries from upstream discussion #1886.
+
 ## 0.5.401 - 2026-08-30
 
 ### Added
