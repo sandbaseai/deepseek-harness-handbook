@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.414 - 2026-08-30
+
+### Added
+
+- Added a canonical citation and backlink snippet to the README so external tutorials, benchmarks, and integrations can point readers to the maintained source-backed handbook.
+
 ## 0.5.413 - 2026-08-30
 
 ### Fixed
