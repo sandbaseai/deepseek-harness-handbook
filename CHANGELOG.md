@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.407 - 2026-08-30
+
+### Added
+
+- Added a five-minute, Agent-first audit workflow for evaluating Awesome catalog entries, recording baseline evidence, and proving rollback before profile activation.
+
 ## 0.5.406 - 2026-08-30
 
 ### Added

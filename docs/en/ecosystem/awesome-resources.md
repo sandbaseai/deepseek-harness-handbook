@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 17
+content_revision: 18
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -14,6 +14,14 @@ sources:
 The [Awesome DeepSeek Harness](https://github.com/0xsline/awesome-deepseek-harness) project maintains a large public index assembled from the DSH external hub and the `dsh-plugin` topic. This page is a smaller Agent-first map: it selects representative resources by the problem they solve, then routes you to the upstream project for installation and current compatibility.
 
 The source index is licensed CC0. The descriptions below are concise editorial summaries, not endorsements or security reviews. Verify each repository's `package.json`, `dsh.bundle` manifest, permissions, release activity, and source before installing it into a real profile.
+
+## A five-minute catalog audit
+
+Treat an entry as a lead for an Agent experiment, not as an install command. Before loading a resource, capture the pinned catalog snapshot and repository commit, then answer five questions: what process owns the code, which files or Sessions can it read, which network destinations can it reach, which provider credentials can it use, and how do you remove it without losing the profile? A useful first pass is read-only: inspect the manifest, package scripts, lockfile, build hooks, and documented permissions without executing lifecycle scripts.
+
+For a disposable profile, record the baseline (`node --version`, DSH version, enabled bundles, and a redacted environment summary), install only one candidate, and run one bounded task. Compare loaded modules, child processes, filesystem writes, outbound hosts, token usage, and Session mutations against the baseline. Keep the evidence digest beside the experiment. If the resource changes routing, memory, or approval behavior, require an explicit before/after review rather than accepting a successful demo as proof of compatibility.
+
+Use this decision rule when an entry is ambiguous: **catalog-only** means link discovery is useful but repository visibility or installability still needs proof; **source-linked** means the URL and purpose were checked, not that the package is safe; **validated in your profile** means you reproduced the behavior with a pinned revision and recorded rollback evidence. The JSON index preserves the first two states; your local experiment log should be the authority for the third.
 
 ## Start with discovery and authoring
 
