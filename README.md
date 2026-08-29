@@ -13,7 +13,7 @@ Also mapped in SandBase's [Awesome Agent Runtime](https://github.com/sandbaseai/
 
 If this handbook saves you a debugging cycle, [star the repository](https://github.com/sandbaseai/deepseek-harness-handbook). That signal helps more Agent builders find source-backed DeepSeek Harness guidance.
 
-**173 canonical guides · 202 localized documents · 64 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**173 canonical guides · 202 localized documents · 69 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -27,7 +27,7 @@ Choose one path and get to evidence quickly:
 
 ### Explore the Agent ecosystem
 
-The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 64 source-linked starting points, including plugin discovery and health checks, database analysis, adversarial workflow review, and Agent-tree budget controls. Each entry is an Agent-oriented discovery lead, not a compatibility or security endorsement; inspect permissions, credentials, and rollback paths before installation.
+The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 69 source-linked starting points, including plugin discovery and health checks, database analysis, adversarial workflow review, Agent evolution, mobile access, and provider fallback controls. Each entry is an Agent-oriented discovery lead, not a compatibility or security endorsement; inspect permissions, credentials, and rollback paths before installation.
 
 For Chinese-language peer discussion, see the upstream community’s [Feishu group discussion](https://github.com/deepseek-ai/deepseek-harness/discussions/4783) for the current invite and context. It is community-run and not official DeepSeek support; do not share credentials, private Session logs, or sensitive workspace data.
 

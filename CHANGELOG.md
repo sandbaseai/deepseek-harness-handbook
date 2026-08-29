@@ -2,6 +2,13 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.406 - 2026-08-30
+
+### Added
+
+- Added five more source-linked Agent resources from the Awesome catalog: plugin skills, auditable evolution, ACP orchestration, mobile access, and provider fallback policy.
+- Synchronized the handbook's curated ecosystem count at 69 resources.
+
 ## 0.5.405 - 2026-08-30
 
 ### Added

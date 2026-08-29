@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 16
+content_revision: 17
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -21,6 +21,7 @@ The source index is licensed CC0. The descriptions below are concise editorial s
 |---|---|---|
 | Plugin development | [dsh-plugin-dev](https://github.com/dsh-external/dsh-plugin-dev) | Field notes and skills for Cordis composition, TypeScript setup, Windows junctions, and persistence pitfalls. |
 | Plugin authoring skills | [dsh-plugin-skills](https://github.com/dsh-external/dsh-plugin-skills) | Skills for building and testing DeepSeek Harness plugins. |
+| Plugin evolution | [dsh-evolve](https://github.com/william-jin-cmu/dsh-evolve) | Experiments with auditable Agent self-evolution; keep mutations versioned, reviewable, and reversible. |
 | Plugin composition examples | [dsh-cordis-rocks (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The upstream catalog records runnable Cordis tutorials; verify current repository visibility before installing. |
 | Find installed/public plugins | [dsh-find-plugins](https://github.com/Nagi-ovo/dsh-find-plugins) | Finds, installs, and verifies GitHub plugins from an Agent workflow; inspect install commands and trust boundaries first. |
 | Context cost audit | [dsh-context-doctor](https://github.com/Zhenyu98/dsh-context-doctor) | Measures instruction, skill-catalog, and tool-schema token cost and reports duplication or conflicts. |
@@ -54,6 +55,7 @@ Memory and repair tools can read sensitive prompts, tool output, and credentials
 | LLM fallback policy | [dsh-llm-fallbacks](https://github.com/dsh-external/dsh-llm-fallbacks) | Applies role-based retry and fallback policy; verify cost and retry limits. |
 | Agent-to-agent routing | [DSH-Subagent-Model-Router](https://github.com/CypherNaught-0x/DSH-Subagent-Model-Router) | Routes delegated work to configured models and exposes join/wait behavior. |
 | Agent budget guard | [dsh-agent-budget](https://github.com/vibeinging/dsh-agent-budget) | Adds an Agent-tree token budget boundary; verify descendant, retry, and provider accounting before relying on the limit. |
+| Provider fallback policy | [dsh-llm-fallbacks](https://github.com/omdsh-dev/dsh-llm-fallbacks) | Applies role-aware provider fallback policy; bound retries, spend, and data-routing changes before enabling it. |
 | GitHub credential bridge | [dsh-gh-bridge (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a Keychain bridge; verify current repository visibility and audit secret scope carefully. |
 
 Routing and fallback plugins can multiply provider calls. Establish a bounded budget, log the selected model and retry count, and keep approval and sandbox policy outside the plugin's marketing description.
@@ -67,6 +69,8 @@ Routing and fallback plugins can multiply provider calls. Establish a bounded bu
 | Design workflows | [dsh-design (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records design-agent workflows; verify current repository visibility before installing. |
 | Cross-agent history | [dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) | Imports histories from multiple coding agents as resumable DSH Sessions. |
 | Translation | [dsh-plugin-translation](https://github.com/863683348/dsh-plugin-translation) | Adds segmented translation, glossary extraction, QA, and translation memory. |
+| Mobile access | [dsh-mobile](https://github.com/lehhair/dsh-mobile) | Adds mobile access to a running DSH surface; verify authentication, network exposure, and read-only defaults. |
+| ACP provider bridge | [dsh-paseo](https://github.com/renat3u/dsh-paseo) | Bridges DSH to Paseo for parallel Agent runs; verify external process and credential boundaries. |
 | Pi bridge | [dsh-pi-adapter (catalog snapshot)](https://github.com/0xsline/awesome-deepseek-harness/blob/c2cc7c971f33340d0fed614341041be52e35f9dc/CATALOG.md) | The catalog records a Pi bridge; verify current repository visibility before installing. |
 | Read-only security audit | [dsh-security-audit](https://github.com/dsh-external/dsh-security-audit) | Scans configuration, plugin provenance, Sessions, and network exposure into a redacted local report. |
 | Safe structured tools | [dsh-tool-schema](https://github.com/dsh-external/dsh-tool-schema) | Validates and explains JSON Schema tool contracts without network access or dynamic execution. |

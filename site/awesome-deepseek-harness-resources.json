@@ -69,6 +69,11 @@
     {"capability":"governance","name":"dsh-plugin-check","url":"https://github.com/omdsh-dev/dsh-plugin-check","why":"Performs read-only checks of plugin manifests, patch shape, build traps, and hub status before activation."},
     {"capability":"tools","name":"dsh-data-agent","url":"https://github.com/omdsh-dev/dsh-data-agent","why":"Connects DSH to databases for conversational analysis; constrain credentials, SQL scope, and result exfiltration before use."},
     {"capability":"orchestration","name":"dsh-inspect","url":"https://github.com/omdsh-dev/dsh-inspect","why":"Runs a checkup → fix → review loop on the official workflow engine with an explicit verification pass."},
-    {"capability":"context","name":"dsh-agent-budget","url":"https://github.com/vibeinging/dsh-agent-budget","why":"Adds an Agent-tree token budget boundary; verify descendant, retry, and provider accounting before relying on the limit."}
+    {"capability":"context","name":"dsh-agent-budget","url":"https://github.com/vibeinging/dsh-agent-budget","why":"Adds an Agent-tree token budget boundary; verify descendant, retry, and provider accounting before relying on the limit."},
+    {"capability":"plugin-authoring","name":"dsh-plugin-skills","url":"https://github.com/omdsh-dev/dsh-plugin-skills","why":"Provides Agent skills for building and testing DeepSeek Harness plugins with a repeatable authoring loop."},
+    {"capability":"evolution","name":"dsh-evolve","url":"https://github.com/william-jin-cmu/dsh-evolve","why":"Experiments with auditable Agent self-evolution; keep mutations versioned, reviewable, and reversible."},
+    {"capability":"orchestration","name":"dsh-paseo","url":"https://github.com/renat3u/dsh-paseo","why":"Bridges DSH to Paseo as an ACP provider for parallel Agent runs; verify external process and credential boundaries."},
+    {"capability":"desktop","name":"dsh-mobile","url":"https://github.com/lehhair/dsh-mobile","why":"Adds mobile access to a running DSH surface; verify authentication, network exposure, and read-only defaults."},
+    {"capability":"routing","name":"dsh-llm-fallbacks","url":"https://github.com/omdsh-dev/dsh-llm-fallbacks","why":"Applies role-aware provider fallback policy; bound retries, spend, and data-routing changes before enabling it."}
   ]
 }
