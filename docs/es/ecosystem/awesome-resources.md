@@ -2,7 +2,7 @@
 title: Recursos del ecosistema Awesome DeepSeek Harness por capacidad
 locale: es
 source: docs/en/ecosystem/awesome-resources.md
-source_revision: 14
+source_revision: 15
 status: reviewed
 verified_at: 2026-08-28
 ---

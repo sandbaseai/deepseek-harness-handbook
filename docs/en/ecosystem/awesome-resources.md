@@ -1,7 +1,7 @@
 ---
 title: DeepSeek Harness Ecosystem Resources, Curated by Capability
 locale: en
-content_revision: 14
+content_revision: 15
 status: canonical
 verified_at: 2026-08-28
 sources:
@@ -93,6 +93,7 @@ The full catalog is intentionally broad. These additional projects are useful wh
 | Model comparison | [dsh-dual-model-eval](https://github.com/huangdaxianer/dsh-dual-model-eval) | Run the same coding prompt in isolated worktrees and compare traces before applying a candidate. |
 | Planning discipline | [dsh-plans](https://github.com/Optim-Agent/dsh-plans) | Turn repository research into traceable plans, critic rounds, and a verifier checklist. |
 | Agent team UI | [dsh-agent-team-gui](https://github.com/toolclub/dsh-agent-team-gui) | Manage persistent multi-model squads and bounded DAG runs from a visual control surface. |
+| Model gateway tiering | [lynkr-dsh-plugin](https://github.com/veerareddyvishal144/lynkr-dsh-plugin) | Route DSH requests through a self-hosted difficulty-aware gateway; verify provider credentials, fallback policy, and spend limits before enabling it. |
 | Context compression | [dsh-context-compressor](https://github.com/qwert702/dsh-context-compressor) | Reduce tool/history payloads for small models while keeping a resumable task flow. |
 | Web search routing | [dsh-web-search-pro](https://github.com/anweat/dsh-web-search-pro) | Route multi-engine and platform search through extraction, caching, and browser rendering. |
 | Cross-agent checkpoints | [task-passport](https://github.com/dongsheng123132/task-passport) | Carry machine-readable task state across multiple coding-agent runtimes. |

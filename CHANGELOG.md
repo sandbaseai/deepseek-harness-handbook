@@ -2,6 +2,12 @@
 
 All notable handbook and publishing changes are recorded here. DeepSeek Harness itself has a separate upstream release history.
 
+## 0.5.404 - 2026-08-30
+
+### Added
+
+- Added the newly indexed `lynkr-dsh-plugin` to the English capability map with model-gateway verification boundaries and synchronized translation revisions.
+
 ## 0.5.403 - 2026-08-30
 
 ### Added
