@@ -1,7 +1,7 @@
 ---
 title: Interpret DeepSeek Harness token accounting
 locale: en
-content_revision: 4
+content_revision: 5
 status: canonical
 verified_at: 2026-08-27
 upstream_revision: b150a551b8d465e31e418e1b2eaf5e79bbb7d28e
@@ -33,7 +33,9 @@ Upstream measurement report [#1886](https://github.com/deepseek-ai/deepseek-harn
 
 Second, a retry can emit multiple usage samples under one `(turn, step)`. The ordinary chunk-plus-final-message pair is a replacement (one request observed twice), but a sample before `llm/retry` and a sample after `llm/retry-started` represent separate attempts and should be added. Do not deduplicate by `(turn, step)` alone; include the retry boundary or `retryId` in the ledger.
 
-For an auditable fold, preserve an ordered record with `seq`, event kind, `(turn, step)`, retry identifier, provider/model route, and each input/output bucket. Assert that a terminal summary contributes once, an ordinary chunk/message pair contributes once, and each retry attempt contributes independently. The report measured 48,895 omitted tokens across three compaction calls; it did not claim a retry undercount because that corpus's failed attempt reported zero usage. Keep those measured and inferred claims separate.
+> **Version boundary:** the retry half is fixed after this page's pinned revision. `dsh-v0.1.2-alpha.1` (commit `cd5ef814`, released 2026-08-27) raises `tokenUsage.stateVersion` from 1 to 2 and clears the `(turn, step)` replacement slot on `llm/retry-started`, so a retried attempt adds instead of overwriting the attempt that failed. At the pinned `b150a55`, `usage-projection.ts` is 219 lines, `stateVersion` is 1, and `llm/retry` appears zero times; at `cd5ef814` the file is 225 lines and it appears twice. The change reached the default branch on 2026-08-25 in `b565df344`, two days before the tag, so a build is classified by `git merge-base --is-ancestor b565df344 <ref>` rather than by its tag. On alpha.1 an operator ledger still has to fold compaction itself, while the retry boundary is the runtime's job.
+
+For an auditable fold, preserve an ordered record with `seq`, event kind, `(turn, step)`, retry identifier, provider/model route, and each input/output bucket. Assert that a terminal summary contributes once, an ordinary chunk/message pair contributes once, and each retry attempt contributes independently. The report measured 48,895 omitted tokens across three compaction calls; it did not claim a retry undercount because that corpus's failed attempt reported zero usage. Keep those measured and inferred claims separate. The compaction half is unchanged at `cd5ef814`: `usageOf()` still matches `assistant/chunk` and `assistant/message`, and `compaction/summary` appears nowhere in that file.
 
 Output tokens belong in cumulative usage and a completed call's total cost, but not in the next prompt occupancy numerator. Reasoning is an output subdivision and must not be added again.
 
@@ -213,6 +215,8 @@ Use percentiles, not only the mean. Keep pricing analytics outside the runtime d
 - [Official token-meter accuracy proposal #3514](https://github.com/deepseek-ai/deepseek-harness/discussions/3514)
 - [Large cumulative token-cost analysis #4758](https://github.com/deepseek-ai/deepseek-harness/discussions/4758)
 - [Token projection compaction and retry audit #1886](https://github.com/deepseek-ai/deepseek-harness/discussions/1886)
+- [alpha.1 usage projection after the retry fix](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc/packages/llm/token-meter/src/usage-projection.ts)
+- [Conformance checker that grades the #1886 folds](https://github.com/lizhuojunx86/token-accounting-conformance/tree/main/dsh-conformance)
 - [Wide-compaction underflow report #4674](https://github.com/deepseek-ai/deepseek-harness/discussions/4674)
 - [Independent underflow report #4703](https://github.com/deepseek-ai/deepseek-harness/discussions/4703)
 - [Bounded reference patch for both projections](https://github.com/Jstn-1g/deepseek-harness/commit/fd88e82f2d7d379118cceb67d0a02fe7ae30d365)
