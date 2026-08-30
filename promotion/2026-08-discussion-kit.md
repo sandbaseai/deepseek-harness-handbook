@@ -1364,6 +1364,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-empty-identity.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #706
+- Topic: fail-fast AgentRuntimeSession shape validation, transactional adapter admission, cleanup-error preservation, capability checks, and contract revision diagnostics
+- Reply: <https://github.com/Pascapone/pibo/issues/706#issuecomment-5466594186>
+- Published: 2026-08-30T04:00:47Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `yyjeqhc/webcodex` pull request #224
 - Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
 - Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
