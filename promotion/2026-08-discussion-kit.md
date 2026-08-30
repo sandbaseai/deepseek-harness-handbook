@@ -96,6 +96,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/markdown-single-tilde.md>
 - Baseline at publish: 88 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #107
+- Topic: UTF-16 code-unit termination, Windows API length handling, Unicode/emoji/path regression matrix, typed path identity, and sanitized native-picker evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/107#discussioncomment-18203188>
+- Published: 2026-08-30T02:37:15Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #55
 - Topic: separate CLI executability from profile plugin-tree health, inspect global package topology, compare fresh and existing profiles, and fail atomically on missing dependencies
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/55#discussioncomment-18203186>
