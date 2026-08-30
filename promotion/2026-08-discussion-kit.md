@@ -97,6 +97,13 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #692
+- Topic: strict Debug PTY scenario schemas, unknown-field rejection, explicit no-assertion policy, invalid-fixture outcomes, mutation coverage, and assertion-manifest evidence
+- Reply: <https://github.com/Pascapone/pibo/issues/692#issuecomment-5466610499>
+- Published: 2026-08-30T04:04:57Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — sympoies/dsh-runtime-kit #133
 
 - Venue: `sympoies/dsh-runtime-kit` issue #133
