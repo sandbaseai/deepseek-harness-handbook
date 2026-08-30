@@ -512,6 +512,13 @@ evidence.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `openclaw/openclaw` issue #130971
+- Topic: DSH per-read idle watchdog versus aggregate compaction ceiling, verified progress, abort ownership, partial-summary durability, and trickle-stream backstop tests
+- Reply: <https://github.com/openclaw/openclaw/issues/130971#issuecomment-5466184267>
+- Published: 2026-08-30T02:14:47Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/manual-compaction-caller-abort.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/context-compression-profiles.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `ob-labs/powercontext-go` issue #3
 - Topic: independently versioned DSH adapter receipts, source/packed/release artifact boundaries, startup-state classification, and immutable alpha drift separation
 - Reply: <https://github.com/ob-labs/powercontext-go/issues/3#issuecomment-5466172475>
