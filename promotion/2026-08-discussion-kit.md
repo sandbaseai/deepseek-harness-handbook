@@ -31,6 +31,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html>
 - Baseline at publish: 89 Stars, 14 forks
 
+## Published outreach — DeepSeek Harness Discussion #5070
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5070
+- Topic: external locale plugin versus built-in locale boundaries, fallback/key-set verification, UI coverage, and community-plugin audit
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5070#discussioncomment-18203276>
+- Published: 2026-08-30T02:58:22Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
