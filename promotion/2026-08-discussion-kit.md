@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `dsh-market/dsh-market` issue #404
+- Topic: pre-install host compatibility checks for `engines.dsh`, capability probing for the Remote/session RPC, and recoverable plugin updates
+- Reply: <https://github.com/dsh-market/dsh-market/issues/404#issuecomment-5466042981>
+- Published: 2026-08-30T01:39:57Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `0xsline/awesome-deepseek-harness` issue #529
 - Topic: community plugin catalog evidence, package integrity, capability/permission scope, and non-endorsement labeling
 - Reply: <https://github.com/0xsline/awesome-deepseek-harness/issues/529#issuecomment-5466026216>
