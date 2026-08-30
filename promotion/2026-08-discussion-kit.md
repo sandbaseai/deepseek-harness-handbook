@@ -148,6 +148,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-runtime.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — seabbs/dotfiles #87
+
+- Venue: `seabbs/dotfiles` issue #87
+- Topic: Docker/OpenRouter/Tailscale DSH evaluation, sandbox/provider/Web exposure separation, exact identity pinning, and read-only/approval/Session acceptance
+- Reply: <https://github.com/seabbs/dotfiles/issues/87#issuecomment-5466393753>
+- Published: 2026-08-30T03:08:32Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/workspace-write-shared-cache.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/remote-web-secure-context.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
