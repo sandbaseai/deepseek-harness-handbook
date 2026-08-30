@@ -96,6 +96,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/markdown-single-tilde.md>
 - Baseline at publish: 88 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #109
+- Topic: host-side retryability classification, attempt/generation receipts, authoritative workspace checks, idempotent successor side effects, budget invariants, and terminal-state distinctions
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/109#discussioncomment-18203174>
+- Published: 2026-08-30T02:34:18Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/ralph-bounded-failure-successor.md>
+- Baseline at publish: 88 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #110
 - Topic: prompt-section provenance, normalized digest and cache-boundary evidence, separate runtime/tool accounting, Plan policy versus execution authority, and Code Mode cost/rejection tests
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/110#discussioncomment-18203169>
