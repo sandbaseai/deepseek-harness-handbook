@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `wingsky-1/dsh-plugin-hub` issue #342
+- Topic: mutation-gate wall-clock versus matrix cost, fixed incremental/full baselines, segment receipts, generated contract checks, and fail-closed split boundaries
+- Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/342#issuecomment-5466225233>
+- Published: 2026-08-30T02:25:04Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `yangbobo2021/relay-dsh-plugin-claude` issue #36
 - Topic: selector-first Workspace targeting, typed scan receipts, generation-safe cancellation/retry, idempotent Session import, accessible compact actions, and stale-handler tests
 - Reply: <https://github.com/yangbobo2021/relay-dsh-plugin-claude/issues/36#issuecomment-5466222178>
