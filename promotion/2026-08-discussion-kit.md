@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `omdsh-dev/dsh-accessibility` issue #7
+- Topic: alpha.1 accessibility candidate provenance, real-AT versus automation gates, remaining-surface ledger, and rollback
+- Reply: <https://github.com/omdsh-dev/dsh-accessibility/issues/7#issuecomment-5466001181>
+- Published: 2026-08-30T01:29:52Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `marius-patrik/dsh-stack` issue #163
 - Topic: pinned DSH submodule upgrade, coherent package graph, plugin compatibility, and rollback receipts
 - Reply: <https://github.com/marius-patrik/dsh-stack/issues/163#issuecomment-5465996680>
