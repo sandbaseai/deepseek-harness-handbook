@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: `nexu-io/open-design` issue #7539
+- Topic: DSH executable discovery versus profile probe state, bounded allow-listed PATH/toolchain scanning, selected-binary identity, generation-safe rescan, credential separation, and stable UI action IDs
+- Reply: <https://github.com/nexu-io/open-design/issues/7539#issuecomment-5466327320>
+- Published: 2026-08-30T02:51:04Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/request-extension-inventory-failure.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: `dsh-market/dsh-market` issue #422
 - Topic: URL tarball source normalization, integrity generation/validation, profile lockfile snapshots, atomic install/rollback, proxy/cache separation, and Windows reinstall evidence
 - Reply: <https://github.com/dsh-market/dsh-market/issues/422#issuecomment-5466323723>
