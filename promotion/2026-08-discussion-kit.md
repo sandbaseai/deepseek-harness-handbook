@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98429
+
+- Venue: `NousResearch/hermes-agent` pull request #98429
+- Topic: terminal guard precision for Python heredocs, quoted grep substitutions, and inspection-versus-server command classification; preserving fail-closed ambiguity handling
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98429#issuecomment-5467486999>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98429> ; the PR masks only supported inert heredoc consumers, skips only unprovable grep operand spans, and scopes long-lived detection to command-start words
+- Source/test evidence: `tools/approval.py`, `tools/shell_heredoc.py`, `tools/terminal_tool.py`, and focused guard tests in PR head `b76c1d1375059021168b55b3c7ab7dfecee6b31c`; the PR reports all existing tests passing
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:52:37Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #96988
 
 - Venue: `NousResearch/hermes-agent` pull request #96988
