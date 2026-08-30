@@ -13,6 +13,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-shell-capability.html>
 - Baseline at publish: 89 Stars, 14 forks
 
+## Published outreach — ranxianglei/billion-context #349
+
+- Venue: `ranxianglei/billion-context` issue #349
+- Topic: ACP compression evidence boundaries, preserving raw Session events on missing-content, and separating model, stream-adapter, and range-validation failures
+- Reply: <https://github.com/ranxianglei/billion-context/issues/349#issuecomment-5466349092>
+- Published: 2026-08-30T02:56:52Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/context-compression-profiles.html>
+- Baseline at publish: 89 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
