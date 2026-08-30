@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `kemalnw/mcpd` issue #64
+- Topic: durable agent-session handoff checkpoints, revision/generation safety, fact-versus-recommendation separation, bounded resume views, and authorization on fresh-agent recovery
+- Reply: <https://github.com/kemalnw/mcpd/issues/64#issuecomment-5466523963>
+- Published: 2026-08-30T03:41:46Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/ralph-bounded-failure-successor.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/live-session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `eumemic/aios` issue #1499
 - Topic: zero-side-effect inbound admission, typed non-fatal denial, connection/chat identity boundaries, policy generations, and backfill evidence
 - Reply: <https://github.com/eumemic/aios/issues/1499#issuecomment-5466520105>
