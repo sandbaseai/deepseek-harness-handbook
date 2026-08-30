@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98423
+
+- Venue: `NousResearch/hermes-agent` pull request #98423
+- Topic: explicit trust classification for operator-added skill taps; preserving scanner findings, exact repository scope, cache reclassification, and bounded dangerous-install semantics
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98423#issuecomment-5467442792>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98423> ; the PR adds an `operator` trust tier only for exact custom tap repositories and reapplies current trust to cached scan results
+- Source/test evidence: `tools/skills_guard.py`, `tools/skills_hub.py`, `hermes_cli/skills_hub.py`, and focused tests in PR head `92202db651a19fac6982b40eaf3b81929fd400fb`; the PR reports 153 focused passes
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:41:28Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98424
 
 - Venue: `NousResearch/hermes-agent` pull request #98424
