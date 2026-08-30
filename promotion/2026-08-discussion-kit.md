@@ -1517,3 +1517,10 @@ evidence.
 - Published: 2026-08-30T04:17:07Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` pull request #681
+- Topic: monotonic PTY scenario deadlines, terminal-path precedence, bounded nested waits, process-tree cleanup, late-output fencing, and stable timeout receipts
+- Reply: <https://github.com/Pascapone/pibo/pull/681#issuecomment-5466657995>
+- Published: 2026-08-30T04:17:52Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal-command-next-prompt-error.html>
+- Baseline at publish: 91 Stars, 14 forks
