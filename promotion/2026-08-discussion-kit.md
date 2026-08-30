@@ -4,6 +4,15 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — AMAP-ML/LongHorizon-Harness #63
+
+- Venue: `AMAP-ML/LongHorizon-Harness` issue #63
+- Topic: Windows DSH bootstrap failure decomposed into filesystem safety, shell execution, process-tree cleanup, and DSH adapter gates
+- Reply: <https://github.com/AMAP-ML/LongHorizon-Harness/issues/63#issuecomment-5466344541>
+- Published: 2026-08-30T02:55:36Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-shell-capability.html>
+- Baseline at publish: 89 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
