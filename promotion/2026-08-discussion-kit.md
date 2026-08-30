@@ -1014,6 +1014,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `chidionyema/crew` issue #568
+- Topic: single durable-workflow owner, Go worker boundaries, generation-safe late completions, explicit retirement tests, and crash/cancellation evidence
+- Reply: <https://github.com/chidionyema/crew/issues/568#issuecomment-5466443898>
+- Published: 2026-08-30T03:21:29Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/long-running-terminal-command-next-prompt-error.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/runaway-agent-loop.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `skyf0xx/hedgehog` issue #343
 - Topic: field-by-field core contract table, optional-field fallbacks, fixture/real-core evidence, writer constraints, and actionable validation errors
 - Reply: <https://github.com/skyf0xx/hedgehog/issues/343#issuecomment-5466438750>
