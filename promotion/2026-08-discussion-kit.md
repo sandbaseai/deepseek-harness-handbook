@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5051
+- Topic: third-party provider reasoning-level capability declarations, profile persistence, and wire evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5051#discussioncomment-18202796>
+- Published: 2026-08-30T01:16:55Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/guides/headless-reasoning-effort.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5052
 - Topic: running-session Direct-Steer submission, newline behavior, draft preservation, and durable admission evidence
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5052#discussioncomment-18202791>
