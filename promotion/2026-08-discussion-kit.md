@@ -57,6 +57,198 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Published: 2026-08-30T03:00:15Z (UTC)
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/live-session-log-durability.md>
 - Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98368
+- Topic: full compression-preview input snapshot, system/schema parity, read-only side effects, partial-estimate labeling, revision identity, and transcript/tool-call regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98368#issuecomment-5467069281>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98368> ; the PR changes `gateway/slash_commands.py` and `tests/gateway/test_compress_preview.py`
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T06:07:05Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5085
+- Topic: workspace display name versus persistent identity, Session cwd, Host/profile evidence, stale-path diagnosis, safe rebinding, and non-destructive recovery
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5085#discussioncomment-18204192>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5085> ; the report provides DSH/Node versions and a workspace name that cannot be opened
+- Handbook role: direct, clearly labeled community runbook for renamed-workspace/stale-cwd recovery; not official DeepSeek documentation
+- Published: 2026-08-30T06:17:39Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/renamed-workspace-stale-cwd.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5079
+- Topic: prompt/skill/MCP/theme resource management, capability-specific trust and scope, credential/SSRF boundaries, profile rollback, and web/desktop isolation
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5079#discussioncomment-18204181>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5079> ; the announcement describes global prompts, skills, stdio/HTTP(S) MCP, media, presets, and web/desktop profiles
+- Handbook role: direct, clearly labeled community guides for plugin audit and MCP capability boundaries; not official DeepSeek documentation or an Armory endorsement
+- Published: 2026-08-30T06:16:33Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5078
+- Topic: local-model context budget, provider usage versus surface estimate, compaction cost, trigger reason separation, bounded compaction, profile/session isolation, and diagnostic redaction
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5078#discussioncomment-18204178>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5078> ; the project describes hard ceiling, observed/predicted prefill limits, early compaction, and retained-token configuration
+- Handbook role: direct, clearly labeled community token-accounting guide for interpreting these separate measurements; not official DeepSeek documentation or a plugin compatibility certification
+- Published: 2026-08-30T06:15:27Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5081
+- Topic: reproducible DSH artifacts, OCI/image and package digests, signature/trust policy, profile/Bundle/lock identity, isolated runtime verification, and rollback
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5081#discussioncomment-18204169>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5081> ; the proposal distinguishes `configHash`, `contentHash`, lock, cache, registry, and OCI digest
+- Handbook role: direct, clearly labeled community guides for plugin packaging and supply-chain audit; not official DeepSeek trust roots or an endorsement of `dsh-pack`
+- Published: 2026-08-30T06:14:20Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/first-plugin.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5077
+- Topic: community plugin supply-chain review, read-only versus Host permissions, artifact pinning, disposable-profile testing, redaction behavior, rollback, and explicit non-endorsement
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5077#discussioncomment-18204161>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5077> ; the discussion describes `dsh-secure-audit` claims, release version, test count, audit scope, and known limits
+- Handbook role: direct, clearly labeled community plugin-audit guide; not official DeepSeek documentation and not an endorsement of the plugin
+- Published: 2026-08-30T06:12:37Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5084
+- Topic: Node 24.11 `resolveSync` signature detection, empty client boot graph, Host-side evidence capture, same-generation verification, and browser-error recovery boundaries
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5084#discussioncomment-18204152>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5084> ; the discussion provides a dependency-free resolver repro, a forked fix, 137 focused tests, and a full build result
+- Handbook role: direct, clearly labeled community runbook for the reported `client-modules` preload/boot failure; not official DeepSeek documentation
+- Published: 2026-08-30T06:10:41Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/client-modules-html-did-not-preload.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5076
+- Topic: broken user plugin startup recovery, profile-scoped evidence, safe-mode criticality, non-destructive isolation, rollback, and Session/credential preservation
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5076#discussioncomment-18204145>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5076> ; the discussion asks for safe mode after a plugin causes startup failure
+- Handbook role: direct, clearly labeled community recovery runbook for plugin/profile failures; not official DeepSeek documentation
+- Published: 2026-08-30T06:09:40Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5082
+- Topic: Node 24.1/tsx silent build exit, `import.meta.main` entry compatibility, missing artifact verification, version A/B evidence, and Web 404 recovery
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5082#discussioncomment-18204139>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5082> ; the discussion reports Node v24.1.0, exit code 0, absent `apps/web/dist`, and the `scripts/build.ts` entry guard
+- Handbook role: direct, clearly labeled community runbook for this exact failure signature; not official DeepSeek documentation
+- Published: 2026-08-30T06:08:40Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/node24-tsx-silent-build.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98371
+- Topic: compression liveness heartbeats, commit admission/termination, bounded status delivery, generation identity, stale-event suppression, client compatibility, and lock/transcript integrity
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98371#issuecomment-5467065385>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98371> ; the PR changes `agent/conversation_compression.py` and adds heartbeat status coverage
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T06:06:09Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98386
+- Topic: Slack clarification choice rendering, callback/index identity, Block Kit limits, escaping, accessibility, stale actions, and Other/free-text regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98386#issuecomment-5467062441>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98386> ; the PR changes `plugins/platforms/slack/adapter.py` and `tests/gateway/test_slack_clarify_buttons.py`
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T06:05:26Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98370
+- Topic: compression preview versus real-run input parity, tool-call/result identity, token-estimate scope, system/schema omissions, lower-bound labeling, and recovery regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98370#issuecomment-5467058108>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98370> ; the PR changes `gateway/slash_commands.py` and `tests/gateway/test_compress_preview.py`, explicitly leaving system prompt and tool schemas for a separate change
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T06:04:26Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98385
+- Topic: confirmed-timeout versus healthy-overlap hook state, bounded fail-open concurrency, backpressure, ordering, shutdown, and fail-closed `pre_tool_call` coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98385#issuecomment-5467054075>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98385> ; the PR changes `hermes_cli/plugins.py` and adds the mutation-verified healthy-concurrency test in `tests/hermes_cli/test_plugins.py`
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T06:03:26Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` issue #98384
+- Topic: shared-venv `.venv` fallback in the POSIX updater, deterministic entry-point resolution, symlink identity, profile/root validation, and update/rollback path consistency
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98384#issuecomment-5467050257>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98384> ; the issue cites `scripts/desktop-update/posix.sh`, `hermes_cli/doctor.py`, and `hermes_cli/managed_uv.py` path conventions
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T06:02:32Z (UTC)
+- Handbook URLs used: none; the target issue and cited source paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98376
+- Topic: Feishu native-topic versus quoted-parent identity, current-message reply anchoring, structured quoted media, cache invalidation, batching isolation, and cross-path regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98376#issuecomment-5467046871>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98376> ; the PR changes Feishu adapter/routing code and adds quoted-context, media, thread-metadata, and stale-cache tests
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T06:01:38Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98373
+- Topic: shared SQLite ResponseStore transaction boundaries, close/in-flight behavior, atomic LRU eviction, idempotency fingerprint semantics, cross-process locking, and concurrency regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98373#issuecomment-5467038685>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98373> ; the PR changes `gateway/platforms/api_server.py` and `tests/gateway/test_api_server.py`
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:59:33Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98374
+- Topic: opt-in Search Capability Broker provider, token and credential isolation, bounded response/error semantics, public `web_search` compatibility, profile/session attribution, and plugin cleanup
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98374#issuecomment-5467035106>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98374> ; the PR adds `plugins/web/search_broker/` and provider/registry tests after narrowing the scope
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:58:33Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98375
+- Topic: backup CLI mutual exclusion, truthful exit/error semantics, quick-versus-archive side effects, output-path handling, and Windows/parser regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98375#issuecomment-5467031684>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98375> ; related issue <https://github.com/NousResearch/hermes-agent/issues/98369> ; the PR changes `hermes_cli/subcommands/backup.py` and adds parser tests
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:57:34Z (UTC)
+- Handbook URLs used: none; the target PR/issue and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` issue #98383
+- Topic: canonical Bot Chat identity, empty-versus-unknown registry lookup results, fail-closed creation, atomic create-or-get, kickoff suppression, and post-restart session recovery
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98383#issuecomment-5467028427>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98383> ; the issue reports six duplicate kickoff sessions and cites the `session.list` / `rows.find(...) || null` path and shipped-bundle evidence
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:56:40Z (UTC)
+- Handbook URLs used: none; the target issue and cited runtime evidence are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98362
+- Topic: profile-local cron execution retention, config-versus-legacy override precedence, malformed-value handling, terminal-row pruning, concurrent transitions, and ledger regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98362#issuecomment-5467024847>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98362> ; the PR changes `cron/executions.py`, `hermes_cli/config_defaults.py`, and `tests/cron/test_execution_ledger.py`
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:55:43Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` issue #98382
+- Topic: observer-hook concurrency, healthy in-flight versus timed-out callback state, bounded queue/worker policy, fail-closed pre-hook behavior, and telemetry-loss regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98382#issuecomment-5467022610>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98382> ; the issue cites `PluginManager.invoke_hook`, `plugins.hook_callback_timeout`, and the existing hung-callback regression boundary
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:55:07Z (UTC)
+- Handbook URLs used: none; the target issue and cited source/test boundaries are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98381
+- Topic: packaged Linux Electron selection, Desktop Entry freshness and quoting, artifact identity, fallback behavior, profile propagation, and fire-and-forget launch regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98381#issuecomment-5467018648>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98381> ; the PR changes `packaged_linux_executable()` / `resolve_exec_command()` and adds `tests/hermes_cli/test_linux_desktop_entry.py`
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:54:02Z (UTC)
+- Handbook URLs used: none; the target PR and source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98365
+- Topic: direct launcher interpreter identity, normalized real-path checks, venv discovery, relaunch-loop prevention, argv/profile/exit propagation, and desktop-launch regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98365#issuecomment-5467016767>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98365> ; the PR changes `hermes` and documents `resolve_hermes_bin()` / `build_relaunch_argv()` paths
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:53:29Z (UTC)
+- Handbook URLs used: none; the target PR and source paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` issue #98377
+- Topic: Windows venv-blocker scan timeout classification, bounded process-count-aware probing, candidate prefiltering, final safety re-scan, and actionable desktop error evidence
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98377#issuecomment-5467014029>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98377> ; the issue cites `apps/desktop/electron/venv-blocker-scan.ts` timeout/probe-failure branches and reports 20.7–24.6 second scans for 446 processes
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:52:45Z (UTC)
+- Handbook URLs used: none; the target issue and cited source paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
 - Venue: `NousResearch/hermes-agent` issue #98378
 - Topic: unrelated Windows service in `STOP_PENDING`, service ownership before blocker classification, bounded transitional-state handling, stale discovery re-scan, and update regression coverage
 - Reply: <https://github.com/NousResearch/hermes-agent/issues/98378#issuecomment-5467009344>
@@ -1797,6 +1989,14 @@ evidence.
 - Published: 2026-08-30T05:20:19Z (UTC)
 - Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
 - Baseline at publish: 90 Stars, 14 forks
+- Venue: `deepseek-ai/deepseek-harness` discussion #5083
+- Topic: public Python type-rendering seam, context-free versus stateful TypedDict generation, preserving oneOf branches, name/Unicode safety, context isolation, and supported-version compile coverage
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5083#discussioncomment-18204211>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5083> ; <https://github.com/deepseek-ai/deepseek-harness/blob/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e/packages/core/tools/src/py-types.ts> ; the discussion includes the downstream tracking issue and concrete `renderType`/`RenderState` boundary
+- Handbook role: none; the upstream discussion and pinned source are the direct remediation path.
+- Published: 2026-08-30T06:21:23Z (UTC)
+- Handbook URLs used: none; no unrelated handbook guide was attached.
+- Baseline at publish: 91 Stars, 14 forks
 - Venue: `NousResearch/hermes-agent` pull request #98358
 - Topic: Feishu card-table conversion, fence-aware markdown extraction, fallback/downgrade behavior, CJK width estimation, and table-versus-code content preservation
 - Reply: <https://github.com/NousResearch/hermes-agent/pull/98358#issuecomment-5466993683>
