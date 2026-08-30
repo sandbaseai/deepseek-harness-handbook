@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `eumemic/aios` issue #1499
+- Topic: zero-side-effect inbound admission, typed non-fatal denial, connection/chat identity boundaries, policy generations, and backfill evidence
+- Reply: <https://github.com/eumemic/aios/issues/1499#issuecomment-5466520105>
+- Published: 2026-08-30T03:40:46Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/remote-web-secure-context.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `deepseek-ai/deepseek-harness` Discussion #4868
 - Topic: split npx resolve/download/extract/start phases, isolated cache comparison, proxy evidence, safe cancellation, and Windows cleanup/rollback
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/4868#discussioncomment-18203454>
