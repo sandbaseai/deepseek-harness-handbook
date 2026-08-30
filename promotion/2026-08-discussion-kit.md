@@ -456,6 +456,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `omdsh-dev/dsh-genui` issue #85
+- Topic: distinguish catalog discovery from installability, exact pnpm build approval, immutable package preference, isolated profile recovery, and post-install smoke evidence
+- Reply: <https://github.com/omdsh-dev/dsh-genui/issues/85#issuecomment-5466095079>
+- Published: 2026-08-30T01:52:30Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-unexpected-store-plugin-update.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `Yan-Zero/dsh-std` issue #11
 - Topic: portable Session capability receipts, fail-closed negotiation, action ownership/idempotency, provenance, and read-only-first conformance cases
 - Reply: <https://github.com/Yan-Zero/dsh-std/issues/11#issuecomment-5466076298>
