@@ -1524,3 +1524,10 @@ evidence.
 - Published: 2026-08-30T04:17:52Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal-command-next-prompt-error.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #713
+- Topic: cancellation-safe async admission, revision-guarded run reservation, monotonic Goal cancellation, no-late-start guarantees, and restart-safe terminal evidence
+- Reply: <https://github.com/Pascapone/pibo/issues/713#issuecomment-5466663204>
+- Published: 2026-08-30T04:19:12Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
+- Baseline at publish: 91 Stars, 14 forks
