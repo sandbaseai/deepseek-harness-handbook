@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `google/gvisor` issue #14145
+- Topic: gVisor/runsc as a DSH sandbox backend, separating tool admission from OCI enforcement and proving cleanup
+- Reply: <https://github.com/google/gvisor/issues/14145#issuecomment-5465984067>
+- Published: 2026-08-30T01:25:23Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/sandbox-denied-vs-unavailable.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/workspace-write-shared-cache.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `Rxiain/dsh-openviking` issue #3
 - Topic: SettingsScope runtime capability drift, mixed package graphs, Client plugin isolation, and rollback
 - Reply: <https://github.com/Rxiain/dsh-openviking/issues/3#issuecomment-5465979469>
