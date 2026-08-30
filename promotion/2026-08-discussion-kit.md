@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `bitflight-devops/skilllint` issue #132
+- Topic: Agent-specific frontmatter schema for list-valued skills, source-aligned rule scope, conservative autofix behavior, and fixtures separating agent files from SKILL.md
+- Reply: <https://github.com/bitflight-devops/skilllint/issues/132#issuecomment-5466546223>
+- Published: 2026-08-30T03:47:38Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-skill-context.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `Pascapone/pibo` issue #699
 - Topic: atomic room/session/workspace identity, two-phase room switching, generation-safe writes, stale-reply handling, and store-level misrouting evidence
 - Reply: <https://github.com/Pascapone/pibo/issues/699#issuecomment-5466539658>
