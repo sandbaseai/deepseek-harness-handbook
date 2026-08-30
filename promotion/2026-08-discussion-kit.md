@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `iamtatsuki05/dotfiles` issue #31
+- Topic: immutable lease/effect identity tuples, provider fencing, UNKNOWN versus FENCE_PENDING, crash-point recovery, and stale-receipt evidence
+- Reply: <https://github.com/iamtatsuki05/dotfiles/issues/31#issuecomment-5466462629>
+- Published: 2026-08-30T03:25:45Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/live-session-log-durability.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `omnigent-ai/omnigent` issue #4988
 - Topic: separate quiescence observations from authoritative sub-agent terminal events, generation-safe delivery, CAS latching, and quiet-gap regression tests
 - Reply: <https://github.com/omnigent-ai/omnigent/issues/4988#issuecomment-5466459665>
