@@ -1440,3 +1440,10 @@ evidence.
 - Published: 2026-08-30T04:06:52Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` pull request #98310
+- Topic: restart-safe heartbeat watch reconstruction, route authorization, generation fencing, idempotent wake registration, clock/revision handling, and shutdown cleanup
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98310#issuecomment-5466622203>
+- Published: 2026-08-30T04:08:07Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
