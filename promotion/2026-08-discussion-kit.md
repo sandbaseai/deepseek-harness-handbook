@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `Qinling-Melon-Farmers/dsh-memoir` issue #8
+- Topic: multilingual agent-facing strings, prompt/schema provenance, memory-language preservation, and reversible locale rollout
+- Reply: <https://github.com/Qinling-Melon-Farmers/dsh-memoir/issues/8#issuecomment-5466010541>
+- Published: 2026-08-30T01:32:14Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/prompt-assembly-provenance.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `alondero/buildmesh` issue #1364
 - Topic: DSH Agent lifecycle correlation, completion versus input-required semantics, signal health, and cross-client deduplication
 - Reply: <https://github.com/alondero/buildmesh/issues/1364#issuecomment-5466005054>
