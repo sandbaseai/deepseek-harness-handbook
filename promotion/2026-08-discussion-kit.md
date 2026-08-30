@@ -166,6 +166,24 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/session-log-storage-format.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — upJiang/dsh-ccswitch #1
+
+- Venue: `upJiang/dsh-ccswitch` issue #1
+- Topic: Windows `ERR_PNPM_UNEXPECTED_STORE`, profile/store identity, disposable repair, bundle verification, and DSH-versus-package-manager boundaries
+- Reply: <https://github.com/upJiang/dsh-ccswitch/issues/1#issuecomment-5466399646>
+- Published: 2026-08-30T03:10:05Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/pnpm-unexpected-store-plugin-update.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-install-recovery.md>
+- Baseline at publish: 91 Stars, 14 forks
+
+## Published outreach — omdsh-dev/dsh-book2skill #2
+
+- Venue: `omdsh-dev/dsh-book2skill` issue #2
+- Topic: isolated prepack dependency failure, package metadata, clean tarball build, runtime bundle activation, optional capability degradation, and rollback
+- Reply: <https://github.com/omdsh-dev/dsh-book2skill/issues/2#issuecomment-5466399706>
+- Published: 2026-08-30T03:10:06Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-peer-dependency-warnings.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
