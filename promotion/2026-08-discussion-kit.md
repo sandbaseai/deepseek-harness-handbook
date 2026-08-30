@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98182
+
+- Venue: `NousResearch/hermes-agent` pull request #98182
+- Topic: subdirectory discovery for `.hermes.md`/`HERMES.md`; precedence, case-insensitive duplicate paths, root confinement, safety limits, and long-running refresh behavior
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98182#issuecomment-5467402106>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98182> ; the PR adds both Hermes-specific filenames to `_HINT_FILENAMES` and preserves the existing hint tracker pipeline
+- Source/test evidence: `agent/subdirectory_hints.py` and `tests/agent/test_subdirectory_hints.py` in PR head `c6aa136b544bd98a5029eb264e44122d9f061833`; the PR reports 30 focused passes and a standalone canary
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:31:24Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98178
 
 - Venue: `NousResearch/hermes-agent` pull request #98178
