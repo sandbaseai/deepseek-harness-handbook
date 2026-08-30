@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98211
+
+- Venue: `NousResearch/hermes-agent` pull request #98211
+- Topic: cursor pagination for Anthropic model catalogs; custom endpoint correctness, page-boundary failures, partial-result policy, and deterministic de-duplication
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98211#issuecomment-5467329734>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98211> ; the PR adds `limit=1000`, `has_more`/`last_id`/`after_id` traversal, repeated-cursor protection, and honors the plugin `base_url`
+- Source/test evidence: `hermes_cli/models.py`, `plugins/model-providers/anthropic/__init__.py`, and pagination tests in PR head `b4a938ba2b828ecad58c19319d87fa802b2501a9`; the PR reports 55-model mock coverage and 10 focused passes
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:13:44Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98208
 
 - Venue: `NousResearch/hermes-agent` pull request #98208
