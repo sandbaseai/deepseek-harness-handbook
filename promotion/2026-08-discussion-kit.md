@@ -90,6 +90,13 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #704
+- Topic: strict leaf-command option parsing, false-green automation prevention, stable machine-readable errors, positional compatibility boundaries, and CLI regression evidence
+- Reply: <https://github.com/Pascapone/pibo/issues/704#issuecomment-5466608655>
+- Published: 2026-08-30T04:04:27Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — sympoies/dsh-runtime-kit #133
 
 - Venue: `sympoies/dsh-runtime-kit` issue #133
