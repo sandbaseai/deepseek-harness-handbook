@@ -1503,3 +1503,10 @@ evidence.
 - Published: 2026-08-30T04:15:11Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` pull request #98331
+- Topic: model-callable current-session goal control, revision/etag fencing, idempotent mutations, monotonic budgets, human authority precedence, and audit-safe structured results
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98331#issuecomment-5466651582>
+- Published: 2026-08-30T04:16:02Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/ralph-bounded-failure-successor.html>
+- Baseline at publish: 91 Stars, 14 forks
