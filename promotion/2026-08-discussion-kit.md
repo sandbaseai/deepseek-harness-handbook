@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98210
+
+- Venue: `NousResearch/hermes-agent` pull request #98210
+- Topic: suppressing stale Kanban summaries while a newer run is active; single/batch SQL semantics, creation-order assumptions, transaction consistency, and query-plan coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98210#issuecomment-5467320202>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98210> ; the PR adds a correlated `NOT EXISTS` guard to `latest_summary` and `latest_summaries`
+- Source/test evidence: `hermes_cli/kanban_db.py` and `tests/hermes_cli/test_kanban_db.py` in PR head `60d1b2ff55fa945acac4124375f19ceda67a22c3`; the PR reports focused suppression and finished-run control tests
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:11:19Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98207
 
 - Venue: `NousResearch/hermes-agent` pull request #98207
