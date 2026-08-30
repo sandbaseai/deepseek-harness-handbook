@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98191
+
+- Venue: `NousResearch/hermes-agent` pull request #98191
+- Topic: post-update plugin scanning parity between CLI and dashboard; truthful scan outcomes, loaded-code lifecycle, revision identity, and failure handling
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98191#issuecomment-5467382951>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98191> ; the PR extracts `_scan_updated_plugin()` and invokes it after both CLI and dashboard pulls, disabling dangerous revisions
+- Source/test evidence: `hermes_cli/plugins_cmd.py` and `tests/hermes_cli/test_plugin_install_ref.py` in PR head `05e5aa22cfe01ceedde98b439e4cd0117f17957c`; the PR reports 86 focused passes and a dangerous-update regression
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:26:46Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98188
 
 - Venue: `NousResearch/hermes-agent` pull request #98188
