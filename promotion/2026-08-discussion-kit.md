@@ -121,6 +121,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — hytime/dsh-thinking-effort #6
+
+- Venue: `hytime/dsh-thinking-effort` issue #6
+- Topic: DSH Web plugin hard-inject regression, optional remote capability probing, non-blocking degradation, prerequisite diagnostics, and rollback evidence
+- Reply: <https://github.com/hytime/dsh-thinking-effort/issues/6#issuecomment-5466382715>
+- Published: 2026-08-30T03:05:44Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-peer-dependency-warnings.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
