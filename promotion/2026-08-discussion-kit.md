@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `alondero/buildmesh` issue #1364
+- Topic: DSH Agent lifecycle correlation, completion versus input-required semantics, signal health, and cross-client deduplication
+- Reply: <https://github.com/alondero/buildmesh/issues/1364#issuecomment-5466005054>
+- Published: 2026-08-30T01:30:52Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-lifecycle.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `omdsh-dev/dsh-accessibility` issue #7
 - Topic: alpha.1 accessibility candidate provenance, real-AT versus automation gates, remaining-surface ledger, and rollback
 - Reply: <https://github.com/omdsh-dev/dsh-accessibility/issues/7#issuecomment-5466001181>
