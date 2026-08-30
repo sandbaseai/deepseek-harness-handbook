@@ -1336,6 +1336,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `omnigent-ai/omnigent` issue #5804
+- Topic: runner-owned Codex workspace propagation, canonical session/workspace identity, resume and thread-rotation inheritance, path authorization, and generation-safe execution evidence
+- Reply: <https://github.com/omnigent-ai/omnigent/issues/5804#issuecomment-5466584372>
+- Published: 2026-08-30T03:58:01Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/workspace-write-shared-cache.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `yyjeqhc/webcodex` pull request #224
 - Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
 - Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
