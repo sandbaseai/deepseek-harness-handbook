@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #76
+- Topic: keep DSH loopback-bound, place remote access behind authenticated TLS proxy/tunnel, protect WebSocket/SSE and CSRF/Origin boundaries, separate proxy auth from tool authority, and test fail-closed exposure
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/76#discussioncomment-18203200>
+- Published: 2026-08-30T02:40:12Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/remote-web-secure-context.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #71
 - Topic: classify non-file .env layers without masking permission/I/O errors, avoid TOCTOU, preserve cwd/user-layer provenance, sanitize diagnostics, and test credential-resolution invariants
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/71#discussioncomment-18203193>
