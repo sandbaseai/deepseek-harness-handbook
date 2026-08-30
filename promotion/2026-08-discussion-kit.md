@@ -229,6 +229,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-runtime.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — dataelement/dsh-desktop #247
+
+- Venue: `dataelement/dsh-desktop` issue #247
+- Topic: Web-versus-desktop DSH host identity, profile/package graph comparison, file/IPC/WebView transport, plugin activation stages, and minimal crash isolation
+- Reply: <https://github.com/dataelement/dsh-desktop/issues/247#issuecomment-5466420142>
+- Published: 2026-08-30T03:15:20Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
