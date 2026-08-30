@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98410
+
+- Venue: `NousResearch/hermes-agent` pull request #98410
+- Topic: converging Ollama/GLM suspicious-stop continuation after one salvage attempt; per-call marker lifecycle, genuine length-cap preservation, and complete-response persistence
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98410#issuecomment-5467453328>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98410> ; the PR tracks heuristic stop-to-length rewrites and accepts a non-empty stitched response after the second suspicious event while retaining the genuine length loop
+- Source/test evidence: `agent/conversation_loop.py`, `run_agent.py`, and `tests/run_agent/test_run_agent.py` in PR head `256c77d1bdf54e339c4c3cfc3bf4e0920dd5499c`; the PR reports 27 continuation-focused passes, 59 agent continuation/ollama passes, and 281 run-agent passes with one unrelated pre-existing dependency failure
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:44:09Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98422
 
 - Venue: `NousResearch/hermes-agent` pull request #98422
