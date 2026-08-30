@@ -22,6 +22,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/context-compression-profiles.html>
 - Baseline at publish: 89 Stars, 14 forks
 
+## Published outreach — chengwill45-bot/dsh-hacker-terminal-theme #2
+
+- Venue: `chengwill45-bot/dsh-hacker-terminal-theme` issue #2
+- Topic: DSH Composer double-layer rendering, WebKit text-fill behavior, IME/selection acceptance gates, and host-CSS rollback boundaries
+- Reply: <https://github.com/chengwill45-bot/dsh-hacker-terminal-theme/issues/2#issuecomment-5466350933>
+- Published: 2026-08-30T02:57:25Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/web-ime-composition.html>
+- Baseline at publish: 89 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
