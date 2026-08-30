@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #29
+- Topic: session/request-scoped mode transitions, generation-safe stream cancellation, runtime profile binding, provider/tool/policy consistency, and post-switch revision evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/29#discussioncomment-18203217>
+- Published: 2026-08-30T02:43:22Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/session-model-default-coupling.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #49
 - Topic: distinguish node-pty ABI/arch/libc/prebuild failures, isolate npx cache versus explicit install, validate native build prerequisites, preserve loader evidence, and verify PTY capability smoke
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/49#discussioncomment-18203214>
