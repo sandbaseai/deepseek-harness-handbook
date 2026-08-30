@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98422
+
+- Venue: `NousResearch/hermes-agent` pull request #98422
+- Topic: continuing configured auxiliary fallback chains after recoverable candidate failures; exact failure scope, index progress, sync/async parity, and exhaustion diagnostics
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98422#issuecomment-5467448119>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98422> ; the PR adds a start index and advances later configured entries after recoverable fallback failures
+- Source/test evidence: `agent/auxiliary_client.py` and `tests/agent/test_auxiliary_client.py` in PR head `90a0e26c5d2fc54b97f2c96cc3446b2b393bb107`; the PR reports 189 focused passes and sync/async chain regressions
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:42:49Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98423
 
 - Venue: `NousResearch/hermes-agent` pull request #98423
