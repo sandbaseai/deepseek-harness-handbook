@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #90
+- Topic: explicit remote Workspace/provider contract, host-key verification, credential-helper boundaries, capability-scoped SSH access, atomic writes, reconnection, and remote/local audit evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/90#discussioncomment-18203206>
+- Published: 2026-08-30T02:41:08Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/acp-remote-hosting.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #76
 - Topic: keep DSH loopback-bound, place remote access behind authenticated TLS proxy/tunnel, protect WebSocket/SSE and CSRF/Origin boundaries, separate proxy auth from tool authority, and test fail-closed exposure
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/76#discussioncomment-18203200>
