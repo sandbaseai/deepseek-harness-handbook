@@ -427,3 +427,10 @@ evidence.
 - Published: 2026-08-30T01:42:08Z (UTC)
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
 - Baseline at publish: 88 Stars, 13 forks
+
+- Venue: `xmanrui/dsh-im` issue #85
+- Topic: isolate Telegram long-poll and outbound API dispatchers, manage Agent lifecycle, and preserve uncertain-delivery semantics during retries
+- Reply: <https://github.com/xmanrui/dsh-im/issues/85#issuecomment-5466057005>
+- Published: 2026-08-30T01:43:08Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
