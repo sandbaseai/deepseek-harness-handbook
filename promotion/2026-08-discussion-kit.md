@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98190
+
+- Venue: `NousResearch/hermes-agent` pull request #98190
+- Topic: Relay-only scope warnings for reconstructed gateway events; selected-transport semantics, resolver failures, log volume, and diagnostic safety
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98190#issuecomment-5467388221>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98190> ; the PR consults `resolve_delivery_transport` and warns only when the selected transport is Relay
+- Source/test evidence: `gateway/run.py` and `tests/gateway/test_relay_delivery_followups.py` in PR head `187e4e5d038e5be62ac0bd1b451e67e8bdb77e22`; the PR reports 29 follow-up passes and 42 resolver/follow-up passes
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:28:04Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98191
 
 - Venue: `NousResearch/hermes-agent` pull request #98191
