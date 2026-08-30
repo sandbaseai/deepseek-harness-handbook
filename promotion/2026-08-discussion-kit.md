@@ -40,6 +40,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+## Published outreach — DeepSeek Harness Discussion #5071
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5071
+- Topic: locale key-set and placeholder validation, UI/command/approval coverage, fallback observability, and external-plugin versus built-in release gates
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5071#discussioncomment-18203280>
+- Published: 2026-08-30T02:59:04Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
