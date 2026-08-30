@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5057
+- Topic: Session archive versus trash/delete semantics, writer coordination, and lifecycle-safe UI actions
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5057#discussioncomment-18202781>
+- Published: 2026-08-30T01:13:02Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/session-archive-trash-delete.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5058
 - Topic: phone-width sidebar drawer behavior, focus/accessibility, and overlay ownership boundaries
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5058#discussioncomment-18202771>
