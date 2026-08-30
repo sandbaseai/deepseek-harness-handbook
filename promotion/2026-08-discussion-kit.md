@@ -1314,3 +1314,10 @@ evidence.
 - Published: 2026-08-30T01:46:35Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
+
+- Venue: `yailPeralta/ast-mcp-server` issue #112
+- Topic: timeout ownership evidence, monotonic lifecycle ordering, queued no-late-start guarantees, recycled-worker stale-generation cancellation, and cleanup verification
+- Reply: <https://github.com/yailPeralta/ast-mcp-server/issues/112#issuecomment-5466559635>
+- Published: 2026-08-30T03:51:02Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
+- Baseline at publish: 91 Stars, 14 forks
