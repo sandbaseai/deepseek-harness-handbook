@@ -1014,6 +1014,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `skyf0xx/hedgehog` issue #343
+- Topic: field-by-field core contract table, optional-field fallbacks, fixture/real-core evidence, writer constraints, and actionable validation errors
+- Reply: <https://github.com/skyf0xx/hedgehog/issues/343#issuecomment-5466438750>
+- Published: 2026-08-30T03:20:11Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/version-evidence.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-harness-scorecard.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `watt-mind/factory` issue #853
 - Topic: separate manifest discovery from policy authorization, enforce code-extension versus data-only pack boundaries, generation-scoped rollback receipts, and negative capability tests
 - Reply: <https://github.com/watt-mind/factory/issues/853#issuecomment-5466207224>
