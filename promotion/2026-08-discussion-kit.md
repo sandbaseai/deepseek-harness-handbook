@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98167
+
+- Venue: `NousResearch/hermes-agent` pull request #98167
+- Topic: update-direction safety for shallow/local-ahead checkouts; separating up-to-date, behind, and unknown states across Python and desktop paths
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98167#issuecomment-5467310418>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98167> ; the PR adds local ancestry checks before compare-API reliance in the banner, CLI update check, and desktop SSH path
+- Source/test evidence: `hermes_cli/banner.py`, `hermes_cli/update_cmd.py`, `apps/desktop/electron/main.ts`, `apps/desktop/electron/update-count.ts`, and their tests in PR head `f2a783c603d99731d3b517058f51866fac47db3a`; the PR reports 55 focused passes and an end-to-end correction
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:08:48Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98212
 
 - Venue: `NousResearch/hermes-agent` pull request #98212
