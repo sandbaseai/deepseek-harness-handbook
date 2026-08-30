@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `agentscope-ai/agentscope-java` issue #2872
+- Topic: final-round versus intermediate ReAct text, buffered delta routing, explicit unknown classification, generation/sequence deduplication, and incomplete-stream handling
+- Reply: <https://github.com/agentscope-ai/agentscope-java/issues/2872#issuecomment-5466483151>
+- Published: 2026-08-30T03:31:06Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-empty-identity.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `kvndhrty/quorum` issue #18
 - Topic: advisory possible-loop detection, stable redacted fingerprints, confidence/reason evidence, legitimate polling negatives, and manager decision traceability
 - Reply: <https://github.com/kvndhrty/quorum/issues/18#issuecomment-5466479840>
