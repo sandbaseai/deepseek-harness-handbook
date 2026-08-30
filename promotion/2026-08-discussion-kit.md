@@ -1721,3 +1721,9 @@ evidence.
 - Published: 2026-08-30T04:56:19Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98337
+- Topic: prior-work-first packet provenance, revision and worktree fencing, untrusted handoff data, monotonic invalidation, one-writer ownership, secret-safe retention, and crash/resume regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98337#issuecomment-5466804980>
+- Published: 2026-08-30T04:57:39Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/sessions-vs-memory.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html>
+- Baseline at publish: 91 Stars, 14 forks
