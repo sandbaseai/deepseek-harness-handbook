@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5053
+- Topic: empty-session ARIA semantics, landmarks, keyboard behavior, and measured contrast evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5053#discussioncomment-18202787>
+- Published: 2026-08-30T01:14:57Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/settings-plugin-nav-overflow.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5054
 - Topic: Plan review Markdown/code-block rendering, composer slot isolation, and Web bundle identity
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5054#discussioncomment-18202783>
