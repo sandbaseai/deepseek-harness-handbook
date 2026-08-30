@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `yangbobo2021/relay-dsh-plugin-codex` issue #23
+- Topic: Codex source-path containment, parser-revision-bound scan receipts, deterministic import keys, unsupported-record handling, and interrupted-import cleanup
+- Reply: <https://github.com/yangbobo2021/relay-dsh-plugin-codex/issues/23#issuecomment-5466237215>
+- Published: 2026-08-30T02:28:14Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/session-log-storage-format.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `kagura-agent/wiki` issue #178
 - Topic: DSH project index drift, generated-index CI gates, bidirectional file/index checks, source/revision/date evidence, and personal-path-safe scripts
 - Reply: <https://github.com/kagura-agent/wiki/issues/178#issuecomment-5466234394>
