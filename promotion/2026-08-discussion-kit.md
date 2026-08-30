@@ -1510,3 +1510,10 @@ evidence.
 - Published: 2026-08-30T04:16:02Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/ralph-bounded-failure-successor.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` pull request #682
+- Topic: cross-runtime model fallback invalidation, same-runtime rebind preservation, atomic routing updates, generation fencing, and provider/model source-of-truth evidence
+- Reply: <https://github.com/Pascapone/pibo/pull/682#issuecomment-5466655424>
+- Published: 2026-08-30T04:17:07Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
+- Baseline at publish: 91 Stars, 14 forks
