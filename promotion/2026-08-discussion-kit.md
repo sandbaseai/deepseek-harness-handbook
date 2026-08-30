@@ -435,6 +435,13 @@ evidence.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/web-search-custom-gateway-auth.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5068
+- Topic: separate provider behavior from Agent tool authority, least-privilege file/network/MCP policy, approval and sandbox states, and canary-based plugin audit
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5068#discussioncomment-18202943>
+- Published: 2026-08-30T01:58:32Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/sandbox-denied-vs-unavailable.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
