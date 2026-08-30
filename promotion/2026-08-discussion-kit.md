@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98213
+
+- Venue: `NousResearch/hermes-agent` pull request #98213
+- Topic: session-row identity for out-of-turn compression dedup resets; in-place versus rotated compaction, cross-session isolation, and default-scope regression boundaries
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98213#issuecomment-5467300321>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98213> ; the PR forwards `session_entry.session_id` from the hygiene sweep and `/compress` handler, addressing the documented fallback-to-`default` mismatch
+- Source/test evidence: `gateway/run.py`, `gateway/slash_commands.py`, `tests/gateway/test_compress_command.py`, and `tests/gateway/test_session_hygiene.py` in PR head `78f8ece4ec8fbfbe25e846906297de9bfb0eac21`; the PR reports 34 focused passes and red-before/green-after assertions
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:06:13Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98216
 
 - Venue: `NousResearch/hermes-agent` pull request #98216
