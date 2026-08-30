@@ -1636,3 +1636,10 @@ evidence.
 - Published: 2026-08-30T04:35:51Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` issue #133065
+- Topic: auth-profile subscription-block projection, model-scoped availability, redacted human/JSON readback, stale-window omission, and read-only diagnostics
+- Reply: <https://github.com/openclaw/openclaw/issues/133065#issuecomment-5466738962>
+- Published: 2026-08-30T04:39:27Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
+- Baseline at publish: 91 Stars, 14 forks
