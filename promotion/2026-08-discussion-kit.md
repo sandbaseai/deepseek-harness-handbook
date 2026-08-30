@@ -96,6 +96,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/markdown-single-tilde.md>
 - Baseline at publish: 88 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #110
+- Topic: prompt-section provenance, normalized digest and cache-boundary evidence, separate runtime/tool accounting, Plan policy versus execution authority, and Code Mode cost/rejection tests
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/110#discussioncomment-18203169>
+- Published: 2026-08-30T02:33:16Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/prompt-assembly-provenance.md>
+- Baseline at publish: 88 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #111
 - Topic: distinguish process/port/UI initialization hangs, supported Node and empty-profile A/B, bounded startup stages, sanitized evidence, and explicit failure/retry branches
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/111#discussioncomment-18203162>
