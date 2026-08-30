@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `marius-patrik/dsh-stack` issue #163
+- Topic: pinned DSH submodule upgrade, coherent package graph, plugin compatibility, and rollback receipts
+- Reply: <https://github.com/marius-patrik/dsh-stack/issues/163#issuecomment-5465996680>
+- Published: 2026-08-30T01:28:39Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `xmanrui/dsh-im` issue #82
 - Topic: DSH alpha.1 plugin API drift (`apiProxy`/`listDirectory`), package-graph compatibility, and recovery-mode rollback
 - Reply: <https://github.com/xmanrui/dsh-im/issues/82#issuecomment-5465992666>
