@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `smanx/deepseek-harness-docker` issue #1
+- Topic: distinguish container default workspace from Session cwd, fresh-session versus existing-session evidence, normalized path identity, mount failures, and explicit apply semantics
+- Reply: <https://github.com/smanx/deepseek-harness-docker/issues/1#issuecomment-5466228169>
+- Published: 2026-08-30T02:25:51Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #342
 - Topic: mutation-gate wall-clock versus matrix cost, fixed incremental/full baselines, segment receipts, generated contract checks, and fail-closed split boundaries
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/342#issuecomment-5466225233>
