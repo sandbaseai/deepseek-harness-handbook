@@ -1650,3 +1650,10 @@ evidence.
 - Published: 2026-08-30T04:40:49Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` issue #98321
+- Topic: Bot Chat versus regular-session behavior evaluation, prompt/tool-surface attribution, behaviorally additive A2A instructions, durable-edit approval, and redacted prompt provenance
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98321#issuecomment-5466748786>
+- Published: 2026-08-30T04:42:16Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
+- Baseline at publish: 91 Stars, 14 forks
