@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98193
+
+- Venue: `NousResearch/hermes-agent` pull request #98193
+- Topic: idempotent goal-mode finalization; atomic terminal-state guards, dependency promote-to-ready, legacy no-run-id callers, and concurrent worker/finalizer outcomes
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98193#issuecomment-5467363634>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98193> ; the PR adds terminal-run checks before synthetic blocks and preserves the original dependency/review handoff
+- Source/test evidence: `cli.py`, `hermes_cli/goals.py`, `hermes_cli/kanban_db.py`, and `tests/hermes_cli/test_kanban_goal_mode.py` in PR head `49cb47679fd0a9597f3d73bb5b3fd8901cfd10ef`; the PR reports 93 focused tests with one Windows skip
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:21:59Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98195
 
 - Venue: `NousResearch/hermes-agent` pull request #98195
