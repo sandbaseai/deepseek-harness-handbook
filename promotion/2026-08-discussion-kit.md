@@ -1685,3 +1685,10 @@ evidence.
 - Published: 2026-08-30T04:47:44Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` pull request #98347
+- Topic: multipart and multimodal repetition detection, visible-text projection, structured-block semantics, bounded continuation budgets, persistence fidelity, and cross-provider coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98347#issuecomment-5466774190>
+- Published: 2026-08-30T04:49:08Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html>
+- Baseline at publish: 91 Stars, 14 forks
