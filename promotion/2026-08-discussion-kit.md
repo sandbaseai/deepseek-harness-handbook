@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98426
+
+- Venue: `NousResearch/hermes-agent` pull request #98426
+- Topic: rebuilding long-lived session system prompts at the compaction commit boundary; byte-equality cache identity, plugin re-render fallback, commit ordering, and prompt/tool alignment
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98426#issuecomment-5467459633>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98426> ; the PR always invokes the live builder, preserves the original prompt object only on byte equality, and logs drifted output
+- Source/test evidence: `agent/conversation_compression.py`, `agent/system_prompt.py`, `tests/test_compaction_prompt_rebuild.py`, and `tests/test_compaction_tool_refresh.py` in PR head `5ea109b3234c60c237c37c40206d279cc05bc65c`; the PR reports 44 system-prompt tests green
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:45:43Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98410
 
 - Venue: `NousResearch/hermes-agent` pull request #98410
