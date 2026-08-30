@@ -1350,6 +1350,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `omnigent-ai/omnigent` issue #5803
+- Topic: Kimi custom-provider readiness, capability-based admission, provider/model tuple preservation, safe probing, and distinct configuration-versus-runtime diagnostics
+- Reply: <https://github.com/omnigent-ai/omnigent/issues/5803#issuecomment-5466589015>
+- Published: 2026-08-30T03:59:22Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `yyjeqhc/webcodex` pull request #224
 - Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
 - Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
