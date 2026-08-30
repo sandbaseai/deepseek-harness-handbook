@@ -4,6 +4,16 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98218
+
+- Venue: `NousResearch/hermes-agent` issue #98218
+- Topic: voice bridge checkpoint lifecycle; historical replay policy, Hermes/Piper failure states, crash/idempotency recovery, SQLite row identity, shared audio temp files, and transcript exposure in process arguments
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98218#issuecomment-5467249499>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98218> ; the issue links `hermes-voice-loop.py`, and the reviewed script was fetched from <https://github.com/timothytuckhco-del/voice-bridge-agent/blob/main/hermes-voice-loop.py>
+- Handbook role: none; the target README and script are the direct remediation path
+- Published: 2026-08-30T06:53:27Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — deepseek-ai/deepseek-harness Discussion #5080
 
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5080
