@@ -1014,6 +1014,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `NousResearch/hermes-agent` issue #98308
+- Topic: provider-scoped reasoning replay normalization, deterministic schema errors, retry/fallback boundaries, and redacted serialization evidence
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98308#issuecomment-5466453903>
+- Published: 2026-08-30T03:23:52Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/pi-ai-cross-provider-reasoning-replay.md>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `chidionyema/crew` issue #568
 - Topic: single durable-workflow owner, Go worker boundaries, generation-safe late completions, explicit retirement tests, and crash/cancellation evidence
 - Reply: <https://github.com/chidionyema/crew/issues/568#issuecomment-5466443898>
