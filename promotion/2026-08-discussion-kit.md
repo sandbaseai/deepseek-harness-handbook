@@ -463,6 +463,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/sessions-vs-memory.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/credential-storage-threat-model.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #37
+- Topic: distinguish Windows native picker focus/owner timing from worker failure, collect browser/host evidence, and test non-ASCII/cancel/multi-window paths
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/37#discussioncomment-18202976>
+- Published: 2026-08-30T02:03:34Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-worker-crash.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
