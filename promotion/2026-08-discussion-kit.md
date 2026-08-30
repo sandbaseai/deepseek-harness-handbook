@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98201
+
+- Venue: `NousResearch/hermes-agent` pull request #98201
+- Topic: preserving OpenRouter `provider_routing` for custom profiles; `extra_body` precedence, effective-host validation, endpoint overrides, and request-path coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98201#issuecomment-5467351942>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98201> ; the PR injects `provider_preferences` only for an OpenRouter base URL when the profile has not already supplied `provider`
+- Source/test evidence: `agent/transports/chat_completions.py` and `tests/agent/transports/test_chat_completions.py` in PR head `58400970ff24f14b1a0516fbc9a4be6d2245f0dd`; the PR reports 59 focused passes and new inject/no-inject cases
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:19:13Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98202
 
 - Venue: `NousResearch/hermes-agent` pull request #98202
