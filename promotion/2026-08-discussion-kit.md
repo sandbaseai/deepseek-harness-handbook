@@ -57,6 +57,14 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Published: 2026-08-30T03:00:15Z (UTC)
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/live-session-log-durability.md>
 - Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` issue #98378
+- Topic: unrelated Windows service in `STOP_PENDING`, service ownership before blocker classification, bounded transitional-state handling, stale discovery re-scan, and update regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98378#issuecomment-5467009344>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98378> ; the issue cites `hermes_cli/gateway.py` discovery, `hermes_cli/update_cmd.py` stop-pending recovery, and `tests/hermes_cli/test_update_concurrent_quarantine.py`
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:51:27Z (UTC)
+- Handbook URLs used: none; the target issue and cited source/test paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
 
 ## Published outreach — docker/sbx-releases #454
 
@@ -1655,9 +1663,11 @@ evidence.
 - Venue: `NousResearch/hermes-agent` issue #98321
 - Topic: Bot Chat versus regular-session behavior evaluation, prompt/tool-surface attribution, behaviorally additive A2A instructions, durable-edit approval, and redacted prompt provenance
 - Reply: <https://github.com/NousResearch/hermes-agent/issues/98321#issuecomment-5466748786>
-- Published: 2026-08-30T04:42:16Z (UTC)
-- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
-- Baseline at publish: 91 Stars, 14 forks
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98321> ; <https://github.com/NousResearch/hermes-agent/commit/0f7981b8> ; <https://github.com/NousResearch/hermes-agent/pull/91802>
+- Handbook role: independent Harness analogy removed; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T04:42:16Z (UTC); corrected source scope and formatting at the same comment ID on 2026-08-30T05:30:14Z.
+- Handbook URLs used: none; the Hermes issue and source history are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
 
 - Venue: `openclaw/openclaw` issue #133077
 - Topic: empty HTML formatting elements, visible-content invariants, sanitizer/parser agreement, idempotent outbound normalization, media-caption separation, and cross-channel regression coverage
@@ -1771,3 +1781,139 @@ evidence.
 - Published: 2026-08-30T05:04:59Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html>
 - Baseline at publish: 91 Stars, 14 forks
+- Venue: `Pascapone/pibo` issue #723
+- Topic: router-generation-aware observation cursors, durable monotonic sequencing, explicit cursor invalidation, retention/truncation semantics, and post-restart child-output regression coverage
+- Reply: <https://github.com/Pascapone/pibo/issues/723#issuecomment-5466883483>
+- Direct target evidence: <https://github.com/Pascapone/pibo/issues/723> ; <https://github.com/Pascapone/pibo/blob/2aef244301f5d181624662fdad53e18e83e80bd9/src/core/session-router.ts#L557-L560> ; <https://github.com/Pascapone/pibo/blob/2aef244301f5d181624662fdad53e18e83e80bd9/src/core/session-router.ts#L2339-L2410> ; <https://github.com/Pascapone/pibo/blob/2aef244301f5d181624662fdad53e18e83e80bd9/src/core/session-router.ts#L2689-L2727>
+- Handbook role: independent Harness analogy only; not Pibo documentation or a direct fix.
+- Published: 2026-08-30T05:18:35Z (UTC)
+- Handbook URLs used: none; the target issue and source are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98313
+- Topic: persisted active heartbeat restoration, routing-index origin requirements, startup ordering, failure isolation, duplicate registration, and restart-to-delivery regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98313#issuecomment-5466889959>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98313> ; <https://github.com/NousResearch/hermes-agent/blob/49b078a97415588975194308a4ce68788d94b0b0/gateway/run.py#L13691-L13702> ; <https://github.com/NousResearch/hermes-agent/blob/49b078a97415588975194308a4ce68788d94b0b0/gateway/run.py#L22532-L22576> ; <https://github.com/NousResearch/hermes-agent/blob/49b078a97415588975194308a4ce68788d94b0b0/tests/gateway/test_heartbeat_restart_restore.py>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:20:19Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98358
+- Topic: Feishu card-table conversion, fence-aware markdown extraction, fallback/downgrade behavior, CJK width estimation, and table-versus-code content preservation
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98358#issuecomment-5466993683>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98358> ; <https://github.com/NousResearch/hermes-agent/blob/92809eec85f122b950d62520a0f5f2b5838fe0ae/plugins/platforms/feishu/feishu_table_card.py#L105-L143> ; <https://github.com/NousResearch/hermes-agent/blob/92809eec85f122b950d62520a0f5f2b5838fe0ae/plugins/platforms/feishu/feishu_table_card.py#L250-L288>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:47:02Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98356
+- Topic: outbound typography normalization, command copy/paste safety, preservation of emoji ZWJ and script ZWNJ characters, shared adapter choke points, and Unicode content-preservation regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98356#issuecomment-5466987541>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98356> ; <https://github.com/NousResearch/hermes-agent/blob/4df7363331789ed9f57900e7fcb46aac7a0d3930/gateway/platforms/base.py#L3040-L3052> ; <https://github.com/NousResearch/hermes-agent/blob/4df7363331789ed9f57900e7fcb46aac7a0d3930/tests/gateway/platforms/test_outbound_typography.py>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:45:23Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98342
+- Topic: native-refresh provider outage audit events, audit-sink failure isolation, refresh-token redaction, multi-provider fallback, and success/failure log-contract regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98342#issuecomment-5466972175>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98342> ; <https://github.com/NousResearch/hermes-agent/blob/2cff0c1dd835178391367c6bc5cea4a925f1ed67/hermes_cli/dashboard_auth/routes.py#L1062-L1073> ; <https://github.com/NousResearch/hermes-agent/blob/2cff0c1dd835178391367c6bc5cea4a925f1ed67/tests/hermes_cli/test_dashboard_auth_native_flow.py#L589-L642>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:42:11Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98333
+- Topic: Desktop `/skills` command-surface expansion, write-approval review access, mutating subcommand exposure, backend guard preservation, and subcommand-level regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98333#issuecomment-5466965914>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98333> ; <https://github.com/NousResearch/hermes-agent/blob/6e59a1444cb6f95099a2e1b8a586b5a83eae8cbf/hermes_cli/commands.py#L327-L333> ; <https://github.com/NousResearch/hermes-agent/blob/6e59a1444cb6f95099a2e1b8a586b5a83eae8cbf/apps/desktop/src/lib/desktop-slash-commands.ts#L301-L312>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:40:42Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98331
+- Topic: model-callable goal control, durable versus process-local freshness, cross-process stale-manager overwrite risk, CAS boundaries, and restart/concurrency regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98331#issuecomment-5466958482>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98331> ; <https://github.com/NousResearch/hermes-agent/blob/f063020b1c2bfe3bb5861ca7132667c1294fc576/hermes_cli/goals.py#L665-L930> ; <https://github.com/NousResearch/hermes-agent/blob/f063020b1c2bfe3bb5861ca7132667c1294fc576/cli.py#L13129-L13145>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:38:53Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` issue #98324
+- Topic: platform-correct Electron select-all modifiers, post-input DOM readback, truthful `acted` semantics, contenteditable behavior, stale refs, and cross-platform regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98324#issuecomment-5466932233>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98324> ; <https://github.com/NousResearch/hermes-agent/blob/52e5e7c034edfbd0105d0b9c315c4eecb6be7f5e/apps/desktop/src/app/chat/right-rail/preview-drive.ts> ; <https://github.com/NousResearch/hermes-agent/blob/52e5e7c034edfbd0105d0b9c315c4eecb6be7f5e/apps/desktop/src/app/chat/right-rail/preview-act.test.ts>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:31:46Z (UTC); reformatted at the same comment ID to paragraph/`<br>` blocks and verified no malformed list tags at 2026-08-30T05:32:54Z.
+- Handbook URLs used: none; the target issue and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` issue #98361
+- Topic: Linux desktop-entry fire-and-forget semantics, Electron process lifetime, Desktop Entry quoting, Wayland/X11 launch selection, sandbox flags, and generated-entry freshness after build state changes
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98361#issuecomment-5466999366>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98361> ; <https://github.com/NousResearch/hermes-agent/blob/26350357d76e4508c8df9304a3374bdc5a6f6220/hermes_cli/linux_desktop_entry.py> ; <https://github.com/NousResearch/hermes-agent/blob/26350357d76e4508c8df9304a3374bdc5a6f6220/hermes_cli/main.py>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:48:37Z (UTC)
+- Handbook URLs used: none; the target issue and source paths are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98353
+- Topic: session-state write-denial classification, Windows path normalization, sensitive-path policy failure handling, fail-closed security semantics, and helper-exception regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98353#issuecomment-5466980393>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98353> ; <https://github.com/NousResearch/hermes-agent/blob/0c4d0c3d89bb4f599f801350cb1d061570c16cf9/tools/file_tools.py#L688-L742> ; <https://github.com/NousResearch/hermes-agent/blob/0c4d0c3d89bb4f599f801350cb1d061570c16cf9/agent/file_safety.py#L165-L225>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:43:56Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98328
+- Topic: Discord threaded-free-response precedence, profile-scoped `auto_thread`, `no_thread_channels` override, relay/recovery scope propagation, and silent inline-fallback regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98328#issuecomment-5466952907>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98328> ; <https://github.com/NousResearch/hermes-agent/blob/3ce71a9418fa2256dc6f0143c035228f411fcc9a/plugins/platforms/discord/adapter.py#L6743-L6775> ; <https://github.com/NousResearch/hermes-agent/blob/3ce71a9418fa2256dc6f0143c035228f411fcc9a/plugins/platforms/discord/adapter.py#L8184-L8238>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:37:22Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98327
+- Topic: `print_fn` spinner-output isolation, carriage-return suppression, animation-thread shutdown, duplicate stop behavior, and TTY/non-TTY regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98327#issuecomment-5466946946>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98327> ; <https://github.com/NousResearch/hermes-agent/blob/8a9bd0016fbb7e1f4cd362611a8f831b09f871cd/agent/display.py#L1220-L1240> ; <https://github.com/NousResearch/hermes-agent/blob/8a9bd0016fbb7e1f4cd/agent/display.py#L1301-L1310> ; <https://github.com/NousResearch/hermes-agent/blob/8a9bd0016fbb7e1f4cd/agent/display.py#L314-L373>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:35:46Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98326
+- Topic: revision-0 TodoStore placeholder handling, unversioned `tool.start` ordering, stale-update protection, terminal-state preservation, and snapshot watermark regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98326#issuecomment-5466942038>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98326> ; <https://github.com/NousResearch/hermes-agent/blob/fd719673f21ce60123c4c49039d95b2706cabc29/apps/desktop/src/store/todos.ts#L74-L86> ; <https://github.com/NousResearch/hermes-agent/blob/fd719673f21ce60123c4c49039d95b2706cabc29/tui_gateway/server.py#L7645-L7660>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:34:27Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98320
+- Topic: Kimi account-usage window mapping, omitted-zero `used` derivation, provider alias completeness, invalid numeric inputs, and failure isolation between top-level and rolling-limit buckets
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98320#issuecomment-5466919338>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98320> ; <https://github.com/NousResearch/hermes-agent/blob/c5dc6f722fa4f1cec4a9432c671c51ce6ce12585/agent/account_usage.py#L887-L1031> ; <https://github.com/NousResearch/hermes-agent/blob/c5dc6f722fa4f1cec4a9432c671c51ce6ce12585/tests/test_account_usage.py#L201-L305>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:28:12Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98319
+- Topic: real-profile browser headed/hidden configuration typing, headless launch behavior, snapshot-lifecycle documentation, and cross-platform config regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98319#issuecomment-5466914843>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98319> ; <https://github.com/NousResearch/hermes-agent/blob/af14cfef4aff688d008a79122878d91419583ab4/tools/browser_tool.py#L1451-L1470> ; <https://github.com/NousResearch/hermes-agent/blob/af14cfef4aff688d008a79122878d91419583ab4/tools/browser_tool.py#L1732-L1747> ; <https://github.com/NousResearch/hermes-agent/blob/af14cfef4aff688d008a79122878d91419583ab4/website/docs/user-guide/features/browser.md#L201-L218>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:26:55Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98318
+- Topic: skill-bundle fetch integrity, removal of an unrelated local-identity contributor artifact, inline-query authorization without chat context, and non-leaking cross-chat regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98318#issuecomment-5466904867>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98318> ; <https://github.com/NousResearch/hermes-agent/blob/c78937597273bef5a72741eeefd6eb901c04682e/contributors/emails/fidiasfeliciano@MacBook-Pro.local> ; <https://github.com/NousResearch/hermes-agent/blob/c78937597273bef5a72741eeefd6eb901c04682e/plugins/platforms/telegram/adapter.py#L7209-L7301> ; <https://github.com/NousResearch/hermes-agent/blob/c78937597273bef5a72741eeefd6eb901c04682e/plugins/platforms/telegram/inline_picker.py#L45-L104>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:24:15Z (UTC); corrected formatting at the same comment ID after API readback.
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98317
+- Topic: Telegram inline command-picker authorization without chat context, uncapped catalog failure semantics, per-user caching, and cross-chat security regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98317#issuecomment-5466899277>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98317> ; <https://github.com/NousResearch/hermes-agent/blob/778f3d40e656bd5ae72f1beef5dae8f51a1771e2/plugins/platforms/telegram/adapter.py#L7209-L7301> ; <https://github.com/NousResearch/hermes-agent/blob/778f3d40e656bd5ae72f1beef5dae8f51a1771e2/plugins/platforms/telegram/inline_picker.py#L45-L104> ; <https://github.com/NousResearch/hermes-agent/blob/778f3d40e656bd5ae72f1beef5dae8f51a1771e2/tests/gateway/test_telegram_inline_picker.py>
+- Handbook role: independent Harness analogy only; not Hermes documentation or a direct fix.
+- Published: 2026-08-30T05:22:46Z (UTC)
+- Handbook URLs used: none; the target PR and source/tests are the direct remediation path.
+- Baseline at publish: 90 Stars, 14 forks
