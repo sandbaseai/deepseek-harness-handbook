@@ -1357,6 +1357,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `agentscope-ai/agentscope-java` issue #2907
+- Topic: AG-UI tool-result identifier scopes, stable toolCall-to-message mapping, replay and reconnect behavior, reducer-level regression coverage, and bounded protocol errors
+- Reply: <https://github.com/agentscope-ai/agentscope-java/issues/2907#issuecomment-5466592611>
+- Published: 2026-08-30T04:00:21Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-empty-identity.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `yyjeqhc/webcodex` pull request #224
 - Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
 - Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
