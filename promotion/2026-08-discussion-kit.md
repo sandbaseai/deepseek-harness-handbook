@@ -76,6 +76,13 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `omnigent-ai/omnigent` issue #4935
+- Topic: chat-to-app-server slash-skill resolution, registry snapshot authority, exact command parsing, stale or unavailable skill failures, and terminal/chat payload parity
+- Reply: <https://github.com/omnigent-ai/omnigent/issues/4935#issuecomment-5466554689>
+- Published: 2026-08-30T03:49:48Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-skill-context.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `AmaadMartin/adk-js` pull request #1114
 - Topic: HTTP+SSE MCP transport capability selection, explicit lifecycle ownership, deprecated-transport boundaries, timeout semantics, redaction, and reconnect evidence
 - Reply: <https://github.com/AmaadMartin/adk-js/pull/1114#issuecomment-5466549513>
