@@ -49,6 +49,24 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+## Published outreach — SigNoz/signoz.io #4032
+
+- Venue: `SigNoz/signoz.io` issue #4032
+- Topic: DSH observability dashboard boundaries, event/provider correlation, privacy-safe fields, and acceptance traces for retries, compaction, approval, and recovery
+- Reply: <https://github.com/SigNoz/signoz.io/issues/4032#issuecomment-5466361408>
+- Published: 2026-08-30T03:00:15Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/live-session-log-durability.md>
+- Baseline at publish: 90 Stars, 14 forks
+
+## Published outreach — docker/sbx-releases #454
+
+- Venue: `docker/sbx-releases` issue #454
+- Topic: SBX/DSH compatibility matrix covering package acquisition, runtime identity, sandbox capabilities, DSH behavior, evidence preservation, and cleanup
+- Reply: <https://github.com/docker/sbx-releases/issues/454#issuecomment-5466361478>
+- Published: 2026-08-30T03:00:16Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/workspace-write-shared-cache.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
+- Baseline at publish: 90 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
