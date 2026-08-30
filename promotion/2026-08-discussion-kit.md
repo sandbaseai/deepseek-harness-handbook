@@ -449,6 +449,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `wingsky-1/dsh-plugin-hub` issue #323
+- Topic: alpha.1 plugin migration index, static/runtime/user-surface capability receipts, degraded-state UX, and tarball/profile rollback evidence
+- Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/323#issuecomment-5466082670>
+- Published: 2026-08-30T01:49:08Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `Hilbert-beinghappy/seektty` issue #174
 - Topic: source-tagged composite Session/Conversation/Chat snapshots, generation-safe stream recovery, tarball-only capability tests, and provisional alpha rollback evidence
 - Reply: <https://github.com/Hilbert-beinghappy/seektty/issues/174#issuecomment-5466079436>
