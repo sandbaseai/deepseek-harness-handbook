@@ -519,6 +519,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/manual-compaction-caller-abort.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/context-compression-profiles.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `zh667/TokenLedger` issue #57
+- Topic: Blue TUI integration boundaries, token-ledger reconciliation receipts, usage-field unknown states, idempotent event accounting, and price-table revisions
+- Reply: <https://github.com/zh667/TokenLedger/issues/57#issuecomment-5466190012>
+- Published: 2026-08-30T02:16:05Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `ob-labs/powercontext-go` issue #3
 - Topic: independently versioned DSH adapter receipts, source/packed/release artifact boundaries, startup-state classification, and immutable alpha drift separation
 - Reply: <https://github.com/ob-labs/powercontext-go/issues/3#issuecomment-5466172475>
