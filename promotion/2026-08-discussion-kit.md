@@ -413,3 +413,10 @@ evidence.
 - Published: 2026-08-30T01:09:00Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/git-plugin-missing-dist.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/corrupt-package-json-profile-boot.html>
 - Baseline at publish: 87 Stars, 13 forks
+
+- Venue: `Jstn-1g/dsh-live-voice` issue #19
+- Topic: independently reproduced, source-pinned DSH alpha authentication smoke and immutable sanitized failure receipts
+- Reply: <https://github.com/Jstn-1g/dsh-live-voice/issues/19#issuecomment-5466048505>
+- Published: 2026-08-30T01:41:12Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
+- Baseline at publish: 88 Stars, 13 forks
