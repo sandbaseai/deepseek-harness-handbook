@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `omnigent-ai/omnigent` issue #4988
+- Topic: separate quiescence observations from authoritative sub-agent terminal events, generation-safe delivery, CAS latching, and quiet-gap regression tests
+- Reply: <https://github.com/omnigent-ai/omnigent/issues/4988#issuecomment-5466459665>
+- Published: 2026-08-30T03:25:00Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/live-session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `deepseek-ai/deepseek-harness` Discussion #5072
 - Topic: bound long-running turns with hard budgets, no-progress fingerprints, external-job state, cancellation, and resumable cleanup
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5072#discussioncomment-18203377>
