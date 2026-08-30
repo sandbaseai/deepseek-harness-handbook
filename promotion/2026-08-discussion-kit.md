@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #68
+- Topic: Host ABI migration inventory, provider/OAuth/credentials layering, pinned compatibility receipts, isolated load/read-only smoke gates, formal UI slots, and community-support labeling
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/68#discussioncomment-18203237>
+- Published: 2026-08-30T02:46:45Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/dsh-codex-ui-extension-boundary.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #30
 - Topic: directory-picker request/generation correlation, Firefox versus Chromium capability evidence, worker exit/timeout/cancel classification, listener cleanup, and safe Workspace creation
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/30#discussioncomment-18203232>
