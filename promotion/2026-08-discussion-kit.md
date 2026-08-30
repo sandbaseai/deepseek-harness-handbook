@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `yangbobo2021/relay-dsh-plugin-session-import` issue #1
+- Topic: slot ownership, typed provider contributions, generation-safe registration, capability receipts, import validation, and durable-session evidence
+- Reply: <https://github.com/yangbobo2021/relay-dsh-plugin-session-import/issues/1#issuecomment-5466213022>
+- Published: 2026-08-30T02:21:54Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `0xsline/awesome-deepseek-harness` issue #529
 - Topic: community plugin catalog evidence, package integrity, capability/permission scope, and non-endorsement labeling
 - Reply: <https://github.com/0xsline/awesome-deepseek-harness/issues/529#issuecomment-5466026216>
