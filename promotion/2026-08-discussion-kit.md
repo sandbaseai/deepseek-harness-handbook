@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `0xsline/awesome-deepseek-harness` issue #529
+- Topic: community plugin catalog evidence, package integrity, capability/permission scope, and non-endorsement labeling
+- Reply: <https://github.com/0xsline/awesome-deepseek-harness/issues/529#issuecomment-5466026216>
+- Published: 2026-08-30T01:36:11Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `mintgao/dsh-desktop` issue #25
 - Topic: alpha.1 Desktop adoption failures, package-graph/build-stage classification, clean-profile smoke, and rollback
 - Reply: <https://github.com/mintgao/dsh-desktop/issues/25#issuecomment-5466021427>
