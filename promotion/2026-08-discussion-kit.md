@@ -420,3 +420,10 @@ evidence.
 - Published: 2026-08-30T01:41:12Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
+
+- Venue: `wingsky-1/dsh-plugin-hub` issue #348
+- Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
+- Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
+- Published: 2026-08-30T01:42:08Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
+- Baseline at publish: 88 Stars, 13 forks
