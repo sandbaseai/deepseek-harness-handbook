@@ -442,6 +442,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/sandbox-denied-vs-unavailable.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #4242
+- Topic: OAuth adapter boundaries across authorization, credential references, provider readiness, redirect/PKCE security, token lifecycle, and multi-account recovery
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/4242#discussioncomment-18202948>
+- Published: 2026-08-30T02:00:01Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/credential-storage-threat-model.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
