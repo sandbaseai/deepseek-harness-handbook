@@ -1618,6 +1618,8 @@ evidence.
 - Venue: `NousResearch/hermes-agent` issue #98336
 - Topic: Windows update hand-off ownership, venv file-lock discovery, process termination races, service relaunch, post-update health verification, and rollback continuity
 - Reply: <https://github.com/NousResearch/hermes-agent/issues/98336#issuecomment-5466713994>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98336> ; <https://github.com/NousResearch/hermes-agent/blob/5d33efd9909f73dede49d7c49e497f8636aa486b/apps/desktop/electron/venv-blocker-scan.ts#L55-L134> ; <https://github.com/NousResearch/hermes-agent/blob/5d33efd9909f73dede49d7c49e497f8636aa486b/apps/desktop/electron/venv-blocker-scan.test.ts>
+- Handbook role: independent Harness analogy only; Hermes issue and source are the direct remediation path.
 - Published: 2026-08-30T04:32:43Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-replacefile-eacces.html>
 - Baseline at publish: 91 Stars, 14 forks
@@ -1732,4 +1734,40 @@ evidence.
 - Reply: <https://github.com/NousResearch/hermes-agent/pull/98314#issuecomment-5466808524>
 - Published: 2026-08-30T04:58:42Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98303
+- Topic: total timeout and retry budgets, retryable failure classes, response and partial-audio cleanup, provider-side duplicate risk, redacted diagnostics, cancellation, and long-generation regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98303#issuecomment-5466813132>
+- Published: 2026-08-30T04:59:59Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/stuck-turn-stop-and-retry.md>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98315
+- Topic: canonical finish-reason normalization, streaming and non-streaming convergence, unknown-value preservation, length-recovery and compaction evidence, idempotency, and terminal-ledger regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98315#issuecomment-5466820052>
+- Published: 2026-08-30T05:01:47Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/output-token-limit-reached.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/compaction-summary-truncated.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `Pascapone/pibo` issue #731
+- Topic: user-settings versus managed-runtime config authority, effective-settings precedence, revisioned readback, atomic capacity reservation, fallback semantics, and restart/concurrency regression coverage
+- Reply: <https://github.com/Pascapone/pibo/issues/731#issuecomment-5466824273>
+- Direct target evidence: <https://github.com/Pascapone/pibo/issues/731> ; <https://github.com/Pascapone/pibo/blob/2aef244301f5d181624662fdad53e18e83e80bd9/src/previews/manager.ts#L56-L95>
+- Handbook role: independent Harness analogy only; not Pibo documentation or a direct fix.
+- Published: 2026-08-30T05:02:55Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/conversation-update-before-start.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `Pascapone/pibo` issue #729
+- Topic: active mode-edit reservation loss, stale completion ownership, atomic run transitions, revision-fenced scheduler recovery, CLI/API conflict semantics, and no-overlap regression coverage
+- Reply: <https://github.com/Pascapone/pibo/issues/729#issuecomment-5466828423>
+- Direct target evidence: <https://github.com/Pascapone/pibo/issues/729> ; <https://github.com/Pascapone/pibo/blob/2aef244301f5d181624662fdad53e18e83e80bd9/src/loops/store.ts#L425-L478> ; <https://github.com/Pascapone/pibo/blob/2aef244301f5d181624662fdad53e18e83e80bd9/src/loops/store.ts#L545-L584>
+- Handbook role: independent Harness analogy only; not Pibo documentation or a direct fix.
+- Published: 2026-08-30T05:03:59Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/goal-round-subagent-wait.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/single-writer-session-roots.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `Pascapone/pibo` issue #730
+- Topic: post-install identity verification authority, command/result/exit-code separation, verified-absent versus unverifiable states, idempotent retries, redacted receipts, and rollback/cleanup coverage
+- Reply: <https://github.com/Pascapone/pibo/issues/730#issuecomment-5466832317>
+- Direct target evidence: <https://github.com/Pascapone/pibo/issues/730> ; <https://github.com/Pascapone/pibo/blob/2aef244301f5d181624662fdad53e18e83e80bd9/src/vscode/install.ts#L150-L205>
+- Handbook role: independent Harness analogy only; not Pibo documentation or a direct fix.
+- Published: 2026-08-30T05:04:59Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html>
 - Baseline at publish: 91 Stars, 14 forks

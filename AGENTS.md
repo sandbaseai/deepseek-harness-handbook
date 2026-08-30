@@ -60,6 +60,14 @@ This repository is an English-first, multilingual community handbook about DeepS
 - Prefer the JSON request-body form when creating or editing a long comment: write a temporary JSON payload, call `gh api … -X PATCH --input <file>` (or the corresponding comments endpoint), read the returned `body` and `updated_at` to verify the write, then remove the temporary file. Never place credentials or unredacted secrets in the payload, shell history, process arguments, or logs.
 - If a comment edit reports a transient API failure, read the comment first to confirm whether it changed before retrying; do not create a duplicate comment while the write state is uncertain.
 
+### Source-backed external reviews
+
+- Before publishing or editing an external issue/PR review, inspect the target project's actual source, tests, and stated base revision. Treat a report or reproduction as a hypothesis until the relevant functions and branches have been checked.
+- Make the review traceable to concrete evidence: link the target project's issue/reproduction and the exact source files or revision that support the diagnosis. Keep observed behavior, inference, and proposed contract separate; do not claim a fix for code or failure modes outside the inspected scope.
+- Every recommendation must be actionable and specific to the target code: name the ownership/state/serialization boundary, the failure branch, and regression cases that would prove the change. Do not publish generic reliability checklists that are not grounded in the target implementation.
+- This is a DeepSeek Harness handbook, not documentation for Pibo, Hermes Agent, or another external project. For an external review, the target project's source, tests, issue, and documentation are the direct remediation path. Link a handbook page only when it gives reusable guidance that genuinely helps with the reported boundary; label it explicitly as an independent, community-maintained Harness analogy, never as the external project's documentation or fix. Omit the handbook link when it would not help the affected users.
+- After creating or editing a comment, read back the rendered body and update timestamp. If the comment is found to be too broad, inaccurate, or misleading about applicability, correct it with target-project evidence before continuing promotion.
+
 ### PR and fork hygiene
 
 - Submit small, reviewable metadata or resource-list PRs to relevant community repositories.
