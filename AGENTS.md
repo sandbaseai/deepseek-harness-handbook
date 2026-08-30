@@ -53,6 +53,13 @@ This repository is an English-first, multilingual community handbook about DeepS
 - Track real GitHub Stars, forks, traffic, referrers, open PRs, and release state with `gh api`; treat these as changing metrics and re-check before reporting.
 - Current working baseline (2026-08-30): 80 Stars, 13 forks, 82 curated resources, 173 canonical pages, 202 localized pages. The growth target is 100 genuine Stars.
 
+### External comment formatting
+
+- Format GitHub issue and pull-request replies as explicit HTML blocks so the rendered comment keeps its visual hierarchy across GitHub views: use `<h3>` for section labels, `<p>` for paragraphs, `<ul><li>` or `<ol><li>` for lists, and `<a href="…">…</a>` for handbook links.
+- Keep one blank line between block elements. Use a compact sequence such as `Review`, `Suggested contract`, `Regression matrix`, and `Handbook reference`; do not mix Markdown heading syntax with HTML headings in the same reply.
+- Prefer the JSON request-body form when creating or editing a long comment: write a temporary JSON payload, call `gh api … -X PATCH --input <file>` (or the corresponding comments endpoint), read the returned `body` and `updated_at` to verify the write, then remove the temporary file. Never place credentials or unredacted secrets in the payload, shell history, process arguments, or logs.
+- If a comment edit reports a transient API failure, read the comment first to confirm whether it changed before retrying; do not create a duplicate comment while the write state is uncertain.
+
 ### PR and fork hygiene
 
 - Submit small, reviewable metadata or resource-list PRs to relevant community repositories.
