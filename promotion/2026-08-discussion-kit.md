@@ -103,6 +103,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — mytab0r/edge-harness #48
+
+- Venue: `mytab0r/edge-harness` issue #48
+- Topic: headless DSH job readiness, tarball/runtime identity, durable Session evidence, idempotent task completion, credential boundaries, and cleanup branches
+- Reply: <https://github.com/mytab0r/edge-harness/issues/48#issuecomment-5466375787>
+- Published: 2026-08-30T03:04:02Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/headless-agent.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/live-session-log-durability.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
