@@ -449,6 +449,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/credential-storage-threat-model.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5061
+- Topic: auditable Tacit learning receipts, directive scope/privacy, deletion and retry isolation, tool-policy boundaries, and non-causal cost/quality reporting
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5061#discussioncomment-18202958>
+- Published: 2026-08-30T02:01:04Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/sessions-vs-memory.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
