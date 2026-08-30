@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #53
+- Topic: host terminal capability contract, shell/platform-aware routing, explicit command normalization, separate inspection versus execution authority, and cross-shell read-only regression evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/53#discussioncomment-18203191>
+- Published: 2026-08-30T02:38:06Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/pty-shell-path.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #55
 - Topic: separate CLI executability from profile plugin-tree health, inspect global package topology, compare fresh and existing profiles, and fail atomically on missing dependencies
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/55#discussioncomment-18203186>
