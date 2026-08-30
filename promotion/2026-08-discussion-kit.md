@@ -455,3 +455,10 @@ evidence.
 - Published: 2026-08-30T01:45:35Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
+
+- Venue: `qkycir-123/dsh-run2skill` issue #154
+- Topic: Remote migration evidence by transport/command/authority/recovery layer, negative authorization matrix, and dual compatibility-line packaging
+- Reply: <https://github.com/qkycir-123/dsh-run2skill/issues/154#issuecomment-5466072611>
+- Published: 2026-08-30T01:46:35Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
