@@ -75,7 +75,6 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Published: 2026-08-30T03:00:55Z (UTC)
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
 - Baseline at publish: 91 Stars, 14 forks
-
 - Venue: `omnigent-ai/omnigent` issue #4935
 - Topic: chat-to-app-server slash-skill resolution, registry snapshot authority, exact command parsing, stale or unavailable skill failures, and terminal/chat payload parity
 - Reply: <https://github.com/omnigent-ai/omnigent/issues/4935#issuecomment-5466554689>
@@ -1703,4 +1702,10 @@ evidence.
 - Reply: <https://github.com/NousResearch/hermes-agent/pull/98335#issuecomment-5466789705>
 - Published: 2026-08-30T04:53:22Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-input-modalities.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98341
+- Topic: structured tool-result block preservation, whitespace-only output semantics, idempotent provider conversion, provider-neutral replay, sentinel isolation, and cross-provider failure regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98341#issuecomment-5466792802>
+- Published: 2026-08-30T04:54:11Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-cross-provider-reasoning-replay.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/dangling-tool-calls-insufficient-results.html>
 - Baseline at publish: 91 Stars, 14 forks
