@@ -1545,3 +1545,10 @@ evidence.
 - Published: 2026-08-30T04:20:51Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` pull request #714
+- Topic: nested Project deletion safety, canonical path and symlink checks, filesystem/SQLite transaction boundaries, TOCTOU protection, crash recovery, and legacy reconciliation
+- Reply: <https://github.com/Pascapone/pibo/pull/714#issuecomment-5466673476>
+- Published: 2026-08-30T04:21:54Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/workspace-write-shared-cache.html>
+- Baseline at publish: 91 Stars, 14 forks
