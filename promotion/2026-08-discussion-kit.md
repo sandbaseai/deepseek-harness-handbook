@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `microsoft/agent-framework` issue #7952
+- Topic: preserve streaming response metadata across WorkflowAgent conversion, defensive property copying, resume-token semantics, and direct-versus-wrapper regression evidence
+- Reply: <https://github.com/microsoft/agent-framework/issues/7952#issuecomment-5466465910>
+- Published: 2026-08-30T03:26:36Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/live-session-log-durability.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `iamtatsuki05/dotfiles` issue #31
 - Topic: immutable lease/effect identity tuples, provider fencing, UNKNOWN versus FENCE_PENDING, crash-point recovery, and stale-receipt evidence
 - Reply: <https://github.com/iamtatsuki05/dotfiles/issues/31#issuecomment-5466462629>
