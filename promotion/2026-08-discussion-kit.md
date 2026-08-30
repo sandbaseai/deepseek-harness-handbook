@@ -441,3 +441,10 @@ evidence.
 - Published: 2026-08-30T01:43:56Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
+
+- Venue: `wingsky-1/xiaozhuge` issue #156
+- Topic: separate alpha.1 bundle-load and behavior gates, capability-based API adaptation, RPC acceptance evidence, and full package-graph rollback
+- Reply: <https://github.com/wingsky-1/xiaozhuge/issues/156#issuecomment-5466064093>
+- Published: 2026-08-30T01:44:45Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>
+- Baseline at publish: 88 Stars, 13 forks
