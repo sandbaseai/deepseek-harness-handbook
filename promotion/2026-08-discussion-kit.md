@@ -112,6 +112,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/headless-agent.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/live-session-log-durability.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — ntd4996/agentpet #54
+
+- Venue: `ntd4996/agentpet` issue #54
+- Topic: DSH product identity, capability separation, exact-version pinning, adapter lifecycle, and minimum compatibility evidence
+- Reply: <https://github.com/ntd4996/agentpet/issues/54#issuecomment-5466379441>
+- Published: 2026-08-30T03:04:56Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
