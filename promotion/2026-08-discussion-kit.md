@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98221
+
+- Venue: `NousResearch/hermes-agent` issue #98221
+- Topic: Windows direct-spawn gateway self-restart; supervised versus in-process ownership, successor readiness/identity, distinct restart outcomes, and profile/PID regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98221#issuecomment-5467258089>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98221> ; the report reproduces `hermes gateway restart` from a Telegram-approved terminal command under a Startup-folder VBS launch
+- Source inspected: <https://github.com/NousResearch/hermes-agent/blob/main/hermes_cli/gateway.py> ; current main exposes POSIX `SIGUSR1` graceful-restart helpers and bounded PID waiting, which do not by themselves establish the Windows direct-spawn path
+- Handbook role: none; the Hermes issue and source are the direct remediation path
+- Published: 2026-08-30T06:55:42Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98218
 
 - Venue: `NousResearch/hermes-agent` issue #98218
