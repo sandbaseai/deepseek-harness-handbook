@@ -1322,6 +1322,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #703
+- Topic: fail-closed browser lease cleanup, profile-deletion ordering, PID identity checks, retryable dirty-state recovery, and machine-readable failure outcomes
+- Reply: <https://github.com/Pascapone/pibo/issues/703#issuecomment-5466600070>
+- Published: 2026-08-30T04:02:21Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `Natedorr/AutoSWE` pull request #144
 - Topic: Codex max-turns contract verification, version-gated live CLI fixtures, behavioral cap evidence, backend-specific configuration, and sanitized diagnostics
 - Reply: <https://github.com/Natedorr/AutoSWE/pull/144#issuecomment-5466573825>
