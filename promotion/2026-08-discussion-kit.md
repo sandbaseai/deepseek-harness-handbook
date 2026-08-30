@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5058
+- Topic: phone-width sidebar drawer behavior, focus/accessibility, and overlay ownership boundaries
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5058#discussioncomment-18202771>
+- Published: 2026-08-30T01:12:04Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/multi-session-presentation-contract.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5064
 - Topic: null-origin `WorkerTunnel` URL resolution and separate WebView/IPC/auth boundaries
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5064#discussioncomment-18202763>
