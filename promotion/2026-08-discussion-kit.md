@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98216
+
+- Venue: `NousResearch/hermes-agent` pull request #98216
+- Topic: hard exclusion of `.archive`/`.library` skill storage across indexing, learning-graph, blueprint, profile-disable, and sync scans; explicit-path preview boundaries and race/symlink regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98216#issuecomment-5467292853>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98216> ; the PR adds `.library` to `EXCLUDED_SKILL_DIRS`, guards seven discovery paths, and reports 158 targeted tests passing
+- Source/test evidence: `agent/skill_utils.py`, `agent/learning_graph.py`, `hermes_cli/web_server.py`, `tools/blueprints.py`, `tools/skills_sync_client.py`, `tools/skills_tool.py`, and `tests/tools/test_skill_exclusion_hardening.py` in PR head `b1c83815f0fcf6d9e9f89d4f8e3f8b4411a4bb4a`
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:04:37Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98219
 
 - Venue: `NousResearch/hermes-agent` pull request #98219
