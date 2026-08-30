@@ -1566,3 +1566,17 @@ evidence.
 - Published: 2026-08-30T04:23:40Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #718
+- Topic: mutually exclusive compute cleanup modes, pre-mutation validation, fake-Docker evidence, and dry-run regression controls
+- Reply: <https://github.com/Pascapone/pibo/issues/718#issuecomment-5466690257>
+- Published: 2026-08-30T04:26:31Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-archive-trash-delete.html>
+- Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` pull request #719
+- Topic: bind-host versus advertised-host identity, structured endpoint tuples, concurrent worker leases, restart/reconnect, and failed-lease cleanup
+- Reply: <https://github.com/Pascapone/pibo/pull/719#issuecomment-5466690305>
+- Published: 2026-08-30T04:26:31Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html>
+- Baseline at publish: 91 Stars, 14 forks
