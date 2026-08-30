@@ -1552,3 +1552,17 @@ evidence.
 - Published: 2026-08-30T04:21:54Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/workspace-write-shared-cache.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #717
+- Topic: migration completeness for legacy owner_scope constraints, compatibility-accurate schema revisions, transactional table rebuilds, crash-safe upgrade states, and schema fingerprint readback
+- Reply: <https://github.com/Pascapone/pibo/issues/717#issuecomment-5466678051>
+- Published: 2026-08-30T04:23:10Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` pull request #716
+- Topic: room/session ownership transitions, generation-fenced streaming, stale-event suppression, rapid-switch races, and restart-safe selection readback
+- Reply: <https://github.com/Pascapone/pibo/pull/716#issuecomment-5466679954>
+- Published: 2026-08-30T04:23:40Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html>
+- Baseline at publish: 91 Stars, 14 forks
