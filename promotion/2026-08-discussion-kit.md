@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `deepseek-ai/deepseek-harness` Discussion #5073
+- Topic: read-only workspace git snapshots, stale/generation handling, comparison failure states, authorization boundaries, and composer evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5073#discussioncomment-18203449>
+- Published: 2026-08-30T03:38:13Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/workspace-write-shared-cache.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/live-session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `deepseek-ai/deepseek-harness` Discussion #5074
 - Topic: plugin directory versus installability evidence, host/browser network boundaries, stale-cache behavior, LLM cost limits, and uninstall/rollback validation
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5074#discussioncomment-18203443>
