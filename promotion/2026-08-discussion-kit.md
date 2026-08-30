@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98431
+
+- Venue: `NousResearch/hermes-agent` pull request #98431
+- Topic: normalizing `path:`/`local:` pseudo-schemes in image resolution; Windows path forms, URI boundaries, backend confinement, and vision retry coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98431#issuecomment-5467506796>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98431> ; the PR strips one bounded pseudo-scheme before existing path handling while preserving real-scheme rejection
+- Source/test evidence: `tools/image_source.py` and `tests/tools/test_image_source.py` in PR head `6c2c8202239a391c59ed2746e285d8dff280e6db`; the PR reports 22 image-source tests and 37 vision/confinement tests passing
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:57:33Z (UTC)
+- Baseline at publish: 92 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98418
 
 - Venue: `NousResearch/hermes-agent` pull request #98418
