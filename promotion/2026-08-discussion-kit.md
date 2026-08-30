@@ -1322,6 +1322,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Natedorr/AutoSWE` pull request #144
+- Topic: Codex max-turns contract verification, version-gated live CLI fixtures, behavioral cap evidence, backend-specific configuration, and sanitized diagnostics
+- Reply: <https://github.com/Natedorr/AutoSWE/pull/144#issuecomment-5466573825>
+- Published: 2026-08-30T03:54:57Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `yyjeqhc/webcodex` pull request #224
 - Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
 - Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
