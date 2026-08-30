@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98177
+
+- Venue: `NousResearch/hermes-agent` pull request #98177
+- Topic: dispatching `/title` during an active gateway turn without interrupting the agent; separating metadata persistence from Telegram topic rename and preserving fail-closed behavior for unwired busy commands
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98177#issuecomment-5467420823>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98177> ; the PR marks `title` as `busy_policy="dispatch"` and adds it to the gateway's plain-command handler table
+- Source/test evidence: `hermes_cli/commands.py`, `gateway/run.py`, and `tests/gateway/test_running_agent_session_toggles.py` in PR head `60f22079d325546dc25646855e27cf8200377397`; the focused tests cover active-turn set/show behavior, concurrent DB append, and missing-handler fail-closed behavior
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:36:02Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98179
 
 - Venue: `NousResearch/hermes-agent` pull request #98179
