@@ -1357,6 +1357,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #680
+- Topic: fail-closed Loop target admission, exactly-one selector validation, no-persistence-on-conflict, shared CLI/API validator reuse, and edit rollback
+- Reply: <https://github.com/Pascapone/pibo/issues/680#issuecomment-5466634812>
+- Published: 2026-08-30T04:11:31Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `Pascapone/pibo` issue #691
 - Topic: scoped portable-history tool invocation identity, call/result pairing, duplicate and reordered events, explicit omission accounting, and cross-runtime replay evidence
 - Reply: <https://github.com/Pascapone/pibo/issues/691#issuecomment-5466626841>
