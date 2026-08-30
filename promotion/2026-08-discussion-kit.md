@@ -1531,3 +1531,10 @@ evidence.
 - Published: 2026-08-30T04:19:12Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #715
+- Topic: atomic concurrent port-block reservation, allocation leases, launch-time revalidation, failed-spawn cleanup, endpoint readiness, and resource ownership receipts
+- Reply: <https://github.com/Pascapone/pibo/issues/715#issuecomment-5466666900>
+- Published: 2026-08-30T04:20:08Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html>
+- Baseline at publish: 91 Stars, 14 forks
