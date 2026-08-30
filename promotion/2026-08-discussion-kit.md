@@ -1615,3 +1615,10 @@ evidence.
 - Published: 2026-08-30T04:31:45Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` issue #98336
+- Topic: Windows update hand-off ownership, venv file-lock discovery, process termination races, service relaunch, post-update health verification, and rollback continuity
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98336#issuecomment-5466713994>
+- Published: 2026-08-30T04:32:43Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-replacefile-eacces.html>
+- Baseline at publish: 91 Stars, 14 forks
