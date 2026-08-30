@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — deepseek-ai/deepseek-harness Discussion #5080
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5080
+- Topic: dsh-im's nine-channel integration; credential scope, inbound authorization, attachment/path boundaries, event idempotency, Session isolation, and upgrade rollback checks
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5080#discussioncomment-18204388>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5080> ; the announcement documents reuse of Host Session/Workspace/credential storage, nine IM channels, AI Office Connector, file/image return, and package installation
+- Source inspected: <https://github.com/xmanrui/dsh-im/blob/main/README.md>
+- Handbook role: explicitly labeled independent community plugin-audit reference; not official DeepSeek documentation, security certification, or compatibility endorsement
+- Published: 2026-08-30T06:51:45Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — deepseek-ai/deepseek-harness Discussion #5086
 
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5086
