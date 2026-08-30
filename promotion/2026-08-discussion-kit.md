@@ -1426,3 +1426,10 @@ evidence.
 - Published: 2026-08-30T03:56:56Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #685
+- Topic: authoritative Docker bind metadata, endpoint scope capabilities, post-spawn reachability probes, IPv4/IPv6 coverage, generation-safe reconnects, and least-exposed defaults
+- Reply: <https://github.com/Pascapone/pibo/issues/685#issuecomment-5466613815>
+- Published: 2026-08-30T04:05:51Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html>
+- Baseline at publish: 91 Stars, 14 forks
