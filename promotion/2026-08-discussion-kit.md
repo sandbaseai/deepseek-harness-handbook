@@ -96,6 +96,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/markdown-single-tilde.md>
 - Baseline at publish: 88 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #100
+- Topic: Node engine/version A-B matrix, npx cache and package-tree isolation, read-only zlib capability probe, loader-cause evidence, and persistence smoke validation
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/100#discussioncomment-18203179>
+- Published: 2026-08-30T02:35:20Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/install-deepseek-harness.md>
+- Baseline at publish: 88 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #109
 - Topic: host-side retryability classification, attempt/generation receipts, authoritative workspace checks, idempotent successor side effects, budget invariants, and terminal-state distinctions
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/109#discussioncomment-18203174>
