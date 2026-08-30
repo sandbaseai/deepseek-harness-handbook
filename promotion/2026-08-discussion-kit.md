@@ -217,3 +217,10 @@ evidence.
 - Published: 2026-08-30T01:02:19Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-recovery.html>
 - Baseline at publish: 87 Stars, 13 forks
+
+- Venue: `alondero/buildmesh` issue #1123
+- Topic: separate DSH harness, DeepSeek provider, Session, and API-account contracts
+- Reply: <https://github.com/alondero/buildmesh/issues/1123#issuecomment-5465899728>
+- Published: 2026-08-30T01:04:52Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html>
+- Baseline at publish: 87 Stars, 13 forks
