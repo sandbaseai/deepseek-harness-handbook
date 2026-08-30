@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5064
+- Topic: null-origin `WorkerTunnel` URL resolution and separate WebView/IPC/auth boundaries
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5064#discussioncomment-18202763>
+- Published: 2026-08-30T01:10:55Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `CZM1998/dsh_cot_gw_dyn` issue #1
 - Topic: distinguish dynamic tool-surface changes from prompt-prefix cache invalidation
 - Reply: <https://github.com/CZM1998/dsh_cot_gw_dyn/issues/1#issuecomment-5465916757>
