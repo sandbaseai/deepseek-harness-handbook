@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `xmanrui/dsh-im` issue #82
+- Topic: DSH alpha.1 plugin API drift (`apiProxy`/`listDirectory`), package-graph compatibility, and recovery-mode rollback
+- Reply: <https://github.com/xmanrui/dsh-im/issues/82#issuecomment-5465992666>
+- Published: 2026-08-30T01:27:36Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-install-recovery.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `sakibsadmanshajib/hive` issue #1262
 - Topic: MCP config delivery versus runtime consumption, tenant/Session isolation, and observable launch receipts
 - Reply: <https://github.com/sakibsadmanshajib/hive/issues/1262#issuecomment-5465987865>
