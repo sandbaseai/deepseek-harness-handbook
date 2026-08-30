@@ -470,6 +470,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `cheshireez/dsh-skill-hub` issue #6
+- Topic: alpha.1 client module-table failure, stale runtime external detection, host capability preflight, and tarball/profile recovery validation
+- Reply: <https://github.com/cheshireez/dsh-skill-hub/issues/6#issuecomment-5466101651>
+- Published: 2026-08-30T01:54:15Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/git-plugin-missing-dist.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `Yan-Zero/dsh-std` issue #11
 - Topic: portable Session capability receipts, fail-closed negotiation, action ownership/idempotency, provenance, and read-only-first conformance cases
 - Reply: <https://github.com/Yan-Zero/dsh-std/issues/11#issuecomment-5466076298>
