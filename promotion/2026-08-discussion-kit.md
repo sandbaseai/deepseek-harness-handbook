@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `IHongTaoI/maestro-workflow` issue #23
+- Topic: explicit Worker instruction/context/permission envelopes, fail-closed host adapters, minimal evidence bundles, generated-worker validation, and typed handoffs
+- Reply: <https://github.com/IHongTaoI/maestro-workflow/issues/23#issuecomment-5466500768>
+- Published: 2026-08-30T03:35:40Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/subagent-route-inheritance.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-skill-context.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `openclaw/openclaw` issue #123133
 - Topic: native Responses API versus compatibility transport, provider capability matrices, versioned launch evidence, explicit fallback, and normalized event/usage tests
 - Reply: <https://github.com/openclaw/openclaw/issues/123133#issuecomment-5466497199>
