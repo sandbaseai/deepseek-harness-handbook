@@ -1343,6 +1343,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #709
+- Topic: merged MCP catalog source ownership, layered-config mutation, description overlays, stale-source conflicts, atomic writes, and next-process readback
+- Reply: <https://github.com/Pascapone/pibo/issues/709#issuecomment-5466605067>
+- Published: 2026-08-30T04:03:37Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `NousResearch/hermes-agent` issue #98332
 - Topic: native runtime crash isolation, serialized SQLite ownership, child-timeout versus owner health, signal-aware recovery classification, and crash-safe delegation state
 - Reply: <https://github.com/NousResearch/hermes-agent/issues/98332#issuecomment-5466598251>
