@@ -1336,6 +1336,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `NousResearch/hermes-agent` issue #98332
+- Topic: native runtime crash isolation, serialized SQLite ownership, child-timeout versus owner health, signal-aware recovery classification, and crash-safe delegation state
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98332#issuecomment-5466598251>
+- Published: 2026-08-30T04:01:51Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `omnigent-ai/omnigent` issue #5804
 - Topic: runner-owned Codex workspace propagation, canonical session/workspace identity, resume and thread-rotation inheritance, path authorization, and generation-safe execution evidence
 - Reply: <https://github.com/omnigent-ai/omnigent/issues/5804#issuecomment-5466584372>
