@@ -1321,3 +1321,10 @@ evidence.
 - Published: 2026-08-30T03:51:02Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `yyjeqhc/webcodex` pull request #224
+- Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
+- Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
+- Published: 2026-08-30T03:52:06Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
