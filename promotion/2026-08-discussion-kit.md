@@ -85,6 +85,24 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/sandbox-denied-vs-unavailable.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — shaobeichen/dsh-pocket #81
+
+- Venue: `shaobeichen/dsh-pocket` issue #81
+- Topic: DSH Desktop browser-access gate versus successful login, safe 403 handling, renderer-secret isolation, and mobile exposure checks
+- Reply: <https://github.com/shaobeichen/dsh-pocket/issues/81#issuecomment-5466372012>
+- Published: 2026-08-30T03:03:05Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/remote-web-secure-context.md>
+- Baseline at publish: 91 Stars, 14 forks
+
+## Published outreach — MichengAI/dsh-skills-manager #5
+
+- Venue: `MichengAI/dsh-skills-manager` issue #5
+- Topic: DSH Project Skills versus user/global scope, discovery refresh, visibility/enforcement limits, and cross-workspace isolation fixtures
+- Reply: <https://github.com/MichengAI/dsh-skills-manager/issues/5#issuecomment-5466372070>
+- Published: 2026-08-30T03:03:06Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
