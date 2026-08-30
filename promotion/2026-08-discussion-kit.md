@@ -193,6 +193,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook>, <https://sandbaseai.github.io/deepseek-harness-handbook/>, <https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — DeepSeek Harness Discussion #4501
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #4501
+- Topic: duplicate tool-call IDs during Web Chat replay, read-only Session recovery, projection versus source integrity, paired call/result transforms, and provider/gateway ownership
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/4501#discussioncomment-18203342>
+- Published: 2026-08-30T03:12:17Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/session-history-corruption-triage.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
