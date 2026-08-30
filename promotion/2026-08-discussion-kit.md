@@ -1329,6 +1329,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `openclaw/openclaw` issue #133058
+- Topic: execution-versus-delivery terminal state, idempotent blocked follow-ups, bounded retry and heartbeat recovery, cron visibility, and late-delivery reconciliation
+- Reply: <https://github.com/openclaw/openclaw/issues/133058#issuecomment-5466577356>
+- Published: 2026-08-30T03:55:58Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `yyjeqhc/webcodex` pull request #224
 - Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
 - Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
