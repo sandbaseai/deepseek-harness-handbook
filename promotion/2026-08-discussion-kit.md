@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `adoresever/graph-memory` issue #93
+- Topic: separate DSH context compaction from durable retention, conservative policy defaults, transaction-safe provenance checks, bounded GC, dry-run/backup/restore evidence, and concurrent-extraction tests
+- Reply: <https://github.com/adoresever/graph-memory/issues/93#issuecomment-5466242504>
+- Published: 2026-08-30T02:29:18Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/live-session-log-durability.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `yangbobo2021/relay-dsh-plugin-codex` issue #23
 - Topic: Codex source-path containment, parser-revision-bound scan receipts, deterministic import keys, unsupported-record handling, and interrupted-import cleanup
 - Reply: <https://github.com/yangbobo2021/relay-dsh-plugin-codex/issues/23#issuecomment-5466237215>
