@@ -449,6 +449,13 @@ evidence.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/persistent-web-ui-client-plugin.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `yailPeralta/ast-mcp-server` issue #107
+- Topic: monotonic timeout deadlines, queue/execution budget ownership, generation-safe cancellation, cleanup receipts, and exact-host evidence
+- Reply: <https://github.com/yailPeralta/ast-mcp-server/issues/107#issuecomment-5466091456>
+- Published: 2026-08-30T01:51:32Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/long-running-terminal.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `Yan-Zero/dsh-std` issue #11
 - Topic: portable Session capability receipts, fail-closed negotiation, action ownership/idempotency, provenance, and read-only-first conformance cases
 - Reply: <https://github.com/Yan-Zero/dsh-std/issues/11#issuecomment-5466076298>
