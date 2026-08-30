@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `wlj521/dsh-ui-tweaks` issue #5
+- Topic: Markdown renderer-scoped code styling, semantic spacing diagnosis, theme/forced-colors contrast, narrow-layout behavior, accessibility states, and versioned visual regression evidence
+- Reply: <https://github.com/wlj521/dsh-ui-tweaks/issues/5#issuecomment-5466245572>
+- Published: 2026-08-30T02:30:06Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/markdown-single-tilde.md>
+- Baseline at publish: 88 Stars, 14 forks
+
 - Venue: `adoresever/graph-memory` issue #93
 - Topic: separate DSH context compaction from durable retention, conservative policy defaults, transaction-safe provenance checks, bounded GC, dry-run/backup/restore evidence, and concurrent-extraction tests
 - Reply: <https://github.com/adoresever/graph-memory/issues/93#issuecomment-5466242504>
