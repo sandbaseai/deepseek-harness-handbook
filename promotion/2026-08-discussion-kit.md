@@ -477,6 +477,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/git-plugin-missing-dist.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `definitely-stable/dsh-toolchain1` issue #34
+- Topic: separate target/definition/execution identities, classify evidence mismatch independently, and adversarially verify generation-stale acceptance results
+- Reply: <https://github.com/definitely-stable/dsh-toolchain1/issues/34#issuecomment-5466105134>
+- Published: 2026-08-30T01:55:13Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `Yan-Zero/dsh-std` issue #11
 - Topic: portable Session capability receipts, fail-closed negotiation, action ownership/idempotency, provenance, and read-only-first conformance cases
 - Reply: <https://github.com/Yan-Zero/dsh-std/issues/11#issuecomment-5466076298>
