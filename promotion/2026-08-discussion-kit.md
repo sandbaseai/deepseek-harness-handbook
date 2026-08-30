@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #106
+- Topic: all/none/partial model selection state, provider/catalog revision snapshots, filtered bulk actions, stale-response protection, unavailable-model handling, and credential-safe acceptance evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/106#discussioncomment-18203219>
+- Published: 2026-08-30T02:44:27Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/session-model-default-coupling.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #29
 - Topic: session/request-scoped mode transitions, generation-safe stream cancellation, runtime profile binding, provider/tool/policy consistency, and post-switch revision evidence
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/29#discussioncomment-18203217>
