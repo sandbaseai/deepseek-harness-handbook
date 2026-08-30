@@ -1496,3 +1496,10 @@ evidence.
 - Published: 2026-08-30T04:11:01Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` pull request #700
+- Topic: ancestor-first signal reconstruction, canonical parent/root topology, generation-safe restart replay, idempotent projection, and parent-control fencing
+- Reply: <https://github.com/Pascapone/pibo/pull/700#issuecomment-5466648486>
+- Published: 2026-08-30T04:15:11Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
