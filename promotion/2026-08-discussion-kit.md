@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `marius-patrik/dsh-stack` issue #169
+- Topic: journaled lifecycle install state, per-root locking, frozen/offline repair, freshness markers, side-effect-light stop behavior, failure branches, and boot smoke evidence
+- Reply: <https://github.com/marius-patrik/dsh-stack/issues/169#issuecomment-5466230914>
+- Published: 2026-08-30T02:26:34Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-install-recovery.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `smanx/deepseek-harness-docker` issue #1
 - Topic: distinguish container default workspace from Session cwd, fresh-session versus existing-session evidence, normalized path identity, mount failures, and explicit apply semantics
 - Reply: <https://github.com/smanx/deepseek-harness-docker/issues/1#issuecomment-5466228169>
