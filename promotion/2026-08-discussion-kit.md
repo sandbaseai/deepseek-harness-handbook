@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `deepseek-ai/deepseek-harness` Discussion #4868
+- Topic: split npx resolve/download/extract/start phases, isolated cache comparison, proxy evidence, safe cancellation, and Windows cleanup/rollback
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/4868#discussioncomment-18203454>
+- Published: 2026-08-30T03:39:23Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/npx-install-prompt-hangs.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/install-doctor.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `deepseek-ai/deepseek-harness` Discussion #5073
 - Topic: read-only workspace git snapshots, stale/generation handling, comparison failure states, authorization boundaries, and composer evidence
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5073#discussioncomment-18203449>
