@@ -558,7 +558,7 @@ evidence.
 - Topic: durable typed planning-session envelope, stage artifact contract, shared NL/Block Kit intent execution, journaled provider/tool evidence, and replay without exposing chain-of-thought
 - Reply: <https://github.com/hugocool/FateForger/issues/206#issuecomment-5466199967>
 - Published: 2026-08-30T02:18:34Z (UTC); corrected: 2026-08-30T02:18:50Z (UTC)
-- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/sessions-and-runtime-state.html>
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/sessions-and-runtime-state.md>
 - Baseline at publish: 88 Stars, 13 forks
 
 - Venue: `sympoies/dsh-runtime-kit` issue #66
