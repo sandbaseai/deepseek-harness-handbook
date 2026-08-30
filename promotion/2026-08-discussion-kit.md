@@ -67,6 +67,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/workspace-write-shared-cache.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
 - Baseline at publish: 90 Stars, 14 forks
 
+## Published outreach — Alessandro-Pang/harnessmith #2
+
+- Venue: `Alessandro-Pang/harnessmith` issue #2
+- Topic: DSH identity and AGENTS.md scope-chain evidence, adapter lifecycle safety, deterministic enforcement boundaries, and install/restore acceptance cases
+- Reply: <https://github.com/Alessandro-Pang/harnessmith/issues/2#issuecomment-5466364006>
+- Published: 2026-08-30T03:00:55Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
