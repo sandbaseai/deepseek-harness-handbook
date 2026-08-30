@@ -1433,3 +1433,10 @@ evidence.
 - Published: 2026-08-30T04:05:51Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #708
+- Topic: custom service-name propagation, single-source gateway lifecycle identity, staged-unit preflight, generation-safe reconfiguration, and deployment rollback
+- Reply: <https://github.com/Pascapone/pibo/issues/708#issuecomment-5466617571>
+- Published: 2026-08-30T04:06:52Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html>
+- Baseline at publish: 91 Stars, 14 forks
