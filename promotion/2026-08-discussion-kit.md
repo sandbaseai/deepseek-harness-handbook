@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: `dsh-market/dsh-market` issue #422
+- Topic: URL tarball source normalization, integrity generation/validation, profile lockfile snapshots, atomic install/rollback, proxy/cache separation, and Windows reinstall evidence
+- Reply: <https://github.com/dsh-market/dsh-market/issues/422#issuecomment-5466323723>
+- Published: 2026-08-30T02:50:08Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-install-recovery.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: `volcengine/ark-cli` issue #19
 - Topic: provider/catalog ownership, additive model registration, provider-qualified IDs, revisioned config snapshots, idempotent helper runs, explicit legacy migration, and credential isolation
 - Reply: <https://github.com/volcengine/ark-cli/issues/19#issuecomment-5466320162>
