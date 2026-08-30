@@ -1349,3 +1349,10 @@ evidence.
 - Published: 2026-08-30T03:54:30Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` pull request #132723
+- Topic: restart-safe inbound message receipts, deterministic deduplication, identity-generation fencing, claim settlement ordering, and operator-versus-sender visibility
+- Reply: <https://github.com/openclaw/openclaw/pull/132723#issuecomment-5466580693>
+- Published: 2026-08-30T03:56:56Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
