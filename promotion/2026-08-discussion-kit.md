@@ -1698,3 +1698,9 @@ evidence.
 - Published: 2026-08-30
 - Handbook URLs: https://sandbaseai.github.io/deepseek-harness-handbook/model-input-modalities.html ; https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html
 - Baseline: 91 stars, 14 forks, 4 watchers (checked 2026-08-30)
+- Venue: `NousResearch/hermes-agent` pull request #98335
+- Topic: multimodal transcript non-blank classification, exact row preservation, atomic repair and marker synchronization, provider-neutral replay, fail-closed unknown parts, and crash/restart regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98335#issuecomment-5466789705>
+- Published: 2026-08-30T04:53:22Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-input-modalities.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
