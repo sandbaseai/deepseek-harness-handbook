@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5052
+- Topic: running-session Direct-Steer submission, newline behavior, draft preservation, and durable admission evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5052#discussioncomment-18202791>
+- Published: 2026-08-30T01:15:56Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/prompt-accepted-before-durable.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/stuck-turn-stop-and-retry.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5053
 - Topic: empty-session ARIA semantics, landmarks, keyboard behavior, and measured contrast evidence
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5053#discussioncomment-18202787>
