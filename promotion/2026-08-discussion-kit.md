@@ -1629,3 +1629,10 @@ evidence.
 - Published: 2026-08-30T04:33:49Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` issue #133064
+- Topic: human-readable channel recovery attempts, snapshot-as-source-of-truth, input validation, JSON shape compatibility, and read-only diagnostics
+- Reply: <https://github.com/openclaw/openclaw/issues/133064#issuecomment-5466725535>
+- Published: 2026-08-30T04:35:51Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/diagnose.html>
+- Baseline at publish: 91 Stars, 14 forks
