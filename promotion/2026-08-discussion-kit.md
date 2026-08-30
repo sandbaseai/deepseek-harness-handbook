@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98207
+
+- Venue: `NousResearch/hermes-agent` pull request #98207
+- Topic: authenticated runtime reload of plugin API routes; trust gates, import-before-swap failure handling, route ordering, atomicity, and concurrent reload boundaries
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98207#issuecomment-5467315559>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98207> ; the PR adds `POST /api/plugins/<name>/reload`, shared source/enablement gating, module eviction, stale-route replacement, and catch-all ordering
+- Source/test evidence: `hermes_cli/web_server.py` and `tests/hermes_cli/test_web_server.py` in PR head `b655e2a88af3ecbe06fe76b71b7ae74322439bca`; the PR reports 203 focused passes and a live 15-route reload result
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:10:09Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98167
 
 - Venue: `NousResearch/hermes-agent` pull request #98167
