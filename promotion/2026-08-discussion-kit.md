@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98202
+
+- Venue: `NousResearch/hermes-agent` pull request #98202
+- Topic: Ollama/GLM natural-response-ending heuristic; decorative Unicode, grapheme boundaries, false-positive truncation, and provider-scope regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98202#issuecomment-5467346224>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98202> ; the PR adds decorative endings to `_has_natural_response_ending()` to prevent duplicate continuation responses
+- Source/test evidence: `run_agent.py` and `tests/run_agent/test_run_agent.py` in PR head `32b4c341e2226f8f4777f9481ee92303bcec1d22`; the PR reports 2 focused passes and a preserved mid-word control
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:17:50Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98205
 
 - Venue: `NousResearch/hermes-agent` pull request #98205
