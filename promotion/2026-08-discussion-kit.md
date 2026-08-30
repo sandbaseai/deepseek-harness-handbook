@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98425
+
+- Venue: `NousResearch/hermes-agent` pull request #98425
+- Topic: pruning OneDrive/iCloud Cloud Files roots before broad Windows search traversal; controller/backend locality, path containment, traversal-engine parity, and native Windows coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98425#issuecomment-5467429924>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98425> ; the PR adds Windows cloud-root discovery and feeds exclusions into rg, find, and grep paths before descent
+- Source/test evidence: `tools/file_operations.py` and `tests/tools/test_windows_cloud_placeholder_search.py` in PR head `ceee223036bda9039713d5f4f763b5858f3029bb`; the PR reports 9 new tests and documents pre-existing Windows-box failures separately
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:38:16Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98177
 
 - Venue: `NousResearch/hermes-agent` pull request #98177
