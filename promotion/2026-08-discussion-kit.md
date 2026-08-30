@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `nicobailon/pi-subagents` issue #1724
+- Topic: separate durable child outcomes from acceptance metadata, typed recovery classification, generation-safe post-compaction reload, and staged continuation policy
+- Reply: <https://github.com/nicobailon/pi-subagents/issues/1724#issuecomment-5466476751>
+- Published: 2026-08-30T03:29:27Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/ralph-bounded-failure-successor.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/live-session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `happy663/dotfiles` issue #314
 - Topic: finite agent-state contract, lifecycle-event provenance, generation-safe pane reuse, cross-agent fixtures, and reversible multiplexer PoC evidence
 - Reply: <https://github.com/happy663/dotfiles/issues/314#issuecomment-5466473763>
