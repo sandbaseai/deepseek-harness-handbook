@@ -1692,3 +1692,9 @@ evidence.
 - Published: 2026-08-30T04:49:08Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/degenerate-model-output.html>
 - Baseline at publish: 91 Stars, 14 forks
+- Venue: Hermes Agent PR #91557 — retain image-only user content
+- Topic: canonical normalized input_image replay, adapter-shape coupling, checkpoint interruption/restart, duplicate upload or billing prevention, fail-closed multipart handling, and compaction regression coverage
+- Reply: https://github.com/NousResearch/hermes-agent/pull/91557#issuecomment-5466784743
+- Published: 2026-08-30
+- Handbook URLs: https://sandbaseai.github.io/deepseek-harness-handbook/model-input-modalities.html ; https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html
+- Baseline: 91 stars, 14 forks, 4 watchers (checked 2026-08-30)
