@@ -1580,3 +1580,10 @@ evidence.
 - Published: 2026-08-30T04:26:31Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/remote-settings-loopback.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` issue #98334
+- Topic: rotating OAuth credentials across file and macOS Keychain stores, concurrent refresh generations, partial reconciliation, metadata preservation, and secret exposure through process arguments
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98334#issuecomment-5466697072>
+- Published: 2026-08-30T04:28:22Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/api-key-storage.html>
+- Baseline at publish: 91 Stars, 14 forks
