@@ -76,6 +76,13 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `AmaadMartin/adk-js` pull request #1114
+- Topic: HTTP+SSE MCP transport capability selection, explicit lifecycle ownership, deprecated-transport boundaries, timeout semantics, redaction, and reconnect evidence
+- Reply: <https://github.com/AmaadMartin/adk-js/pull/1114#issuecomment-5466549513>
+- Published: 2026-08-30T03:48:31Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-mcp.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — sympoies/dsh-runtime-kit #133
 
 - Venue: `sympoies/dsh-runtime-kit` issue #133
