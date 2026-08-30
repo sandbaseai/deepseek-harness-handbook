@@ -1657,3 +1657,10 @@ evidence.
 - Published: 2026-08-30T04:42:16Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` issue #133077
+- Topic: empty HTML formatting elements, visible-content invariants, sanitizer/parser agreement, idempotent outbound normalization, media-caption separation, and cross-channel regression coverage
+- Reply: <https://github.com/openclaw/openclaw/issues/133077#issuecomment-5466753683>
+- Published: 2026-08-30T04:43:39Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/web-dollar-math-rendering.html>
+- Baseline at publish: 91 Stars, 14 forks
