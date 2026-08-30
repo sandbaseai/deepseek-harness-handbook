@@ -477,6 +477,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/credential-storage-threat-model.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `Jstn-1g/dsh-live-voice` issue #8
+- Topic: credential-backed provider roundtrip versus live export-boundary evidence, explicit negative paths, Session/draft isolation, and sanitized receipts
+- Reply: <https://github.com/Jstn-1g/dsh-live-voice/issues/8#issuecomment-5466147154>
+- Published: 2026-08-30T02:05:44Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/credential-storage-threat-model.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
