@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98219
+
+- Venue: `NousResearch/hermes-agent` pull request #98219
+- Topic: dashboard credential-file denylist versus canonical write denylist; write-path regression coverage, case/path normalization, symlink/traversal behavior, and safe-dotfile near misses
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98219#issuecomment-5467283488>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98219> ; the diff adds canonical credential basenames and pattern-based read protection, plus `_netrc` and related stores to `build_write_denied_paths()`
+- Source/test evidence: `hermes_cli/web_server.py`, `agent/file_safety.py`, and `tests/hermes_cli/test_web_server_files.py` in PR head `cb3782c458462d167992da633633bb19bbe562ca`
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:02:20Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98184
 
 - Venue: `NousResearch/hermes-agent` issue #98184
