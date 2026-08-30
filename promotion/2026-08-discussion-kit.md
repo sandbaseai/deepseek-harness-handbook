@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #71
+- Topic: classify non-file .env layers without masking permission/I/O errors, avoid TOCTOU, preserve cwd/user-layer provenance, sanitize diagnostics, and test credential-resolution invariants
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/71#discussioncomment-18203193>
+- Published: 2026-08-30T02:39:02Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/auth-token-not-available.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #53
 - Topic: host terminal capability contract, shell/platform-aware routing, explicit command normalization, separate inspection versus execution authority, and cross-shell read-only regression evidence
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/53#discussioncomment-18203191>
