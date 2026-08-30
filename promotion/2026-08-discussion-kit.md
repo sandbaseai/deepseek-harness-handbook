@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #46
+- Topic: separate expose-internals, native addon ABI, loader-root, and optional-HMR capability failures; verify execArgv; avoid unsupported NODE_OPTIONS advice; compare clean install paths
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/46#discussioncomment-18203241>
+- Published: 2026-08-30T02:47:49Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/hmr-expose-internals-source-checkout.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #68
 - Topic: Host ABI migration inventory, provider/OAuth/credentials layering, pinned compatibility receipts, isolated load/read-only smoke gates, formal UI slots, and community-support labeling
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/68#discussioncomment-18203237>
