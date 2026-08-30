@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — deepseek-ai/deepseek-harness Discussion #5086
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5086
+- Topic: distinguish ambient credential scrubbing from explicit `env` opt-in; require redacted tests for `MULTICA_TOKEN`, managed `DSH_*` facts, the model-facing bash path, and trusted plugin callers
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5086#discussioncomment-18204377>
+- Direct target evidence: <https://github.com/deepseek-ai/deepseek-harness/discussions/5086> ; the report shows `scrubbedParentEnv()` removing `MULTICA_TOKEN` by the broad `TOKEN` pattern but does not identify the exact source revision or caller path
+- Source evidence used: official [`subprocess.md`](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc5/docs/subsystems/subprocess.md) and [`shell.md`](https://github.com/deepseek-ai/deepseek-harness/blob/cd5ef8148158c3a752a658978873241fdf8e2bbc5/docs/subsystems/shell.md)
+- Handbook role: none; official source contracts are the direct reference
+- Published: 2026-08-30T06:49:59Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98222
 
 - Venue: `NousResearch/hermes-agent` issue #98222
