@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98178
+
+- Venue: `NousResearch/hermes-agent` pull request #98178
+- Topic: optional Context7 HTTP skill; API-key redaction, bounded library-ID redirects, response limits, ambiguous package selection, command safety, and untrusted retrieved content
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98178#issuecomment-5467395761>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98178> ; the PR adds stdlib-only `search`/`context`/`lookup` commands, disables HTTP redirects, and keeps the key optional
+- Source/test evidence: `optional-skills/software-development/context7/`, `tests/skills/test_context7_skill.py`, and generated docs in PR head `e514c8d1a1d8a6d681533c1173e550df1e94e50c`; the PR reports 75 focused passes, 1691 broader skill/website passes, and an anonymous smoke test
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:29:54Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98190
 
 - Venue: `NousResearch/hermes-agent` pull request #98190
