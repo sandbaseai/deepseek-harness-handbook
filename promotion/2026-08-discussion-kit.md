@@ -1343,6 +1343,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/workspace-write-shared-cache.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `omnigent-ai/omnigent` issue #5790
+- Topic: child-thread token attribution, model-snapshot evidence, cumulative counter segmentation, generation-safe accounting, and explicit unattributed-cost handling
+- Reply: <https://github.com/omnigent-ai/omnigent/issues/5790#issuecomment-5466587214>
+- Published: 2026-08-30T03:58:49Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `yyjeqhc/webcodex` pull request #224
 - Topic: Agent Wake migration idempotency, canonical database-state locking, takeover crash matrices, high-watermark coverage, and conservative claim recovery evidence
 - Reply: <https://github.com/yyjeqhc/webcodex/pull/224#issuecomment-5466563434>
