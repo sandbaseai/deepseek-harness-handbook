@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98418
+
+- Venue: `NousResearch/hermes-agent` pull request #98418
+- Topic: Portal OAuth missing-`client_id` observability; intentional disable versus misconfiguration, registration state transitions, warning cardinality, and credential-safe diagnostics
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98418#issuecomment-5467500112>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98418> ; the PR changes the no-client-ID skip from DEBUG to WARNING and scopes unrelated happy-path log assertions
+- Source/test evidence: `plugins/dashboard_auth/nous/__init__.py`, `tests/plugins/dashboard_auth/test_nous_provider.py`, and `tests/agent/test_system_prompt_restore.py` in PR head `0cfa85f859daafb3794fa3b667c72d9b58b2cf17`; the PR reports 6 client-ID tests and 16 prompt-restore tests passing
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:55:48Z (UTC)
+- Baseline at publish: 92 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #97380
 
 - Venue: `NousResearch/hermes-agent` pull request #97380
