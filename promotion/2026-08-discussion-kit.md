@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98203
+
+- Venue: `NousResearch/hermes-agent` pull request #98203
+- Topic: Electron PTY startup-output gate; attach/exit ordering, bounded-buffer loss, renderer destruction, sender isolation, and local/remote lifecycle coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98203#issuecomment-5467335483>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98203> ; the PR buffers PTY data/exit until a sender-scoped `terminal.attach`, then flushes before cleanup
+- Source/test evidence: `apps/desktop/electron/terminal-ipc.ts`, `terminal-output-gate.ts`, `preload.ts`, and `use-terminal-session.ts`, plus the gate test in PR head `592044e4bad8bb0d17ebed1f9fa7b05db772d147`; the PR reports 3 focused tests and passing typechecks
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:15:12Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98211
 
 - Venue: `NousResearch/hermes-agent` pull request #98211
