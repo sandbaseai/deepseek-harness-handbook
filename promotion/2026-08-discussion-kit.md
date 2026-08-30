@@ -540,6 +540,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `sympoies/dsh-runtime-kit` issue #66
+- Topic: content-addressed baseline/candidate receipts, issue-specific outcome classes, rollback coherence, and adversarial generation-stale acceptance sequence
+- Reply: <https://github.com/sympoies/dsh-runtime-kit/issues/66#issuecomment-5466177737>
+- Published: 2026-08-30T02:13:12Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `anywhere-labs/dsh-desktop` issue #734
 - Topic: enhanced-mode sidebar layout contract, DOM geometry receipts, responsive regression matrix, and WebView lifecycle cleanup
 - Reply: <https://github.com/anywhere-labs/dsh-desktop/issues/734#issuecomment-5466085861>
