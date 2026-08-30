@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `Rxiain/dsh-openviking` issue #3
+- Topic: SettingsScope runtime capability drift, mixed package graphs, Client plugin isolation, and rollback
+- Reply: <https://github.com/Rxiain/dsh-openviking/issues/3#issuecomment-5465979469>
+- Published: 2026-08-30T01:24:16Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-install-recovery.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `Jstn-1g/dsh-live-voice` issue #20
 - Topic: served-Web versus `file://` + IPC voice carrier boundaries, bounded duplex receipts, and teardown evidence
 - Reply: <https://github.com/Jstn-1g/dsh-live-voice/issues/20#issuecomment-5465975273>
