@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `monowai/bc-view` issue #1184
+- Topic: explicit stream terminal invariants, typed mid-stream errors, compare-and-set done/error emission, incomplete EOF handling, and reconnect generation evidence
+- Reply: <https://github.com/monowai/bc-view/issues/1184#issuecomment-5466469894>
+- Published: 2026-08-30T03:27:40Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-empty-identity.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `microsoft/agent-framework` issue #7952
 - Topic: preserve streaming response metadata across WorkflowAgent conversion, defensive property copying, resume-token semantics, and direct-versus-wrapper regression evidence
 - Reply: <https://github.com/microsoft/agent-framework/issues/7952#issuecomment-5466465910>
