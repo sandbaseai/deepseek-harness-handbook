@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/ecosystem/awesome-resources.md>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `BreakfastDaPaiDang/saki` issue #71
+- Topic: DSH upstream pin synchronization, semantic conflict classification, cross-platform/runtime gates, and rollback
+- Reply: <https://github.com/BreakfastDaPaiDang/saki/issues/71#issuecomment-5466031596>
+- Published: 2026-08-30T01:37:31Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/version-evidence.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `mintgao/dsh-desktop` issue #25
 - Topic: alpha.1 Desktop adoption failures, package-graph/build-stage classification, clean-profile smoke, and rollback
 - Reply: <https://github.com/mintgao/dsh-desktop/issues/25#issuecomment-5466021427>
