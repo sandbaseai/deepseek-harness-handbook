@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `NousResearch/hermes-agent` issue #90446
+- Topic: per-review refusal circuit breakers, typed retryability, rejected-call token accounting, cumulative budgets, and observable stop decisions
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/90446#issuecomment-5466487223>
+- Published: 2026-08-30T03:32:06Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/token-meter-accounting.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `agentscope-ai/agentscope-java` issue #2872
 - Topic: final-round versus intermediate ReAct text, buffered delta routing, explicit unknown classification, generation/sequence deduplication, and incomplete-stream handling
 - Reply: <https://github.com/agentscope-ai/agentscope-java/issues/2872#issuecomment-5466483151>
