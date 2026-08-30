@@ -1538,3 +1538,10 @@ evidence.
 - Published: 2026-08-30T04:20:08Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/acp-remote-hosting.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #676
+- Topic: reference-aware externalized payload release, transaction/outbox separation, deduplicated ownership, crash-safe garbage collection, reconciliation, and reversible cleanup evidence
+- Reply: <https://github.com/Pascapone/pibo/issues/676#issuecomment-5466669586>
+- Published: 2026-08-30T04:20:51Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
