@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `alexchenzl/dsh-plugin-directory` issue #224
+- Topic: consent-bound voice capability, pinned host/plugin evidence, read-only install checks, failure cleanup, rollback, and listed-versus-verified status
+- Reply: <https://github.com/alexchenzl/dsh-plugin-directory/issues/224#issuecomment-5466494036>
+- Published: 2026-08-30T03:33:53Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `openclaw/openclaw` issue #132303
 - Topic: effective per-agent tool policy, fail-closed unsupported denies, backend/native-tool boundaries, generation-scoped policy changes, and runtime capability tests
 - Reply: <https://github.com/openclaw/openclaw/issues/132303#issuecomment-5466490647>
