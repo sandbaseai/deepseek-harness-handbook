@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `deepseek-ai/deepseek-harness` Discussion #5072
+- Topic: bound long-running turns with hard budgets, no-progress fingerprints, external-job state, cancellation, and resumable cleanup
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5072#discussioncomment-18203377>
+- Published: 2026-08-30T03:18:14Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/runaway-agent-loop.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/ralph-bounded-failure-successor.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `wlj521/dsh-ui-tweaks` issue #5
 - Topic: Markdown renderer-scoped code styling, semantic spacing diagnosis, theme/forced-colors contrast, narrow-layout behavior, accessibility states, and versioned visual regression evidence
 - Reply: <https://github.com/wlj521/dsh-ui-tweaks/issues/5#issuecomment-5466245572>
