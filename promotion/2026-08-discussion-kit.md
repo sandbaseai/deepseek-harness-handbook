@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98427
+
+- Venue: `NousResearch/hermes-agent` pull request #98427
+- Topic: Discord private text-channel creation; permission-overwrite boundaries, configured default recipients, input/schema validation, and retry/reconciliation behavior
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98427#issuecomment-5467465693>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98427> ; the PR adds `create_channel`, denies `@everyone` for private channels, and grants View+Send only to validated roles/users
+- Source/test evidence: `tools/discord_tool.py`, `hermes_cli/config_defaults.py`, `website/docs/user-guide/messaging/discord.md`, and `tests/tools/test_discord_tool.py` in PR head `241a6b20f68786d2797c651498636670fb352ec8`; the PR reports 60 focused tests passed
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:47:13Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98426
 
 - Venue: `NousResearch/hermes-agent` pull request #98426
