@@ -96,6 +96,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/markdown-single-tilde.md>
 - Baseline at publish: 88 Stars, 14 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` discussion #111
+- Topic: distinguish process/port/UI initialization hangs, supported Node and empty-profile A/B, bounded startup stages, sanitized evidence, and explicit failure/retry branches
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/111#discussioncomment-18203162>
+- Published: 2026-08-30T02:31:45Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/install-deepseek-harness.md>
+- Baseline at publish: 88 Stars, 14 forks
+
 - Venue: `adoresever/graph-memory` issue #93
 - Topic: separate DSH context compaction from durable retention, conservative policy defaults, transaction-safe provenance checks, bounded GC, dry-run/backup/restore evidence, and concurrent-extraction tests
 - Reply: <https://github.com/adoresever/graph-memory/issues/93#issuecomment-5466242504>
