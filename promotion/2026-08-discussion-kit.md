@@ -1357,6 +1357,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #683
+- Topic: fail-closed future-schema detection, byte-preserving database open, transactional migrations, versioned recovery evidence, and downgrade/upgrade regression coverage
+- Reply: <https://github.com/Pascapone/pibo/issues/683#issuecomment-5466644876>
+- Published: 2026-08-30T04:14:12Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `Pascapone/pibo` issue #687
 - Topic: fail-closed Cron schedule admission, exactly-one selector validation, no-persistence-on-conflict, shared add/edit/API validation, and cadence readback evidence
 - Reply: <https://github.com/Pascapone/pibo/issues/687#issuecomment-5466641082>
