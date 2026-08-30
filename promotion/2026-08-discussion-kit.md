@@ -1357,6 +1357,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #687
+- Topic: fail-closed Cron schedule admission, exactly-one selector validation, no-persistence-on-conflict, shared add/edit/API validation, and cadence readback evidence
+- Reply: <https://github.com/Pascapone/pibo/issues/687#issuecomment-5466641082>
+- Published: 2026-08-30T04:13:11Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `agentscope-ai/agentscope-java` issue #2876
 - Topic: version-sensitive streaming diagnosis, provider/event timeline evidence, SSE framing and WebFlux buffering, typed event envelopes, backpressure, and cancellation
 - Reply: <https://github.com/agentscope-ai/agentscope-java/issues/2876#issuecomment-5466638612>
