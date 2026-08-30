@@ -448,3 +448,10 @@ evidence.
 - Published: 2026-08-30T01:44:45Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>
 - Baseline at publish: 88 Stars, 13 forks
+
+- Venue: `wenzetan/dsh-llm-newapi` issue #3
+- Topic: split AggregateError into independent loader failures, verify runtime exports, isolate plugin boot impact, and gate cross-version provider compatibility
+- Reply: <https://github.com/wenzetan/dsh-llm-newapi/issues/3#issuecomment-5466067989>
+- Published: 2026-08-30T01:45:35Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
