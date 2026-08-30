@@ -57,8 +57,8 @@ This repository is an English-first, multilingual community handbook about DeepS
 
 - Submit small, reviewable metadata or resource-list PRs to relevant community repositories.
 - Create external-submission forks under the `sandbaseai` GitHub organization, using a clearly named temporary repository or branch.
-- Keep the organization fork while its PR is open. As soon as the PR is merged or closed, delete that temporary `sandbaseai` fork and its submission branch.
-- Never delete an active PR fork or someone else's repository. Check PR state before cleanup; only remove resources owned by `sandbaseai`.
+- Keep the organization fork while its PR is open. As soon as the PR is merged or closed, delete only that temporary `sandbaseai` fork project (and its submission branch when applicable).
+- Never modify, reset, archive, or delete a SandBase-owned formal project. Never delete an active PR fork or someone else's repository. Check repository purpose and PR state before cleanup; cleanup is limited to explicitly temporary submission forks created for that PR.
 - Before continuing work, run `git status --short`, inspect recent commits, list releases and open PRs, and verify that no unrelated changes are overwritten.
 
 ### Useful status commands
