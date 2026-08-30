@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98188
+
+- Venue: `NousResearch/hermes-agent` pull request #98188
+- Topic: verifying the privileged E2E evidence publisher's `gh-image` binary; install-time versus use-time trust, immutable artifact identity, runner architecture, and fail-closed workflow gates
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98188#issuecomment-5467376529>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98188> ; the workflow installs `drogers0/gh-image@v1.2.0`, hashes the Linux amd64 binary, and stops on mismatch before evidence use
+- Source/test evidence: `.github/workflows/publish-e2e-evidence.yml` in PR head `7090a6fd18a7437bbe412911b7644bd88aeadba3`; the PR reports 65 focused CI tests and an isolated install/hash witness
+- Handbook role: none; the Hermes workflow and tests are the direct remediation path
+- Published: 2026-08-30T07:25:09Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98198
 
 - Venue: `NousResearch/hermes-agent` pull request #98198
