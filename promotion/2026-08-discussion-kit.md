@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `openclaw/openclaw` issue #133051
+- Topic: immutable delivery receipts, end-to-end propagation, sent-versus-ambiguous states, generation/idempotency, projection repair, and restart reconciliation
+- Reply: <https://github.com/openclaw/openclaw/issues/133051#issuecomment-5466527564>
+- Published: 2026-08-30T03:42:43Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-session-log-format.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `kemalnw/mcpd` issue #64
 - Topic: durable agent-session handoff checkpoints, revision/generation safety, fact-versus-recommendation separation, bounded resume views, and authorization on fresh-agent recovery
 - Reply: <https://github.com/kemalnw/mcpd/issues/64#issuecomment-5466523963>
