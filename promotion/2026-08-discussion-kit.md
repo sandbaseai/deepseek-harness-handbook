@@ -1357,6 +1357,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `agentscope-ai/agentscope-java` issue #2876
+- Topic: version-sensitive streaming diagnosis, provider/event timeline evidence, SSE framing and WebFlux buffering, typed event envelopes, backpressure, and cancellation
+- Reply: <https://github.com/agentscope-ai/agentscope-java/issues/2876#issuecomment-5466638612>
+- Published: 2026-08-30T04:12:33Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/streamed-tool-call-empty-identity.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `Pascapone/pibo` issue #680
 - Topic: fail-closed Loop target admission, exactly-one selector validation, no-persistence-on-conflict, shared CLI/API validator reuse, and edit rollback
 - Reply: <https://github.com/Pascapone/pibo/issues/680#issuecomment-5466634812>
