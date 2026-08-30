@@ -1709,3 +1709,15 @@ evidence.
 - Published: 2026-08-30T04:54:11Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-cross-provider-reasoning-replay.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/dangling-tool-calls-insufficient-results.html>
 - Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98344
+- Topic: dual-sink refresh failure observability, stable correlation and event identity, audit-before-error ordering, idempotent retries, redaction, partial sink failure, and provider-failure regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98344#issuecomment-5466796250>
+- Published: 2026-08-30T04:55:11Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/auth-token-not-available.html>
+- Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98346
+- Topic: monotonic durable spoken-reply consumption, stale-snapshot fencing, live-to-durable rewrite separation, restart reconstruction, bounded-history eviction, and playback acknowledgement regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98346#issuecomment-5466800341>
+- Published: 2026-08-30T04:56:19Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
