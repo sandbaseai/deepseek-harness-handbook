@@ -1608,3 +1608,10 @@ evidence.
 - Published: 2026-08-30T04:30:41Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-server-retry.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` issue #98330
+- Topic: cross-surface write-approval parity, fail-closed pending queues, Session/workspace provenance, content-hash fencing, idempotent review, and bounded cleanup
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98330#issuecomment-5466710171>
+- Published: 2026-08-30T04:31:45Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html>
+- Baseline at publish: 91 Stars, 14 forks
