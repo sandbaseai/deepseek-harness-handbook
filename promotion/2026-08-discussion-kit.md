@@ -1454,3 +1454,10 @@ evidence.
 - Published: 2026-08-30T04:08:07Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #694
+- Topic: generated production gateway-port fidelity, single typed endpoint configuration, staged systemd artifact verification, health-probe alignment, and rollback
+- Reply: <https://github.com/Pascapone/pibo/issues/694#issuecomment-5466628846>
+- Published: 2026-08-30T04:09:52Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 91 Stars, 14 forks
