@@ -554,6 +554,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `watt-mind/factory` issue #853
+- Topic: separate manifest discovery from policy authorization, enforce code-extension versus data-only pack boundaries, generation-scoped rollback receipts, and negative capability tests
+- Reply: <https://github.com/watt-mind/factory/issues/853#issuecomment-5466207224>
+- Published: 2026-08-30T02:20:24Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/community-plugin-audit.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `hugocool/FateForger` issue #206
 - Topic: durable typed planning-session envelope, stage artifact contract, shared NL/Block Kit intent execution, journaled provider/tool evidence, and replay without exposing chain-of-thought
 - Reply: <https://github.com/hugocool/FateForger/issues/206#issuecomment-5466199967>
