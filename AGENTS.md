@@ -56,8 +56,9 @@ This repository is an English-first, multilingual community handbook about DeepS
 ### PR and fork hygiene
 
 - Submit small, reviewable metadata or resource-list PRs to relevant community repositories.
-- Keep a fork while its PR is open; after merge or closure, delete the temporary fork and branch when safe.
-- Never delete an active PR fork or someone else's repository. Check PR state before cleanup.
+- Create external-submission forks under the `sandbaseai` GitHub organization, using a clearly named temporary repository or branch.
+- Keep the organization fork while its PR is open. As soon as the PR is merged or closed, delete that temporary `sandbaseai` fork and its submission branch.
+- Never delete an active PR fork or someone else's repository. Check PR state before cleanup; only remove resources owned by `sandbaseai`.
 - Before continuing work, run `git status --short`, inspect recent commits, list releases and open PRs, and verify that no unrelated changes are overwritten.
 
 ### Useful status commands
