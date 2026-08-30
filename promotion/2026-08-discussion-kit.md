@@ -157,6 +157,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/security/workspace-write-shared-cache.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/remote-web-secure-context.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — DavidDingXu/agent-handoff #10
+
+- Venue: `DavidDingXu/agent-handoff` issue #10
+- Topic: narrow DSH preview adapter contract, read-only Session inspection, deterministic export/import, confirmation binding, duplicate detection, and unstable API isolation
+- Reply: <https://github.com/DavidDingXu/agent-handoff/issues/10#issuecomment-5466396057>
+- Published: 2026-08-30T03:09:09Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/session-log-storage-format.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
