@@ -1601,3 +1601,10 @@ evidence.
 - Published: 2026-08-30T04:29:34Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` issue #98338
+- Topic: refresh-attempt event reconciliation, HTTP failure classification, bounded backoff, scoped circuit breakers, credential-generation fencing, and operator health evidence
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98338#issuecomment-5466705936>
+- Published: 2026-08-30T04:30:41Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/pi-ai-server-retry.html>
+- Baseline at publish: 91 Stars, 14 forks
