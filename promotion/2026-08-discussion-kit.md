@@ -224,3 +224,10 @@ evidence.
 - Published: 2026-08-30T01:04:52Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/official-deepseek-harness.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-cli.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-model-default.html>
 - Baseline at publish: 87 Stars, 13 forks
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5066
+- Topic: missing pi-ai model artifact in an npx cache during profile boot
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5066#discussioncomment-18202744>
+- Published: 2026-08-30T01:09:00Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/git-plugin-missing-dist.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/corrupt-package-json-profile-boot.html>
+- Baseline at publish: 87 Stars, 13 forks
