@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #97380
+
+- Venue: `NousResearch/hermes-agent` pull request #97380
+- Topic: Windows updater hand-off completion semantics; current-checkout Desktop rebuild gating, parent/child success propagation, config migration ordering, exit markers, and resumable failure
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/97380#issuecomment-5467494014>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/97380> ; the PR routes Python hand-off and Node repair through a shared Desktop rebuild/config-migration completion tail and suppresses success on build failure
+- Source/test evidence: `hermes_cli/update_cmd.py`, `tests/hermes_cli/test_cmd_update.py`, and related current-checkout/health tests in PR head `97b30808844ae8a1d16efd53f0693f9fbad5a5aa`; the PR reports focused updater regressions passing on Windows 11
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:54:15Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98429
 
 - Venue: `NousResearch/hermes-agent` pull request #98429
