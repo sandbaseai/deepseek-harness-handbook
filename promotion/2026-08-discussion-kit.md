@@ -1664,3 +1664,10 @@ evidence.
 - Published: 2026-08-30T04:43:39Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/web-dollar-math-rendering.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` pull request #98349
+- Topic: async delegation serialization boundaries, redaction and bounded representations, ledger-versus-queue failure separation, idempotent finalization, batch partial failure, and slot cleanup
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98349#issuecomment-5466759435>
+- Published: 2026-08-30T04:45:13Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/subagent-unknown-job.html>
+- Baseline at publish: 91 Stars, 14 forks
