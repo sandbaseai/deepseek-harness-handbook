@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `dsh-tauri-desk/deepseek-harness-desktop` issue #229
+- Topic: separate shell versus Tauri child-process PATH diagnostics, fnm/npm prefix evidence, absolute-path fallback, sanitized receipts, and version-gated revalidation
+- Reply: <https://github.com/dsh-tauri-desk/deepseek-harness-desktop/issues/229#issuecomment-5466219602>
+- Published: 2026-08-30T02:23:35Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-standalone-pnpm-npm-execpath.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `oil-oil/dsh-oil-creator` issue #4
 - Topic: pnpm build-script approval as a separate gate, exact package/commit verification, profile-scoped allowlisting, read-only smoke evidence, and Windows rollback/prebuilt recovery
 - Reply: <https://github.com/oil-oil/dsh-oil-creator/issues/4#issuecomment-5466216356>
