@@ -103,6 +103,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/filesystem-url-as-path.md>
 - Baseline at publish: 89 Stars, 14 forks
 
+- Venue: `volcengine/ark-cli` issue #19
+- Topic: provider/catalog ownership, additive model registration, provider-qualified IDs, revisioned config snapshots, idempotent helper runs, explicit legacy migration, and credential isolation
+- Reply: <https://github.com/volcengine/ark-cli/issues/19#issuecomment-5466320162>
+- Published: 2026-08-30T02:49:14Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/session-model-default-coupling.md>
+- Baseline at publish: 89 Stars, 14 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` discussion #46
 - Topic: separate expose-internals, native addon ABI, loader-root, and optional-HMR capability failures; verify execArgv; avoid unsupported NODE_OPTIONS advice; compare clean install paths
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/46#discussioncomment-18203241>
