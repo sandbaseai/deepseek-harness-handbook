@@ -202,6 +202,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/session-history-corruption-triage.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — DeepSeek Harness Discussion #5041
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5041
+- Topic: same-provider retry versus cross-provider failover, capability/credential/budget gates, tool-side-effect reconciliation, Session attempt records, and visible failure states
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5041#discussioncomment-18203344>
+- Published: 2026-08-30T03:12:58Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
