@@ -76,6 +76,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — sympoies/dsh-runtime-kit #133
+
+- Venue: `sympoies/dsh-runtime-kit` issue #133
+- Topic: DSH `danger-full-access` authority receipts, OS capability evidence, lifecycle controls, isolated-Docker negative controls, and approval/sandbox separation
+- Reply: <https://github.com/sympoies/dsh-runtime-kit/issues/133#issuecomment-5466369278>
+- Published: 2026-08-30T03:02:18Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/sandbox-denied-vs-unavailable.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
