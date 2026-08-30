@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `mintgao/dsh-desktop` issue #25
+- Topic: alpha.1 Desktop adoption failures, package-graph/build-stage classification, clean-profile smoke, and rollback
+- Reply: <https://github.com/mintgao/dsh-desktop/issues/25#issuecomment-5466021427>
+- Published: 2026-08-30T01:34:57Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/upgrade-and-rollback.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `CherryHQ/cherry-studio` issue #18802
 - Topic: DSH runtime adapter conformance, runtime generations, event projection, Snapshot/replay, and transport-neutral Agent protocol
 - Reply: <https://github.com/CherryHQ/cherry-studio/issues/18802#issuecomment-5466016304>
