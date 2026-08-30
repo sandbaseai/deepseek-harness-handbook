@@ -484,6 +484,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/credential-storage-threat-model.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `Jstn-1g/dsh-live-voice` issue #9
+- Topic: packaged Desktop install/restart/uninstall inventory, active-handle and artifact cleanup, interrupted-update recovery, and immutable asset/core identity
+- Reply: <https://github.com/Jstn-1g/dsh-live-voice/issues/9#issuecomment-5466152101>
+- Published: 2026-08-30T02:06:54Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
