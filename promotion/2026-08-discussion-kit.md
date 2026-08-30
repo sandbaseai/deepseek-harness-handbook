@@ -1643,3 +1643,10 @@ evidence.
 - Published: 2026-08-30T04:39:27Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` issue #133053
+- Topic: Session-rename projection cost, Gateway scheduling fairness, lazy plugin classification, latency attribution, and revision-fenced recovery
+- Reply: <https://github.com/openclaw/openclaw/issues/133053#issuecomment-5466743713>
+- Published: 2026-08-30T04:40:49Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-heap-growth.html>
+- Baseline at publish: 91 Stars, 14 forks
