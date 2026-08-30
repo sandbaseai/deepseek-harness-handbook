@@ -70,3 +70,12 @@ gh api repos/sandbaseai/deepseek-harness-handbook --jq '{stars:.stargazers_count
 gh release list --repo sandbaseai/deepseek-harness-handbook --limit 5
 gh pr list --repo sandbaseai/deepseek-harness-handbook --state all
 ```
+
+## Session start and continuous execution
+
+- At the beginning of every session, read the latest repository state, recent commits, releases, open PRs, traffic signals, and the last recorded promotion outcome before choosing work.
+- Treat the previous session's achieved baseline as the starting point. Set the next measurable organic-growth target to 120% of that baseline (for example, a target of 100 genuine Stars becomes 120 after it is achieved), and record the new target in the handoff or changelog when relevant.
+- Do not pause for routine confirmation: within this repository's established scope, proceed autonomously with source-backed content updates, checks, releases, relevant outreach, and cleanup of eligible temporary forks.
+- Continue iterating across sessions until the active target is achieved or the user explicitly stops or changes the goal. Do not manufacture engagement, automate or purchase Stars, spam communities, or claim that a target is guaranteed.
+- “Default authorization” does not override platform permissions, repository ownership rules, secrets handling, destructive-action safeguards, or required external approvals. Stop and report when an action would modify/delete a formal SandBase project, delete an active PR fork, or require authority not already granted.
+- At the end of each session, leave a concise status trail: baseline, target, actions taken, verification results, open blockers, and the next safe action.
