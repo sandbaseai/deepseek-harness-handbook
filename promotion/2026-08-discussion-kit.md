@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5067
+- Topic: durable external plugin events, installed-package identity, and per-run Subagent workspace contracts
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5067#discussioncomment-18202802>
+- Published: 2026-08-30T01:18:33Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/plugin-development/custom-session-events.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/subagents.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5051
 - Topic: third-party provider reasoning-level capability declarations, profile persistence, and wire evidence
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5051#discussioncomment-18202796>
