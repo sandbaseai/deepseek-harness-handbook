@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #96988
+
+- Venue: `NousResearch/hermes-agent` pull request #96988
+- Topic: encrypted local credential vault and model-blind browser autofill; terminal threat model, secret redaction completeness, origin binding, cross-process durability, and profile privacy
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/96988#issuecomment-5467480120>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/96988> ; the PR exposes opaque handles, requires exact current-page origin, injects secrets only through supervised CDP, and keeps passwords out of normal tool results
+- Source/test evidence: `agent/vault_store.py`, `tools/browser_vault_tool.py`, `agent/redact.py`, `agent/file_safety.py`, `agent/vault_login_classifier.py`, and vault/browser tests in PR head `a513fe4d2cc7e0f05f06d83cc0e9312cdabbdf73`; the PR reports 30 targeted vault tests and a live isolated Chromium repro
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:50:51Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98419
 
 - Venue: `NousResearch/hermes-agent` pull request #98419
