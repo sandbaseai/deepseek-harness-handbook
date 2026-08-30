@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98179
+
+- Venue: `NousResearch/hermes-agent` pull request #98179
+- Topic: feature-gate logging severity; distinguishing initial expected misses from exceptions/post-success outages, retained history, cache bounds, concurrency, and log routing
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98179#issuecomment-5467409500>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98179> ; the PR keeps last-good timestamps beyond the availability grace window and logs clean initial `False` results at INFO
+- Source/test evidence: `tools/registry.py` and `tests/tools/test_terminal_tool_requirements.py` in PR head `334f82fc0a2f25a8ac6cfe9c97af0ebaa4ce00a9`; the PR reports 54 focused passes and before/after logging controls
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:33:14Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98182
 
 - Venue: `NousResearch/hermes-agent` pull request #98182
