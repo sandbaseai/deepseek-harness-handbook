@@ -1622,3 +1622,10 @@ evidence.
 - Published: 2026-08-30T04:32:43Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-replacefile-eacces.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` issue #133059
+- Topic: admission-time outbox destination identity, session-scope recovery, generation fencing, delivery-state distinctions, conservative legacy migration, and duplicate-send prevention
+- Reply: <https://github.com/openclaw/openclaw/issues/133059#issuecomment-5466718090>
+- Published: 2026-08-30T04:33:49Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html>
+- Baseline at publish: 91 Stars, 14 forks
