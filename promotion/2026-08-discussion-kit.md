@@ -442,6 +442,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `Yan-Zero/dsh-std` issue #11
+- Topic: portable Session capability receipts, fail-closed negotiation, action ownership/idempotency, provenance, and read-only-first conformance cases
+- Reply: <https://github.com/Yan-Zero/dsh-std/issues/11#issuecomment-5466076298>
+- Published: 2026-08-30T01:47:28Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/xiaozhuge` issue #156
 - Topic: separate alpha.1 bundle-load and behavior gates, capability-based API adaptation, RPC acceptance evidence, and full package-graph rollback
 - Reply: <https://github.com/wingsky-1/xiaozhuge/issues/156#issuecomment-5466064093>
