@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98424
+
+- Venue: `NousResearch/hermes-agent` pull request #98424
+- Topic: fail-closed turn-start behavior after stalled context compression; timeout-marker lifecycle, commit-fence preservation, sync/async parity, and user-visible recovery
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98424#issuecomment-5467436788>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98424> ; the PR raises `PreflightCompressionTimedOut` when an oversized unchanged payload follows a progress timeout while preserving lock-defer behavior
+- Source/test evidence: `agent/turn_context.py`, `run_agent.py`, and `tests/agent/test_preflight_compression_timeout_fail_closed.py` in PR head `33a434d6395cf4e79e871b5806754a5c88570ff7`; the PR reports 19 focused passes and separates existing failures from its changes
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:39:59Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98425
 
 - Venue: `NousResearch/hermes-agent` pull request #98425
