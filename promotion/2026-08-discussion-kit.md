@@ -505,6 +505,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-write-integrity.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `omdsh-dev/dsh-accessibility` issue #9
+- Topic: bind manual accessibility results to exact fixtures, test dynamic DSH surfaces, distinguish manual/automated/blocked states, and scope release-gate failures
+- Reply: <https://github.com/omdsh-dev/dsh-accessibility/issues/9#issuecomment-5466167398>
+- Published: 2026-08-30T02:10:39Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
