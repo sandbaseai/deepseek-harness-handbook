@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `openclaw/openclaw` issue #132303
+- Topic: effective per-agent tool policy, fail-closed unsupported denies, backend/native-tool boundaries, generation-scoped policy changes, and runtime capability tests
+- Reply: <https://github.com/openclaw/openclaw/issues/132303#issuecomment-5466490647>
+- Published: 2026-08-30T03:32:59Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-worker-trust-boundary.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/community-plugin-audit.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `NousResearch/hermes-agent` issue #90446
 - Topic: per-review refusal circuit breakers, typed retryability, rejected-call token accounting, cumulative budgets, and observable stop decisions
 - Reply: <https://github.com/NousResearch/hermes-agent/issues/90446#issuecomment-5466487223>
