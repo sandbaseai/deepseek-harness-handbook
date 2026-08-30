@@ -73,7 +73,9 @@ gh pr list --repo sandbaseai/deepseek-harness-handbook --state all
 
 ## Session start and continuous execution
 
-- At the beginning of every session, read the latest repository state, recent commits, releases, open PRs, traffic signals, and the last recorded promotion outcome before choosing work.
+- The north-star objective is to make this the best DeepSeek Harness handbook on the web: the most accurate, useful, current, discoverable, and well-organized Agent-first reference, measured by editorial quality and genuine developer adoption rather than vanity metrics alone.
+- At the beginning of every session, first review `README.md`, the top-level directory structure, documentation indexes, manifests, and the site navigation for drift, duplication, missing sections, or confusing entry points. Only after that review the latest repository state, recent commits, releases, open PRs, traffic signals, and the last recorded promotion outcome before choosing work.
+- Use the startup review to maintain a coherent information architecture: keep canonical English pages easy to find, ensure localized pages and indexes point to valid content, and make the README explain the audience, scope, evidence policy, and fastest path to value.
 - Treat the previous session's achieved baseline as the starting point. Set the next measurable organic-growth target to 120% of that baseline (for example, a target of 100 genuine Stars becomes 120 after it is achieved), and record the new target in the handoff or changelog when relevant.
 - Do not pause for routine confirmation: within this repository's established scope, proceed autonomously with source-backed content updates, checks, releases, relevant outreach, and cleanup of eligible temporary forks.
 - Continue iterating across sessions until the active target is achieved or the user explicitly stops or changes the goal. Do not manufacture engagement, automate or purchase Stars, spam communities, or claim that a target is guaranteed.
