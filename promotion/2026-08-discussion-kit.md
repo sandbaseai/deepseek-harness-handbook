@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `Pascapone/pibo` issue #699
+- Topic: atomic room/session/workspace identity, two-phase room switching, generation-safe writes, stale-reply handling, and store-level misrouting evidence
+- Reply: <https://github.com/Pascapone/pibo/issues/699#issuecomment-5466539658>
+- Published: 2026-08-30T03:45:52Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-groups-workspace-less.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `ms2sato/agent-console` issue #1475
 - Topic: epoch-specific liveness reset, history-resync separation, generation/sequence ordering, conservative unknown state, and composer-gate regression tests
 - Reply: <https://github.com/ms2sato/agent-console/issues/1475#issuecomment-5466536205>
