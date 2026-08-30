@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98141
+
+- Venue: `NousResearch/hermes-agent` pull request #98141
+- Topic: interactive MCP OAuth single-flight behavior; preventing PKCE state rotation during terminal callback entry, propagating the effective transport timeout, and preserving non-interactive retry boundaries
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98141#issuecomment-5467518061>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98141> ; the PR gates initial connection failure under `force_interactive_oauth()`, copies the effective `connect_timeout` into the server config, and adds an older-SDK auth-result compatibility wrapper
+- Source/test evidence: `tools/mcp_tool.py`, `tools/mcp_oauth.py`, `hermes_cli/mcp_config.py`, `tests/tools/test_mcp_oauth.py`, and `tests/hermes_cli/test_mcp_config.py` in PR head `4ef5cdadd62ec1958cd59100bd4be0d0eeb20db2`; the PR adds focused coverage for one-attempt interactive failure and timeout propagation
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T08:00:28Z (UTC)
+- Baseline at publish: 92 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98431
 
 - Venue: `NousResearch/hermes-agent` pull request #98431
