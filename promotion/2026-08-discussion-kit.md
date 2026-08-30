@@ -1328,3 +1328,10 @@ evidence.
 - Published: 2026-08-30T03:52:06Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `omnigent-ai/omnigent` issue #3180
+- Topic: cancellation-safe coalescer shutdown, bounded close phases, child-process reaping order, idempotent cleanup, and duplicate-runner prevention after session resume
+- Reply: <https://github.com/omnigent-ai/omnigent/issues/3180#issuecomment-5466572183>
+- Published: 2026-08-30T03:54:30Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
+- Baseline at publish: 91 Stars, 14 forks
