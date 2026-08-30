@@ -1727,3 +1727,9 @@ evidence.
 - Published: 2026-08-30T04:57:39Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/sessions-vs-memory.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html>
 - Baseline at publish: 91 Stars, 14 forks
+- Venue: `NousResearch/hermes-agent` pull request #98314
+- Topic: hollow in-memory history reconciliation, DB-versus-live authority, revision and Session fencing, unsaved-tail merge, provider projection separation, and Desktop/TUI/CLI restart regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98314#issuecomment-5466808524>
+- Published: 2026-08-30T04:58:42Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-history-recovery.html> ; <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
