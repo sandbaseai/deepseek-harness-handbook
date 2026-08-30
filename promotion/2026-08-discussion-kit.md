@@ -1671,3 +1671,10 @@ evidence.
 - Published: 2026-08-30T04:45:13Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/subagent-unknown-job.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` pull request #98350
+- Topic: install-scoped process identity, PID-reuse fencing, fail-closed blocker scanning, scan/termination races, hand-off idempotency, relaunch state, and post-update health verification
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98350#issuecomment-5466764126>
+- Published: 2026-08-30T04:46:29Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-replacefile-eacces.html>
+- Baseline at publish: 91 Stars, 14 forks
