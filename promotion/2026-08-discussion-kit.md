@@ -220,6 +220,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — uksrc/Calycopis-broker #62
+
+- Venue: `uksrc/Calycopis-broker` issue #62
+- Topic: broker versus DSH runtime boundaries, streaming/tool preservation, credential isolation, failure classification, fallback idempotency, and minimum acceptance matrix
+- Reply: <https://github.com/uksrc/Calycopis-broker/issues/62#issuecomment-5466416996>
+- Published: 2026-08-30T03:14:31Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-runtime.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
