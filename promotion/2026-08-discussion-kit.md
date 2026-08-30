@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98195
+
+- Venue: `NousResearch/hermes-agent` pull request #98195
+- Topic: per-hop HTTPS/SSRF validation for remote plugin-pack redirects; URL resolution, redacted provenance, DNS/redirect failures, and installation-boundary regressions
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98195#issuecomment-5467358401>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98195> ; the PR validates the initial URL and redirect `Location`, uses the shared guarded client, caps redirects at five, and retains payload/SHA checks
+- Source/test evidence: `hermes_cli/plugin_packs.py` and `tests/hermes_cli/test_plugin_packs.py` in PR head `cbe1a935cf6455ca31704c9fe9176025144ac9c8`; the PR reports 141 focused passes and request-order redirect tests
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:20:42Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98201
 
 - Venue: `NousResearch/hermes-agent` pull request #98201
