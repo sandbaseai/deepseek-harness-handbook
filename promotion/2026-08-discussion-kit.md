@@ -211,6 +211,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — DeepSeek Harness Discussion #5048
+
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #5048
+- Topic: custom OpenAI-compatible provider versus built-in catalog, credential and model-directory boundaries, exact compatibility evidence, retry/cost accounting, and provider rollback
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5048#discussioncomment-18203356>
+- Published: 2026-08-30T03:13:43Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/getting-started/model-providers.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
