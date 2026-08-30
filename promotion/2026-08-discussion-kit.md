@@ -139,6 +139,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — JPHutchins/code-review #203
+
+- Venue: `JPHutchins/code-review` issue #203
+- Topic: DSH evaluation dimensions across provider cost/latency, Agent loop, plugin graph, approval/sandbox, Sessions, operator surfaces, and reproducible cleanup
+- Reply: <https://github.com/JPHutchins/code-review/issues/203#issuecomment-5466389696>
+- Published: 2026-08-30T03:07:29Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-runtime.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/operations/token-meter-accounting.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
