@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `CherryHQ/cherry-studio` issue #18802
+- Topic: DSH runtime adapter conformance, runtime generations, event projection, Snapshot/replay, and transport-neutral Agent protocol
+- Reply: <https://github.com/CherryHQ/cherry-studio/issues/18802#issuecomment-5466016304>
+- Published: 2026-08-30T01:33:42Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/architecture/agent-lifecycle.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/acp-editor-boundary.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `Qinling-Melon-Farmers/dsh-memoir` issue #8
 - Topic: multilingual agent-facing strings, prompt/schema provenance, memory-language preservation, and reversible locale rollout
 - Reply: <https://github.com/Qinling-Melon-Farmers/dsh-memoir/issues/8#issuecomment-5466010541>
