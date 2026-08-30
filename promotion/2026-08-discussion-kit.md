@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `kvndhrty/quorum` issue #18
+- Topic: advisory possible-loop detection, stable redacted fingerprints, confidence/reason evidence, legitimate polling negatives, and manager decision traceability
+- Reply: <https://github.com/kvndhrty/quorum/issues/18#issuecomment-5466479840>
+- Published: 2026-08-30T03:30:15Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/runaway-agent-loop.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/ralph-bounded-failure-successor.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `nicobailon/pi-subagents` issue #1724
 - Topic: separate durable child outcomes from acceptance metadata, typed recovery classification, generation-safe post-compaction reload, and staged continuation policy
 - Reply: <https://github.com/nicobailon/pi-subagents/issues/1724#issuecomment-5466476751>
