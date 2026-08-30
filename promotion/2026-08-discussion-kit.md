@@ -1025,7 +1025,7 @@ evidence.
 - Topic: field-by-field core contract table, optional-field fallbacks, fixture/real-core evidence, writer constraints, and actionable validation errors
 - Reply: <https://github.com/skyf0xx/hedgehog/issues/343#issuecomment-5466438750>
 - Published: 2026-08-30T03:20:11Z (UTC)
-- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/version-evidence.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-harness-scorecard.md>
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>
 - Baseline at publish: 91 Stars, 14 forks
 
 - Venue: `watt-mind/factory` issue #853
