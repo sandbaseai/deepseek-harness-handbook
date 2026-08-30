@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `oil-oil/dsh-oil-creator` issue #4
+- Topic: pnpm build-script approval as a separate gate, exact package/commit verification, profile-scoped allowlisting, read-only smoke evidence, and Windows rollback/prebuilt recovery
+- Reply: <https://github.com/oil-oil/dsh-oil-creator/issues/4#issuecomment-5466216356>
+- Published: 2026-08-30T02:22:45Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-install-recovery.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `yangbobo2021/relay-dsh-plugin-session-import` issue #1
 - Topic: slot ownership, typed provider contributions, generation-safe registration, capability receipts, import validation, and durable-session evidence
 - Reply: <https://github.com/yangbobo2021/relay-dsh-plugin-session-import/issues/1#issuecomment-5466213022>
