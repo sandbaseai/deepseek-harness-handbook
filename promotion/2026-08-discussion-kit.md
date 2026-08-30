@@ -434,3 +434,10 @@ evidence.
 - Published: 2026-08-30T01:43:08Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
+
+- Venue: `Fishquito7/dsh-skill-mcp-panel` issue #10
+- Topic: session capability adapters, explicit global-scope fallback, runtime schema checks, and unload/scope regression evidence
+- Reply: <https://github.com/Fishquito7/dsh-skill-mcp-panel/issues/10#issuecomment-5466060450>
+- Published: 2026-08-30T01:43:56Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
+- Baseline at publish: 88 Stars, 13 forks
