@@ -463,6 +463,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/pnpm-unexpected-store-plugin-update.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `sympoies/dsh-runtime-kit` issue #59
+- Topic: generation/revision-bound acceptance verdicts, crash-consistent evidence sequencing, fail-closed infrastructure states, CAS for stale completions, and deterministic packed smoke receipts
+- Reply: <https://github.com/sympoies/dsh-runtime-kit/issues/59#issuecomment-5466098414>
+- Published: 2026-08-30T01:53:23Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/agent-harness-scorecard.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `Yan-Zero/dsh-std` issue #11
 - Topic: portable Session capability receipts, fail-closed negotiation, action ownership/idempotency, provenance, and read-only-first conformance cases
 - Reply: <https://github.com/Yan-Zero/dsh-std/issues/11#issuecomment-5466076298>
