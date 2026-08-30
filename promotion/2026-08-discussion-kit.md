@@ -89,6 +89,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `kagura-agent/wiki` issue #178
+- Topic: DSH project index drift, generated-index CI gates, bidirectional file/index checks, source/revision/date evidence, and personal-path-safe scripts
+- Reply: <https://github.com/kagura-agent/wiki/issues/178#issuecomment-5466234394>
+- Published: 2026-08-30T02:27:30Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `marius-patrik/dsh-stack` issue #169
 - Topic: journaled lifecycle install state, per-root locking, frozen/offline repair, freshness markers, side-effect-light stop behavior, failure branches, and boot smoke evidence
 - Reply: <https://github.com/marius-patrik/dsh-stack/issues/169#issuecomment-5466230914>
