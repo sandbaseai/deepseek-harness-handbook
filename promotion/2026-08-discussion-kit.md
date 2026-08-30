@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: official `deepseek-ai/deepseek-harness` Discussion #1676
+- Topic: Windows Store PowerShell discovery, inherited PATH, alias version drift, and spawn ENOENT evidence
+- Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/1676#discussioncomment-18202806>
+- Published: 2026-08-30T01:19:54Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/windows-compatibility.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5067
 - Topic: durable external plugin events, installed-package identity, and per-run Subagent workspace contracts
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5067#discussioncomment-18202802>
