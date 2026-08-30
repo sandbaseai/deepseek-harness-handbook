@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98224
+
+- Venue: `NousResearch/hermes-agent` issue #98224
+- Topic: custom-provider reasoning aliases and assistant/tool stream state; preserving reasoning after tool calls, identity-safe accumulation, response/request separation, and sanitized regression fixtures
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98224#issuecomment-5467263367>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98224> ; the report includes a custom-versus-bare-OpenAI runtime comparison, `reasoning`/`reasoning_content` field observations, and a multi-tool-call reproduction
+- Source inspected: <https://github.com/NousResearch/hermes-agent/blob/main/agent/chat_completion_helpers.py>
+- Handbook role: none; the Hermes issue and source are the direct remediation path
+- Published: 2026-08-30T06:57:05Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98221
 
 - Venue: `NousResearch/hermes-agent` issue #98221
