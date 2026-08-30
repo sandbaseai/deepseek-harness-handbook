@@ -1357,6 +1357,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
 - Baseline at publish: 91 Stars, 14 forks
 
+- Venue: `Pascapone/pibo` issue #691
+- Topic: scoped portable-history tool invocation identity, call/result pairing, duplicate and reordered events, explicit omission accounting, and cross-runtime replay evidence
+- Reply: <https://github.com/Pascapone/pibo/issues/691#issuecomment-5466626841>
+- Published: 2026-08-30T04:09:21Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `Pascapone/pibo` issue #709
 - Topic: merged MCP catalog source ownership, layered-config mutation, description overlays, stale-source conflicts, atomic writes, and next-process readback
 - Reply: <https://github.com/Pascapone/pibo/issues/709#issuecomment-5466605067>
