@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `ms2sato/agent-console` issue #1475
+- Topic: epoch-specific liveness reset, history-resync separation, generation/sequence ordering, conservative unknown state, and composer-gate regression tests
+- Reply: <https://github.com/ms2sato/agent-console/issues/1475#issuecomment-5466536205>
+- Published: 2026-08-30T03:44:58Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/subagent-unknown-job.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `riatzukiza/.agents` issue #6
 - Topic: portable skill-tree inventory, symlink escape checks, clean-checkout loading, immutable revision agreement, and rollback evidence
 - Reply: <https://github.com/riatzukiza/.agents/issues/6#issuecomment-5466531603>
