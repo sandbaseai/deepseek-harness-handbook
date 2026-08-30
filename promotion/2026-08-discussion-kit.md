@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `Jstn-1g/dsh-live-voice` issue #20
+- Topic: served-Web versus `file://` + IPC voice carrier boundaries, bounded duplex receipts, and teardown evidence
+- Reply: <https://github.com/Jstn-1g/dsh-live-voice/issues/20#issuecomment-5465975273>
+- Published: 2026-08-30T01:23:12Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: official `deepseek-ai/deepseek-harness` Discussion #5060
 - Topic: portable community distribution provenance, embedded runtime identity, state migration, and rollback evidence
 - Reply: <https://github.com/deepseek-ai/deepseek-harness/discussions/5060#discussioncomment-18202817>
