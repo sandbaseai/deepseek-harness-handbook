@@ -332,6 +332,13 @@ does not speak for DeepSeek AI.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-peer-dependency-warnings.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/upgrade-and-rollback.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `riatzukiza/.agents` issue #6
+- Topic: portable skill-tree inventory, symlink escape checks, clean-checkout loading, immutable revision agreement, and rollback evidence
+- Reply: <https://github.com/riatzukiza/.agents/issues/6#issuecomment-5466531603>
+- Published: 2026-08-30T03:43:47Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/code-mode-skill-context.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-plugin-audit.html>
+- Baseline at publish: 91 Stars, 14 forks
+
 - Venue: `openclaw/openclaw` issue #133051
 - Topic: immutable delivery receipts, end-to-end propagation, sent-versus-ambiguous states, generation/idempotency, projection repair, and restart reconciliation
 - Reply: <https://github.com/openclaw/openclaw/issues/133051#issuecomment-5466527564>
