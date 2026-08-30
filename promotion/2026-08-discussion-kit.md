@@ -498,6 +498,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/model-providers.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/tool-schema-subset.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `Bayes-Cluster/kubecode` issue #87
+- Topic: event/reducer authority for optimistic send, idempotent stop, cancel-and-replace, SSE cursor repair, and crash-point acceptance tests
+- Reply: <https://github.com/Bayes-Cluster/kubecode/issues/87#issuecomment-5466162320>
+- Published: 2026-08-30T02:09:23Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/custom-session-events.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/session-write-integrity.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-turn-stop-and-retry.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
