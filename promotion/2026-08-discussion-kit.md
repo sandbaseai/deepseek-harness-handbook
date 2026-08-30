@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98208
+
+- Venue: `NousResearch/hermes-agent` pull request #98208
+- Topic: keeping the Move-to-project submenu consistent with sidebar visibility filters; view state versus execution validation, stale targets, root-folder constraints, and accessibility regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98208#issuecomment-5467324637>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98208> ; the PR applies `filterVisibleProjects` and `$sidebarProjectFilter` before the existing move-specific constraints
+- Source/test evidence: `apps/desktop/src/app/chat/sidebar/session-actions-menu.tsx` and its test in PR head `b3bc6defb32b63e4d81996f5224f14836676cc55`; the PR reports 8 focused tests, typecheck, and full check passing
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:12:28Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98210
 
 - Venue: `NousResearch/hermes-agent` pull request #98210
