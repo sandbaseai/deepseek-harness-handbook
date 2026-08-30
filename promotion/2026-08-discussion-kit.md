@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98212
+
+- Venue: `NousResearch/hermes-agent` pull request #98212
+- Topic: keeping provider stale/TTFB lifecycle diagnostics out of chat surfaces while preserving programmatic raw status; buffer-to-surface coverage and regex boundary cases
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98212#issuecomment-5467305121>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98212> ; the PR adds two duration-qualified alternatives to `_TELEGRAM_NOISY_STATUS_RE` and extends the chat matrix with WeCom
+- Source/test evidence: `gateway/run.py` and `tests/gateway/test_telegram_noise_filter.py` in PR head `3b6263bb870de33015d5b4e707f53590359f4f51`; the PR reports focused green/red-before results and a documented pre-existing gateway-suite baseline
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:07:26Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98213
 
 - Venue: `NousResearch/hermes-agent` pull request #98213
