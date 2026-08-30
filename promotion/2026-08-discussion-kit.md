@@ -130,6 +130,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/troubleshooting/plugin-peer-dependency-warnings.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — DevCoreXOfficial/core-termux #42
+
+- Venue: `DevCoreXOfficial/core-termux` issue #42
+- Topic: correction of the DSH Agent-runtime versus direct model-chat boundary, official coordinates, command verification, and minimum integration evidence
+- Reply: <https://github.com/DevCoreXOfficial/core-termux/issues/42#issuecomment-5466387141>
+- Published: 2026-08-30T03:06:50Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
