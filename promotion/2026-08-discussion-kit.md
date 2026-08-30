@@ -1461,3 +1461,10 @@ evidence.
 - Published: 2026-08-30T04:09:52Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `Pascapone/pibo` issue #679
+- Topic: separating cache eviction from terminal Session disposal, generation-safe signal reopening, compact/detail status consistency, and stale-event race coverage
+- Reply: <https://github.com/Pascapone/pibo/issues/679#issuecomment-5466633067>
+- Published: 2026-08-30T04:11:01Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/session-log-durability.html>
+- Baseline at publish: 91 Stars, 14 forks
