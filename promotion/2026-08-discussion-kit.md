@@ -1678,3 +1678,10 @@ evidence.
 - Published: 2026-08-30T04:46:29Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-replacefile-eacces.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `NousResearch/hermes-agent` pull request #98348
+- Topic: timeout versus termination semantics, worker-owned resource lifetime, callback exactly-once cleanup, generation fencing, conservative owner recovery, and late completion handling
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98348#issuecomment-5466768871>
+- Published: 2026-08-30T04:47:44Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/stuck-tool-cancellation.html>
+- Baseline at publish: 91 Stars, 14 forks
