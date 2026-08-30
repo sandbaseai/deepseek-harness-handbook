@@ -82,6 +82,13 @@ does not speak for DeepSeek AI.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/filesystem-url-as-path.html>
 - Baseline at publish: 87 Stars, 13 forks
 
+- Venue: `sakibsadmanshajib/hive` issue #1262
+- Topic: MCP config delivery versus runtime consumption, tenant/Session isolation, and observable launch receipts
+- Reply: <https://github.com/sakibsadmanshajib/hive/issues/1262#issuecomment-5465987865>
+- Published: 2026-08-30T01:26:21Z (UTC)
+- Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/integrations/mcp.md>
+- Baseline at publish: 87 Stars, 13 forks
+
 - Venue: `google/gvisor` issue #14145
 - Topic: gVisor/runsc as a DSH sandbox backend, separating tool admission from OCI enforcement and proving cleanup
 - Reply: <https://github.com/google/gvisor/issues/14145#issuecomment-5465984067>
