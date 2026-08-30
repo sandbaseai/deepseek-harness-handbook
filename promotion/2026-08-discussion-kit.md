@@ -554,6 +554,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `hugocool/FateForger` issue #206
+- Topic: durable typed planning-session envelope, stage artifact contract, shared NL/Block Kit intent execution, journaled provider/tool evidence, and replay without exposing chain-of-thought
+- Reply: <https://github.com/hugocool/FateForger/issues/206#issuecomment-5466199967>
+- Published: 2026-08-30T02:18:34Z (UTC); corrected: 2026-08-30T02:18:50Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/sessions-and-runtime-state.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `sympoies/dsh-runtime-kit` issue #66
 - Topic: content-addressed baseline/candidate receipts, issue-specific outcome classes, rollback coherence, and adversarial generation-stale acceptance sequence
 - Reply: <https://github.com/sympoies/dsh-runtime-kit/issues/66#issuecomment-5466177737>
