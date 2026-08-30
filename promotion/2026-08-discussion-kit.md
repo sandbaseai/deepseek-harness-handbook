@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98198
+
+- Venue: `NousResearch/hermes-agent` pull request #98198
+- Topic: process-global tool-registry isolation in A2A plugin tests; atomic fixture restore, private-state completeness, dynamic/static capability branches, and parallel execution
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98198#issuecomment-5467369905>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98198> ; the PR snapshots and clears `_tools`/`_scoped_tools` under the registry lock, then restores them per test
+- Source/test evidence: `tests/plugins/test_a2a_plugin.py` in PR head `9e3b7c87ac091b168eab9c4918dd3ff1114f4903`; the PR reports 113 combined passes versus one ordering-dependent failure before the fix
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:23:30Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98193
 
 - Venue: `NousResearch/hermes-agent` pull request #98193
