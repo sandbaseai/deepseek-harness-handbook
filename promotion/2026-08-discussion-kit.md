@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98419
+
+- Venue: `NousResearch/hermes-agent` pull request #98419
+- Topic: Telegram STT transcript formatting with expandable HTML quotes; exact fallback preservation, UTF-16 chunking, Bot API compatibility, and DM-topic fail-closed routing
+- Reply: <https://github.com/NousResearch/hermes-agent/pull/98419#issuecomment-5467472846>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/pull/98419> ; the PR routes Telegram STT echoes through escaped HTML, re-wraps long chunks, and keeps topic anchors on the HTML path
+- Source/test evidence: `gateway/stt_echo.py`, `plugins/platforms/telegram/adapter.py`, `gateway/run.py`, and focused Telegram/STT tests in PR head `de66b27046fa8b446bd557b0571221e155a2f0b2`; the PR reports 76 focused passes and explicitly notes no live Bot API test
+- Handbook role: none; the Hermes PR source and tests are the direct remediation path
+- Published: 2026-08-30T07:49:01Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98427
 
 - Venue: `NousResearch/hermes-agent` pull request #98427
