@@ -442,6 +442,13 @@ evidence.
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/plugin-install-recovery.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `anywhere-labs/dsh-desktop` issue #734
+- Topic: enhanced-mode sidebar layout contract, DOM geometry receipts, responsive regression matrix, and WebView lifecycle cleanup
+- Reply: <https://github.com/anywhere-labs/dsh-desktop/issues/734#issuecomment-5466085861>
+- Published: 2026-08-30T01:50:03Z (UTC)
+- Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/persistent-web-ui-client-plugin.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `Yan-Zero/dsh-std` issue #11
 - Topic: portable Session capability receipts, fail-closed negotiation, action ownership/idempotency, provenance, and read-only-first conformance cases
 - Reply: <https://github.com/Yan-Zero/dsh-std/issues/11#issuecomment-5466076298>
