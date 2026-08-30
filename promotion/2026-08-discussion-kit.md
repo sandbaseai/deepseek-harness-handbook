@@ -1587,3 +1587,17 @@ evidence.
 - Published: 2026-08-30T04:28:22Z (UTC)
 - Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/api-key-storage.html>
 - Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` issue #133072
+- Topic: structured web-search outcomes, separation of security wrappers from tool errors, replay-safe diagnostics, legacy unknown states, and redacted correlation evidence
+- Reply: <https://github.com/openclaw/openclaw/issues/133072#issuecomment-5466701469>
+- Published: 2026-08-30T04:29:34Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/web-search-custom-gateway.html>
+- Baseline at publish: 91 Stars, 14 forks
+
+- Venue: `openclaw/openclaw` issue #133073
+- Topic: command discovery versus executable readiness, managed-service PATH parity, bounded non-mutating probes, shim classification, and structured prerequisite failures
+- Reply: <https://github.com/openclaw/openclaw/issues/133073#issuecomment-5466701518>
+- Published: 2026-08-30T04:29:34Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/deepseek-harness-skills.html>
+- Baseline at publish: 91 Stars, 14 forks
