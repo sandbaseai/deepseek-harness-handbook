@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #97796
+
+- Venue: `NousResearch/hermes-agent` issue #97796
+- Topic: provider-owned upstream headers, Nous `User-Agent` identity, credential retry consistency, hop-by-hop/auth filtering, and streaming/non-streaming proxy regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/97796#issuecomment-5467269054>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/97796> ; the issue reproduces Cloudflare 403/1010 for forwarded `OpenAI/Python` identity and success with `HermesAgent/<version>`
+- Source inspected: <https://github.com/NousResearch/hermes-agent/blob/main/hermes_cli/proxy/server.py> and <https://github.com/NousResearch/hermes-agent/blob/main/hermes_cli/proxy/adapters/base.py>
+- Handbook role: none; the Hermes issue and source are the direct remediation path
+- Published: 2026-08-30T06:58:39Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #98224
 
 - Venue: `NousResearch/hermes-agent` issue #98224
