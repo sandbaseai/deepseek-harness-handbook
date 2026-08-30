@@ -4,6 +4,17 @@ This is a ready-to-publish draft for the next authenticated GitHub distribution
 run. It is intentionally answer-first: publish only where the question or
 topic matches, and keep the handbook link as the supporting artifact.
 
+## Published outreach — NousResearch/hermes-agent #98184
+
+- Venue: `NousResearch/hermes-agent` issue #98184
+- Topic: Higgins web capability diagnosis; profile-scoped credentials, independent search/extract backends, tool registry/allowlist evidence, failure classification, and redacted regression coverage
+- Reply: <https://github.com/NousResearch/hermes-agent/issues/98184#issuecomment-5467277306>
+- Direct target evidence: <https://github.com/NousResearch/hermes-agent/issues/98184> ; the request asks for `web_search` and `web_extract` in Higgins and reports the missing Firecrawl configuration error
+- Sources inspected: <https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/web-search.md> and <https://github.com/NousResearch/hermes-agent/blob/main/tools/web_tools.py>
+- Handbook role: none; official Hermes documentation and source are the direct remediation path
+- Published: 2026-08-30T07:00:50Z (UTC)
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Published outreach — NousResearch/hermes-agent #97796
 
 - Venue: `NousResearch/hermes-agent` issue #97796
