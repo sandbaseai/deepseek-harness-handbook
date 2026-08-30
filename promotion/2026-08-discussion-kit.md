@@ -238,6 +238,15 @@ topic matches, and keep the handbook link as the supporting artifact.
 - Handbook URL used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
 - Baseline at publish: 91 Stars, 14 forks
 
+## Published outreach — skyf0xx/hedgehog #342
+
+- Venue: `skyf0xx/hedgehog` issue #342
+- Topic: DSH core audit ownership, pinned revision/Preview claims, guidance versus deterministic enforcement, plugin/host boundaries, and negative capability fixtures
+- Reply: <https://github.com/skyf0xx/hedgehog/issues/342#issuecomment-5466426842>
+- Published: 2026-08-30T03:17:04Z (UTC)
+- Handbook URLs used: <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/agent-patterns/agents-md-scope.md>, <https://github.com/sandbaseai/deepseek-harness-handbook/blob/main/docs/en/reference/official-project-identity.md>
+- Baseline at publish: 91 Stars, 14 forks
+
 ## Post A — MCP versus webMCP
 
 **Title:** MCP and webMCP are different control planes in DeepSeek Harness
