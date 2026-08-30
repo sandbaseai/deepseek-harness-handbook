@@ -470,6 +470,13 @@ evidence.
 - Handbook URL used: <https://sandbaseai.github.io/deepseek-harness-handbook/windows-folder-picker-worker-crash.html>
 - Baseline at publish: 88 Stars, 13 forks
 
+- Venue: `Jstn-1g/dsh-live-voice` issue #5
+- Topic: separate source-Web, packed-Web, and Desktop release evidence; credential/provider boundary; physical-device failure paths; and fail-closed release criteria
+- Reply: <https://github.com/Jstn-1g/dsh-live-voice/issues/5#issuecomment-5466142064>
+- Published: 2026-08-30T02:04:28Z (UTC)
+- Handbook URLs used: <https://sandbaseai.github.io/deepseek-harness-handbook/version-evidence.html>, <https://sandbaseai.github.io/deepseek-harness-handbook/credential-storage-threat-model.html>
+- Baseline at publish: 88 Stars, 13 forks
+
 - Venue: `wingsky-1/dsh-plugin-hub` issue #348
 - Topic: alpha.1 client i18n namespace/key manifests, listener disposal, locale-switch regression gates, and type-only dependency verification
 - Reply: <https://github.com/wingsky-1/dsh-plugin-hub/issues/348#issuecomment-5466052696>
