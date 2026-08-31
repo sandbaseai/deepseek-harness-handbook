@@ -4,7 +4,7 @@ locale: zh-CN
 source: docs/en/integrations/sandbase-harness-bridge.md
 source_revision: 1
 status: reviewed
-verified_at: 2026-08-29
+verified_at: 2026-08-31
 ---
 
 # 通过 DeepSeek Harness 运行 SandBase Harness
@@ -23,10 +23,10 @@ Bridge 不会自动让任意 endpoint 可信。URL、凭据和可访问工具都
 
 ## 受控安装
 
-使用带 tag 的源码 checkout 和一次性 DSH profile。SandBase README 当前记录 `v0.3.7`，重复操作前请核对 tag 和 Node 要求。
+使用带 tag 的源码 checkout 和一次性 DSH profile。SandBase README 当前记录 `v0.3.8`，重复操作前请核对 tag 和 Node 要求。
 
 ```bash
-git clone --branch v0.3.7 --depth 1 https://github.com/sandbaseai/sandbase-harness.git
+git clone --branch v0.3.8 --depth 1 https://github.com/sandbaseai/sandbase-harness.git
 cd sandbase-harness && npm ci && npm run build
 mkdir ../my-agents && cd ../my-agents
 node ../sandbase-harness/dist/index.js init
@@ -60,6 +60,6 @@ dsh web
 
 ## 来源
 
-- [SandBase Harness README 与 DSH Bridge](https://github.com/sandbaseai/sandbase-harness/tree/37a95c3)
+- [SandBase Harness README 与 DSH Bridge](https://github.com/sandbaseai/sandbase-harness/tree/dea25a2)
 - [DeepSeek Harness 插件指南](../../en/plugin-development/first-plugin.md)
 - [社区插件审计](../../en/security/community-plugin-audit.md)

@@ -2,9 +2,9 @@
 title: Run SandBase Harness through DeepSeek Harness
 locale: en
 status: reviewed
-verified_at: 2026-08-29
+verified_at: 2026-08-31
 sources:
-  - https://github.com/sandbaseai/sandbase-harness/tree/37a95c3
+  - https://github.com/sandbaseai/sandbase-harness/tree/dea25a2
   - https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc
 ---
 
@@ -24,10 +24,10 @@ The bridge does not make an arbitrary endpoint trustworthy. Treat URL, credentia
 
 ## Bounded local setup
 
-Use a tagged source checkout and a disposable DSH profile. The SandBase README currently documents `v0.3.7`; verify the tag and Node requirement before repeating it.
+Use a tagged source checkout and a disposable DSH profile. The SandBase README currently documents `v0.3.8`; verify the tag and Node requirement before repeating it.
 
 ```bash
-git clone --branch v0.3.7 --depth 1 https://github.com/sandbaseai/sandbase-harness.git
+git clone --branch v0.3.8 --depth 1 https://github.com/sandbaseai/sandbase-harness.git
 cd sandbase-harness && npm ci && npm run build
 mkdir ../my-agents && cd ../my-agents
 node ../sandbase-harness/dist/index.js init
@@ -61,6 +61,6 @@ To roll back, stop SandBase, remove the out-of-tree profile layer, and boot the 
 
 ## Sources
 
-- [SandBase Harness README and DSH bridge](https://github.com/sandbaseai/sandbase-harness/tree/37a95c3)
+- [SandBase Harness README and DSH bridge](https://github.com/sandbaseai/sandbase-harness/tree/dea25a2)
 - [DeepSeek Harness first-plugin guide](../plugin-development/first-plugin.md)
 - [Community plugin audit](../security/community-plugin-audit.md)
