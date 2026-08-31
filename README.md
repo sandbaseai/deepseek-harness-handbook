@@ -24,7 +24,7 @@ https://github.com/sandbaseai/deepseek-harness-handbook
 
 The handbook is community-maintained and independent of DeepSeek AI. Please link to the exact guide or release when you make a version-sensitive claim.
 
-**173 canonical guides · 202 localized documents · 82 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**173 canonical guides · 202 localized documents · 79 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -38,7 +38,7 @@ Choose one path and get to evidence quickly:
 
 ### Explore the Agent ecosystem
 
-The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 82 source-linked starting points, including checkpoint/rewind, side Sessions, child-Agent visibility, browser and Office surfaces, plugin discovery and health checks, database analysis, adversarial workflow review, Agent evolution, mobile access, and provider fallback controls. Each entry is an Agent-oriented discovery lead, not a compatibility or security endorsement; inspect permissions, credentials, and rollback paths before installation.
+The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness-handbook/awesome-deepseek-harness-resources.html) now covers 79 source-linked starting points, including checkpoint/rewind, side Sessions, child-Agent visibility, browser and Office surfaces, plugin discovery and health checks, database analysis, adversarial workflow review, Agent evolution, mobile access, and provider fallback controls. Each entry is an Agent-oriented discovery lead, not a compatibility or security endorsement; inspect permissions, credentials, and rollback paths before installation.
 
 For scale context, the pinned [upstream catalog snapshot](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) contains 271 hub repositories, 1,000 public `dsh-plugin` topic repositories, and 471 manual additions. This handbook deliberately curates a smaller, source-linked subset so every entry has an explicit Agent boundary to inspect.
 
