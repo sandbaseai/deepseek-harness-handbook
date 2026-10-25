@@ -446,6 +446,7 @@ Every item below is available now. Planned coverage lives in the [public roadmap
 - [Fix macOS workspace picker trailing-colon paths](docs/en/troubleshooting/macos-workspace-picker-trailing-colon.md)
 - [Persist custom plugin events without breaking Session resume](docs/en/plugin-development/custom-session-events.md)
 - [Updates and breaking changes](docs/en/updates/README.md)
+- [Mode VC LLM Inference Cost Calculator](https://modevc.com/tools/llm-inference-calculator) - Free browser-side LLM token unit economics, prompt caching, and gross margin calculator across 8 frontier and open-weights models.
 
 ## Repository structure
 
