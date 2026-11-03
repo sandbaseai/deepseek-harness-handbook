@@ -211,5 +211,5 @@ Reproduce on a clean disposable workspace, remove keys and private paths, identi
 ## Official sources
 
 - [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)
-- [Defensive patterns](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/defensive-patterns.md)
+- [Defensive patterns](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/defensive-patterns/README.md)
 - [Postmortems](https://github.com/deepseek-ai/deepseek-harness/tree/master/docs/postmortem)

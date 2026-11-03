@@ -16,7 +16,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          # DSH 0.2.2-alpha.3 declares Node >=24.9.0, so check content on Node 24.
+          node-version: 24
       - run: npm run check
       - run: npm run check:resources
       - run: npm run check:links
