@@ -61,4 +61,4 @@ Treating these as interchangeable creates dangerous blind spots.
 
 - [Architecture](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.md)
 - [Capability seams](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/capability-seams.md)
-- [Defensive patterns](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/defensive-patterns.md)
+- [Defensive patterns](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/defensive-patterns/README.md)

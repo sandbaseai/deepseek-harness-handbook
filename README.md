@@ -24,7 +24,7 @@ https://github.com/sandbaseai/deepseek-harness-handbook
 
 The handbook is community-maintained and independent of DeepSeek AI. Please link to the exact guide or release when you make a version-sensitive claim.
 
-**173 canonical guides · 202 localized documents · 79 curated Awesome resources · rc.2 + alpha.1 source-pinned analysis**
+**173 canonical guides · 202 localized documents · 79 curated Awesome resources · 0.1.x source-pinned analysis**
 
 Unlike a command catalog, this handbook follows the complete Agent boundary: model routing, tools, approval, sandboxing, durable Sessions, plugins, MCP, ACP, and operator-visible failure recovery. Version-sensitive pages identify the source revision they were checked against.
 
@@ -42,7 +42,7 @@ The curated [Awesome resource map](https://sandbaseai.github.io/deepseek-harness
 
 For scale context, the pinned [upstream catalog snapshot](https://github.com/0xsline/awesome-deepseek-harness/blob/07278233cba25e6f2d011018751187b7a4d8ed52/CATALOG.md) contains 271 hub repositories, 1,000 public `dsh-plugin` topic repositories, and 471 manual additions. This handbook deliberately curates a smaller, source-linked subset so every entry has an explicit Agent boundary to inspect.
 
-For Chinese-language peer discussion, see the upstream community’s [Feishu group discussion](https://github.com/deepseek-ai/deepseek-harness/discussions/4783) for the current invite and context. It is community-run and not official DeepSeek support; do not share credentials, private Session logs, or sensitive workspace data.
+For Chinese-language peer discussion, see the upstream community’s [community discussions](https://github.com/deepseek-ai/deepseek-harness/discussions) for the current invite and context. It is community-run and not official DeepSeek support; do not share credentials, private Session logs, or sensitive workspace data.
 
 ### Newly source-verified
 
@@ -70,7 +70,7 @@ For Chinese-language peer discussion, see the upstream community’s [Feishu gro
 | [Keep HTTP(S) URLs out of filesystem tools](docs/en/troubleshooting/filesystem-url-as-path.md) | Discussion #4862's Windows reproduction is a capability-boundary failure: reject URI-like input before local path resolution, preserve the original value, and route network retrieval to a web/fetch tool. |
 | [Fold compaction and retry usage without losing cost evidence](docs/en/operations/token-meter-accounting.md#treat-compaction-and-retry-usage-as-separate-billing-events) | Discussion #1886 separates duplicate chunk/message observations from independent retry attempts and makes `compaction/summary.usage` visible in cumulative accounting. |
 
-Each entry above names its pinned official source revision—currently rc.2 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) or alpha.1 [`cd5ef814…`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc)—records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
+Each entry above names its pinned official source revision—rc.2 [`b150a551…`](https://github.com/deepseek-ai/deepseek-harness/tree/b150a551b8d465e31e418e1b2eaf5e79bbb7d28e) or alpha.1 [`cd5ef814…`](https://github.com/deepseek-ai/deepseek-harness/tree/cd5ef8148158c3a752a658978873241fdf8e2bbc)—records what is observed, source-verified, inferred, or proposed, and includes acceptance gates rather than a copy-paste-only happy path.
 
 If the handbook resolves a real question, **[star it on GitHub](https://github.com/sandbaseai/deepseek-harness-handbook)**. That signal helps the next Agent builder find a source-backed answer instead of another unverified command list. If a claim differs from the runtime you operate, [open an evidence report](https://github.com/sandbaseai/deepseek-harness-handbook/issues/new/choose) with the exact DSH version and first failing boundary.
 
@@ -84,6 +84,9 @@ The project is maintained by [SandBase](https://sandbase.ai/). It is not an offi
 > DeepSeek Harness is in developer preview and may introduce compatibility-breaking changes. Pages in this handbook name their verification date and link to primary sources. Pin the revision you deploy.
 
 > **This repository is documentation, not a DeepSeek Harness plugin.** Do not run `dsh plugin add github:sandbaseai/deepseek-harness-handbook`; the handbook has no `dsh.bundle` activation contract. Read the guides from GitHub or the visual field site instead.
+
+> [!NOTE]
+> **Version baseline (checked 2026-11-03).** The guides here were source-verified against 0.1.x checkpoints — most recently rc.2 at `b150a551…` and alpha.1 at `cd5ef814…`, with earlier pages still pinned to rc.7/rc.8 — through 2026-08-30; they are not a statement about the current release. The newest upstream tag is [`dsh-v0.2.2-alpha.3`](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-alpha.3) (`05b1cae8…`); its published CLI package requires Node `>=24.9.0`, and the source workspace declares `pnpm@11.28.5`. On npm, `latest` is `0.2.1-rc.5` and `alpha` is `0.2.2-alpha.3` (checked with `npm view @deepseek-ai/dsh version dist-tags` on 2026-11-03), so an unpinned `npx @deepseek-ai/dsh` does not install 0.2.2-alpha.3. Re-check the exact version, dist-tag, and Node range before reusing an install command from a 0.1.x page.
 
 ## Start with your goal
 

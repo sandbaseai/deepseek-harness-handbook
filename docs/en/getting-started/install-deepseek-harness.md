@@ -1,7 +1,7 @@
 ---
 title: Install DeepSeek Harness Safely
 locale: en
-content_revision: 8
+content_revision: 9
 status: canonical
 verified_at: 2026-08-28
 upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
@@ -12,6 +12,9 @@ upstream_revision: cd5ef8148158c3a752a658978873241fdf8e2bbc
 The official quick path is `npx @deepseek-ai/dsh web`. It is excellent for a first look, but the command alone does not answer three operational questions: which version executed, where its profile state lives, and whether you are testing a published artifact or a source checkout.
 
 This guide separates those choices before configuration or troubleshooting begins.
+
+> [!NOTE]
+> **Baseline check (2026-11-03).** The registry coordinates on this page were verified on 2026-08-28 against the 0.1.x line (`dsh-v0.1.1-rc.2` and `dsh-v0.1.2-alpha.1`). They are historical: the newest upstream tag is [`dsh-v0.2.2-alpha.3`](https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.2.2-alpha.3), and npm now resolves `latest` to `0.2.1-rc.5` while `alpha` points to `0.2.2-alpha.3`. Re-query the registry and re-pin the exact version before running the commands below.
 
 > [!WARNING]
 > DeepSeek Harness is in developer preview and can run tools that read or modify the selected workspace. Start in a disposable repository, use limited credentials, and review every approval request.
